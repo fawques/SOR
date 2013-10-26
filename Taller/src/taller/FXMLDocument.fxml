@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml" fx:controller="taller.FXMLDocumentController">
+   <children>
+    <TitledPane animated="false" layoutX="0.0" layoutY="0.0" minWidth="382.0" prefHeight="257.0" prefWidth="382.0" text="Registro de taller">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="190.0" prefWidth="440.0">
+          <children>
+            <Button layoutX="82.0" layoutY="88.0" mnemonicParsing="false" text="Salir" />
+            <Button layoutX="189.0" layoutY="88.0" mnemonicParsing="false" text="Alta en gestor" />
+          </children>
+        </AnchorPane>
+      </content>
+    </TitledPane>
+  </children>
+</AnchorPane>
