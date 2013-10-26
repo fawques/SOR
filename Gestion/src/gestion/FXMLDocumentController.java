@@ -4,34 +4,36 @@
  * and open the template in the editor.
  */
 
-package taller;
+package gestion;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
  *
- * @author Pablo
+ * @author Cute
  */
 public class FXMLDocumentController implements Initializable {
     
     @FXML
     private Label label;
+    @FXML
+    private Button button;
+    
+    @FXML
+    private void handleButtonAction(ActionEvent event) {
+        System.out.println("You clicked me!");
+        label.setText("Hello World!");
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
     
-    public void onClickSalir(ActionEvent e){
-        
-    }
-    
-    public void onClickAlta(ActionEvent e) {
-        
-    }
 }

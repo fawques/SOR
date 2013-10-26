@@ -7,3 +7,8 @@
 /TallerSOR/build/
 /TallerSOR/dist/
 /Taller/nbproject/private/
+
+# Netbeans #
+*/build/
+*/dist/
+*/nbproject/private/
