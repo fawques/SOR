@@ -28,7 +28,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public void onClickSalir(ActionEvent e){
-        
+        System.exit(0);
     }
     
     public void onClickAlta(ActionEvent e) {

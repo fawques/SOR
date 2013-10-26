@@ -6,14 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml" fx:controller="taller.FXMLDocumentController">
-   <children>
-    <TitledPane animated="false" layoutX="0.0" layoutY="0.0" minWidth="382.0" prefHeight="257.0" prefWidth="382.0" text="Registro de taller">
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.FXMLDocumentController">
+  <children>
+    <TitledPane animated="false" layoutX="0.0" layoutY="0.0" minWidth="382.0" prefHeight="200.0" prefWidth="382.0" text="Registro de taller">
       <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="190.0" prefWidth="440.0">
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="377.0">
           <children>
-            <Button layoutX="82.0" layoutY="88.0" mnemonicParsing="false" text="Salir" />
-            <Button layoutX="189.0" layoutY="88.0" mnemonicParsing="false" text="Alta en gestor" />
+            <Button layoutX="82.0" layoutY="71.0" mnemonicParsing="false" onAction="#onClickSalir" text="Salir" />
+            <Button layoutX="189.0" layoutY="71.0" mnemonicParsing="false" onAction="#onClickAlta" text="Alta en gestor" />
           </children>
         </AnchorPane>
       </content>
