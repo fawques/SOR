@@ -27,6 +27,13 @@ public class Taller extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    
+   /* public void abrirAlta()
+    {
+        Parent altaTaller = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
+        
+        Scene scene = new Scene(altaTaller);
+    }*/
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
