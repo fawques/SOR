@@ -1,0 +1,5 @@
+http://www.programania.net/diseno-de-software/java-web-services-soap-y-annotations/
+
+http://www.forosdelweb.com/f45/consumir-web-services-desde-java-con-soap-601232/
+
+http://switchoffandletsgo.blogspot.com.es/2008/06/modificar-un-mensaje-soap-desde-java.html //este está bastante bien
