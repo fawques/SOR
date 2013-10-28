@@ -9,29 +9,31 @@ package taller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
 /**
+ * FXML Controller class
  *
  * @author Pablo
  */
-public class FXMLDocumentController implements Initializable {
-    
-    @FXML
-    private Label label;
-    
+public class AltaTallerController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
     
-    public void onClickSalir(ActionEvent e){
+    public void onClickCancel(ActionEvent e)
+    {
         System.exit(0);
     }
     
-    public void onClickAlta(ActionEvent e) {
-        
+    public void onClickAceptar(ActionEvent e)
+    {
+        //Validar y enviar
     }
+    
 }

@@ -20,13 +20,21 @@ public class Taller extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        //if(noEstaRegistradoEnGestor)
+        Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
     }
+    
+   /* public void abrirAlta()
+    {
+        Parent altaTaller = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
+        
+        Scene scene = new Scene(altaTaller);
+    }*/
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
