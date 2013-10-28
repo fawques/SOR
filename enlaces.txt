@@ -3,3 +3,23 @@ http://www.programania.net/diseno-de-software/java-web-services-soap-y-annotatio
 http://www.forosdelweb.com/f45/consumir-web-services-desde-java-con-soap-601232/
 
 http://switchoffandletsgo.blogspot.com.es/2008/06/modificar-un-mensaje-soap-desde-java.html //este está bastante bien
+
+http://www.javahispano.org/storage/documentacion/Crear_Cliente_SOAP_Java_v2.pdf
+
+http://stackoverflow.com/questions/15948927/working-soap-client-example
+
+http://users.skynet.be/pascalbotte/rcx-ws-doc/present.htm
+
+http://www.youtube.com/watch?v=mKjvKPlb1rA
+
+http://www.mkyong.com/tutorials/jax-ws-tutorials/
+
+http://java.globinch.com/enterprise-java/web-services/soap-binding-document-rpc-style-web-services-difference/java.globinch.com/enterprise-java/web-services/jax-ws/java-jax-ws-tutorial-develop-web-services-clients-consumers/
+
+----
+
+Política de envios-> habrá que generar un hilo que reintente X veces, y si en ninguno de los intentos funciona dará error.
+
+1 cola activeMQ, topics?
+
+Hay que mirarse cada uno lo de webservices, activemq y uddii (en este orden de importancia).
