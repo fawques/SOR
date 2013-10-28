@@ -20,7 +20,8 @@ public class Taller extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        //if(noEstaRegistradoEnGestor)
+        Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
         
         Scene scene = new Scene(root);
         

@@ -28,12 +28,12 @@ public class AltaTallerController implements Initializable {
     
     public void onClickCancel(ActionEvent e)
     {
-        
+        System.exit(0);
     }
     
     public void onClickAceptar(ActionEvent e)
     {
-        
+        //Validar y enviar
     }
     
 }
