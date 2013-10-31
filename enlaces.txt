@@ -16,6 +16,8 @@ http://www.mkyong.com/tutorials/jax-ws-tutorials/
 
 http://java.globinch.com/enterprise-java/web-services/soap-binding-document-rpc-style-web-services-difference/java.globinch.com/enterprise-java/web-services/jax-ws/java-jax-ws-tutorial-develop-web-services-clients-consumers/
 
+https://netbeans.org/kb/docs/websvc/intro-ws.html#jaxws		// introdución a los webservices de la página de netbeans
+
 ----
 
 Política de envios-> habrá que generar un hilo que reintente X veces, y si en ninguno de los intentos funciona dará error.
