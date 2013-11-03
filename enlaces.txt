@@ -18,6 +18,10 @@ http://java.globinch.com/enterprise-java/web-services/soap-binding-document-rpc-
 
 https://netbeans.org/kb/docs/websvc/intro-ws.html#jaxws		// introdución a los webservices de la página de netbeans
 
+http://activemq.apache.org/hello-world.html //activemq hello world
+
+http://oreilly.com/catalog/javawebserv/chapter/ch06.html //uddi y java
+
 ----
 
 Política de envios-> habrá que generar un hilo que reintente X veces, y si en ninguno de los intentos funciona dará error.
