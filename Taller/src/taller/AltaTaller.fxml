@@ -13,14 +13,14 @@
     <Label layoutX="54.0" layoutY="65.0" text="Nombre Taller" wrapText="false" />
     <Label layoutX="54.0" layoutY="123.0" text="Nombre dueño" wrapText="false" />
     <Label layoutX="54.0" layoutY="177.0" text="Dirección" wrapText="false" />
-    <Label layoutX="54.0" layoutY="239.0" text="Provincia" />
+    <Label layoutX="54.0" layoutY="239.0" text="Ciudad" />
     <Label layoutX="54.0" layoutY="288.0" text="CP" />
     <Label layoutX="54.0" layoutY="335.0" text="Teléfono" />
-    <TextField fx:id="TfNombreTaller" layoutX="161.0" layoutY="65.0" prefWidth="200.0" promptText="" />
-    <TextField fx:id="TfNombreDuenyo" layoutX="161.0" layoutY="123.0" prefWidth="200.0" />
-    <TextField fx:id="TfDireccion" layoutX="161.0" layoutY="174.0" prefWidth="200.0" />
-    <TextField fx:id="TfProvincia" layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
-    <TextField fx:id="TfCp" layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
-    <TextField fx:id="TfTelefono" layoutX="161.0" layoutY="332.0" prefWidth="200.0" />
+    <TextField fx:id="tfNombreTaller" layoutX="161.0" layoutY="65.0" prefWidth="200.0" />
+    <TextField fx:id="tfNombreDuenyo" layoutX="161.0" layoutY="123.0" prefWidth="200.0" />
+    <TextField fx:id="tfDireccion" layoutX="161.0" layoutY="174.0" prefWidth="200.0" />
+    <TextField fx:id="tfCiudad" layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
+    <TextField fx:id="tfCp" layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
+    <TextField fx:id="tfTelefono" layoutX="161.0" layoutY="332.0" prefWidth="200.0" />
   </children>
 </AnchorPane>

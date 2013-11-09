@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package taller;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.util.regex.*;
 
 /**
  *
@@ -29,29 +29,35 @@ public class Taller extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    
-   /* public void abrirAlta()
-    {
-        Parent altaTaller = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
+
+    /* public void abrirAlta()
+     {
+     Parent altaTaller = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
         
-        Scene scene = new Scene(altaTaller);
-    }*/
-    
-    public static boolean validarNombre(String n)
-    {
-        Pattern p = Pattern.compile("^[a-zA-Z]+");
+     Scene scene = new Scene(altaTaller);
+     }*/
+    public static boolean validarNombre(String n) {
+        Pattern p = Pattern.compile("^[a-zA-Z ]+[a-zA-Z]");
         Matcher m = p.matcher(n);
-        if(!m.find())
-        {
+        if (!m.matches()) {
             System.err.println("Los nombres no pueden contener carácteres extraños (á,é,ñ,...)");
             return false;
         }
         return true;
     }
     
-    public static boolean validar()
-    {
-        return validarNombre("hoal");
+    public static boolean validarSoloNumeros(String num) {
+        Pattern p = Pattern.compile("^[0-9 ]+[0-9]");
+        Matcher m = p.matcher(num);
+        if (!m.matches()) {
+            System.err.println("Este campo sólo puede contener números.");
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean validar(String nombreTaller, String nombreDuenyo, String direccion, String ciudad, String cp, String telefono) {
+        return validarNombre(nombreTaller) && validarNombre(nombreDuenyo) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono);
     }
 
     /**
