@@ -9,7 +9,9 @@ package taller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -17,6 +19,17 @@ import javafx.fxml.Initializable;
  * @author Pablo
  */
 public class AltaTallerController implements Initializable {
+    
+    /**
+     * Class variables
+     */
+    @FXML
+    public TextField TfNombreTaller;
+    public TextField TfNombreDuenyo;
+    public TextField TfDireccion;
+    public TextField TfProvincia;
+    public TextField TfCp;
+    public TextField TfTelefono;
 
     /**
      * Initializes the controller class.
@@ -24,6 +37,7 @@ public class AltaTallerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        assert TfNombreTaller != null : "fx:id=\"myButton\" was not injected: check your FXML file 'simple.fxml'.";
     }
     
     public void onClickCancel(ActionEvent e)
@@ -33,7 +47,11 @@ public class AltaTallerController implements Initializable {
     
     public void onClickAceptar(ActionEvent e)
     {
-        //Validar y enviar
+        //Validar
+        if(Taller.validar())
+        {
+            
+        }
     }
     
 }

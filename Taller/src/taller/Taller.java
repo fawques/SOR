@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.util.regex.*;
 
 /**
  *
@@ -35,6 +36,23 @@ public class Taller extends Application {
         
         Scene scene = new Scene(altaTaller);
     }*/
+    
+    public static boolean validarNombre(String n)
+    {
+        Pattern p = Pattern.compile("^[a-zA-Z]+");
+        Matcher m = p.matcher(n);
+        if(!m.find())
+        {
+            System.err.println("Los nombres no pueden contener carácteres extraños (á,é,ñ,...)");
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean validar()
+    {
+        return validarNombre("hoal");
+    }
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.

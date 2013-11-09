@@ -16,11 +16,11 @@
     <Label layoutX="54.0" layoutY="239.0" text="Provincia" />
     <Label layoutX="54.0" layoutY="288.0" text="CP" />
     <Label layoutX="54.0" layoutY="335.0" text="Teléfono" />
-    <TextField layoutX="161.0" layoutY="65.0" prefWidth="200.0" />
-    <TextField layoutX="161.0" layoutY="123.0" prefWidth="200.0" />
-    <TextField layoutX="161.0" layoutY="174.0" prefWidth="200.0" />
-    <TextField layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
-    <TextField layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
-    <TextField layoutX="161.0" layoutY="332.0" prefWidth="200.0" />
+    <TextField fx:id="TfNombreTaller" layoutX="161.0" layoutY="65.0" prefWidth="200.0" promptText="" />
+    <TextField fx:id="TfNombreDuenyo" layoutX="161.0" layoutY="123.0" prefWidth="200.0" />
+    <TextField fx:id="TfDireccion" layoutX="161.0" layoutY="174.0" prefWidth="200.0" />
+    <TextField fx:id="TfProvincia" layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
+    <TextField fx:id="TfCp" layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
+    <TextField fx:id="TfTelefono" layoutX="161.0" layoutY="332.0" prefWidth="200.0" />
   </children>
 </AnchorPane>
