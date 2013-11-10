@@ -4,6 +4,9 @@
 *.jar
 *.war
 *.ear
+/TallerSOR/build/
+/TallerSOR/dist/
+/Taller/nbproject/private/
 
 # Netbeans #
 */build/

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="375.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.AltaTallerController">
+  <children>
+    <Button layoutX="222.0" layoutY="427.0" mnemonicParsing="false" onAction="#onClickAceptar" text="Aceptar" />
+    <Button layoutX="101.0" layoutY="427.0" mnemonicParsing="false" onAction="#onClickCancel" text="Cancelar" />
+    <Label layoutX="54.0" layoutY="65.0" text="Nombre Taller" wrapText="false" />
+    <Label layoutX="54.0" layoutY="123.0" text="Nombre dueño" wrapText="false" />
+    <Label layoutX="54.0" layoutY="177.0" text="Dirección" wrapText="false" />
+    <Label layoutX="54.0" layoutY="239.0" text="Provincia" />
+    <Label layoutX="54.0" layoutY="288.0" text="CP" />
+    <Label layoutX="54.0" layoutY="335.0" text="Teléfono" />
+    <TextField layoutX="161.0" layoutY="65.0" prefWidth="200.0" />
+    <TextField layoutX="161.0" layoutY="123.0" prefWidth="200.0" />
+    <TextField layoutX="161.0" layoutY="174.0" prefWidth="200.0" />
+    <TextField layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
+    <TextField layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
+    <TextField layoutX="161.0" layoutY="332.0" prefWidth="200.0" />
+  </children>
+</AnchorPane>
