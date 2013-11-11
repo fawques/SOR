@@ -7,18 +7,18 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="582.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.AltaTallerController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="619.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.AltaTallerController">
   <children>
     <Button layoutX="304.0" layoutY="427.0" mnemonicParsing="false" onAction="#onClickAceptar" text="Aceptar" />
     <Button layoutX="120.0" layoutY="427.0" mnemonicParsing="false" onAction="#onClickCancel" text="Cancelar" />
     <Label layoutX="54.0" layoutY="65.0" text="Nombre Taller" wrapText="false" />
-    <Label layoutX="54.0" layoutY="123.0" text="Nombre dueño" wrapText="false" />
+    <Label layoutX="54.0" layoutY="123.0" text="E-mail" wrapText="false" />
     <Label layoutX="54.0" layoutY="177.0" text="Dirección" wrapText="false" />
     <Label layoutX="54.0" layoutY="239.0" text="Ciudad" />
     <Label layoutX="54.0" layoutY="288.0" text="CP" />
     <Label layoutX="54.0" layoutY="335.0" text="Teléfono" />
     <TextField fx:id="tfNombreTaller" layoutX="161.0" layoutY="65.0" prefWidth="200.0" />
-    <TextField fx:id="tfNombreDuenyo" layoutX="161.0" layoutY="123.0" prefWidth="200.0" />
+    <TextField fx:id="tfEmail" layoutX="161.0" layoutY="123.0" prefWidth="200.0" />
     <TextField fx:id="tfDireccion" layoutX="161.0" layoutY="174.0" prefWidth="200.0" />
     <TextField fx:id="tfCiudad" layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
     <TextField fx:id="tfCp" layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
@@ -28,9 +28,9 @@
         <Font size="10.0" fx:id="x1" />
       </font>
     </Label>
-    <Label fx:id="errorNombreDuenyo" font="$x1" layoutX="369.0" layoutY="129.0" text="" textFill="RED" />
-    <Label id="errorCiud" fx:id="errorDireccion" font="$x1" layoutX="369.0" layoutY="180.0" text="" textFill="RED" />
-    <Label id="error" fx:id="errorCiudad" font="$x1" layoutX="369.0" layoutY="236.0" text="" textFill="RED" />
+    <Label fx:id="errorEmail" font="$x1" layoutX="369.0" layoutY="129.0" text="" textFill="RED" />
+    <Label fx:id="errorDireccion" font="$x1" layoutX="369.0" layoutY="180.0" text="" textFill="RED" />
+    <Label fx:id="errorCiudad" font="$x1" layoutX="369.0" layoutY="236.0" text="" textFill="RED" />
     <Label fx:id="errorCp" font="$x1" layoutX="369.0" layoutY="291.0" text="" textFill="RED" />
     <Label fx:id="errorTelefono" font="$x1" layoutX="369.0" layoutY="338.0" text="" textFill="RED" />
   </children>

@@ -27,13 +27,13 @@ public class AltaTallerController implements Initializable {
      */
     @FXML
     public TextField tfNombreTaller;
-    public TextField tfNombreDuenyo;
+    public TextField tfEmail;
     public TextField tfDireccion;
     public TextField tfCiudad;
     public TextField tfCp;
     public TextField tfTelefono;
     public Label errorNombreTaller;
-    public Label errorNombreDuenyo;
+    public Label errorEmail;
     public Label errorDireccion;
     public Label errorCiudad;
     public Label errorCp;
@@ -59,24 +59,24 @@ public class AltaTallerController implements Initializable {
                         errorNombreTaller.setText("");
                     } else {
                         //add errors in the interface
-                        errorNombreTaller.setText("No pueden contener carácteres extraños (á,é,ñ,...)");
+                        errorNombreTaller.setText("No pueden contener carácteres extraños, ni números");
                         tfNombreTaller.setStyle("-fx-border-color: red;");
                     }
                 }
             }
         });
 
-        tfNombreDuenyo.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        tfEmail.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (Taller.validarNombre(tfNombreDuenyo.getText())) {
-                        tfNombreDuenyo.setStyle("-fx-border-color: green;");
-                        errorNombreDuenyo.setText("");
+                    if (Taller.validarEmail(tfEmail.getText())) {
+                        tfEmail.setStyle("-fx-border-color: green;");
+                        errorEmail.setText("");
                     } else {
-                        tfNombreDuenyo.setStyle("-fx-border-color: red;");
+                        tfEmail.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorNombreDuenyo.setText("No pueden contener carácteres extraños (á,é,ñ,...)");
+                        errorEmail.setText("Email incorrecto");
                     }
                 }
             }
@@ -92,7 +92,7 @@ public class AltaTallerController implements Initializable {
                     } else {
                         tfCiudad.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorCiudad.setText("No pueden contener carácteres extraños (á,é,ñ,...)");
+                        errorCiudad.setText("No pueden contener carácteres extraños, ni números");
                     }
                 }
             }
@@ -161,7 +161,7 @@ public class AltaTallerController implements Initializable {
      */
     public void onClickAceptar(ActionEvent e) {
         //If the validation goes well
-        if (Taller.validar(tfNombreTaller.getText(), tfNombreDuenyo.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
+        if (Taller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println(Taller.alta("hola que tal"));
 

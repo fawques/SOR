@@ -40,7 +40,6 @@ public class Taller extends Application {
         Pattern p = Pattern.compile("^[a-zA-Z ]*[a-zA-Z]");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
-            System.err.println("Los nombres no pueden contener carácteres extraños (á,é,ñ,...)");
             return false;
         }
         return true;
@@ -50,7 +49,15 @@ public class Taller extends Application {
         Pattern p = Pattern.compile("^[0-9 ]*[0-9]");
         Matcher m = p.matcher(num);
         if (!m.matches()) {
-            System.err.println("Este campo sólo puede contener números.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validarEmail(String n) {
+        Pattern p = Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+");
+        Matcher m = p.matcher(n);
+        if (!m.matches()) {
             return false;
         }
         return true;
