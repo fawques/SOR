@@ -4,11 +4,10 @@
 *.jar
 *.war
 *.ear
-/TallerSOR/build/
-/TallerSOR/dist/
-/Taller/nbproject/private/
 
 # Netbeans #
 */build/
 */dist/
 */nbproject/private/
+*/nbproject/genfiles.properties
+*/nbproject/jax-ws.xml
