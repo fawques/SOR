@@ -6,8 +6,6 @@
 
 package gestor_taller;
 
-import general.Pedido;
-import java.util.Date;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -16,16 +14,15 @@ import javax.jws.WebParam;
  *
  * @author fawques
  */
-@WebService(serviceName = "Taller")
-public class Taller {
+@WebService(serviceName = "TallerWS")
+public class TallerWS {
 
     /**
-     * Web service operation
+     * This is a sample web service operation
      */
     @WebMethod(operationName = "alta")
-    public Boolean alta(@WebParam(name = "datos") String datos) {
-        System.out.println("he recibido una petición de alta => " + datos);
-        Pedido nuevo = new Pedido(0, new Date(), new Date(2014, 10, 1));
-        return true;
+    public String alta(@WebParam(name = "name") String txt) {
+        System.out.println("He recibido" + txt);
+        return "Hello " + txt + " !";
     }
 }
