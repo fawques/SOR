@@ -50,6 +50,7 @@ public class AltaTallerController implements Initializable {
                     if (Taller.validarNombre(tfNombreTaller.getText())) {
                         tfNombreTaller.setStyle("-fx-border-color: green;");
                     } else {
+                        //add errors in the interface
                         tfNombreTaller.setStyle("-fx-border-color: red;");
                     }
                 }
