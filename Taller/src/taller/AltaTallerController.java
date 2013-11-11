@@ -72,11 +72,11 @@ public class AltaTallerController implements Initializable {
                 if (!arg2) { //Code here the action when the object lose the focus
                     if (Taller.validarNombre(tfNombreDuenyo.getText())) {
                         tfNombreDuenyo.setStyle("-fx-border-color: green;");
-                        errorNombreTaller.setText("");
+                        errorNombreDuenyo.setText("");
                     } else {
                         tfNombreDuenyo.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorNombreTaller.setText("No pueden contener carácteres extraños (á,é,ñ,...)");
+                        errorNombreDuenyo.setText("No pueden contener carácteres extraños (á,é,ñ,...)");
                     }
                 }
             }
@@ -88,11 +88,11 @@ public class AltaTallerController implements Initializable {
                 if (!arg2) { //Code here the action when the object lose the focus
                     if (Taller.validarNombre(tfCiudad.getText())) {
                         tfCiudad.setStyle("-fx-border-color: green;");
-                        errorNombreTaller.setText("");
+                        errorCiudad.setText("");
                     } else {
                         tfCiudad.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorNombreTaller.setText("No pueden contener carácteres extraños (á,é,ñ,...)");
+                        errorCiudad.setText("No pueden contener carácteres extraños (á,é,ñ,...)");
                     }
                 }
             }
@@ -104,11 +104,11 @@ public class AltaTallerController implements Initializable {
                 if (!arg2) { //Code here the action when the object lose the focus
                     if (true) {
                         tfDireccion.setStyle("-fx-border-color: green;");
-                        errorNombreTaller.setText("");
+                        errorDireccion.setText("");
                     } else {
                         tfDireccion.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorNombreTaller.setText("Caca");
+                        errorDireccion.setText("Caca");
                     }
                 }
             }
@@ -120,11 +120,11 @@ public class AltaTallerController implements Initializable {
                 if (!arg2) { //Code here the action when the object lose the focus
                     if (Taller.validarSoloNumeros(tfCp.getText())) {
                         tfCp.setStyle("-fx-border-color: green;");
-                        errorNombreTaller.setText("");
+                        errorCp.setText("");
                     } else {
                         tfCp.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorNombreTaller.setText("Sólo añadir números");
+                        errorCp.setText("Sólo añadir números");
                     }
                 }
             }
@@ -136,11 +136,11 @@ public class AltaTallerController implements Initializable {
                 if (!arg2) { //Code here the action when the object lose the focus
                     if (Taller.validarSoloNumeros(tfTelefono.getText())) {
                         tfTelefono.setStyle("-fx-border-color: green;");
-                        errorNombreTaller.setText("");
+                        errorTelefono.setText("");
                     } else {
                         tfTelefono.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorNombreTaller.setText("Sólo añadir números");
+                        errorTelefono.setText("Sólo añadir números");
                     }
                 }
             }
