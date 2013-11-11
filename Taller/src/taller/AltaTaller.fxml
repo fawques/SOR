@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="375.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.AltaTallerController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="540.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.AltaTallerController">
   <children>
     <Button layoutX="222.0" layoutY="427.0" mnemonicParsing="false" onAction="#onClickAceptar" text="Aceptar" />
     <Button layoutX="101.0" layoutY="427.0" mnemonicParsing="false" onAction="#onClickCancel" text="Cancelar" />
@@ -22,5 +22,11 @@
     <TextField fx:id="tfCiudad" layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
     <TextField fx:id="tfCp" layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
     <TextField fx:id="tfTelefono" layoutX="161.0" layoutY="332.0" prefWidth="200.0" />
+    <Label layoutX="395.0" layoutY="65.0" text="Label" />
+    <Label layoutX="395.0" layoutY="126.0" text="Label" />
+    <Label layoutX="395.0" layoutY="177.0" text="Label" />
+    <Label layoutX="395.0" layoutY="233.0" text="Label" />
+    <Label layoutX="395.0" layoutY="288.0" text="Label" />
+    <Label layoutX="395.0" layoutY="335.0" text="Label" />
   </children>
 </AnchorPane>
