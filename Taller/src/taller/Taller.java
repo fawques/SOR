@@ -72,4 +72,9 @@ public class Taller extends Application {
         launch(args);
     }
 
+    public static String alta(java.lang.String name) {
+        taller.TallerWS_Service service = new taller.TallerWS_Service();
+        taller.TallerWS port = service.getTallerWSPort();
+        return port.alta(name);
+    }
 }
