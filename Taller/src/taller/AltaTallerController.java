@@ -12,6 +12,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -31,6 +32,12 @@ public class AltaTallerController implements Initializable {
     public TextField tfCiudad;
     public TextField tfCp;
     public TextField tfTelefono;
+    public Label errorNombreTaller;
+    public Label errorNombreDuenyo;
+    public Label errorDireccion;
+    public Label errorCiudad;
+    public Label errorCp;
+    public Label errorTelefono;
 
     /**
      * Initializes the controller class.
