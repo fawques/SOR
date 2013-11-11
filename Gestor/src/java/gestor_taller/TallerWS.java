@@ -6,6 +6,7 @@
 
 package gestor_taller;
 
+import general.Taller;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -18,11 +19,11 @@ import javax.jws.WebParam;
 public class TallerWS {
 
     /**
-     * This is a sample web service operation
+     * Web service operation
      */
     @WebMethod(operationName = "alta")
-    public String alta(@WebParam(name = "name") String txt) {
-        System.out.println("He recibido" + txt);
-        return "Hello " + txt + " !";
+    public Boolean alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
+        Taller t = new Taller(name, email, address, city, postalCode, telephone);
+        return t != null?true:false;
     }
 }

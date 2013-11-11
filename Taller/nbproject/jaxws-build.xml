@@ -18,8 +18,8 @@
     </target>
     <target name="wsimport-client-TallerWS" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/TallerWS"/>
-        <property name="wsdl-TallerWS" location="xml-resources/web-service-references/TallerWS/wsdl/169.254.106.177_8080/Gestor/TallerWS.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TallerWS" destdir="${build.generated.dir}/jax-wsCache/TallerWS" wsdl="${wsdl-TallerWS}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://169.254.106.177:8080/Gestor/TallerWS?wsdl" xnocompile="true" xendorsed="true" package="taller">
+        <property name="wsdl-TallerWS" location="xml-resources/web-service-references/TallerWS/wsdl/localhost_8080/Gestor/TallerWS.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TallerWS" destdir="${build.generated.dir}/jax-wsCache/TallerWS" wsdl="${wsdl-TallerWS}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/Gestor/TallerWS?wsdl" xnocompile="true" xendorsed="true" package="taller_ws">
             <depends file="${wsdl-TallerWS}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/TallerWS"/>
         </wsimport>
@@ -31,7 +31,7 @@
     </target>
     <target name="wsimport-client-clean-TallerWS" depends="-init-project">
         <delete dir="${build.generated.dir}/jax-wsCache/TallerWS"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/taller"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/taller_ws"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-TallerWS"/>
 </project>

@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://169.254.106.177:8080/Gestor/TallerWS?wsdl" uri="wsdl/169.254.106.177_8080/Gestor/TallerWS.wsdl"/>
     <system systemId="http://169.254.106.177:8080/Gestor/TallerWS?xsd=1" uri="wsdl/169.254.106.177_8080/Gestor/TallerWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Gestor/TallerWS?wsdl" uri="wsdl/localhost_8080/Gestor/TallerWS.wsdl"/>
+    <system systemId="http://localhost:8080/Gestor/TallerWS?xsd=1" uri="wsdl/localhost_8080/Gestor/TallerWS.xsd_1.xsd"/>
 </catalog>

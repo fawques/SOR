@@ -163,7 +163,8 @@ public class AltaTallerController implements Initializable {
         //If the validation goes well
         if (Taller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
-            System.out.println(Taller.alta("hola que tal"));
+            System.out.println("Enviando...");
+            System.out.println(Taller.alta("Nombre","taller@taller.com","Calle de las pipas","Alicante",123456,961234567));
 
         }
         //else nothing
