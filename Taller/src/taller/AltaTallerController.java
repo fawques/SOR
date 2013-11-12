@@ -54,7 +54,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (Taller.validarNombre(tfNombreTaller.getText())) {
+                    if (MainTaller.validarNombre(tfNombreTaller.getText())) {
                         tfNombreTaller.setStyle("-fx-border-color: green;");
                         errorNombreTaller.setText("");
                     } else {
@@ -70,7 +70,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (Taller.validarEmail(tfEmail.getText())) {
+                    if (MainTaller.validarEmail(tfEmail.getText())) {
                         tfEmail.setStyle("-fx-border-color: green;");
                         errorEmail.setText("");
                     } else {
@@ -86,7 +86,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (Taller.validarNombre(tfCiudad.getText())) {
+                    if (MainTaller.validarNombre(tfCiudad.getText())) {
                         tfCiudad.setStyle("-fx-border-color: green;");
                         errorCiudad.setText("");
                     } else {
@@ -118,7 +118,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (Taller.validarSoloNumeros(tfCp.getText())) {
+                    if (MainTaller.validarSoloNumeros(tfCp.getText())) {
                         tfCp.setStyle("-fx-border-color: green;");
                         errorCp.setText("");
                     } else {
@@ -134,7 +134,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (Taller.validarSoloNumeros(tfTelefono.getText())) {
+                    if (MainTaller.validarSoloNumeros(tfTelefono.getText())) {
                         tfTelefono.setStyle("-fx-border-color: green;");
                         errorTelefono.setText("");
                     } else {
@@ -161,10 +161,10 @@ public class AltaTallerController implements Initializable {
      */
     public void onClickAceptar(ActionEvent e) {
         //If the validation goes well
-        if (Taller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
+        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
-            System.out.println(Taller.alta("Nombre","taller@taller.com","Calle de las pipas","Alicante",123456,961234567));
+            System.out.println(MainTaller.alta("Nombre","taller@taller.com","Calle de las pipas","Alicante",123456,961234567));
 
         }
         //else nothing

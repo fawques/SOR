@@ -26,6 +26,11 @@ public class Taller {
         this.postalCode = postalCode;
         this.telephone = telephone;
     }
+
+    @Override
+    public String toString() {
+        return "Taller{" + "name=" + name + ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + ", telephone=" + telephone + '}';
+    }
     
     
     

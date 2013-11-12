@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  *
  * @author Pablo
  */
-public class Taller extends Application {
+public class MainTaller extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {

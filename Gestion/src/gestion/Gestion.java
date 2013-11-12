@@ -39,5 +39,11 @@ public class Gestion extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public static java.util.List<java.lang.Object> getAltas() {
+        admin.AdminWS_Service service = new admin.AdminWS_Service();
+        admin.AdminWS port = service.getAdminWSPort();
+        return port.getAltas();
+    }
     
 }

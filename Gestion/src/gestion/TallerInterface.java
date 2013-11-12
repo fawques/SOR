@@ -13,7 +13,7 @@ import javafx.beans.property.*;
  *
  * @author Cute
  */
-public class Taller {
+public class TallerInterface {
     
     
     
@@ -25,7 +25,7 @@ public class Taller {
     private final SimpleIntegerProperty codigoPostal;
     private final SimpleIntegerProperty numeroTelefono;
 
-    public Taller(){
+    public TallerInterface(){
          nombreTaller= new SimpleStringProperty("");
     nombreDuenyo=new SimpleStringProperty("");
     direccion=new SimpleStringProperty("");
@@ -35,7 +35,7 @@ public class Taller {
     numeroTelefono=new SimpleIntegerProperty();
     }
     
-    public Taller(String _nombre,String _duenyo,String _direccion,String _provincia,String _email,int codigo,int numero){
+    public TallerInterface(String _nombre,String _duenyo,String _direccion,String _provincia,String _email,int codigo,int numero){
         
     nombreTaller= new SimpleStringProperty(_nombre);
     nombreDuenyo=new SimpleStringProperty(_duenyo);
@@ -103,5 +103,9 @@ public class Taller {
     public String toString() {
         return "Taller{" + "nombreTaller=" + nombreTaller + ", nombreDuenyo=" + nombreDuenyo + ", direccion=" + direccion + ", provincia=" + provincia + ", codigoPostal=" + codigoPostal + ", numeroTelefono=" + numeroTelefono + '}';
     }
+
+
+
+
     
 }
