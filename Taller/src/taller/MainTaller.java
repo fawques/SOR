@@ -36,6 +36,11 @@ public class MainTaller extends Application {
         
      Scene scene = new Scene(altaTaller);
      }*/
+    /**
+     *
+     * @param n
+     * @return
+     */
     public static boolean validarNombre(String n) {
         Pattern p = Pattern.compile("^[a-zA-Z ]*[a-zA-Z]");
         Matcher m = p.matcher(n);
@@ -45,6 +50,11 @@ public class MainTaller extends Application {
         return true;
     }
 
+    /**
+     *
+     * @param num
+     * @return
+     */
     public static boolean validarSoloNumeros(String num) {
         Pattern p = Pattern.compile("^[0-9 ]*[0-9]");
         Matcher m = p.matcher(num);
@@ -54,6 +64,11 @@ public class MainTaller extends Application {
         return true;
     }
 
+    /**
+     *
+     * @param n
+     * @return
+     */
     public static boolean validarEmail(String n) {
         Pattern p = Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+");
         Matcher m = p.matcher(n);
@@ -63,6 +78,47 @@ public class MainTaller extends Application {
         return true;
     }
 
+    /*//mail.jar send mail netbeans
+     public static void sendMail() {
+     Properties props = new Properties();
+     props.put("mail.smtp.host", "smtp.gmail.com");
+     props.put("mail.smtp.port", "465");
+
+     Session mailSession = Session.getDefaultInstance(props);
+     Message simpleMessage = new MimeMessage(mailSession);
+
+     InternetAddress fromAddress = null;
+     InternetAddress toAddress = null;
+     try {
+     fromAddress = new InternetAddress(from);
+     toAddress = new InternetAddress(to);
+     } catch (AddressException e) {
+     // TODO Auto-generated catch block
+     e.printStackTrace();
+     }
+
+     try {
+     simpleMessage.setFrom(fromAddress);
+     simpleMessage.setRecipient(RecipientType.TO, toAddress);
+     simpleMessage.setSubject(subject);
+     simpleMessage.setText(text);
+
+     Transport.send(simpleMessage);
+     } catch (MessagingException e) {
+     // TODO Auto-generated catch block
+     e.printStackTrace();
+     }
+     }*/
+    /**
+     *
+     * @param nombreTaller
+     * @param nombreDuenyo
+     * @param direccion
+     * @param ciudad
+     * @param cp
+     * @param telefono
+     * @return
+     */
     public static boolean validar(String nombreTaller, String nombreDuenyo, String direccion, String ciudad, String cp, String telefono) {
         return validarNombre(nombreTaller) && validarNombre(nombreDuenyo) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono);
     }
@@ -79,10 +135,19 @@ public class MainTaller extends Application {
         launch(args);
     }
 
-    public static Boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
-        return port.alta(name, email, address, city, postalCode, telephone);
-    }
-
+    /**
+     *
+     * @param name
+     * @param email
+     * @param address
+     * @param city
+     * @param postalCode
+     * @param telephone
+     * @return
+     */
+    /*public static Boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+     taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
+     taller_ws.TallerWS port = service.getTallerWSPort();
+     return port.alta(name, email, address, city, postalCode, telephone);
+     }*/
 }
