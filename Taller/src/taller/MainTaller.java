@@ -112,15 +112,15 @@ public class MainTaller extends Application {
     /**
      *
      * @param nombreTaller
-     * @param nombreDuenyo
+     * @param email
      * @param direccion
      * @param ciudad
      * @param cp
      * @param telefono
      * @return
      */
-    public static boolean validar(String nombreTaller, String nombreDuenyo, String direccion, String ciudad, String cp, String telefono) {
-        return validarNombre(nombreTaller) && validarNombre(nombreDuenyo) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono);
+    public static boolean validar(String nombreTaller, String email, String direccion, String ciudad, String cp, String telefono) {
+        return validarNombre(nombreTaller) && validarEmail(email) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono);
     }
 
     /**
@@ -145,9 +145,9 @@ public class MainTaller extends Application {
      * @param telephone
      * @return
      */
-    /*public static Boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-     taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-     taller_ws.TallerWS port = service.getTallerWSPort();
-     return port.alta(name, email, address, city, postalCode, telephone);
-     }*/
+    public static Boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
+        taller_ws.TallerWS port = service.getTallerWSPort();
+        return port.alta(name, email, address, city, postalCode, telephone);
+    }
 }
