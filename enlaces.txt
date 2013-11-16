@@ -38,6 +38,9 @@ http://apachejuddi.blogspot.com.es/ //un motón de ejemplos hay por 2009, 2010 y 
 ----------------------------------- BD -----------------------------------------------
 http://docs.oracle.com/javaee/5/tutorial/doc/docinfo.html
 
+----------------------------------- Librería JSON (GSON) -----------------------------
+https://sites.google.com/site/gson/gson-user-guide#TOC-Using-Gson
+
 ------------------------------------ Apuntes de clase --------------------------------
 
 Política de envios-> habrá que generar un hilo que reintente X veces, y si en ninguno de los intentos funciona dará error.

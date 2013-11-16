@@ -40,10 +40,11 @@ public class Gestion extends Application {
         launch(args);
     }
 
-    public static java.util.List<java.lang.Object> getAltas() {
-        admin.AdminWS_Service service = new admin.AdminWS_Service();
-        admin.AdminWS port = service.getAdminWSPort();
+    public static String getAltas() {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getAltas();
     }
+
     
 }

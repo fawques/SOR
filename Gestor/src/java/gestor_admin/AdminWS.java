@@ -6,11 +6,13 @@
 
 package gestor_admin;
 
+import com.google.gson.Gson;
 import general.Taller;
 import java.util.ArrayList;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+
 
 /**
  *
@@ -31,12 +33,14 @@ public class AdminWS {
      * Web service operation
      */
     @WebMethod(operationName = "getAltas")
-    public ArrayList<Taller> getAltas() {
+    public String getAltas() {
         System.out.println("hola");
         ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
         listaTalleres.add(new Taller("Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
         listaTalleres.add(new Taller("Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-        
-        return listaTalleres;
+        Gson gson = new Gson();
+        String listaJSON = gson.toJson(listaTalleres);
+        System.out.println("listaJSON = " + listaJSON);
+        return listaJSON;
     }
 }
