@@ -25,6 +25,25 @@ public class Pieza {
         this.estado = estado;
         this.descripcion = descripcion;
     }
-    
+
+    public int getID() {
+        return ID;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public EstadoPieza getEstado() {
+        return estado;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public Date getFecha_baja() {
+        return fecha_baja;
+    }
     
 }
