@@ -6,10 +6,13 @@
 
 package gestion;
 
-import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import general.Taller;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,17 +55,14 @@ public class FXMLDocumentController implements Initializable {
            //  System.out.println(taller);
         //}
          ArrayList<Taller> listaTalleres= new ArrayList<>();
-        ArrayList<Object> objlist= new ArrayList<> (Gestion.getAltas());
+        //ArrayList<Object> objlist= new ArrayList<> (Gestion.getAltas());
+        Gson gson = new Gson();
+        Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
+        listaTalleres = gson.fromJson(Gestion.getAltas(), collectionType);
          System.out.println("pasa por aqui");
-         System.out.println(
-                 ((ElementNSImpl)objlist.get(0)).getLocalName());
-//         for (Object obj : Gestion.getAltas()) {
-//            listaTalleres.add(Taller.class.cast(obj));
-//        }
-//         
-//         for (Taller taller : listaTalleres) {
-//             System.out.println(taller);
-//        }
+         for (Taller taller : listaTalleres) {
+             System.out.println(taller);
+        }
     }
     
     @Override
