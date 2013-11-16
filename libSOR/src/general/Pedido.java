@@ -15,8 +15,7 @@ import java.util.Date;
  */
 public class Pedido {
     private int ID;
-    // cutrefix para que la conversión a JSON no de stackOverflow. Hay que solucionarlo
-    //private Taller taller;
+    private transient Taller taller;
     private Date fecha_alta;
     private Date fecha_baja;
     private Date fecha_limite;

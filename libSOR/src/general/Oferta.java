@@ -18,8 +18,8 @@ public class Oferta {
     private Date fecha_baja;
     private Date fecha_limite;
     private double precio;
-    private Desguace desguace;
-    private Pedido pedido;
+    private transient Desguace desguace;
+    private transient Pedido pedido;
 
     public Oferta(int ID, Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, Desguace desguace, Pedido pedido) {
         this.ID = ID;
