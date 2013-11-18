@@ -20,6 +20,7 @@ public class Taller {
     private String city;
     private int postalCode;
     private int telephone;
+    private EstadoGeneral estado;
     
     private ArrayList<Pedido> listaPedidos;
 
@@ -31,12 +32,30 @@ public class Taller {
         this.postalCode = postalCode;
         this.telephone = telephone;
         this.listaPedidos = new ArrayList<>();
+        this.estado = EstadoGeneral.ACTIVE;
     }
 
     @Override
     public String toString() {
         return "Taller{" + "name=" + name + ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + ", telephone=" + telephone + '}';
     }
+    
+    public Pedido nuevoPedido(Date fecha_alta, Date fecha_baja, Date fecha_limite){
+        Date ahora = new Date();
+//TODO: Darle un ID de verdad, no el tiempo actual...
+        Pedido nuevo = new Pedido((int)ahora.getTime(), this, fecha_alta, fecha_baja, fecha_limite);
+        listaPedidos.add(nuevo);
+        return nuevo;
+    }
+    
+    // recibe una oferta o un id para rechazar, y busca ese id en todas las ofertas de su lista?
+    public boolean rechazarOferta(Oferta oferta){
+        oferta.setEstado(EstadoOferta.REJECTED);
+        return true;
+    }
+    
+    
+    // ========== Getters ===========
     
     public String getName() {
         return name;
@@ -64,14 +83,6 @@ public class Taller {
 
     public ArrayList<Pedido> getListaPedidos() {
         return listaPedidos;
-    }
-    
-    public Pedido nuevoPedido(Date fecha_alta, Date fecha_baja, Date fecha_limite){
-        Date ahora = new Date();
-//TODO: Darle un ID de verdad, no el tiempo actual...
-        Pedido nuevo = new Pedido((int)ahora.getTime(), this, fecha_alta, fecha_baja, fecha_limite);
-        listaPedidos.add(nuevo);
-        return nuevo;
     }
     
     

@@ -10,6 +10,6 @@ package general;
  *
  * @author fawques
  */
-public enum EstadoPieza {
+public enum EstadoGeneral {
     ACTIVE,INACTIVE
 }

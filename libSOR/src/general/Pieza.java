@@ -15,16 +15,19 @@ import java.util.Date;
 public class Pieza {
     private int ID;
     private String nombre;
-    private EstadoPieza estado;
+    private EstadoGeneral estado;
     private String descripcion;
     private Date fecha_baja;
 
-    public Pieza(int ID, String nombre, EstadoPieza estado, String descripcion) {
+    public Pieza(int ID, String nombre, EstadoGeneral estado, String descripcion) {
         this.ID = ID;
         this.nombre = nombre;
         this.estado = estado;
         this.descripcion = descripcion;
     }
+    
+    
+    // ======== Getters =========
 
     public int getID() {
         return ID;
@@ -34,7 +37,7 @@ public class Pieza {
         return nombre;
     }
 
-    public EstadoPieza getEstado() {
+    public EstadoGeneral getEstado() {
         return estado;
     }
 

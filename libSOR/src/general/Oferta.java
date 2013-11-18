@@ -20,6 +20,7 @@ public class Oferta {
     private double precio;
     private transient Desguace desguace;
     private transient Pedido pedido;
+    private EstadoOferta estado;
 
     public Oferta(int ID, Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, Desguace desguace, Pedido pedido) {
         this.ID = ID;
@@ -29,8 +30,17 @@ public class Oferta {
         this.precio = precio;
         this.desguace = desguace;
         this.pedido = pedido;
+        this.estado = EstadoOferta.WAITING_ACCEPT;
     }
 
+    // OJO, mirar si hace falta esto, es bastante peligroso!!
+    public void setEstado(EstadoOferta estado) {
+        this.estado = estado;
+    }
+
+    
+    // ============ Getters ==========
+    
     public int getID() {
         return ID;
     }
@@ -57,6 +67,10 @@ public class Oferta {
 
     public Pedido getPedido() {
         return pedido;
+    }
+
+    public EstadoOferta getEstado() {
+        return estado;
     }
 
     

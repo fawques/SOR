@@ -20,6 +20,7 @@ public class Desguace {
     private String city;
     private int postalCode;
     private int telephone;
+    private EstadoGeneral estado;
     
     private ArrayList<Oferta> listaOfertas;
 
@@ -31,8 +32,25 @@ public class Desguace {
         this.postalCode = postalCode;
         this.telephone = telephone;
         listaOfertas = new ArrayList<>();
+        this.estado = EstadoGeneral.ACTIVE;
     }
 
+    public Oferta nuevaOferta(Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, Pedido pedido){
+        Date ahora = new Date();
+//TODO: Darle un ID de verdad, no el tiempo actual...
+        Oferta nueva = new Oferta((int)ahora.getTime(), fecha_alta, fecha_baja, fecha_limite, precio, this, pedido);
+        listaOfertas.add(nueva);
+        return nueva;
+    }
+    
+    // OJO: ver rechazarOferta en Pedido también
+    public boolean cancelarOferta(Oferta oferta){
+        oferta.setEstado(EstadoOferta.CANCELLED);
+        return true;
+    }
+    
+    // ======== Getters =======
+    
     public String getName() {
         return name;
     }
@@ -60,14 +78,5 @@ public class Desguace {
     public ArrayList<Oferta> getListaOfertas() {
         return listaOfertas;
     }
-    
-    public Oferta nuevaOferta(Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, Pedido pedido){
-        Date ahora = new Date();
-//TODO: Darle un ID de verdad, no el tiempo actual...
-        Oferta nueva = new Oferta((int)ahora.getTime(), fecha_alta, fecha_baja, fecha_limite, precio, this, pedido);
-        listaOfertas.add(nueva);
-        return nueva;
-    }
-    
     
 }

@@ -19,6 +19,7 @@ public class Pedido {
     private Date fecha_alta;
     private Date fecha_baja;
     private Date fecha_limite;
+    private EstadoPedido estado;
     
     private ArrayList<Pieza> listaPiezas;
     private ArrayList<Integer> listaCantidadesPiezas;
@@ -33,6 +34,7 @@ public class Pedido {
         this.listaPiezas = new ArrayList<>();
         this.listaCantidadesPiezas = new ArrayList<>();
         this.listaOfertas = new ArrayList<>();
+        this.estado = EstadoPedido.NO_OFFERS;
     }
     
     public boolean addPieza(Pieza pieza, Integer cantidad){
@@ -41,14 +43,17 @@ public class Pedido {
 //TODO: habrá que mirar más cosas para devolver true/false o lo que sea
         return true;
     }
+    
+    
+    // ======== Getters ==========
 
     public int getID() {
         return ID;
     }
 
-    /*public Taller getTaller() {
+    public Taller getTaller() {
         return taller;
-    }*/
+    }
 
     public Date getFecha_alta() {
         return fecha_alta;
@@ -73,7 +78,9 @@ public class Pedido {
     public ArrayList<Oferta> getListaOfertas() {
         return listaOfertas;
     }
-    
-    
+
+    public EstadoPedido getEstado() {
+        return estado;
+    }
     
 }
