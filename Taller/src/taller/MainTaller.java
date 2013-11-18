@@ -80,7 +80,7 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validarEmail(String n) {
-        Pattern p = Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+");
+        Pattern p = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+[.][a-zA-Z]+");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
             return false;
