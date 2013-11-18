@@ -20,15 +20,7 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TableView id="tableTalleres" disable="false" layoutX="46.0" layoutY="65.0" prefHeight="200.0" prefWidth="722.0" tableMenuButtonVisible="true">
-                  <columns>
-                    <TableColumn id="columnID" maxWidth="5000.0" minWidth="10.0" prefWidth="52.0" text="ID" />
-                    <TableColumn id="columnNombre" maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Nombre" />
-                    <TableColumn id="columnEmail" maxWidth="5000.0" minWidth="10.0" prefWidth="196.0" text="Email" />
-                    <TableColumn id="columnFecha" maxWidth="5000.0" minWidth="10.0" prefWidth="105.0" text="Fecha" />
-                    <TableColumn id="columnEstado" maxWidth="5000.0" minWidth="10.0" prefWidth="271.0" text="Estado" />
-                  </columns>
-                </TableView>
+                <TableView fx:id="tableTalleres" disable="false" editable="true" layoutX="46.0" layoutY="65.0" prefHeight="200.0" prefWidth="722.0" tableMenuButtonVisible="true" />
                 <TableView id="tableDesguaces" disable="false" layoutX="46.0" layoutY="325.0" prefHeight="200.0" prefWidth="722.0" tableMenuButtonVisible="true">
                   <columns>
                     <TableColumn id="columnId" maxWidth="5000.0" minWidth="10.0" prefWidth="52.0" text="ID" />
@@ -44,6 +36,7 @@
                   </font>
                 </Text>
                 <Text font="$x1" layoutX="88.0" layoutY="300.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Desguaces" />
+                <Button fx:id="button" layoutX="712.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Insert" />
               </children>
             </AnchorPane>
           </content>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
-    <service name="Taller">
-      <implementation-class>gestor_taller.Taller</implementation-class>
+    <service name="TallerWS">
+      <implementation-class>gestor_taller.TallerWS</implementation-class>
+    </service>
+    <service name="AdminWS">
+      <implementation-class>gestor_admin.AdminWS</implementation-class>
     </service>
   </services>
   <clients/>
