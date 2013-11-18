@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author fawques
  */
-public class Taller {
+public class Desguace {
     private String name;
     private String email;
     private String address;
@@ -22,40 +22,34 @@ public class Taller {
     private int telephone;
     private EstadoGeneral estado;
     
-    private ArrayList<Pedido> listaPedidos;
+    private ArrayList<Oferta> listaOfertas;
 
-    public Taller(String name, String email, String address, String city, int postalCode, int telephone) {
+    public Desguace(String name, String email, String address, String city, int postalCode, int telephone) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
         this.telephone = telephone;
-        this.listaPedidos = new ArrayList<>();
+        listaOfertas = new ArrayList<>();
         this.estado = EstadoGeneral.ACTIVE;
     }
 
-    @Override
-    public String toString() {
-        return "Taller{" + "name=" + name + ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + ", telephone=" + telephone + '}';
-    }
-    
-    public Pedido nuevoPedido(Date fecha_alta, Date fecha_baja, Date fecha_limite){
+    public Oferta nuevaOferta(Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, Pedido pedido){
         Date ahora = new Date();
 //TODO: Darle un ID de verdad, no el tiempo actual...
-        Pedido nuevo = new Pedido((int)ahora.getTime(), this, fecha_alta, fecha_baja, fecha_limite);
-        listaPedidos.add(nuevo);
-        return nuevo;
+        Oferta nueva = new Oferta((int)ahora.getTime(), fecha_alta, fecha_baja, fecha_limite, precio, this, pedido);
+        listaOfertas.add(nueva);
+        return nueva;
     }
     
-    // recibe una oferta o un id para rechazar, y busca ese id en todas las ofertas de su lista?
-    public boolean rechazarOferta(Oferta oferta){
-        oferta.setEstado(EstadoOferta.REJECTED);
+    // OJO: ver rechazarOferta en Pedido también
+    public boolean cancelarOferta(Oferta oferta){
+        oferta.setEstado(EstadoOferta.CANCELLED);
         return true;
     }
     
-    
-    // ========== Getters ===========
+    // ======== Getters =======
     
     public String getName() {
         return name;
@@ -81,9 +75,8 @@ public class Taller {
         return telephone;
     }
 
-    public ArrayList<Pedido> getListaPedidos() {
-        return listaPedidos;
+    public ArrayList<Oferta> getListaOfertas() {
+        return listaOfertas;
     }
-    
     
 }
