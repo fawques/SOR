@@ -14,6 +14,7 @@ import java.util.Date;
  * @author fawques
  */
 public class Taller {
+    private int ID;
     private String name;
     private String email;
     private String address;
@@ -24,7 +25,8 @@ public class Taller {
     
     private ArrayList<Pedido> listaPedidos;
 
-    public Taller(String name, String email, String address, String city, int postalCode, int telephone) {
+    public Taller(int ID,String name, String email, String address, String city, int postalCode, int telephone) {
+        this.ID=ID;
         this.name = name;
         this.email = email;
         this.address = address;
@@ -43,7 +45,7 @@ public class Taller {
     public Pedido nuevoPedido(Date fecha_alta, Date fecha_baja, Date fecha_limite){
         Date ahora = new Date();
 //TODO: Darle un ID de verdad, no el tiempo actual...
-        Pedido nuevo = new Pedido((int)ahora.getTime(), this, fecha_alta, fecha_baja, fecha_limite);
+        Pedido nuevo = new Pedido((int)ahora.getTime(),ID , fecha_alta, fecha_baja, fecha_limite);
         listaPedidos.add(nuevo);
         return nuevo;
     }
