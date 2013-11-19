@@ -52,7 +52,7 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validarNombre(String n) {
-        Pattern p = Pattern.compile("^[a-zA-Z ]*[a-zA-Z]");
+        Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]*[a-zA-Z]");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
             return false;
@@ -66,7 +66,8 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validarSoloNumeros(String num) {
-        Pattern p = Pattern.compile("^[0-9 ]*[0-9]");
+        //Verificar que no se pase de 9 digitos!
+        Pattern p = Pattern.compile("^[0-9]*[0-9]");
         Matcher m = p.matcher(num);
         if (!m.matches()) {
             return false;
