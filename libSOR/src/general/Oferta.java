@@ -18,18 +18,18 @@ public class Oferta {
     private Date fecha_baja;
     private Date fecha_limite;
     private double precio;
-    private transient Desguace desguace;
-    private transient Pedido pedido;
+    private int desguaceID;
+    private int pedidoID;
     private EstadoOferta estado;
 
-    public Oferta(int ID, Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, Desguace desguace, Pedido pedido) {
+    public Oferta(int ID, Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, int desguaceID, int pedidoID) {
         this.ID = ID;
         this.fecha_alta = fecha_alta;
         this.fecha_baja = fecha_baja;
         this.fecha_limite = fecha_limite;
         this.precio = precio;
-        this.desguace = desguace;
-        this.pedido = pedido;
+        this.desguaceID = desguaceID;
+        this.pedidoID = pedidoID;
         this.estado = EstadoOferta.WAITING_ACCEPT;
     }
 
@@ -61,12 +61,12 @@ public class Oferta {
         return precio;
     }
 
-    public Desguace getDesguace() {
-        return desguace;
+    public int getDesguace() {
+        return desguaceID;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public int getPedido() {
+        return pedidoID;
     }
 
     public EstadoOferta getEstado() {
