@@ -37,8 +37,8 @@ public class AdminWS {
     public String getAltas() {
         System.out.println("hola");
         ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
-        listaTalleres.add(new Taller("Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-        listaTalleres.add(new Taller("Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
+        listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
+        listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
         listaTalleres.get(0).nuevoPedido(new Date(), new Date(), new Date());
         Gson gson = new Gson();
         String listaJSON = gson.toJson(listaTalleres);
