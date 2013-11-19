@@ -67,29 +67,30 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TableColumn columnNombreTaller = new TableColumn("Nombre taller");
-         TableColumn columnDuenyo = new TableColumn("Nombre dueño");
-          TableColumn columnDireccion = new TableColumn("Dirección");
-          TableColumn columnProvincia = new TableColumn("Provincia");
+        TableColumn columnID = new TableColumn("ID taller");
+         TableColumn columnNombre = new TableColumn("Nombre taller");
           TableColumn columnEmail = new TableColumn("Email");
+          TableColumn columnDireccion = new TableColumn("Dirección");
+          TableColumn columnCiudad = new TableColumn("Ciudad");
            TableColumn columnCodigoPostal = new TableColumn("Código Postal");
           TableColumn columnNumero = new TableColumn("Número telefónico");
+           TableColumn columnEstado = new TableColumn("Estado");
            tableTalleres.setEditable(true);
         System.out.println("Initialize!");
-          columnNombreTaller.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("nombreTaller")
+          columnID.setCellValueFactory(
+           new PropertyValueFactory<TallerInterface,String>("ID taller")
                );
-           columnDuenyo.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("nombreDuenyo")
-           );
-           columnDireccion.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("direccion")
-           );
-           columnProvincia.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("provincia")
+           columnNombre.setCellValueFactory(
+           new PropertyValueFactory<TallerInterface,String>("Nombre taller")
            );
            columnEmail.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("email")
+           new PropertyValueFactory<TallerInterface,String>("Email")
+           );
+           columnCiudad.setCellValueFactory(
+           new PropertyValueFactory<TallerInterface,String>("Ciudad")
+           );
+           columnEstado.setCellValueFactory(
+           new PropertyValueFactory<TallerInterface,String>("Estado")
            );
            columnCodigoPostal.setCellValueFactory(
            new PropertyValueFactory<TallerInterface,String>("codigoPostal")
@@ -97,10 +98,12 @@ public class FXMLDocumentController implements Initializable {
            columnNumero.setCellValueFactory(
            new PropertyValueFactory<TallerInterface,String>("numeroTelefono")
            );
-           
+           columnDireccion.setCellValueFactory(
+           new PropertyValueFactory<TallerInterface,String>("Dirección")
+           );
            personData.add(new TallerInterface("SilviaSL", "Silvia De Gregorio", "C/ Piruleta", "Nyan","asfasf@gmasf.com",1,8612));
            tableTalleres.setItems(personData);
-         tableTalleres.getColumns().addAll(columnNombreTaller,columnDuenyo,columnDireccion,columnProvincia,columnEmail,columnCodigoPostal,columnNumero);
+           tableTalleres.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnEstado,columnCodigoPostal,columnNumero);
         // TODO
     }    
     

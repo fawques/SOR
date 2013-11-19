@@ -7,6 +7,8 @@
 package gestor_admin;
 
 import com.google.gson.Gson;
+import general.Oferta;
+import general.Pedido;
 import general.Taller;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +37,7 @@ public class AdminWS {
      */
     @WebMethod(operationName = "getAltas")
     public String getAltas() {
-        System.out.println("hola");
+        
         ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
         listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
         listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
@@ -44,5 +46,37 @@ public class AdminWS {
         String listaJSON = gson.toJson(listaTalleres);
         System.out.println("listaJSON = " + listaJSON);
         return listaJSON;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getPedidos")
+    public String getPedidos() {
+        ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
+        listaPedidos.add(new Pedido(1,1,new Date(), new Date(),new Date()));
+       listaPedidos.add(new Pedido(2,1,new Date(), new Date(),new Date()));
+        
+        Gson gson = new Gson();
+        String listaJSON = gson.toJson(listaPedidos);
+        System.out.println("listaJSON = " + listaJSON);
+        return listaJSON;
+        
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getOfertas")
+    public String getOfertas() {
+        ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
+        listaOfertas.add(new Oferta(1,new Date(),new Date(), new Date(),32.2,1,1));
+        listaOfertas.add(new Oferta(2,new Date(),new Date(), new Date(),20.0,1,1));
+        
+        Gson gson = new Gson();
+        String listaJSON = gson.toJson(listaOfertas);
+        System.out.println("listaJSON = " + listaJSON);
+        return listaJSON;
+        
     }
 }
