@@ -9,6 +9,7 @@ package gestor_admin;
 import com.google.gson.Gson;
 import general.Taller;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -38,6 +39,7 @@ public class AdminWS {
         ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
         listaTalleres.add(new Taller("Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
         listaTalleres.add(new Taller("Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
+        listaTalleres.get(0).nuevoPedido(new Date(), new Date(), new Date());
         Gson gson = new Gson();
         String listaJSON = gson.toJson(listaTalleres);
         System.out.println("listaJSON = " + listaJSON);
