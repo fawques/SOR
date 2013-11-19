@@ -60,50 +60,49 @@ public class FXMLDocumentController implements Initializable {
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
         listaTalleres = gson.fromJson(Gestion.getAltas(), collectionType);
          System.out.println("pasa por aqui");
+         TallerInterface interfaz= new TallerInterface();
          for (Taller taller : listaTalleres) {
+             interfaz= new TallerInterface(taller);
+             personData.add(interfaz);
              System.out.println(taller);
         }
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TableColumn columnID = new TableColumn("ID taller");
-         TableColumn columnNombre = new TableColumn("Nombre taller");
-          TableColumn columnEmail = new TableColumn("Email");
-          TableColumn columnDireccion = new TableColumn("Dirección");
-          TableColumn columnCiudad = new TableColumn("Ciudad");
-           TableColumn columnCodigoPostal = new TableColumn("Código Postal");
-          TableColumn columnNumero = new TableColumn("Número telefónico");
-           TableColumn columnEstado = new TableColumn("Estado");
+        TableColumn columnID = new TableColumn("ID");
+         TableColumn columnNombre = new TableColumn("nombreTaller");
+          TableColumn columnEmail = new TableColumn("email");
+          TableColumn columnDireccion = new TableColumn("direccion");
+          TableColumn columnCiudad = new TableColumn("ciudad");
+           TableColumn columnCodigoPostal = new TableColumn("codigoPostal");
+          TableColumn columnNumero = new TableColumn("numeroTelefono");          
            tableTalleres.setEditable(true);
         System.out.println("Initialize!");
           columnID.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("ID taller")
+           new PropertyValueFactory<TallerInterface,Integer>("ID")
                );
            columnNombre.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("Nombre taller")
+           new PropertyValueFactory<TallerInterface,String>("nombreTaller")
            );
            columnEmail.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("Email")
+           new PropertyValueFactory<TallerInterface,String>("email")
            );
            columnCiudad.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("Ciudad")
-           );
-           columnEstado.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("Estado")
+           new PropertyValueFactory<TallerInterface,String>("ciudad")
            );
            columnCodigoPostal.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("codigoPostal")
+           new PropertyValueFactory<TallerInterface,Integer>("codigoPostal")
            );
            columnNumero.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("numeroTelefono")
+           new PropertyValueFactory<TallerInterface,Integer>("numeroTelefono")
            );
            columnDireccion.setCellValueFactory(
-           new PropertyValueFactory<TallerInterface,String>("Dirección")
+           new PropertyValueFactory<TallerInterface,String>("direccion")
            );
-           personData.add(new TallerInterface("SilviaSL", "Silvia De Gregorio", "C/ Piruleta", "Nyan","asfasf@gmasf.com",1,8612));
+           personData.add(new TallerInterface(1, "Silvia De Gregorio","asfasf@gmasf.com", "C/ Piruleta", "Nyan",3690,8612));
            tableTalleres.setItems(personData);
-           tableTalleres.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnEstado,columnCodigoPostal,columnNumero);
+           tableTalleres.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnCodigoPostal,columnNumero);
         // TODO
     }    
     

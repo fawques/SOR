@@ -18,14 +18,14 @@ public class TallerInterface {
     
     
     
-    private SimpleIntegerProperty ID;
-    private SimpleStringProperty nombreTaller;
-    private SimpleStringProperty email;
-    private SimpleStringProperty direccion;
-    private SimpleStringProperty ciudad;    
-    private SimpleIntegerProperty codigoPostal;
-    private SimpleIntegerProperty numeroTelefono;
-    private SimpleIntegerProperty estado;
+    private final SimpleIntegerProperty ID;
+    private final SimpleStringProperty nombreTaller;
+    private final SimpleStringProperty email;
+    private final SimpleStringProperty direccion;
+    private final SimpleStringProperty ciudad;    
+    private final SimpleIntegerProperty codigoPostal;
+    private final SimpleIntegerProperty numeroTelefono;
+
 
     public TallerInterface(){
     ID= new SimpleIntegerProperty();
@@ -35,14 +35,27 @@ public class TallerInterface {
     email=new SimpleStringProperty("");
     codigoPostal=new SimpleIntegerProperty();
     numeroTelefono=new SimpleIntegerProperty();
-    estado= new SimpleIntegerProperty();
+
     }
     
-    public TallerInterface(int _ID,String _nombre,String _direccion,String _provincia,String _email,int _codigo,int _numero,int _estado){
-        crearTallerInterface(_ID, _nombre, _direccion, _provincia, _email, _codigo, _numero,_estado);
+    /*public TallerInterface(int _ID,String _nombre,String _direccion,String _provincia,String _email,int _codigo,int _numero){
+    crearTallerInterface(_ID, _nombre, _direccion, _provincia, _email, _codigo, _numero);
     }
+    private void crearTallerInterface(int _ID, String _nombre, String _direccion, String _provincia, String _email, int _codigo, int _numero) {
+    ID= new SimpleIntegerProperty(_ID);
+    nombreTaller=new SimpleStringProperty(_nombre);
+    direccion=new SimpleStringProperty(_direccion);
+    ciudad=new SimpleStringProperty(_provincia);
+    email=new SimpleStringProperty(_email);
+    codigoPostal=new SimpleIntegerProperty(_codigo);
+    numeroTelefono=new SimpleIntegerProperty(_numero);
+    }
+    public TallerInterface(Taller taller){
+    crearTallerInterface(taller.getID(),taller.getName(), taller.getAddress(), taller.getCity(), taller.getEmail(),taller.getPostalCode(),taller.getTelephone());
+    }*/
 
-    private void crearTallerInterface(int _ID, String _nombre, String _direccion, String _provincia, String _email, int _codigo, int _numero,int _estado) {
+    public TallerInterface(int _ID, String _nombre, String _direccion, String _provincia, String _email, int _codigo, int _numero) {
+     
         ID= new SimpleIntegerProperty(_ID);
         nombreTaller=new SimpleStringProperty(_nombre);
         direccion=new SimpleStringProperty(_direccion);
@@ -50,71 +63,67 @@ public class TallerInterface {
         email=new SimpleStringProperty(_email);
         codigoPostal=new SimpleIntegerProperty(_codigo);
         numeroTelefono=new SimpleIntegerProperty(_numero);
-        estado = new SimpleIntegerProperty(_estado);
+    }
+     public TallerInterface(Taller taller) {
+         
+        ID= new SimpleIntegerProperty(taller.getID());
+        nombreTaller=new SimpleStringProperty(taller.getName());
+        direccion=new SimpleStringProperty(taller.getAddress());
+        ciudad=new SimpleStringProperty( taller.getCity());
+        email=new SimpleStringProperty( taller.getEmail());
+        codigoPostal=new SimpleIntegerProperty(taller.getPostalCode());
+        numeroTelefono=new SimpleIntegerProperty(taller.getTelephone());
+    }
+
+    public SimpleIntegerProperty getID() {
+        return ID;
+    }
+
+ 
+
+    public SimpleStringProperty getNombreTaller() {
+        return nombreTaller;
     }
 
 
-    public TallerInterface(Taller taller){
-        crearTallerInterface(taller.getName(), taller.get, null, null, null, codigo, numero);
-    }
-    public String getNombreTaller() {
-        return nombreTaller.get();
+
+    public SimpleStringProperty getEmail() {
+        return email;
     }
 
-    public void setNombreTaller(String nombreTaller) {
-        this.nombreTaller.set(nombreTaller);
+
+
+    public SimpleStringProperty getDireccion() {
+        return direccion;
     }
 
-    public String getNombreDuenyo() {
-        return nombreDuenyo.get();
+
+
+    public SimpleStringProperty getCiudad() {
+        return ciudad;
     }
 
-    public void setNombreDuenyo(String nombreDuenyo) {
-        this.nombreDuenyo.set(nombreDuenyo);
+
+    public SimpleIntegerProperty getCodigoPostal() {
+        return codigoPostal;
     }
 
-    public String getDireccion() {
-        return direccion.get();
+
+
+    public SimpleIntegerProperty getNumeroTelefono() {
+        return numeroTelefono;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion.set(direccion);
-    }
-
-    public String getProvincia() {
-        return provincia.get();
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia.set(provincia);
-    }
-
-    public int getCodigoPostal() {
-        return codigoPostal.get();
-    }
-
-    public void setCodigoPostal(int codigoPostal) {
-        this.codigoPostal.set(codigoPostal);
-    }
-
-    public int getNumeroTelefono() {
-        return numeroTelefono.get();
-    }
-
-    public void setNumeroTelefono(int numeroTelefono) {
-        this.numeroTelefono.set(numeroTelefono);
-    }
-    public String getEmail() {
-        return email.get();
-    }
-
-    public void setEmail(String email) {
-        this.email.set(email);
-    }
     @Override
     public String toString() {
-        return "Taller{" + "nombreTaller=" + nombreTaller + ", nombreDuenyo=" + nombreDuenyo + ", direccion=" + direccion + ", provincia=" + provincia + ", codigoPostal=" + codigoPostal + ", numeroTelefono=" + numeroTelefono + '}';
+        return "TallerInterface{" + "ID=" + ID + ", nombreTaller=" + nombreTaller + ", email=" + email + ", direccion=" + direccion + ", ciudad=" + ciudad + ", codigoPostal=" + codigoPostal + ", numeroTelefono=" + numeroTelefono + '}';
     }
+
+  
+  
+
+
+
 
 
 
