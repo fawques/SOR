@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class Pedido {
     private int ID;
-    private transient Taller taller;
+    private int tallerID;
     private Date fecha_alta;
     private Date fecha_baja;
     private Date fecha_limite;
@@ -25,9 +25,9 @@ public class Pedido {
     private ArrayList<Integer> listaCantidadesPiezas;
     private ArrayList<Oferta> listaOfertas;
 
-    public Pedido(int ID, Taller taller, Date fecha_alta, Date fecha_baja, Date fecha_limite) {
+    public Pedido(int ID, int tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite) {
         this.ID = ID;
-        //this.taller = taller;
+        this.tallerID = tallerID;
         this.fecha_alta = fecha_alta;
         this.fecha_baja = fecha_baja;
         this.fecha_limite = fecha_limite;
@@ -51,8 +51,8 @@ public class Pedido {
         return ID;
     }
 
-    public Taller getTaller() {
-        return taller;
+    public int getTaller() {
+        return tallerID;
     }
 
     public Date getFecha_alta() {
