@@ -14,6 +14,7 @@ import java.util.Date;
  * @author fawques
  */
 public class Desguace {
+    private int ID;
     private String name;
     private String email;
     private String address;
@@ -24,7 +25,8 @@ public class Desguace {
     
     private ArrayList<Oferta> listaOfertas;
 
-    public Desguace(String name, String email, String address, String city, int postalCode, int telephone) {
+    public Desguace(int ID,String name, String email, String address, String city, int postalCode, int telephone) {
+       this.ID=ID;
         this.name = name;
         this.email = email;
         this.address = address;
@@ -35,10 +37,10 @@ public class Desguace {
         this.estado = EstadoGeneral.ACTIVE;
     }
 
-    public Oferta nuevaOferta(Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, Pedido pedido){
+    public Oferta nuevaOferta(Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, int pedidoID){
         Date ahora = new Date();
 //TODO: Darle un ID de verdad, no el tiempo actual...
-        Oferta nueva = new Oferta((int)ahora.getTime(), fecha_alta, fecha_baja, fecha_limite, precio, this, pedido);
+        Oferta nueva = new Oferta((int)ahora.getTime(),fecha_alta, fecha_baja, fecha_limite, precio, ID,pedidoID);
         listaOfertas.add(nueva);
         return nueva;
     }
