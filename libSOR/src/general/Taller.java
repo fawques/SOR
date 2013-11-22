@@ -13,28 +13,14 @@ import java.util.Date;
  *
  * @author fawques
  */
-public class Taller {
-    private int ID;
-    private String name;
-    private String email;
-    private String address;
-    private String city;
-    private int postalCode;
-    private int telephone;
-    private EstadoGeneral estado;
+public class Taller extends Usuario{
+    
     
     private ArrayList<Pedido> listaPedidos;
 
     public Taller(int ID,String name, String email, String address, String city, int postalCode, int telephone) {
-        this.ID=ID;
-        this.name = name;
-        this.email = email;
-        this.address = address;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.telephone = telephone;
+        super(ID, name, email, address, city, postalCode, telephone);
         this.listaPedidos = new ArrayList<>();
-        this.estado = EstadoGeneral.ACTIVE;
     }
 
     @Override
