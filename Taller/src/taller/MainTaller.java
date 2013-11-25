@@ -5,7 +5,7 @@
  */
 package taller;
 
-import conexion.Conexion;
+import BD.Conexion;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
