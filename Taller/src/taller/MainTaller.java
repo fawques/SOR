@@ -57,7 +57,7 @@ public class MainTaller extends Application {
             return false;
         }
         Conexion conexion = new Conexion();
-        conexion.crearConexion();
+        conexion.crearConexion("sor_taller");
         return true;
     }
 

@@ -34,15 +34,16 @@ public class Conexion {
 
     /**
     * Método utilizado para establecer la conexión con la base de datos
+     * @param database nombre de la base de datos a la que conectar
     * @return estado regresa el estado de la conexión, true si se estableció la conexión,
     * falso en caso contrario
     */
-    public boolean crearConexion()
+    public boolean crearConexion(String database)
     {
        try {
           Class.forName("com.mysql.jdbc.Driver");
           System.out.println("Conexion establecida");
-          Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/sor_gestor","root","12345");
+          Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database,"root","12345");
           System.out.println("Conexion establecida");
        } catch (SQLException ex) {
           ex.printStackTrace();
