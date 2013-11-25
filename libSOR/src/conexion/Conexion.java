@@ -42,7 +42,7 @@ public class Conexion {
        try {
           Class.forName("com.mysql.jdbc.Driver");
           System.out.println("Conexion establecida");
-          Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","12345");
+          Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/sor_gestor","root","12345");
           System.out.println("Conexion establecida");
        } catch (SQLException ex) {
           ex.printStackTrace();
