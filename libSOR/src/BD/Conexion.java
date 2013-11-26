@@ -20,40 +20,41 @@ import java.sql.Statement;
 
 public class Conexion {
 
+    Connection conexion;
+    String database;
+    
+    /**
+    * Constructor de clase utilizado para establecer la conexión con la base de datos
+     * @param database nombre de la base de datos a la que conectar
+    */
+    public Conexion(String database) throws SQLException, ClassNotFoundException {
+        this.database = database;
+        try {
+          Class.forName("com.mysql.jdbc.Driver");
+          System.out.println("Conexion establecida");
+          conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database,"root","12345");
+          System.out.println("Conexion establecida");
+       } catch (SQLException ex) {
+          ex.printStackTrace();
+          //return false;
+          throw ex;
+       } catch (ClassNotFoundException ex) {
+          ex.printStackTrace();
+          //return false;
+          throw ex;
+       }
+    }
+
     /**
     * Método utilizado para recuperar el valor del atributo conexion
     * @return conexion contiene el estado de la conexión
     *
     */
   
-    Connection conexion;
+    
     public Connection getConexion()
     {
        return conexion;
-    }
-
-    /**
-    * Método utilizado para establecer la conexión con la base de datos
-     * @param database nombre de la base de datos a la que conectar
-    * @return estado regresa el estado de la conexión, true si se estableció la conexión,
-    * falso en caso contrario
-    */
-    public boolean crearConexion(String database)
-    {
-       try {
-          Class.forName("com.mysql.jdbc.Driver");
-          System.out.println("Conexion establecida");
-          Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database,"root","12345");
-          System.out.println("Conexion establecida");
-       } catch (SQLException ex) {
-          ex.printStackTrace();
-          return false;
-       } catch (ClassNotFoundException ex) {
-          ex.printStackTrace();
-          return false;
-       }
-
-       return true;
     }
 
     /**

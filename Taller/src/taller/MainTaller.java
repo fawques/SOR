@@ -5,7 +5,7 @@
  */
 package taller;
 
-import BD.Conexion;
+import BD.InterfazBD;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,8 +30,12 @@ import javax.mail.internet.MimeMessage;
  */
 public class MainTaller extends Application {
 
+    InterfazBD bd;
+    
     @Override
     public void start(Stage stage) throws Exception {
+        bd = new InterfazBD("sor_taller");
+        System.out.println(bd.getPedidosActivos());
         //if(noEstaRegistradoEnGestor)
         Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
         Scene scene = new Scene(root);
@@ -56,8 +60,7 @@ public class MainTaller extends Application {
         if (!m.matches()) {
             return false;
         }
-        Conexion conexion = new Conexion();
-        conexion.crearConexion("sor_taller");
+        
         return true;
     }
 
