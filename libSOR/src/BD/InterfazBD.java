@@ -6,6 +6,7 @@
 
 package BD;
 
+import general.EstadoPedido;
 import general.Pedido;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,8 +29,7 @@ public class InterfazBD {
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido;");
             while(resultados.next()){
-                // TODO: meter en la BD los campos de fecha_alta, baja y límite
-                Pedido nuevo = new Pedido(resultados.getInt("id"), resultados.getInt("taller"), null, null, null);
+                Pedido nuevo = new Pedido(resultados.getInt("id"), resultados.getInt("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),resultados.getObject("estado",EstadoPedido.class));
                 lista.add(nuevo);
             }
         }catch(SQLException ex){
