@@ -23,15 +23,21 @@ public class TallerWS {
     
     InterfazBD bd;
     /**
-     * Web service operation
+     * 
+     * @param name
+     * @param email
+     * @param address
+     * @param city
+     * @param postalCode
+     * @param telephone
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
      */
     @WebMethod(operationName = "alta")
-    public Boolean alta(@WebParam(name = "ID") int ID,@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) throws SQLException, ClassNotFoundException {
-        Taller t = new Taller(ID,name, email, address, city, postalCode, telephone);
+    public int alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) throws SQLException, ClassNotFoundException {
         
         bd = new InterfazBD("sor_taller");
-        
-        return t != null?true:false;
-        //return codigoGestor
+        return bd.altaTaller(name, email, address, city, postalCode, telephone, 0);
     }
 }

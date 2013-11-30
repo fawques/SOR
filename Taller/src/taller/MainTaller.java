@@ -185,12 +185,9 @@ public class MainTaller extends Application {
      * @param telephone
      * @return
      */
-    public static Boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+    public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
         taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
         taller_ws.TallerWS port = service.getTallerWSPort();
-        
-        
-        
         return port.alta(name, email, address, city, postalCode, telephone);
     }
     

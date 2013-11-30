@@ -19,9 +19,11 @@ import java.util.ArrayList;
 public class InterfazBD {
     
     Conexion conexion;
+    int contadorTaller;
 
     public InterfazBD(String database) throws SQLException, ClassNotFoundException {
         conexion = new Conexion(database);
+        contadorTaller=1;
     }
     
     public ArrayList<Pedido> getPedidosActivos(){
@@ -40,6 +42,10 @@ public class InterfazBD {
         
     }
     
-    
+    public int altaTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado){
+        conexion.ejecutarSQL("insert into taller values ("+contadorTaller+",'"+nombre+"', '"+email+"','"+direccion+"','"+ciudad+"',"+codPostal+","+telefono+","+estado+");");
+        contadorTaller++;
+        return contadorTaller-1;
+    }
     
 }
