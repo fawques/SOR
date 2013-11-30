@@ -5,6 +5,7 @@
  */
 package taller;
 
+import BD.InterfazBD;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,13 +30,15 @@ import javax.mail.internet.MimeMessage;
  */
 public class MainTaller extends Application {
 
+    InterfazBD bd;
+    
     @Override
     public void start(Stage stage) throws Exception {
+        bd = new InterfazBD("sor_taller");
+        System.out.println(bd.getPedidosActivos());
         //if(noEstaRegistradoEnGestor)
         Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
-
         Scene scene = new Scene(root);
-
         stage.setScene(scene);
         stage.show();
     }
@@ -57,6 +60,7 @@ public class MainTaller extends Application {
         if (!m.matches()) {
             return false;
         }
+        
         return true;
     }
 
@@ -184,6 +188,10 @@ public class MainTaller extends Application {
     public static Boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
         taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
         taller_ws.TallerWS port = service.getTallerWSPort();
+        
+        
+        
         return port.alta(name, email, address, city, postalCode, telephone);
     }
+    
 }
