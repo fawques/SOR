@@ -46,25 +46,25 @@ public class Gestion extends Application {
         return port.getAltas();
     }
 
-    private static String getDesguaces() {
+    public static String getDesguaces() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getDesguaces();
     }
 
-    private static String getOfertas() {
+    public static String getOfertas() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getOfertas();
     }
 
-    private static String getPedidos() {
+    public static String getPedidos() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getPedidos();
     }
 
-    private static String getTalleres() {
+    public static String getTalleres() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getTalleres();

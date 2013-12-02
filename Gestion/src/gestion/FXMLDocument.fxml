@@ -11,25 +11,23 @@
   <children>
     <TabPane id="tabPanel" layoutX="0.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-        <Tab id="tabGestor" text="Gestor">
+        <Tab id="tabGestor" text="Pedidos">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView id="tablaOfertas" fx:id="tableOfertas" layoutX="14.0" layoutY="303.0" prefHeight="200.0" prefWidth="601.0" />
+                <Text layoutX="32.0" layoutY="33.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos" />
+                <Text layoutX="41.0" layoutY="286.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas" />
+                <TableView id="tablaPedidos" fx:id="tablePedidos" layoutX="14.0" layoutY="58.0" prefHeight="200.0" prefWidth="601.0" />
+              </children>
+            </AnchorPane>
           </content>
         </Tab>
-        <Tab id="tabSolucitudes" text="Solicitudes">
+        <Tab id="tabSolucitudes" text="Usuarios">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
                 <TableView fx:id="tableTalleres" disable="false" editable="true" layoutX="46.0" layoutY="65.0" prefHeight="200.0" prefWidth="722.0" tableMenuButtonVisible="true" />
-                <TableView id="tableDesguaces" disable="false" layoutX="46.0" layoutY="325.0" prefHeight="200.0" prefWidth="722.0" tableMenuButtonVisible="true">
-                  <columns>
-                    <TableColumn id="columnId" maxWidth="5000.0" minWidth="10.0" prefWidth="52.0" text="ID" />
-                    <TableColumn id="columnNombre" maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Nombre" />
-                    <TableColumn id="columnEmail" maxWidth="5000.0" minWidth="10.0" prefWidth="196.0" text="Email" />
-                    <TableColumn id="columnFecha" maxWidth="5000.0" minWidth="10.0" prefWidth="105.0" text="Fecha" />
-                    <TableColumn id="columnEstado" maxWidth="5000.0" minWidth="10.0" prefWidth="271.0" text="Estado" />
-                  </columns>
-                </TableView>
                 <Text layoutX="76.0" layoutY="36.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Talleres">
                   <font>
                     <Font size="14.0" fx:id="x1" />
@@ -37,11 +35,17 @@
                 </Text>
                 <Text font="$x1" layoutX="88.0" layoutY="300.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Desguaces" />
                 <Button fx:id="button" layoutX="712.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Insert" />
+                <TableView id="tableTalleres" fx:id="tableDesguaces" disable="false" editable="true" layoutX="40.0" layoutY="327.0" prefHeight="200.0" prefWidth="722.0" tableMenuButtonVisible="true" />
               </children>
             </AnchorPane>
           </content>
         </Tab>
-        <Tab id="tabPedidos" text="Pedidos">
+        <Tab id="tabPedidos" text="Altas">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab id="tabPedidos" text="Opciones">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
           </content>
