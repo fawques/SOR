@@ -17,6 +17,10 @@ import javafx.stage.Stage;
  * @author Cute
  */
 public class Gestion extends Application {
+
+    static String getOfertasporPedido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -68,6 +72,12 @@ public class Gestion extends Application {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getTalleres();
+    }
+
+    public static String getOfertasporPedido(int idPedido) {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getOfertasporPedido(idPedido);
     }
 
 

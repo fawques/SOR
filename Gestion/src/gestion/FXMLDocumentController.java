@@ -6,11 +6,13 @@
 
 package gestion;
 
+import clasesInterfaz.OfertasInterfaz;
 import clasesInterfaz.PedidosInterfaz;
 import clasesInterfaz.UsuarioInterface;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import general.Desguace;
+import general.Oferta;
 import general.Taller;
 import general.Pedido;
 import java.lang.reflect.Type;
@@ -28,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -42,6 +45,7 @@ public class FXMLDocumentController implements Initializable {
    private ObservableList<UsuarioInterface> personData = FXCollections.observableArrayList();
    private ObservableList<UsuarioInterface> personDataDesguaces = FXCollections.observableArrayList();
    private ObservableList<PedidosInterfaz> personDataPedidos = FXCollections.observableArrayList();
+   private ObservableList<OfertasInterfaz> personDataOferta = FXCollections.observableArrayList();
     @FXML
     private Label label;
     @FXML
@@ -61,6 +65,7 @@ public class FXMLDocumentController implements Initializable {
         talleresInterfaz();
         desguacesInterfaz();
         pedidosInterfaz();
+        ofertasInterfaz();
     }
     public void  pedidosInterfaz(){
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
@@ -124,10 +129,72 @@ public class FXMLDocumentController implements Initializable {
            tablePedidos.getColumns().addAll(columnID,columnIDtaller,columnAlta,columnBaja,columnLimite);
        
     }
-    public void ofertasInterfaz(int fila){
-        
+    public void ofertasInterfaz(){
+         
+     ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
+     Gson gson = new Gson();
+     TableColumn columnID = new TableColumn("ID");
+     TableColumn columnIDPedido = new TableColumn("idPedido");
+     TableColumn columnIDDesguace = new TableColumn("idDesguace");
+     TableColumn columnAlta = new TableColumn("fecha_alta");
+     TableColumn columnBaja = new TableColumn("fecha_baja");
+     TableColumn columnLimite = new TableColumn("fecha_limite");
+     TableColumn columnPrecio= new TableColumn("precio");
+     tableOfertas.setEditable(true);
+       columnID.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,Integer>("ID")
+               );
+    
+       
+       columnIDDesguace.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,Integer>("idDesguace")
+       );
+       columnIDPedido.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,Integer>("idPedido")
+       );
+       columnAlta.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("fecha_alta")
+       );
+ 
+       columnBaja.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("fecha_baja")
+       );
+       
+       columnLimite.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("fecha_limite")
+       );
+      columnPrecio.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,Double>("precio")
+       );
+      
+      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
+        listaOferta = gson.fromJson(Gestion.getOfertas(), collectionType);
+        System.out.println("pasa por aqui");
+        OfertasInterfaz interfaz= new OfertasInterfaz();
+         for (Oferta oferta : listaOferta) {
+             interfaz= new OfertasInterfaz(oferta);
+             personDataOferta.add(interfaz);
+             System.out.println(oferta);
+        }
+           tableOfertas.setItems(personDataOferta);
+           tableOfertas.getColumns().addAll(columnID,columnIDDesguace,columnIDPedido,columnAlta,columnBaja,columnLimite,columnPrecio);
+     
+     
     }
-            
+    public void ofertasclickPedido(int id){
+    personDataOferta.clear();
+     ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
+     Gson gson = new Gson();
+     Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
+        listaOferta = gson.fromJson(Gestion.getOfertasporPedido(id), collectionType);
+        System.out.println("pasa por aqui");
+        OfertasInterfaz interfaz= new OfertasInterfaz();
+         for (Oferta oferta : listaOferta) {
+             interfaz= new OfertasInterfaz(oferta);
+             personDataOferta.add(interfaz);
+             System.out.println(oferta);
+        }
+    }        
     public void desguacesInterfaz(){
      ArrayList<Desguace> listaDesguaces= new ArrayList<>();
      Gson gson = new Gson();
@@ -224,13 +291,16 @@ public class FXMLDocumentController implements Initializable {
            tableTalleres.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnCodigoPostal,columnNumero);
      
     }
-    
+ 
     class MyEventHandler implements EventHandler<MouseEvent> {
+        private Object TableRow;
  
         @Override
         public void handle(MouseEvent t) {
             TableCell c = (TableCell) t.getSource();
             int index = c.getIndex();
+            
+           ofertasclickPedido( personDataPedidos.get(index).getID());
             
         }
     }

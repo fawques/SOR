@@ -12,6 +12,10 @@
 
 <xs:element name="getOfertasResponse" type="tns:getOfertasResponse"/>
 
+<xs:element name="getOfertasporPedido" type="tns:getOfertasporPedido"/>
+
+<xs:element name="getOfertasporPedidoResponse" type="tns:getOfertasporPedidoResponse"/>
+
 <xs:element name="getPedidos" type="tns:getPedidos"/>
 
 <xs:element name="getPedidosResponse" type="tns:getPedidosResponse"/>
@@ -23,6 +27,18 @@
 <xs:element name="hello" type="tns:hello"/>
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
+
+<xs:complexType name="getOfertasporPedido">
+<xs:sequence>
+<xs:element name="idPedido" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOfertasporPedidoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="getOfertas">
 <xs:sequence/>

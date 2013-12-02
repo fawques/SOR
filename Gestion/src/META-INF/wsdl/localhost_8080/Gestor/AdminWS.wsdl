@@ -22,6 +22,12 @@
 <message name="getPedidosResponse">
 <part name="parameters" element="tns:getPedidosResponse"/>
 </message>
+<message name="getOfertas">
+<part name="parameters" element="tns:getOfertas"/>
+</message>
+<message name="getOfertasResponse">
+<part name="parameters" element="tns:getOfertasResponse"/>
+</message>
 <message name="getDesguaces">
 <part name="parameters" element="tns:getDesguaces"/>
 </message>
@@ -34,11 +40,11 @@
 <message name="getTalleresResponse">
 <part name="parameters" element="tns:getTalleresResponse"/>
 </message>
-<message name="getOfertas">
-<part name="parameters" element="tns:getOfertas"/>
+<message name="getOfertasporPedido">
+<part name="parameters" element="tns:getOfertasporPedido"/>
 </message>
-<message name="getOfertasResponse">
-<part name="parameters" element="tns:getOfertasResponse"/>
+<message name="getOfertasporPedidoResponse">
+<part name="parameters" element="tns:getOfertasporPedidoResponse"/>
 </message>
 <portType name="AdminWS">
 <operation name="hello">
@@ -53,6 +59,10 @@
 <input wsam:Action="http://gestor_admin/AdminWS/getPedidosRequest" message="tns:getPedidos"/>
 <output wsam:Action="http://gestor_admin/AdminWS/getPedidosResponse" message="tns:getPedidosResponse"/>
 </operation>
+<operation name="getOfertas">
+<input wsam:Action="http://gestor_admin/AdminWS/getOfertasRequest" message="tns:getOfertas"/>
+<output wsam:Action="http://gestor_admin/AdminWS/getOfertasResponse" message="tns:getOfertasResponse"/>
+</operation>
 <operation name="getDesguaces">
 <input wsam:Action="http://gestor_admin/AdminWS/getDesguacesRequest" message="tns:getDesguaces"/>
 <output wsam:Action="http://gestor_admin/AdminWS/getDesguacesResponse" message="tns:getDesguacesResponse"/>
@@ -61,9 +71,9 @@
 <input wsam:Action="http://gestor_admin/AdminWS/getTalleresRequest" message="tns:getTalleres"/>
 <output wsam:Action="http://gestor_admin/AdminWS/getTalleresResponse" message="tns:getTalleresResponse"/>
 </operation>
-<operation name="getOfertas">
-<input wsam:Action="http://gestor_admin/AdminWS/getOfertasRequest" message="tns:getOfertas"/>
-<output wsam:Action="http://gestor_admin/AdminWS/getOfertasResponse" message="tns:getOfertasResponse"/>
+<operation name="getOfertasporPedido">
+<input wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoRequest" message="tns:getOfertasporPedido"/>
+<output wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoResponse" message="tns:getOfertasporPedidoResponse"/>
 </operation>
 </portType>
 <binding name="AdminWSPortBinding" type="tns:AdminWS">
@@ -95,6 +105,15 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="getOfertas">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getDesguaces">
 <soap:operation soapAction=""/>
 <input>
@@ -113,7 +132,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getOfertas">
+<operation name="getOfertasporPedido">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

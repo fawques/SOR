@@ -110,4 +110,26 @@ public class AdminWS {
         System.out.println("listaJSON = " + listaJSON);
         return listaJSON;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getOfertasporPedido")
+    public String getOfertasporPedido(@WebParam(name = "idPedido") int idPedido) {
+        ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
+        if(idPedido==1){
+        listaOfertas.add(new Oferta(1,new Date(),new Date(), new Date(),32.2,1,1));
+        listaOfertas.add(new Oferta(2,new Date(),new Date(), new Date(),20.0,1,1));
+        }
+        else{
+        listaOfertas.add(new Oferta(1,new Date(),new Date(), new Date(),32.2,1,2));
+        listaOfertas.add(new Oferta(2,new Date(),new Date(), new Date(),20.0,1,2));
+        }
+
+        
+        Gson gson = new Gson();
+        String listaJSON = gson.toJson(listaOfertas);
+        System.out.println("listaJSON = " + listaJSON);
+        return listaJSON;
+    }
 }
