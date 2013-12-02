@@ -41,7 +41,7 @@ public class TallerWS {
         try {
             bd = new InterfazBD("sor_gestor");
             return bd.altaTaller(name, email, address, city, postalCode, telephone, 0);
-        } catch (SQLException ex) {
+        } catch (java.sql.SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
