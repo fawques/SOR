@@ -8,9 +8,13 @@ package BD;
 
 import general.EstadoPedido;
 import general.Pedido;
+import general.Taller;
+import general.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,6 +42,21 @@ public class InterfazBD {
         }
         return lista;
         
+    }
+    
+    public Taller getRegistroTaller()
+    {
+        ResultSet resultado = conexion.ejecutarSQLSelect("SELECT * FROM taller;");
+        try {
+            if(resultado.wasNull())
+            {
+                return new Taller(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("email"), resultado.getString("direccion"), resultado.getString("ciudad"), resultado.getInt("codPostal"), resultado.getInt("telefono"));
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     public int altaTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado){

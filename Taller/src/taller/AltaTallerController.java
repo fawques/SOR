@@ -164,7 +164,9 @@ public class AltaTallerController implements Initializable {
         if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
-            System.out.println(MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText())));
+            if(MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText())) >=0){
+                //METER en base de datos si está todo ok.
+            }
             //Faltaría anyadir el código recibido por el gestor
             /*MainTaller.sendMail("pablovm1990@gmail.com", tfEmail.getText(), "Usuario SorApp creado correctamente",
                     "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"

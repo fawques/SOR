@@ -11,5 +11,5 @@ package general;
  * @author fawques
  */
 public enum EstadoGeneral {
-    ACTIVE,INACTIVE
+    ACTIVE,INACTIVE, PENDIENTE
 }

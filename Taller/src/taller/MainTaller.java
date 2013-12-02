@@ -6,6 +6,9 @@
 package taller;
 
 import BD.InterfazBD;
+import general.EstadoGeneral;
+import general.Taller;
+import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,10 +40,31 @@ public class MainTaller extends Application {
         bd = new InterfazBD("sor_taller");
         System.out.println(bd.getPedidosActivos());
         //if(noEstaRegistradoEnGestor)
-        Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Taller t = bd.getRegistroTaller();
+        if(t!=null) //está pendiente o activado
+        {
+            if(t.getEstado()==EstadoGeneral.PENDIENTE) //pendiente de activación
+            {
+                //Mostrar página de espera
+            }
+            else if(t.getEstado()==EstadoGeneral.ACTIVE){ //activo
+                //Cargar GestionPedido
+                Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+            else{ //baja
+                
+            }
+        }
+        else
+        {
+            Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     /* public void abrirAlta()
