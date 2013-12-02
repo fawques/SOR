@@ -55,6 +55,12 @@ CREATE TABLE `oferta` (
   CONSTRAINT `oferta_pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `pieza` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `pedido_pieza` (
   `pedido` int(11) NOT NULL,
   `pieza` int(11) NOT NULL,
@@ -62,14 +68,10 @@ CREATE TABLE `pedido_pieza` (
   PRIMARY KEY (`pedido`,`pieza`),
   KEY `pieza_FK_idx` (`pieza`),
   CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`idpieza`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `pieza` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 CREATE DATABASE IF NOT EXISTS `sor_taller` /*!40100 DEFAULT CHARACTER SET utf8 */;
