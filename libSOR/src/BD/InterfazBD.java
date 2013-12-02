@@ -27,10 +27,12 @@ public class InterfazBD {
     public ArrayList<Pedido> getPedidosActivos(){
         ArrayList<Pedido> lista= new ArrayList<>();
         try{
+            //conexion.ejecutarSQL("INSERT INTO pedido values (1, 12/3/12, 1, 1, 12/3/12, 12/3/12);");
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido;");
             while(resultados.next()){
                 Pedido nuevo = new Pedido(resultados.getInt("id"), resultados.getInt("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),resultados.getObject("estado",EstadoPedido.class));
                 lista.add(nuevo);
+                //System.out.println("id: " + resultados.getInt("id") + " taller: "+resultados.getInt("taller"));
             }
         }catch(SQLException ex){
             ex.printStackTrace();

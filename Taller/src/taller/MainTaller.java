@@ -6,7 +6,13 @@
 package taller;
 
 import BD.InterfazBD;
+import general.EstadoPedido;
+import general.Pedido;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.application.Application;
@@ -34,13 +40,19 @@ public class MainTaller extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        bd = new InterfazBD("sor_taller");
-        System.out.println(bd.getPedidosActivos());
+        /*bd = new InterfazBD("sor_taller");
+        System.out.println(bd.getPedidosActivos());*/
         //if(noEstaRegistradoEnGestor)
         Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public static void vilella() throws SQLException, ClassNotFoundException{
+        InterfazBD i = new InterfazBD("sor_gestor");
+        System.out.println("aquí");
+        
     }
 
     /* public void abrirAlta()
@@ -55,6 +67,22 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validarNombre(String n) {
+        InterfazBD i = null;
+        try {
+            //vilella();
+                        
+            i = new InterfazBD("sor_gestor");
+            
+            i.getPedidosActivos();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("aquí");
+        
         Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]*[a-zA-Z]");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
