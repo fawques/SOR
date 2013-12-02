@@ -58,8 +58,12 @@ CREATE TABLE `oferta` (
 CREATE TABLE `pieza` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
+  `estado` int(11) NOT NULL,
+  `descripcion` varchar(200) DEFAULT NULL,
+  `fecha_baja` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `pedido_pieza` (
   `pedido` int(11) NOT NULL,
