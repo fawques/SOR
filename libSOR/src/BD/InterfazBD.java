@@ -12,6 +12,7 @@ import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
 import general.Pieza;
+import general.Taller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class InterfazBD {
         conexion.ejecutarSQL("insert INTO sor_desguace.pedido (id, fechaAlta, estado, taller, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"','"+estado+"','"+taller+"','"+fechaBaja+"','"+fechaLimite+"';");
     }
     
-    public void anadirDesguace(int id, String nombre, String email, String direccion, String ciudad, String codPostal, String telefono, int estado)
+    public void anadirDesguace(int id, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado)
     {
         conexion.ejecutarSQL("insert INTO sor_desguace.desguace (id, nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('"+id+"','"+nombre+"', '"+email+"','"+direccion+"','"+ciudad+"','"+codPostal+"','"+telefono+"','"+estado+"');");
         
@@ -105,6 +106,76 @@ public class InterfazBD {
     }
     
     // fin DESGUACES
+    
+    public ArrayList<Taller> getTalleres()
+    {
+        ArrayList<Taller> lista= new ArrayList<>();
+        try{
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_taller.taller;");
+            while(resultados.next()){
+                Taller nuevo = new Taller(resultados.getInt("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),resultados.getInt("estado"));
+                lista.add(nuevo);
+                //System.out.println("id: " + resultados.getInt("id") + " taller: "+resultados.getInt("taller"));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;    
+    }
+    
+    public ArrayList<Taller> getAltasTaller()
+    {
+        ArrayList<Taller> lista= new ArrayList<>();
+        try{
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_taller.taller where estado ='"+2+"';");
+            while(resultados.next()){
+                Taller nuevo = new Taller(resultados.getInt("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),resultados.getInt("estado"));
+                lista.add(nuevo);
+                //System.out.println("id: " + resultados.getInt("id") + " taller: "+resultados.getInt("taller"));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+        
+    }
+    
+    public ArrayList<Desguace> getAltasDesguaces()
+    {
+        ArrayList<Desguace> lista= new ArrayList<>();
+        try{
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_desguace.desguace where estado ='"+2+"';");
+            while(resultados.next()){
+                Desguace nuevo = new Desguace(resultados.getInt("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),resultados.getInt("estado"));
+                lista.add(nuevo);
+                //System.out.println("id: " + resultados.getInt("id") + " taller: "+resultados.getInt("taller"));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+    }
+    
+    public Pedido getPedido(int id)
+    {
+        Pedido pedido = null;
+        try{
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_desguace.pedido where id ='"+id+"';");
+            if(resultados != null){
+                ArrayList<Pieza> piezas = null;
+                ArrayList<Integer> cantidades = null;
+                getPiezasYCantidades(id, piezas, cantidades);
+                pedido = new Pedido(resultados.getInt("id"),resultados.getInt("tallerID"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"),resultados.getDate("fecha_limite"), resultados.getObject("estado",EstadoPedido.class),piezas,cantidades,getOfertas(id));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return pedido;
+    }
     
     public void getPiezasYCantidades(int pedidoID, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades){
         piezas = new ArrayList<>();
