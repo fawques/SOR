@@ -27,10 +27,16 @@ public class InterfazBD {
         conexion = new Conexion(database);
     }
     
+    public void anadirPieza(int id, String nombre, String email, String direccion, String ciudad, String codPostal, String telefono, int estado)
+    {
+        conexion.ejecutarSQL("insert INTO sor_desguace.desguace (id, nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('"+id+"','"+nombre+"', '"+email+"','"+direccion+"','"+ciudad+"','"+codPostal+"','"+telefono+"','"+estado+"');");
+        
+    }
+    
     public ArrayList<Pedido> getPedidosActivos(){
         ArrayList<Pedido> lista= new ArrayList<>();
         try{
-            //conexion.ejecutarSQL("INSERT INTO pedido values (1, 12/3/12, 1, 1, 12/3/12, 12/3/12);");
+            conexion.ejecutarSQL("INSERT INTO pedido (id, taller, estado, fecha_alta, fecha_baja, fecha_limite) values ('4', '5','4','2013-03-12', '2013-03-12', '2013-03-12');");
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido;");
             while(resultados.next()){
                 int pedidoID = resultados.getInt("id");
