@@ -11,6 +11,8 @@ import general.Oferta;
 import general.Pedido;
 import general.Taller;
 import general.Desguace;
+import general.EstadoGeneral;
+import general.Pieza;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.jws.WebService;
@@ -129,6 +131,22 @@ public class AdminWS {
         
         Gson gson = new Gson();
         String listaJSON = gson.toJson(listaOfertas);
+        System.out.println("listaJSON = " + listaJSON);
+        return listaJSON;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getPedidoID")
+    public String getPedidoID(@WebParam(name = "id") int id) {
+        ArrayList<Pedido> listaPedido = new ArrayList<Pedido>();
+
+        listaPedido.add(new Pedido(1,1,new Date(), new Date(),new Date()));
+        Pieza p = new Pieza(1, "Patatas Maria", EstadoGeneral.ACTIVE, null);
+        listaPedido.get(0).addPieza(p, 11);
+        Gson gson = new Gson();
+        String listaJSON = gson.toJson(listaPedido);
         System.out.println("listaJSON = " + listaJSON);
         return listaJSON;
     }

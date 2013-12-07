@@ -80,6 +80,12 @@ public class Gestion extends Application {
         return port.getOfertasporPedido(idPedido);
     }
 
+    public static String getPedidoID(int id) {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getPedidoID(id);
+    }
+
 
     
 }

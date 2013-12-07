@@ -8,6 +8,7 @@ package gestion;
 
 import clasesInterfaz.OfertasInterfaz;
 import clasesInterfaz.PedidosInterfaz;
+import clasesInterfaz.PiezasInterfaz;
 import clasesInterfaz.UsuarioInterface;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +16,7 @@ import general.Desguace;
 import general.Oferta;
 import general.Taller;
 import general.Pedido;
+import general.Pieza;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,10 +26,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 
@@ -46,6 +50,7 @@ public class FXMLDocumentController implements Initializable {
    private ObservableList<UsuarioInterface> personDataDesguaces = FXCollections.observableArrayList();
    private ObservableList<PedidosInterfaz> personDataPedidos = FXCollections.observableArrayList();
    private ObservableList<OfertasInterfaz> personDataOferta = FXCollections.observableArrayList();
+   private ObservableList<PiezasInterfaz> personDataPiezas = FXCollections.observableArrayList();
     @FXML
     private Label label;
     @FXML
@@ -54,6 +59,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableView tableDesguaces;
     @FXML private TableView tablePedidos;
      @FXML private TableView tableOfertas;
+     @FXML private TableView tablePiezas;
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -125,6 +131,7 @@ public class FXMLDocumentController implements Initializable {
              personDataPedidos.add(interfaz);
              System.out.println(pedido);
         }
+         piezasInterfaz(personDataPedidos.get(0).getID());
            tablePedidos.setItems(personDataPedidos);
            tablePedidos.getColumns().addAll(columnID,columnIDtaller,columnAlta,columnBaja,columnLimite);
        
@@ -194,7 +201,57 @@ public class FXMLDocumentController implements Initializable {
              personDataOferta.add(interfaz);
              System.out.println(oferta);
         }
-    }        
+      
+      
+    }
+    public void piezasInterfaz(int id ){
+     ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
+        Gson gson = new Gson();
+        TableColumn columnCant = new TableColumn("cant");
+        TableColumn columnNombre = new TableColumn("nombrePieza");
+        tablePiezas.setEditable(true);
+        columnCant.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,Integer>("cant")
+        );
+        columnNombre.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("nombrePieza")
+        );
+        Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
+        listaPedidos =gson.fromJson(Gestion.getPedidoID(id), collectionType);
+       
+         PiezasInterfaz interfaz= new PiezasInterfaz();
+         for (Pedido p : listaPedidos) {
+             for(int i=0;i<p.getListaPiezas().size();i++){
+                interfaz= new PiezasInterfaz(p.getListaCantidadesPiezas().get(i),p.getListaPiezas().get(i).getNombre());
+                personDataPiezas.add(interfaz);
+                
+             }
+        }
+          tablePiezas.setItems(personDataPiezas);
+           tablePiezas.getColumns().addAll(columnNombre,columnCant);
+     
+    }
+    public void piezasclickPedido(int id){
+        personDataPiezas.clear();
+        ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
+        Gson gson = new Gson();
+       
+        Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
+        listaPedidos =gson.fromJson(Gestion.getPedidoID(id), collectionType);
+       
+         PiezasInterfaz interfaz= new PiezasInterfaz();
+         for (Pedido p : listaPedidos) {
+             for(int i=0;i<p.getListaPiezas().size();i++){
+                interfaz= new PiezasInterfaz(p.getListaCantidadesPiezas().get(i),p.getListaPiezas().get(i).getNombre());
+                personDataPiezas.add(interfaz);
+                
+             }
+        }
+          tablePiezas.setItems(personDataPiezas);
+
+     
+    
+    }
     public void desguacesInterfaz(){
      ArrayList<Desguace> listaDesguaces= new ArrayList<>();
      Gson gson = new Gson();
@@ -240,6 +297,7 @@ public class FXMLDocumentController implements Initializable {
            tableDesguaces.setItems(personDataDesguaces);
            tableDesguaces.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnCodigoPostal,columnNumero);
     }
+
     public void talleresInterfaz(){
         ArrayList<Taller> listaTalleres= new ArrayList<>();
         Gson gson = new Gson();
@@ -293,14 +351,18 @@ public class FXMLDocumentController implements Initializable {
     }
  
     class MyEventHandler implements EventHandler<MouseEvent> {
-        private Object TableRow;
+
  
         @Override
         public void handle(MouseEvent t) {
             TableCell c = (TableCell) t.getSource();
+            String tabla= c.getTableView().getId();
             int index = c.getIndex();
-            
+        
            ofertasclickPedido( personDataPedidos.get(index).getID());
+           piezasclickPedido(personDataPedidos.get(index).getID());
+
+           
             
         }
     }
