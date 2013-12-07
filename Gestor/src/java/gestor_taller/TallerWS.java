@@ -40,8 +40,31 @@ public class TallerWS {
     public int alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
         try {
             bd = new InterfazBD("sor_gestor");
-            return bd.altaTaller(name, email, address, city, postalCode, telephone, 0);
+            int res = bd.altaTaller(name, email, address, city, postalCode, telephone, 0);
+            //bd.close();
+            return res;
         } catch (java.sql.SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
+    /**
+     *
+     * @param email
+     * @return
+     */
+    @WebMethod(operationName = "activarTaller")
+    public int activarTaller(@WebParam(name = "mail") String email)
+    {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            int res = bd.activarTaller(email);
+           // bd.close();
+            return res;
+        } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);

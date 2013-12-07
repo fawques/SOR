@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="97.99980000000505" prefWidth="224.99990000000253" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.TallerPendienteActivacionController">
+  <children>
+    <ProgressIndicator layoutX="94.0" layoutY="21.0" progress="-1.0" />
+    <Label layoutX="54.0" layoutY="65.0" text="Espere por favor..." />
+  </children>
+</AnchorPane>

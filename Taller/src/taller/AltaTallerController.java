@@ -5,15 +5,20 @@
  */
 package taller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -22,6 +27,7 @@ import javafx.scene.control.TextField;
  */
 public class AltaTallerController implements Initializable {
 
+    Stage thisStage;
     /**
      * Class Fxml variables
      */
@@ -147,6 +153,15 @@ public class AltaTallerController implements Initializable {
         });
     }
 
+    public void setStage(Stage stage) {
+        thisStage = stage;
+    }
+
+    public void showStage() {
+        thisStage.sizeToScene();
+        thisStage.show();
+    }
+
     /**
      *
      * @param e
@@ -158,25 +173,29 @@ public class AltaTallerController implements Initializable {
     /**
      *
      * @param e
+     * @throws java.io.IOException
      */
-    public void onClickAceptar(ActionEvent e) {
+    public void onClickAceptar(ActionEvent e) throws IOException, Exception {
         //If the validation goes well
         if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
-            if(MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText())) >=0){
-                //METER en base de datos si está todo ok.
+            if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText())) >= 0) {
+                //METER en base de datos si está todo ok.Stage stage = (Stage) tfCp.getScene().getWindow();
+                Parent page = (Parent) FXMLLoader.load(MainTaller.class.getResource("tallerPendienteActivacion.fxml"), null, new JavaFXBuilderFactory());
+                thisStage.getScene().setRoot(page);
+                showStage();
             }
             //Faltaría anyadir el código recibido por el gestor
             /*MainTaller.sendMail("pablovm1990@gmail.com", tfEmail.getText(), "Usuario SorApp creado correctamente",
-                    "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
-                    + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
-                    + "<li>" + tfNombreTaller.getText() + "</li><br/>"
-                    + "<li>" + tfDireccion.getText() + "</li><br/>"
-                    + "<li>" + tfCiudad.getText() + "</li><br/>"
-                    + "<li>" + tfCp.getText() + "</li><br/>"
-                    + "<li>" + tfTelefono.getText() + "</li><br/>"
-                    + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");*/
+             "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
+             + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
+             + "<li>" + tfNombreTaller.getText() + "</li><br/>"
+             + "<li>" + tfDireccion.getText() + "</li><br/>"
+             + "<li>" + tfCiudad.getText() + "</li><br/>"
+             + "<li>" + tfCp.getText() + "</li><br/>"
+             + "<li>" + tfTelefono.getText() + "</li><br/>"
+             + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");*/
         }
         //else nothing
     }
