@@ -164,9 +164,9 @@ public class AltaTallerController implements Initializable {
         if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
-            //System.out.println(MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText())));
+            System.out.println(MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText())));
             //Faltaría anyadir el código recibido por el gestor
-            MainTaller.sendMail("pablovm1990@gmail.com", tfEmail.getText(), "Usuario SorApp creado correctamente",
+            /*MainTaller.sendMail("pablovm1990@gmail.com", tfEmail.getText(), "Usuario SorApp creado correctamente",
                     "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
                     + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
                     + "<li>" + tfNombreTaller.getText() + "</li><br/>"
@@ -174,7 +174,7 @@ public class AltaTallerController implements Initializable {
                     + "<li>" + tfCiudad.getText() + "</li><br/>"
                     + "<li>" + tfCp.getText() + "</li><br/>"
                     + "<li>" + tfTelefono.getText() + "</li><br/>"
-                    + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");
+                    + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");*/
         }
         //else nothing
     }
