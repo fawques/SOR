@@ -25,11 +25,38 @@ public class Pedido {
     private ArrayList<Integer> listaCantidadesPiezas;
     private ArrayList<Oferta> listaOfertas;
 
-    public Pedido(int ID, int tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite) {
+    /**
+     * Constructor para recrear el objeto desde la BD, con todos los campos
+     * @param ID
+     * @param tallerID
+     * @param fecha_alta
+     * @param fecha_baja
+     * @param fecha_limite
+     * @param estado
+     */
+    public Pedido(int ID, int tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado) {
         this.ID = ID;
         this.tallerID = tallerID;
         this.fecha_alta = fecha_alta;
         this.fecha_baja = fecha_baja;
+        this.fecha_limite = fecha_limite;
+        this.estado = estado;
+        // TODO: no sé cómo hacer la parte de las piezas, ofertas, etc...
+    }
+
+    
+    
+    /**
+     * Constructor para pedidos nuevos. Se pone el estado a NO_OFFERS y la fecha_alta a la fecha actual
+     * @param ID id del nuevo pedido
+     * @param tallerID taller que hace el pedido
+     * @param fecha_limite fecha límite para recibir ofertas de este pedido. Pasada esa fecha, el pedido se cancelará
+     */
+    public Pedido(int ID, int tallerID, Date fecha_limite) {
+        this.ID = ID;
+        this.tallerID = tallerID;
+        this.fecha_alta = new Date();
+        this.fecha_baja = null;
         this.fecha_limite = fecha_limite;
         this.listaPiezas = new ArrayList<>();
         this.listaCantidadesPiezas = new ArrayList<>();

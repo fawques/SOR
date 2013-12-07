@@ -44,7 +44,7 @@ public class AdminWS {
         ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
         listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
         listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-        listaTalleres.get(0).nuevoPedido(new Date(), new Date(), new Date());
+        listaTalleres.get(0).nuevoPedido(new Date());
         Gson gson = new Gson();
         String listaJSON = gson.toJson(listaTalleres);
         System.out.println("listaJSON = " + listaJSON);
@@ -57,8 +57,8 @@ public class AdminWS {
     @WebMethod(operationName = "getPedidos")
     public String getPedidos() {
         ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
-        listaPedidos.add(new Pedido(1,1,new Date(), new Date(),new Date()));
-       listaPedidos.add(new Pedido(2,1,new Date(), new Date(),new Date()));
+        listaPedidos.add(new Pedido(1,1,new Date(2014,2,1)));
+       listaPedidos.add(new Pedido(2,1,new Date(2014,2,1)));
         
         Gson gson = new Gson();
         String listaJSON = gson.toJson(listaPedidos);
