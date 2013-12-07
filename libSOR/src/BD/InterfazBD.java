@@ -6,6 +6,7 @@
 
 package BD;
 
+import general.Desguace;
 import general.EstadoGeneral;
 import general.EstadoPedido;
 import general.Oferta;
@@ -14,6 +15,7 @@ import general.Pieza;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -27,16 +29,63 @@ public class InterfazBD {
         conexion = new Conexion(database);
     }
     
-    public void anadirPieza(int id, String nombre, String email, String direccion, String ciudad, String codPostal, String telefono, int estado)
+    // DESGUACES 
+    // setters
+    public void anadirOferta(int id, Date fechaAlta, float importe, int estado, int pedido, int desguace, Date fechaBaja, Date fechaLimite)
+    {
+        conexion.ejecutarSQL("insert INTO sor_desguace.oferta (id, fechaAlta, importe, estado, pedido, desguace, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"', '"+importe+"','"+estado+"','"+pedido+"';"+desguace+"','"+fechaBaja+"','"+fechaLimite+"');");
+        
+    }
+    
+    public void anadirPedido(int id, Date fechaAlta, int estado, int taller, Date fechaBaja, Date fechaLimite)
+    {
+        conexion.ejecutarSQL("insert INTO sor_desguace.pedido (id, fechaAlta, estado, taller, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"','"+estado+"','"+taller+"','"+fechaBaja+"','"+fechaLimite+"';");
+    }
+    
+    public void anadirDesguace(int id, String nombre, String email, String direccion, String ciudad, String codPostal, String telefono, int estado)
     {
         conexion.ejecutarSQL("insert INTO sor_desguace.desguace (id, nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('"+id+"','"+nombre+"', '"+email+"','"+direccion+"','"+ciudad+"','"+codPostal+"','"+telefono+"','"+estado+"');");
         
+    }
+    // getters
+    public ArrayList<Oferta> getOfertas()
+    {
+        ArrayList<Oferta> lista= new ArrayList<>();
+        try{
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_desguace.oferta;");
+            while(resultados.next()){
+                Oferta nuevo = new Oferta(resultados.getInt("id"), resultados.getDate("fecha_alta"), resultados.getDouble("importe"), resultados.getInt("estado"), resultados.getInt("pedido"),resultados.getInt("desguace"),resultados.getDate("fecha_baja"),resultados.getDate("fecha_limite"));
+                lista.add(nuevo);
+                //System.out.println("id: " + resultados.getInt("id") + " taller: "+resultados.getInt("taller"));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;    
+    }
+    
+    public ArrayList<Desguace> getDesguaces()
+    {
+        ArrayList<Desguace> lista= new ArrayList<>();
+        try{
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_desguace.desguace;");
+            while(resultados.next()){
+                Desguace nuevo = new Desguace(resultados.getInt("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),resultados.getInt("estado"));
+                lista.add(nuevo);
+                //System.out.println("id: " + resultados.getInt("id") + " taller: "+resultados.getInt("taller"));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;    
     }
     
     public ArrayList<Pedido> getPedidosActivos(){
         ArrayList<Pedido> lista= new ArrayList<>();
         try{
-            conexion.ejecutarSQL("INSERT INTO pedido (id, taller, estado, fecha_alta, fecha_baja, fecha_limite) values ('4', '5','4','2013-03-12', '2013-03-12', '2013-03-12');");
+            //conexion.ejecutarSQL("INSERT INTO pedido (id, taller, estado, fecha_alta, fecha_baja, fecha_limite) values ('4', '5','4','2013-03-12', '2013-03-12', '2013-03-12');");
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido;");
             while(resultados.next()){
                 int pedidoID = resultados.getInt("id");
@@ -54,6 +103,8 @@ public class InterfazBD {
         return lista;
         
     }
+    
+    // fin DESGUACES
     
     public void getPiezasYCantidades(int pedidoID, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades){
         piezas = new ArrayList<>();

@@ -33,6 +33,10 @@ public class Oferta {
         this.estado = EstadoOferta.WAITING_ACCEPT;
     }
 
+    public Oferta(int aInt, java.sql.Date date, double aDouble, int aInt0, int aInt1, int aInt2, java.sql.Date date0, java.sql.Date date1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     // OJO, mirar si hace falta esto, es bastante peligroso!!
     public void setEstado(EstadoOferta estado) {
         this.estado = estado;
