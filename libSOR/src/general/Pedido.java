@@ -33,15 +33,20 @@ public class Pedido {
      * @param fecha_baja
      * @param fecha_limite
      * @param estado
+     * @param listaPiezas
+     * @param listaCantidadesPiezas
+     * @param listaOfertas
      */
-    public Pedido(int ID, int tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado) {
+    public Pedido(int ID, int tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
         this.ID = ID;
         this.tallerID = tallerID;
         this.fecha_alta = fecha_alta;
         this.fecha_baja = fecha_baja;
         this.fecha_limite = fecha_limite;
         this.estado = estado;
-        // TODO: no sé cómo hacer la parte de las piezas, ofertas, etc...
+        this.listaPiezas = listaPiezas;
+        this.listaCantidadesPiezas = listaCantidadesPiezas;
+        this.listaOfertas = listaOfertas;
     }
 
     
