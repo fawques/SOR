@@ -39,7 +39,7 @@ public class MainTaller extends Application {
 
     InterfazBD bd;
     static Taller taller;
-    Stage stage;
+    public Stage stage;
 
     @Override
     public void start(Stage stage2) throws Exception {
@@ -47,6 +47,7 @@ public class MainTaller extends Application {
         bd = new InterfazBD("sor_taller");
         System.out.println(bd.getPedidosActivos());
         taller = bd.getRegistroTaller();
+        //bd.close();
         if (taller != null) //está pendiente o activado
         {
             if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación

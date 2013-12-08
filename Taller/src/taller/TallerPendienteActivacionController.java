@@ -8,9 +8,12 @@ package taller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -19,24 +22,43 @@ import javafx.fxml.Initializable;
  */
 public class TallerPendienteActivacionController implements Initializable {
 
+    Stage thisStage;
     /**
      * Initializes the controller class.
      */
+    @FXML
+    public Button btRecargar;
+    public ProgressIndicator piIndicador;
+    public Label lbEstado;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        boolean first = false;
         // TODO
-        //do
-        //{
-            
-            /*try {
-                Thread.sleep(30000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(TallerPendienteActivacionController.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-        //}while(MainTaller.activarTaller()==0);
     }
     
-    
-    
+    public void comprobarActivacion() {
+        btRecargar.setDisable(true);
+        lbEstado.setText("");
+        piIndicador.setVisible(true);
+
+        if (MainTaller.activarTaller() == 0) //Activado
+        {
+            //enviar a pantalla gestion de pedido
+
+        } else //No activado
+        {
+            lbEstado.setText("Lo siento, todavía no está activada su cuenta");
+            lbEstado.setStyle("-fx-border-color: red;");
+        }
+        btRecargar.setDisable(false);
+    }
+
+    public void setStage(Stage stage) {
+        thisStage = stage;
+    }
+
+    public void showStage() {
+        thisStage.sizeToScene();
+        thisStage.show();
+    }
 }

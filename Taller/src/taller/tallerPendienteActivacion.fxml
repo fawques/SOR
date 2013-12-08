@@ -6,9 +6,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="97.99980000000505" prefWidth="224.99990000000253" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.TallerPendienteActivacionController">
+<AnchorPane id="AnchorPane" prefHeight="119.99980000000505" prefWidth="224.99990000000253" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.TallerPendienteActivacionController">
   <children>
-    <ProgressIndicator layoutX="94.0" layoutY="21.0" progress="-1.0" />
-    <Label layoutX="54.0" layoutY="65.0" text="Espere por favor..." />
+    <ProgressIndicator fx:id="piIndicador" layoutX="94.0" layoutY="21.0" progress="-1.0" visible="false" />
+    <Button fx:id="btRecargar" layoutX="74.0" layoutY="85.0" mnemonicParsing="false" onAction="#comprobarActivacion" text="Recargar" />
+    <Label fx:id="lbEstado" layoutX="94.0" layoutY="32.0" prefHeight="20.999908447265625" text="" />
   </children>
 </AnchorPane>

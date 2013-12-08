@@ -6,15 +6,13 @@
 
 package gestor_taller;
 
-import BD.Conexion;
 import BD.InterfazBD;
-import general.Taller;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebService;
 
 /**
  *
@@ -69,6 +67,6 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
+        return 2; //devolvemos el estado pendiente, por defecto
     }
 }

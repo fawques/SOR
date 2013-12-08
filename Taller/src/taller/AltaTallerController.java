@@ -5,6 +5,7 @@
  */
 package taller;
 
+import BD.InterfazBD;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +29,7 @@ import javafx.stage.Stage;
 public class AltaTallerController implements Initializable {
 
     Stage thisStage;
+    InterfazBD bd;
     /**
      * Class Fxml variables
      */
@@ -170,23 +172,49 @@ public class AltaTallerController implements Initializable {
         System.exit(0);
     }
 
+    public void setEditableAllInputs(boolean b) {
+        tfNombreTaller.setEditable(b);
+        tfEmail.setEditable(b);
+        tfDireccion.setEditable(b);
+        tfCiudad.setEditable(b);
+        tfCp.setEditable(b);
+        tfTelefono.setEditable(b);
+    }
+
     /**
      *
      * @param e
      * @throws java.io.IOException
      */
+    @SuppressWarnings("empty-statement")
     public void onClickAceptar(ActionEvent e) throws IOException, Exception {
         //If the validation goes well
+        //bloquear los inputs
+        setEditableAllInputs(false);
         if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
             if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText())) >= 0) {
-                //METER en base de datos si está todo ok.Stage stage = (Stage) tfCp.getScene().getWindow();
-                Parent page = (Parent) FXMLLoader.load(MainTaller.class.getResource("tallerPendienteActivacion.fxml"), null, new JavaFXBuilderFactory());
-                thisStage.getScene().setRoot(page);
-                showStage();
+                //METER en base de datos si está todo ok.
+                bd = new InterfazBD("sor_taller");
+                if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
+                    MainTaller.taller = bd.getRegistroTaller();
+                    //bd.close()
+                    URL location = getClass().getResource("tallerPendienteActivacion.fxml");
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(location);
+                    loader.setBuilderFactory(new JavaFXBuilderFactory());
+                    Parent page = (Parent) loader.load(location.openStream());
+                    thisStage.getScene().setRoot(page);
+                    thisStage.setTitle("Esperando código de aceptación");
+                    TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                    staticDataBox.setStage(thisStage);
+                    staticDataBox.showStage();
+                } else {
+                    //devolver un error
+                }
             }
-            //Faltaría anyadir el código recibido por el gestor
+            //Faltaría anyadir el código recibido por el gestor hay que pasarlo al gestor
             /*MainTaller.sendMail("pablovm1990@gmail.com", tfEmail.getText(), "Usuario SorApp creado correctamente",
              "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
              + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
