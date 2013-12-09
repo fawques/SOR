@@ -38,7 +38,7 @@ import javax.mail.internet.MimeMessage;
 public class MainTaller extends Application {
 
     InterfazBD bd;
-    static Taller taller;
+    public static Taller taller;
     public Stage stage;
 
     @Override
@@ -52,36 +52,54 @@ public class MainTaller extends Application {
         {
             if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación
             {
-                changeScene("tallerPendienteActivacion.fxml");
+                FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
+                stage.setTitle("Esperando código de aceptación");
+                TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                staticDataBox.setStage(stage);
+                staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
                 //Cargar GestionPedido
+                //FXMLLoader loader = changeScene(".fxml");
+                stage.setTitle("Gestión de pedidos");
+                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                 staticDataBox.setStage(stage);
+                staticDataBox.showStage();*/
             } else { //baja
-
+                //FXMLLoader loader = changeScene(".fxml");
+                stage.setTitle("Estoy de baja no sé que hacer");
+                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                 staticDataBox.setStage(stage);
+                 staticDataBox.showStage();*/
             }
         } else {
-            URL location = getClass().getResource("AltaTaller.fxml");
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(location);
-            loader.setBuilderFactory(new JavaFXBuilderFactory());
-            Parent root = (Parent) loader.load(location.openStream());
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            FXMLLoader loader = changeScene("AltaTaller.fxml");
+            stage.setTitle("Alta de taller");
+            /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+             staticDataBox.setStage(stage);
+             staticDataBox.showStage();*/
             AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
             staticDataBox.setStage(stage);
             staticDataBox.showStage();
         }
     }
 
-    public void changeScene(String fxml) throws IOException {
+    public FXMLLoader changeScene(String fxml) throws IOException {
         //Mostrar página de espera interfaz básica
-        Parent page = (Parent) FXMLLoader.load(MainTaller.class.getResource(fxml), null, new JavaFXBuilderFactory());
+        URL location = getClass().getResource(fxml);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page = (Parent) loader.load(location.openStream());
         if (stage.getScene() == null) {
-            stage.setScene(page.getScene());
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
         } else {
             stage.getScene().setRoot(page);
             stage.sizeToScene();
         }
-        stage.show();
+
+        return loader;
+
     }
 
     public Parent replaceSceneContent(String fxml) throws Exception {

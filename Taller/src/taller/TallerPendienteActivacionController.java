@@ -6,7 +6,9 @@
 
 package taller;
 
+import BD.InterfazBD;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +25,7 @@ import javafx.stage.Stage;
 public class TallerPendienteActivacionController implements Initializable {
 
     Stage thisStage;
+    InterfazBD bd;
     /**
      * Initializes the controller class.
      */
@@ -36,7 +39,9 @@ public class TallerPendienteActivacionController implements Initializable {
         // TODO
     }
     
-    public void comprobarActivacion() {
+    public void comprobarActivacion() throws SQLException, ClassNotFoundException {
+        bd = new InterfazBD("sor_taller");
+        System.out.println(bd.getRegistroTaller().getEmail());
         btRecargar.setDisable(true);
         lbEstado.setText("");
         piIndicador.setVisible(true);

@@ -198,8 +198,6 @@ public class AltaTallerController implements Initializable {
                 //METER en base de datos si está todo ok.
                 bd = new InterfazBD("sor_taller");
                 if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
-                    MainTaller.taller = bd.getRegistroTaller();
-                    //bd.close()
                     URL location = getClass().getResource("tallerPendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
@@ -213,6 +211,7 @@ public class AltaTallerController implements Initializable {
                 } else {
                     //devolver un error
                 }
+                //bd.close()
             }
             //Faltaría anyadir el código recibido por el gestor hay que pasarlo al gestor
             /*MainTaller.sendMail("pablovm1990@gmail.com", tfEmail.getText(), "Usuario SorApp creado correctamente",

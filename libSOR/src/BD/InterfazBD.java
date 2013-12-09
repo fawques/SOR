@@ -44,9 +44,13 @@ public class InterfazBD {
 
     public Taller getRegistroTaller() {
         ResultSet resultado = conexion.ejecutarSQLSelect("SELECT * FROM taller;");
+
         try {
-            if (resultado.wasNull()) {
+            if (resultado.first()) {
+                System.out.println("hola holita");
                 return new Taller(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("email"), resultado.getString("direccion"), resultado.getString("ciudad"), resultado.getInt("codPostal"), resultado.getInt("telefono"));
+            } else {
+                System.out.println("hola que ase");
             }
             return null;
         } catch (SQLException ex) {
