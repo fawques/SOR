@@ -267,10 +267,10 @@ public class MainTaller extends Application {
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static int activarTaller() {
+    public static int activarTaller(java.lang.String email) {
         taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
         taller_ws.TallerWS port = service.getTallerWSPort();
-        return port.activarTaller(taller.getEmail());
+        return port.activarTaller(email);
     }
 
 }

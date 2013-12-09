@@ -10,6 +10,6 @@
   <children>
     <ProgressIndicator fx:id="piIndicador" layoutX="94.0" layoutY="21.0" progress="-1.0" visible="false" />
     <Button fx:id="btRecargar" layoutX="74.0" layoutY="85.0" mnemonicParsing="false" onAction="#comprobarActivacion" text="Recargar" />
-    <Label fx:id="lbEstado" layoutX="94.0" layoutY="32.0" prefHeight="20.999908447265625" text="" />
+    <Label fx:id="lbEstado" layoutX="36.0" layoutY="32.0" prefHeight="27.999908447265625" text="" textAlignment="CENTER" textFill="#ff3333" />
   </children>
 </AnchorPane>

@@ -41,20 +41,21 @@ public class TallerPendienteActivacionController implements Initializable {
     
     public void comprobarActivacion() throws SQLException, ClassNotFoundException {
         bd = new InterfazBD("sor_taller");
-        System.out.println(bd.getRegistroTaller().getEmail());
         btRecargar.setDisable(true);
         lbEstado.setText("");
         piIndicador.setVisible(true);
 
-        if (MainTaller.activarTaller() == 0) //Activado
+        if (MainTaller.activarTaller(bd.getRegistroTaller().getEmail()) == 0) //Activado
         {
             //enviar a pantalla gestion de pedido
-
+            
         } else //No activado
         {
-            lbEstado.setText("Lo siento, todavía no está activada su cuenta");
             lbEstado.setStyle("-fx-border-color: red;");
+            lbEstado.setText("Su cuenta no está activa");
         }
+        //bd.close();
+        piIndicador.setVisible(false);
         btRecargar.setDisable(false);
     }
 

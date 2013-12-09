@@ -47,10 +47,7 @@ public class InterfazBD {
 
         try {
             if (resultado.first()) {
-                System.out.println("hola holita");
                 return new Taller(resultado.getInt("id"), resultado.getString("nombre"), resultado.getString("email"), resultado.getString("direccion"), resultado.getString("ciudad"), resultado.getInt("codPostal"), resultado.getInt("telefono"));
-            } else {
-                System.out.println("hola que ase");
             }
             return null;
         } catch (SQLException ex) {
@@ -64,9 +61,11 @@ public class InterfazBD {
     }
 
     public int activarTaller(String email) {
-        ResultSet res = conexion.ejecutarSQLSelect("SELECT id from taller where='" + email + "';");
+        ResultSet res = conexion.ejecutarSQLSelect("SELECT id from taller where email='" + email + "';");
         try {
-            return res.getInt("id");
+            if (res.first()) {
+                return res.getInt("id");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
         }
