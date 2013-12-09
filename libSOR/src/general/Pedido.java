@@ -74,9 +74,9 @@ public class Pedido {
         this.fecha_alta = p.fecha_alta;
         this.fecha_baja = p.fecha_baja;
         this.fecha_limite = p.fecha_limite;
-        this.listaPiezas = p.listaPiezas;
-        this.listaCantidadesPiezas = p.listaCantidadesPiezas;
-        this.listaOfertas = p.listaOfertas;
+        this.listaPiezas =new ArrayList<>( p.listaPiezas);
+        this.listaCantidadesPiezas =new ArrayList<>(p.listaCantidadesPiezas) ;
+        this.listaOfertas =new ArrayList<>( p.listaOfertas);
         this.estado = p.estado;
     }
     

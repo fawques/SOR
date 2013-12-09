@@ -18,6 +18,12 @@ import java.util.Date;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import BD.InterfazBD;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import com.google.gson.GsonBuilder;
+import java.text.DateFormat;
 
 
 /**
@@ -26,7 +32,7 @@ import javax.jws.WebParam;
  */
 @WebService(serviceName = "AdminWS")
 public class AdminWS {
-
+ InterfazBD bd;
     /**
      * This is a sample web service operation
      */
@@ -39,8 +45,15 @@ public class AdminWS {
      * Web service operation
      */
     @WebMethod(operationName = "getAltas")
-    public String getAltas() {
-        
+    public String getAltas(){
+        try{
+            bd = new InterfazBD("sor_gestor");
+        } catch (SQLException ex) {        
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }        
+    
         ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
         listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
         listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
@@ -56,15 +69,22 @@ public class AdminWS {
      */
     @WebMethod(operationName = "getPedidos")
     public String getPedidos() {
-        ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
-        listaPedidos.add(new Pedido(1,1,new Date(2014,2,1)));
-       listaPedidos.add(new Pedido(2,1,new Date(2014,2,1)));
-        
-        Gson gson = new Gson();
-        String listaJSON = gson.toJson(listaPedidos);
-        System.out.println("listaJSON = " + listaJSON);
-        return listaJSON;
-        
+        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+        //Dec 7, 2013 5:46:35 PM
+         try{
+            ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();            
+            bd = new InterfazBD("sor_gestor");
+            listaPedidos=bd.getPedidosActivos();
+            String listaJSON = gson.toJson(listaPedidos);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     } 
+        return null;
     }
 
     /**
@@ -72,6 +92,14 @@ public class AdminWS {
      */
     @WebMethod(operationName = "getOfertas")
     public String getOfertas() {
+         try{
+            bd = new InterfazBD("sor_gestor");
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
         ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
         listaOfertas.add(new Oferta(1,new Date(),new Date(), new Date(),32.2,1,1));
         listaOfertas.add(new Oferta(2,new Date(),new Date(), new Date(),20.0,1,1));
@@ -81,6 +109,7 @@ public class AdminWS {
         System.out.println("listaJSON = " + listaJSON);
         return listaJSON;
         
+        
     }
 
     /**
@@ -88,6 +117,14 @@ public class AdminWS {
      */
     @WebMethod(operationName = "getDesguaces")
     public String getDesguaces() {
+         try{
+            bd = new InterfazBD("sor_gestor");
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
         ArrayList<Desguace> listaDesguaces = new ArrayList<Desguace>();
         listaDesguaces.add(new Desguace(1,"Pepito S.L", "comprame@gmai.com", "C/Mariano Luis", "España", 1234,124124));
         listaDesguaces.add(new Desguace(2,"Construcciones S.L", "todoparavender@gmail.com", "C/ Empresario Rico", "España", 1234,124124));
@@ -103,10 +140,18 @@ public class AdminWS {
      */
     @WebMethod(operationName = "getTalleres")
     public String getTalleres() {
+         try{
+            bd = new InterfazBD("sor_gestor");
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
           ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
         listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
         listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-        listaTalleres.get(0).nuevoPedido(new Date(), new Date(), new Date());
+        listaTalleres.get(0).nuevoPedido(new Date());
         Gson gson = new Gson();
         String listaJSON = gson.toJson(listaTalleres);
         System.out.println("listaJSON = " + listaJSON);
@@ -118,21 +163,22 @@ public class AdminWS {
      */
     @WebMethod(operationName = "getOfertasporPedido")
     public String getOfertasporPedido(@WebParam(name = "idPedido") int idPedido) {
-        ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
-        if(idPedido==1){
-        listaOfertas.add(new Oferta(1,new Date(),new Date(), new Date(),32.2,1,1));
-        listaOfertas.add(new Oferta(2,new Date(),new Date(), new Date(),20.0,1,1));
-        }
-        else{
-        listaOfertas.add(new Oferta(1,new Date(),new Date(), new Date(),32.2,1,2));
-        listaOfertas.add(new Oferta(2,new Date(),new Date(), new Date(),20.0,1,2));
-        }
-
-        
-        Gson gson = new Gson();
-        String listaJSON = gson.toJson(listaOfertas);
-        System.out.println("listaJSON = " + listaJSON);
-        return listaJSON;
+         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+        //Dec 7, 2013 5:46:35 PM
+         try{
+            ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();           
+            bd = new InterfazBD("sor_gestor");
+            listaOfertas=bd.getOfertas(idPedido);
+            String listaJSON = gson.toJson(listaOfertas);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON; 
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        return null;
     }
 
     /**
@@ -140,9 +186,17 @@ public class AdminWS {
      */
     @WebMethod(operationName = "getPedidoID")
     public String getPedidoID(@WebParam(name = "id") int id) {
+         try{
+            bd = new InterfazBD("sor_gestor");
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
         ArrayList<Pedido> listaPedido = new ArrayList<Pedido>();
 
-        listaPedido.add(new Pedido(1,1,new Date(), new Date(),new Date()));
+        listaPedido.add(new Pedido(1,1,new Date()));
         Pieza p = new Pieza(1, "Patatas Maria", EstadoGeneral.ACTIVE, null);
         listaPedido.get(0).addPieza(p, 11);
         Gson gson = new Gson();

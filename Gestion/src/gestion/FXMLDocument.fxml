@@ -44,7 +44,11 @@
         </Tab>
         <Tab id="tabPedidos" text="Altas">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView fx:id="tableAltas" layoutX="73.0" layoutY="45.0" prefHeight="442.0" prefWidth="595.0" />
+              </children>
+            </AnchorPane>
           </content>
         </Tab>
         <Tab id="tabPedidos" text="Opciones">

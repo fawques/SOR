@@ -51,6 +51,7 @@ public class FXMLDocumentController implements Initializable {
    private ObservableList<PedidosInterfaz> personDataPedidos = FXCollections.observableArrayList();
    private ObservableList<OfertasInterfaz> personDataOferta = FXCollections.observableArrayList();
    private ObservableList<PiezasInterfaz> personDataPiezas = FXCollections.observableArrayList();
+   
     @FXML
     private Label label;
     @FXML
@@ -70,8 +71,9 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         talleresInterfaz();
         desguacesInterfaz();
-        pedidosInterfaz();
         ofertasInterfaz();
+        pedidosInterfaz();
+        
     }
     public void  pedidosInterfaz(){
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
@@ -82,6 +84,7 @@ public class FXMLDocumentController implements Initializable {
      TableColumn columnBaja = new TableColumn("fecha_baja");
      TableColumn columnLimite = new TableColumn("fecha_limite");
      tablePedidos.setEditable(true);
+     
       Callback<TableColumn, TableCell> integerCellFactory =
                 new Callback<TableColumn, TableCell>() {
             @Override
@@ -134,7 +137,7 @@ public class FXMLDocumentController implements Initializable {
          piezasInterfaz(personDataPedidos.get(0).getID());
            tablePedidos.setItems(personDataPedidos);
            tablePedidos.getColumns().addAll(columnID,columnIDtaller,columnAlta,columnBaja,columnLimite);
-       
+
     }
     public void ofertasInterfaz(){
          
