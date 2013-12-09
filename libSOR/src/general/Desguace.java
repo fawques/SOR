@@ -24,6 +24,10 @@ public class Desguace extends Usuario{
         listaOfertas = new ArrayList<>();
     }
 
+    public Desguace(int aInt, String string, String string0, String string1, String string2, int aInt0, int aInt1, int aInt2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public Oferta nuevaOferta(Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, int pedidoID){
         Date ahora = new Date();
 //TODO: Darle un ID de verdad, no el tiempo actual...
