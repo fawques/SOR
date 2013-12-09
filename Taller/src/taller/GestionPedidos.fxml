@@ -8,7 +8,6 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?scenebuilder-classpath-element ../../../libSOR/lib/extfx-0.3.jar?>
 
 <fx:root type="javafx.scene.layout.AnchorPane" id="AnchorPane" prefHeight="546.0" prefWidth="660.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.GestionPedidosController">
   <children>
