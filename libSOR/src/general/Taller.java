@@ -18,10 +18,11 @@ public class Taller extends Usuario{
     
     private ArrayList<Pedido> listaPedidos;
 
-    public Taller(int ID,String name, String email, String address, String city, int postalCode, int telephone) {
+    public Taller(int ID,String name, String email, String address, String city, int postalCode, int telephone, ArrayList<Pedido> listaDePedidos) {
         super(ID, name, email, address, city, postalCode, telephone);
-        this.listaPedidos = new ArrayList<>();
+        this.listaPedidos = listaDePedidos;
     }
+    
 
     @Override
     public String toString() {
