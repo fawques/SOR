@@ -193,20 +193,20 @@ public class AdminWS {
     public String getPedidoID(@WebParam(name = "id") int id) {
          try{
             bd = new InterfazBD("sor_gestor");
+            ArrayList<Pedido> listaPedido = new ArrayList<Pedido>();
+            listaPedido.add(bd.getPedido(id));
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gson.toJson(listaPedido);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
         }        
         catch (ClassNotFoundException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
-        ArrayList<Pedido> listaPedido = new ArrayList<Pedido>();
-
-        listaPedido.add(new Pedido(1,1,new Date()));
-        Pieza p = new Pieza(1, "Patatas Maria", EstadoGeneral.ACTIVE, null);
-        listaPedido.get(0).addPieza(p, 11);
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-        String listaJSON = gson.toJson(listaPedido);
-        System.out.println("listaJSON = " + listaJSON);
-        return listaJSON;
+        
+        return null;
+      
     }
 }

@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -93,8 +94,8 @@ public class InterfazBD {
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido;");
             while(resultados.next()){
                 int pedidoID = resultados.getInt("id");
-                ArrayList<Pieza> piezas = getPiezasPedido(pedidoID);
-                ArrayList<Integer> cantidades = null;
+                ArrayList<Pieza> piezas = new ArrayList<>();
+                ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
 
                 Pedido nuevo = new Pedido(pedidoID, resultados.getInt("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")],piezas,cantidades,getOfertasPedido(pedidoID));
@@ -116,8 +117,8 @@ public class InterfazBD {
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where taller = '" + idTaller + "';");
             while(resultados.next()){
                 int pedidoID = resultados.getInt("id");
-                ArrayList<Pieza> piezas = getPiezasPedido(pedidoID);
-                ArrayList<Integer> cantidades = null;
+                ArrayList<Pieza> piezas = new ArrayList<>();
+                ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
                 Pedido nuevo = new Pedido(pedidoID, resultados.getInt("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")],piezas,cantidades,getOfertasPedido(pedidoID));
                 lista.add(nuevo);
@@ -198,11 +199,12 @@ public class InterfazBD {
         Pedido pedido = null;
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where id ='"+id+"';");
-            if(resultados != null){
-                ArrayList<Pieza> piezas = null;
-                ArrayList<Integer> cantidades = null;
+            while(resultados.next()){
+                ArrayList<Pieza> piezas =new ArrayList<>();
+        
+                ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(id, piezas, cantidades);
-                pedido = new Pedido(resultados.getInt("id"),resultados.getInt("tallerID"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"),resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")] ,piezas,cantidades,getOfertasPedido(id));
+                pedido = new Pedido(resultados.getInt("id"),resultados.getInt("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"),resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")] ,piezas,cantidades,getOfertasPedido(id));
             }
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -213,13 +215,16 @@ public class InterfazBD {
     
 
     public void getPiezasYCantidades(int pedidoID, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades){
-        piezas = new ArrayList<>();
-        cantidades = new ArrayList<>();
+        List<Pieza> listpieza = new ArrayList<Pieza>();
+        List<Integer> listacantidades= new ArrayList<Integer>();
+        listpieza=piezas;
+        listacantidades=cantidades;
+        
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido_pieza WHERE pedido=" + pedidoID + ";");
             while(resultados.next()){
-                piezas.add(getPieza(resultados.getInt("pieza")));
-                cantidades.add(resultados.getInt("cantidad"));
+                listpieza.add(getPieza(resultados.getInt("pieza")));
+                listacantidades.add(resultados.getInt("cantidad"));
             }
         }catch(SQLException ex){
             ex.printStackTrace();
