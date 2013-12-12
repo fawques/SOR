@@ -22,7 +22,7 @@ public class Oferta {
     private int pedidoID;
     private EstadoOferta estado;
 
-    public Oferta(int ID, Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, int desguaceID, int pedidoID) {
+    public Oferta(int ID, Date fecha_alta, Date fecha_baja, Date fecha_limite, double precio, int desguaceID, int pedidoID, EstadoOferta estado) {
         this.ID = ID;
         this.fecha_alta = fecha_alta;
         this.fecha_baja = fecha_baja;
@@ -30,7 +30,7 @@ public class Oferta {
         this.precio = precio;
         this.desguaceID = desguaceID;
         this.pedidoID = pedidoID;
-        this.estado = EstadoOferta.WAITING_ACCEPT;
+        this.estado = estado;
     }
 
     public Oferta(int aInt, java.sql.Date date, double aDouble, int aInt0, int aInt1, int aInt2, java.sql.Date date0, java.sql.Date date1) {

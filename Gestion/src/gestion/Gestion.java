@@ -17,6 +17,10 @@ import javafx.stage.Stage;
  * @author Cute
  */
 public class Gestion extends Application {
+
+    static String getOfertasporPedido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -46,28 +50,40 @@ public class Gestion extends Application {
         return port.getAltas();
     }
 
-    private static String getDesguaces() {
+    public static String getDesguaces() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getDesguaces();
     }
 
-    private static String getOfertas() {
+    public static String getOfertas() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getOfertas();
     }
 
-    private static String getPedidos() {
+    public static String getPedidos() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getPedidos();
     }
 
-    private static String getTalleres() {
+    public static String getTalleres() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getTalleres();
+    }
+
+    public static String getOfertasporPedido(int idPedido) {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getOfertasporPedido(idPedido);
+    }
+
+    public static String getPedidoID(int id) {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getPedidoID(id);
     }
 
 

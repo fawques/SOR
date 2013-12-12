@@ -68,6 +68,17 @@ public class Pedido {
         this.listaOfertas = new ArrayList<>();
         this.estado = EstadoPedido.NO_OFFERS;
     }
+    public Pedido(Pedido p) {
+        this.ID = p.ID;
+        this.tallerID =p.tallerID;
+        this.fecha_alta = p.fecha_alta;
+        this.fecha_baja = p.fecha_baja;
+        this.fecha_limite = p.fecha_limite;
+        this.listaPiezas =new ArrayList<>( p.listaPiezas);
+        this.listaCantidadesPiezas =new ArrayList<>(p.listaCantidadesPiezas) ;
+        this.listaOfertas =new ArrayList<>( p.listaOfertas);
+        this.estado = p.estado;
+    }
     
     public boolean addPieza(Pieza pieza, Integer cantidad){
         listaPiezas.add(pieza);
