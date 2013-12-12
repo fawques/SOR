@@ -48,20 +48,21 @@ public class AdminWS {
     public String getAltas(){
         try{
             bd = new InterfazBD("sor_gestor");
+            ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
+     //   listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
+      //  listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
+            listaTalleres=bd.getTalleres();
+            listaTalleres.get(0).nuevoPedido(new Date());
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gson.toJson(listaTalleres);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
         } catch (SQLException ex) {        
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      } catch (ClassNotFoundException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }        
-    
-        ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
-        listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-        listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-        listaTalleres.get(0).nuevoPedido(new Date());
-        Gson gson = new Gson();
-        String listaJSON = gson.toJson(listaTalleres);
-        System.out.println("listaJSON = " + listaJSON);
-        return listaJSON;
+        return null;
     }
 
     /**
@@ -94,22 +95,23 @@ public class AdminWS {
     public String getOfertas() {
          try{
             bd = new InterfazBD("sor_gestor");
+            ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
+        //listaOfertas.add(new Oferta(1,new Date(),new Date(), new Date(),32.2,1,1));
+        //listaOfertas.add(new Oferta(2,new Date(),new Date(), new Date(),20.0,1,1));
+            listaOfertas=bd.getOfertas();
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gson.toJson(listaOfertas);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
         }        
         catch (ClassNotFoundException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
-        ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
-        listaOfertas.add(new Oferta(1,new Date(),new Date(), new Date(),32.2,1,1));
-        listaOfertas.add(new Oferta(2,new Date(),new Date(), new Date(),20.0,1,1));
+
         
-        Gson gson = new Gson();
-        String listaJSON = gson.toJson(listaOfertas);
-        System.out.println("listaJSON = " + listaJSON);
-        return listaJSON;
-        
-        
+        return null;
     }
 
     /**
@@ -119,20 +121,21 @@ public class AdminWS {
     public String getDesguaces() {
          try{
             bd = new InterfazBD("sor_gestor");
+            ArrayList<Desguace> listaDesguaces = new ArrayList<Desguace>();
+       // listaDesguaces.add(new Desguace(1,"Pepito S.L", "comprame@gmai.com", "C/Mariano Luis", "España", 1234,124124));
+        //listaDesguaces.add(new Desguace(2,"Construcciones S.L", "todoparavender@gmail.com", "C/ Empresario Rico", "España", 1234,124124));
+            listaDesguaces=bd.getDesguaces();
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gson.toJson(listaDesguaces);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
         }        
         catch (ClassNotFoundException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
-        ArrayList<Desguace> listaDesguaces = new ArrayList<Desguace>();
-        listaDesguaces.add(new Desguace(1,"Pepito S.L", "comprame@gmai.com", "C/Mariano Luis", "España", 1234,124124));
-        listaDesguaces.add(new Desguace(2,"Construcciones S.L", "todoparavender@gmail.com", "C/ Empresario Rico", "España", 1234,124124));
-
-        Gson gson = new Gson();
-        String listaJSON = gson.toJson(listaDesguaces);
-        System.out.println("listaJSON = " + listaJSON);
-        return listaJSON;
+         return null;
     }
 
     /**
@@ -142,20 +145,22 @@ public class AdminWS {
     public String getTalleres() {
          try{
             bd = new InterfazBD("sor_gestor");
+             ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
+             listaTalleres=bd.getTalleres();
+            //listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
+            //listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
+            listaTalleres.get(0).nuevoPedido(new Date());
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gson.toJson(listaTalleres);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
         }        
         catch (ClassNotFoundException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
-          ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
-        listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-        listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-        listaTalleres.get(0).nuevoPedido(new Date());
-        Gson gson = new Gson();
-        String listaJSON = gson.toJson(listaTalleres);
-        System.out.println("listaJSON = " + listaJSON);
-        return listaJSON;
+        return null;
     }
 
     /**
@@ -168,7 +173,7 @@ public class AdminWS {
          try{
             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();           
             bd = new InterfazBD("sor_gestor");
-            listaOfertas=bd.getOfertas(idPedido);
+            listaOfertas=bd.getOfertasPedido(idPedido);
             String listaJSON = gson.toJson(listaOfertas);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON; 
@@ -199,7 +204,7 @@ public class AdminWS {
         listaPedido.add(new Pedido(1,1,new Date()));
         Pieza p = new Pieza(1, "Patatas Maria", EstadoGeneral.ACTIVE, null);
         listaPedido.get(0).addPieza(p, 11);
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
         String listaJSON = gson.toJson(listaPedido);
         System.out.println("listaJSON = " + listaJSON);
         return listaJSON;

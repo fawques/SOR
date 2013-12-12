@@ -54,9 +54,10 @@ public class InterfazBD {
     {
         ArrayList<Oferta> lista= new ArrayList<>();
         try{
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_desguace.oferta;");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta;");
             while(resultados.next()){
-                Oferta nuevo = new Oferta(resultados.getInt("id"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), resultados.getDouble("importe"), resultados.getInt("desguace"), resultados.getInt("pedido"), resultados.getObject("estado",EstadoOferta.class));
+                Oferta nuevo = new Oferta(resultados.getInt("id"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), resultados.getDouble("importe"), resultados.getInt("desguace"), resultados.getInt("pedido"),EstadoOferta.values()[
+                        resultados.getInt("estado")] );
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getInt("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -71,7 +72,7 @@ public class InterfazBD {
     {
         ArrayList<Desguace> lista= new ArrayList<>();
         try{
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_desguace.desguace;");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace;");
             while(resultados.next()){
                 ArrayList listaOfertas = getOfertasDesguace(resultados.getInt("id"));
                 Desguace nuevo = new Desguace(resultados.getInt("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),listaOfertas);
@@ -96,7 +97,7 @@ public class InterfazBD {
                 ArrayList<Integer> cantidades = null;
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
 
-                Pedido nuevo = new Pedido(pedidoID, resultados.getInt("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),resultados.getObject("estado",EstadoPedido.class),piezas,cantidades,getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID, resultados.getInt("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")],piezas,cantidades,getOfertasPedido(pedidoID));
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getInt("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -112,13 +113,13 @@ public class InterfazBD {
         ArrayList<Pedido> lista= new ArrayList<>();
         try{
             //conexion.ejecutarSQL("INSERT INTO pedido (id, taller, estado, fecha_alta, fecha_baja, fecha_limite) values ('4', '5','4','2013-03-12', '2013-03-12', '2013-03-12');");
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_gestor.pedido where taller = '" + idTaller + "';");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where taller = '" + idTaller + "';");
             while(resultados.next()){
                 int pedidoID = resultados.getInt("id");
                 ArrayList<Pieza> piezas = getPiezasPedido(pedidoID);
                 ArrayList<Integer> cantidades = null;
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
-                Pedido nuevo = new Pedido(pedidoID, resultados.getInt("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),resultados.getObject("estado",EstadoPedido.class),piezas,cantidades,getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID, resultados.getInt("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")],piezas,cantidades,getOfertasPedido(pedidoID));
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getInt("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -136,7 +137,7 @@ public class InterfazBD {
     {
         ArrayList<Taller> lista= new ArrayList<>();
         try{
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_taller.taller;");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller;");
             ArrayList<Pedido> listaDePedidos = new ArrayList<>();
             while(resultados.next()){
                 listaDePedidos = getPedidosTaller(resultados.getInt("id"));
@@ -155,7 +156,7 @@ public class InterfazBD {
     {
         ArrayList<Taller> lista= new ArrayList<>();
         try{
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_taller.taller where estado ='"+2+"';");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller where estado ='"+2+"';");
             while(resultados.next()){
                 ArrayList<Pedido> listaDePedidos = new ArrayList<>();
                 listaDePedidos = null; // no se necesita para el alta
@@ -176,7 +177,7 @@ public class InterfazBD {
     {
         ArrayList<Desguace> lista= new ArrayList<>();
         try{
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_desguace.desguace where estado ='"+2+"';");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace where estado ='"+2+"';");
             
             while(resultados.next()){
                 ArrayList<Oferta> listaOfertas = new ArrayList<>();
@@ -196,12 +197,12 @@ public class InterfazBD {
     {
         Pedido pedido = null;
         try{
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_desguace.pedido where id ='"+id+"';");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where id ='"+id+"';");
             if(resultados != null){
                 ArrayList<Pieza> piezas = null;
                 ArrayList<Integer> cantidades = null;
                 getPiezasYCantidades(id, piezas, cantidades);
-                pedido = new Pedido(resultados.getInt("id"),resultados.getInt("tallerID"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"),resultados.getDate("fecha_limite"), resultados.getObject("estado",EstadoPedido.class),piezas,cantidades,getOfertasPedido(id));
+                pedido = new Pedido(resultados.getInt("id"),resultados.getInt("tallerID"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"),resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")] ,piezas,cantidades,getOfertasPedido(id));
             }
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -230,7 +231,7 @@ public class InterfazBD {
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pieza WHERE id=" + piezaID + ";");
             if(resultados.next()){
-                Pieza nueva = new Pieza(piezaID, resultados.getString("nombre"), resultados.getObject("estado", EstadoGeneral.class), resultados.getString("descripcion"));
+                Pieza nueva = new Pieza(piezaID, resultados.getString("nombre"),EstadoGeneral.values()[ resultados.getInt("estado")], resultados.getString("descripcion"));
                 return nueva;
             }
         }catch(SQLException ex){
@@ -242,7 +243,7 @@ public class InterfazBD {
     public ArrayList<Pieza> getPiezasPedido(int pedidoID){
         ArrayList<Pieza> lista = new ArrayList<>();
         try{
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM sor_gestor.pedido_pieza WHERE pedido=" + pedidoID + ";");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido_pieza WHERE pedido=" + pedidoID + ";");
             while(resultados.next()){
                 Pieza nueva = getPieza(resultados.getInt("id"));
                 //Pieza nueva = new Pieza(resultados.getInt("id"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), resultados.getDouble("importe"), resultados.getInt("desguace"), resultados.getInt("pedido"), resultados.getObject("estado",EstadoOferta.class));
@@ -261,7 +262,7 @@ public class InterfazBD {
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta WHERE desguace=" + desguaceID + ";");
             while(resultados.next()){
-                Oferta nueva = new Oferta(resultados.getInt("id"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), resultados.getDouble("importe"), resultados.getInt("desguace"), resultados.getInt("pedido"), resultados.getObject("estado",EstadoOferta.class));
+                Oferta nueva = new Oferta(resultados.getInt("id"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), resultados.getDouble("importe"), resultados.getInt("desguace"), resultados.getInt("pedido"), EstadoOferta.values()[resultados.getInt("estado")]);
                 lista.add(nueva);
             }
         }catch(SQLException ex){
@@ -278,7 +279,7 @@ public class InterfazBD {
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta WHERE pedido=" + pedidoID + ";");
             while(resultados.next()){
 
-                Oferta nueva = new Oferta(resultados.getInt("id"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), resultados.getDouble("importe"), resultados.getInt("desguace"), resultados.getInt("pedido"), resultados.getObject("estado",EstadoOferta.class));
+                Oferta nueva = new Oferta(resultados.getInt("id"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), resultados.getDouble("importe"), resultados.getInt("desguace"), resultados.getInt("pedido"), EstadoOferta.values()[resultados.getInt("estado")]);
 
                 lista.add(nueva);
             }
