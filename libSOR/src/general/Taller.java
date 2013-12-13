@@ -24,7 +24,7 @@ public class Taller extends Usuario{
     }
     
 
-    @Override
+   @Override
     public String toString() {
         return "Taller{" + "name=" + name + ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + ", telephone=" + telephone + '}';
     }

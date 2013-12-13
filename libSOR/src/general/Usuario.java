@@ -28,7 +28,7 @@ public abstract class Usuario {
         this.city = city;
         this.postalCode = postalCode;
         this.telephone = telephone;
-        this.estado = EstadoGeneral.ACTIVE;
+        this.estado = EstadoGeneral.PENDIENTE;
     }
 
     public int getID() {
@@ -63,5 +63,11 @@ public abstract class Usuario {
         return estado;
     }
     
+    public void activar(){
+        this.estado = EstadoGeneral.ACTIVE;
+    }
     
+    public void baja(){
+        this.estado = EstadoGeneral.INACTIVE;
+    }
 }

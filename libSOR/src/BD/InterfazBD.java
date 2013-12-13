@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package BD;
 
 import general.Desguace;
@@ -19,13 +18,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author fawques
  */
 public class InterfazBD {
-    
+
     Conexion conexion;
 
     public InterfazBD(String database) throws SQLException, ClassNotFoundException {
@@ -287,16 +288,43 @@ public class InterfazBD {
 
                 lista.add(nueva);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }
         return lista;
-        
+
     }
-    
-    public int altaTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado){
-        return conexion.ejecutarInsert("insert into taller (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('"+nombre+"', '"+email+"','"+direccion+"','"+ciudad+"',"+codPostal+","+telefono+","+estado+");");
+
+    public Taller getRegistroTaller() {
+        ResultSet resultado = conexion.ejecutarSQLSelect("SELECT * FROM taller;");
+
+        try {
+            if (resultado.first()) {
+                final int tallerID = resultado.getInt("id");
+                return new Taller(tallerID, resultado.getString("nombre"),resultado.getString("email"), resultado.getString("direccion"), resultado.getString("ciudad"), resultado.getInt("codPostal"), resultado.getInt("telefono"), getPedidosTaller(tallerID));
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
-    
+
+    public int altaTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
+        return conexion.ejecutarInsert("insert into taller (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
+    }
+
+    public int activarTaller(String email) {
+        ResultSet res = conexion.ejecutarSQLSelect("SELECT id from taller where email='" + email + "';");
+        try {
+            if (res.first()) {
+                return res.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
 }

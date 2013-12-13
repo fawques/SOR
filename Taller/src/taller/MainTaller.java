@@ -6,10 +6,11 @@
 package taller;
 
 import BD.InterfazBD;
-import general.EstadoPedido;
-import general.Pedido;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import general.EstadoGeneral;
+import general.Taller;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -37,16 +39,91 @@ import javax.mail.internet.MimeMessage;
 public class MainTaller extends Application {
 
     InterfazBD bd;
-    
+    public static Taller taller;
+    public Stage stage;
+
     @Override
-    public void start(Stage stage) throws Exception {
-        /*bd = new InterfazBD("sor_taller");
-        System.out.println(bd.getPedidosActivos());*/
-        //if(noEstaRegistradoEnGestor)
-        Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage stage2) throws Exception {
+        stage = stage2;
+        bd = new InterfazBD("sor_taller");
+        System.out.println(bd.getPedidosActivos());
+        taller = bd.getRegistroTaller();
+        //bd.close();
+        if (taller != null) //está pendiente o activado
+        {
+            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación
+            {
+                FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
+                stage.setTitle("Esperando código de aceptación");
+                TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                staticDataBox.setStage(stage);
+                staticDataBox.showStage();
+            } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
+                //Cargar GestionPedido
+                //FXMLLoader loader = changeScene(".fxml");
+                stage.setTitle("Gestión de pedidos");
+                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                 staticDataBox.setStage(stage);
+                staticDataBox.showStage();*/
+            } else { //baja
+                //FXMLLoader loader = changeScene(".fxml");
+                stage.setTitle("Estoy de baja no sé que hacer");
+                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                 staticDataBox.setStage(stage);
+                 staticDataBox.showStage();*/
+            }
+        } else {
+            FXMLLoader loader = changeScene("AltaTaller.fxml");
+            stage.setTitle("Alta de taller");
+            /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+             staticDataBox.setStage(stage);
+             staticDataBox.showStage();*/
+            AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
+            staticDataBox.setStage(stage);
+            staticDataBox.showStage();
+        }
+    }
+
+    public FXMLLoader changeScene(String fxml) throws IOException {
+        //Mostrar página de espera interfaz básica
+        URL location = getClass().getResource(fxml);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page = (Parent) loader.load(location.openStream());
+        if (stage.getScene() == null) {
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+        } else {
+            stage.getScene().setRoot(page);
+            stage.sizeToScene();
+        }
+
+        return loader;
+
+    }
+
+    public Parent replaceSceneContent(String fxml) throws Exception {
+        Parent page = (Parent) FXMLLoader.load(MainTaller.class.getResource(fxml), null, new JavaFXBuilderFactory());
+        Scene scene = stage.getScene();
+        if (scene == null) {
+            stage.setScene(scene);
+        } else {
+            stage.getScene().setRoot(page);
+        }
+        stage.sizeToScene();
+        return page;
+    }
+
+    /**
+     *
+     */
+    public void goToTallerPendienteActivacion() {
+        try {
+            replaceSceneContent("tallerPendienteActivacion.fxml");
+        } catch (Exception ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static void vilella() throws SQLException, ClassNotFoundException{
@@ -55,12 +132,6 @@ public class MainTaller extends Application {
         
     }
 
-    /* public void abrirAlta()
-     {
-     Parent altaTaller = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
-        
-     Scene scene = new Scene(altaTaller);
-     }*/
     /**
      *
      * @param n
@@ -88,7 +159,7 @@ public class MainTaller extends Application {
         if (!m.matches()) {
             return false;
         }
-        
+
         return true;
     }
 
@@ -144,7 +215,7 @@ public class MainTaller extends Application {
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        //a priori, para que funcione en otro pc, 
+                        //a priori, para que funcione en otro pc,
                         //a lo mejor habría que generar otra contrasenya, pero creo que no
                         return new PasswordAuthentication("pablovm1990@gmail.com",
                                 "gcjacxtujgfqigxt");
@@ -218,5 +289,11 @@ public class MainTaller extends Application {
         taller_ws.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
-    
+
+    public  static int activarTaller(java.lang.String mail) {
+        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
+        taller_ws.TallerWS port = service.getTallerWSPort();
+        return port.activarTaller(mail);
+    }
+
 }
