@@ -6,8 +6,6 @@
 
 package general;
 
-import java.util.Date;
-
 /**
  *
  * @author fawques

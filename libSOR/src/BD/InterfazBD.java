@@ -6,7 +6,6 @@
 package BD;
 
 import general.Desguace;
-import general.EstadoGeneral;
 import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
@@ -298,6 +297,12 @@ public class InterfazBD {
         return null;
     }
 
+    // método que llama el gestor, pasándole el id como un string (resultado del md5)
+    public int altaTaller(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
+        return conexion.ejecutarInsert("insert into taller (id,nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
+    }
+    
+    // método que llaman talleres y desguaces, sin id (lo autogenera la bd)
     public int altaTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
         return conexion.ejecutarInsert("insert into taller (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
     }
