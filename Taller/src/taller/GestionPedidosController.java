@@ -9,8 +9,11 @@ package taller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -20,7 +23,9 @@ import javafx.fxml.Initializable;
 public class GestionPedidosController implements Initializable {
 
     @FXML
-    
+    //añadir botón al controlador
+    Button btNuevoPedido;
+    public TextField tfIDPedido;
     
     /**
      * Initializes the controller class.
@@ -30,5 +35,14 @@ public class GestionPedidosController implements Initializable {
         // TODO
         TimeZone tz = null;
     }    
+    
+    public void onClickNuevoPedido(ActionEvent e)
+    {
+        //System.out.println("hola");
+         
+        //MainTaller.envioNuevoPedido(id, null, null, null, null, postalCode, telephone);
+                
+        
+    }
     
 }

@@ -37,7 +37,7 @@ public class MainTaller extends Application {
         bd = new InterfazBD("sor_taller");
         System.out.println(bd.getPedidosActivos());
         //if(noEstaRegistradoEnGestor)
-        Parent root = FXMLLoader.load(getClass().getResource("AltaTaller.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GestionPedidos.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -185,13 +185,21 @@ public class MainTaller extends Application {
      * @param telephone
      * @return
      */
-    public static Boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+   /* public static Boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
         taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
         taller_ws.TallerWS port = service.getTallerWSPort();
         
         
         
         return port.alta(name, email, address, city, postalCode, telephone);
+    }*/
+
+    public static Boolean envioNuevoPedido(int id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.envioNuevoPedido(id, name, email, address, city, postalCode, telephone);
     }
+    
+    
     
 }
