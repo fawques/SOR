@@ -223,7 +223,7 @@ public class InterfazBD {
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido_pieza WHERE pedido=" + pedidoID + ";");
             while(resultados.next()){
-                listpieza.add(getPieza(resultados.getInt("pieza")));
+                listpieza.add(new Pieza(resultados.getString("pieza")));
                 listacantidades.add(resultados.getInt("cantidad"));
             }
         }catch(SQLException ex){
@@ -232,26 +232,13 @@ public class InterfazBD {
         }
     }
     
-    public Pieza getPieza(int piezaID){
-        try{
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pieza WHERE id=" + piezaID + ";");
-            if(resultados.next()){
-                Pieza nueva = new Pieza(piezaID, resultados.getString("nombre"),EstadoGeneral.values()[ resultados.getInt("estado")], resultados.getString("descripcion"));
-                return nueva;
-            }
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        return null;
-    }
   
     public ArrayList<Pieza> getPiezasPedido(int pedidoID){
         ArrayList<Pieza> lista = new ArrayList<>();
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido_pieza WHERE pedido=" + pedidoID + ";");
             while(resultados.next()){
-                Pieza nueva = getPieza(resultados.getInt("id"));
-                //Pieza nueva = new Pieza(resultados.getInt("id"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), resultados.getDouble("importe"), resultados.getInt("desguace"), resultados.getInt("pedido"), resultados.getObject("estado",EstadoOferta.class));
+                Pieza nueva = new Pieza(resultados.getString("pieza"));
                 lista.add(nueva);
             }
         }catch(SQLException ex){
