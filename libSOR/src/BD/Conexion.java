@@ -110,6 +110,8 @@ public class Conexion {
                 ResultSet rs = stmt.getGeneratedKeys();
                 if (rs.next()){
                     numero=rs.getInt(1);
+                }else{
+                    numero = 0;
                 }
                 rs.close();
             }

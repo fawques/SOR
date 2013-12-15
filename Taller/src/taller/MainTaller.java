@@ -46,7 +46,7 @@ public class MainTaller extends Application {
     public void start(Stage stage2) throws Exception {
         stage = stage2;
         bd = new InterfazBD("sor_taller");
-        System.out.println(bd.getPedidosActivos());
+        //System.out.println(bd.getPedidosActivos());
         taller = bd.getPrimerTaller();
         //bd.close();
         if (taller != null) //está pendiente o activado
@@ -284,7 +284,7 @@ public class MainTaller extends Application {
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static int activarTaller(java.lang.String email) {
+    public static String activarTaller(java.lang.String email) {
         taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
         taller_ws.TallerWS port = service.getTallerWSPort();
         return port.activarTaller(email);
