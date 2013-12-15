@@ -247,14 +247,14 @@ public class InterfazBD {
                 Pieza nueva = new Pieza(resultados.getString("pieza"));
                 lista.add(nueva);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }
         return lista;
-        
+
     }
-    
+
     public ArrayList<Oferta> getOfertasDesguace(String desguaceID){
         ArrayList<Oferta> lista = new ArrayList<>();
         try{

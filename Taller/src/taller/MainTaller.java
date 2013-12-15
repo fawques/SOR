@@ -125,12 +125,6 @@ public class MainTaller extends Application {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static void vilella() throws SQLException, ClassNotFoundException{
-        InterfazBD i = new InterfazBD("sor_gestor");
-        System.out.println("aquí");
-        
-    }
 
     /**
      *
@@ -290,10 +284,10 @@ public class MainTaller extends Application {
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public  static int activarTaller(java.lang.String mail) {
+    public static int activarTaller(java.lang.String email) {
         taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
         taller_ws.TallerWS port = service.getTallerWSPort();
-        return port.activarTaller(mail);
+        return port.activarTaller(email);
     }
 
 }
