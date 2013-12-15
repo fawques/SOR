@@ -45,7 +45,7 @@ public class TallerPendienteActivacionController implements Initializable {
         lbEstado.setText("");
         piIndicador.setVisible(true);
 
-        if (MainTaller.activarTaller(bd.getRegistroTaller().getEmail()) == 0) //Activado
+        if (MainTaller.activarTaller(bd.getPrimerTaller().getEmail()) == 0) //Activado
         {
             //enviar a pantalla gestion de pedido
             

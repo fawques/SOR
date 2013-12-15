@@ -59,11 +59,11 @@ public class TallerWS {
      * @return
      */
     @WebMethod(operationName = "activarTaller")
-    public int activarTaller(@WebParam(name = "mail") String email)
+    public String activarTaller(@WebParam(name = "mail") String email)
     {
         try {
             bd = new InterfazBD("sor_gestor");
-            int res = bd.activarTaller(email);
+            String res = bd.activarTaller(email);
            // bd.close();
             return res;
         } catch (SQLException ex) {
@@ -71,6 +71,6 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 2; //devolvemos el estado pendiente, por defecto
+        return ""; //devolvemos el estado pendiente, por defecto
     }
 }

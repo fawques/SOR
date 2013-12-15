@@ -47,7 +47,7 @@ public class MainTaller extends Application {
         stage = stage2;
         bd = new InterfazBD("sor_taller");
         System.out.println(bd.getPedidosActivos());
-        taller = bd.getRegistroTaller();
+        taller = bd.getPrimerTaller();
         //bd.close();
         if (taller != null) //está pendiente o activado
         {

@@ -167,7 +167,7 @@ public class AdminWS {
      * Web service operation
      */
     @WebMethod(operationName = "getOfertasporPedido")
-    public String getOfertasporPedido(@WebParam(name = "idPedido") int idPedido) {
+    public String getOfertasporPedido(@WebParam(name = "idPedido") String idPedido) {
          Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
         //Dec 7, 2013 5:46:35 PM
          try{
@@ -190,7 +190,7 @@ public class AdminWS {
      * Web service operation
      */
     @WebMethod(operationName = "getPedidoID")
-    public String getPedidoID(@WebParam(name = "id") int id) {
+    public String getPedidoID(@WebParam(name = "id") String id) {
          try{
             bd = new InterfazBD("sor_gestor");
             ArrayList<Pedido> listaPedido = new ArrayList<Pedido>();
