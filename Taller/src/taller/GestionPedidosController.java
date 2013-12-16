@@ -8,7 +8,6 @@ package taller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import general.EstadoPedido;
 import general.Pedido;
 import java.io.IOException;
 import java.net.URL;
@@ -49,10 +48,10 @@ public class GestionPedidosController implements Initializable {
         TimeZone tz = null;
     }    
     
-    public void onClicknuevoPedido(ActionEvent e) throws IOException, Exception {
+    public void onClickNuevoPedido(ActionEvent e) throws IOException, Exception {
         //If the validation goes well
         //bloquear los inputs
-        Pedido nuevoP = new Pedido(1001, 1, new Date(), new Date(), new Date(), EstadoPedido.ACCEPTED);
+        Pedido nuevoP = new Pedido(1001, "", new Date());
         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
         String listaJSON = gson.toJson(nuevoP);
         MainTaller.nuevoPedido(listaJSON);

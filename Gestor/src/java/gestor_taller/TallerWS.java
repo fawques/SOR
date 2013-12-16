@@ -10,12 +10,9 @@ import BD.InterfazBD;
 import activemq.Gestor_activemq;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import general.Pedido;
-import java.lang.reflect.*;
-
+import java.lang.reflect.Type;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
@@ -64,11 +61,10 @@ public class TallerWS {
      * @return
      */
     @WebMethod(operationName = "activarTaller")
-    public int activarTaller(@WebParam(name = "mail") String email)
-    {
+    public String activarTaller(@WebParam(name = "mail") String email)    {
         try {
             bd = new InterfazBD("sor_gestor");
-            int res = bd.activarTaller(email);
+            String res = bd.activarTaller(email);
            // bd.close();
             return res;
         } catch (SQLException ex) {
@@ -76,7 +72,7 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 2; //devolvemos el estado pendiente, por defecto
+        return ""; //devolvemos el estado pendiente, por defecto
     }
 
     /**

@@ -14,27 +14,22 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import general.Desguace;
 import general.Oferta;
-import general.Taller;
 import general.Pedido;
-import general.Pieza;
+import general.Taller;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -240,7 +235,7 @@ public class FXMLDocumentController implements Initializable {
         Gson gson = new Gson();
        
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        listaPedidos =gson.fromJson(Gestion.getPedidoID(id), collectionType);
+        listaPedidos = gson.fromJson(Gestion.getPedidoID(id), collectionType);
        
          PiezasInterfaz interfaz= new PiezasInterfaz();
          for (Pedido p : listaPedidos) {

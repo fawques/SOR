@@ -6,9 +6,12 @@
 package taller;
 
 import BD.InterfazBD;
+import general.EstadoGeneral;
 import general.Taller;
+import gestor_taller.JMSException_Exception;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -66,11 +69,11 @@ public class MainTaller extends Application {
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else { //baja
-                //FXMLLoader loader = changeScene(".fxml");
-                stage.setTitle("Estoy de baja no sé que hacer");
+                /*FXMLLoader loader = changeScene(".fxml");
+                 stage.setTitle("Estoy de baja no sé que hacer");
                 TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                  staticDataBox.setStage(stage);
-                 staticDataBox.showStage();
+                 staticDataBox.showStage();*/
             }
         } else {
             FXMLLoader loader = changeScene("GestionPedidos.fxml");
@@ -130,7 +133,13 @@ public class MainTaller extends Application {
      */
     public static boolean validarNombre(String n) {
         InterfazBD i = null;
-        i = new InterfazBD("sor_gestor");
+        try {
+            i = new InterfazBD("sor_gestor");
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         i.getPedidosActivos();
         System.out.println("aquí");
         
@@ -253,24 +262,22 @@ public class MainTaller extends Application {
         launch(args);
     }
 
-
-    public static int activarTaller(java.lang.String mail) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
+    public static String activarTaller(java.lang.String mail) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.activarTaller(mail);
     }
 
     public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static Boolean nuevoPedido(java.lang.String pedido) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
+    public static Boolean nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(pedido);
     }
-    
-    
+
 }

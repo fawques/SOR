@@ -22,6 +22,9 @@
 <message name="nuevoPedidoResponse">
 <part name="parameters" element="tns:nuevoPedidoResponse"/>
 </message>
+<message name="JMSException">
+<part name="fault" element="tns:JMSException"/>
+</message>
 <portType name="TallerWS">
 <operation name="alta">
 <input wsam:Action="http://gestor_taller/TallerWS/altaRequest" message="tns:alta"/>
@@ -34,6 +37,7 @@
 <operation name="nuevoPedido">
 <input wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoRequest" message="tns:nuevoPedido"/>
 <output wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoResponse" message="tns:nuevoPedidoResponse"/>
+<fault message="tns:JMSException" name="JMSException" wsam:Action="http://gestor_taller/TallerWS/nuevoPedido/Fault/JMSException"/>
 </operation>
 </portType>
 <binding name="TallerWSPortBinding" type="tns:TallerWS">
@@ -64,6 +68,9 @@
 <output>
 <soap:body use="literal"/>
 </output>
+<fault name="JMSException">
+<soap:fault name="JMSException" use="literal"/>
+</fault>
 </operation>
 </binding>
 <service name="TallerWS">
