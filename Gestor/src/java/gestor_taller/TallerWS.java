@@ -73,4 +73,10 @@ public class TallerWS {
         }
         return ""; //devolvemos el estado pendiente, por defecto
     }
+    
+    @WebMethod(operationName = "envioNuevoPedido")
+    public Boolean envioNuevoPedido(@WebParam(name = "ID") int ID,@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
+        Taller t = new Taller(ID,name, email, address, city, postalCode, telephone);
+        return t != null?true:false;
+    }
 }
