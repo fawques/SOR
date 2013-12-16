@@ -26,7 +26,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <TableView layoutX="56.0" layoutY="200.0" prefHeight="169.0" prefWidth="494.0">
+    <TableView fx:id="dgPedidos" layoutX="56.0" layoutY="200.0" prefHeight="169.0" prefWidth="494.0">
       <columns>
         <TableColumn prefWidth="75.0" text="Pieza" />
         <TableColumn prefWidth="75.0" text="Cantidad" />

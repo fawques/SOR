@@ -9,6 +9,8 @@ package taller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -22,6 +24,8 @@ public class NuevoPedidoController implements Initializable {
     Stage thisStage;
     public TextField tfIDPedido;
     public TextField tfIDTaller;
+    public Button btAnadirPieza;
+    public TableView tbPedidos;
     /**
      * Initializes the controller class.
      */
