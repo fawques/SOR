@@ -52,9 +52,9 @@ public class MainTaller extends Application {
         {
             if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación
             {
-                FXMLLoader loader = changeScene("GestionPedidos.fxml");
+                FXMLLoader loader = changeScene("TallerPendienteActivacion.fxml");
                 stage.setTitle("Esperando código de aceptación");
-                GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
+                TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo

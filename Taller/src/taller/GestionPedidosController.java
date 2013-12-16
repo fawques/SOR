@@ -61,6 +61,13 @@ public class GestionPedidosController implements Initializable {
         staticDataBox.showStage();
     }
     
-    
+    public void setStage(Stage stage) {
+        thisStage = stage;
+    }
+
+    public void showStage() {
+        thisStage.sizeToScene();
+        thisStage.show();
+    }
     
 }
