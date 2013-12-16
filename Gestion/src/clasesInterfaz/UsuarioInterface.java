@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package gestion;
+package clasesInterfaz;
 
+import general.Desguace;
 import general.Taller;
 import javafx.beans.property.*;
 
@@ -14,7 +15,7 @@ import javafx.beans.property.*;
  *
  * @author Cute
  */
-public class TallerInterface {
+public class UsuarioInterface {
     
     
     
@@ -27,7 +28,7 @@ public class TallerInterface {
     private final SimpleIntegerProperty numeroTelefono;
 
 
-    public TallerInterface(){
+    public UsuarioInterface(){
     ID= new SimpleIntegerProperty();
     nombreTaller=new SimpleStringProperty("");
     direccion=new SimpleStringProperty("");
@@ -54,7 +55,7 @@ public class TallerInterface {
     crearTallerInterface(taller.getID(),taller.getName(), taller.getAddress(), taller.getCity(), taller.getEmail(),taller.getPostalCode(),taller.getTelephone());
     }*/
 
-    public TallerInterface(int _ID, String _nombre, String _direccion, String _provincia, String _email, int _codigo, int _numero) {
+    public UsuarioInterface(int _ID, String _nombre, String _direccion, String _provincia, String _email, int _codigo, int _numero) {
      
         ID= new SimpleIntegerProperty(_ID);
         nombreTaller=new SimpleStringProperty(_nombre);
@@ -64,7 +65,7 @@ public class TallerInterface {
         codigoPostal=new SimpleIntegerProperty(_codigo);
         numeroTelefono=new SimpleIntegerProperty(_numero);
     }
-     public TallerInterface(Taller taller) {
+     public UsuarioInterface(Taller taller) {
          
         ID= new SimpleIntegerProperty(taller.getID());
         nombreTaller=new SimpleStringProperty(taller.getName());
@@ -74,59 +75,59 @@ public class TallerInterface {
         codigoPostal=new SimpleIntegerProperty(taller.getPostalCode());
         numeroTelefono=new SimpleIntegerProperty(taller.getTelephone());
     }
-
-    public SimpleIntegerProperty getID() {
-        return ID;
+     public UsuarioInterface(Desguace desguace) {
+         
+        ID= new SimpleIntegerProperty(desguace.getID());
+        nombreTaller=new SimpleStringProperty(desguace.getName());
+        direccion=new SimpleStringProperty(desguace.getAddress());
+        ciudad=new SimpleStringProperty( desguace.getCity());
+        email=new SimpleStringProperty( desguace.getEmail());
+        codigoPostal=new SimpleIntegerProperty(desguace.getPostalCode());
+        numeroTelefono=new SimpleIntegerProperty(desguace.getTelephone());
+    }
+    public int getID() {
+        return ID.get();
     }
 
  
 
-    public SimpleStringProperty getNombreTaller() {
-        return nombreTaller;
+    public String getNombreTaller() {
+        return nombreTaller.get();
     }
 
 
 
-    public SimpleStringProperty getEmail() {
-        return email;
+    public String getEmail() {
+        return email.get();
     }
 
 
 
-    public SimpleStringProperty getDireccion() {
-        return direccion;
+    public String getDireccion() {
+        return direccion.get();
     }
 
 
 
-    public SimpleStringProperty getCiudad() {
-        return ciudad;
+    public String getCiudad() {
+        return ciudad.get();
     }
 
 
-    public SimpleIntegerProperty getCodigoPostal() {
-        return codigoPostal;
+    public int getCodigoPostal() {
+        return codigoPostal.get();
     }
 
 
 
-    public SimpleIntegerProperty getNumeroTelefono() {
-        return numeroTelefono;
+    public int getNumeroTelefono() {
+        return numeroTelefono.get();
     }
 
     @Override
     public String toString() {
         return "TallerInterface{" + "ID=" + ID + ", nombreTaller=" + nombreTaller + ", email=" + email + ", direccion=" + direccion + ", ciudad=" + ciudad + ", codigoPostal=" + codigoPostal + ", numeroTelefono=" + numeroTelefono + '}';
     }
-
-  
-  
-
-
-
-
-
-
-
     
 }
+

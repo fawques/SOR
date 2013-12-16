@@ -11,7 +11,16 @@ package general;
  * @author fawques
  */
 public abstract class Usuario {
-    protected int ID;
+
+    /**
+     * id proporcionado por el gestor. Tiene 32 caracteres. El valor de error es ""
+     */
+    protected String ID;
+
+    /**
+     * id auxiliar para taller o desguace. El valor de error es -1.
+     */
+    protected int ID_aux;
     protected String name;
     protected String email;
     protected String address;
@@ -20,19 +29,32 @@ public abstract class Usuario {
     protected int telephone;
     protected EstadoGeneral estado;
 
-    public Usuario(int ID, String name, String email, String address, String city, int postalCode, int telephone) {
+    public Usuario(String ID, int ID_aux, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado) {
         this.ID = ID;
+        this.ID_aux = ID_aux;
         this.name = name;
         this.email = email;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
         this.telephone = telephone;
-        this.estado = EstadoGeneral.PENDIENTE;
+        this.estado = estado;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public int getID_aux() {
+        return ID_aux;
+    }
+
+    public void setID_aux(int ID_aux) {
+        this.ID_aux = ID_aux;
     }
 
     public String getName() {

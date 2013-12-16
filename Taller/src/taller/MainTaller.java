@@ -6,6 +6,7 @@
 package taller;
 
 import BD.InterfazBD;
+import java.sql.SQLException;
 import general.EstadoGeneral;
 import general.Taller;
 import java.io.IOException;
@@ -45,8 +46,8 @@ public class MainTaller extends Application {
     public void start(Stage stage2) throws Exception {
         stage = stage2;
         bd = new InterfazBD("sor_taller");
-        System.out.println(bd.getPedidosActivos());
-        taller = bd.getRegistroTaller();
+        //System.out.println(bd.getPedidosActivos());
+        taller = bd.getPrimerTaller();
         //bd.close();
         if (taller != null) //está pendiente o activado
         {
@@ -131,6 +132,22 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validarNombre(String n) {
+        InterfazBD i = null;
+        try {
+            //vilella();
+                        
+            i = new InterfazBD("sor_gestor");
+            
+            i.getPedidosActivos();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("aquí");
+        
         Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]*[a-zA-Z]");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
@@ -267,7 +284,7 @@ public class MainTaller extends Application {
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static int activarTaller(java.lang.String email) {
+    public static String activarTaller(java.lang.String email) {
         taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
         taller_ws.TallerWS port = service.getTallerWSPort();
         return port.activarTaller(email);
