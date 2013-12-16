@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -22,6 +23,8 @@ import javafx.scene.control.TextField;
  * @author pablovm1990
  */
 public class GestionPedidosController implements Initializable {
+
+    Stage thisStage;
 
     @FXML
     //añadir botón al controlador
@@ -45,5 +48,13 @@ public class GestionPedidosController implements Initializable {
         //Hacer validacion
         //MainTaller.envioNuevoPedido(tfIDPedido.getText(), tfIDCliente.getText(), tfIDPieza.getText());            
     }
-    
+
+    public void setStage(Stage stage) {
+        thisStage = stage;
+    }
+
+    public void showStage() {
+        thisStage.sizeToScene();
+        thisStage.show();
+    }
 }

@@ -6,11 +6,11 @@
 package taller;
 
 import BD.InterfazBD;
-import java.sql.SQLException;
 import general.EstadoGeneral;
 import general.Taller;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,18 +53,29 @@ public class MainTaller extends Application {
         {
             if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación
             {
-                FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
-                stage.setTitle("Esperando código de aceptación");
-                TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
-                staticDataBox.setStage(stage);
-                staticDataBox.showStage();
+                String idRecibido = MainTaller.activarTaller(bd.getPrimerTaller().getEmail());
+                if (idRecibido.equals("")) //No Activado
+                {
+                    FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
+                    stage.setTitle("Esperando código de aceptación");
+                    TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                    staticDataBox.setStage(stage);
+                    staticDataBox.showStage();
+                } else {
+                    //Modificar estado de taller
+                    FXMLLoader loader = changeScene("GestionPedidos.fxml");
+                    stage.setTitle("Gestión de pedidos");
+                    GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
+                    staticDataBox.setStage(stage);
+                    staticDataBox.showStage();
+                }
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
                 //Cargar GestionPedido
-                //FXMLLoader loader = changeScene(".fxml");
+                FXMLLoader loader = changeScene("GestionPedidos.fxml");
                 stage.setTitle("Gestión de pedidos");
-                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
-                 staticDataBox.setStage(stage);
-                staticDataBox.showStage();*/
+                GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
+                staticDataBox.setStage(stage);
+                staticDataBox.showStage();
             } else { //baja
                 //FXMLLoader loader = changeScene(".fxml");
                 stage.setTitle("Estoy de baja no sé que hacer");
@@ -268,26 +279,16 @@ public class MainTaller extends Application {
         launch(args);
     }
 
-    /**
-     *
-     * @param name
-     * @param email
-     * @param address
-     * @param city
-     * @param postalCode
-     * @param telephone
-     * @return
-     */
-    public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
-        return port.alta(name, email, address, city, postalCode, telephone);
+    public static String activarTaller(java.lang.String mail) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.activarTaller(mail);
     }
 
-    public static String activarTaller(java.lang.String email) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
-        return port.activarTaller(email);
+    public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.alta(name, email, address, city, postalCode, telephone);
     }
 
 }
