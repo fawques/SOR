@@ -13,12 +13,14 @@ import com.google.gson.reflect.TypeToken;
 import general.Pedido;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -44,7 +46,9 @@ public class TallerWS {
     public int alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
         try {
             bd = new InterfazBD("sor_gestor");
-            int res = bd.altaTaller(name, email, address, city, postalCode, telephone, 2);
+            Date ahora = new Date();
+            String stringID  = DigestUtils.md5Hex(ahora.toString());
+            int res = bd.altaTaller(stringID, name, email, address, city, postalCode, telephone, 2);
             //bd.close();
             return res;
         } catch (java.sql.SQLException ex) {
@@ -85,9 +89,13 @@ public class TallerWS {
             Gson gson = new Gson();
              Type collectionType = new TypeToken<Pedido>(){}.getType();
             Pedido p = gson.fromJson(pedido, collectionType);
-           // bd.anadirPedido(p.getID(), p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
+            Date ahora = new Date();
+            String stringID  = DigestUtils.md5Hex(ahora.toString());
+            p.setID(stringID);
+            //bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
             Gestor_activemq activemq= new Gestor_activemq("Pedidos");
-            activemq.producer.produceMessage(pedido);
+            String pedidoFinal = gson.toJson(p);
+            activemq.producer.produceMessage(pedidoFinal);
             activemq.producer.closeProduce();
             // bd.close();
             return true;
