@@ -21,14 +21,14 @@
                       <children>
                         <TextField fx:id="tfIDPedido" layoutX="74.0" layoutY="20.0" prefWidth="43.0" />
                         <Label layoutX="12.0" layoutY="23.0" text="Id pedido" />
-                        <TextField layoutX="202.0" layoutY="20.0" prefWidth="43.0" text="" />
+                        <TextField fx:id="tfIDCliente" layoutX="202.0" layoutY="20.0" prefWidth="43.0" />
                         <Label layoutX="135.0" layoutY="23.0" text="Id cliente" />
-                        <TextField layoutX="315.0" layoutY="20.0" prefWidth="43.0" />
+                        <TextField id="tf" fx:id="tfIDPieza" layoutX="315.0" layoutY="20.0" prefWidth="43.0" />
                         <Label layoutX="258.0" layoutY="23.0" text="Id pieza" />
                         <TextField layoutX="144.0" layoutY="69.0" prefWidth="97.0" />
                         <Label layoutX="14.0" layoutY="72.0" text="Cualquier término" />
                         <Label layoutX="373.0" layoutY="23.0" text="Estado pedido" />
-                        <ComboBox layoutX="474.0" layoutY="20.0" prefWidth="89.9998779296875" promptText="Cualquiera">
+                        <ComboBox fx:id="cbEstadoPedido" layoutX="474.0" layoutY="20.0" prefWidth="89.9998779296875" promptText="Cualquiera">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Cualquiera" />

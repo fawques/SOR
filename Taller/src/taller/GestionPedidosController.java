@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 /**
@@ -26,6 +27,9 @@ public class GestionPedidosController implements Initializable {
     //añadir botón al controlador
     Button btNuevoPedido;
     public TextField tfIDPedido;
+    public TextField tfIDCliente;
+    public TextField tfIDPieza;
+    public ComboBox cbEstado;
     
     /**
      * Initializes the controller class.
@@ -38,11 +42,8 @@ public class GestionPedidosController implements Initializable {
     
     public void onClickNuevoPedido(ActionEvent e)
     {
-        //System.out.println("hola");
-         
-        //MainTaller.envioNuevoPedido(id, null, null, null, null, postalCode, telephone);
-                
-        
+        //Hacer validacion
+        //MainTaller.envioNuevoPedido(tfIDPedido.getText(), tfIDCliente.getText(), tfIDPieza.getText());            
     }
     
 }
