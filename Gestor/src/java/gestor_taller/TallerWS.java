@@ -7,14 +7,21 @@
 package gestor_taller;
 
 import BD.InterfazBD;
+import activemq.Gestor_activemq;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import general.Pedido;
+import java.lang.reflect.*;
+
 import java.sql.SQLException;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.jms.JMSException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -40,9 +47,7 @@ public class TallerWS {
     public int alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
         try {
             bd = new InterfazBD("sor_gestor");
-            Date ahora = new Date();
-            String stringID  = DigestUtils.md5Hex(ahora.toString());
-            int res = bd.altaTaller(stringID, name, email, address, city, postalCode, telephone, 2);
+            int res = bd.altaTaller(name, email, address, city, postalCode, telephone, 2);
             //bd.close();
             return res;
         } catch (java.sql.SQLException ex) {
@@ -50,7 +55,7 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return -1;
+        return 0;
     }
     
     /**
@@ -59,11 +64,11 @@ public class TallerWS {
      * @return
      */
     @WebMethod(operationName = "activarTaller")
-    public String activarTaller(@WebParam(name = "mail") String email)
+    public int activarTaller(@WebParam(name = "mail") String email)
     {
         try {
             bd = new InterfazBD("sor_gestor");
-            String res = bd.activarTaller(email);
+            int res = bd.activarTaller(email);
            // bd.close();
             return res;
         } catch (SQLException ex) {
@@ -71,6 +76,31 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return ""; //devolvemos el estado pendiente, por defecto
+        return 2; //devolvemos el estado pendiente, por defecto
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "nuevoPedido")
+    public Boolean nuevoPedido(@WebParam(name = "pedido") String pedido) throws JMSException {
+         try {
+            bd = new InterfazBD("sor_gestor");
+            Gson gson = new Gson();
+             Type collectionType = new TypeToken<Pedido>(){}.getType();
+            Pedido p = gson.fromJson(pedido, collectionType);
+           // bd.anadirPedido(p.getID(), p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
+            Gestor_activemq activemq= new Gestor_activemq("Pedidos");
+            activemq.producer.produceMessage(pedido);
+            activemq.producer.closeProduce();
+            // bd.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 }

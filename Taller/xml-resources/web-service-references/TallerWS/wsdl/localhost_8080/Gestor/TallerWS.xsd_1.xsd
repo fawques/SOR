@@ -8,6 +8,10 @@
 
 <xs:element name="altaResponse" type="tns:altaResponse"/>
 
+<xs:element name="nuevoPedido" type="tns:nuevoPedido"/>
+
+<xs:element name="nuevoPedidoResponse" type="tns:nuevoPedidoResponse"/>
+
 <xs:complexType name="activarTaller">
 <xs:sequence>
 <xs:element name="mail" type="xs:string" minOccurs="0"/>
@@ -17,6 +21,18 @@
 <xs:complexType name="activarTallerResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nuevoPedido">
+<xs:sequence>
+<xs:element name="pedido" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nuevoPedidoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

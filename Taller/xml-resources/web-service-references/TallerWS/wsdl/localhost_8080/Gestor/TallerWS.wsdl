@@ -16,6 +16,12 @@
 <message name="activarTallerResponse">
 <part name="parameters" element="tns:activarTallerResponse"/>
 </message>
+<message name="nuevoPedido">
+<part name="parameters" element="tns:nuevoPedido"/>
+</message>
+<message name="nuevoPedidoResponse">
+<part name="parameters" element="tns:nuevoPedidoResponse"/>
+</message>
 <portType name="TallerWS">
 <operation name="alta">
 <input wsam:Action="http://gestor_taller/TallerWS/altaRequest" message="tns:alta"/>
@@ -24,6 +30,10 @@
 <operation name="activarTaller">
 <input wsam:Action="http://gestor_taller/TallerWS/activarTallerRequest" message="tns:activarTaller"/>
 <output wsam:Action="http://gestor_taller/TallerWS/activarTallerResponse" message="tns:activarTallerResponse"/>
+</operation>
+<operation name="nuevoPedido">
+<input wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoRequest" message="tns:nuevoPedido"/>
+<output wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoResponse" message="tns:nuevoPedidoResponse"/>
 </operation>
 </portType>
 <binding name="TallerWSPortBinding" type="tns:TallerWS">
@@ -38,6 +48,15 @@
 </output>
 </operation>
 <operation name="activarTaller">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="nuevoPedido">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

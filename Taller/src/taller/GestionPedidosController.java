@@ -6,7 +6,13 @@
 
 package taller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import general.EstadoPedido;
+import general.Pedido;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 import javafx.event.ActionEvent;
@@ -43,10 +49,13 @@ public class GestionPedidosController implements Initializable {
         TimeZone tz = null;
     }    
     
-    public void onClickNuevoPedido(ActionEvent e)
-    {
-        //Hacer validacion
-        //MainTaller.envioNuevoPedido(tfIDPedido.getText(), tfIDCliente.getText(), tfIDPieza.getText());            
+    public void onClicknuevoPedido(ActionEvent e) throws IOException, Exception {
+        //If the validation goes well
+        //bloquear los inputs
+        Pedido nuevoP = new Pedido(1001, 1, new Date(), new Date(), new Date(), EstadoPedido.ACCEPTED);
+        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+        String listaJSON = gson.toJson(nuevoP);
+        MainTaller.nuevoPedido(listaJSON);
     }
 
     public void setStage(Stage stage) {

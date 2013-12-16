@@ -6,12 +6,9 @@
 package taller;
 
 import BD.InterfazBD;
-import general.EstadoGeneral;
 import general.Taller;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -22,15 +19,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javax.mail.Message;
-import javax.mail.Message.RecipientType;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 
 /**
  *
@@ -50,7 +39,7 @@ public class MainTaller extends Application {
         taller = bd.getPrimerTaller();
         //bd.close();
         if (taller != null) //está pendiente o activado
-        {
+         {
             if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación
             {
                 String idRecibido = MainTaller.activarTaller(bd.getPrimerTaller().getEmail());
@@ -79,17 +68,14 @@ public class MainTaller extends Application {
             } else { //baja
                 //FXMLLoader loader = changeScene(".fxml");
                 stage.setTitle("Estoy de baja no sé que hacer");
-                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                  staticDataBox.setStage(stage);
-                 staticDataBox.showStage();*/
+                 staticDataBox.showStage();
             }
         } else {
-            FXMLLoader loader = changeScene("AltaTaller.fxml");
+            FXMLLoader loader = changeScene("GestionPedidos.fxml");
             stage.setTitle("Alta de taller");
-            /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
-             staticDataBox.setStage(stage);
-             staticDataBox.showStage();*/
-            AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
+            GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
             staticDataBox.setStage(stage);
             staticDataBox.showStage();
         }
@@ -144,19 +130,8 @@ public class MainTaller extends Application {
      */
     public static boolean validarNombre(String n) {
         InterfazBD i = null;
-        try {
-            //vilella();
-                        
-            i = new InterfazBD("sor_gestor");
-            
-            i.getPedidosActivos();
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        i = new InterfazBD("sor_gestor");
+        i.getPedidosActivos();
         System.out.println("aquí");
         
         Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]*[a-zA-Z]");
@@ -204,8 +179,7 @@ public class MainTaller extends Application {
      * @param subject
      * @param text
      */
-    public static void sendMail(final String from, String to, String subject, String text) {
-        String SMTP_HOST_NAME = "smtp.gmail.com";
+    /*public static void sendMail(final String from, String to, String subject, String text) {        String SMTP_HOST_NAME = "smtp.gmail.com";
         String SMTP_PORT = "465";
         String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         Properties props = new Properties();
@@ -251,7 +225,7 @@ public class MainTaller extends Application {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
+    }*/
 
     /**
      *
@@ -279,16 +253,24 @@ public class MainTaller extends Application {
         launch(args);
     }
 
-    public static String activarTaller(java.lang.String mail) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
+
+    public static int activarTaller(java.lang.String mail) {
+        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
+        taller_ws.TallerWS port = service.getTallerWSPort();
         return port.activarTaller(mail);
     }
 
     public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
+        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
+        taller_ws.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
+    public static Boolean nuevoPedido(java.lang.String pedido) {
+        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
+        taller_ws.TallerWS port = service.getTallerWSPort();
+        return port.nuevoPedido(pedido);
+    }
+    
+    
 }
