@@ -7,6 +7,7 @@
 package gestor_taller;
 
 import BD.InterfazBD;
+import general.Taller;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

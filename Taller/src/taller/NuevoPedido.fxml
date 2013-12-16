@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevoPedidoController">
+  <children>
+    <Label layoutX="58.0" layoutY="46.0" text="ID Pedido" />
+    <TextField fx:id="tfIDPedido" layoutX="141.0" layoutY="43.0" prefWidth="200.0" />
+    <Label layoutX="58.0" layoutY="84.0" text="ID Taller" />
+    <TextField fx:id="tfIDTaller" layoutX="141.0" layoutY="81.0" prefWidth="200.0" />
+    <Label layoutX="58.0" layoutY="118.0" text="Fecha alta" />
+    <Label layoutX="233.0" layoutY="121.0" text="Fecha baja" />
+    <Label layoutX="388.0" layoutY="126.0" text="Fecha limite" />
+    <Label layoutX="56.0" layoutY="155.0" text="Estado" />
+    <ComboBox fx:id="cbEstado" layoutX="106.0" layoutY="153.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <TableView layoutX="56.0" layoutY="200.0" prefHeight="169.0" prefWidth="494.0">
+      <columns>
+        <TableColumn prefWidth="75.0" text="Pieza" />
+        <TableColumn prefWidth="75.0" text="Cantidad" />
+      </columns>
+    </TableView>
+    <Button fx:id="btAnadirPieza" layoutX="332.0" layoutY="155.0" mnemonicParsing="false" text="Añadir pieza" />
+  </children>
+</AnchorPane>

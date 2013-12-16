@@ -52,9 +52,9 @@ public class MainTaller extends Application {
         {
             if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación
             {
-                FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
+                FXMLLoader loader = changeScene("GestionPedidos.fxml");
                 stage.setTitle("Esperando código de aceptación");
-                TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
@@ -251,26 +251,24 @@ public class MainTaller extends Application {
         launch(args);
     }
 
-    /**
-     *
-     * @param name
-     * @param email
-     * @param address
-     * @param city
-     * @param postalCode
-     * @param telephone
-     * @return
-     */
+    public static int activarTaller(java.lang.String mail) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.activarTaller(mail);
+    }
+
     public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static int activarTaller(java.lang.String email) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
-        return port.activarTaller(email);
+    public static Boolean envioNuevoPedido(int id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.envioNuevoPedido(id, name, email, address, city, postalCode, telephone);
     }
+
+    
 
 }

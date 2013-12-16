@@ -6,6 +6,7 @@
 
 package taller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
@@ -15,6 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -30,6 +35,7 @@ public class GestionPedidosController implements Initializable {
     public TextField tfIDCliente;
     public TextField tfIDPieza;
     public ComboBox cbEstado;
+    private Stage thisStage;
     
     /**
      * Initializes the controller class.
@@ -40,10 +46,21 @@ public class GestionPedidosController implements Initializable {
         TimeZone tz = null;
     }    
     
-    public void onClickNuevoPedido(ActionEvent e)
+   
+    public void onClickNuevoPedido(ActionEvent e) throws IOException
     {
-        //Hacer validacion
-        //MainTaller.envioNuevoPedido(tfIDPedido.getText(), tfIDCliente.getText(), tfIDPieza.getText());            
+        URL location = getClass().getResource("NuevoPedido.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page = (Parent) loader.load(location.openStream());
+        thisStage.getScene().setRoot(page);
+        thisStage.setTitle("Esperando código de aceptación");
+        NuevoPedidoController staticDataBox = (NuevoPedidoController) loader.getController();
+        staticDataBox.setStage(thisStage);
+        staticDataBox.showStage();
     }
+    
+    
     
 }
