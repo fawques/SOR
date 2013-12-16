@@ -23,7 +23,7 @@ public class Taller extends Usuario{
         this.listaPedidos = new ArrayList<>();
     }
 
-    @Override
+   @Override
     public String toString() {
         return "Taller{" + "name=" + name + ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + ", telephone=" + telephone + '}';
     }

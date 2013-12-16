@@ -11,4 +11,8 @@
 */nbproject/private/
 */nbproject/genfiles.properties
 */nbproject/jaxws-build.xml
-*/nbproject/build-impl.xml~
+*~
+*/nbproject/jfx-impl.xml
+*/nbproject/jfx-impl_backup_*.xml
+*/nbproject/UPDATED.TXT
+

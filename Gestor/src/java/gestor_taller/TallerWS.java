@@ -6,10 +6,13 @@
 
 package gestor_taller;
 
-import general.Taller;
-import javax.jws.WebService;
+import BD.InterfazBD;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebService;
 
 /**
  *
@@ -17,14 +20,54 @@ import javax.jws.WebParam;
  */
 @WebService(serviceName = "TallerWS")
 public class TallerWS {
-
+    
+    InterfazBD bd;
     /**
-     * Web service operation
+     * 
+     * @param name
+     * @param email
+     * @param address
+     * @param city
+     * @param postalCode
+     * @param telephone
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
      */
     @WebMethod(operationName = "alta")
-    public Boolean alta(@WebParam(name = "ID") int ID,@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
-        Taller t = new Taller(ID,name, email, address, city, postalCode, telephone);
-        return t != null?true:false;
+    public int alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            int res = bd.altaTaller(name, email, address, city, postalCode, telephone, 2);
+            //bd.close();
+            return res;
+        } catch (java.sql.SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
+    /**
+     *
+     * @param email
+     * @return
+     */
+    @WebMethod(operationName = "activarTaller")
+    public int activarTaller(@WebParam(name = "mail") String email)
+    {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            int res = bd.activarTaller(email);
+           // bd.close();
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 2; //devolvemos el estado pendiente, por defecto
     }
     
     @WebMethod(operationName = "envioNuevoPedido")
