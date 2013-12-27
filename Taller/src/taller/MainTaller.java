@@ -6,7 +6,6 @@
 package taller;
 
 import BD.InterfazBD;
-import java.sql.SQLException;
 import general.EstadoGeneral;
 import general.Taller;
 import java.io.IOException;
@@ -122,29 +121,18 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validarNombre(String n) {
-        InterfazBD i = null;
-        try {
-            //vilella();
-                        
-            i = new InterfazBD("sor_gestor");
-            
-            i.getPedidosActivos();
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("aquí");
         
-        Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]*[a-zA-Z]");
+        Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]{0,21}");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
             return false;
         }
 
         return true;
+    }
+
+    public static boolean validarDireccion(String dir) {
+        return dir.length() < 22;
     }
 
     /**
@@ -154,7 +142,7 @@ public class MainTaller extends Application {
      */
     public static boolean validarSoloNumeros(String num) {
         //Verificar que no se pase de 9 digitos!
-        Pattern p = Pattern.compile("^[0-9]*[0-9]");
+        Pattern p = Pattern.compile("^[0-9]{0,7}[0-9]");
         Matcher m = p.matcher(num);
         if (!m.matches()) {
             return false;
@@ -168,7 +156,7 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validarEmail(String n) {
-        Pattern p = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+[.][a-zA-Z]+");
+        Pattern p = Pattern.compile("^(([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?))$");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
             return false;
@@ -187,7 +175,7 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validar(String nombreTaller, String email, String direccion, String ciudad, String cp, String telefono) {
-        return validarNombre(nombreTaller) && validarEmail(email) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono);
+        return validarNombre(nombreTaller) && validarEmail(email) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono) && validarDireccion(direccion);
     }
 
     /**
@@ -202,26 +190,21 @@ public class MainTaller extends Application {
         launch(args);
     }
 
-    /**
-     *
-     * @param name
-     * @param email
-     * @param address
-     * @param city
-     * @param postalCode
-     * @param telephone
-     * @return
-     */
     public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static String activarTaller(java.lang.String email) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
-        return port.activarTaller(email);
+    public static String activarTaller(java.lang.String mail) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.activarTaller(mail);
     }
 
+    public static Boolean envioNuevoPedido(java.lang.String id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.envioNuevoPedido(id, name, email, address, city, postalCode, telephone);
+    }
 }

@@ -7,8 +7,11 @@
 package gestor_taller;
 
 import BD.InterfazBD;
+import general.EstadoGeneral;
+import general.Pedido;
 import general.Taller;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,8 +79,8 @@ public class TallerWS {
     }
     
     @WebMethod(operationName = "envioNuevoPedido")
-    public Boolean envioNuevoPedido(@WebParam(name = "ID") int ID,@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
-        Taller t = new Taller(ID,name, email, address, city, postalCode, telephone);
+    public Boolean envioNuevoPedido(@WebParam(name = "ID") String ID, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
+        Taller t = new Taller(ID, name, email, address, city, postalCode, telephone, EstadoGeneral.PENDIENTE, new ArrayList<Pedido>());
         return t != null?true:false;
     }
 }
