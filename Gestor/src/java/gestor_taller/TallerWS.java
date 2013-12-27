@@ -9,11 +9,13 @@ package gestor_taller;
 import BD.InterfazBD;
 import general.Taller;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -39,7 +41,9 @@ public class TallerWS {
     public int alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
         try {
             bd = new InterfazBD("sor_gestor");
-            int res = bd.altaTaller(name, email, address, city, postalCode, telephone, 2);
+            Date ahora = new Date();
+            String stringID  = DigestUtils.md5Hex(ahora.toString());
+            int res = bd.altaTaller(stringID, name, email, address, city, postalCode, telephone, 2);
             //bd.close();
             return res;
         } catch (java.sql.SQLException ex) {
@@ -47,7 +51,7 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
+        return -1;
     }
     
     /**
@@ -56,11 +60,11 @@ public class TallerWS {
      * @return
      */
     @WebMethod(operationName = "activarTaller")
-    public int activarTaller(@WebParam(name = "mail") String email)
+    public String activarTaller(@WebParam(name = "mail") String email)
     {
         try {
             bd = new InterfazBD("sor_gestor");
-            int res = bd.activarTaller(email);
+            String res = bd.activarTaller(email);
            // bd.close();
             return res;
         } catch (SQLException ex) {
@@ -68,7 +72,7 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 2; //devolvemos el estado pendiente, por defecto
+        return ""; //devolvemos el estado pendiente, por defecto
     }
     
     @WebMethod(operationName = "envioNuevoPedido")

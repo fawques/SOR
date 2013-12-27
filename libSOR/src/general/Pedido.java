@@ -14,8 +14,9 @@ import java.util.Date;
  * @author fawques
  */
 public class Pedido {
-    private int ID;
-    private int tallerID;
+    private String ID;
+    private int ID_aux;
+    private String tallerID;
     private Date fecha_alta;
     private Date fecha_baja;
     private Date fecha_limite;
@@ -25,35 +26,67 @@ public class Pedido {
     private ArrayList<Integer> listaCantidadesPiezas;
     private ArrayList<Oferta> listaOfertas;
 
-    /**
-     * Constructor para recrear el objeto desde la BD, con todos los campos
+    /** Constructor para la base de datos.
+     *
+     * @param ID
+     * @param ID_aux
+     * @param tallerID
+     * @param fecha_alta
+     * @param fecha_baja
+     * @param fecha_limite
+     * @param estado
+     * @param listaPiezas
+     * @param listaCantidadesPiezas
+     * @param listaOfertas
+     */
+    public Pedido(String ID, int ID_aux, String tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
+        this.ID = ID;
+        this.ID_aux = ID_aux;
+        this.tallerID = tallerID;
+        this.fecha_alta = fecha_alta;
+        this.fecha_baja = fecha_baja;
+        this.fecha_limite = fecha_limite;
+        this.estado = estado;
+        this.listaPiezas = listaPiezas;
+        this.listaCantidadesPiezas = listaCantidadesPiezas;
+        this.listaOfertas = listaOfertas;
+    }
+
+    /** Constructor para la base de datos sin id_aux.
+     *  Pone id_aux a -1.
+     *
      * @param ID
      * @param tallerID
      * @param fecha_alta
      * @param fecha_baja
      * @param fecha_limite
      * @param estado
+     * @param listaPiezas
+     * @param listaCantidadesPiezas
+     * @param listaOfertas
      */
-    public Pedido(int ID, int tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado) {
+    public Pedido(String ID, String tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
         this.ID = ID;
         this.tallerID = tallerID;
         this.fecha_alta = fecha_alta;
         this.fecha_baja = fecha_baja;
         this.fecha_limite = fecha_limite;
         this.estado = estado;
-        // TODO: no sé cómo hacer la parte de las piezas, ofertas, etc...
+        this.listaPiezas = listaPiezas;
+        this.listaCantidadesPiezas = listaCantidadesPiezas;
+        this.listaOfertas = listaOfertas;
     }
 
-    
-    
     /**
-     * Constructor para pedidos nuevos. Se pone el estado a NO_OFFERS y la fecha_alta a la fecha actual
-     * @param ID id del nuevo pedido
+     * Constructor para pedidos nuevos. Se pone el estado a NO_OFFERS y la fecha_alta a la fecha actual.
+     * No tiene piezas, en principio, habrá que añadirlas
+     * @param ID_aux id del nuevo pedido 
      * @param tallerID taller que hace el pedido
      * @param fecha_limite fecha límite para recibir ofertas de este pedido. Pasada esa fecha, el pedido se cancelará
      */
-    public Pedido(int ID, int tallerID, Date fecha_limite) {
-        this.ID = ID;
+    public Pedido(int ID_aux, String tallerID, Date fecha_limite) {
+        this.ID = "";
+        this.ID_aux = ID_aux;
         this.tallerID = tallerID;
         this.fecha_alta = new Date();
         this.fecha_baja = null;
@@ -64,6 +97,23 @@ public class Pedido {
         this.estado = EstadoPedido.NO_OFFERS;
     }
     
+    /** Constructor de copia
+     *
+     * @param p pedido
+     */
+    public Pedido(Pedido p) {
+        this.ID = p.ID;
+        this.ID_aux = p.ID_aux;
+        this.tallerID =p.tallerID;
+        this.fecha_alta = p.fecha_alta;
+        this.fecha_baja = p.fecha_baja;
+        this.fecha_limite = p.fecha_limite;
+        this.listaPiezas =new ArrayList<>( p.listaPiezas);
+        this.listaCantidadesPiezas =new ArrayList<>(p.listaCantidadesPiezas) ;
+        this.listaOfertas =new ArrayList<>( p.listaOfertas);
+        this.estado = p.estado;
+    }
+    
     public boolean addPieza(Pieza pieza, Integer cantidad){
         listaPiezas.add(pieza);
         listaCantidadesPiezas.add(cantidad);
@@ -72,13 +122,21 @@ public class Pedido {
     }
     
     
-    // ======== Getters ==========
+    // ======== Getters/Setters ==========
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public int getTaller() {
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public int getID_aux() {
+        return ID_aux;
+    }    
+
+    public String getTaller() {
         return tallerID;
     }
 

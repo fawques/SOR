@@ -45,14 +45,16 @@ public class TallerPendienteActivacionController implements Initializable {
         lbEstado.setText("");
         piIndicador.setVisible(true);
 
-        if (MainTaller.activarTaller(bd.getRegistroTaller().getEmail()) == 0) //Activado
-        {
-            //enviar a pantalla gestion de pedido
-            
-        } else //No activado
+        String idRecibido = MainTaller.activarTaller(bd.getPrimerTaller().getEmail());
+        if (idRecibido.equals("")) //No Activado
         {
             lbEstado.setStyle("-fx-border-color: red;");
             lbEstado.setText("Su cuenta no está activa");
+        } else //Activado
+        {
+            //enviar a pantalla gestion de pedido
+            System.out.println("He recibido " + idRecibido);
+            
         }
         //bd.close();
         piIndicador.setVisible(false);

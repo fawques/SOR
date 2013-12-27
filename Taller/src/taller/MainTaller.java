@@ -6,11 +6,11 @@
 package taller;
 
 import BD.InterfazBD;
+import java.sql.SQLException;
 import general.EstadoGeneral;
 import general.Taller;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -21,15 +21,6 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javax.mail.Message;
-import javax.mail.Message.RecipientType;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -45,14 +36,14 @@ public class MainTaller extends Application {
     public void start(Stage stage2) throws Exception {
         stage = stage2;
         bd = new InterfazBD("sor_taller");
-        System.out.println(bd.getPedidosActivos());
-        taller = bd.getRegistroTaller();
+        //System.out.println(bd.getPedidosActivos());
+        taller = bd.getPrimerTaller();
         //bd.close();
         if (taller != null) //está pendiente o activado
         {
             if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación
             {
-                FXMLLoader loader = changeScene("TallerPendienteActivacion.fxml");
+                FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
                 stage.setTitle("Esperando código de aceptación");
                 TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                 staticDataBox.setStage(stage);
@@ -131,6 +122,22 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validarNombre(String n) {
+        InterfazBD i = null;
+        try {
+            //vilella();
+                        
+            i = new InterfazBD("sor_gestor");
+            
+            i.getPedidosActivos();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("aquí");
+        
         Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]*[a-zA-Z]");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
@@ -171,62 +178,6 @@ public class MainTaller extends Application {
 
     /**
      *
-     * @param from
-     * @param to
-     * @param subject
-     * @param text
-     */
-    public static void sendMail(final String from, String to, String subject, String text) {
-        String SMTP_HOST_NAME = "smtp.gmail.com";
-        String SMTP_PORT = "465";
-        String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-        Properties props = new Properties();
-        props.put("mail.smtp.host", SMTP_HOST_NAME);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.debug", "true");
-        props.put("mail.smtp.port", SMTP_PORT);
-        props.put("mail.smtp.socketFactory.port", SMTP_PORT);
-        props.put("mail.smtp.socketFactory.class", SSL_FACTORY);
-        props.put("mail.smtp.socketFactory.fallback", "false");
-
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        //a priori, para que funcione en otro pc,
-                        //a lo mejor habría que generar otra contrasenya, pero creo que no
-                        return new PasswordAuthentication("pablovm1990@gmail.com",
-                                "gcjacxtujgfqigxt");
-                    }
-                });
-
-        session.setDebug(true);
-
-        Message simpleMessage = new MimeMessage(session);
-        InternetAddress fromAddress = null;
-        InternetAddress toAddress = null;
-        try {
-            fromAddress = new InternetAddress(from);
-            toAddress = new InternetAddress(to);
-        } catch (AddressException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            simpleMessage.setFrom(fromAddress);
-            simpleMessage.setRecipient(RecipientType.TO, toAddress);
-            simpleMessage.setSubject(subject);
-            simpleMessage.setContent(text, "text/html");
-
-            Transport.send(simpleMessage);
-        } catch (MessagingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     *
      * @param nombreTaller
      * @param email
      * @param direccion
@@ -251,24 +202,26 @@ public class MainTaller extends Application {
         launch(args);
     }
 
-    public static int activarTaller(java.lang.String mail) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.activarTaller(mail);
-    }
-
+    /**
+     *
+     * @param name
+     * @param email
+     * @param address
+     * @param city
+     * @param postalCode
+     * @param telephone
+     * @return
+     */
     public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
+        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
+        taller_ws.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static Boolean envioNuevoPedido(int id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.envioNuevoPedido(id, name, email, address, city, postalCode, telephone);
+    public static String activarTaller(java.lang.String email) {
+        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
+        taller_ws.TallerWS port = service.getTallerWSPort();
+        return port.activarTaller(email);
     }
-
-    
 
 }
