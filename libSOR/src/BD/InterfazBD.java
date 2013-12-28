@@ -37,18 +37,21 @@ public class InterfazBD {
     // setters
     public void anadirOferta(int id, Date fechaAlta, float importe, int estado, int pedido, int desguace, Date fechaBaja, Date fechaLimite)
     {
-        conexion.ejecutarSQL("insert INTO sor_desguace.oferta (id, fechaAlta, importe, estado, pedido, desguace, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"', '"+importe+"','"+estado+"','"+pedido+"';"+desguace+"','"+fechaBaja+"','"+fechaLimite+"');");
+        // TODO: cambiar el id
+        conexion.ejecutarSQL("insert INTO oferta (id, fechaAlta, importe, estado, pedido, desguace, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"', '"+importe+"','"+estado+"','"+pedido+"';"+desguace+"','"+fechaBaja+"','"+fechaLimite+"');");
         
     }
     
-    public void anadirPedido(int id, Date fechaAlta, int estado, int taller, Date fechaBaja, Date fechaLimite)
+    public void anadirPedido(String id, Date fechaAlta, int estado, String taller, Date fechaBaja, Date fechaLimite)
     {
-        conexion.ejecutarSQL("insert INTO sor_desguace.pedido (id, fechaAlta, estado, taller, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"','"+estado+"','"+taller+"','"+fechaBaja+"','"+fechaLimite+"';");
+        conexion.ejecutarSQL("insert INTO pedido (id, fechaAlta, estado, taller, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"','"+estado+"','"+taller+"','"+fechaBaja+"','"+fechaLimite+"';");
     }
+    
     
     public void anadirDesguace(int id, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado)
     {
-        conexion.ejecutarSQL("insert INTO sor_desguace.desguace (id, nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('"+id+"','"+nombre+"', '"+email+"','"+direccion+"','"+ciudad+"','"+codPostal+"','"+telefono+"','"+estado+"');");
+        // TODO: cambiar el id
+        conexion.ejecutarSQL("insert INTO desguace (id, nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('"+id+"','"+nombre+"', '"+email+"','"+direccion+"','"+ciudad+"','"+codPostal+"','"+telefono+"','"+estado+"');");
         
     }
     // getters
@@ -141,7 +144,7 @@ public class InterfazBD {
             ArrayList<Pedido> listaDePedidos = new ArrayList<>();
             while(resultados.next()){
                 Taller nuevo;
-                if (resultados.getString("id") == "") {
+                if ("".equals(resultados.getString("id"))) {
                     // estamos en taller, y está todavía pendiente
                     nuevo = new Taller("", resultados.getInt("id_aux"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], listaDePedidos);
                 }else{

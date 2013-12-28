@@ -6,8 +6,11 @@
 package taller;
 
 import BD.InterfazBD;
+import com.google.gson.Gson;
+import general.Pedido;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -155,14 +158,7 @@ public class AltaTallerController implements Initializable {
         });
     }
 
-    public void setStage(Stage stage) {
-        thisStage = stage;
-    }
-
-    public void showStage() {
-        thisStage.sizeToScene();
-        thisStage.show();
-    }
+   
 
     /**
      *
@@ -190,6 +186,10 @@ public class AltaTallerController implements Initializable {
     public void onClickAceptar(ActionEvent e) throws IOException, Exception {
         //If the validation goes well
         //bloquear los inputs
+        Pedido nuevoP = new Pedido(1, "", new Date());
+        Gson g = new Gson();
+        String listaJSON = g.toJson(nuevoP);
+        MainTaller.nuevoPedido(listaJSON);
         setEditableAllInputs(false);
         if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration

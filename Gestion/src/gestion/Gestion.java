@@ -140,18 +140,16 @@ public class Gestion extends Application {
         return port.getTalleres();
     }
 
-    public static String getOfertasporPedido(int idPedido) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
-        gestor_admin.AdminWS port = service.getAdminWSPort();
-        return port.getOfertasporPedido(idPedido);
-    }
-
-    public static String getPedidoID(int id) {
+    public static String getPedidoID(java.lang.String id) {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getPedidoID(id);
     }
 
+    public static String getOfertasporPedido(java.lang.String idPedido) {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getOfertasporPedido(idPedido);
+    }
 
-    
 }
