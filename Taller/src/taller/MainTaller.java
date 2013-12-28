@@ -30,9 +30,22 @@ import javafx.stage.Stage;
 public class MainTaller extends Application {
 
     static InterfazBD bd;
+
+    /**
+     *
+     */
     public static Taller taller;
+
+    /**
+     *
+     */
     public Stage stage;
 
+    /**
+     *
+     * @param stage2
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage2) throws Exception {
         stage = stage2;
@@ -72,6 +85,15 @@ public class MainTaller extends Application {
         }
     }
 
+    /**
+     * ****************** Escenas *************************
+     */
+    /**
+     * @param fxml
+     * @return
+     * @throws java.io.IOException
+     */
+
     public FXMLLoader changeScene(String fxml) throws IOException {
         //Mostrar página de espera interfaz básica
         URL location = getClass().getResource(fxml);
@@ -91,6 +113,12 @@ public class MainTaller extends Application {
 
     }
 
+    /**
+     *
+     * @param fxml
+     * @return
+     * @throws Exception
+     */
     public Parent replaceSceneContent(String fxml) throws Exception {
         Parent page = (Parent) FXMLLoader.load(MainTaller.class.getResource(fxml), null, new JavaFXBuilderFactory());
         Scene scene = stage.getScene();
@@ -104,16 +132,8 @@ public class MainTaller extends Application {
     }
 
     /**
-     *
+     * ******************** Validaciones **************************
      */
-    public void goToTallerPendienteActivacion() {
-        try {
-            replaceSceneContent("tallerPendienteActivacion.fxml");
-        } catch (Exception ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     /**
      *
      * @param n
@@ -130,6 +150,11 @@ public class MainTaller extends Application {
         return true;
     }
 
+    /**
+     *
+     * @param dir
+     * @return
+     */
     public static boolean validarDireccion(String dir) {
         return dir.length() < 22;
     }
@@ -177,6 +202,15 @@ public class MainTaller extends Application {
         return validarNombre(nombreTaller) && validarEmail(email) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono) && validarDireccion(direccion);
     }
 
+    /**
+     * ****************** BD *************************
+     */
+    /**
+     * 
+     * @param idRecibido
+     * @return
+     */
+
     public static boolean activarTallerBD(String idRecibido) {
         try {
             bd = new InterfazBD("sor_taller");
@@ -202,18 +236,43 @@ public class MainTaller extends Application {
         launch(args);
     }
 
+    /**
+     * ******************* WebServices *************************
+     */
+
+    /**
+     * @param name
+     * @param email
+     * @param address
+     * @param city
+     * @param postalCode
+     * @param telephone
+     * @return
+     */
+
     public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
+    /**
+     *
+     * @param mail
+     * @return
+     */
     public static String activarTaller(java.lang.String mail) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.activarTaller(mail);
     }
 
+    /**
+     *
+     * @param pedido
+     * @return
+     * @throws JMSException_Exception
+     */
     public static Boolean nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();

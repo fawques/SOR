@@ -13,12 +13,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.TimeZone;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -32,20 +32,20 @@ public class GestionPedidosController implements Initializable {
     Stage thisStage;
 
     @FXML
-    //añadir botón al controlador
     Button btNuevoPedido;
     public TextField tfIDPedido;
     public TextField tfIDCliente;
     public TextField tfIDPieza;
     public ComboBox cbEstado;
-    
+    public TextField tfSearch;
+    public TableView tvGrid;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        TimeZone tz = null;
     }    
     
     public void onClickNuevoPedido(ActionEvent e) throws IOException, Exception {
@@ -55,6 +55,14 @@ public class GestionPedidosController implements Initializable {
         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
         String listaJSON = gson.toJson(nuevoP);
         MainTaller.nuevoPedido(listaJSON);
+    }
+
+    public void buscar(ActionEvent e) {
+
+    }
+
+    public void eliminarPedido(ActionEvent e) {
+
     }
 
     public void setStage(Stage stage) {
