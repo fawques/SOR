@@ -158,7 +158,14 @@ public class AltaTallerController implements Initializable {
         });
     }
 
-   
+    public void setStage(Stage stage) {
+        thisStage = stage;
+    }
+
+    public void showStage() {
+        thisStage.sizeToScene();
+        thisStage.show();
+    }
 
     /**
      *
