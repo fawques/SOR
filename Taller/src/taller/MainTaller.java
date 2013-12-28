@@ -70,6 +70,8 @@ public class MainTaller extends Application {
                  staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else { //baja
+                //Yo lo que haria sería un volver a darme de alta, con los mismos datos
+                //un botón y prou
                 FXMLLoader loader = changeScene("AltaTaller.fxml");
                 stage.setTitle("Alta de taller");
                 AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
