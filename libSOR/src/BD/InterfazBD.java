@@ -323,7 +323,7 @@ public class InterfazBD {
         return conexion.ejecutarInsert("insert into taller (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
     }
 
-    public String activarTaller(String email) {
+    public String getMD5IdTaller(String email) {
         ResultSet res = conexion.ejecutarSQLSelect("SELECT id from taller where email='" + email + "';");
         try {
             if (res.first()) {
@@ -333,6 +333,18 @@ public class InterfazBD {
             Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "ERROR";
+    }
+
+    /**
+     * Será el que llame el taller para activarse en su BD (sor_taller) Activará
+     * el propio taller en su bd. Cambiará el md5 generado en gestor y cambiará
+     * el estado del taller a pendiente.
+     *
+     * @param idRecibido
+     * @return
+     */
+    public boolean activarTallerMainTaller(String idRecibido) {
+        return conexion.ejecutarSQL("UPDATE `taller` SET `id`='" + idRecibido + "', `estado`='0'");
     }
 
 }

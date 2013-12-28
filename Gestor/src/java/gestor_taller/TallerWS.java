@@ -68,7 +68,7 @@ public class TallerWS {
     public String activarTaller(@WebParam(name = "mail") String email)    {
         try {
             bd = new InterfazBD("sor_gestor");
-            String res = bd.activarTaller(email);
+            String res = bd.getMD5IdTaller(email);
            // bd.close();
             return res;
         } catch (SQLException ex) {

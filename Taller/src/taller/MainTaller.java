@@ -8,8 +8,10 @@ package taller;
 import BD.InterfazBD;
 import general.EstadoGeneral;
 import general.Taller;
+import gestor_taller.JMSException_Exception;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -27,7 +29,7 @@ import javafx.stage.Stage;
  */
 public class MainTaller extends Application {
 
-    InterfazBD bd;
+    static InterfazBD bd;
     public static Taller taller;
     public Stage stage;
 
@@ -49,24 +51,21 @@ public class MainTaller extends Application {
                 staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
                 //Cargar GestionPedido
-                //FXMLLoader loader = changeScene(".fxml");
+                FXMLLoader loader = changeScene("GestionPedidos.fxml");
                 stage.setTitle("Gestión de pedidos");
-                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
                  staticDataBox.setStage(stage);
-                staticDataBox.showStage();*/
+                staticDataBox.showStage();
             } else { //baja
-                //FXMLLoader loader = changeScene(".fxml");
-                stage.setTitle("Estoy de baja no sé que hacer");
-                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
-                 staticDataBox.setStage(stage);
-                 staticDataBox.showStage();*/
+                FXMLLoader loader = changeScene("AltaTaller.fxml");
+                stage.setTitle("Alta de taller");
+                AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
+                staticDataBox.setStage(stage);
+                staticDataBox.showStage();
             }
-        } else {
+        } else { //no existe
             FXMLLoader loader = changeScene("AltaTaller.fxml");
             stage.setTitle("Alta de taller");
-            /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
-             staticDataBox.setStage(stage);
-             staticDataBox.showStage();*/
             AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
             staticDataBox.setStage(stage);
             staticDataBox.showStage();
@@ -142,7 +141,7 @@ public class MainTaller extends Application {
      */
     public static boolean validarSoloNumeros(String num) {
         //Verificar que no se pase de 9 digitos!
-        Pattern p = Pattern.compile("^[0-9]{0,7}[0-9]");
+        Pattern p = Pattern.compile("^[0-9]{0,8}[0-9]");
         Matcher m = p.matcher(num);
         if (!m.matches()) {
             return false;
@@ -178,6 +177,19 @@ public class MainTaller extends Application {
         return validarNombre(nombreTaller) && validarEmail(email) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono) && validarDireccion(direccion);
     }
 
+    public static boolean activarTallerBD(String idRecibido) {
+        try {
+            bd = new InterfazBD("sor_taller");
+            return bd.activarTallerMainTaller(idRecibido);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
@@ -202,9 +214,9 @@ public class MainTaller extends Application {
         return port.activarTaller(mail);
     }
 
-    public static Boolean envioNuevoPedido(java.lang.String id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+    public static Boolean nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.envioNuevoPedido(id, name, email, address, city, postalCode, telephone);
+        return port.nuevoPedido(pedido);
     }
 }

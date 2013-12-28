@@ -152,8 +152,8 @@ public class AltaTallerController implements Initializable {
                     } else {
                         tfCp.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        if (tfCp.getText().length() >= 9) {
-                            errorCp.setText("No más de 8 carácteres");
+                        if (tfCp.getText().length() >= 10) {
+                            errorCp.setText("No más de 9 carácteres");
                         } else if (tfCp.getText().isEmpty()) {
                             errorCp.setText("No puede ser vacio");
                         } else {
@@ -174,8 +174,8 @@ public class AltaTallerController implements Initializable {
                     } else {
                         tfTelefono.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        if (tfTelefono.getText().length() >= 9) {
-                            errorTelefono.setText("No más de 8 carácteres");
+                        if (tfTelefono.getText().length() >= 10) {
+                            errorTelefono.setText("No más de 9 carácteres");
                         } else if (tfTelefono.getText().isEmpty()) {
                             errorTelefono.setText("No puede ser vacio");
                         } else {

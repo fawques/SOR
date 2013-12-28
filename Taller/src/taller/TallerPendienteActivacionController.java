@@ -57,19 +57,24 @@ public class TallerPendienteActivacionController implements Initializable {
         } else //Activado
         {
             //enviar a pantalla gestion de pedido
-
             System.out.println("He recibido " + idRecibido);
-            //cambiar estado a activado
-            URL location = getClass().getResource("GestionPedidos.fxml");
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(location);
-            loader.setBuilderFactory(new JavaFXBuilderFactory());
-            Parent page = (Parent) loader.load(location.openStream());
-            thisStage.getScene().setRoot(page);
-            thisStage.setTitle("Gestión de pedidos");
-            GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
-            staticDataBox.setStage(thisStage);
-            staticDataBox.showStage();
+
+            if (!MainTaller.activarTallerBD(idRecibido)) {
+                System.out.println(",pero no he podido updatear");
+                lbEstado.setStyle("-fx-border-color: red;");
+                lbEstado.setText("Su cuenta no ha podido activarse");
+            } else {
+                URL location = getClass().getResource("GestionPedidos.fxml");
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(location);
+                loader.setBuilderFactory(new JavaFXBuilderFactory());
+                Parent page = (Parent) loader.load(location.openStream());
+                thisStage.getScene().setRoot(page);
+                thisStage.setTitle("Gestión de pedidos");
+                GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
+                staticDataBox.setStage(thisStage);
+                staticDataBox.showStage();
+            }
         }
         //bd.close();
         piIndicador.setVisible(false);
