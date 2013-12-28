@@ -6,8 +6,12 @@
 
 package taller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import general.Pedido;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 import javafx.event.ActionEvent;
@@ -16,9 +20,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 /**
@@ -28,6 +29,8 @@ import javafx.stage.Stage;
  */
 public class GestionPedidosController implements Initializable {
 
+    Stage thisStage;
+
     @FXML
     //añadir botón al controlador
     Button btNuevoPedido;
@@ -35,7 +38,6 @@ public class GestionPedidosController implements Initializable {
     public TextField tfIDCliente;
     public TextField tfIDPieza;
     public ComboBox cbEstado;
-    private Stage thisStage;
     
     /**
      * Initializes the controller class.
@@ -46,21 +48,15 @@ public class GestionPedidosController implements Initializable {
         TimeZone tz = null;
     }    
     
-   
-    public void onClickNuevoPedido(ActionEvent e) throws IOException
-    {
-        URL location = getClass().getResource("NuevoPedido.fxml");
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(location);
-        loader.setBuilderFactory(new JavaFXBuilderFactory());
-        Parent page = (Parent) loader.load(location.openStream());
-        thisStage.getScene().setRoot(page);
-        thisStage.setTitle("Esperando código de aceptación");
-        NuevoPedidoController staticDataBox = (NuevoPedidoController) loader.getController();
-        staticDataBox.setStage(thisStage);
-        staticDataBox.showStage();
+    public void onClickNuevoPedido(ActionEvent e) throws IOException, Exception {
+        //If the validation goes well
+        //bloquear los inputs
+        Pedido nuevoP = new Pedido(1001, "", new Date());
+        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+        String listaJSON = gson.toJson(nuevoP);
+        MainTaller.nuevoPedido(listaJSON);
     }
-    
+
     public void setStage(Stage stage) {
         thisStage = stage;
     }
@@ -69,5 +65,4 @@ public class GestionPedidosController implements Initializable {
         thisStage.sizeToScene();
         thisStage.show();
     }
-    
 }

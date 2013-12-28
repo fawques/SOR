@@ -7,14 +7,16 @@
 package gestor_taller;
 
 import BD.InterfazBD;
-import general.EstadoGeneral;
+import activemq.Gestor_activemq;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import general.Pedido;
-import general.Taller;
+import java.lang.reflect.Type;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.jms.JMSException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -54,7 +56,7 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return -1;
+        return 0;
     }
     
     /**
@@ -63,8 +65,7 @@ public class TallerWS {
      * @return
      */
     @WebMethod(operationName = "activarTaller")
-    public String activarTaller(@WebParam(name = "mail") String email)
-    {
+    public String activarTaller(@WebParam(name = "mail") String email)    {
         try {
             bd = new InterfazBD("sor_gestor");
             String res = bd.activarTaller(email);
@@ -77,10 +78,33 @@ public class TallerWS {
         }
         return ""; //devolvemos el estado pendiente, por defecto
     }
-    
-    @WebMethod(operationName = "envioNuevoPedido")
-    public Boolean envioNuevoPedido(@WebParam(name = "ID") String ID, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
-        Taller t = new Taller(ID, name, email, address, city, postalCode, telephone, EstadoGeneral.PENDIENTE, new ArrayList<Pedido>());
-        return t != null?true:false;
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "nuevoPedido")
+    public Boolean nuevoPedido(@WebParam(name = "pedido") String pedido) throws JMSException {
+         try {
+            bd = new InterfazBD("sor_gestor");
+            Gson gson = new Gson();
+             Type collectionType = new TypeToken<Pedido>(){}.getType();
+            Pedido p = gson.fromJson(pedido, collectionType);
+            Date ahora = new Date();
+            String stringID  = DigestUtils.md5Hex(ahora.toString());
+            p.setID(stringID);
+            //bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
+            Gestor_activemq activemq= new Gestor_activemq("Pedidos");
+            String pedidoFinal = gson.toJson(p);
+            activemq.producer.produceMessage(pedidoFinal);
+            activemq.producer.closeProduce();
+            // bd.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 }
