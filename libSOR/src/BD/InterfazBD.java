@@ -347,4 +347,49 @@ public class InterfazBD {
         return conexion.ejecutarSQL("UPDATE `taller` SET `id`='" + idRecibido + "', `estado`='0'");
     }
 
+    public ArrayList<Pedido> buscarPedido(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) throws SQLException {
+        ArrayList<Pedido> alPedidos = new ArrayList<>();
+        String sWhere = "";
+        ResultSet pedidos;
+
+        sWhere = crearWhereDeSelect(idPedido, sWhere, modoAceptacion, fechaLimite, estado);
+
+        if (sWhere.isEmpty()) {
+            pedidos = conexion.ejecutarSQLSelect("Select * from pedido;");
+        } else {
+            pedidos = conexion.ejecutarSQLSelect("SELECT * FROM pedido where " + sWhere);
+        }
+
+        if (!pedidos.wasNull()) {
+            //buscar pieza por pedido
+        }
+
+        return alPedidos;
+    }
+
+    //falta añadir el modoAceptación
+    private String crearWhereDeSelect(String idPedido, String sWhere, String modoAceptacion, Date fechaLimite, String estado) {
+        if (idPedido.isEmpty()) {
+            sWhere += " (id_aux='" + idPedido + "' or id='" + idPedido + "')";
+        }
+        /*if (modoAceptacion.isEmpty()) {            if (sWhere.isEmpty()) {
+                sWhere += " and ";
+            }
+            sWhere +="";
+         }*/
+        if (fechaLimite.toString().isEmpty()) {
+            if (sWhere.isEmpty()) {
+                sWhere += " and ";
+            }
+            sWhere += "fecha_limite='" + fechaLimite.toString() + "'";
+        }
+        //estado debe ser el último porque es un and
+        if (estado.isEmpty()) {
+            if (sWhere.isEmpty()) {
+                sWhere += " and ";
+            }
+            sWhere += "estado='" + estado + "'";
+        }
+        return sWhere;
+    }
 }

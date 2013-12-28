@@ -34,7 +34,6 @@ public class GestionPedidosController implements Initializable {
     @FXML
     Button btNuevoPedido;
     public TextField tfIDPedido;
-    public TextField tfIDCliente;
     public TextField tfIDPieza;
     public ComboBox cbEstado;
     public TextField tfSearch;
