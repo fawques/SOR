@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -26,6 +27,8 @@ public class NuevoPedidoController implements Initializable {
     public TextField tfIDTaller;
     public Button btAnadirPieza;
     public TableView tbPedidos;
+    public ComboBox cbEstado;
+    
     /**
      * Initializes the controller class.
      */

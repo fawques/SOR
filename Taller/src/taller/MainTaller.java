@@ -267,15 +267,11 @@ public class MainTaller extends Application {
         return port.activarTaller(mail);
     }
 
-    /**
-     *
-     * @param pedido
-     * @return
-     * @throws JMSException_Exception
-     */
     public static Boolean nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(pedido);
     }
+
+    
 }
