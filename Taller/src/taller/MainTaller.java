@@ -7,11 +7,14 @@ package taller;
 
 import BD.InterfazBD;
 import general.EstadoGeneral;
+import general.Pedido;
 import general.Taller;
 import gestor_taller.JMSException_Exception;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -216,7 +219,9 @@ public class MainTaller extends Application {
     public static boolean activarTallerBD(String idRecibido) {
         try {
             bd = new InterfazBD("sor_taller");
-            return bd.activarTallerMainTaller(idRecibido);
+            boolean r = bd.activarTallerMainTaller(idRecibido);
+            //bd.close();
+            return r;
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -224,6 +229,20 @@ public class MainTaller extends Application {
         }
 
         return false;
+    }
+
+    public static ArrayList<Pedido> buscarPedidos(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) {
+        try {
+            bd = new InterfazBD("sor_taller");
+            ArrayList<Pedido> p = bd.buscarPedido(idPedido, idPieza, estado, fechaLimite, modoAceptacion);
+            //bd.close();
+            return p;
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     /**

@@ -36,7 +36,7 @@ public class GestionPedidosController implements Initializable {
     public TextField tfIDPedido;
     public TextField tfIDPieza;
     public ComboBox cbEstado;
-    public TextField tfSearch;
+    public ComboBox cbModo;
     public TableView tvGrid;
 
     /**
@@ -57,6 +57,7 @@ public class GestionPedidosController implements Initializable {
     }
 
     public void buscar(ActionEvent e) {
+        System.out.println(MainTaller.buscarPedidos(tfIDPedido.getText(), tfIDPieza.getText(), cbEstado.getValue().toString(), new Date(), cbModo.getValue().toString()));
 
     }
 

@@ -34,10 +34,13 @@
                               <String fx:value="Con ofertas" />
                             </FXCollections>
                           </items>
+                          <value>
+                              <String fx:value="Cualquiera" />
+                          </value>
                         </ComboBox>
                         <Button layoutX="448.0" layoutY="72.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscar" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
                         <Label layoutX="268.0" layoutY="72.0" text="Fecha limite" />
-                        <ComboBox layoutX="144.0" layoutY="70.0" prefWidth="100.0" promptText="Cualquiera">
+                        <ComboBox fx:id="cbModo" layoutX="144.0" layoutY="70.0" prefWidth="100.0" promptText="Cualquiera">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Cualquiera" />
@@ -45,6 +48,9 @@
                               <String fx:value="Automático" />
                             </FXCollections>
                           </items>
+                          <value>
+                              <String fx:value="Cualquiera" />
+                          </value>
                         </ComboBox>
                       </children>
                     </AnchorPane>

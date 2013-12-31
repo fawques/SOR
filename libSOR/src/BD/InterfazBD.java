@@ -17,7 +17,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -224,16 +223,11 @@ public class InterfazBD {
     
 
     public void getPiezasYCantidades(String pedidoID, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades){
-        List<Pieza> listpieza = new ArrayList<Pieza>();
-        List<Integer> listacantidades= new ArrayList<Integer>();
-        listpieza=piezas;
-        listacantidades=cantidades;
-        
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido_pieza WHERE pedido=" + pedidoID + ";");
             while(resultados.next()){
-                listpieza.add(new Pieza(resultados.getString("pieza")));
-                listacantidades.add(resultados.getInt("cantidad"));
+                piezas.add(new Pieza(resultados.getString("pieza")));
+                cantidades.add(resultados.getInt("cantidad"));
             }
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -349,6 +343,7 @@ public class InterfazBD {
 
     public ArrayList<Pedido> buscarPedido(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) throws SQLException {
         ArrayList<Pedido> alPedidos = new ArrayList<>();
+
         String sWhere = "";
         ResultSet pedidos;
 
@@ -360,8 +355,18 @@ public class InterfazBD {
             pedidos = conexion.ejecutarSQLSelect("SELECT * FROM pedido where " + sWhere);
         }
 
-        if (!pedidos.wasNull()) {
-            //buscar pieza por pedido
+        if (pedidos.first()) {
+            while (!pedidos.isAfterLast()) {
+                ArrayList<Pieza> piezas = new ArrayList<>();
+                ArrayList<Integer> cantidades = new ArrayList<>();
+                getPiezasYCantidades(idPedido, piezas, cantidades);
+
+                Pedido p = new Pedido(pedidos.getNString("id"),
+                        pedidos.getInt("id_aux"), pedidos.getNString("taller"), pedidos.getDate("fecha_alta"), pedidos.getDate("fecha_baja"), pedidos.getDate("fecha_limite"), EstadoPedido.values()[pedidos.getInt("estado")],
+                        piezas, cantidades, getOfertasPedido(pedidos.getNString("id")));
+                alPedidos.add(p);
+                pedidos.next();
+            }
         }
 
         return alPedidos;
