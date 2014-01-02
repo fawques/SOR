@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.collections.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root type="javafx.scene.layout.AnchorPane" id="AnchorPane" prefHeight="546.0" prefWidth="660.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.GestionPedidosController">
+<AnchorPane id="AnchorPane" prefHeight="546.0" prefWidth="660.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.GestionPedidosController">
   <children>
     <TabPane layoutX="-1.0" layoutY="0.0" prefHeight="546.0000999999975" prefWidth="660.0000999999975" tabClosingPolicy="UNAVAILABLE">
       <tabs>
@@ -25,7 +23,7 @@
                         <Label layoutX="168.0" layoutY="23.0" text="Id pieza" />
                         <Label layoutX="14.0" layoutY="72.0" text="Tipo de aceptación" />
                         <Label layoutX="315.0" layoutY="26.0" text="Estado pedido" />
-                        <ComboBox id="cbEstadoPedido" fx:id="cbEstado" layoutX="419.0" layoutY="23.0" prefWidth="110.0" promptText="Cualquiera">
+                        <ComboBox id="cbEstadoPedido" fx:id="cbEstado" layoutX="419.0" layoutY="23.0" prefWidth="110.0" promptText="Cualquiera" value="Cualquiera">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Cualquiera" />
@@ -34,13 +32,10 @@
                               <String fx:value="Con ofertas" />
                             </FXCollections>
                           </items>
-                          <value>
-                              <String fx:value="Cualquiera" />
-                          </value>
                         </ComboBox>
-                        <Button layoutX="448.0" layoutY="72.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscar" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
+                        <Button layoutX="493.0" layoutY="72.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscar" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
                         <Label layoutX="268.0" layoutY="72.0" text="Fecha limite" />
-                        <ComboBox fx:id="cbModo" layoutX="144.0" layoutY="70.0" prefWidth="100.0" promptText="Cualquiera">
+                        <ComboBox fx:id="cbModo" disable="false" layoutX="144.0" layoutY="70.0" prefWidth="100.0" promptText="Cualquiera" value="Cualquiera">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Cualquiera" />
@@ -48,10 +43,14 @@
                               <String fx:value="Automático" />
                             </FXCollections>
                           </items>
-                          <value>
-                              <String fx:value="Cualquiera" />
-                          </value>
                         </ComboBox>
+                        <HBox layoutX="355.0" layoutY="70.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
+                          <children>
+                            <TextField fx:id="tfLimiteDia" minWidth="30.0" prefWidth="150.0" />
+                            <TextField fx:id="tfLimiteMes" minWidth="30.0" prefWidth="150.0" />
+                            <TextField fx:id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
+                          </children>
+                        </HBox>
                       </children>
                     </AnchorPane>
                   </content>
@@ -82,4 +81,4 @@
       </tabs>
     </TabPane>
   </children>
-</fx:root>
+</AnchorPane>

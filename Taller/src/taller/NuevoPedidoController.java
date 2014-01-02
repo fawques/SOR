@@ -22,12 +22,19 @@ import javafx.stage.Stage;
  */
 public class NuevoPedidoController implements Initializable {
 
-    Stage thisStage;
+    Stage stage;
+
     public TextField tfIDPedido;
     public TextField tfIDTaller;
     public Button btAnadirPieza;
     public TableView tbPedidos;
     public ComboBox cbEstado;
+    public TextField tfLimiteDia;
+    public TextField tfLimiteMes;
+    public TextField tfLimiteAnyo;
+    public TextField tfBajaDia;
+    public TextField tfBajaMes;
+    public TextField tfBajaAnyo;
     
     /**
      * Initializes the controller class.
@@ -35,14 +42,16 @@ public class NuevoPedidoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    public void setStage(Stage stage) {
-        thisStage = stage;
     }
 
+    public void setStage(Stage s) {
+        stage = s;
+    }
     public void showStage() {
-        thisStage.sizeToScene();
-        thisStage.show();
+        stage.show();
+    }
+
+    public void realizarPedido() {
+        System.out.println("hola");
     }
 }
