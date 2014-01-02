@@ -34,23 +34,19 @@ public class InterfazBD {
     
     // DESGUACES 
     // setters
-    public void anadirOferta(int id, Date fechaAlta, float importe, int estado, int pedido, int desguace, Date fechaBaja, Date fechaLimite)
-    {
+    public int anadirOferta(int id, Date fechaAlta, float importe, int estado, int pedido, int desguace, Date fechaBaja, Date fechaLimite)    {
         // TODO: cambiar el id
-        conexion.ejecutarSQL("insert INTO oferta (id, fechaAlta, importe, estado, pedido, desguace, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"', '"+importe+"','"+estado+"','"+pedido+"';"+desguace+"','"+fechaBaja+"','"+fechaLimite+"');");
-        
+        return conexion.ejecutarInsert("insert INTO oferta (id, fechaAlta, importe, estado, pedido, desguace, fechaBaja, fechaLimite) values ('" + id + "','" + fechaAlta + "', '" + importe + "','" + estado + "','" + pedido + "';" + desguace + "','" + fechaBaja + "','" + fechaLimite + "');");
     }
     
-    public void anadirPedido(String id, Date fechaAlta, int estado, String taller, Date fechaBaja, Date fechaLimite)
-    {
-        conexion.ejecutarSQL("insert INTO pedido (id, fechaAlta, estado, taller, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"','"+estado+"','"+taller+"','"+fechaBaja+"','"+fechaLimite+"';");
+    public int anadirPedido(Date fechaAlta, EstadoPedido estado, String taller, Date fechaBaja, Date fechaLimite) {
+        return conexion.ejecutarInsert("insert INTO pedido (fechaAlta, estado, taller, fechaBaja, fechaLimite) values ('" + fechaAlta + "','" + estado + "','" + taller + "','" + fechaBaja + "','" + fechaLimite + "';");
     }
     
     
-    public void anadirDesguace(int id, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado)
-    {
+    public int anadirDesguace(int id, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado)    {
         // TODO: cambiar el id
-        conexion.ejecutarSQL("insert INTO desguace (id, nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('"+id+"','"+nombre+"', '"+email+"','"+direccion+"','"+ciudad+"','"+codPostal+"','"+telefono+"','"+estado+"');");
+        return conexion.ejecutarInsert("insert INTO desguace (id, nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + id + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "','" + codPostal + "','" + telefono + "','" + estado + "');");
         
     }
     // getters
@@ -396,5 +392,22 @@ public class InterfazBD {
             sWhere += "estado='" + estado + "'";
         }
         return sWhere;
+    }
+
+    private boolean anyadirPiezasATablaPieza(ArrayList<Pieza> piezas) {
+        for (Pieza pieza : piezas) {
+            conexion.ejecutarInsert("Insert into pieza(nombre) values of('" + pieza + "')");
+        }
+        return true;
+    }
+
+    public boolean anyadirPiezasAPedido(int idPedido, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+        if (anyadirPiezasATablaPieza(piezas)) {
+            for (int i = 0; i < piezas.size(); i++) {
+                conexion.ejecutarInsert("Insert into pedido_pieza(pedido,pieza,cantidad) values of('" + idPedido + "', '" + piezas.get(i) + "', '" + cantidades.get(i) + "'");
+            }
+            return true;
+        }
+        return false;
     }
 }
