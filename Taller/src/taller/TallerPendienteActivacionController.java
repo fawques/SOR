@@ -49,8 +49,8 @@ public class TallerPendienteActivacionController implements Initializable {
         lbEstado.setText("");
         piIndicador.setVisible(true);
 
-        String idRecibido = MainTaller.activarTaller(bd.getPrimerTaller().getEmail());
-        if (idRecibido.equals("")) //No Activado
+        String idRecibido = MainTaller.checkActivacion(bd.getPrimerTaller().getEmail());
+        if ("".equals(idRecibido)) //No Activado
         {
             lbEstado.setStyle("-fx-border-color: red;");
             lbEstado.setText("Su cuenta no está activa");
@@ -76,7 +76,7 @@ public class TallerPendienteActivacionController implements Initializable {
                 staticDataBox.showStage();
             }
         }
-        //bd.close();
+        bd.close();
         piIndicador.setVisible(false);
         btRecargar.setDisable(false);
     }

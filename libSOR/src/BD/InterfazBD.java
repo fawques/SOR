@@ -291,7 +291,27 @@ public class InterfazBD {
         return lista;
 
     }
-
+    
+    public Taller getTaller(String email){
+        ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller WHERE email='" + email + "';");
+        try {
+            if (resultados.first()) {
+                final String tallerID = resultados.getString("id");
+                if("".equals(tallerID)){
+                    return new Taller("", resultados.getInt("id_aux"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
+                }else{
+                    ArrayList<Pedido> listaDePedidos = getPedidosTaller(resultados.getString("id"));
+                    return new Taller(tallerID, resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+                }
+                
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public Taller getPrimerTaller() {
         ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller;");
 
@@ -314,8 +334,9 @@ public class InterfazBD {
     }
 
     // método que llama el gestor, pasándole el id como un string (resultado del md5)
-    public int altaTaller(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
-        return conexion.ejecutarInsert("insert into taller (id,nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
+    public boolean altaTaller(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
+        int res = conexion.ejecutarInsert("insert into taller (id,nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
+        return res > 0;
     }
     
     // método que llaman talleres y desguaces, sin id (lo autogenera la bd)
@@ -346,7 +367,7 @@ public class InterfazBD {
     /**
      * Será el que llame el taller para activarse en su BD (sor_taller) Activará
      * el propio taller en su bd. Cambiará el md5 generado en gestor y cambiará
-     * el estado del taller a pendiente.
+     * el estado del taller a activo.
      *
      * @param idRecibido
      * @return

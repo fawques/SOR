@@ -238,44 +238,30 @@ public class MainTaller extends Application {
 
     /**
      * ******************* WebServices *************************
-     */
-
-    /**
      * @param name
      * @param email
      * @param address
      * @param city
      * @param postalCode
      * @param telephone
-     * @return
+     * @return 
      */
 
-    public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+    public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    /**
-     *
-     * @param mail
-     * @return
-     */
-    public static String activarTaller(java.lang.String mail) {
+    public static String checkActivacion(java.lang.String mail) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.activarTaller(mail);
+        return port.checkActivacion(mail);
     }
-
-    /**
-     *
-     * @param pedido
-     * @return
-     * @throws JMSException_Exception
-     */
-    public static Boolean nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
+    
+    public static String nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(pedido);
-    }
+    }     
 }
