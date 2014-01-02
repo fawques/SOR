@@ -45,7 +45,6 @@
       </columns>
     </TableView>
     <Button fx:id="btAnadirPieza" layoutX="338.0" layoutY="102.0" mnemonicParsing="false" text="Añadir pieza" />
-    <Button layoutX="197.0" layoutY="348.0" mnemonicParsing="false" onAction="#onClickCancel" text="Cancelar" />
-    <Button layoutX="328.0" layoutY="348.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
+    <Button layoutX="235.0" layoutY="348.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
   </children>
 </AnchorPane>
