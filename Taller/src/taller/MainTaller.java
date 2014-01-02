@@ -6,12 +6,12 @@
 package taller;
 
 import BD.InterfazBD;
-import java.sql.SQLException;
 import general.EstadoGeneral;
 import general.Taller;
+import gestor_taller.JMSException_Exception;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Properties;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -22,15 +22,6 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javax.mail.Message;
-import javax.mail.Message.RecipientType;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -38,10 +29,23 @@ import javax.mail.internet.MimeMessage;
  */
 public class MainTaller extends Application {
 
-    InterfazBD bd;
+    static InterfazBD bd;
+
+    /**
+     *
+     */
     public static Taller taller;
+
+    /**
+     *
+     */
     public Stage stage;
 
+    /**
+     *
+     * @param stage2
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage2) throws Exception {
         stage = stage2;
@@ -60,29 +64,35 @@ public class MainTaller extends Application {
                 staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
                 //Cargar GestionPedido
-                //FXMLLoader loader = changeScene(".fxml");
+                FXMLLoader loader = changeScene("GestionPedidos.fxml");
                 stage.setTitle("Gestión de pedidos");
-                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
                  staticDataBox.setStage(stage);
-                staticDataBox.showStage();*/
+                staticDataBox.showStage();
             } else { //baja
-                //FXMLLoader loader = changeScene(".fxml");
-                stage.setTitle("Estoy de baja no sé que hacer");
-                /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
-                 staticDataBox.setStage(stage);
-                 staticDataBox.showStage();*/
+                FXMLLoader loader = changeScene("AltaTaller.fxml");
+                stage.setTitle("Alta de taller");
+                AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
+                staticDataBox.setStage(stage);
+                staticDataBox.showStage();
             }
-        } else {
+        } else { //no existe
             FXMLLoader loader = changeScene("AltaTaller.fxml");
             stage.setTitle("Alta de taller");
-            /*TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
-             staticDataBox.setStage(stage);
-             staticDataBox.showStage();*/
             AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
             staticDataBox.setStage(stage);
             staticDataBox.showStage();
         }
     }
+
+    /**
+     * ****************** Escenas *************************
+     */
+    /**
+     * @param fxml
+     * @return
+     * @throws java.io.IOException
+     */
 
     public FXMLLoader changeScene(String fxml) throws IOException {
         //Mostrar página de espera interfaz básica
@@ -103,6 +113,12 @@ public class MainTaller extends Application {
 
     }
 
+    /**
+     *
+     * @param fxml
+     * @return
+     * @throws Exception
+     */
     public Parent replaceSceneContent(String fxml) throws Exception {
         Parent page = (Parent) FXMLLoader.load(MainTaller.class.getResource(fxml), null, new JavaFXBuilderFactory());
         Scene scene = stage.getScene();
@@ -116,39 +132,16 @@ public class MainTaller extends Application {
     }
 
     /**
-     *
+     * ******************** Validaciones **************************
      */
-    public void goToTallerPendienteActivacion() {
-        try {
-            replaceSceneContent("tallerPendienteActivacion.fxml");
-        } catch (Exception ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     /**
      *
      * @param n
      * @return
      */
     public static boolean validarNombre(String n) {
-        InterfazBD i = null;
-        try {
-            //vilella();
-                        
-            i = new InterfazBD("sor_gestor");
-            
-            i.getPedidosActivos();
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("aquí");
         
-        Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]*[a-zA-Z]");
+        Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]{0,21}");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
             return false;
@@ -159,12 +152,21 @@ public class MainTaller extends Application {
 
     /**
      *
+     * @param dir
+     * @return
+     */
+    public static boolean validarDireccion(String dir) {
+        return dir.length() < 22;
+    }
+
+    /**
+     *
      * @param num
      * @return
      */
     public static boolean validarSoloNumeros(String num) {
         //Verificar que no se pase de 9 digitos!
-        Pattern p = Pattern.compile("^[0-9]*[0-9]");
+        Pattern p = Pattern.compile("^[0-9]{0,8}[0-9]");
         Matcher m = p.matcher(num);
         if (!m.matches()) {
             return false;
@@ -178,68 +180,12 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validarEmail(String n) {
-        Pattern p = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+[.][a-zA-Z]+");
+        Pattern p = Pattern.compile("^(([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?))$");
         Matcher m = p.matcher(n);
         if (!m.matches()) {
             return false;
         }
         return true;
-    }
-
-    /**
-     *
-     * @param from
-     * @param to
-     * @param subject
-     * @param text
-     */
-    public static void sendMail(final String from, String to, String subject, String text) {
-        String SMTP_HOST_NAME = "smtp.gmail.com";
-        String SMTP_PORT = "465";
-        String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-        Properties props = new Properties();
-        props.put("mail.smtp.host", SMTP_HOST_NAME);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.debug", "true");
-        props.put("mail.smtp.port", SMTP_PORT);
-        props.put("mail.smtp.socketFactory.port", SMTP_PORT);
-        props.put("mail.smtp.socketFactory.class", SSL_FACTORY);
-        props.put("mail.smtp.socketFactory.fallback", "false");
-
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        //a priori, para que funcione en otro pc,
-                        //a lo mejor habría que generar otra contrasenya, pero creo que no
-                        return new PasswordAuthentication("pablovm1990@gmail.com",
-                                "gcjacxtujgfqigxt");
-                    }
-                });
-
-        session.setDebug(true);
-
-        Message simpleMessage = new MimeMessage(session);
-        InternetAddress fromAddress = null;
-        InternetAddress toAddress = null;
-        try {
-            fromAddress = new InternetAddress(from);
-            toAddress = new InternetAddress(to);
-        } catch (AddressException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            simpleMessage.setFrom(fromAddress);
-            simpleMessage.setRecipient(RecipientType.TO, toAddress);
-            simpleMessage.setSubject(subject);
-            simpleMessage.setContent(text, "text/html");
-
-            Transport.send(simpleMessage);
-        } catch (MessagingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -253,7 +199,29 @@ public class MainTaller extends Application {
      * @return
      */
     public static boolean validar(String nombreTaller, String email, String direccion, String ciudad, String cp, String telefono) {
-        return validarNombre(nombreTaller) && validarEmail(email) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono);
+        return validarNombre(nombreTaller) && validarEmail(email) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono) && validarDireccion(direccion);
+    }
+
+    /**
+     * ****************** BD *************************
+     */
+    /**
+     * 
+     * @param idRecibido
+     * @return
+     */
+
+    public static boolean activarTallerBD(String idRecibido) {
+        try {
+            bd = new InterfazBD("sor_taller");
+            return bd.activarTallerMainTaller(idRecibido);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
     }
 
     /**
@@ -269,7 +237,10 @@ public class MainTaller extends Application {
     }
 
     /**
-     *
+     * ******************* WebServices *************************
+     */
+
+    /**
      * @param name
      * @param email
      * @param address
@@ -278,16 +249,33 @@ public class MainTaller extends Application {
      * @param telephone
      * @return
      */
+
     public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static String activarTaller(java.lang.String email) {
-        taller_ws.TallerWS_Service service = new taller_ws.TallerWS_Service();
-        taller_ws.TallerWS port = service.getTallerWSPort();
-        return port.activarTaller(email);
+    /**
+     *
+     * @param mail
+     * @return
+     */
+    public static String activarTaller(java.lang.String mail) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.activarTaller(mail);
     }
 
+    /**
+     *
+     * @param pedido
+     * @return
+     * @throws JMSException_Exception
+     */
+    public static Boolean nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.nuevoPedido(pedido);
+    }
 }

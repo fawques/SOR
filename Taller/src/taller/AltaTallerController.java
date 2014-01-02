@@ -6,8 +6,11 @@
 package taller;
 
 import BD.InterfazBD;
+import com.google.gson.Gson;
+import general.Pedido;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -67,7 +70,14 @@ public class AltaTallerController implements Initializable {
                         errorNombreTaller.setText("");
                     } else {
                         //add errors in the interface
-                        errorNombreTaller.setText("No pueden contener carácteres extraños, ni números");
+                        if (tfNombreTaller.getText().length() < 22) {
+                            errorNombreTaller.setText("No pueden contener carácteres extraños, ni números");
+                        } else if (tfNombreTaller.getText().isEmpty()) {
+                            errorNombreTaller.setText("No puede ser vacio");
+                        } else {
+                            errorNombreTaller.setText("No más de 21 carácteres");
+                        }
+
                         tfNombreTaller.setStyle("-fx-border-color: red;");
                     }
                 }
@@ -84,7 +94,11 @@ public class AltaTallerController implements Initializable {
                     } else {
                         tfEmail.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorEmail.setText("Email incorrecto");
+                        if (tfEmail.getText().isEmpty()) {
+                            errorEmail.setText("No puede ser vacio");
+                        } else {
+                            errorEmail.setText("Email incorrecto");
+                        }
                     }
                 }
             }
@@ -100,7 +114,13 @@ public class AltaTallerController implements Initializable {
                     } else {
                         tfCiudad.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorCiudad.setText("No pueden contener carácteres extraños, ni números");
+                        if (tfCiudad.getText().length() < 22) {
+                            errorCiudad.setText("No pueden contener carácteres extraños, ni números");
+                        } else if (tfCiudad.getText().isEmpty()) {
+                            errorCiudad.setText("No puede ser vacio");
+                        } else {
+                            errorCiudad.setText("No más de 21 carácteres");
+                        }
                     }
                 }
             }
@@ -110,13 +130,13 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (true) {
+                    if (MainTaller.validarDireccion(tfDireccion.getText())) {
                         tfDireccion.setStyle("-fx-border-color: green;");
                         errorDireccion.setText("");
                     } else {
                         tfDireccion.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorDireccion.setText("Caca");
+                        errorDireccion.setText("No más de 21 carácteres");
                     }
                 }
             }
@@ -132,7 +152,13 @@ public class AltaTallerController implements Initializable {
                     } else {
                         tfCp.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorCp.setText("Sólo añadir números");
+                        if (tfCp.getText().length() >= 10) {
+                            errorCp.setText("No más de 9 carácteres");
+                        } else if (tfCp.getText().isEmpty()) {
+                            errorCp.setText("No puede ser vacio");
+                        } else {
+                            errorCp.setText("Sólo añadir números");
+                        }
                     }
                 }
             }
@@ -148,7 +174,13 @@ public class AltaTallerController implements Initializable {
                     } else {
                         tfTelefono.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorTelefono.setText("Sólo añadir números");
+                        if (tfTelefono.getText().length() >= 10) {
+                            errorTelefono.setText("No más de 9 carácteres");
+                        } else if (tfTelefono.getText().isEmpty()) {
+                            errorTelefono.setText("No puede ser vacio");
+                        } else {
+                            errorTelefono.setText("Sólo añadir números");
+                        }
                     }
                 }
             }
@@ -190,6 +222,10 @@ public class AltaTallerController implements Initializable {
     public void onClickAceptar(ActionEvent e) throws IOException, Exception {
         //If the validation goes well
         //bloquear los inputs
+        Pedido nuevoP = new Pedido(1, "", new Date());
+        Gson g = new Gson();
+        String listaJSON = g.toJson(nuevoP);
+        MainTaller.nuevoPedido(listaJSON);
         setEditableAllInputs(false);
         if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration

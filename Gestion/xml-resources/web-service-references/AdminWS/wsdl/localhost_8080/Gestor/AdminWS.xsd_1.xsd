@@ -34,7 +34,7 @@
 
 <xs:complexType name="getOfertasporPedido">
 <xs:sequence>
-<xs:element name="idPedido" type="xs:int"/>
+<xs:element name="idPedido" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -98,7 +98,7 @@
 
 <xs:complexType name="getPedidoID">
 <xs:sequence>
-<xs:element name="id" type="xs:int"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
