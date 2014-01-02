@@ -334,6 +334,14 @@ public class InterfazBD {
         }
         return "ERROR";
     }
+    
+    public boolean modificarTaller(String ID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, EstadoGeneral estado){
+        return conexion.ejecutarSQL("UPDATE `taller` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "', `estado`='" + estado.ordinal() + "' WHERE `id`='" + ID + "';");
+    }
+    
+    public void close(){
+        conexion.closeConexion();
+    }
 
     /**
      * Será el que llame el taller para activarse en su BD (sor_taller) Activará

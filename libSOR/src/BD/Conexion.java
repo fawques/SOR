@@ -34,7 +34,6 @@ public class Conexion {
         this.database = database;
         try {
           Class.forName("com.mysql.jdbc.Driver");
-          System.out.println("Conexion establecida");
           conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database,"root","12345");
           System.out.println("Conexion establecida");
        } catch (SQLException ex) {
@@ -58,6 +57,14 @@ public class Conexion {
     public Connection getConexion()
     {
        return conexion;
+    }
+    
+    public void closeConexion(){
+        try {
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -121,15 +128,6 @@ public class Conexion {
         return numero;
     }
 
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        
-    }
     
     
 }

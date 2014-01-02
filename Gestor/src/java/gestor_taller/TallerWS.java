@@ -49,7 +49,7 @@ public class TallerWS {
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             int res = bd.altaTaller(stringID, name, email, address, city, postalCode, telephone, 2);
-            //bd.close();
+            bd.close();
             return res;
         } catch (java.sql.SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
