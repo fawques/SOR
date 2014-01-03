@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 11. Deploying to JBoss 6.0.0.GA</title><link rel="stylesheet" type="text/css" href="css/jbossorg.css"/><meta xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL Stylesheets V1.76.1"/><link rel="home" href="index.html" title="jUDDI User Guide"/><link rel="up" href="index.html" title="jUDDI User Guide"/><link rel="prev" href="chap-Administration.html" title="Chapter 10. Administration"/><link rel="next" href="chap-deployglassfish.html" title="Chapter 12. Deploying to Glassfish 2.1.1"/><link rel="copyright" href="ln-d0e35.html" title="Legal Notice"/></head><body><p id="title"><a href="http://juddi.apache.org/" class="site_href"><strong>Apache jUDDI</strong></a><a href="http://juddi.apache.org/docs.html" class="doc_href"><strong>Community Documentation</strong></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-Administration.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="chap-deployglassfish.html"><strong>Next</strong></a></li></ul><div class="chapter" title="Chapter 11. Deploying to JBoss 6.0.0.GA"><div class="titlepage"><div><div><h2 class="title"><a id="chap-deployjboss"/>Chapter 11. Deploying to JBoss 6.0.0.GA</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="chap-deployjboss.html#sect-deployjboss">11.1. Introduction</a></span></dt><dt><span class="section"><a href="chap-deployjboss.html#sect-juddi-war">11.2. Add juddiv3.war</a></span></dt><dt><span class="section"><a href="chap-deployjboss.html#sect-web.xml">11.3. Change web.xml</a></span></dt><dt><span class="section"><a href="chap-deployjboss.html#sect-datasource">11.4. Configure Datasource</a></span></dt></dl></div><div class="section" title="11.1. Introduction"><div class="titlepage"><div><div><h2 class="title"><a id="sect-deployjboss"/>11.1. Introduction</h2></div></div></div><p>
+	This section describes how to deploy juddi to JBoss 6.0.0.GA.     
+        </p><p>
+	First, download jboss-6.0.0.GA - the zip or tar.gz bundle may be found 
+at http://www.jboss.org/jbossas/downloads/.      Download the bundle and uncompress it.
+        </p></div><div class="section" title="11.2. Add juddiv3.war"><div class="titlepage"><div><div><h2 class="title"><a id="sect-juddi-war"/>11.2. Add juddiv3.war</h2></div></div></div><p>
+	Copy juddiv3.war to server/default/deploy and unpack it.
+	</p><p>
+	Insert <code class="filename">jboss-web.xml</code> into the juddiv3.war/WEB-INF directory , should look like the following :
+	</p><pre class="programlisting">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+
+&lt;!DOCTYPE jboss-web PUBLIC 
+	"-//JBoss//DTD Web Application 2.3V2//EN"
+    "http://www.jboss.org/j2ee/dtd/jboss-web_3_2.dtd"&gt;
+
+&lt;jboss-web&gt;
+
+    &lt;resource-ref&gt;
+        &lt;res-ref-name&gt;jdbc/JuddiDS&lt;/res-ref-name&gt;
+        &lt;jndi-name&gt;java:JuddiDS&lt;/jndi-name&gt;
+    &lt;/resource-ref&gt;
+    &lt;depends&gt;jboss.jdbc:datasource=JuddiDS,service=metadata&lt;/depends&gt;
+
+&lt;/jboss-web&gt;
+</pre><p>	
+	</p></div><div class="section" title="11.3. Change web.xml"><div class="titlepage"><div><div><h2 class="title"><a id="sect-web.xml"/>11.3. Change web.xml</h2></div></div></div><p>
+	Replace the WEB-INF/web.xml with the jbossws-native-web.xml within docs/examples/appserver.
+        </p></div><div class="section" title="11.4. Configure Datasource"><div class="titlepage"><div><div><h2 class="title"><a id="sect-datasource"/>11.4. Configure Datasource</h2></div></div></div><p>
+	The first step for configuring a datasource is to copy your JDBC driver into the classpath.    Copy your JDBC driver into <code class="filename">${jboss.home.dir}/server/${configuration}/lib</code>, where configuration is the profile you wish to start with (default, all, etc.). 
+
+	Example : 
+	</p><pre class="programlisting">cp mysql-connector-java-5.0.8-bin.jar /opt/jboss-5.1.0.GA/server/default/lib</pre><p> 
+        </p><p>
+	Next, configure a JBoss datasource file for your db.   Listed below is an example datasource for MySQL :	
+        </p><pre class="programlisting">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;datasources&gt;
+ &lt;local-tx-datasource&gt;
+   &lt;jndi-name&gt;JuddiDS&lt;/jndi-name&gt;
+   &lt;connection-url&gt;jdbc:mysql://localhost:3306/juddiv3&lt;/connection-url&gt;
+   &lt;driver-class&gt;com.mysql.jdbc.Driver&lt;/driver-class&gt;
+   &lt;user-name&gt;root&lt;/user-name&gt;
+   &lt;password&gt;&lt;/password&gt;
+   &lt;exception-sorter-class-name&gt;org.jboss.resource.adapter.jdbc.vendor.MySQLExceptionSorter&lt;/exception-sorter-class-name&gt;
+
+   &lt;!-- corresponding type-mapping in the standardjbosscmp-jdbc.xml (optional) --&gt;
+   &lt;metadata&gt;
+      &lt;type-mapping&gt;mySQL&lt;/type-mapping&gt;
+   &lt;/metadata&gt;
+ &lt;/local-tx-datasource&gt;
+&lt;/datasources&gt;
+</pre><p>
+	Next, make a few changes to the <code class="filename">juddiv3.war/classes/META-INF/persistence.xml</code>. 
+	
+	Change the "hibernate.dialect" property to match the database you have chosen for persistence.      For MySQL, change the value of hibernate.dialect to "org.hibernate.dialect.MySQLDialect".     A full list of dialects available can be found in the hibernate documentation (https://www.hibernate.org/hib_docs/v3/api/org/hibernate/dialect/package-summary.html).  
+
+	Next, change the &lt;jta-data-source&gt; tags so that it reads &lt;non-jta-data-source&gt;, and change the value from java:comp/env/jdbc/JuddiDS to java:/JuddiDS.
+        </p></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-Administration.html"><strong>Prev</strong>Chapter 10. Administration</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="chap-deployglassfish.html"><strong>Next</strong>Chapter 12. Deploying to Glassfish 2.1.1</a></li></ul></body></html>

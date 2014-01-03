@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 12. Deploying to Glassfish 2.1.1</title><link rel="stylesheet" type="text/css" href="css/jbossorg.css"/><meta xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL Stylesheets V1.76.1"/><link rel="home" href="index.html" title="jUDDI User Guide"/><link rel="up" href="index.html" title="jUDDI User Guide"/><link rel="prev" href="chap-deployjboss.html" title="Chapter 11. Deploying to JBoss 6.0.0.GA"/><link rel="next" href="appe-Publican-Revision_History.html" title="Appendix A. Revision History"/><link rel="copyright" href="ln-d0e35.html" title="Legal Notice"/></head><body><p id="title"><a href="http://juddi.apache.org/" class="site_href"><strong>Apache jUDDI</strong></a><a href="http://juddi.apache.org/docs.html" class="doc_href"><strong>Community Documentation</strong></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-deployjboss.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="appe-Publican-Revision_History.html"><strong>Next</strong></a></li></ul><div class="chapter" title="Chapter 12. Deploying to Glassfish 2.1.1"><div class="titlepage"><div><div><h2 class="title"><a id="chap-deployglassfish"/>Chapter 12. Deploying to Glassfish 2.1.1</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="chap-deployglassfish.html#sect-deployglassfish">12.1. Introduction</a></span></dt><dt><span class="section"><a href="chap-deployglassfish.html#sect-glassfish-jars">12.2. Glassfish jars</a></span></dt><dt><span class="section"><a href="chap-deployglassfish.html#sect-juddi-ds">12.3. Configure the JUDDI datasource</a></span></dt><dt><span class="section"><a href="chap-deployglassfish.html#sect-glassfish-juddi-war">12.4. Add juddiv3-cxf.war</a></span></dt><dt><span class="section"><a href="chap-deployglassfish.html#sect-run">12.5. Run juddi</a></span></dt></dl></div><div class="section" title="12.1. Introduction"><div class="titlepage"><div><div><h2 class="title"><a id="sect-deployglassfish"/>12.1. Introduction</h2></div></div></div><p> This section describes how to deploy juddi to Glassfish 2.1.1.
+			These instructions will use CXF as a webservice framework.</p><p>
+			First, download the glassfish-v2.1.1 installer JAR. Once
+			downloaded,install using the JAR and then run the ant setup script :
+			</p><pre class="programlisting">
+java -jar glassfish-installer-v2.1.1-b31g-linux.jar
+cd glassfish
+ant -f setup.xml
+</pre><p>
+		</p></div><div class="section" title="12.2. Glassfish jars"><div class="titlepage"><div><div><h2 class="title"><a id="sect-glassfish-jars"/>12.2. Glassfish jars</h2></div></div></div><p>
+			Copy the following JARs into domains/domain1/lib/ext. Note that for
+			the purposes of this example, we have copied the MySQL driver to
+			<code class="filename">domains/domain1/lib/ext</code>
+			:
+			</p><pre class="programlisting">
+antlr-2.7.6.jar
+cglib-nodep-2.1_3.jar
+commons-collections-3.2.1.jar
+commons-logging-1.1.jar
+dom4j-1.6.1.jar
+hibernate-3.2.5.ga.jar
+hibernate-annotations-3.3.0.ga.jar
+hibernate-commons-annotations-3.0.0.ga.jar
+hibernate-entitymanager-3.3.1.ga.jar
+hibernate-validator-3.0.0.ga.jar
+javassist-3.3.ga.jar
+jboss-common-core-2.0.4.GA.jar
+jta-1.0.1B.jar
+mysql-connector-java-5.0.8-bin.jar
+persistence-api-1.0.jar
+</pre><p>
+		</p></div><div class="section" title="12.3. Configure the JUDDI datasource"><div class="titlepage"><div><div><h2 class="title"><a id="sect-juddi-ds"/>12.3. Configure the JUDDI datasource</h2></div></div></div><p>
+			First, using the asadmin administration tool, import the following
+			file :
+			</p><pre class="programlisting">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE resources PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.0 Domain//EN" "*&lt;install directory&gt;/lib/dtds/sun-resources_1_3.dtd*"&gt;
+&lt;resources&gt;
+&lt;jdbc-connection-pool name="mysql-pool" datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" res-type="javax.sql.DataSource"&gt;
+&lt;property name="user" value="juddi"/&gt;
+&lt;property name="password" value="juddi"/&gt;
+&lt;property name="url" value="jdbc:mysql://localhost:3306/juddiv3"/&gt;
+&lt;/jdbc-connection-pool&gt;
+&lt;jdbc-resource enabled="true" jndi-name="jdbc/mysql-resource" object-type="user" pool-name="mysql-pool"/&gt;
+&lt;/resources&gt;
+</pre><p>
+			</p><pre class="programlisting">
+	asadmin add-resources resource.xml
+	</pre><p>
+			Then use the Glassfish administration console to create a
+			"jdbc/juddiDB" JDBC datasource resource based on the mysql-pool
+			Connection Pool.
+		</p></div><div class="section" title="12.4. Add juddiv3-cxf.war"><div class="titlepage"><div><div><h2 class="title"><a id="sect-glassfish-juddi-war"/>12.4. Add juddiv3-cxf.war</h2></div></div></div><p>
+			Unzip the juddiv3-cxf WAR into
+			<code class="filename">domains/domain1/autodeploy/juddiv3.war
+			</code>
+			.
+		</p><p>
+			Add a
+			<code class="filename">sun-web.xml</code>
+			file into juddiv3.war/WEB-INF. Make sure that the JNDI references
+			matches the JNDI location you configured in the Glassfish
+			administration console.
+			</p><pre class="programlisting">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE sun-web-app PUBLIC '-//Sun Microsystems, Inc.//DTD 
+Application Server 9.0 Servlet 2.5//EN' 
+'http://www.sun.com/software/appserver/dtds/sun-web-app_2_5-0.dtd'&gt;
+&lt;sun-web-app&gt;
+&lt;resource-ref&gt;
+&lt;res-ref-name&gt;jdbc/juddiDB&lt;/res-ref-name&gt;
+&lt;jndi-name&gt;jdbc/juddiDB&lt;/jndi-name&gt;
+&lt;/resource-ref&gt;
+&lt;/sun-web-app&gt;
+</pre><p>
+		</p><p>
+			Next, make a few changes to
+			<code class="filename">juddiv3.war/WEB-INF/classes/META-INF/persistence.xml
+			</code>.
+			Change the "hibernate.dialect" property to match the database that
+			you have chosen for persistence. For MySQL, change the value of
+			hibernate.dialect to "org.hibernate.dialect.MySQLDialect". A full
+			list of dialects available can be found in the hibernate
+			documentation
+			(https://www.hibernate.org/hib_docs/v3/api/org/hibernate/dialect/package-summary.html).
+			Next, change the &lt;jta-data-source&gt; change the value from java:comp/env/jdbc/JuddiDS to java:comp/env/jdbc/JuddiDB.
+
+	</p></div><div class="section" title="12.5. Run juddi"><div class="titlepage"><div><div><h2 class="title"><a id="sect-run"/>12.5. Run juddi</h2></div></div></div><p>
+	Start up the server :
+	</p><pre class="programlisting">
+cd bin
+asadmin start-domain domain1
+        </pre><p>
+	
+	Once the server is deployed, browse to <a class="ulink" href="http://localhost:8080/juddiv3">http://localhost:8080/juddiv3</a>
+	</p></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-deployjboss.html"><strong>Prev</strong>Chapter 11. Deploying to JBoss 6.0.0.GA</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="appe-Publican-Revision_History.html"><strong>Next</strong>Appendix A. Revision History</a></li></ul></body></html>

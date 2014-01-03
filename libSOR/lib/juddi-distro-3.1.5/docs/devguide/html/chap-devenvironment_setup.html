@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 2. Development Environment Setup</title><link rel="stylesheet" href="css/jbossorg.css" type="text/css"/><meta xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL Stylesheets V1.74.0"/><link rel="home" href="index.html" title="jUDDI Dev Guide"/><link rel="up" href="index.html" title="jUDDI Dev Guide"/><link rel="prev" href="chap-jUDDI_Architecture.html" title="Chapter 1. UDDI Registry"/><link rel="next" href="chap-release_process.html" title="Chapter 3. Release Process"/><link rel="copyright" href="ln-d0e35.html" title="Legal Notice"/></head><body><p id="title"><a href="http://ws.apache.org/juddi" class="site_href"><strong>Apache jUDDI</strong></a><a href="http://ws.apache.org/juddi/docs" class="doc_href"><strong>Community Documentation</strong></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-jUDDI_Architecture.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="chap-release_process.html"><strong>Next</strong></a></li></ul><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="chap-devenvironment_setup"/>Chapter 2. Development Environment Setup</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="chap-devenvironment_setup.html#Prerequisites">2.1. Prerequisites</a></span></dt><dt><span class="section"><a href="chap-devenvironment_setup.html#Building the Project">2.2. Building the Project</a></span></dt><dt><span class="section"><a href="chap-devenvironment_setup.html#Source Modules Overview">2.3. Source Modules Overview</a></span></dt><dt><span class="section"><a href="chap-devenvironment_setup.html#settingupeclipse">2.4. Setting up Eclipse</a></span></dt><dt><span class="section"><a href="chap-devenvironment_setup.html#Running a unittest from within Eclipse">2.5. Running a unittest from within Eclipse</a></span></dt><dt><span class="section"><a href="chap-devenvironment_setup.html#Building the JAR">2.6. Building the JAR</a></span></dt><dt><span class="section"><a href="chap-devenvironment_setup.html#Building the WAR">2.7. Building the WAR</a></span></dt><dt><span class="section"><a href="chap-devenvironment_setup.html#Building the Tomcat Bundle">2.8. Building the Tomcat Bundle</a></span></dt><dt><span class="section"><a href="chap-devenvironment_setup.html#Running and Developing Tests">2.9. Running and Developing Tests</a></span></dt></dl></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Prerequisites"/>2.1. Prerequisites</h2></div></div></div><p>
+	To be able to build and run jUDDI you will need to have the following installed:
+	</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>1.5.X JDK</p></li><li><p>Maven 2.0.8</p></li></ol></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Building the Project"/>2.2. Building the Project</h2></div></div></div><p>
+First, check out the jUDDI sources:
+</p><pre class="screen">
+% svn co http://svn.apache.org/repos/asf/webservices/juddi/trunk
+</pre><p>
+Then build the entire project using OpenJPA for persistance use:
+
+</p><pre class="screen">
+% cd trunk
+% mvn clean install -Dpersistence=openjpa
+</pre><p>
+To use Hibernate change the persistence flag to hibernate. Optionally you can use a <code class="filename">settings.xml</code> to set your persistence choice on a permanent basis, so you don't have to provide the persistence variable every time you build. The default location of the <code class="filename">settings.xml</code> is in your <code class="filename">.m2</code> directory.  An example file is checked into our source tree at <code class="filename">etc/.m2/settings.xml</code>.
+        </p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Source Modules Overview"/>2.3. Source Modules Overview</h2></div></div></div><p> 
+	Within jUDDI source, there are the following modules:
+        </p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>uddi-ws: JAXWS stubs built from the WSDLs</p></li><li><p>uddi-tck: Test kit developed by jUDDI for testing UDDI v3 functionality.    The TCK is not jUDDI specific and could be used to verify and validate other UDDI v3 implementations</p></li><li><p>juddi-core: the jUDDI jar containing the model, API, and core jUDDI functionality</p></li><li><p>juddiv3-war: a WAR module agnostic as to JAX-WS provider</p></li><li><p>juddi-cxf: a WAR module that uses CXF as the web service framework, chosen by default</p></li><li><p>juddi-tomcat: a module which builds a Tomcat bundle with juddi-cxf installed and Derby as a backend data base</p></li><li><p>juddi-console: a module which builds upon the juddi-tomcat module and adds a GWT-based administration console</p></li><li><p>uddi-client: a generic client library for communicating with a UDDI server</p></li><li><p>juddi-dist: a module used to produce shippable binary distributions</p></li></ol></div><p>
+jUDDI v3 is set up to produce a number of different deliverables – a JAR, a WAR, and a Tomcat bundle. Depending on the scope of your application, or your interest in the project, you might want to use the Tomcat server bundle packaged with the Derby database and jUDDI, or you may just want to use the jUDDI JAR and make your own database and Web Service choices. jUDDI is set up so that it can support a range of environments.
+	</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="settingupeclipse"/>2.4. Setting up Eclipse</h2></div></div></div><p>
+The easiest way to setup jUDDI in eclipse is to use the m2eclipse plugin which can be found at http://m2eclipse.codehaus.org/update/.   In order to run and debug the project unit tests, it is required that you install this plugin.    After installing the plugin you should select:
+	</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>“Enable Depency Management”</p></li><li><p>Then, “Enable Nested Modules”</p></li><li><p>Then, “Update Project Configuration”</p></li></ol></div><p>
+        </p><div class="figure"><a id="fig-jUDDI-eclipse-maven"/><div class="figure-contents"><div class="mediaobject"><img src="images/eclipse_maven.png" alt="Enable m2eclipse"/></div></div><p class="title"><b>Figure 2.1. Eclipse Maven Integration</b></p></div><br class="figure-break"/><p>
+If you wish to change your persistence.xml for the purposes of testing, either change it and then build, or change <code class="filename">juddi-core/target/classes/META-INF/persistence.xml</code>.
+
+If you choose not to use the m2eclipse plugin you can setup your classpath by following these directions, but there are no guarantees that the unit tests will be debuggable within Eclipse.
+Choose “Eclipse” -&gt; “Preferences”
+In the preference dialog, select “Java” -&gt; “Build Path” -&gt; “Classpath Variables”
+Add a new classpath variable :
+</p><code class="literal">
+	<p>Name: M2_REPO</p>
+	<p>Path : /[path-to-.m2]/.m2 (example : /home/tcunning/.m2)</p>
+
+<p>% cd v3_trunk</p>
+<p>% mvn eclipse:eclipse -Declipse.workspace=/[path-to-workspace]/workspace</p>
+</code><p>
+Then within Eclipse, “Create New Project” and choose “Create from existing source” and choose the source folder that you just checked out from SVN.
+    </p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Running a unittest from within Eclipse"/>2.5. Running a unittest from within Eclipse</h2></div></div></div><p>
+To run one unittest from within eclipse simply right-click the unittest and select Debug As &gt; Junit Test
+	</p><div class="figure"><a id="fig-eclipse-unittest"/><div class="figure-contents"><div class="mediaobject"><img src="images/eclipse_unittest.png" alt="Running unittests from within Eclipse"/></div></div><p class="title"><b>Figure 2.2. Eclipse Maven Integration</b></p></div><br class="figure-break"/><p>
+If you are using OpenJPA you have to make sure that the <code class="filename">openjpa-1.2.jar</code> is on the classpath and that for each unittest you specify the javaagent needed for the enhancement phase
+</p><p>
+<code class="literal">
+-javaagent:/Users/kstam/.m2/repository/org/apache/openjpa/openjpa/1.2.0/openjpa-1.2.0.jar
+</code>
+</p><div class="figure"><a id="fig-jUDDI-eclipse-javaagent"/><div class="figure-contents"><div class="mediaobject"><img src="images/eclipse_javaagent.png" alt="Specifying the javaagent needed by OpenJPA during the enhancement phase"/></div></div><p class="title"><b>Figure 2.3. Eclipse Maven Integration</b></p></div><br class="figure-break"/></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Building the JAR"/>2.6. Building the JAR</h2></div></div></div><p>
+The juddi-core module produces a JAR which contains the jUDDI source and a jUDDI persistence.xml configuration. jUDDI is currently setup so that you can choose between using either OpenJPA or Hibernate as your persistence framework. The juddi-core <code class="filename">pom.xml</code> contains two profiles, triggered on the "persistence" property.
+</p><p>
+OpenJPA
+</p><pre class="screen">
+% cd juddi-core
+% mvn clean install -Dpersistence=openjpa 
+</pre><p>
+Hibernate
+</p><pre class="screen">
+% cd juddi-core
+% mvn clean install -Dpersistence=hibernate 
+</pre><p>
+For juddi 3.0.0 and 3.0.1, the project built with Hibernate by default, but as of 3.0.2 the project now builds with openjpa as the default persistence layer.    Two flavors of juddi-core are available as maven artifacts - juddi-core for hibernate usage and juddi-core-openjpa for use with OpenJPA.
+</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Building the WAR"/>2.7. Building the WAR</h2></div></div></div><p>
+As with the JAR, you need to make a decision on what framework you would like to use when building the WAR.       The project contains twoWAR modules – juddiv3-war, which produces a JAX-WS agnostic WAR, and juddi-cxf – which produces a WAR with CXF descriptors.       The project would welcome any contribution of docs or descriptors for alternative JAX-WS providers.
+        </p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Building the Tomcat Bundle"/>2.8. Building the Tomcat Bundle</h2></div></div></div><p>
+     Tomcat bundle packages up one of the jUDDI WAR files, Apache Derby, and a few necessary configuration files and provides the user with a pre-configured jUDDI instance.       By default, the WAR produced by the juddi-cxf module is used – the example below shown uses URLs and endpoints using the jUDDI CXF configuration.     If you use the Axis 2 configuration, URLs and endpoints may differ.
+</p><p>
+To get started using the Tomcat bundle, unzip the <code class="filename">juddi-tomcat-bundle.zip</code>, and start Tomcat :
+</p><pre class="screen">
+% cd apache-tomcat-6.0.20/bin
+% ./startup.sh  
+</pre><p>Browse to http://localhost:8080/juddiv3/services</p><div class="figure"><a id="fig-juddi-services"/><div class="figure-contents"><div class="mediaobject"><img src="images/juddi_services.png" alt="jUDDI Service List"/></div></div><p class="title"><b>Figure 2.4. jUDDI Service List</b></p></div><br class="figure-break"/><p>The services page shows you the available endpoints and methods available.      Using any SOAP client, you should be able to send some sample requests to jUDDI to test:</p><div class="figure"><a id="fig-soap-sample-request"/><div class="figure-contents"><div class="mediaobject"><img src="images/soap_request.png" alt="A jUDDI sample SOAP request"/></div></div><p class="title"><b>Figure 2.5. SOAP Sample Request</b></p></div><br class="figure-break"/></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Running and Developing Tests"/>2.9. Running and Developing Tests</h2></div></div></div><p>
+Currently the only unit tests are in juddi-core.      We plan to add a suite of web service tests automated against the juddi-cargo module.
+</p><p>
+Running the tests:
+</p><pre class="screen">
+% cd juddi-core
+% mvn -Dpersistence=hibernate test
+</pre><p>
+The tests are run through a maven-surefire-plugin within the juddi-core <code class="filename">pom.xml</code> :
+</p><pre xmlns="" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="XML"><!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+
+        maven-surefire-plugin
+        2.4.2
+        
+          
+            src/test/resources/suite-init.xml,src/test/resources/suite-subscribe.xml,src/test/resources/suite-clean.xml
+          
+        
+      <!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_plain"></span><br />
+</pre><p>
+The NUnit suite files listed here determine what tests are run with what data, and what order they are run in.     <code class="filename">suite-init.xml</code> initializes the jUDDI database with data, <code class="filename">suite-subscribe.xml</code> runs a subscription test, and <code class="filename">suite-clean.xml</code> cleans the database and removes the test data.
+</p><p>
+To develop your own tests, please add another maven-surefire-plugin segment and the same ordering of XML files (<code class="filename">suite-init.xml</code>, your custom suite, and then <code class="filename">suite-clean.xml</code>).  
+</p></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-jUDDI_Architecture.html"><strong>Prev</strong>Chapter 1. UDDI Registry</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="chap-release_process.html"><strong>Next</strong>Chapter 3. Release Process</a></li></ul></body></html>
