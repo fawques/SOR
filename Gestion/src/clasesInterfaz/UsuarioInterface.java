@@ -19,7 +19,7 @@ public class UsuarioInterface {
     
     
     
-    private final SimpleIntegerProperty ID;
+    private final SimpleStringProperty ID;
     private final SimpleStringProperty nombreTaller;
     private final SimpleStringProperty email;
     private final SimpleStringProperty direccion;
@@ -29,7 +29,7 @@ public class UsuarioInterface {
 
 
     public UsuarioInterface(){
-    ID= new SimpleIntegerProperty();
+    ID= new SimpleStringProperty();
     nombreTaller=new SimpleStringProperty("");
     direccion=new SimpleStringProperty("");
     ciudad=new SimpleStringProperty("");
@@ -55,9 +55,9 @@ public class UsuarioInterface {
     crearTallerInterface(taller.getID(),taller.getName(), taller.getAddress(), taller.getCity(), taller.getEmail(),taller.getPostalCode(),taller.getTelephone());
     }*/
 
-    public UsuarioInterface(int _ID, String _nombre, String _direccion, String _provincia, String _email, int _codigo, int _numero) {
+    public UsuarioInterface(String _ID, String _nombre, String _direccion, String _provincia, String _email, int _codigo, int _numero) {
      
-        ID= new SimpleIntegerProperty(_ID);
+        ID= new SimpleStringProperty(_ID);
         nombreTaller=new SimpleStringProperty(_nombre);
         direccion=new SimpleStringProperty(_direccion);
         ciudad=new SimpleStringProperty(_provincia);
@@ -67,7 +67,7 @@ public class UsuarioInterface {
     }
      public UsuarioInterface(Taller taller) {
          
-        ID= new SimpleIntegerProperty(taller.getID());
+        ID= new SimpleStringProperty(taller.getID());
         nombreTaller=new SimpleStringProperty(taller.getName());
         direccion=new SimpleStringProperty(taller.getAddress());
         ciudad=new SimpleStringProperty( taller.getCity());
@@ -77,7 +77,7 @@ public class UsuarioInterface {
     }
      public UsuarioInterface(Desguace desguace) {
          
-        ID= new SimpleIntegerProperty(desguace.getID());
+        ID= new SimpleStringProperty(desguace.getID());
         nombreTaller=new SimpleStringProperty(desguace.getName());
         direccion=new SimpleStringProperty(desguace.getAddress());
         ciudad=new SimpleStringProperty( desguace.getCity());
@@ -85,7 +85,7 @@ public class UsuarioInterface {
         codigoPostal=new SimpleIntegerProperty(desguace.getPostalCode());
         numeroTelefono=new SimpleIntegerProperty(desguace.getTelephone());
     }
-    public int getID() {
+    public String getID() {
         return ID.get();
     }
 

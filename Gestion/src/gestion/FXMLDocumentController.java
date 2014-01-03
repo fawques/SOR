@@ -186,7 +186,7 @@ public class FXMLDocumentController implements Initializable {
      
      
     }
-    public void ofertasclickPedido(int id){
+    public void ofertasclickPedido(String id){
     personDataOferta.clear();
      ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
      Gson gson = new Gson();
@@ -202,7 +202,7 @@ public class FXMLDocumentController implements Initializable {
       
       
     }
-    public void piezasInterfaz(int id ){
+    public void piezasInterfaz(String id ){
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
         Gson gson = new Gson();
         TableColumn columnCant = new TableColumn("cant");
@@ -229,7 +229,7 @@ public class FXMLDocumentController implements Initializable {
            tablePiezas.getColumns().addAll(columnNombre,columnCant);
      
     }
-    public void piezasclickPedido(int id){
+    public void piezasclickPedido(String id){
         personDataPiezas.clear();
         ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
         Gson gson = new Gson();
