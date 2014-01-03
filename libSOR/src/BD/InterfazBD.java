@@ -36,11 +36,11 @@ public class InterfazBD {
     // setters
     public int anadirOferta(int id, Date fechaAlta, float importe, int estado, int pedido, int desguace, Date fechaBaja, Date fechaLimite)    {
         // TODO: cambiar el id
-        return conexion.ejecutarInsert("insert INTO oferta (id, fechaAlta, importe, estado, pedido, desguace, fechaBaja, fechaLimite) values ('" + id + "','" + fechaAlta + "', '" + importe + "','" + estado + "','" + pedido + "';" + desguace + "','" + fechaBaja + "','" + fechaLimite + "');");
+        return conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('" + id + "','" + fechaAlta + "', '" + importe + "','" + estado + "','" + pedido + "';" + desguace + "','" + fechaBaja + "','" + fechaLimite + "');");
     }
     
     public int anadirPedido(Date fechaAlta, EstadoPedido estado, String taller, Date fechaBaja, Date fechaLimite) {
-        return conexion.ejecutarInsert("insert INTO pedido (fechaAlta, estado, taller, fechaBaja, fechaLimite) values ('" + fechaAlta + "','" + estado + "','" + taller + "','" + fechaBaja + "','" + fechaLimite + "';");
+        return conexion.ejecutarInsert("insert INTO pedido (id, fecha_alta, estado, taller, fecha_limite) values ('', Date('" + fechaAlta + "'),'" + estado + "','" + taller + "', Date('" + fechaLimite + "'));");
     }
     
     
