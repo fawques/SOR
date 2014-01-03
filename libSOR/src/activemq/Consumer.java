@@ -7,6 +7,7 @@
 package activemq;
 
 import javax.jms.Connection;
+import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;

@@ -7,11 +7,16 @@ package taller;
 
 import BD.InterfazBD;
 import general.EstadoGeneral;
+import general.EstadoPedido;
+import general.Pedido;
+import general.Pieza;
 import general.Taller;
 import gestor_taller.JMSException_Exception;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -70,6 +75,8 @@ public class MainTaller extends Application {
                  staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else { //baja
+                //Yo lo que haria sería un volver a darme de alta, con los mismos datos
+                //un botón y prou
                 FXMLLoader loader = changeScene("AltaTaller.fxml");
                 stage.setTitle("Alta de taller");
                 AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
@@ -83,6 +90,18 @@ public class MainTaller extends Application {
             staticDataBox.setStage(stage);
             staticDataBox.showStage();
         }
+    }
+
+    /**
+     * The main() method is ignored in correctly deployed JavaFX application.
+     * main() serves only as fallback in case the application can not be
+     * launched through deployment artifacts, e.g., in IDEs with limited FX
+     * support. NetBeans ignores main().
+     *
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
     }
 
     /**
@@ -143,6 +162,16 @@ public class MainTaller extends Application {
         
         Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]{0,21}");
         Matcher m = p.matcher(n);
+        if (!m.matches()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean validarFecha(String dia, String mes, String anyo) {
+        Pattern p = Pattern.compile("^((((((0[13578])|(1[02]))[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9])|(3[01])))|(((0[469])|(11))[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9])|(30)))|((02)[\\s\\.\\-\\/\\\\]?((0[1-9])|(1[0-9])|(2[0-8]))))[\\s\\.\\-\\/\\\\]?(((([2468][^048])|([13579][^26]))00)|(\\d\\d\\d[13579])|(\\d\\d[02468][^048])|(\\d\\d[13579][^26])))|(((((0[13578])|(1[02]))[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9])|(3[01])))|(((0[469])|(11))[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9])|(30)))|((02)[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9]))))[\\s\\.\\-\\/\\\\]?(((([2468][048])|([13579][26]))00)|(\\d\\d[2468][048])|(\\d\\d[13579][26])|(\\d\\d0[48]))))$");
+        Matcher m = p.matcher(mes + dia + anyo);
         if (!m.matches()) {
             return false;
         }
@@ -214,7 +243,9 @@ public class MainTaller extends Application {
     public static boolean activarTallerBD(String idRecibido) {
         try {
             bd = new InterfazBD("sor_taller");
-            return bd.activarTallerMainTaller(idRecibido);
+            boolean r = bd.activarTallerMainTaller(idRecibido);
+            //bd.close();
+            return r;
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -224,16 +255,31 @@ public class MainTaller extends Application {
         return false;
     }
 
-    /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
+    public static ArrayList<Pedido> buscarPedidos(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) {
+        try {
+            bd = new InterfazBD("sor_taller");
+            ArrayList<Pedido> p = bd.buscarPedido(idPedido, idPieza, estado, fechaLimite, modoAceptacion);
+            //bd.close();
+            return p;
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+        try {
+            bd = new InterfazBD("sor_taller");
+            int id = bd.anadirPedido(fechaAlta, estado, bd.getPrimerTaller().getID(), new Date(), fechaLimite);
+            bd.anyadirPiezasAPedido(id, piezas, cantidades);
+            //bd.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

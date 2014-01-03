@@ -7,31 +7,36 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevoPedidoController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="357.0" prefWidth="586.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevoPedidoController">
   <children>
-    <Label layoutX="58.0" layoutY="46.0" text="ID Pedido" />
-    <TextField fx:id="tfIDPedido" layoutX="141.0" layoutY="43.0" prefWidth="200.0" text="" />
-    <Label layoutX="58.0" layoutY="84.0" text="ID Taller" />
-    <TextField fx:id="tfIDTaller" layoutX="141.0" layoutY="81.0" prefWidth="200.0" text="" />
-    <Label layoutX="58.0" layoutY="118.0" text="Fecha alta" />
-    <Label layoutX="233.0" layoutY="121.0" text="Fecha baja" />
-    <Label layoutX="388.0" layoutY="126.0" text="Fecha limite" />
-    <Label layoutX="56.0" layoutY="155.0" text="Estado" />
-    <ComboBox fx:id="cbEstado" layoutX="106.0" layoutY="153.0">
-      <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
-        </FXCollections>
-      </items>
-    </ComboBox>
-    <TableView fx:id="dgPedidos" layoutX="56.0" layoutY="200.0" prefHeight="169.0" prefWidth="494.0">
+    <TableView id="dgPedidos" fx:id="tbPedidos" layoutX="148.0" layoutY="62.0" prefHeight="169.0" prefWidth="245.0">
       <columns>
-        <TableColumn prefWidth="75.0" text="Pieza" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="172.0" text="Pieza" />
         <TableColumn prefWidth="75.0" text="Cantidad" />
       </columns>
     </TableView>
-    <Button fx:id="btAnadirPieza" layoutX="332.0" layoutY="155.0" mnemonicParsing="false" text="Añadir pieza" />
+    <Button fx:id="btAnadirPieza" layoutX="456.0" layoutY="30.0" mnemonicParsing="false" onAction="#anyadirPiezaAPedido" text="Añadir pieza" />
+    <Button layoutX="225.0" layoutY="317.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
+    <TextField layoutX="351.0" layoutY="29.0" prefWidth="65.0" />
+    <TextField layoutX="111.0" layoutY="29.0" prefWidth="151.0" />
+    <Label layoutX="66.0" layoutY="32.0" text="Pieza" />
+    <Label layoutX="285.0" layoutY="32.0" text="Cantidad" />
+    <Label layoutX="61.0" layoutY="258.0" text="Fecha limite" />
+    <HBox layoutX="148.0" layoutY="255.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
+      <children>
+        <TextField id="tfLimiteDia" minWidth="30.0" prefWidth="150.0" />
+        <TextField id="tfLimiteMes" minWidth="30.0" prefWidth="150.0" />
+        <TextField id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
+      </children>
+    </HBox>
+    <Label layoutX="305.0" layoutY="257.0" text="Estado" />
+    <ComboBox id="cbEstado" layoutX="355.0" layoutY="255.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Manual" />
+          <String fx:value="Automático" />
+        </FXCollections>
+      </items>
+    </ComboBox>
   </children>
 </AnchorPane>
