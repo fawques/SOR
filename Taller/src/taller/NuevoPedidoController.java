@@ -58,9 +58,12 @@ public class NuevoPedidoController implements Initializable {
 
     public void realizarPedido() {
         //validar
-        String fechaLimite = tfLimiteAnyo.getText() + "/" + tfLimiteMes.getText() + "/" + tfLimiteDia;
-//EstadoAutomatico.valueOf(cbEstado.getValue().toString()) falta añadir estado manual/automatica
-        MainTaller.crearPedido(new Date().toString(), EstadoPedido.WAITING_ACCEPT, fechaLimite, new ArrayList<Pieza>(), new ArrayList<Integer>());
+        String fechaLimite = tfLimiteAnyo.getText() + "/" + tfLimiteMes.getText() + "/" + tfLimiteDia.getText();
+        //EstadoAutomatico.valueOf(cbEstado.getValue().toString()) falta añadir estado manual/automatica
+        Date today1 = new Date();
+        String today = today1.getYear() + "/" + today1.getMonth() + "/" + today1.getDay();
+        System.out.println(today);
+        MainTaller.crearPedido(today, EstadoPedido.WAITING_ACCEPT, fechaLimite, new ArrayList<Pieza>(), new ArrayList<Integer>());
     }
 
     public void anyadirPiezaAPedido() {
