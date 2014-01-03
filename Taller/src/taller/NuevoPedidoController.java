@@ -18,7 +18,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -41,6 +43,9 @@ public class NuevoPedidoController implements Initializable {
     public TextField tfLimiteAnyo;
     public TextField tfIdPieza;
     public TextField tfCantidadPieza;
+    public CheckBox chModoAutomatico;
+    public RadioButton rbPVP;
+    public RadioButton rbFecha;
     
     /**
      * Initializes the controller class.

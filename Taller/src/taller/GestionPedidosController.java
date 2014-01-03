@@ -43,6 +43,29 @@ public class GestionPedidosController implements Initializable {
     public ComboBox cbEstado;
     public ComboBox cbModo;
     public TableView tvGrid;
+    public Button btBuscarPedido;
+    
+    /* PIEZAS */
+    
+    public TextField tfNombrePieza;
+    public ComboBox cbTipoPiezas;
+    public ComboBox cbEstadoPiezas;
+    public Button btNuevaPieza;
+    public Button btBuscarPieza;
+    
+    /* OFERTAS */
+    public TextField tfIDPedidoOferta;
+    public TextField tfIDCliente;
+    public TextField tfIDPiezaOferta;
+    public TextField tfNombreCliente;
+    public TextField tfApellidos;
+    public ComboBox cbEstadoOfertas;
+    public TextField tfOfertasDia;
+    public TextField tfOfertasMes;
+    public TextField tfOfertasAnyo;
+
+    public Button btAceptarOferta;
+    public Button btRechazarOferta;
 
     /**
      * Initializes the controller class.

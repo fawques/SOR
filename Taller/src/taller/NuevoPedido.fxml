@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="357.0" prefWidth="586.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevoPedidoController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="586.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevoPedidoController">
   <children>
     <TableView id="dgPedidos" fx:id="tbPedidos" layoutX="148.0" layoutY="62.0" prefHeight="169.0" prefWidth="245.0">
       <columns>
@@ -16,7 +16,7 @@
       </columns>
     </TableView>
     <Button fx:id="btAnadirPieza" layoutX="456.0" layoutY="30.0" mnemonicParsing="false" onAction="#anyadirPiezaAPedido" text="Añadir pieza" />
-    <Button layoutX="225.0" layoutY="317.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
+    <Button layoutX="221.0" layoutY="373.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
     <TextField layoutX="351.0" layoutY="29.0" prefWidth="65.0" />
     <TextField layoutX="111.0" layoutY="29.0" prefWidth="151.0" />
     <Label layoutX="66.0" layoutY="32.0" text="Pieza" />
@@ -38,5 +38,8 @@
         </FXCollections>
       </items>
     </ComboBox>
+    <CheckBox id="chModo" fx:id="chModoAutomatico" layoutX="61.0" layoutY="297.0" mnemonicParsing="false" text="Modo automático" />
+    <RadioButton id="rdPVP" fx:id="rbPVP" layoutX="61.0" layoutY="324.0" mnemonicParsing="false" text="PVP mínimo" />
+    <RadioButton id="rdFecha" fx:id="rbFecha" layoutX="169.0" layoutY="324.0" mnemonicParsing="false" text="Fecha entrega mas proxima" />
   </children>
 </AnchorPane>
