@@ -2,29 +2,17 @@
 
 <xs:element name="JMSException" type="tns:JMSException"/>
 
-<xs:element name="activarTaller" type="tns:activarTaller"/>
-
-<xs:element name="activarTallerResponse" type="tns:activarTallerResponse"/>
-
 <xs:element name="alta" type="tns:alta"/>
 
 <xs:element name="altaResponse" type="tns:altaResponse"/>
 
+<xs:element name="checkActivacion" type="tns:checkActivacion"/>
+
+<xs:element name="checkActivacionResponse" type="tns:checkActivacionResponse"/>
+
 <xs:element name="nuevoPedido" type="tns:nuevoPedido"/>
 
 <xs:element name="nuevoPedidoResponse" type="tns:nuevoPedidoResponse"/>
-
-<xs:complexType name="activarTaller">
-<xs:sequence>
-<xs:element name="mail" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="activarTallerResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
 
 <xs:complexType name="nuevoPedido">
 <xs:sequence>
@@ -34,7 +22,7 @@
 
 <xs:complexType name="nuevoPedidoResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -77,7 +65,19 @@
 
 <xs:complexType name="altaResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:int"/>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkActivacion">
+<xs:sequence>
+<xs:element name="mail" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkActivacionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
