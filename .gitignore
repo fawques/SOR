@@ -9,12 +9,7 @@
 # Netbeans #
 */build/
 */dist/
-*/nbproject/private/
-*/nbproject/genfiles.properties
-*/nbproject/jaxws-build.xml
-*/nbproject/jfx-impl.xml
-*/nbproject/jfx-impl_backup_*.xml
-*/nbproject/UPDATED.TXT
+*/nbproject/*
 
 # ActiveMQ #
 *.log
