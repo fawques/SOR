@@ -16,7 +16,6 @@ import general.Taller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,13 +33,13 @@ public class InterfazBD {
     
     // DESGUACES 
     // setters
-    public int anadirOferta(int id, Date fechaAlta, float importe, int estado, int pedido, int desguace, Date fechaBaja, Date fechaLimite)    {
+    public int anadirOferta(String fechaAlta, float importe, int estado, int pedido, int desguace, String fechaLimite) {
         // TODO: cambiar el id
-        return conexion.ejecutarInsert("insert INTO oferta (id, fechaAlta, importe, estado, pedido, desguace, fechaBaja, fechaLimite) values ('" + id + "','" + fechaAlta + "', '" + importe + "','" + estado + "','" + pedido + "';" + desguace + "','" + fechaBaja + "','" + fechaLimite + "');");
+        return conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_limite) values ('' ,Date('" + fechaAlta + "'), '" + importe + "','" + estado + "','" + pedido + "';" + desguace + "',Date('" + fechaLimite + "'));");
     }
     
-    public int anadirPedido(Date fechaAlta, EstadoPedido estado, String taller, Date fechaBaja, Date fechaLimite) {
-        return conexion.ejecutarInsert("insert INTO pedido (fechaAlta, estado, taller, fechaBaja, fechaLimite) values ('" + fechaAlta + "','" + estado + "','" + taller + "','" + fechaBaja + "','" + fechaLimite + "';");
+    public int anadirPedido(String fechaAlta, EstadoPedido estado, String taller, String fechaLimite) {
+        return conexion.ejecutarInsert("insert INTO pedido (id, fecha_Alta, estado, taller, fecha_limite) values ('' ,Date('" + fechaAlta + "'),'" + estado + "','" + taller + "', Date('" + fechaLimite + "'));");
     }
     
     
@@ -96,7 +95,7 @@ public class InterfazBD {
                 ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
 
-                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")],piezas,cantidades,getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getNString("fecha_alta"), resultados.getNString("fecha_baja"), resultados.getNString("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -118,7 +117,7 @@ public class InterfazBD {
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
-                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")],piezas,cantidades,getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getNString("fecha_alta"), resultados.getNString("fecha_baja"), resultados.getNString("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -208,7 +207,7 @@ public class InterfazBD {
         
                 ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(id, piezas, cantidades);
-                pedido = new Pedido(resultados.getString("id"),resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"),resultados.getDate("fecha_limite"),EstadoPedido.values()[resultados.getInt("estado")] ,piezas,cantidades,getOfertasPedido(id));
+                pedido = new Pedido(resultados.getString("id"), resultados.getString("taller"), resultados.getNString("fecha_alta"), resultados.getNString("fecha_baja"), resultados.getNString("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], piezas, cantidades, getOfertasPedido(id));
             }
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -337,7 +336,7 @@ public class InterfazBD {
         return conexion.ejecutarSQL("UPDATE `taller` SET `id`='" + idRecibido + "', `estado`='0'");
     }
 
-    public ArrayList<Pedido> buscarPedido(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) throws SQLException {
+    public ArrayList<Pedido> buscarPedido(String idPedido, String idPieza, String estado, String fechaLimite, String modoAceptacion) throws SQLException {
         ArrayList<Pedido> alPedidos = new ArrayList<>();
 
         String sWhere = "";
@@ -358,7 +357,7 @@ public class InterfazBD {
                 getPiezasYCantidades(idPedido, piezas, cantidades);
 
                 Pedido p = new Pedido(pedidos.getNString("id"),
-                        pedidos.getInt("id_aux"), pedidos.getNString("taller"), pedidos.getDate("fecha_alta"), pedidos.getDate("fecha_baja"), pedidos.getDate("fecha_limite"), EstadoPedido.values()[pedidos.getInt("estado")],
+                        pedidos.getInt("id_aux"), pedidos.getNString("taller"), pedidos.getNString("fecha_alta"), pedidos.getNString("fecha_baja"), pedidos.getNString("fecha_limite"), EstadoPedido.values()[pedidos.getInt("estado")],
                         piezas, cantidades, getOfertasPedido(pedidos.getNString("id")));
                 alPedidos.add(p);
                 pedidos.next();
@@ -369,7 +368,7 @@ public class InterfazBD {
     }
 
     //falta añadir el modoAceptación
-    private String crearWhereDeSelect(String idPedido, String sWhere, String modoAceptacion, Date fechaLimite, String estado) {
+    private String crearWhereDeSelect(String idPedido, String sWhere, String modoAceptacion, String fechaLimite, String estado) {
         if (idPedido.isEmpty()) {
             sWhere += " (id_aux='" + idPedido + "' or id='" + idPedido + "')";
         }

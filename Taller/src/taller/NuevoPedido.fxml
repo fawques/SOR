@@ -17,20 +17,20 @@
     </TableView>
     <Button fx:id="btAnadirPieza" layoutX="456.0" layoutY="30.0" mnemonicParsing="false" onAction="#anyadirPiezaAPedido" text="Añadir pieza" />
     <Button layoutX="225.0" layoutY="317.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
-    <TextField layoutX="351.0" layoutY="29.0" prefWidth="65.0" />
-    <TextField layoutX="111.0" layoutY="29.0" prefWidth="151.0" />
+    <TextField fx:id="tfCantidadPieza" layoutX="351.0" layoutY="29.0" prefWidth="65.0" />
+    <TextField fx:id="tfIdPieza" layoutX="111.0" layoutY="29.0" prefWidth="151.0" />
     <Label layoutX="66.0" layoutY="32.0" text="Pieza" />
     <Label layoutX="285.0" layoutY="32.0" text="Cantidad" />
     <Label layoutX="61.0" layoutY="258.0" text="Fecha limite" />
     <HBox layoutX="148.0" layoutY="255.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
       <children>
-        <TextField id="tfLimiteDia" minWidth="30.0" prefWidth="150.0" />
-        <TextField id="tfLimiteMes" minWidth="30.0" prefWidth="150.0" />
-        <TextField id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
+        <TextField fx:id="tfLimiteDia" minWidth="30.0" prefWidth="150.0" />
+        <TextField fx:id="tfLimiteMes" minWidth="30.0" prefWidth="150.0" />
+        <TextField fx:id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
       </children>
     </HBox>
     <Label layoutX="305.0" layoutY="257.0" text="Estado" />
-    <ComboBox id="cbEstado" layoutX="355.0" layoutY="255.0">
+    <ComboBox fx:id="cbEstado" layoutX="355.0" layoutY="255.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Manual" />
