@@ -61,10 +61,10 @@ public class Taller extends Usuario{
         return "Taller{" + "name=" + name + ", email=" + email + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode + ", telephone=" + telephone + '}';
     }
     
-    public Pedido nuevoPedido(Date fecha_limite) {
+    public Pedido nuevoPedido(Date fecha_limite){
         Date ahora = new Date();
 //TODO: Darle un ID de verdad, no el tiempo actual...
-        Pedido nuevo = new Pedido((int) ahora.getTime(), ID, fecha_limite.toString());
+        Pedido nuevo = new Pedido((int)ahora.getTime(),ID , fecha_limite);
         listaPedidos.add(nuevo);
         return nuevo;
     }

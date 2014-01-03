@@ -7,6 +7,7 @@
 package general;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,9 +17,9 @@ public class Pedido {
     private String ID;
     private int ID_aux;
     private String tallerID;
-    private String fecha_alta;
-    private String fecha_baja;
-    private String fecha_limite;
+    private Date fecha_alta;
+    private Date fecha_baja;
+    private Date fecha_limite;
     private EstadoPedido estado;
     
     private ArrayList<Pieza> listaPiezas;
@@ -38,7 +39,7 @@ public class Pedido {
      * @param listaCantidadesPiezas
      * @param listaOfertas
      */
-    public Pedido(String ID, int ID_aux, String tallerID, String fecha_alta, String fecha_baja, String fecha_limite, EstadoPedido estado, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
+    public Pedido(String ID, int ID_aux, String tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
         this.ID = ID;
         this.ID_aux = ID_aux;
         this.tallerID = tallerID;
@@ -64,7 +65,7 @@ public class Pedido {
      * @param listaCantidadesPiezas
      * @param listaOfertas
      */
-    public Pedido(String ID, String tallerID, String fecha_alta, String fecha_baja, String fecha_limite, EstadoPedido estado, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
+    public Pedido(String ID, String tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
         this.ID = ID;
         this.tallerID = tallerID;
         this.fecha_alta = fecha_alta;
@@ -83,11 +84,11 @@ public class Pedido {
      * @param tallerID taller que hace el pedido
      * @param fecha_limite fecha límite para recibir ofertas de este pedido. Pasada esa fecha, el pedido se cancelará
      */
-    public Pedido(int ID_aux, String tallerID, String fecha_limite) {
+    public Pedido(int ID_aux, String tallerID, Date fecha_limite) {
         this.ID = "";
         this.ID_aux = ID_aux;
         this.tallerID = tallerID;
-        this.fecha_alta = new String();
+        this.fecha_alta = new Date();
         this.fecha_baja = null;
         this.fecha_limite = fecha_limite;
         this.listaPiezas = new ArrayList<>();
@@ -139,15 +140,15 @@ public class Pedido {
         return tallerID;
     }
 
-    public String getFecha_alta() {
+    public Date getFecha_alta() {
         return fecha_alta;
     }
 
-    public String getFecha_baja() {
+    public Date getFecha_baja() {
         return fecha_baja;
     }
 
-    public String getFecha_limite() {
+    public Date getFecha_limite() {
         return fecha_limite;
     }
 
