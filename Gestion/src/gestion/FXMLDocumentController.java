@@ -27,10 +27,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
@@ -47,7 +49,7 @@ public class FXMLDocumentController implements Initializable {
    private ObservableList<OfertasInterfaz> personDataOferta = FXCollections.observableArrayList();
    private ObservableList<PiezasInterfaz> personDataPiezas = FXCollections.observableArrayList();
    
-    @FXML
+    /*@FXML
     private Label label;
     @FXML
     private Button button;
@@ -55,7 +57,44 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableView tableDesguaces;
     @FXML private TableView tablePedidos;
      @FXML private TableView tableOfertas;
-     @FXML private TableView tablePiezas;
+     @FXML private TableView tablePiezas; ¿SIRVE? */
+   
+   /* ALTAS PENDIENTES */
+   public Button btDarAlta;
+   public Button btRechazarAlta;
+   public Button btCerrar;
+   
+   /* EMPRESAS CONECTADAS */
+   public Button btModificar;
+   public Button btDarBaja;
+   
+   /* PEDIDOS */
+   public Button btBuscar;
+   public TextField tfIDLocal;
+   public TextField tfIDgestor;
+   public ComboBox cbVia;
+   
+   public TextField tfFecha1Dia;
+   public TextField tfFecha1Mes;
+   public TextField tfFecha1Anyo;
+   public TextField tfFecha2Dia;
+   public TextField tfFecha2Mes;
+   public TextField tfFecha2Anyo;
+   
+   /* OFERTAS */
+   public ComboBox cbBuscarOfertas;
+   public TextField tfIDOferta;
+   public TextField tfIDGestorOferta;
+   public TextField tfNombreDesguace;
+   public TextField tfNombreTaller;
+   
+   public TextField tfFechaOferta1Dia;
+   public TextField tfFechaOferta1Mes;
+   public TextField tfFechaOferta1Anyo;
+   public TextField tfFechaOferta2Dia;
+   public TextField tfFechaOferta2Mes;
+   public TextField tfFechaOferta2Anyo;
+   
 
     @FXML
     private void handleButtonAction(ActionEvent event) {

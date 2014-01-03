@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="437.0" prefWidth="375.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevaPiezaController">
+  <children>
+    <Label id="tbNombrePieza" layoutX="32.0" layoutY="31.0" text="Nombre pieza" />
+    <TextField id="tbNombrePieza" fx:id="tfNombrePieza" layoutX="126.0" layoutY="28.0" prefWidth="200.0" />
+    <Button id="btNuevaPieza" fx:id="btAnadir" layoutX="126.0" layoutY="367.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="91.0" text="Añadir" />
+    <Label id="tbNombrePieza" layoutX="32.0" layoutY="58.0" text="Tipo" />
+    <Label id="tbNombrePieza" layoutX="32.0" layoutY="103.0" text="Estado" />
+    <Label id="tbNombrePieza" layoutX="32.0" layoutY="143.0" text="Stock" />
+    <TextField id="tbNombrePieza" fx:id="tfStock" layoutX="126.0" layoutY="140.0" prefWidth="63.000099999997474" />
+    <ComboBox fx:id="cbEstado" layoutX="126.0" layoutY="101.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <ComboBox id="cbEstado" fx:id="cbTipo" layoutX="126.0" layoutY="64.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Label id="tbNombrePieza" layoutX="30.0" layoutY="193.0" text="Descripción" />
+    <TextArea fx:id="taDescripcion" layoutX="126.0" layoutY="193.0" prefWidth="200.0" wrapText="true" />
+    <Button id="btNuevaPieza" fx:id="btCancelar" layoutX="235.0" layoutY="367.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="91.0" text="Cancelar" />
+  </children>
+</AnchorPane>
