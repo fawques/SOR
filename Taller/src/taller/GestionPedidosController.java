@@ -8,6 +8,7 @@ package taller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,7 +72,7 @@ public class GestionPedidosController implements Initializable {
     }
 
     public void buscar(ActionEvent e) {
-        String fechaLimite = tfLimiteAnyo.getText().toString() + "/" + tfLimiteMes.getText().toString() + "/" + tfLimiteDia.getText().toString();
+        Date fechaLimite = new Date(Integer.parseInt(tfLimiteAnyo.getText().toString()), Integer.parseInt(tfLimiteMes.getText().toString()), Integer.parseInt(tfLimiteDia.getText().toString()));
         System.out.println(MainTaller.buscarPedidos(tfIDPedido.getText(), tfIDPieza.getText(), cbEstado.getValue().toString(), fechaLimite, cbModo.getValue().toString()));
 
     }

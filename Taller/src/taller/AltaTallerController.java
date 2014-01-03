@@ -222,7 +222,7 @@ public class AltaTallerController implements Initializable {
     public void onClickAceptar(ActionEvent e) throws IOException, Exception {
         //If the validation goes well
         //bloquear los inputs
-        Pedido nuevoP = new Pedido(1, "", new Date().toString());
+        Pedido nuevoP = new Pedido(1, "", new Date());
         Gson g = new Gson();
         String listaJSON = g.toJson(nuevoP);
         MainTaller.nuevoPedido(listaJSON);
