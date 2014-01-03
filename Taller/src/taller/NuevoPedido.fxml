@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -16,7 +16,7 @@
       </columns>
     </TableView>
     <Button fx:id="btAnadirPieza" layoutX="456.0" layoutY="30.0" mnemonicParsing="false" onAction="#anyadirPiezaAPedido" text="Añadir pieza" />
-    <Button layoutX="225.0" layoutY="317.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
+    <Button layoutX="225.0" layoutY="366.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
     <TextField fx:id="tfCantidadPieza" layoutX="351.0" layoutY="29.0" prefWidth="65.0" />
     <TextField fx:id="tfIdPieza" layoutX="111.0" layoutY="29.0" prefWidth="151.0" />
     <Label layoutX="66.0" layoutY="32.0" text="Pieza" />
