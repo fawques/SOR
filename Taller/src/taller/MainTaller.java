@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -254,7 +255,7 @@ public class MainTaller extends Application {
         return false;
     }
 
-    public static ArrayList<Pedido> buscarPedidos(String idPedido, String idPieza, String estado, String fechaLimite, String modoAceptacion) {
+    public static ArrayList<Pedido> buscarPedidos(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) {
         try {
             bd = new InterfazBD("sor_taller");
             ArrayList<Pedido> p = bd.buscarPedido(idPedido, idPieza, estado, fechaLimite, modoAceptacion);
@@ -268,10 +269,10 @@ public class MainTaller extends Application {
         return null;
     }
 
-    public static void crearPedido(String fechaAlta, EstadoPedido estado, String fechaLimite, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
         try {
             bd = new InterfazBD("sor_taller");
-            int id = bd.anadirPedido(fechaAlta, estado, bd.getPrimerTaller().getID(), fechaLimite);
+            int id = bd.anadirPedido(fechaAlta, estado, bd.getPrimerTaller().getID(), new Date(), fechaLimite);
             bd.anyadirPiezasAPedido(id, piezas, cantidades);
             //bd.close();
         } catch (SQLException ex) {
