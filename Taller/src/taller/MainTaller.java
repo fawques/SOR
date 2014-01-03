@@ -6,6 +6,7 @@
 package taller;
 
 import BD.InterfazBD;
+import com.google.gson.Gson;
 import general.EstadoGeneral;
 import general.EstadoPedido;
 import general.Pedido;
@@ -275,11 +276,16 @@ public class MainTaller extends Application {
             int id = bd.anadirPedido(fechaAlta, estado, bd.getPrimerTaller().getID(), new Date(), fechaLimite);
             bd.anyadirPiezasAPedido(id, piezas, cantidades);
             //bd.close();
+            Gson gson = new Gson();
+            nuevoPedido(gson.toJson(new Pedido(id, bd.getPrimerTaller().getID(), fechaLimite)));
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JMSException_Exception ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**

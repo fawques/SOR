@@ -15,6 +15,7 @@ import general.Pieza;
 import general.Taller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,13 +43,15 @@ public class InterfazBD {
     
     public void anadirPedido(String id, Date fechaAlta, int estado, String taller, Date fechaBaja, Date fechaLimite)
     {
-        conexion.ejecutarSQL("insert INTO pedido (id, fechaAlta, estado, taller, fechaBaja, fechaLimite) values ('"+id+"','"+fechaAlta+"','"+estado+"','"+taller+"','"+fechaBaja+"','"+fechaLimite+"';");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        conexion.ejecutarSQL("insert INTO pedido (id, fecha_alta, estado, taller, fecha_baja, fecha_limite) values ('"+id+"',"+(fechaAlta != null? "'"+dateFormat.format(fechaAlta)+ "'":fechaAlta)+",'"+estado+"','"+taller+"',"+(fechaBaja != null?"'" + dateFormat.format(fechaBaja) + "'":fechaBaja)+","+(fechaLimite != null? "'" + dateFormat.format(fechaLimite) + "'":fechaLimite)+");");
     }
     
     public int anadirPedido(Date fechaAlta, EstadoPedido estado, String taller, Date fechaBaja, Date fechaLimite) {
-        return conexion.ejecutarInsert("insert INTO pedido (id, fecha_alta, estado, taller, fecha_limite) values ('', Date('" + fechaAlta + "'),'" + estado + "','" + taller + "', Date('" + fechaLimite + "'));");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        return conexion.ejecutarInsert("insert INTO pedido (id, fecha_alta, estado, taller, fecha_limite) values ('', " + (fechaAlta != null? "'"+dateFormat.format(fechaAlta)+ "'":fechaAlta) + ",'" + estado.ordinal() + "','" + taller + "', " + (fechaLimite != null? "'"+dateFormat.format(fechaLimite)+ "'":fechaLimite) + ");");
     }
-    
+
     
     public int anadirDesguace(int id, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado)    {
         // TODO: cambiar el id
