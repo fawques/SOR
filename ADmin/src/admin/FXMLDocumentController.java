@@ -17,6 +17,7 @@ import general.Oferta;
 import general.Pedido;
 import general.Taller;
 import admin.Admin;
+import com.google.gson.JsonSyntaxException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -101,14 +102,14 @@ public class FXMLDocumentController implements Initializable {
             }
         };
        columnID.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,Integer>("ID")
+           new PropertyValueFactory<UsuarioInterface,String>("ID")
                );
-       columnID.setCellFactory(integerCellFactory);
+       columnID.setCellFactory(stringCellFactory);
        
        columnIDtaller.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,Integer>("idTaller")
+           new PropertyValueFactory<UsuarioInterface,String>("idTaller")
        );
-       columnIDtaller.setCellFactory(integerCellFactory);
+       columnIDtaller.setCellFactory(stringCellFactory);
        columnAlta.setCellValueFactory(
            new PropertyValueFactory<UsuarioInterface,String>("fecha_alta")
        );
@@ -130,7 +131,10 @@ public class FXMLDocumentController implements Initializable {
              personDataPedidos.add(interfaz);
              System.out.println(pedido);
         }
-         piezasInterfaz(personDataPedidos.get(0).getID());
+         if(personDataPedidos.size()!=0){
+             piezasInterfaz(personDataPedidos.get(0).getID());
+         }
+         
            tablePedidos.setItems(personDataPedidos);
            tablePedidos.getColumns().addAll(columnID,columnIDtaller,columnAlta,columnBaja,columnLimite);
 
@@ -148,15 +152,15 @@ public class FXMLDocumentController implements Initializable {
      TableColumn columnPrecio= new TableColumn("precio");
      tableOfertas.setEditable(true);
        columnID.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,Integer>("ID")
+           new PropertyValueFactory<UsuarioInterface,String>("ID")
                );
     
        
        columnIDDesguace.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,Integer>("idDesguace")
+           new PropertyValueFactory<UsuarioInterface,String>("idDesguace")
        );
        columnIDPedido.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,Integer>("idPedido")
+           new PropertyValueFactory<UsuarioInterface,String>("idPedido")
        );
        columnAlta.setCellValueFactory(
            new PropertyValueFactory<UsuarioInterface,String>("fecha_alta")
@@ -264,7 +268,7 @@ public class FXMLDocumentController implements Initializable {
      tableDesguaces.setEditable(true);
      
            columnID.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,Integer>("ID")
+           new PropertyValueFactory<UsuarioInterface,String>("ID")
                );
            columnNombre.setCellValueFactory(
            new PropertyValueFactory<UsuarioInterface,String>("nombreTaller")
@@ -310,7 +314,7 @@ public class FXMLDocumentController implements Initializable {
            tableTalleres.setEditable(true);
         System.out.println("Initialize!");
           columnID.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,Integer>("ID")
+           new PropertyValueFactory<UsuarioInterface,String>("ID")
                );
            columnNombre.setCellValueFactory(
            new PropertyValueFactory<UsuarioInterface,String>("nombreTaller")
@@ -334,8 +338,12 @@ public class FXMLDocumentController implements Initializable {
            
         
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
-        listaTalleres = gson.fromJson(Admin.getTalleres(), collectionType);
-         System.out.println("pasa por aqui");
+        try{
+            listaTalleres = gson.fromJson(Admin.getTalleres(), collectionType);
+        }
+        catch(Exception e){
+        }
+        System.out.println("pasa por aqui");
          UsuarioInterface interfaz= new UsuarioInterface();
          for (Taller taller : listaTalleres) {
              interfaz= new UsuarioInterface(taller);
@@ -357,9 +365,11 @@ public class FXMLDocumentController implements Initializable {
             TableCell c = (TableCell) t.getSource();
             String tabla= c.getTableView().getId();
             int index = c.getIndex();
-        
+        if(personDataPedidos.size()>=index){
            ofertasclickPedido( personDataPedidos.get(index).getID());
            piezasclickPedido(personDataPedidos.get(index).getID());
+        }
+           
 
            
             
