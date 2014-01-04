@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 
-package gestion;
+package admin;
 
 import java.util.Properties;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.stage.Stage;/*
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
@@ -20,13 +21,13 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage;*/
 
 /**
  *
  * @author Cute
  */
-public class Gestion extends Application {
+public class Admin extends Application {
 
     static String getOfertasporPedido() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -61,7 +62,7 @@ public class Gestion extends Application {
      * @param subject
      * @param text
      */
-    public static void sendMail(final String from, String to, String subject, String text) {
+   /* public static void sendMail(final String from, String to, String subject, String text) {
         String SMTP_HOST_NAME = "smtp.gmail.com";
         String SMTP_PORT = "465";
         String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -109,7 +110,7 @@ public class Gestion extends Application {
             e.printStackTrace();
         }
     }
-
+*/
     public static String getAltas() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();

@@ -10,12 +10,6 @@
 <message name="helloResponse">
 <part name="parameters" element="tns:helloResponse"/>
 </message>
-<message name="getOfertasporPedido">
-<part name="parameters" element="tns:getOfertasporPedido"/>
-</message>
-<message name="getOfertasporPedidoResponse">
-<part name="parameters" element="tns:getOfertasporPedidoResponse"/>
-</message>
 <message name="getAltas">
 <part name="parameters" element="tns:getAltas"/>
 </message>
@@ -52,14 +46,16 @@
 <message name="getPedidoIDResponse">
 <part name="parameters" element="tns:getPedidoIDResponse"/>
 </message>
+<message name="getOfertasporPedido">
+<part name="parameters" element="tns:getOfertasporPedido"/>
+</message>
+<message name="getOfertasporPedidoResponse">
+<part name="parameters" element="tns:getOfertasporPedidoResponse"/>
+</message>
 <portType name="AdminWS">
 <operation name="hello">
 <input wsam:Action="http://gestor_admin/AdminWS/helloRequest" message="tns:hello"/>
 <output wsam:Action="http://gestor_admin/AdminWS/helloResponse" message="tns:helloResponse"/>
-</operation>
-<operation name="getOfertasporPedido">
-<input wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoRequest" message="tns:getOfertasporPedido"/>
-<output wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoResponse" message="tns:getOfertasporPedidoResponse"/>
 </operation>
 <operation name="getAltas">
 <input wsam:Action="http://gestor_admin/AdminWS/getAltasRequest" message="tns:getAltas"/>
@@ -85,19 +81,14 @@
 <input wsam:Action="http://gestor_admin/AdminWS/getPedidoIDRequest" message="tns:getPedidoID"/>
 <output wsam:Action="http://gestor_admin/AdminWS/getPedidoIDResponse" message="tns:getPedidoIDResponse"/>
 </operation>
+<operation name="getOfertasporPedido">
+<input wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoRequest" message="tns:getOfertasporPedido"/>
+<output wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoResponse" message="tns:getOfertasporPedidoResponse"/>
+</operation>
 </portType>
 <binding name="AdminWSPortBinding" type="tns:AdminWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="hello">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getOfertasporPedido">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -152,6 +143,15 @@
 </output>
 </operation>
 <operation name="getPedidoID">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getOfertasporPedido">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

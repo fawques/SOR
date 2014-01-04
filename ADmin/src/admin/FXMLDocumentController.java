@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gestion;
+package admin;
 
 import clasesInterfaz.OfertasInterfaz;
 import clasesInterfaz.PedidosInterfaz;
@@ -16,6 +16,7 @@ import general.Desguace;
 import general.Oferta;
 import general.Pedido;
 import general.Taller;
+import admin.Admin;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -121,7 +122,7 @@ public class FXMLDocumentController implements Initializable {
        );
        columnLimite.setCellFactory(stringCellFactory);
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        listaPedidos = gson.fromJson(Gestion.getPedidos(), collectionType);
+        listaPedidos = gson.fromJson(Admin.getPedidos(), collectionType);
         System.out.println("pasa por aqui");
         PedidosInterfaz interfaz= new PedidosInterfaz();
          for (Pedido pedido : listaPedidos) {
@@ -173,7 +174,7 @@ public class FXMLDocumentController implements Initializable {
        );
       
       Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
-        listaOferta = gson.fromJson(Gestion.getOfertas(), collectionType);
+        listaOferta = gson.fromJson(Admin.getOfertas(), collectionType);
         System.out.println("pasa por aqui");
         OfertasInterfaz interfaz= new OfertasInterfaz();
          for (Oferta oferta : listaOferta) {
@@ -191,7 +192,7 @@ public class FXMLDocumentController implements Initializable {
      ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
      Gson gson = new Gson();
      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
-        listaOferta = gson.fromJson(Gestion.getOfertasporPedido(id), collectionType);
+        listaOferta = gson.fromJson(Admin.getOfertasporPedido(id), collectionType);
         System.out.println("pasa por aqui");
         OfertasInterfaz interfaz= new OfertasInterfaz();
          for (Oferta oferta : listaOferta) {
@@ -215,7 +216,7 @@ public class FXMLDocumentController implements Initializable {
            new PropertyValueFactory<UsuarioInterface,String>("nombrePieza")
         );
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        listaPedidos =gson.fromJson(Gestion.getPedidoID(id), collectionType);
+        listaPedidos =gson.fromJson(Admin.getPedidoID(id), collectionType);
        
          PiezasInterfaz interfaz= new PiezasInterfaz();
          for (Pedido p : listaPedidos) {
@@ -235,7 +236,7 @@ public class FXMLDocumentController implements Initializable {
         Gson gson = new Gson();
        
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        listaPedidos = gson.fromJson(Gestion.getPedidoID(id), collectionType);
+        listaPedidos = gson.fromJson(Admin.getPedidoID(id), collectionType);
        
          PiezasInterfaz interfaz= new PiezasInterfaz();
          for (Pedido p : listaPedidos) {
@@ -284,7 +285,7 @@ public class FXMLDocumentController implements Initializable {
            new PropertyValueFactory<UsuarioInterface,String>("direccion")
            );
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
-        listaDesguaces = gson.fromJson(Gestion.getDesguaces(), collectionType);
+        listaDesguaces = gson.fromJson(Admin.getDesguaces(), collectionType);
         System.out.println("pasa por aqui");
         UsuarioInterface interfaz= new UsuarioInterface();
          for (Desguace desguace : listaDesguaces) {
@@ -333,7 +334,7 @@ public class FXMLDocumentController implements Initializable {
            
         
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
-        listaTalleres = gson.fromJson(Gestion.getTalleres(), collectionType);
+        listaTalleres = gson.fromJson(Admin.getTalleres(), collectionType);
          System.out.println("pasa por aqui");
          UsuarioInterface interfaz= new UsuarioInterface();
          for (Taller taller : listaTalleres) {
