@@ -144,6 +144,10 @@ public class Pedido {
         return fecha_alta;
     }
 
+    public void setEstado(EstadoPedido estado) {
+        this.estado = estado;
+    }
+
     public Date getFecha_baja() {
         return fecha_baja;
     }
