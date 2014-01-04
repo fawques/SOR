@@ -9,6 +9,7 @@ import BD.InterfazBD;
 import com.google.gson.Gson;
 import general.EstadoGeneral;
 import general.EstadoPedido;
+import general.Oferta;
 import general.Pedido;
 import general.Pieza;
 import general.Taller;
@@ -59,25 +60,25 @@ public class MainTaller extends Application {
         //System.out.println(bd.getPedidosActivos());
         taller = bd.getPrimerTaller();
         //bd.close();
-        if (taller != null) //está pendiente o activado
+        if (taller != null) //estÃ¡ pendiente o activado
         {
-            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación
+            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activaciÃ³n
             {
                 FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
-                stage.setTitle("Esperando código de aceptación");
+                stage.setTitle("Esperando cÃ³digo de aceptaciÃ³n");
                 TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
                 //Cargar GestionPedido
                 FXMLLoader loader = changeScene("GestionPedidos.fxml");
-                stage.setTitle("Gestión de pedidos");
+                stage.setTitle("GestiÃ³n de pedidos");
                 GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
                  staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else { //baja
-                //Yo lo que haria sería un volver a darme de alta, con los mismos datos
-                //un botón y prou
+                //Yo lo que haria serÃ­a un volver a darme de alta, con los mismos datos
+                //un botÃ³n y prou
                 FXMLLoader loader = changeScene("AltaTaller.fxml");
                 stage.setTitle("Alta de taller");
                 AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
@@ -115,7 +116,7 @@ public class MainTaller extends Application {
      */
 
     public FXMLLoader changeScene(String fxml) throws IOException {
-        //Mostrar página de espera interfaz básica
+        //Mostrar pÃ¡gina de espera interfaz bÃ¡sica
         URL location = getClass().getResource(fxml);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
@@ -272,12 +273,17 @@ public class MainTaller extends Application {
 
     public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
         try {
+            String tallerID = bd.getPrimerTaller().getID();            
             bd = new InterfazBD("sor_taller");
-            int id = bd.anadirPedido(fechaAlta, estado, bd.getPrimerTaller().getID(), new Date(), fechaLimite);
+            int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite);
             bd.anyadirPiezasAPedido(id, piezas, cantidades);
-            //bd.close();
+            bd.close();
+            Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, piezas, cantidades, new ArrayList<Oferta>());
             Gson gson = new Gson();
-            nuevoPedido(gson.toJson(new Pedido(id, bd.getPrimerTaller().getID(), fechaLimite)));
+            String idFinal = nuevoPedido(gson.toJson(nuevo));
+            nuevo.setID(idFinal);
+            nuevo.setEstado(EstadoPedido.ACCEPTED);
+            // habría que meterlo a la BD... esto está muy feo ahora mismo :S
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
