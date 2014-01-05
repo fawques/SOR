@@ -34,7 +34,7 @@
                             </FXCollections>
                           </items>
                         </ComboBox>
-                        <Button fx:id="btBuscarPedido" layoutX="563.0" layoutY="72.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscar" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
+                        <Button fx:id="btBuscarPedido" layoutX="563.0" layoutY="72.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscarPedido" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
                         <Label layoutX="286.0" layoutY="72.0" text="Fecha limite" />
                         <ComboBox fx:id="cbModo" disable="false" layoutX="162.0" layoutY="70.0" prefWidth="100.0" promptText="Cualquiera" value="Cualquiera">
                           <items>
@@ -199,8 +199,8 @@
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="101.0" text="Fecha entrega" />
                   </columns>
                 </TableView>
-                <Button id="btNuevaPieza" fx:id="btAceptarOferta" layoutX="27.0" layoutY="503.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Aceptar oferta" />
-                <Button id="btNuevaPieza" fx:id="btRechazarOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Rechazar oferta" />
+                <Button id="btNuevaPieza" fx:id="btAceptarOferta" layoutX="27.0" layoutY="503.0" mnemonicParsing="false" onAction="#aceptarOferta" prefHeight="22.0" prefWidth="135.0" text="Aceptar oferta" />
+                <Button id="btNuevaPieza" fx:id="btRechazarOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" onAction="#rechazarOferta" prefHeight="22.0" prefWidth="135.0" text="Rechazar oferta" />
                 <Text layoutX="347.0" layoutY="229.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos realizados" />
                 <Text layoutX="352.0" layoutY="376.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas recibidas" />
               </children>

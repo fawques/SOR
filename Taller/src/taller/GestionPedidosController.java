@@ -94,7 +94,7 @@ public class GestionPedidosController implements Initializable {
         MainTaller.nuevoPedido(listaJSON);*/
     }
 
-    public void buscar(ActionEvent e) {
+    public void buscarPedido(ActionEvent e) {
         Date fechaLimite = new Date(Integer.parseInt(tfLimiteAnyo.getText().toString()), Integer.parseInt(tfLimiteMes.getText().toString()), Integer.parseInt(tfLimiteDia.getText().toString()));
         System.out.println(MainTaller.buscarPedidos(tfIDPedido.getText(), tfIDPieza.getText(), cbEstado.getValue().toString(), fechaLimite, cbModo.getValue().toString()));
 
@@ -111,5 +111,13 @@ public class GestionPedidosController implements Initializable {
     public void showStage() {
         thisStage.sizeToScene();
         thisStage.show();
+    }
+
+    public void aceptarOferta() {
+
+    }
+
+    public void rechazarOferta() {
+
     }
 }
