@@ -114,13 +114,14 @@ public class Conexion {
         try {
             try (Statement stmt = conexion.createStatement()) {
                 stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                ResultSet rs = stmt.getGeneratedKeys();
+                /*ResultSet rs = stmt.getGeneratedKeys();
                 if (rs.next()){
                     numero=rs.getInt(1);
                 }else{
                     numero = 0;
                 }
-                rs.close();
+                rs.close();*/
+                numero = 1;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);

@@ -147,9 +147,6 @@ public class AdminWS {
             bd = new InterfazBD("sor_gestor");
              ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
              listaTalleres=bd.getTalleres();
-            //listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-            //listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-            listaTalleres.get(0).nuevoPedido(new Date());
             Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);

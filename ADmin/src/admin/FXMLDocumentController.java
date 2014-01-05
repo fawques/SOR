@@ -123,7 +123,10 @@ public class FXMLDocumentController implements Initializable {
        );
        columnLimite.setCellFactory(stringCellFactory);
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        listaPedidos = gson.fromJson(Admin.getPedidos(), collectionType);
+        String pedidosstring= Admin.getPedidos();
+        if(!pedidosstring.equals("") && pedidosstring!=null){
+            listaPedidos = gson.fromJson(pedidosstring, collectionType);
+        }
         System.out.println("pasa por aqui");
         PedidosInterfaz interfaz= new PedidosInterfaz();
          for (Pedido pedido : listaPedidos) {
@@ -178,7 +181,11 @@ public class FXMLDocumentController implements Initializable {
        );
       
       Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
-        listaOferta = gson.fromJson(Admin.getOfertas(), collectionType);
+      String ofertasstring= Admin.getOfertas();
+      if(!ofertasstring.equals("") && ofertasstring!=null){
+      listaOferta = gson.fromJson(Admin.getOfertas(), collectionType);
+      }
+        
         System.out.println("pasa por aqui");
         OfertasInterfaz interfaz= new OfertasInterfaz();
          for (Oferta oferta : listaOferta) {
@@ -196,7 +203,10 @@ public class FXMLDocumentController implements Initializable {
      ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
      Gson gson = new Gson();
      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
+     String ofertasstring=Admin.getOfertasporPedido(id);
+     if(!ofertasstring.equals("") && ofertasstring!=null){
         listaOferta = gson.fromJson(Admin.getOfertasporPedido(id), collectionType);
+     }
         System.out.println("pasa por aqui");
         OfertasInterfaz interfaz= new OfertasInterfaz();
          for (Oferta oferta : listaOferta) {
@@ -220,7 +230,11 @@ public class FXMLDocumentController implements Initializable {
            new PropertyValueFactory<UsuarioInterface,String>("nombrePieza")
         );
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        listaPedidos =gson.fromJson(Admin.getPedidoID(id), collectionType);
+        String pedidosstring= Admin.getPedidoID(id);
+        if(!pedidosstring.equals("") && pedidosstring!=null){
+            listaPedidos =gson.fromJson(Admin.getPedidoID(id), collectionType);
+        }
+        
        
          PiezasInterfaz interfaz= new PiezasInterfaz();
          for (Pedido p : listaPedidos) {
@@ -240,7 +254,11 @@ public class FXMLDocumentController implements Initializable {
         Gson gson = new Gson();
        
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        listaPedidos = gson.fromJson(Admin.getPedidoID(id), collectionType);
+        String pedidosstring=Admin.getPedidoID(id);
+        if(!pedidosstring.equals("") && pedidosstring!=null){
+         listaPedidos = gson.fromJson(Admin.getPedidoID(id), collectionType);
+        }
+        
        
          PiezasInterfaz interfaz= new PiezasInterfaz();
          for (Pedido p : listaPedidos) {
@@ -289,7 +307,10 @@ public class FXMLDocumentController implements Initializable {
            new PropertyValueFactory<UsuarioInterface,String>("direccion")
            );
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
-        listaDesguaces = gson.fromJson(Admin.getDesguaces(), collectionType);
+        String desguacestring=Admin.getDesguaces();
+        if(!desguacestring.equals("") && desguacestring!=null){
+            listaDesguaces = gson.fromJson(Admin.getDesguaces(), collectionType);
+        }
         System.out.println("pasa por aqui");
         UsuarioInterface interfaz= new UsuarioInterface();
          for (Desguace desguace : listaDesguaces) {
@@ -338,10 +359,9 @@ public class FXMLDocumentController implements Initializable {
            
         
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
-        try{
-            listaTalleres = gson.fromJson(Admin.getTalleres(), collectionType);
-        }
-        catch(Exception e){
+        String tallerstring=Admin.getTalleres();
+        if( !tallerstring.equals("") && tallerstring!=null ){
+            listaTalleres = gson.fromJson(tallerstring, collectionType);
         }
         System.out.println("pasa por aqui");
          UsuarioInterface interfaz= new UsuarioInterface();

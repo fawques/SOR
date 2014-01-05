@@ -10,7 +10,9 @@ import BD.InterfazBD;
 import activemq.Gestor_activemq;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import general.EstadoGeneral;
 import general.Pedido;
+import general.Taller;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.Date;
@@ -43,12 +45,12 @@ public class TallerWS {
      * @throws ClassNotFoundException 
      */
     @WebMethod(operationName = "alta")
-    public int alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
+    public boolean alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
         try {
             bd = new InterfazBD("sor_gestor");
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
-            int res = bd.altaTaller(stringID, name, email, address, city, postalCode, telephone, 2);
+            boolean res = bd.altaTaller(stringID, name, email, address, city, postalCode, telephone, 2);
             bd.close();
             return res;
         } catch (java.sql.SQLException ex) {
@@ -56,7 +58,7 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
+        return false;
     }
     
     /**
@@ -64,12 +66,18 @@ public class TallerWS {
      * @param email
      * @return
      */
-    @WebMethod(operationName = "activarTaller")
-    public String activarTaller(@WebParam(name = "mail") String email)    {
+    @WebMethod(operationName = "checkActivacion")
+    public String checkActivacion(@WebParam(name = "mail") String email)    {
         try {
             bd = new InterfazBD("sor_gestor");
-            String res = bd.getMD5IdTaller(email);
-           // bd.close();
+            Taller taller = bd.getTaller(email);
+            String res;
+            if (taller.getEstado() == EstadoGeneral.ACTIVE) {
+                res = taller.getID();
+            }else{
+                res = "";
+            }
+            bd.close();
             return res;
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,7 +91,7 @@ public class TallerWS {
      * Web service operation
      */
     @WebMethod(operationName = "nuevoPedido")
-    public Boolean nuevoPedido(@WebParam(name = "pedido") String pedido) throws JMSException {
+    public String nuevoPedido(@WebParam(name = "pedido") String pedido) throws JMSException {
          try {
             bd = new InterfazBD("sor_gestor");
             Gson gson = new Gson();
@@ -92,19 +100,19 @@ public class TallerWS {
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
-            //bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
+            bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
             Gestor_activemq activemq= new Gestor_activemq("Pedidos");
             String pedidoFinal = gson.toJson(p);
             activemq.producer.produceMessage(pedidoFinal);
-            activemq.producer.closeProduce();
-            // bd.close();
-            return true;
+            activemq.producer.closeProduce(); // WARNING: esto hay que hacerlo aquí?
+            bd.close();
+            return stringID;
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return false;
+        return "";
     }
 }

@@ -222,15 +222,15 @@ public class AltaTallerController implements Initializable {
     public void onClickAceptar(ActionEvent e) throws IOException, Exception {
         //If the validation goes well
         //bloquear los inputs
-        Pedido nuevoP = new Pedido(1, "", new Date());
+        /*Pedido nuevoP = new Pedido(1, "", new Date());
         Gson g = new Gson();
         String listaJSON = g.toJson(nuevoP);
-        MainTaller.nuevoPedido(listaJSON);
+        MainTaller.nuevoPedido(listaJSON);*/
         setEditableAllInputs(false);
         if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
-            if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText())) >= 0) {
+            if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()))) {
                 //METER en base de datos si está todo ok.
                 bd = new InterfazBD("sor_taller");
                 if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
@@ -247,7 +247,7 @@ public class AltaTallerController implements Initializable {
                 } else {
                     //devolver un error
                 }
-                //bd.close()
+                bd.close();
             }
             else{
                 System.err.println("alta me ha devuelto < 0");

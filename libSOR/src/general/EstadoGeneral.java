@@ -8,7 +8,9 @@ package general;
 
 /**
  *
- * @author fawques
+ * ACTIVE = Con ID de gestor, activo en el sistema
+ * INACTIVE = Dado de baja
+ * PENDIENTE = Recien creado, esperando confirmacion desde el gestor. Tiene ID local pero no ID generada por el gestor
  */
 public enum EstadoGeneral {
     ACTIVE,INACTIVE, PENDIENTE

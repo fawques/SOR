@@ -10,12 +10,6 @@
 <message name="altaResponse">
 <part name="parameters" element="tns:altaResponse"/>
 </message>
-<message name="activarTaller">
-<part name="parameters" element="tns:activarTaller"/>
-</message>
-<message name="activarTallerResponse">
-<part name="parameters" element="tns:activarTallerResponse"/>
-</message>
 <message name="nuevoPedido">
 <part name="parameters" element="tns:nuevoPedido"/>
 </message>
@@ -25,33 +19,30 @@
 <message name="JMSException">
 <part name="fault" element="tns:JMSException"/>
 </message>
+<message name="checkActivacion">
+<part name="parameters" element="tns:checkActivacion"/>
+</message>
+<message name="checkActivacionResponse">
+<part name="parameters" element="tns:checkActivacionResponse"/>
+</message>
 <portType name="TallerWS">
 <operation name="alta">
 <input wsam:Action="http://gestor_taller/TallerWS/altaRequest" message="tns:alta"/>
 <output wsam:Action="http://gestor_taller/TallerWS/altaResponse" message="tns:altaResponse"/>
-</operation>
-<operation name="activarTaller">
-<input wsam:Action="http://gestor_taller/TallerWS/activarTallerRequest" message="tns:activarTaller"/>
-<output wsam:Action="http://gestor_taller/TallerWS/activarTallerResponse" message="tns:activarTallerResponse"/>
 </operation>
 <operation name="nuevoPedido">
 <input wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoRequest" message="tns:nuevoPedido"/>
 <output wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoResponse" message="tns:nuevoPedidoResponse"/>
 <fault message="tns:JMSException" name="JMSException" wsam:Action="http://gestor_taller/TallerWS/nuevoPedido/Fault/JMSException"/>
 </operation>
+<operation name="checkActivacion">
+<input wsam:Action="http://gestor_taller/TallerWS/checkActivacionRequest" message="tns:checkActivacion"/>
+<output wsam:Action="http://gestor_taller/TallerWS/checkActivacionResponse" message="tns:checkActivacionResponse"/>
+</operation>
 </portType>
 <binding name="TallerWSPortBinding" type="tns:TallerWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="alta">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="activarTaller">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -71,6 +62,15 @@
 <fault name="JMSException">
 <soap:fault name="JMSException" use="literal"/>
 </fault>
+</operation>
+<operation name="checkActivacion">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 </binding>
 <service name="TallerWS">
