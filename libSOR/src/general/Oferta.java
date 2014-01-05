@@ -72,7 +72,7 @@ public class Oferta {
     }
 
     /**
-     * Constructor para ofertas nuevos. Se pone el estado a WAITING_ACCEPT y la fecha_alta a la fecha actual.
+     * Constructor para ofertas nuevos. Se pone el estado a NEW y la fecha_alta a la fecha actual.
      * @param ID_aux id del nuevo pedido 
      * @param precio 
      * @param desguaceID taller que hace el pedido
@@ -88,7 +88,7 @@ public class Oferta {
         this.fecha_baja = null;
         this.pedidoID = pedidoID;
         this.fecha_limite = fecha_limite;
-        this.estado = EstadoOferta.WAITING_ACCEPT;
+        this.estado = EstadoOferta.NEW;
     }
     
     /** Constructor de copia

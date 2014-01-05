@@ -78,7 +78,7 @@ public class Pedido {
     }
 
     /**
-     * Constructor para pedidos nuevos. Se pone el estado a NO_OFFERS y la fecha_alta a la fecha actual.
+     * Constructor para pedidos nuevos. Se pone el estado a NEW y la fecha_alta a la fecha actual.
      * No tiene piezas, en principio, habrá que añadirlas
      * @param ID_aux id del nuevo pedido 
      * @param tallerID taller que hace el pedido
@@ -94,7 +94,7 @@ public class Pedido {
         this.listaPiezas = new ArrayList<>();
         this.listaCantidadesPiezas = new ArrayList<>();
         this.listaOfertas = new ArrayList<>();
-        this.estado = EstadoPedido.NO_OFFERS;
+        this.estado = EstadoPedido.NEW;
     }
     
     /** Constructor de copia

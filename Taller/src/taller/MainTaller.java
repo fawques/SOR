@@ -60,19 +60,19 @@ public class MainTaller extends Application {
         //System.out.println(bd.getPedidosActivos());
         taller = bd.getPrimerTaller();
         //bd.close();
-        if (taller != null) //estÃ¡ pendiente o activado
+        if (taller != null) //esta pendiente o activado
         {
-            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activaciÃ³n
+            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
             {
                 FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
-                stage.setTitle("Esperando cÃ³digo de aceptaciÃ³n");
+                stage.setTitle("Esperando codigo de aceptacion");
                 TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
                 //Cargar GestionPedido
                 FXMLLoader loader = changeScene("GestionPedidos.fxml");
-                stage.setTitle("GestiÃ³n de pedidos");
+                stage.setTitle("Gestion de pedidos");
                 GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
                  staticDataBox.setStage(stage);
                 staticDataBox.showStage();
@@ -282,7 +282,7 @@ public class MainTaller extends Application {
             Gson gson = new Gson();
             String idFinal = nuevoPedido(gson.toJson(nuevo));
             nuevo.setID(idFinal);
-            nuevo.setEstado(EstadoPedido.ACCEPTED);
+            nuevo.setEstado(EstadoPedido.ACTIVE);
             // habría que meterlo a la BD... esto está muy feo ahora mismo :S
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
