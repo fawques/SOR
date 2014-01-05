@@ -18,7 +18,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -436,7 +435,7 @@ public class InterfazBD {
 
     private boolean anyadirPiezasATablaPieza(ArrayList<Pieza> piezas) {
         for (Pieza pieza : piezas) {
-            conexion.ejecutarInsert("Insert into pieza(nombre) values of('" + pieza + "')");
+            conexion.ejecutarInsert("Insert into pieza(nombre) values ('" + pieza.getNombre() + "')");
         }
         return true;
     }
@@ -444,7 +443,7 @@ public class InterfazBD {
     public boolean anyadirPiezasAPedido(int idPedido, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
         if (anyadirPiezasATablaPieza(piezas)) {
             for (int i = 0; i < piezas.size(); i++) {
-                conexion.ejecutarInsert("Insert into pedido_pieza(pedido,pieza,cantidad) values of('" + idPedido + "', '" + piezas.get(i) + "', '" + cantidades.get(i) + "'");
+                conexion.ejecutarInsert("Insert into pedido_pieza(pedido,pieza,cantidad) values ('" + idPedido + "', '" + piezas.get(i) + "', '" + cantidades.get(i) + "')");
             }
             return true;
         }
