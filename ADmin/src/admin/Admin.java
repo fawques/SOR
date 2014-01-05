@@ -111,11 +111,7 @@ public class Admin extends Application {
         }
     }
 */
-    public static String getAltas() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
-        gestor_admin.AdminWS port = service.getAdminWSPort();
-        return port.getAltas();
-    }
+
 
 
 
@@ -155,6 +151,18 @@ public class Admin extends Application {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getDesguaces();
+    }
+
+    public static String getAltaDesguaces() {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getAltaDesguaces();
+    }
+
+    public static String getAltaTalleres() {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getAltaTalleres();
     }
 
 }

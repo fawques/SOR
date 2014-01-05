@@ -44,30 +44,6 @@ public class AdminWS {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "getAltas")
-    public String getAltas(){
-        try{
-            bd = new InterfazBD("sor_gestor");
-            ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
-     //   listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-      //  listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-            listaTalleres=bd.getTalleres();
-            listaTalleres.get(0).nuevoPedido(new Date());
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-            String listaJSON = gson.toJson(listaTalleres);
-            System.out.println("listaJSON = " + listaJSON);
-            return listaJSON;
-        } catch (SQLException ex) {        
-         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
-     } catch (ClassNotFoundException ex) {
-         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
-     }        
-        return null;
-    }
-
-    /**
-     * Web service operation
-     */
     @WebMethod(operationName = "getPedidos")
     public String getPedidos() {
         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
@@ -205,5 +181,49 @@ public class AdminWS {
         
         return null;
       
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getAltaTalleres")
+    public String getAltaTalleres() {
+         try{
+            bd = new InterfazBD("sor_gestor");
+             ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
+             listaTalleres=bd.getAltasTaller();
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gson.toJson(listaTalleres);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        return null;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getAltaDesguaces")
+    public String getAltaDesguaces() {
+ try{
+            bd = new InterfazBD("sor_gestor");
+            ArrayList<Desguace> listaDesguaces = new ArrayList<Desguace>();
+            listaDesguaces=bd.getAltasDesguaces();
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gson.toJson(listaDesguaces);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
+         return null;
     }
 }

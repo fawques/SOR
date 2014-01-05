@@ -22,6 +22,8 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,17 +50,21 @@ public class FXMLDocumentController implements Initializable {
    private ObservableList<PedidosInterfaz> personDataPedidos = FXCollections.observableArrayList();
    private ObservableList<OfertasInterfaz> personDataOferta = FXCollections.observableArrayList();
    private ObservableList<PiezasInterfaz> personDataPiezas = FXCollections.observableArrayList();
-   
+   private ObservableList<UsuarioInterface> altaTaller = FXCollections.observableArrayList();
+   private ObservableList<UsuarioInterface> altaDesguaces = FXCollections.observableArrayList();
     @FXML
     private Label label;
     @FXML
     private Button button;
+    @FXML
+    private Button btnNew = new Button("New Record");
     @FXML private TableView tableTalleres;
     @FXML private TableView tableDesguaces;
     @FXML private TableView tablePedidos;
-     @FXML private TableView tableOfertas;
-     @FXML private TableView tablePiezas;
-
+    @FXML private TableView tableOfertas;
+    @FXML private TableView tablePiezas;
+    @FXML private TableView tableAltaTalleres;
+    @FXML private TableView tableAltaDesguaces;
     @FXML
     private void handleButtonAction(ActionEvent event) {
     
@@ -70,8 +76,10 @@ public class FXMLDocumentController implements Initializable {
         desguacesInterfaz();
         ofertasInterfaz();
         pedidosInterfaz();
-        
+        altaTaller();
+        AltaDesguaces();
     }
+
     public void  pedidosInterfaz(){
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
      Gson gson = new Gson();
@@ -183,7 +191,7 @@ public class FXMLDocumentController implements Initializable {
       Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
       String ofertasstring= Admin.getOfertas();
       if(!ofertasstring.equals("") && ofertasstring!=null){
-      listaOferta = gson.fromJson(Admin.getOfertas(), collectionType);
+      listaOferta = gson.fromJson(ofertasstring, collectionType);
       }
         
         System.out.println("pasa por aqui");
@@ -205,7 +213,7 @@ public class FXMLDocumentController implements Initializable {
      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
      String ofertasstring=Admin.getOfertasporPedido(id);
      if(!ofertasstring.equals("") && ofertasstring!=null){
-        listaOferta = gson.fromJson(Admin.getOfertasporPedido(id), collectionType);
+        listaOferta = gson.fromJson(ofertasstring, collectionType);
      }
         System.out.println("pasa por aqui");
         OfertasInterfaz interfaz= new OfertasInterfaz();
@@ -232,7 +240,7 @@ public class FXMLDocumentController implements Initializable {
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring= Admin.getPedidoID(id);
         if(!pedidosstring.equals("") && pedidosstring!=null){
-            listaPedidos =gson.fromJson(Admin.getPedidoID(id), collectionType);
+            listaPedidos =gson.fromJson(pedidosstring, collectionType);
         }
         
        
@@ -256,7 +264,7 @@ public class FXMLDocumentController implements Initializable {
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring=Admin.getPedidoID(id);
         if(!pedidosstring.equals("") && pedidosstring!=null){
-         listaPedidos = gson.fromJson(Admin.getPedidoID(id), collectionType);
+         listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
         
        
@@ -273,6 +281,7 @@ public class FXMLDocumentController implements Initializable {
      
     
     }
+    
     public void desguacesInterfaz(){
      ArrayList<Desguace> listaDesguaces= new ArrayList<>();
      Gson gson = new Gson();
@@ -309,7 +318,7 @@ public class FXMLDocumentController implements Initializable {
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
         String desguacestring=Admin.getDesguaces();
         if(!desguacestring.equals("") && desguacestring!=null){
-            listaDesguaces = gson.fromJson(Admin.getDesguaces(), collectionType);
+            listaDesguaces = gson.fromJson(desguacestring, collectionType);
         }
         System.out.println("pasa por aqui");
         UsuarioInterface interfaz= new UsuarioInterface();
@@ -321,7 +330,168 @@ public class FXMLDocumentController implements Initializable {
            tableDesguaces.setItems(personDataDesguaces);
            tableDesguaces.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnCodigoPostal,columnNumero);
     }
-
+    public void AltaDesguaces(){
+     ArrayList<Desguace> listaDesguaces= new ArrayList<>();
+     Gson gson = new Gson();
+     TableColumn columnID = new TableColumn("ID");
+     TableColumn columnNombre = new TableColumn("nombreTaller");
+     TableColumn columnEmail = new TableColumn("email");
+     TableColumn columnDireccion = new TableColumn("direccion");
+     TableColumn columnCiudad = new TableColumn("ciudad");
+     TableColumn columnCodigoPostal = new TableColumn("codigoPostal");
+     TableColumn columnNumero = new TableColumn("numeroTelefono");
+     tableAltaDesguaces.setEditable(true);
+     btnNew.setOnAction(btnNewHandler);
+           columnID.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("ID")
+               );
+           columnNombre.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("nombreTaller")
+           );
+           columnEmail.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("email")
+           );
+           columnCiudad.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("ciudad")
+           );
+           columnCodigoPostal.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,Integer>("codigoPostal")
+           );
+           columnNumero.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,Integer>("numeroTelefono")
+           );
+           columnDireccion.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("direccion")
+           );
+            TableColumn col_action = new TableColumn<>("Action");
+        col_action.setSortable(false);
+         
+        col_action.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<UsuarioInterface, Boolean>, 
+                ObservableValue<Boolean>>() {
+ 
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<UsuarioInterface, Boolean> p) {
+                return new SimpleBooleanProperty(p.getValue() != null);
+            }
+        });
+ 
+        col_action.setCellFactory(
+                new Callback<TableColumn<UsuarioInterface, Boolean>, TableCell<UsuarioInterface, Boolean>>() {
+ 
+            @Override
+            public TableCell<UsuarioInterface, Boolean> call(TableColumn<UsuarioInterface, Boolean> p) {
+                return new ButtonCell();
+            }
+         
+        });
+        Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
+        String desguacestring=Admin.getAltaDesguaces();
+        if(!desguacestring.equals("") && desguacestring!=null){
+            listaDesguaces = gson.fromJson(desguacestring, collectionType);
+        }
+        System.out.println("pasa por aqui");
+        UsuarioInterface interfaz= new UsuarioInterface();
+         for (Desguace desguace : listaDesguaces) {
+             interfaz= new UsuarioInterface(desguace);
+             altaDesguaces.add(interfaz);
+             System.out.println(desguace);
+        }
+           tableAltaDesguaces.setItems(altaDesguaces);
+           tableAltaDesguaces.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnCodigoPostal,columnNumero,col_action);
+    }
+     private class ButtonCell extends TableCell<UsuarioInterface, Boolean> {
+        final Button cellButton = new Button("Estado");
+         
+        ButtonCell(){
+             
+            cellButton.setOnAction(new EventHandler<ActionEvent>(){
+ 
+                @Override
+                public void handle(ActionEvent t) {
+                    // do something when button clicked
+                    int selectdIndex = getTableRow().getIndex();
+                    
+                    //Cambiar a aceptado.
+                }
+            });
+        }
+ 
+        //Display button if the row is not empty
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if(!empty){
+                setGraphic(cellButton);
+            }
+        }
+    }
+     
+    EventHandler<ActionEvent> btnNewHandler = 
+            new EventHandler<ActionEvent>(){
+ 
+        @Override
+        public void handle(ActionEvent t) {
+   
+             
+        }
+    };
+    public void altaTaller(){
+        
+        ArrayList<Taller> listaTalleres= new ArrayList<>();
+        Gson gson = new Gson();
+         TableColumn columnID = new TableColumn("ID");
+         TableColumn columnNombre = new TableColumn("nombreTaller");
+          TableColumn columnEmail = new TableColumn("email");
+          TableColumn columnDireccion = new TableColumn("direccion");
+          TableColumn columnCiudad = new TableColumn("ciudad");
+           TableColumn columnCodigoPostal = new TableColumn("codigoPostal");
+          TableColumn columnNumero = new TableColumn("numeroTelefono");          
+           tableAltaTalleres.setEditable(true);
+        System.out.println("Initialize!");
+          columnID.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("ID")
+               );
+           columnNombre.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("nombreTaller")
+           );
+           columnEmail.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("email")
+           );
+           columnCiudad.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("ciudad")
+           );
+           columnCodigoPostal.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,Integer>("codigoPostal")
+           );
+           columnNumero.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,Integer>("numeroTelefono")
+           );
+           columnDireccion.setCellValueFactory(
+           new PropertyValueFactory<UsuarioInterface,String>("direccion")
+           );
+           
+           
+        
+        Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
+        String tallerstring=Admin.getAltaTalleres();
+        if( !tallerstring.equals("") && tallerstring!=null ){
+            listaTalleres = gson.fromJson(tallerstring, collectionType);
+        }
+        System.out.println("pasa por aqui");
+         UsuarioInterface interfaz= new UsuarioInterface();
+         for (Taller taller : listaTalleres) {
+             interfaz= new UsuarioInterface(taller);
+             altaTaller.add(interfaz);
+             System.out.println(taller);
+        }
+           
+          
+           tableAltaTalleres.setItems(altaTaller);
+           tableAltaTalleres.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnCodigoPostal,columnNumero);
+     
+          
+    }
     public void talleresInterfaz(){
         ArrayList<Taller> listaTalleres= new ArrayList<>();
         Gson gson = new Gson();

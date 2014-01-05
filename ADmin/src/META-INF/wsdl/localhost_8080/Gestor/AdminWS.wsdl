@@ -4,17 +4,11 @@
 <xsd:import namespace="http://gestor_admin/" schemaLocation="http://localhost:8080/Gestor/AdminWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="hello">
-<part name="parameters" element="tns:hello"/>
+<message name="getOfertasporPedido">
+<part name="parameters" element="tns:getOfertasporPedido"/>
 </message>
-<message name="helloResponse">
-<part name="parameters" element="tns:helloResponse"/>
-</message>
-<message name="getAltas">
-<part name="parameters" element="tns:getAltas"/>
-</message>
-<message name="getAltasResponse">
-<part name="parameters" element="tns:getAltasResponse"/>
+<message name="getOfertasporPedidoResponse">
+<part name="parameters" element="tns:getOfertasporPedidoResponse"/>
 </message>
 <message name="getPedidos">
 <part name="parameters" element="tns:getPedidos"/>
@@ -46,20 +40,28 @@
 <message name="getPedidoIDResponse">
 <part name="parameters" element="tns:getPedidoIDResponse"/>
 </message>
-<message name="getOfertasporPedido">
-<part name="parameters" element="tns:getOfertasporPedido"/>
+<message name="hello">
+<part name="parameters" element="tns:hello"/>
 </message>
-<message name="getOfertasporPedidoResponse">
-<part name="parameters" element="tns:getOfertasporPedidoResponse"/>
+<message name="helloResponse">
+<part name="parameters" element="tns:helloResponse"/>
+</message>
+<message name="getAltaTalleres">
+<part name="parameters" element="tns:getAltaTalleres"/>
+</message>
+<message name="getAltaTalleresResponse">
+<part name="parameters" element="tns:getAltaTalleresResponse"/>
+</message>
+<message name="getAltaDesguaces">
+<part name="parameters" element="tns:getAltaDesguaces"/>
+</message>
+<message name="getAltaDesguacesResponse">
+<part name="parameters" element="tns:getAltaDesguacesResponse"/>
 </message>
 <portType name="AdminWS">
-<operation name="hello">
-<input wsam:Action="http://gestor_admin/AdminWS/helloRequest" message="tns:hello"/>
-<output wsam:Action="http://gestor_admin/AdminWS/helloResponse" message="tns:helloResponse"/>
-</operation>
-<operation name="getAltas">
-<input wsam:Action="http://gestor_admin/AdminWS/getAltasRequest" message="tns:getAltas"/>
-<output wsam:Action="http://gestor_admin/AdminWS/getAltasResponse" message="tns:getAltasResponse"/>
+<operation name="getOfertasporPedido">
+<input wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoRequest" message="tns:getOfertasporPedido"/>
+<output wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoResponse" message="tns:getOfertasporPedidoResponse"/>
 </operation>
 <operation name="getPedidos">
 <input wsam:Action="http://gestor_admin/AdminWS/getPedidosRequest" message="tns:getPedidos"/>
@@ -81,23 +83,22 @@
 <input wsam:Action="http://gestor_admin/AdminWS/getPedidoIDRequest" message="tns:getPedidoID"/>
 <output wsam:Action="http://gestor_admin/AdminWS/getPedidoIDResponse" message="tns:getPedidoIDResponse"/>
 </operation>
-<operation name="getOfertasporPedido">
-<input wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoRequest" message="tns:getOfertasporPedido"/>
-<output wsam:Action="http://gestor_admin/AdminWS/getOfertasporPedidoResponse" message="tns:getOfertasporPedidoResponse"/>
+<operation name="hello">
+<input wsam:Action="http://gestor_admin/AdminWS/helloRequest" message="tns:hello"/>
+<output wsam:Action="http://gestor_admin/AdminWS/helloResponse" message="tns:helloResponse"/>
+</operation>
+<operation name="getAltaTalleres">
+<input wsam:Action="http://gestor_admin/AdminWS/getAltaTalleresRequest" message="tns:getAltaTalleres"/>
+<output wsam:Action="http://gestor_admin/AdminWS/getAltaTalleresResponse" message="tns:getAltaTalleresResponse"/>
+</operation>
+<operation name="getAltaDesguaces">
+<input wsam:Action="http://gestor_admin/AdminWS/getAltaDesguacesRequest" message="tns:getAltaDesguaces"/>
+<output wsam:Action="http://gestor_admin/AdminWS/getAltaDesguacesResponse" message="tns:getAltaDesguacesResponse"/>
 </operation>
 </portType>
 <binding name="AdminWSPortBinding" type="tns:AdminWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="hello">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getAltas">
+<operation name="getOfertasporPedido">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -151,7 +152,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getOfertasporPedido">
+<operation name="hello">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getAltaTalleres">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getAltaDesguaces">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
