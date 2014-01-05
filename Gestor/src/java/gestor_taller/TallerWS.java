@@ -11,10 +11,12 @@ import activemq.Gestor_activemq;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
+import general.Oferta;
 import general.Pedido;
 import general.Taller;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -114,5 +116,31 @@ public class TallerWS {
         }
         
         return "";
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getOfertas")
+    public String getOfertas(@WebParam(name = "listaPedidos") String listaPedidos) {
+        Type collectionType = new TypeToken<ArrayList<Oferta>>() {
+        }.getType();
+        Gson gson = new Gson();
+        ArrayList<Oferta> listaOferta = new ArrayList<>();
+        ArrayList<Pedido> arrayPedido = gson.fromJson(listaPedidos, collectionType);
+        try {
+            bd = new InterfazBD("sor_gestor");
+            for (Pedido p : arrayPedido) {
+                listaOferta.addAll(bd.getOfertasPedido(p.getID()));
+            }
+            bd.close();
+            return gson.toJson(listaOferta);
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 }
