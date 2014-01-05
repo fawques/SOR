@@ -73,7 +73,7 @@ public class NuevoPedidoController implements Initializable {
             String fecha = "" + tfLimiteAnyo.getText() + "/" + tfLimiteMes.getText() + "/" + tfLimiteDia.getText();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date fechaLimite = dateFormat.parse(fecha);
-            MainTaller.crearPedido(today, EstadoPedido.NO_OFFERS, fechaLimite, new ArrayList<Pieza>(), new ArrayList<Integer>());
+            MainTaller.crearPedido(today, EstadoPedido.NEW, fechaLimite, new ArrayList<Pieza>(), new ArrayList<Integer>());
         } catch (ParseException ex) {
             Logger.getLogger(NuevoPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         }
