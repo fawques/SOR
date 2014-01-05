@@ -6,12 +6,19 @@
 package taller;
 
 import BD.InterfazBD;
+import com.google.gson.Gson;
 import general.EstadoGeneral;
+import general.EstadoPedido;
+import general.Oferta;
+import general.Pedido;
+import general.Pieza;
 import general.Taller;
 import gestor_taller.JMSException_Exception;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -53,23 +60,25 @@ public class MainTaller extends Application {
         //System.out.println(bd.getPedidosActivos());
         taller = bd.getPrimerTaller();
         //bd.close();
-        if (taller != null) //está pendiente o activado
+        if (taller != null) //esta pendiente o activado
         {
-            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activación
+            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
             {
                 FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
-                stage.setTitle("Esperando código de aceptación");
+                stage.setTitle("Esperando codigo de aceptacion");
                 TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
                 //Cargar GestionPedido
                 FXMLLoader loader = changeScene("GestionPedidos.fxml");
-                stage.setTitle("Gestión de pedidos");
+                stage.setTitle("Gestion de pedidos");
                 GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
                  staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else { //baja
+                //Yo lo que haria serÃ­a un volver a darme de alta, con los mismos datos
+                //un botÃ³n y prou
                 FXMLLoader loader = changeScene("AltaTaller.fxml");
                 stage.setTitle("Alta de taller");
                 AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
@@ -86,6 +95,18 @@ public class MainTaller extends Application {
     }
 
     /**
+     * The main() method is ignored in correctly deployed JavaFX application.
+     * main() serves only as fallback in case the application can not be
+     * launched through deployment artifacts, e.g., in IDEs with limited FX
+     * support. NetBeans ignores main().
+     *
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    /**
      * ****************** Escenas *************************
      */
     /**
@@ -95,7 +116,7 @@ public class MainTaller extends Application {
      */
 
     public FXMLLoader changeScene(String fxml) throws IOException {
-        //Mostrar página de espera interfaz básica
+        //Mostrar pÃ¡gina de espera interfaz bÃ¡sica
         URL location = getClass().getResource(fxml);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
@@ -143,6 +164,16 @@ public class MainTaller extends Application {
         
         Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z ]{0,21}");
         Matcher m = p.matcher(n);
+        if (!m.matches()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean validarFecha(String dia, String mes, String anyo) {
+        Pattern p = Pattern.compile("^((((((0[13578])|(1[02]))[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9])|(3[01])))|(((0[469])|(11))[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9])|(30)))|((02)[\\s\\.\\-\\/\\\\]?((0[1-9])|(1[0-9])|(2[0-8]))))[\\s\\.\\-\\/\\\\]?(((([2468][^048])|([13579][^26]))00)|(\\d\\d\\d[13579])|(\\d\\d[02468][^048])|(\\d\\d[13579][^26])))|(((((0[13578])|(1[02]))[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9])|(3[01])))|(((0[469])|(11))[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9])|(30)))|((02)[\\s\\.\\-\\/\\\\]?((0[1-9])|([12][0-9]))))[\\s\\.\\-\\/\\\\]?(((([2468][048])|([13579][26]))00)|(\\d\\d[2468][048])|(\\d\\d[13579][26])|(\\d\\d0[48]))))$");
+        Matcher m = p.matcher(mes + dia + anyo);
         if (!m.matches()) {
             return false;
         }
@@ -214,7 +245,9 @@ public class MainTaller extends Application {
     public static boolean activarTallerBD(String idRecibido) {
         try {
             bd = new InterfazBD("sor_taller");
-            return bd.activarTallerMainTaller(idRecibido);
+            boolean r = bd.activarTallerMainTaller(idRecibido);
+            //bd.close();
+            return r;
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -224,58 +257,69 @@ public class MainTaller extends Application {
         return false;
     }
 
-    /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
+    public static ArrayList<Pedido> buscarPedidos(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) {
+        try {
+            bd = new InterfazBD("sor_taller");
+            ArrayList<Pedido> p = bd.buscarPedido(idPedido, idPieza, estado, fechaLimite, modoAceptacion);
+            //bd.close();
+            return p;
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+        try {
+            String tallerID = bd.getPrimerTaller().getID();            
+            bd = new InterfazBD("sor_taller");
+            int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite);
+            bd.anyadirPiezasAPedido(id, piezas, cantidades);
+            bd.close();
+            Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, piezas, cantidades, new ArrayList<Oferta>());
+            Gson gson = new Gson();
+            String idFinal = nuevoPedido(gson.toJson(nuevo));
+            nuevo.setID(idFinal);
+            nuevo.setEstado(EstadoPedido.ACTIVE);
+            // habría que meterlo a la BD... esto está muy feo ahora mismo :S
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JMSException_Exception ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
      * ******************* WebServices *************************
-     */
-
-    /**
      * @param name
      * @param email
      * @param address
      * @param city
      * @param postalCode
      * @param telephone
-     * @return
+     * @return 
      */
 
-    public static int alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+    public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    /**
-     *
-     * @param mail
-     * @return
-     */
-    public static String activarTaller(java.lang.String mail) {
+    public static String checkActivacion(java.lang.String mail) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.activarTaller(mail);
+        return port.checkActivacion(mail);
     }
-
-    /**
-     *
-     * @param pedido
-     * @return
-     * @throws JMSException_Exception
-     */
-    public static Boolean nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
+    
+    public static String nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(pedido);
-    }
+    }     
 }

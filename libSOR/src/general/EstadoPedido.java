@@ -7,9 +7,12 @@
 package general;
 
 /**
- *
- * @author fawques
+ * NEW = Recien creado, tiene ID local pero no ID generado por el gestor
+ * ACTIVE = Con ID del gestor, puede tener ofertas asignadas o no
+ * ACCEPTED = El taller ha aceptado una oferta para este pedido, esperando la confirmacion del desguace
+ * FINISHED_OK = El desguace ha confirmado la oferta, y la operacion ha finalizado correctamente
+ * CANCELLED = El taller ha cancelado el pedido
  */
 public enum EstadoPedido {
-    NO_OFFERS,WAITING_ACCEPT,ACCEPTED,FINISHED_OK,CANCELLED
+    NEW,ACTIVE,ACCEPTED,FINISHED_OK,CANCELLED
 }
