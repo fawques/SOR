@@ -183,15 +183,15 @@ public final class happy_jsp extends org.apache.jasper.runtime.HttpJspBase
       out = pageContext.getOut();
       _jspx_out = out;
 
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("<!DOCTYPE html>\r\n");
-      out.write("\r\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("\n");
 
 /*
  * Copyright 2002,2004 The Apache Software Foundation.
@@ -209,35 +209,34 @@ public final class happy_jsp extends org.apache.jasper.runtime.HttpJspBase
  * limitations under the License.
  */
 
-      out.write('\r');
       out.write('\n');
-      out.write("\r\n");
-      out.write("<html>\r\n");
-      out.write("<head>\r\n");
-      out.write("<title>jUDDI Happiness Page</title>\r\n");
-      out.write("<link rel=\"stylesheet\" href=\"juddi.css\">\r\n");
-      out.write("</head>\r\n");
-      out.write("<body>\r\n");
-      out.write("\r\n");
-      out.write("<div class=\"nav\" align=\"right\"><font size=\"-2\"><a href=\"http://juddi.apache.org/\">jUDDI@Apache</a></font></div>\r\n");
-      out.write("<h1>jUDDI</h1>\r\n");
-      out.write("\r\n");
-      out.write("<div class=\"announcement\">\r\n");
-      out.write("<p>\r\n");
-      out.write("<h3>Happy jUDDI!</h3>\r\n");
-      out.write("\r\n");
-      out.write("<h4>jUDDI Version Information</h4>\r\n");
-      out.write("<pre>\r\n");
+      out.write("\n");
+      out.write("<html>\n");
+      out.write("<head>\n");
+      out.write("<title>jUDDI Happiness Page</title>\n");
+      out.write("<link rel=\"stylesheet\" href=\"juddi.css\">\n");
+      out.write("</head>\n");
+      out.write("<body>\n");
+      out.write("\n");
+      out.write("<div class=\"nav\" align=\"right\"><font size=\"-2\"><a href=\"http://juddi.apache.org/\">jUDDI@Apache</a></font></div>\n");
+      out.write("<h1>jUDDI</h1>\n");
+      out.write("\n");
+      out.write("<div class=\"announcement\">\n");
+      out.write("<p>\n");
+      out.write("<h3>Happy jUDDI!</h3>\n");
+      out.write("\n");
+      out.write("<h4>jUDDI Version Information</h4>\n");
+      out.write("<pre>\n");
       out.write("<b>jUDDI Version:</b> ");
       out.print( org.apache.juddi.config.Release.getRegistryVersion() );
-      out.write("\r\n");
+      out.write("\n");
       out.write("<b>UDDI Version:</b>  ");
       out.print( org.apache.juddi.config.Release.getUDDIVersion() );
-      out.write("\r\n");
-      out.write("</pre>\r\n");
-      out.write("        \r\n");
-      out.write("<h4>jUDDI Dependencies: Class Files &amp; Libraries</h4>\r\n");
-      out.write("<pre>\r\n");
+      out.write("\n");
+      out.write("</pre>\n");
+      out.write("        \n");
+      out.write("<h4>jUDDI Dependencies: Class Files &amp; Libraries</h4>\n");
+      out.write("<pre>\n");
 
     //creates the schema if not there
  //  RegistryEngine registry = RegistryServlet.getRegistry();
@@ -277,11 +276,11 @@ public final class happy_jsp extends org.apache.jasper.runtime.HttpJspBase
       }
     }   
 
-      out.write("\r\n");
-      out.write("</pre>\r\n");
-      out.write("        \r\n");
-      out.write("<h4>jUDDI Dependencies: Resource &amp; Properties Files</h4>\r\n");
-      out.write("<pre>\r\n");
+      out.write("\n");
+      out.write("</pre>\n");
+      out.write("        \n");
+      out.write("<h4>jUDDI Dependencies: Resource &amp; Properties Files</h4>\n");
+      out.write("<pre>\n");
 
     String[] resourceArray = {
       "log4j.xml",
@@ -310,11 +309,11 @@ public final class happy_jsp extends org.apache.jasper.runtime.HttpJspBase
       }
     }   
 
-      out.write("\r\n");
-      out.write("</pre>\r\n");
-      out.write("\r\n");
-      out.write("<h4>jUDDI DataSource Validation</h4>\r\n");
-      out.write("<pre>\r\n");
+      out.write("\n");
+      out.write("</pre>\n");
+      out.write("\n");
+      out.write("<h4>jUDDI DataSource Validation</h4>\n");
+      out.write("<pre>\n");
 
   String dsname = null;
   Context ctx = null;
@@ -400,12 +399,12 @@ public final class happy_jsp extends org.apache.jasper.runtime.HttpJspBase
     out.println("</font>");
   }
 
-      out.write("\r\n");
-      out.write("</pre>\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("<h4>System Properties</h4>\r\n");
-      out.write("<pre>\r\n");
+      out.write("\n");
+      out.write("</pre>\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<h4>System Properties</h4>\n");
+      out.write("<pre>\n");
 
   try
   {
@@ -422,20 +421,20 @@ public final class happy_jsp extends org.apache.jasper.runtime.HttpJspBase
     e.printStackTrace();
   }
 
-      out.write("\r\n");
-      out.write("</pre>\r\n");
-      out.write("\r\n");
-      out.write("<hr>\r\n");
+      out.write("\n");
+      out.write("</pre>\n");
+      out.write("\n");
+      out.write("<hr>\n");
       out.write("Platform: ");
       out.print( getServletConfig().getServletContext().getServerInfo() );
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("<table width=\"100%\" border=\"0\">\r\n");
-      out.write("<tr><td height=\"50\" align=\"center\" valign=\"bottom\" nowrap><div class=\"footer\">&nbsp;</div></td></tr>\r\n");
-      out.write("</table>\r\n");
-      out.write("\r\n");
-      out.write("</div>\r\n");
-      out.write("</body>\r\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<table width=\"100%\" border=\"0\">\n");
+      out.write("<tr><td height=\"50\" align=\"center\" valign=\"bottom\" nowrap><div class=\"footer\">&nbsp;</div></td></tr>\n");
+      out.write("</table>\n");
+      out.write("\n");
+      out.write("</div>\n");
+      out.write("</body>\n");
       out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
