@@ -7,6 +7,7 @@ package taller;
 
 import BD.InterfazBD;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
 import general.EstadoPedido;
 import general.Oferta;
@@ -15,6 +16,7 @@ import general.Pieza;
 import general.Taller;
 import gestor_taller.JMSException_Exception;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -246,7 +248,7 @@ public class MainTaller extends Application {
         try {
             bd = new InterfazBD("sor_taller");
             boolean r = bd.activarTallerMainTaller(idRecibido);
-            //bd.close();
+            bd.close();
             return r;
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -257,11 +259,46 @@ public class MainTaller extends Application {
         return false;
     }
 
+    public static ArrayList<Oferta> actualizarOfertas() {
+        String ofertasGson = MainTaller.getOfertas(MainTaller.getAllPedidos());
+        Gson gson = new Gson();
+        Type collectionType = new TypeToken<ArrayList<Oferta>>() {
+        }.getType();
+        ArrayList<Oferta> listOf = gson.fromJson(ofertasGson, collectionType);
+        try {
+            bd = new InterfazBD("sor_taller");
+            for (Oferta of : listOf) {
+                bd.anadirOferta(of.getID_aux(), of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(), of.getFecha_baja(), of.getFecha_limite());
+            }
+            bd.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listOf;
+    }
+
+    public static String getAllPedidos() {
+        try {
+            bd = new InterfazBD("sor_taller");
+            ArrayList<Pedido> p = bd.getPedidosActivos();
+            bd.close();
+            Gson gson = new Gson();
+            return gson.toJson(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static ArrayList<Pedido> buscarPedidos(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) {
         try {
             bd = new InterfazBD("sor_taller");
             ArrayList<Pedido> p = bd.buscarPedido(idPedido, idPieza, estado, fechaLimite, modoAceptacion);
-            //bd.close();
+            bd.close();
             return p;
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -322,4 +359,10 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(pedido);
     }     
+
+    public static String getOfertas(java.lang.String listaPedidos) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.getOfertas(listaPedidos);
+    }
 }
