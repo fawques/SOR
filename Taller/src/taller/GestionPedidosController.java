@@ -6,8 +6,10 @@
 
 package taller;
 
+import general.Oferta;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -32,6 +34,7 @@ import javafx.stage.Stage;
 public class GestionPedidosController implements Initializable {
 
     Stage thisStage;
+    ArrayList<Oferta> ofertas;
 
     @FXML
     Button btNuevoPedido;
@@ -119,5 +122,9 @@ public class GestionPedidosController implements Initializable {
 
     public void rechazarOferta() {
 
+    }
+
+    public void actualizarOfertas() {
+        ofertas = MainTaller.actualizarOfertas();
     }
 }

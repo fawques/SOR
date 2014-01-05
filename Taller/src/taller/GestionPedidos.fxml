@@ -126,7 +126,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab text="Ofertas">
+        <Tab onSelectionChanged="#actualizarOfertas" text="Ofertas">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="780.0">
               <children>
@@ -203,6 +203,7 @@
                 <Button id="btNuevaPieza" fx:id="btRechazarOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" onAction="#rechazarOferta" prefHeight="22.0" prefWidth="135.0" text="Rechazar oferta" />
                 <Text layoutX="347.0" layoutY="229.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos realizados" />
                 <Text layoutX="352.0" layoutY="376.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas recibidas" />
+                <Button layoutX="334.0" layoutY="504.0" mnemonicParsing="false" onAction="#actualizarOfertas" text="Actualizar Ofertas" />
               </children>
             </AnchorPane>
           </content>
