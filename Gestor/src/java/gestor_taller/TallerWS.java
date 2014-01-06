@@ -9,6 +9,7 @@ package gestor_taller;
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
 import general.Oferta;
@@ -18,6 +19,7 @@ import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
@@ -97,8 +99,9 @@ public class TallerWS {
          try {
             bd = new InterfazBD("sor_gestor");
             Gson gson = new Gson();
-             Type collectionType = new TypeToken<Pedido>(){}.getType();
-            Pedido p = gson.fromJson(pedido, collectionType);
+             Type collectionType = new TypeToken<Pedido>() {
+             }.getType();
+             Pedido p = gson.fromJson(pedido, collectionType);
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
@@ -123,14 +126,16 @@ public class TallerWS {
      */
     @WebMethod(operationName = "getOfertas")
     public String getOfertas(@WebParam(name = "listaPedidos") String listaPedidos) {
-        Type collectionType = new TypeToken<ArrayList<Oferta>>() {
+        Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
         ArrayList<Oferta> listaOferta = new ArrayList<>();
-        ArrayList<Pedido> arrayPedido = gson.fromJson(listaPedidos, collectionType);
+        ArrayList<Pedido> arrayPedido = new ArrayList<Pedido>();
+        arrayPedido = gson.fromJson(listaPedidos, collectionType);
         try {
             bd = new InterfazBD("sor_gestor");
-            for (Pedido p : arrayPedido) {
+            for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
+                Pedido p = it.next();
                 listaOferta.addAll(bd.getOfertasPedido(p.getID()));
             }
             bd.close();

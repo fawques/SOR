@@ -105,7 +105,7 @@
                             </FXCollections>
                           </items>
                         </ComboBox>
-                        <Button id="btBuscar" fx:id="btBuscarPieza" layoutX="25.0" layoutY="75.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscar" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
+                        <Button id="btBuscar" fx:id="btBuscarPieza" layoutX="25.0" layoutY="75.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscarPieza" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
                       </children>
                     </AnchorPane>
                   </content>
@@ -170,7 +170,7 @@
                             <TextField id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
                           </children>
                         </HBox>
-                        <Button id="btBuscar" fx:id="btBuscarOfertas" layoutX="566.0" layoutY="102.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscar" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
+                        <Button id="btBuscar" fx:id="btBuscarOfertas" layoutX="566.0" layoutY="102.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscarOfertas" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
                       </children>
                     </AnchorPane>
                   </content>

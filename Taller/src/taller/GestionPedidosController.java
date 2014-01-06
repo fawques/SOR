@@ -103,6 +103,14 @@ public class GestionPedidosController implements Initializable {
 
     }
 
+    public void buscarOfertas() {
+
+    }
+
+    public void buscarPieza() {
+
+    }
+
     public void eliminarPedido(ActionEvent e) {
 
     }
