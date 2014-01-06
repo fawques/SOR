@@ -125,10 +125,12 @@ public class GestionPedidosController implements Initializable {
     }
 
     public void aceptarOferta() {
+        //comprobar si hay alguna oferta seleccionada
 
     }
 
     public void rechazarOferta() {
+        //comprobar si hay alguna oferta seleccionada
 
     }
 

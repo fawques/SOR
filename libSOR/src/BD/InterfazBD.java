@@ -449,4 +449,8 @@ public class InterfazBD {
         }
         return false;
     }
+
+    public boolean cambiarEstadoOferta(EstadoOferta eOf, String id) {
+        return conexion.ejecutarSQL("Update oferta set estado='" + eOf.ordinal() + "' where id='" + id + "'");
+    }
 }

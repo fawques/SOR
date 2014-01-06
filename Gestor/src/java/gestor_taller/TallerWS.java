@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
+import general.EstadoOferta;
 import general.Oferta;
 import general.Pedido;
 import general.Taller;
@@ -147,5 +148,39 @@ public class TallerWS {
         }
 
         return null;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "aceptarOferta")
+    public Boolean aceptarOferta(@WebParam(name = "ID") String ID) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED, ID);
+            bd.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "rechazarOferta")
+    public Boolean rechazarOferta(@WebParam(name = "ID") String ID) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            bd.cambiarEstadoOferta(EstadoOferta.REJECTED, ID);
+            bd.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }
