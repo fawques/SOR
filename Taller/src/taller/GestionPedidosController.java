@@ -125,13 +125,15 @@ public class GestionPedidosController implements Initializable {
     }
 
     public void aceptarOferta() {
-        //comprobar si hay alguna oferta seleccionada
-
+        //comprobar si hay alguna oferta seleccionada y obtener el ID
+        String id = null;
+        MainTaller.aceptarOferta(id);
     }
 
     public void rechazarOferta() {
-        //comprobar si hay alguna oferta seleccionada
-
+        //comprobar si hay alguna oferta seleccionada y obtener el ID
+        String id = null;
+        MainTaller.rechazarOferta(id);
     }
 
     public void actualizarOfertas() {

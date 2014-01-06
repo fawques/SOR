@@ -365,4 +365,16 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.getOfertas(listaPedidos);
     }
+
+    public static Boolean aceptarOferta(java.lang.String id) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.aceptarOferta(id);
+    }
+
+    public static Boolean rechazarOferta(java.lang.String id) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.rechazarOferta(id);
+    }
 }
