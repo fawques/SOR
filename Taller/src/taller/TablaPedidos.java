@@ -7,6 +7,7 @@
 package taller;
 
 import general.EstadoPedido;
+import general.Pedido;
 import java.util.Date;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -26,14 +27,14 @@ public class TablaPedidos {
     SimpleObjectProperty<Date> fecha_baja;
     SimpleObjectProperty<Date> fecha_limite;
 
-    public TablaPedidos(SimpleIntegerProperty id_aux, SimpleStringProperty id, SimpleObjectProperty<Date> fecha_alta, SimpleObjectProperty<EstadoPedido> estado, SimpleStringProperty taller, SimpleObjectProperty<Date> fecha_baja, SimpleObjectProperty<Date> fecha_limite) {
-        this.id_aux = id_aux;
-        this.id = id;
-        this.fecha_alta = fecha_alta;
-        this.estado = estado;
-        this.taller = taller;
-        this.fecha_baja = fecha_baja;
-        this.fecha_limite = fecha_limite;
+    public TablaPedidos(Pedido p) {
+        this.id_aux = new SimpleIntegerProperty(p.getID_aux());
+        this.id = new SimpleStringProperty(p.getID());
+        this.fecha_alta = new SimpleObjectProperty<>(p.getFecha_alta());
+        this.estado = new SimpleObjectProperty<>(p.getEstado());
+        this.taller = new SimpleStringProperty(p.getTaller());
+        this.fecha_baja = new SimpleObjectProperty<>(p.getFecha_baja());
+        this.fecha_limite = new SimpleObjectProperty<>(p.getFecha_limite());
     }
 
     public SimpleIntegerProperty getId_aux() {

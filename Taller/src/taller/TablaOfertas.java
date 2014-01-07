@@ -7,6 +7,7 @@
 package taller;
 
 import general.EstadoOferta;
+import general.Oferta;
 import java.util.Date;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -38,6 +39,18 @@ public class TablaOfertas {
         this.desguace = desguace;
         this.fecha_baja = fecha_baja;
         this.fecha_limite = fecha_limite;
+    }
+
+    TablaOfertas(Oferta of) {
+        this.id_aux = new SimpleIntegerProperty(of.getID_aux());
+        this.id = new SimpleStringProperty(of.getID());
+        this.fecha_alta = new SimpleObjectProperty<>(of.getFecha_alta());
+        this.importe = new SimpleDoubleProperty(of.getPrecio());
+        this.estado = new SimpleObjectProperty<>(of.getEstado());
+        this.pedido = new SimpleStringProperty(of.getPedido());
+        this.desguace = new SimpleStringProperty(of.getDesguace());
+        this.fecha_baja = new SimpleObjectProperty<>(of.getFecha_baja());
+        this.fecha_limite = new SimpleObjectProperty<>(of.getFecha_limite());
     }
 
     public SimpleIntegerProperty getId_aux() {
