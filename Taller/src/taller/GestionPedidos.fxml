@@ -56,18 +56,7 @@
                     </AnchorPane>
                   </content>
                 </TitledPane>
-                <TableView fx:id="tvGrid" layoutX="28.0" layoutY="243.0" prefHeight="268.0" prefWidth="721.0">
-                  <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="53.0" text="Id1" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="68.0" text="IdGestor" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="60.0" text="Id pieza" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="59.0" text="Estado" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80.0" text="Fecha alta" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="85.0" text="Fecha baja" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="94.0" text="Fecha limite" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="94.0" text="¿Automático?" />
-                  </columns>
-                </TableView>
+                <TableView id="tvGrid" fx:id="tbPedidos" layoutX="28.0" layoutY="243.0" prefHeight="268.0" prefWidth="721.0" />
                 <Button fx:id="btNuevoPedido" layoutX="30.0" layoutY="196.0" mnemonicParsing="false" onAction="#onClickNuevoPedido" prefHeight="32.0" prefWidth="103.0" text="Nuevo pedido" />
                 <Button layoutX="160.0" layoutY="196.0" mnemonicParsing="false" onAction="#eliminarPedido" prefHeight="32.0" text="Eliminar pedido" />
                 <Text layoutX="373.0" layoutY="217.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos" />
@@ -110,16 +99,7 @@
                     </AnchorPane>
                   </content>
                 </TitledPane>
-                <TableView id="dgPedidos" prefHeight="275.0" prefWidth="717.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="235.0">
-                  <columns>
-                    <TableColumn prefWidth="75.0" text="ID" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="169.0" text="Nombre" />
-                    <TableColumn prefWidth="75.0" text="Tipo" />
-                    <TableColumn prefWidth="75.0" text="Estado" />
-                    <TableColumn prefWidth="75.0" text="Stock" />
-                    <TableColumn prefWidth="75.0" text="¡Activa?" />
-                  </columns>
-                </TableView>
+                <TableView fx:id="tbPiezas" prefHeight="275.0" prefWidth="717.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="235.0" />
                 <Button id="btNuevoPedido" fx:id="btNuevaPieza" mnemonicParsing="false" onAction="#onClickNuevoPedido" prefHeight="37.0" prefWidth="103.0" text="Nueva pieza" AnchorPane.bottomAnchor="328.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="649.0" AnchorPane.topAnchor="180.0" />
                 <Text layoutX="337.0" layoutY="208.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Catálogo de piezas" />
               </children>
@@ -175,30 +155,8 @@
                     </AnchorPane>
                   </content>
                 </TitledPane>
-                <TableView id="tabVPedidos" layoutX="28.0" layoutY="246.0" prefHeight="104.0" prefWidth="718.0">
-                  <columns>
-                    <TableColumn prefWidth="75.0" text="ID Pedido" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="65.0" text="ID gestor" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="65.0" text="ID Cliente" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80.0" text="Nombre" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="101.0" text="Apellidos" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="74.0" text="ID Pieza" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" text="Pieza" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" text="Fecha limite" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="78.0" text="Estado" />
-                  </columns>
-                </TableView>
-                <TableView id="tabVOfertas" layoutX="28.0" layoutY="389.0" prefHeight="93.0" prefWidth="718.0">
-                  <columns>
-                    <TableColumn prefWidth="75.0" text="ID Oferta" />
-                    <TableColumn prefWidth="75.0" text="ID gestor" />
-                    <TableColumn prefWidth="75.0" text="ID desguace" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="178.0" text="Nombre desguace" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="139.0" text="Fecha limite acept." />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="59.0" text="PVP" />
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="101.0" text="Fecha entrega" />
-                  </columns>
-                </TableView>
+                <TableView fx:id="tbPedidosOfertas" layoutX="28.0" layoutY="246.0" prefHeight="104.0" prefWidth="718.0" />
+                <TableView fx:id="tbOfertas" layoutX="28.0" layoutY="389.0" prefHeight="93.0" prefWidth="718.0" />
                 <Button id="btNuevaPieza" fx:id="btAceptarOferta" layoutX="27.0" layoutY="503.0" mnemonicParsing="false" onAction="#aceptarOferta" prefHeight="22.0" prefWidth="135.0" text="Aceptar oferta" />
                 <Button id="btNuevaPieza" fx:id="btRechazarOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" onAction="#rechazarOferta" prefHeight="22.0" prefWidth="135.0" text="Rechazar oferta" />
                 <Text layoutX="347.0" layoutY="229.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos realizados" />
