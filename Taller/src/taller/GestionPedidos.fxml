@@ -106,7 +106,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab onSelectionChanged="#actualizarOfertas" text="Ofertas">
+        <Tab text="Ofertas">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="780.0">
               <children>

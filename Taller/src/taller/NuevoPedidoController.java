@@ -96,7 +96,7 @@ public class NuevoPedidoController implements Initializable {
                 cantidadPiezas.add(tp.getCantidad());
             }
 
-            MainTaller.crearPedido(today, EstadoPedido.NO_OFFERS, fechaLimite, piezasPedido, cantidadPiezas);
+            MainTaller.crearPedido(today, EstadoPedido.NEW, fechaLimite, piezasPedido, cantidadPiezas);
         } catch (ParseException ex) {
             Logger.getLogger(NuevoPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         }

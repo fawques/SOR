@@ -260,7 +260,7 @@ public class MainTaller extends Application {
     }
 
     public static ArrayList<Oferta> actualizarOfertas() {
-        String ofertasGson = MainTaller.getOfertas(MainTaller.getAllPedidos());
+        String ofertasGson = MainTaller.getOfertas(MainTaller.getPedidosActivos());
         Gson gson = new Gson();
         Type collectionType = new TypeToken<ArrayList<Oferta>>() {
         }.getType();
@@ -279,10 +279,25 @@ public class MainTaller extends Application {
         return listOf;
     }
 
-    public static String getAllPedidos() {
+    public static String getPedidosActivos() {
         try {
             bd = new InterfazBD("sor_taller");
             ArrayList<Pedido> p = bd.getPedidosActivos();
+            bd.close();
+            Gson gson = new Gson();
+            return gson.toJson(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static String getAllPedidos() {
+        try {
+            bd = new InterfazBD("sor_taller");
+            ArrayList<Pedido> p = bd.getPedidosTaller(taller.getID());
             bd.close();
             Gson gson = new Gson();
             return gson.toJson(p);
