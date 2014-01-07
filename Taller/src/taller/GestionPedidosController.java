@@ -224,9 +224,9 @@ public class GestionPedidosController implements Initializable {
     }
 
     public void verOfertas() {
-        olTablaOfertas.clear();
         TablaPedidos tp = (TablaPedidos) tbPedidosOfertas.getSelectionModel().getSelectedItem();
         if (tp != null) {
+            olTablaOfertas.clear();
             TablaOfertas tpOf;
             for (Oferta oferta : ofertas) {
                 if (oferta.getPedido() == null ? tp.getId() == null : oferta.getPedido().equals(tp.getId())) {
@@ -237,6 +237,8 @@ public class GestionPedidosController implements Initializable {
 
             tbOfertas.setEditable(true);
             tbOfertas.setItems(olTablaOfertas);
+        } else {
+            actualizarOfertas();
         }
     }
 }
