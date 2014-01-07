@@ -9,12 +9,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="586.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevoPedidoController">
   <children>
-    <TableView id="dgPedidos" fx:id="tbPedidos" layoutX="148.0" layoutY="62.0" prefHeight="169.0" prefWidth="245.0">
-      <columns>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="172.0" text="Pieza" />
-        <TableColumn prefWidth="75.0" text="Cantidad" />
-      </columns>
-    </TableView>
+    <TableView fx:id="tbPiezas" editable="true" layoutX="148.0" layoutY="62.0" prefHeight="169.0" prefWidth="245.0" tableMenuButtonVisible="false" />
     <Button fx:id="btAnadirPieza" layoutX="456.0" layoutY="30.0" mnemonicParsing="false" onAction="#anyadirPiezaAPedido" text="Añadir pieza" />
     <Button layoutX="225.0" layoutY="366.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
     <TextField fx:id="tfCantidadPieza" layoutX="351.0" layoutY="29.0" prefWidth="65.0" />
