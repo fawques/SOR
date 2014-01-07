@@ -137,8 +137,53 @@ public class InterfazBD {
         return lista;
         
     }
-    // fin DESGUACES
-    
+
+    public ArrayList<Pedido> getPedidosConID_aux() { //devuelve pedidos en general
+        ArrayList<Pedido> lista = new ArrayList<>();
+        try {
+            //conexion.ejecutarSQL("INSERT INTO pedido (id, taller, estado, fecha_alta, fecha_baja, fecha_limite) values ('4', '5','4','2013-03-12', '2013-03-12', '2013-03-12');");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido;");
+            while (resultados.next()) {
+                String pedidoID = resultados.getString("id");
+                ArrayList<Pieza> piezas = new ArrayList<>();
+                ArrayList<Integer> cantidades = new ArrayList<>();
+                getPiezasYCantidades(pedidoID, piezas, cantidades);
+
+                Pedido nuevo = new Pedido(pedidoID, resultados.getInt("id_aux"), resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], piezas, cantidades, getOfertasPedido(pedidoID));
+                lista.add(nuevo);
+                //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+
+    }
+
+    public ArrayList<Pedido> getPedidosConID_aux(EstadoPedido estado) { //devuelve pedidos en general
+        ArrayList<Pedido> lista = new ArrayList<>();
+        try {
+            //conexion.ejecutarSQL("INSERT INTO pedido (id, taller, estado, fecha_alta, fecha_baja, fecha_limite) values ('4', '5','4','2013-03-12', '2013-03-12', '2013-03-12');");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where estado='" + estado.ordinal() + "'");
+            while (resultados.next()) {
+                String pedidoID = resultados.getString("id");
+                ArrayList<Pieza> piezas = new ArrayList<>();
+                ArrayList<Integer> cantidades = new ArrayList<>();
+                getPiezasYCantidades(pedidoID, piezas, cantidades);
+
+                Pedido nuevo = new Pedido(pedidoID, resultados.getInt("id_aux"), resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], piezas, cantidades, getOfertasPedido(pedidoID));
+                lista.add(nuevo);
+                //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+
+    }
+
     public ArrayList<Taller> getTalleres()
     {
         ArrayList<Taller> lista= new ArrayList<>();
