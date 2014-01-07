@@ -282,7 +282,7 @@ public class MainTaller extends Application {
     public static String getPedidosActivos() {
         try {
             bd = new InterfazBD("sor_taller");
-            ArrayList<Pedido> p = bd.getPedidosActivos();
+            ArrayList<Pedido> p = bd.getPedidosConID_aux(EstadoPedido.ACTIVE);
             bd.close();
             Gson gson = new Gson();
             return gson.toJson(p);
@@ -297,7 +297,7 @@ public class MainTaller extends Application {
     public static String getAllPedidos() {
         try {
             bd = new InterfazBD("sor_taller");
-            ArrayList<Pedido> p = bd.getPedidosTaller(taller.getID());
+            ArrayList<Pedido> p = bd.getPedidosConID_aux();
             bd.close();
             Gson gson = new Gson();
             return gson.toJson(p);
