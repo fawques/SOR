@@ -37,32 +37,32 @@ public class TablaPedidos {
         this.fecha_limite = new SimpleObjectProperty<>(p.getFecha_limite());
     }
 
-    public SimpleIntegerProperty getId_aux() {
-        return id_aux;
+    public int getId_aux() {
+        return id_aux.get();
     }
 
-    public SimpleStringProperty getId() {
-        return id;
+    public String getId() {
+        return id.get();
     }
 
-    public SimpleObjectProperty<Date> getFecha_alta() {
-        return fecha_alta;
+    public Date getFecha_alta() {
+        return fecha_alta.get();
     }
 
-    public SimpleObjectProperty<EstadoPedido> getEstado() {
-        return estado;
+    public EstadoPedido getEstado() {
+        return estado.get();
     }
 
-    public SimpleStringProperty getTaller() {
-        return taller;
+    public String getTaller() {
+        return taller.get();
     }
 
-    public SimpleObjectProperty<Date> getFecha_baja() {
-        return fecha_baja;
+    public Date getFecha_baja() {
+        return fecha_baja.get();
     }
 
-    public SimpleObjectProperty<Date> getFecha_limite() {
-        return fecha_limite;
+    public Date getFecha_limite() {
+        return fecha_limite.get();
     }
 
 }

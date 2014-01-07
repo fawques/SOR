@@ -29,18 +29,6 @@ public class TablaOfertas {
     SimpleObjectProperty<Date> fecha_baja;
     SimpleObjectProperty<Date> fecha_limite;
 
-    public TablaOfertas(SimpleIntegerProperty id_aux, SimpleStringProperty id, SimpleObjectProperty<Date> fecha_alta, SimpleDoubleProperty importe, SimpleObjectProperty<EstadoOferta> estado, SimpleStringProperty pedido, SimpleStringProperty desguace, SimpleObjectProperty<Date> fecha_baja, SimpleObjectProperty<Date> fecha_limite) {
-        this.id_aux = id_aux;
-        this.id = id;
-        this.fecha_alta = fecha_alta;
-        this.importe = importe;
-        this.estado = estado;
-        this.pedido = pedido;
-        this.desguace = desguace;
-        this.fecha_baja = fecha_baja;
-        this.fecha_limite = fecha_limite;
-    }
-
     TablaOfertas(Oferta of) {
         this.id_aux = new SimpleIntegerProperty(of.getID_aux());
         this.id = new SimpleStringProperty(of.getID());
@@ -53,40 +41,40 @@ public class TablaOfertas {
         this.fecha_limite = new SimpleObjectProperty<>(of.getFecha_limite());
     }
 
-    public SimpleIntegerProperty getId_aux() {
-        return id_aux;
+    public int getId_aux() {
+        return id_aux.get();
     }
 
-    public SimpleStringProperty getId() {
-        return id;
+    public String getId() {
+        return id.get();
     }
 
-    public SimpleObjectProperty<Date> getFecha_alta() {
-        return fecha_alta;
+    public Date getFecha_alta() {
+        return fecha_alta.get();
     }
 
-    public SimpleDoubleProperty getImporte() {
-        return importe;
+    public Double getImporte() {
+        return importe.get();
     }
 
-    public SimpleObjectProperty<EstadoOferta> getEstado() {
-        return estado;
+    public EstadoOferta getEstado() {
+        return estado.get();
     }
 
-    public SimpleStringProperty getPedido() {
-        return pedido;
+    public String getPedido() {
+        return pedido.get();
     }
 
-    public SimpleStringProperty getDesguace() {
-        return desguace;
+    public String getDesguace() {
+        return desguace.get();
     }
 
-    public SimpleObjectProperty<Date> getFecha_baja() {
-        return fecha_baja;
+    public Date getFecha_baja() {
+        return fecha_baja.get();
     }
 
-    public SimpleObjectProperty<Date> getFecha_limite() {
-        return fecha_limite;
+    public Date getFecha_limite() {
+        return fecha_limite.get();
     }
 
 }

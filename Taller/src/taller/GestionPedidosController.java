@@ -7,6 +7,7 @@
 package taller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoOferta;
 import general.Oferta;
@@ -87,7 +88,7 @@ public class GestionPedidosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
 
         TableColumn id_auxCol = new TableColumn("Id_aux");
         id_auxCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Integer>("id_aux"));
