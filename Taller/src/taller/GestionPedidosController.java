@@ -138,7 +138,7 @@ public class GestionPedidosController implements Initializable {
 
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
-        ArrayList<Pedido> alPedidos = gson.fromJson(MainTaller.getAllPedidos(), collectionType);
+        ArrayList<Pedido> alPedidos = gson.fromJson(MainTaller.getPedidosActivos(), collectionType);
         TablaPedidos tpPed;
         for (Pedido pedido : alPedidos) {
             tpPed = new TablaPedidos(pedido);
@@ -148,6 +148,12 @@ public class GestionPedidosController implements Initializable {
         tbPedidosOfertas.setEditable(true);
         tbPedidosOfertas.setItems(olTablaPedidos);
         tbPedidosOfertas.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+        olTablaPedidos.clear();
+        ArrayList<Pedido> alPedidosActivos = gson.fromJson(MainTaller.getAllPedidos(), collectionType);
+        for (Pedido pedido : alPedidosActivos) {
+            tpPed = new TablaPedidos(pedido);
+            olTablaPedidos.add(tpPed);
+        }
         tbPedidos.setEditable(true);
         tbPedidos.setItems(olTablaPedidos);
         tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);

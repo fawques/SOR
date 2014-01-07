@@ -161,10 +161,9 @@ public class InterfazBD {
 
     }
 
-    public ArrayList<Pedido> getPedidosConID_aux(EstadoPedido estado) { //devuelve pedidos en general
+    public ArrayList<Pedido> getPedidosConID_aux(EstadoPedido estado) {
         ArrayList<Pedido> lista = new ArrayList<>();
         try {
-            //conexion.ejecutarSQL("INSERT INTO pedido (id, taller, estado, fecha_alta, fecha_baja, fecha_limite) values ('4', '5','4','2013-03-12', '2013-03-12', '2013-03-12');");
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where estado='" + estado.ordinal() + "'");
             while (resultados.next()) {
                 String pedidoID = resultados.getString("id");
@@ -174,8 +173,7 @@ public class InterfazBD {
 
                 Pedido nuevo = new Pedido(pedidoID, resultados.getInt("id_aux"), resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
-                //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
-            }
+           }
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
@@ -323,9 +321,9 @@ public class InterfazBD {
         ArrayList<Oferta> lista = new ArrayList<>();
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta WHERE pedido='" + pedidoID + "';");
-            while(resultados.next()){
-
-                Oferta nueva = new Oferta(resultados.getString("id"),  resultados.getDouble("importe"), resultados.getString("desguace"), resultados.getString("pedido"),resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+            Oferta nueva;
+            while (resultados.next()) {
+                nueva = new Oferta(resultados.getString("id"), resultados.getDouble("importe"), resultados.getString("desguace"), resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
 
                 lista.add(nueva);
             }
@@ -497,5 +495,9 @@ public class InterfazBD {
 
     public boolean cambiarEstadoOferta(EstadoOferta eOf, String id) {
         return conexion.ejecutarSQL("Update oferta set estado='" + eOf.ordinal() + "' where id='" + id + "'");
+    }
+
+    public boolean activarPedidoTaller(int id_aux, String id) {
+        return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "'");
     }
 }

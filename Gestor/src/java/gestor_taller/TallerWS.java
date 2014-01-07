@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
 import general.EstadoOferta;
+import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
 import general.Taller;
@@ -106,7 +107,7 @@ public class TallerWS {
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
-            bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
+             bd.anadirPedido(stringID, p.getFecha_alta(), EstadoPedido.ACCEPTED.ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
             Gestor_activemq activemq= new Gestor_activemq("Pedidos");
             String pedidoFinal = gson.toJson(p);
             activemq.producer.produceMessage(pedidoFinal);
