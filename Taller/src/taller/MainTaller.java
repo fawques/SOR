@@ -260,7 +260,7 @@ public class MainTaller extends Application {
     }
 
     public static ArrayList<Oferta> actualizarOfertas() {
-        String ofertasGson = MainTaller.getOfertas(MainTaller.getPedidosActivos());
+        String ofertasGson = getOfertas(getPedidosActivos());
         Gson gson = new Gson();
         Type collectionType = new TypeToken<ArrayList<Oferta>>() {
         }.getType();
@@ -329,13 +329,11 @@ public class MainTaller extends Application {
             bd = new InterfazBD("sor_taller");
             int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite);
             bd.anyadirPiezasAPedido(id, piezas, cantidades);
-            bd.close();
             Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, piezas, cantidades, new ArrayList<Oferta>());
             Gson gson = new Gson();
             String idFinal = nuevoPedido(gson.toJson(nuevo));
-            nuevo.setID(idFinal);
-            nuevo.setEstado(EstadoPedido.ACTIVE);
-            // habría que meterlo a la BD... esto está muy feo ahora mismo :S
+            bd.activarPedidoTaller(id, idFinal);
+            bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
