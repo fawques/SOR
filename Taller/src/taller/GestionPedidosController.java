@@ -201,18 +201,42 @@ public class GestionPedidosController implements Initializable {
     }
 
     public void aceptarOferta() {
-        //comprobar si hay alguna oferta seleccionada y obtener el ID
-        String id = null;
-        MainTaller.aceptarOferta(id);
+        TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
+        MainTaller.aceptarOferta(tpPed.getId());
     }
 
     public void rechazarOferta() {
-        //comprobar si hay alguna oferta seleccionada y obtener el ID
-        String id = null;
-        MainTaller.rechazarOferta(id);
+        TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
+        MainTaller.rechazarOferta(tpPed.getId());
     }
 
     public void actualizarOfertas() {
+        olTablaOfertas.clear();
         ofertas = MainTaller.actualizarOfertas();
+        TablaOfertas tpOf;
+        for (Oferta of : ofertas) {
+            tpOf = new TablaOfertas(of);
+            olTablaOfertas.add(tpOf);
+        }
+
+        tbOfertas.setEditable(true);
+        tbOfertas.setItems(olTablaOfertas);
+    }
+
+    public void verOfertas() {
+        olTablaOfertas.clear();
+        TablaPedidos tp = (TablaPedidos) tbPedidosOfertas.getSelectionModel().getSelectedItem();
+        if (tp != null) {
+            TablaOfertas tpOf;
+            for (Oferta oferta : ofertas) {
+                if (oferta.getPedido() == null ? tp.getId() == null : oferta.getPedido().equals(tp.getId())) {
+                    tpOf = new TablaOfertas(oferta);
+                    olTablaOfertas.add(tpOf);
+                }
+            }
+
+            tbOfertas.setEditable(true);
+            tbOfertas.setItems(olTablaOfertas);
+        }
     }
 }

@@ -162,6 +162,7 @@
                 <Text layoutX="347.0" layoutY="229.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos realizados" />
                 <Text layoutX="352.0" layoutY="376.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas recibidas" />
                 <Button layoutX="334.0" layoutY="504.0" mnemonicParsing="false" onAction="#actualizarOfertas" text="Actualizar Ofertas" />
+                <Button layoutX="35.0" layoutY="358.0" mnemonicParsing="false" onAction="#verOfertas" text="Ver ofertas" />
               </children>
             </AnchorPane>
           </content>
