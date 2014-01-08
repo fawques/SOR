@@ -404,4 +404,12 @@ public class GestionPedidosController implements Initializable {
             actualizarOfertas();
         }
     }
+
+    public void bajaTaller() {
+
+    }
+
+    public void modificarTaller() {
+
+    }
 }
