@@ -26,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -55,6 +56,7 @@ public class NuevoPedidoController implements Initializable {
     public CheckBox chModoAutomatico;
     public RadioButton rbPVP;
     public RadioButton rbFecha;
+    public Label lbMensaje;
     
     /**
      * Initializes the controller class.
@@ -97,7 +99,11 @@ public class NuevoPedidoController implements Initializable {
             }
 
             MainTaller.crearPedido(today, EstadoPedido.NEW, fechaLimite, piezasPedido, cantidadPiezas);
+            //Mensaje
+            lbMensaje.setText("El pedido se ha creado correctamente");
+
         } catch (ParseException ex) {
+            lbMensaje.setText("Algo no ha ido bien... :(");
             Logger.getLogger(NuevoPedidoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
