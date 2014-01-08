@@ -50,40 +50,143 @@ public class GestionPedidosController implements Initializable {
 
     @FXML
     Button btNuevoPedido;
+
+    /**
+     *
+     */
     public TextField tfIDPedido;
+
+    /**
+     *
+     */
     public TextField tfIDPieza;
+
+    /**
+     *
+     */
     public TextField tfLimiteDia;
+
+    /**
+     *
+     */
     public TextField tfLimiteMes;
+
+    /**
+     *
+     */
     public TextField tfLimiteAnyo;
+
+    /**
+     *
+     */
     public ComboBox cbEstado;
+
+    /**
+     *
+     */
     public ComboBox cbModo;
+
+    /**
+     *
+     */
     public TableView tbPedidos;
+
+    /**
+     *
+     */
     public Button btBuscarPedido;
     
     /* PIEZAS */
-    
+    /**
+     *
+     */
     public TextField tfNombrePieza;
+
+    /**
+     *
+     */
     public ComboBox cbTipoPiezas;
+
+    /**
+     *
+     */
     public ComboBox cbEstadoPiezas;
+
+    /**
+     *
+     */
     public Button btNuevaPieza;
+
+    /**
+     *
+     */
     public Button btBuscarPieza;
+
+    /**
+     *
+     */
     public TableView tbPiezas;
     
     /* OFERTAS */
+    /**
+     *
+     */
     public TextField tfIDPedidoOferta;
+
+    /**
+     *
+     */
     public TextField tfIDCliente;
+
+    /**
+     *
+     */
     public TextField tfIDPiezaOferta;
+
+    /**
+     *
+     */
     public TextField tfNombreCliente;
+
+    /**
+     *
+     */
     public TextField tfApellidos;
+
+    /**
+     *
+     */
     public ComboBox cbEstadoOfertas;
+
+    /**
+     *
+     */
     public TextField tfOfertasDia;
+
+    /**
+     *
+     */
     public TextField tfOfertasMes;
+
+    /**
+     *
+     */
     public TextField tfOfertasAnyo;
+
+    /**
+     *
+     */
     public TableView tbOfertas;
+
+    /**
+     *
+     */
     public TableView tbPedidosOfertas;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -160,6 +263,12 @@ public class GestionPedidosController implements Initializable {
 
     }
     
+    /**
+     *
+     * @param e
+     * @throws IOException
+     * @throws Exception
+     */
     public void onClickNuevoPedido(ActionEvent e) throws IOException, Exception {
         URL location = getClass().getResource("NuevoPedido.fxml");
         Stage stage = new Stage();
@@ -179,43 +288,85 @@ public class GestionPedidosController implements Initializable {
         MainTaller.nuevoPedido(listaJSON);*/
     }
 
+    /**
+     *
+     * @param e
+     */
     public void buscarPedido(ActionEvent e) {
         Date fechaLimite = new Date(Integer.parseInt(tfLimiteAnyo.getText().toString()), Integer.parseInt(tfLimiteMes.getText().toString()), Integer.parseInt(tfLimiteDia.getText().toString()));
         System.out.println(MainTaller.buscarPedidos(tfIDPedido.getText(), tfIDPieza.getText(), cbEstado.getValue().toString(), fechaLimite, cbModo.getValue().toString()));
 
     }
 
+    /**
+     *
+     */
     public void buscarOfertas() {
 
     }
 
+    /**
+     *
+     */
     public void buscarPieza() {
 
     }
 
-    public void eliminarPedido(ActionEvent e) {
+    /**
+     *
+     */
+    public void eliminarPedido() {
+        TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
+        if (tp != null) {
+            //Debe hacer un cancelado en cascada de las ofertas
 
+        }
+        //else //no hay pedido seleccionada
     }
 
+    /**
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         thisStage = stage;
     }
 
+    /**
+     *
+     */
     public void showStage() {
         thisStage.sizeToScene();
         thisStage.show();
     }
 
+    /**
+     *
+     */
     public void aceptarOferta() {
         TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
-        MainTaller.aceptarOferta(tpPed.getId());
+        if (tpPed != null) {
+            MainTaller.aceptarOferta(tpPed.getId());
+        }
+        //else //no hay oferta seleccionada
     }
 
+    /**
+     *
+     */
     public void rechazarOferta() {
         TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
-        MainTaller.rechazarOferta(tpPed.getId());
+        if (tpPed != null) {
+            MainTaller.rechazarOferta(tpPed.getId());
+        }
+        //else //no hay pedido seleccionada
     }
 
+    //Obtiene las ofertas que sean: Active
+
+    /**
+     *
+     */
     public void actualizarOfertas() {
         olTablaOfertas.clear();
         ofertas = MainTaller.actualizarOfertas();
@@ -229,6 +380,9 @@ public class GestionPedidosController implements Initializable {
         tbOfertas.setItems(olTablaOfertas);
     }
 
+    /**
+     *
+     */
     public void verOfertas() {
         TablaPedidos tp = (TablaPedidos) tbPedidosOfertas.getSelectionModel().getSelectedItem();
         if (tp != null) {
@@ -236,14 +390,17 @@ public class GestionPedidosController implements Initializable {
             TablaOfertas tpOf;
             for (Oferta oferta : ofertas) {
                 if (oferta.getPedido() == null ? tp.getId() == null : oferta.getPedido().equals(tp.getId())) {
-                    tpOf = new TablaOfertas(oferta);
-                    olTablaOfertas.add(tpOf);
+                    if (oferta.getEstado() == EstadoOferta.ACTIVE || oferta.getEstado() == EstadoOferta.ACCEPTED) {
+                        tpOf = new TablaOfertas(oferta);
+                        olTablaOfertas.add(tpOf);
+                    }
                 }
             }
 
             tbOfertas.setEditable(true);
             tbOfertas.setItems(olTablaOfertas);
         } else {
+            //no hay pedido seleccionada
             actualizarOfertas();
         }
     }

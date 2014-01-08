@@ -334,6 +334,24 @@ public class InterfazBD {
         return lista;
 
     }
+
+    public ArrayList<Oferta> getOfertasPedido(String pedidoID, EstadoOferta estado) {
+        ArrayList<Oferta> lista = new ArrayList<>();
+        try {
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta WHERE pedido='" + pedidoID + "' and estado='" + estado.ordinal() + ";");
+            Oferta nueva;
+            while (resultados.next()) {
+                nueva = new Oferta(resultados.getString("id"), resultados.getDouble("importe"), resultados.getString("desguace"), resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+
+                lista.add(nueva);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+
+    }
     
     public Taller getTaller(String email){
         ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller WHERE email='" + email + "';");

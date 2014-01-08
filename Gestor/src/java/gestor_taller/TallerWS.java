@@ -138,7 +138,7 @@ public class TallerWS {
             bd = new InterfazBD("sor_gestor");
             for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
                 Pedido p = it.next();
-                listaOferta.addAll(bd.getOfertasPedido(p.getID()));
+                listaOferta.addAll(bd.getOfertasPedido(p.getID(), EstadoOferta.ACTIVE));
             }
             bd.close();
             return gson.toJson(listaOferta);
