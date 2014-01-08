@@ -1,8 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://gestor_admin/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://gestor_admin/">
 
-<xs:element name="getAltaDesguaces" type="tns:getAltaDesguaces"/>
+<xs:element name="addAccesoDesguace" type="tns:addAccesoDesguace"/>
 
-<xs:element name="getAltaDesguacesResponse" type="tns:getAltaDesguacesResponse"/>
+<xs:element name="addAccesoDesguaceResponse" type="tns:addAccesoDesguaceResponse"/>
+
+<xs:element name="darAccesoTaller" type="tns:darAccesoTaller"/>
+
+<xs:element name="darAccesoTallerResponse" type="tns:darAccesoTallerResponse"/>
+
+<xs:element name="getAltaDesguace" type="tns:getAltaDesguace"/>
+
+<xs:element name="getAltaDesguaceResponse" type="tns:getAltaDesguaceResponse"/>
 
 <xs:element name="getAltaTalleres" type="tns:getAltaTalleres"/>
 
@@ -36,6 +44,16 @@
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
 
+<xs:complexType name="getAltaDesguace">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAltaDesguaceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getOfertasporPedido">
 <xs:sequence>
 <xs:element name="idPedido" type="xs:string" minOccurs="0"/>
@@ -53,16 +71,6 @@
 </xs:complexType>
 
 <xs:complexType name="getOfertasResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getAltaDesguaces">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getAltaDesguacesResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -100,6 +108,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="darAccesoTaller">
+<xs:sequence>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="darAccesoTallerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getTalleres">
 <xs:sequence/>
 </xs:complexType>
@@ -107,6 +127,18 @@
 <xs:complexType name="getTalleresResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addAccesoDesguace">
+<xs:sequence>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addAccesoDesguaceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

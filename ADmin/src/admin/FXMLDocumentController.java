@@ -80,6 +80,28 @@ public class FXMLDocumentController implements Initializable {
         AltaDesguaces();
     }
 
+    public void actualizarPedidos(){
+        personDataPedidos.clear();
+    ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
+     Gson gson = new Gson();
+      Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
+        String pedidosstring= Admin.getPedidos();
+        if(!pedidosstring.equals("") && pedidosstring!=null){
+            listaPedidos = gson.fromJson(pedidosstring, collectionType);
+        }
+        System.out.println("pasa por aqui");
+        PedidosInterfaz interfaz= new PedidosInterfaz();
+         for (Pedido pedido : listaPedidos) {
+             interfaz= new PedidosInterfaz(pedido);
+             personDataPedidos.add(interfaz);
+             System.out.println(pedido);
+        }
+         if(personDataPedidos.size()!=0){
+             piezasInterfaz(personDataPedidos.get(0).getID());
+         }
+         
+           tablePedidos.setItems(personDataPedidos);
+    }
     public void  pedidosInterfaz(){
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
      Gson gson = new Gson();
@@ -149,6 +171,25 @@ public class FXMLDocumentController implements Initializable {
            tablePedidos.setItems(personDataPedidos);
            tablePedidos.getColumns().addAll(columnID,columnIDtaller,columnAlta,columnBaja,columnLimite);
 
+    }
+    public void actualizarOfertas(){
+     ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
+     Gson gson = new Gson();
+     personDataOferta.clear();
+     Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
+      String ofertasstring= Admin.getOfertas();
+      if(!ofertasstring.equals("") && ofertasstring!=null){
+      listaOferta = gson.fromJson(ofertasstring, collectionType);
+      }
+        
+        System.out.println("pasa por aqui");
+        OfertasInterfaz interfaz= new OfertasInterfaz();
+         for (Oferta oferta : listaOferta) {
+             interfaz= new OfertasInterfaz(oferta);
+             personDataOferta.add(interfaz);
+             System.out.println(oferta);
+        }
+           tableOfertas.setItems(personDataOferta);
     }
     public void ofertasInterfaz(){
          
@@ -281,6 +322,55 @@ public class FXMLDocumentController implements Initializable {
      
     
     }
+    public void actualizarPedidosPestaña(){
+        actualizarPedidos();
+        actualizarOfertas();
+        
+    }
+    public void actualizarUsuariosPestaña(){
+        actualizarDesguaces();
+        actualizarTaller();
+    }
+    public void actualizarAltasPestaña(){
+        actualizarAltasTaller();
+        actualizarAltasDesguaces();
+    }
+    public void actualizarDesguaces(){
+    personDataDesguaces.clear();
+    Gson gson = new Gson();
+    ArrayList<Desguace> listaDesguaces= new ArrayList<>();
+        Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
+        String desguacestring=Admin.getDesguaces();
+        if(!desguacestring.equals("") && desguacestring!=null){
+            listaDesguaces = gson.fromJson(desguacestring, collectionType);
+        }
+        System.out.println("pasa por aqui");
+        UsuarioInterface interfaz= new UsuarioInterface();
+         for (Desguace desguace : listaDesguaces) {
+             interfaz= new UsuarioInterface(desguace);
+             personDataDesguaces.add(interfaz);
+             System.out.println(desguace);
+        }
+           tableDesguaces.setItems(personDataDesguaces);
+    }
+    public void actualizarAltasDesguaces(){
+    altaDesguaces.clear();
+    Gson gson = new Gson();
+    ArrayList<Desguace> listaDesguaces= new ArrayList<>();
+       Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
+        String desguacestring=Admin.getAltaDesguace();
+        if(!desguacestring.equals("") && desguacestring!=null){
+            listaDesguaces = gson.fromJson(desguacestring, collectionType);
+        }
+        System.out.println("pasa por aqui");
+        UsuarioInterface interfaz= new UsuarioInterface();
+         for (Desguace desguace : listaDesguaces) {
+             interfaz= new UsuarioInterface(desguace);
+             altaDesguaces.add(interfaz);
+             System.out.println(desguace);
+        }
+           tableAltaDesguaces.setItems(altaDesguaces);
+    }
     
     public void desguacesInterfaz(){
      ArrayList<Desguace> listaDesguaces= new ArrayList<>();
@@ -386,7 +476,7 @@ public class FXMLDocumentController implements Initializable {
          
         });
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
-        String desguacestring=Admin.getAltaDesguaces();
+        String desguacestring=Admin.getAltaDesguace();
         if(!desguacestring.equals("") && desguacestring!=null){
             listaDesguaces = gson.fromJson(desguacestring, collectionType);
         }
@@ -411,6 +501,19 @@ public class FXMLDocumentController implements Initializable {
                 public void handle(ActionEvent t) {
                     // do something when button clicked
                     int selectdIndex = getTableRow().getIndex();
+                    String table= getTableView().getId();
+                    if(table.equals("tableTalleres")){
+                        if(altaTaller.size()>=selectdIndex){
+                        Admin.darAccesoTaller(altaTaller.get(selectdIndex).getID());
+                        actualizarAltasTaller();
+                    }
+                    }
+                    else{
+                    if(altaDesguaces.size()>=selectdIndex){
+                        Admin.addAccesoDesguace(altaDesguaces.get(selectdIndex).getID());
+                        actualizarAltasDesguaces();
+                    }
+                    }
                     
                     //Cambiar a aceptado.
                 }
@@ -436,6 +539,47 @@ public class FXMLDocumentController implements Initializable {
              
         }
     };
+    
+        public void actualizarAltasTaller(){
+    altaTaller.clear();
+        ArrayList<Taller> listaTalleres= new ArrayList<>();
+        Gson gson = new Gson();
+        Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
+        String tallerstring=Admin.getAltaTalleres();
+        if( !tallerstring.equals("") && tallerstring!=null ){
+            listaTalleres = gson.fromJson(tallerstring, collectionType);
+        }
+        System.out.println("pasa por aqui");
+         UsuarioInterface interfaz= new UsuarioInterface();
+         for (Taller taller : listaTalleres) {
+             interfaz= new UsuarioInterface(taller);
+             altaTaller.add(interfaz);
+             System.out.println(taller);
+        }
+           
+          
+           tableAltaTalleres.setItems(altaTaller);
+    }
+public void actualizarTaller(){
+    personData.clear();
+        ArrayList<Taller> listaTalleres= new ArrayList<>();
+        Gson gson = new Gson();
+        Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
+        String tallerstring=Admin.getTalleres();
+        if( !tallerstring.equals("") && tallerstring!=null ){
+            listaTalleres = gson.fromJson(tallerstring, collectionType);
+        }
+        System.out.println("pasa por aqui");
+         UsuarioInterface interfaz= new UsuarioInterface();
+         for (Taller taller : listaTalleres) {
+             interfaz= new UsuarioInterface(taller);
+             personData.add(interfaz);
+             System.out.println(taller);
+        }
+           
+          
+           tableTalleres.setItems(personData);
+    }
     public void altaTaller(){
         
         ArrayList<Taller> listaTalleres= new ArrayList<>();
@@ -470,7 +614,28 @@ public class FXMLDocumentController implements Initializable {
            columnDireccion.setCellValueFactory(
            new PropertyValueFactory<UsuarioInterface,String>("direccion")
            );
-           
+                     TableColumn col_action = new TableColumn<>("Action");
+        col_action.setSortable(false);
+         
+        col_action.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<UsuarioInterface, Boolean>, 
+                ObservableValue<Boolean>>() {
+ 
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<UsuarioInterface, Boolean> p) {
+                return new SimpleBooleanProperty(p.getValue() != null);
+            }
+        });
+ 
+        col_action.setCellFactory(
+                new Callback<TableColumn<UsuarioInterface, Boolean>, TableCell<UsuarioInterface, Boolean>>() {
+ 
+            @Override
+            public TableCell<UsuarioInterface, Boolean> call(TableColumn<UsuarioInterface, Boolean> p) {
+                return new ButtonCell();
+            }
+         
+        });
            
         
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
@@ -488,7 +653,7 @@ public class FXMLDocumentController implements Initializable {
            
           
            tableAltaTalleres.setItems(altaTaller);
-           tableAltaTalleres.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnCodigoPostal,columnNumero);
+           tableAltaTalleres.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnCodigoPostal,columnNumero,col_action);
      
           
     }

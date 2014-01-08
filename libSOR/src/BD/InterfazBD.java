@@ -374,9 +374,14 @@ public class InterfazBD {
      * @return
      */
     public boolean activarTallerMainTaller(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `taller` SET `id`='" + idRecibido + "', `estado`='0'");
+        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0' where `id`='" + idRecibido + "'");
     }
-
+    public boolean activarTaller(String idRecibido) {
+        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0' where `id`='" + idRecibido + "'");
+    }
+    public boolean activarDesguace(String idRecibido) {
+        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0' where `id`='" + idRecibido + "'");
+    }
     public ArrayList<Pedido> buscarPedido(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) throws SQLException {
         ArrayList<Pedido> alPedidos = new ArrayList<>();
 

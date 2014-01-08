@@ -208,14 +208,52 @@ public class AdminWS {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "getAltaDesguaces")
-    public String getAltaDesguaces() {
- try{
+    @WebMethod(operationName = "darAccesoTaller")
+    public Boolean darAccesoTaller(@WebParam(name = "ID") String ID) {
+     try {
+         bd = new InterfazBD("sor_gestor");
+        return  bd.activarTaller(ID);
+        
+     } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
+            
+            
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addAccesoDesguace")
+    public Boolean addAccesoDesguace(@WebParam(name = "ID") String ID) {
+     try {
+         bd = new InterfazBD("sor_gestor");
+        return  bd.activarDesguace(ID);
+        
+     } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
+            
+            
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getAltaDesguace")
+    public String getAltaDesguace() {
+         try{
             bd = new InterfazBD("sor_gestor");
-            ArrayList<Desguace> listaDesguaces = new ArrayList<Desguace>();
-            listaDesguaces=bd.getAltasDesguaces();
+             ArrayList<Desguace> listaDesguace = new ArrayList<Desguace>();
+             listaDesguace=bd.getAltasDesguaces();
             Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-            String listaJSON = gson.toJson(listaDesguaces);
+            String listaJSON = gson.toJson(listaDesguace);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;
         }        
@@ -224,6 +262,6 @@ public class AdminWS {
         } catch (SQLException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
-         return null;
+        return null;
     }
 }

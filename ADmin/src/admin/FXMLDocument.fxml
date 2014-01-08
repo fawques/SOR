@@ -11,7 +11,7 @@
   <children>
     <TabPane id="tabPanel" layoutX="0.0" layoutY="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1366.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-        <Tab id="tabGestor" text="Pedidos">
+        <Tab id="tabPedidos" onSelectionChanged="#actualizarPedidosPestaña" text="Pedidos">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
@@ -25,7 +25,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab id="tabSolucitudes" text="Usuarios">
+        <Tab id="tabSolucitudes" onSelectionChanged="#actualizarUsuariosPestaña" text="Usuarios">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
@@ -42,14 +42,14 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab id="tabPedidos" text="Altas">
+        <Tab id="tabPedidos" onSelectionChanged="#actualizarAltasPestaña" text="Altas">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
                 <Text font="$x1" layoutX="79.0" layoutY="51.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Alta talleres" />
                 <Text font="$x1" layoutX="92.0" layoutY="289.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Alta desguaces" />
                 <TableView id="tableTalleres" fx:id="tableAltaTalleres" disable="false" editable="true" layoutX="33.0" layoutY="61.0" prefHeight="200.0" prefWidth="745.0" tableMenuButtonVisible="true" />
-                <TableView id="tableTalleres" fx:id="tableAltaDesguaces" disable="false" editable="true" layoutX="33.0" layoutY="335.0" prefHeight="200.0" prefWidth="745.0" tableMenuButtonVisible="true" />
+                <TableView id="tableDesguaces" fx:id="tableAltaDesguaces" disable="false" editable="true" layoutX="33.0" layoutY="335.0" prefHeight="200.0" prefWidth="745.0" tableMenuButtonVisible="true" />
               </children>
             </AnchorPane>
           </content>
