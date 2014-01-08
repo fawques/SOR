@@ -338,7 +338,7 @@ public class InterfazBD {
     public ArrayList<Oferta> getOfertasPedido(String pedidoID, EstadoOferta estado) {
         ArrayList<Oferta> lista = new ArrayList<>();
         try {
-            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta WHERE pedido='" + pedidoID + "' and estado='" + estado.ordinal() + ";");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta WHERE pedido='" + pedidoID + "' and estado='" + estado.ordinal() + "';");
             Oferta nueva;
             while (resultados.next()) {
                 nueva = new Oferta(resultados.getString("id"), resultados.getDouble("importe"), resultados.getString("desguace"), resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
@@ -496,15 +496,15 @@ public class InterfazBD {
 
     private boolean anyadirPiezasATablaPieza(ArrayList<Pieza> piezas) {
         for (Pieza pieza : piezas) {
-            conexion.ejecutarInsert("Insert into pieza(nombre) values ('" + pieza.getNombre() + "')");
+                conexion.ejecutarInsert("Insert into pieza(nombre) values ('" + pieza.getNombre() + "')");
         }
         return true;
     }
 
-    public boolean anyadirPiezasAPedido(int idPedido, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+    public boolean anyadirPiezasAPedido(String idPedido, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
         if (anyadirPiezasATablaPieza(piezas)) {
             for (int i = 0; i < piezas.size(); i++) {
-                conexion.ejecutarInsert("Insert into pedido_pieza(pedido,pieza,cantidad) values ('" + idPedido + "', '" + piezas.get(i) + "', '" + cantidades.get(i) + "')");
+                conexion.ejecutarInsert("Insert into pedido_pieza(pedido,pieza,cantidad) values ('" + idPedido + "', '" + piezas.get(i).getNombre() + "', '" + cantidades.get(i) + "')");
             }
             return true;
         }
@@ -516,6 +516,6 @@ public class InterfazBD {
     }
 
     public boolean activarPedidoTaller(int id_aux, String id) {
-        return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "'");
+        return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
     }
 }

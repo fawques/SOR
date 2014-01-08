@@ -111,7 +111,7 @@ public class TallerWS {
             Gestor_activemq activemq= new Gestor_activemq("Pedidos");
             String pedidoFinal = gson.toJson(p);
             activemq.producer.produceMessage(pedidoFinal);
-            activemq.producer.closeProduce(); // WARNING: esto hay que hacerlo aquí?
+             //activemq.producer.closeProduce();
             bd.close();
             return stringID;
         } catch (SQLException ex) {

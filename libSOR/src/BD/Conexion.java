@@ -6,7 +6,6 @@
 
 package BD;
 
-import com.mysql.jdbc.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -114,21 +113,19 @@ public class Conexion {
         try {
             try (Statement stmt = conexion.createStatement()) {
                 stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                /*ResultSet rs = stmt.getGeneratedKeys();
+                ResultSet rs = stmt.getGeneratedKeys();
                 if (rs.next()){
                     numero=rs.getInt(1);
                 }else{
                     numero = 0;
                 }
-                rs.close();*/
-                numero = 1;
+                rs.close();
+                return numero;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return numero;
     }
-
-    
     
 }

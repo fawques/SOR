@@ -328,11 +328,11 @@ public class MainTaller extends Application {
             bd = new InterfazBD("sor_taller");
             String tallerID = bd.getPrimerTaller().getID();
             int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite);
-            bd.anyadirPiezasAPedido(id, piezas, cantidades);
             Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, piezas, cantidades, new ArrayList<Oferta>());
             Gson gson = new Gson();
             String idFinal = nuevoPedido(gson.toJson(nuevo));
             bd.activarPedidoTaller(id, idFinal);
+            bd.anyadirPiezasAPedido(idFinal, piezas, cantidades);
             bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
