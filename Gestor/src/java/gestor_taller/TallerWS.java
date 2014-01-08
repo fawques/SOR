@@ -9,13 +9,19 @@ package gestor_taller;
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
+import general.EstadoOferta;
+import general.EstadoPedido;
+import general.Oferta;
 import general.Pedido;
 import general.Taller;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
@@ -95,16 +101,17 @@ public class TallerWS {
          try {
             bd = new InterfazBD("sor_gestor");
             Gson gson = new Gson();
-             Type collectionType = new TypeToken<Pedido>(){}.getType();
-            Pedido p = gson.fromJson(pedido, collectionType);
+             Type collectionType = new TypeToken<Pedido>() {
+             }.getType();
+             Pedido p = gson.fromJson(pedido, collectionType);
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
-            bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
+             bd.anadirPedido(stringID, p.getFecha_alta(), EstadoPedido.ACCEPTED.ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
             Gestor_activemq activemq= new Gestor_activemq("Pedidos");
             String pedidoFinal = gson.toJson(p);
             activemq.producer.produceMessage(pedidoFinal);
-            activemq.producer.closeProduce(); // WARNING: esto hay que hacerlo aquí?
+             //activemq.producer.closeProduce();
             bd.close();
             return stringID;
         } catch (SQLException ex) {
@@ -114,5 +121,67 @@ public class TallerWS {
         }
         
         return "";
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getOfertas")
+    public String getOfertas(@WebParam(name = "listaPedidos") String listaPedidos) {
+        Type collectionType = new TypeToken<ArrayList<Pedido>>() {
+        }.getType();
+        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+        ArrayList<Oferta> listaOferta = new ArrayList<>();
+        ArrayList<Pedido> arrayPedido = new ArrayList<Pedido>();
+        arrayPedido = gson.fromJson(listaPedidos, collectionType);
+        try {
+            bd = new InterfazBD("sor_gestor");
+            for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
+                Pedido p = it.next();
+                listaOferta.addAll(bd.getOfertasPedido(p.getID(), EstadoOferta.ACTIVE));
+            }
+            bd.close();
+            return gson.toJson(listaOferta);
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "aceptarOferta")
+    public Boolean aceptarOferta(@WebParam(name = "ID") String ID) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED, ID);
+            bd.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "rechazarOferta")
+    public Boolean rechazarOferta(@WebParam(name = "ID") String ID) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            bd.cambiarEstadoOferta(EstadoOferta.REJECTED, ID);
+            bd.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }
