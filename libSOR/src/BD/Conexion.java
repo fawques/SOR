@@ -112,19 +112,23 @@ public class Conexion {
         int numero=-1;
         try {
             try (Statement stmt = conexion.createStatement()) {
-                stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                ResultSet rs = stmt.getGeneratedKeys();
-                if (rs.next()){
-                    numero=rs.getInt(1);
-                }else{
-                    numero = 0;
+                try {
+                    stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+                    ResultSet rs = stmt.getGeneratedKeys();
+                    if (rs.next()) {
+                        numero = rs.getInt(1);
+                    } else {
+                        numero = 0;
+                    }
+                    rs.close();
+                    return numero;
+                } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex) {
+                    System.err.println(ex.getMessage());
                 }
-                rs.close();
-                return numero;
-            }
+            } 
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         return numero;
     }
     
