@@ -24,10 +24,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -47,15 +45,12 @@ public class NuevoPedidoController implements Initializable {
     @FXML
     public Button btAnadirPieza;
     public TableView tbPiezas;
-    public ComboBox cbEstado;
+    public ComboBox cbModoAutomatico;
     public TextField tfLimiteDia;
     public TextField tfLimiteMes;
     public TextField tfLimiteAnyo;
     public TextField tfIdPieza;
     public TextField tfCantidadPieza;
-    public CheckBox chModoAutomatico;
-    public RadioButton rbPVP;
-    public RadioButton rbFecha;
     public Label lbMensaje;
     
     /**
@@ -98,7 +93,7 @@ public class NuevoPedidoController implements Initializable {
                 cantidadPiezas.add(tp.getCantidad());
             }
 
-            MainTaller.crearPedido(today, EstadoPedido.NEW, fechaLimite, piezasPedido, cantidadPiezas);
+            MainTaller.crearPedido(today, EstadoPedido.NEW, fechaLimite, "Automatico".equals(cbModoAutomatico.getValue().toString()), piezasPedido, cantidadPiezas);
             //Mensaje
             lbMensaje.setText("El pedido se ha creado correctamente");
 

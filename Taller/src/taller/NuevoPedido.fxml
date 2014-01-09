@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="586.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevoPedidoController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="371.0" prefWidth="586.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevoPedidoController">
   <children>
     <TableView fx:id="tbPiezas" editable="true" layoutX="148.0" layoutY="62.0" prefHeight="169.0" prefWidth="245.0" tableMenuButtonVisible="false" />
     <Button fx:id="btAnadirPieza" layoutX="456.0" layoutY="30.0" mnemonicParsing="false" onAction="#anyadirPiezaAPedido" text="Añadir pieza" />
-    <Button layoutX="225.0" layoutY="366.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
+    <Button layoutX="225.0" layoutY="309.0" mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
     <TextField fx:id="tfCantidadPieza" layoutX="351.0" layoutY="29.0" prefWidth="65.0" />
     <TextField fx:id="tfIdPieza" layoutX="111.0" layoutY="29.0" prefWidth="151.0" />
     <Label layoutX="66.0" layoutY="32.0" text="Pieza" />
@@ -24,18 +24,15 @@
         <TextField fx:id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
       </children>
     </HBox>
-    <Label layoutX="305.0" layoutY="257.0" text="Estado" />
-    <ComboBox fx:id="cbEstado" layoutX="355.0" layoutY="255.0">
+    <Label layoutX="305.0" layoutY="257.0" text="Modo" />
+    <ComboBox id="cbEstado" fx:id="cbModoAutomatico" layoutX="355.0" layoutY="255.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Manual" />
-          <String fx:value="Automático" />
+          <String fx:value="Automatico" />
         </FXCollections>
       </items>
     </ComboBox>
-    <CheckBox id="chModo" fx:id="chModoAutomatico" layoutX="61.0" layoutY="297.0" mnemonicParsing="false" text="Modo automático" />
-    <RadioButton id="rdPVP" fx:id="rbPVP" layoutX="61.0" layoutY="324.0" mnemonicParsing="false" text="PVP mínimo" />
-    <RadioButton id="rdFecha" fx:id="rbFecha" layoutX="169.0" layoutY="324.0" mnemonicParsing="false" text="Fecha entrega mas proxima" />
     <Label fx:id="lbMensaje" layoutX="367.0" layoutY="368.0" text="" textFill="#00cc21" />
   </children>
 </AnchorPane>
