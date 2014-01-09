@@ -375,6 +375,22 @@ public class MainTaller extends Application {
         return false;
     }
 
+    public static boolean cancellPedido(String idPedido) {
+        try {
+            if (cancelarPedido(idPedido)) {
+                bd = new InterfazBD("sor_taller");
+                boolean o = bd.cancelarPedido(idPedido);
+                bd.close();
+                return o;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     /**
      * ******************* WebServices *************************
      * @param name
@@ -432,5 +448,11 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.modificar(id, name, email, address, city, postalCode, telephone);
+    }
+
+    private static Boolean cancelarPedido(java.lang.String idPedido) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.cancelarPedido(idPedido);
     }
 }

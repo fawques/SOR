@@ -319,8 +319,7 @@ public class GestionPedidosController implements Initializable {
     public void eliminarPedido() {
         TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
         if (tp != null) {
-            //Debe hacer un cancelado en cascada de las ofertas
-
+            MainTaller.cancellPedido(tp.getId());
         }
         //else //no hay pedido seleccionada
     }
