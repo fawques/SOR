@@ -75,7 +75,7 @@ public class MainTaller extends Application {
                 stage.setTitle("Esperando codigo de aceptacion");
                 TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                 staticDataBox.setStage(stage);
-                staticDataBox.showStage();
+                    staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
                 //Cargar GestionPedido
                 FXMLLoader loader = changeScene("GestionPedidos.fxml");
@@ -87,6 +87,13 @@ public class MainTaller extends Application {
                 FXMLLoader loader = changeScene("TallerDeBaja.fxml");
                 stage.setTitle("Baja de taller");
                 TallerDeBajaController staticDataBox = (TallerDeBajaController) loader.getController();
+                staticDataBox.setStage(stage);
+                staticDataBox.showStage();
+                }
+            } else {
+                FXMLLoader loader = changeScene("AltaTaller.fxml");
+                stage.setTitle("Alta de taller");
+                AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             }
