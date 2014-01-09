@@ -523,4 +523,20 @@ public class InterfazBD {
     public boolean activarPedidoTaller(int id_aux, String id) {
         return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
     }
+
+    /**
+     *
+     * @param accion debe tener formato "nombre:param0|param1|...|paramN"
+     * @param paramValues debe tener formato "valor0|valor1|...|valorN"
+     * @return
+     */
+    public boolean guardarAccion(String accion, String paramValues) {
+        return conexion.ejecutarSQL("INSERT INTO `acciones`(`accion`,`params`) VALUES('" + accion + "', '" + paramValues + "');");
+    }
+
+    public ResultSet getAcciones() {
+        ResultSet result = conexion.ejecutarSQLSelect("SELECT * FROM `acciones`;");
+        conexion.ejecutarSQL("DELETE FROM `acciones`;");
+        return result;
+    }
 }

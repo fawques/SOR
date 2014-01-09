@@ -5,6 +5,7 @@
  */
 package taller;
 
+import Async.AsyncManager;
 import BD.InterfazBD;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,6 +17,7 @@ import general.Pieza;
 import general.Taller;
 import gestor_taller.JMSException_Exception;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.sql.SQLException;
@@ -365,6 +367,31 @@ public class MainTaller extends Application {
      */
 
     public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+        try {
+            for (int i = 0; i < 10; i++) {
+                try{
+                    boolean ret = alta_WS(name, email, address, city, postalCode, telephone);
+                    // si no ha lanzado excepción, devolvemos correctamente
+                    return ret;
+                }catch(javax.xml.ws.WebServiceException e){}
+            }
+            System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+            // tenemos que guardar el alta en local, y dejarla pendiente de mandar
+            class Local {};
+            java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+            String params[] = {name,email,address,city,Integer.toString(postalCode),Integer.toString(telephone)};
+            AsyncManager manager = new AsyncManager("sor_taller");
+            manager.guardarAccion(m,params);
+            
+        } catch (SecurityException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    private static boolean alta_WS(String name, String email, String address, String city, int postalCode, int telephone) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
