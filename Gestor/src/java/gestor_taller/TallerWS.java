@@ -216,4 +216,22 @@ public class TallerWS {
         }
         return false;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "cancelarPedido")
+    public Boolean cancelarPedido(@WebParam(name = "idPedido") String idPedido) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            boolean oool = bd.cancelarPedido(idPedido);
+            bd.close();
+            return oool;
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }
