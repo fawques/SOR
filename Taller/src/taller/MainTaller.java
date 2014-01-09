@@ -79,11 +79,9 @@ public class MainTaller extends Application {
                  staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else { //baja
-                //Yo lo que haria serÃ­a un volver a darme de alta, con los mismos datos
-                //un botÃ³n y prou
-                FXMLLoader loader = changeScene("AltaTaller.fxml");
+                FXMLLoader loader = changeScene("TallerDeBaja.fxml");
                 stage.setTitle("Alta de taller");
-                AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
+                TallerDeBajaController staticDataBox = (TallerDeBajaController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             }
@@ -325,8 +323,40 @@ public class MainTaller extends Application {
         
     }
 
-    public static void reactivarTaller() {
+    public static boolean reactivarTaller() {
+        try {
+            bd = new InterfazBD("sor_taller");
+            boolean r = bd.activarTaller(taller.getID());
+            bd.close();
+            return r;
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+        return false;
+    }
+
+    public static boolean bajaTaller() {
+        try {
+            if (bajaTallerWS(taller.getID())) {
+                bd = new InterfazBD("sor_taller");
+                if (bd.bajaTaller(taller.getID())) {
+                    bd.close();
+                    return true;
+                } else {
+                    System.err.println("Error: No se ha podido cambiar el estado en taller.");
+                }
+            } else {
+                System.err.println("Error: No se ha podido dar de baja en gestor.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     /**
@@ -374,5 +404,11 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.rechazarOferta(id);
+    }
+
+    private static Boolean bajaTallerWS(java.lang.String tallerID) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.bajaTaller(tallerID);
     }
 }

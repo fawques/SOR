@@ -407,6 +407,14 @@ public class GestionPedidosController implements Initializable {
     }
 
     public void bajaTaller() throws IOException {
+        if (MainTaller.bajaTaller()) {
+            cambiarAPantallaTallerDeBaja();
+        } else {
+            System.err.println("Lo siento, no se ha podido dar de baja.");
+        }
+    }
+
+    private void cambiarAPantallaTallerDeBaja() throws IOException {
         URL location = getClass().getResource("TallerDeBaja.fxml");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
