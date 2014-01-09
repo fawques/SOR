@@ -118,7 +118,6 @@ public class MainTaller extends Application {
      */
 
     public FXMLLoader changeScene(String fxml) throws IOException {
-        //Mostrar pÃ¡gina de espera interfaz bÃ¡sica
         URL location = getClass().getResource(fxml);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
@@ -134,24 +133,6 @@ public class MainTaller extends Application {
 
         return loader;
 
-    }
-
-    /**
-     *
-     * @param fxml
-     * @return
-     * @throws Exception
-     */
-    public Parent replaceSceneContent(String fxml) throws Exception {
-        Parent page = (Parent) FXMLLoader.load(MainTaller.class.getResource(fxml), null, new JavaFXBuilderFactory());
-        Scene scene = stage.getScene();
-        if (scene == null) {
-            stage.setScene(scene);
-        } else {
-            stage.getScene().setRoot(page);
-        }
-        stage.sizeToScene();
-        return page;
     }
 
     /**
@@ -342,6 +323,10 @@ public class MainTaller extends Application {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+
+    public static void reactivarTaller() {
+
     }
 
     /**
