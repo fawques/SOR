@@ -6,8 +6,12 @@
 
 package taller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
@@ -28,8 +32,16 @@ public class ReintentarConexionController implements Initializable {
     }
 
     public void reintentar() {
-        if (MainTaller.hello()) {
-
+        if (MainTaller.hello() == "hello") {
+            try {
+                MainTaller.inicioTaller();
+            } catch (IOException ex) {
+                Logger.getLogger(ReintentarConexionController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ReintentarConexionController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ReintentarConexionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

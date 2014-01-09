@@ -48,7 +48,7 @@ public class MainTaller extends Application {
     /**
      *
      */
-    public Stage stage;
+    public static Stage stage;
 
     /**
      *
@@ -62,26 +62,36 @@ public class MainTaller extends Application {
         
         try {
             hello();
-            
-            bd = new InterfazBD("sor_taller");
-            //System.out.println(bd.getPedidosActivos());
-            taller = bd.getPrimerTaller();
-            //bd.close();
-            if (taller != null) //esta pendiente o activado
+            inicioTaller();
+        } catch (javax.xml.ws.WebServiceException e) {
+            FXMLLoader loader = changeScene("reintentarConexion.fxml");
+            stage.setTitle("Conexion fallida");
+            ReintentarConexionController staticDataBox = (ReintentarConexionController) loader.getController();
+            staticDataBox.setStage(stage);
+            staticDataBox.showStage();
+        }
+    }
+
+    public static void inicioTaller() throws IOException, ClassNotFoundException, SQLException {
+        bd = new InterfazBD("sor_taller");
+        //System.out.println(bd.getPedidosActivos());
+        taller = bd.getPrimerTaller();
+        //bd.close();
+        if (taller != null) //esta pendiente o activado
+        {
+            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
             {
-                if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
-                {
-                    FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
+                FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
                 stage.setTitle("Esperando codigo de aceptacion");
                 TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                 staticDataBox.setStage(stage);
-                    staticDataBox.showStage();
+                staticDataBox.showStage();
             } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
                 //Cargar GestionPedido
                 FXMLLoader loader = changeScene("GestionPedidos.fxml");
                 stage.setTitle("Gestion de pedidos");
                 GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
-                 staticDataBox.setStage(stage);
+                staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else { //baja
                 FXMLLoader loader = changeScene("TallerDeBaja.fxml");
@@ -89,18 +99,11 @@ public class MainTaller extends Application {
                 TallerDeBajaController staticDataBox = (TallerDeBajaController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
-                }
-            } else {
-                FXMLLoader loader = changeScene("AltaTaller.fxml");
-                stage.setTitle("Alta de taller");
-                AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
-                staticDataBox.setStage(stage);
-                staticDataBox.showStage();
             }
-        } catch (javax.xml.ws.WebServiceException  e) {
-            FXMLLoader loader = changeScene("reintentarConexion.fxml");
-            stage.setTitle("Conexion fallida");
-            ReintentarConexionController staticDataBox = (ReintentarConexionController) loader.getController();
+        } else {
+            FXMLLoader loader = changeScene("AltaTaller.fxml");
+            stage.setTitle("Alta de taller");
+            AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
             staticDataBox.setStage(stage);
             staticDataBox.showStage();
         }
@@ -127,8 +130,8 @@ public class MainTaller extends Application {
      * @throws java.io.IOException
      */
 
-    public FXMLLoader changeScene(String fxml) throws IOException {
-        URL location = getClass().getResource(fxml);
+    public static FXMLLoader changeScene(String fxml) throws IOException {
+        URL location = NuevoPedidoController.class.getResource("NuevoPedido.fxml");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
