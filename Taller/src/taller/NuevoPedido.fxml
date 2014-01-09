@@ -36,6 +36,6 @@
     <CheckBox id="chModo" fx:id="chModoAutomatico" layoutX="61.0" layoutY="297.0" mnemonicParsing="false" text="Modo automático" />
     <RadioButton id="rdPVP" fx:id="rbPVP" layoutX="61.0" layoutY="324.0" mnemonicParsing="false" text="PVP mínimo" />
     <RadioButton id="rdFecha" fx:id="rbFecha" layoutX="169.0" layoutY="324.0" mnemonicParsing="false" text="Fecha entrega mas proxima" />
-    <Label fx:id="lbMensaje" layoutX="367.0" layoutY="368.0" text="" textFill="RED" />
+    <Label fx:id="lbMensaje" layoutX="367.0" layoutY="368.0" text="" textFill="#00cc21" />
   </children>
 </AnchorPane>
