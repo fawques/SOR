@@ -121,7 +121,7 @@ public class TallerWS {
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
-             bd.anadirPedido(stringID, p.getFecha_alta(), EstadoPedido.ACCEPTED.ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite());
+             bd.anadirPedido(stringID, p.getFecha_alta(), EstadoPedido.ACCEPTED.ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
             Gestor_activemq activemq= new Gestor_activemq("Pedidos");
             String pedidoFinal = gson.toJson(p);
             activemq.producer.produceMessage(pedidoFinal);

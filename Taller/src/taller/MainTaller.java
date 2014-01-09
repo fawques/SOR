@@ -302,12 +302,12 @@ public class MainTaller extends Application {
         return null;
     }
 
-    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
         try {           
             bd = new InterfazBD("sor_taller");
             String tallerID = bd.getPrimerTaller().getID();
-            int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite);
-            Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, piezas, cantidades, new ArrayList<Oferta>());
+            int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite, modoAutomatico);
+            Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, modoAutomatico, piezas, cantidades, new ArrayList<Oferta>());
             Gson gson = new Gson();
             String idFinal = nuevoPedido(gson.toJson(nuevo));
             bd.activarPedidoTaller(id, idFinal);
