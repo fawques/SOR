@@ -131,7 +131,7 @@ public class MainTaller extends Application {
      */
 
     public static FXMLLoader changeScene(String fxml) throws IOException {
-        URL location = NuevoPedidoController.class.getResource("NuevoPedido.fxml");
+        URL location = MainTaller.class.getResource(fxml);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
