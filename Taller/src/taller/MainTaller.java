@@ -50,7 +50,7 @@ public class MainTaller extends Application {
     /**
      *
      */
-    public Stage stage;
+    public static Stage stage;
 
     /**
      *
@@ -64,46 +64,50 @@ public class MainTaller extends Application {
         
         try {
             hello();
-            
-            bd = new InterfazBD("sor_taller");
-            //System.out.println(bd.getPedidosActivos());
-            taller = bd.getPrimerTaller();
-            //bd.close();
-            if (taller != null) //esta pendiente o activado
+            inicioTaller();
+        } catch (javax.xml.ws.WebServiceException e) {
+            FXMLLoader loader = changeScene("reintentarConexion.fxml");
+            stage.setTitle("Conexion fallida");
+            ReintentarConexionController staticDataBox = (ReintentarConexionController) loader.getController();
+            staticDataBox.setStage(stage);
+            staticDataBox.showStage();
+        }
+    }
+
+    public static void inicioTaller() throws IOException, ClassNotFoundException, SQLException {
+        bd = new InterfazBD("sor_taller");
+        //System.out.println(bd.getPedidosActivos());
+        taller = bd.getPrimerTaller();
+        //bd.close();
+        if (taller != null) //esta pendiente o activado
+        {
+            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
             {
-                if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
-                {
-                    FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
-                    stage.setTitle("Esperando codigo de aceptacion");
-                    TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
-                    staticDataBox.setStage(stage);
-                    staticDataBox.showStage();
-                } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
-                    //Cargar GestionPedido
-                    FXMLLoader loader = changeScene("GestionPedidos.fxml");
-                    stage.setTitle("Gestion de pedidos");
-                    GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
-                     staticDataBox.setStage(stage);
-                    staticDataBox.showStage();
-                } else { //baja
-                    //Yo lo que haria serÃ­a un volver a darme de alta, con los mismos datos
-                    //un botÃ³n y prou
-                    FXMLLoader loader = changeScene("AltaTaller.fxml");
-                    stage.setTitle("Alta de taller");
-                    AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
-                    staticDataBox.setStage(stage);
-                    staticDataBox.showStage();
-                }
-            } else { //no existe
-                FXMLLoader loader = changeScene("AltaTaller.fxml");
-                stage.setTitle("Alta de taller");
-                AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
+                FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
+                stage.setTitle("Esperando codigo de aceptacion");
+                TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                staticDataBox.setStage(stage);
+                staticDataBox.showStage();
+            } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
+                //Cargar GestionPedido
+                FXMLLoader loader = changeScene("GestionPedidos.fxml");
+                stage.setTitle("Gestion de pedidos");
+                GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
+                staticDataBox.setStage(stage);
+                staticDataBox.showStage();
+            } else { //baja
+                FXMLLoader loader = changeScene("TallerDeBaja.fxml");
+                stage.setTitle("Baja de taller");
+                TallerDeBajaController staticDataBox = (TallerDeBajaController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             }
-        } catch (javax.xml.ws.WebServiceException  e) {
-            // mostrar interfaz diciendo que no ha podido conectar
-            System.out.println("NO SE HA PODIDO CONECTAR");
+        } else {
+            FXMLLoader loader = changeScene("AltaTaller.fxml");
+            stage.setTitle("Alta de taller");
+            AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
+            staticDataBox.setStage(stage);
+            staticDataBox.showStage();
         }
     }
 
@@ -128,9 +132,8 @@ public class MainTaller extends Application {
      * @throws java.io.IOException
      */
 
-    public FXMLLoader changeScene(String fxml) throws IOException {
-        //Mostrar pÃ¡gina de espera interfaz bÃ¡sica
-        URL location = getClass().getResource(fxml);
+    public static FXMLLoader changeScene(String fxml) throws IOException {
+        URL location = MainTaller.class.getResource(fxml);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -145,24 +148,6 @@ public class MainTaller extends Application {
 
         return loader;
 
-    }
-
-    /**
-     *
-     * @param fxml
-     * @return
-     * @throws Exception
-     */
-    public Parent replaceSceneContent(String fxml) throws Exception {
-        Parent page = (Parent) FXMLLoader.load(MainTaller.class.getResource(fxml), null, new JavaFXBuilderFactory());
-        Scene scene = stage.getScene();
-        if (scene == null) {
-            stage.setScene(scene);
-        } else {
-            stage.getScene().setRoot(page);
-        }
-        stage.sizeToScene();
-        return page;
     }
 
     /**
@@ -355,6 +340,42 @@ public class MainTaller extends Application {
         
     }
 
+    public static boolean reactivarTaller() {
+        try {
+            bd = new InterfazBD("sor_taller");
+            boolean r = bd.activarTaller(taller.getID());
+            bd.close();
+            return r;
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    public static boolean bajaTaller() {
+        try {
+            if (bajaTallerWS(taller.getID())) {
+                bd = new InterfazBD("sor_taller");
+                if (bd.bajaTaller(taller.getID())) {
+                    bd.close();
+                    return true;
+                } else {
+                    System.err.println("Error: No se ha podido cambiar el estado en taller.");
+                }
+            } else {
+                System.err.println("Error: No se ha podido dar de baja en gestor.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     /**
      * ******************* WebServices *************************
      * @param name
@@ -427,9 +448,15 @@ public class MainTaller extends Application {
         return port.rechazarOferta(id);
     }
 
-    private static String hello() {
+    public static String hello() {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.hello();
+    }
+    
+    private static Boolean bajaTallerWS(java.lang.String tallerID) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.bajaTaller(tallerID);
     }
 }

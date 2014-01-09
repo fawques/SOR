@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="121.0" prefWidth="314.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.ReintentarConexionController">
+  <children>
+    <Label layoutX="47.0" layoutY="36.0" text="No se ha podido conectar al gestor" textFill="#ff00f5" />
+    <Button layoutX="114.0" layoutY="73.0" mnemonicParsing="false" onAction="#reintentar" text="Reintentar" />
+  </children>
+</AnchorPane>

@@ -434,7 +434,7 @@ public class InterfazBD {
      * @return
      */
     public boolean activarTallerMainTaller(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0' where `id`='" + idRecibido + "'");
+        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0', `id`='" + idRecibido + "'");
     }
     public boolean activarTaller(String idRecibido) {
         return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0' where `id`='" + idRecibido + "'");
@@ -522,6 +522,9 @@ public class InterfazBD {
 
     public boolean activarPedidoTaller(int id_aux, String id) {
         return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
+    }
+    public boolean bajaTaller(String id) {
+        return conexion.ejecutarSQL("Update taller set estado='" + EstadoGeneral.INACTIVE.ordinal() + "' where id='" + id + "'");
     }
 
     /**

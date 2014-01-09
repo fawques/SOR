@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="779.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.GestionPedidosController">
   <children>
-    <TabPane layoutX="-1.0" layoutY="0.0" prefHeight="576.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE">
+    <TabPane layoutX="-1.0" layoutY="-7.0" prefHeight="576.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
         <Tab text="Pedidos">
           <content>
@@ -60,6 +60,8 @@
                 <Button fx:id="btNuevoPedido" layoutX="30.0" layoutY="196.0" mnemonicParsing="false" onAction="#onClickNuevoPedido" prefHeight="32.0" prefWidth="103.0" text="Nuevo pedido" />
                 <Button layoutX="160.0" layoutY="196.0" mnemonicParsing="false" onAction="#eliminarPedido" prefHeight="32.0" text="Eliminar pedido" />
                 <Text layoutX="373.0" layoutY="217.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos" />
+                <Button layoutX="641.0" layoutY="4.0" mnemonicParsing="false" onAction="#bajaTaller" text="Darme de baja" />
+                <Button layoutX="476.0" layoutY="4.0" mnemonicParsing="false" onAction="#modificarTaller" text="Modificar mis datos" />
               </children>
             </AnchorPane>
           </content>
@@ -102,6 +104,8 @@
                 <TableView fx:id="tbPiezas" prefHeight="275.0" prefWidth="717.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="235.0" />
                 <Button id="btNuevoPedido" fx:id="btNuevaPieza" mnemonicParsing="false" onAction="#onClickNuevoPedido" prefHeight="37.0" prefWidth="103.0" text="Nueva pieza" AnchorPane.bottomAnchor="328.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="649.0" AnchorPane.topAnchor="180.0" />
                 <Text layoutX="337.0" layoutY="208.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Catálogo de piezas" />
+                <Button layoutX="632.0" layoutY="4.0" mnemonicParsing="false" onAction="#bajaTaller" text="Darme de baja" />
+                <Button layoutX="476.0" layoutY="4.0" mnemonicParsing="false" onAction="#modificarTaller" text="Modificar mis datos" />
               </children>
             </AnchorPane>
           </content>
@@ -163,6 +167,8 @@
                 <Text layoutX="352.0" layoutY="376.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas recibidas" />
                 <Button layoutX="334.0" layoutY="504.0" mnemonicParsing="false" onAction="#actualizarOfertas" text="Actualizar Ofertas" />
                 <Button layoutX="35.0" layoutY="358.0" mnemonicParsing="false" onAction="#verOfertas" text="Ver ofertas" />
+                <Button layoutX="632.0" layoutY="4.0" mnemonicParsing="false" onAction="#bajaTaller" text="Darme de baja" />
+                <Button layoutX="470.0" layoutY="4.0" mnemonicParsing="false" onAction="#modificarTaller" text="Modificar mis datos" />
               </children>
             </AnchorPane>
           </content>
