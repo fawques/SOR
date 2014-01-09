@@ -319,8 +319,7 @@ public class GestionPedidosController implements Initializable {
     public void eliminarPedido() {
         TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
         if (tp != null) {
-            //Debe hacer un cancelado en cascada de las ofertas
-
+            MainTaller.cancellPedido(tp.getId());
         }
         //else //no hay pedido seleccionada
     }
@@ -406,6 +405,10 @@ public class GestionPedidosController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     public void bajaTaller() throws IOException {
         if (MainTaller.bajaTaller()) {
             cambiarAPantallaTallerDeBaja();
@@ -426,7 +429,18 @@ public class GestionPedidosController implements Initializable {
         tdCont.showStage();
     }
 
-    public void modificarTaller() {
-
+    /**
+     *
+     */
+    public void modificarTaller() throws IOException {
+        URL location = getClass().getResource("modificarDatos.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page = (Parent) loader.load(location.openStream());
+        thisStage.getScene().setRoot(page);
+        AltaTallerController tdCont = (AltaTallerController) loader.getController();
+        tdCont.setStage(thisStage);
+        tdCont.showStage();
     }
 }

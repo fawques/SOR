@@ -359,6 +359,38 @@ public class MainTaller extends Application {
         return false;
     }
 
+    public static boolean modificarDatos(String nombre, String email, String direccion, String ciudad, String codPostal, String telefono) {
+        try {
+            if (modificar(taller.getID(), nombre, email, direccion, ciudad, Integer.parseInt(codPostal), Integer.parseInt(telefono))) {
+                bd = new InterfazBD("sor_taller");
+                boolean o = bd.modificarTaller(nombre, email, direccion, ciudad, Integer.parseInt(codPostal), Integer.parseInt(telefono));
+                bd.close();
+                return o;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public static boolean cancellPedido(String idPedido) {
+        try {
+            if (cancelarPedido(idPedido)) {
+                bd = new InterfazBD("sor_taller");
+                boolean o = bd.cancelarPedido(idPedido);
+                bd.close();
+                return o;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     /**
      * ******************* WebServices *************************
      * @param name
@@ -410,5 +442,17 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.bajaTaller(tallerID);
+    }
+
+    public static boolean modificar(java.lang.String id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.modificar(id, name, email, address, city, postalCode, telephone);
+    }
+
+    private static Boolean cancelarPedido(java.lang.String idPedido) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.cancelarPedido(idPedido);
     }
 }

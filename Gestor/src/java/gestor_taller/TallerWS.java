@@ -67,6 +67,20 @@ public class TallerWS {
         return false;
     }
     
+    public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            boolean res = bd.modificarTaller(id, name, email, city, city, postalCode, telephone, EstadoGeneral.ACTIVE);
+            bd.close();
+            return res;
+        } catch (java.sql.SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     /**
      *
      * @param email
@@ -193,6 +207,24 @@ public class TallerWS {
         try {
             bd = new InterfazBD("sor_gestor");
             boolean oool = bd.bajaTaller(tallerID);
+            bd.close();
+            return oool;
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "cancelarPedido")
+    public Boolean cancelarPedido(@WebParam(name = "idPedido") String idPedido) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            boolean oool = bd.cancelarPedido(idPedido);
             bd.close();
             return oool;
         } catch (SQLException ex) {

@@ -420,6 +420,10 @@ public class InterfazBD {
     public boolean modificarTaller(String ID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, EstadoGeneral estado){
         return conexion.ejecutarSQL("UPDATE `taller` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "', `estado`='" + estado.ordinal() + "' WHERE `id`='" + ID + "';");
     }
+
+    public boolean modificarTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono) {
+        return conexion.ejecutarSQL("UPDATE `taller` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "'");
+    }
     
     public void close(){
         conexion.closeConexion();
@@ -524,7 +528,27 @@ public class InterfazBD {
         return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
     }
 
-    public boolean bajaTaller(String id) {
+    public boolean cancelarOfertas(String idPedido) {
+        return conexion.ejecutarSQL("Update oferta set estado='" + EstadoOferta.CANCELLED.ordinal() + "' where pedido='" + idPedido + "'");
+    }
+
+    public boolean cancelarPedidosTaller(String idTaller) throws SQLException {
+        ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where taller='" + idTaller + "'");
+        while (resultados.next()) {
+            cancelarOfertas(resultados.getString("id"));
+        }
+        conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where taller='" + idTaller + "'");
+        return false;
+    }
+
+    public boolean cancelarPedido(String idPedido) {
+        cancelarOfertas(idPedido);
+        conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where id='" + idPedido + "'");
+        return false;
+    }
+
+    public boolean bajaTaller(String id) throws SQLException {
+        cancelarPedidosTaller(id);
         return conexion.ejecutarSQL("Update taller set estado='" + EstadoGeneral.INACTIVE.ordinal() + "' where id='" + id + "'");
     }
 }
