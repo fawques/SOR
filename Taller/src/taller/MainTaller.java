@@ -100,8 +100,11 @@ public class MainTaller extends Application {
                 staticDataBox.showStage();
             }
         } catch (javax.xml.ws.WebServiceException  e) {
-            // mostrar interfaz diciendo que no ha podido conectar
-            System.out.println("NO SE HA PODIDO CONECTAR");
+            FXMLLoader loader = changeScene("reintentarConexion.fxml");
+            stage.setTitle("Conexion fallida");
+            ReintentarConexionController staticDataBox = (ReintentarConexionController) loader.getController();
+            staticDataBox.setStage(stage);
+            staticDataBox.showStage();
         }
     }
 
@@ -400,7 +403,7 @@ public class MainTaller extends Application {
         return port.rechazarOferta(id);
     }
 
-    private static String hello() {
+    public static String hello() {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.hello();
