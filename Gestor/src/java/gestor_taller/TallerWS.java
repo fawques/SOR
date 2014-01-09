@@ -184,4 +184,22 @@ public class TallerWS {
         }
         return false;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "bajaTaller")
+    public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            boolean oool = bd.bajaTaller(tallerID);
+            bd.close();
+            return oool;
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }
