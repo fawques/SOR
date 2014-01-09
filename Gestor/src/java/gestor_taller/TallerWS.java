@@ -184,4 +184,12 @@ public class TallerWS {
         }
         return false;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "hello")
+    public String hello() {
+        return "hello";
+    }
 }

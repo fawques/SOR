@@ -58,41 +58,50 @@ public class MainTaller extends Application {
     @Override
     public void start(Stage stage2) throws Exception {
         stage = stage2;
-        bd = new InterfazBD("sor_taller");
-        //System.out.println(bd.getPedidosActivos());
-        taller = bd.getPrimerTaller();
-        //bd.close();
-        if (taller != null) //esta pendiente o activado
-        {
-            if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
+        
+        
+        try {
+            hello();
+            
+            bd = new InterfazBD("sor_taller");
+            //System.out.println(bd.getPedidosActivos());
+            taller = bd.getPrimerTaller();
+            //bd.close();
+            if (taller != null) //esta pendiente o activado
             {
-                FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
-                stage.setTitle("Esperando codigo de aceptacion");
-                TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
-                staticDataBox.setStage(stage);
-                staticDataBox.showStage();
-            } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
-                //Cargar GestionPedido
-                FXMLLoader loader = changeScene("GestionPedidos.fxml");
-                stage.setTitle("Gestion de pedidos");
-                GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
-                 staticDataBox.setStage(stage);
-                staticDataBox.showStage();
-            } else { //baja
-                //Yo lo que haria serÃ­a un volver a darme de alta, con los mismos datos
-                //un botÃ³n y prou
+                if (taller.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
+                {
+                    FXMLLoader loader = changeScene("tallerPendienteActivacion.fxml");
+                    stage.setTitle("Esperando codigo de aceptacion");
+                    TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                    staticDataBox.setStage(stage);
+                    staticDataBox.showStage();
+                } else if (taller.getEstado() == EstadoGeneral.ACTIVE) { //activo
+                    //Cargar GestionPedido
+                    FXMLLoader loader = changeScene("GestionPedidos.fxml");
+                    stage.setTitle("Gestion de pedidos");
+                    GestionPedidosController staticDataBox = (GestionPedidosController) loader.getController();
+                     staticDataBox.setStage(stage);
+                    staticDataBox.showStage();
+                } else { //baja
+                    //Yo lo que haria serÃ­a un volver a darme de alta, con los mismos datos
+                    //un botÃ³n y prou
+                    FXMLLoader loader = changeScene("AltaTaller.fxml");
+                    stage.setTitle("Alta de taller");
+                    AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
+                    staticDataBox.setStage(stage);
+                    staticDataBox.showStage();
+                }
+            } else { //no existe
                 FXMLLoader loader = changeScene("AltaTaller.fxml");
                 stage.setTitle("Alta de taller");
                 AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             }
-        } else { //no existe
-            FXMLLoader loader = changeScene("AltaTaller.fxml");
-            stage.setTitle("Alta de taller");
-            AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
-            staticDataBox.setStage(stage);
-            staticDataBox.showStage();
+        } catch (javax.xml.ws.WebServiceException  e) {
+            // mostrar interfaz diciendo que no ha podido conectar
+            System.out.println("NO SE HA PODIDO CONECTAR");
         }
     }
 
@@ -389,5 +398,11 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.rechazarOferta(id);
+    }
+
+    private static String hello() {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.hello();
     }
 }
