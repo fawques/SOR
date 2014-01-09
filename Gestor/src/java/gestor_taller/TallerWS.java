@@ -67,10 +67,10 @@ public class TallerWS {
         return false;
     }
     
-    public boolean modificar(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
+    public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
         try {
             bd = new InterfazBD("sor_gestor");
-            boolean res = bd.modificarTaller(city, name, email, city, city, postalCode, telephone, EstadoGeneral.ACTIVE);
+            boolean res = bd.modificarTaller(id, name, email, city, city, postalCode, telephone, EstadoGeneral.ACTIVE);
             bd.close();
             return res;
         } catch (java.sql.SQLException ex) {

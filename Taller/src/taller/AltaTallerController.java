@@ -281,8 +281,8 @@ public class AltaTallerController implements Initializable {
     public void modificarTaller() throws IOException {
         if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             System.out.println("Enviando...");
-
-            irAGestionPedidos();
+            if (MainTaller.modificarDatos(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText()))
+                irAGestionPedidos();
         }
     }
 }
