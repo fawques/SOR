@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -405,8 +406,16 @@ public class GestionPedidosController implements Initializable {
         }
     }
 
-    public void bajaTaller() {
-
+    public void bajaTaller() throws IOException {
+        URL location = getClass().getResource("TallerDeBaja.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page = (Parent) loader.load(location.openStream());
+        thisStage.getScene().setRoot(page);
+        TallerDeBajaController tdCont = (TallerDeBajaController) loader.getController();
+        tdCont.setStage(thisStage);
+        tdCont.showStage();
     }
 
     public void modificarTaller() {
