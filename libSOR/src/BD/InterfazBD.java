@@ -42,12 +42,12 @@ public class InterfazBD {
     
     public void anadirPedido(String id, Date fechaAlta, int estado, String taller, Date fechaBaja, Date fechaLimite, boolean modoAutomatico)    {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        conexion.ejecutarSQL("insert INTO pedido (id, fecha_alta, estado, taller, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado + "','" + taller + "'," + (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja) + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + modoAutomatico + "');");
+        conexion.ejecutarSQL("insert INTO pedido (id, fecha_alta, estado, taller, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado + "','" + taller + "'," + (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja) + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
     }
     
     public int anadirPedido(Date fechaAlta, EstadoPedido estado, String taller, Date fechaBaja, Date fechaLimite, boolean modoAutomatico) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        return conexion.ejecutarInsert("insert INTO pedido (id, fecha_alta, estado, taller, fecha_limite, modo_automatico) values ('', " + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado.ordinal() + "','" + taller + "', " + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + modoAutomatico + "');");
+        return conexion.ejecutarInsert("insert INTO pedido (id, fecha_alta, estado, taller, fecha_limite, modo_automatico) values ('', " + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado.ordinal() + "','" + taller + "', " + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
     }
 
     
@@ -103,7 +103,7 @@ public class InterfazBD {
                 ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
 
-                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getInt("modo_automatico") != 0, piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -485,7 +485,7 @@ public class InterfazBD {
         if (modoAceptacion.isEmpty()) {            if (sWhere.isEmpty()) {
                 sWhere += " and ";
             }
-            sWhere += "modo_automatico='" + modoAceptacion + "'";
+            sWhere += "modo_automatico='" + ("Automatico".equals(modoAceptacion) ? 1 : 0) + "'";
          }
         if (fechaLimite.toString().isEmpty()) {
             if (sWhere.isEmpty()) {

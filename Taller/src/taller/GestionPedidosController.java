@@ -20,7 +20,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -250,16 +249,16 @@ public class GestionPedidosController implements Initializable {
     }
 
     public void visualizarPedidos(Gson gson) throws JsonSyntaxException {
+        olTablaPedidos.clear();
+        olTablaPedidosOfertas.clear();
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
         ArrayList<Pedido> alPedidos = gson.fromJson(MainTaller.getPedidosActivos(), collectionType);
         TablaPedidos tpPed;
         for (Pedido pedido : alPedidos) {
             tpPed = new TablaPedidos(pedido);
-            olTablaPedidos.add(tpPed);
             olTablaPedidosOfertas.add(tpPed);
         }
-
         tbPedidosOfertas.setEditable(true);
         tbPedidosOfertas.setItems(olTablaPedidosOfertas);
         olTablaPedidos.clear();
@@ -326,10 +325,7 @@ public class GestionPedidosController implements Initializable {
         TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
         if (tp != null && (tp.getEstado() == EstadoPedido.ACTIVE || tp.getEstado() == EstadoPedido.NEW)) {
             if (MainTaller.cancellPedido(tp.getId())) {
-                tp.setEstado(new SimpleObjectProperty<EstadoPedido>(EstadoPedido.CANCELLED));
-                tbPedidos.setItems(olTablaPedidos);
-                System.out.println(olTablaPedidosOfertas.remove(tp));
-                tbPedidosOfertas.setItems(olTablaPedidosOfertas);
+                visualizarPedidos(new GsonBuilder().setDateFormat("MMM dd, yyyy").create());
             }
         }
         //else //no hay pedido seleccionada
