@@ -8,8 +8,10 @@ package taller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoOferta;
+import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
 import java.io.IOException;
@@ -48,6 +50,7 @@ public class GestionPedidosController implements Initializable {
     ArrayList<Oferta> ofertas;
     ObservableList<TablaOfertas> olTablaOfertas = FXCollections.observableArrayList();
     ObservableList<TablaPedidos> olTablaPedidos = FXCollections.observableArrayList();
+    ObservableList<TablaPedidos> olTablaPedidosOfertas = FXCollections.observableArrayList();
 
     @FXML
     Button btNuevoPedido;
@@ -238,8 +241,14 @@ public class GestionPedidosController implements Initializable {
         fecha_bajaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_baja"));
         TableColumn fecha_limiteCol1 = new TableColumn("Fecha limite");
         fecha_limiteCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_limite"));
+        visualizarPedidos(gson);
+        
+        tbPedidosOfertas.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+        tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+        
+    }
 
-
+    public void visualizarPedidos(Gson gson) throws JsonSyntaxException {
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
         ArrayList<Pedido> alPedidos = gson.fromJson(MainTaller.getPedidosActivos(), collectionType);
@@ -247,11 +256,11 @@ public class GestionPedidosController implements Initializable {
         for (Pedido pedido : alPedidos) {
             tpPed = new TablaPedidos(pedido);
             olTablaPedidos.add(tpPed);
+            olTablaPedidosOfertas.add(tpPed);
         }
 
         tbPedidosOfertas.setEditable(true);
-        tbPedidosOfertas.setItems(olTablaPedidos);
-        tbPedidosOfertas.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+        tbPedidosOfertas.setItems(olTablaPedidosOfertas);
         olTablaPedidos.clear();
         ArrayList<Pedido> alPedidosActivos = gson.fromJson(MainTaller.getAllPedidos(), collectionType);
         for (Pedido pedido : alPedidosActivos) {
@@ -260,8 +269,6 @@ public class GestionPedidosController implements Initializable {
         }
         tbPedidos.setEditable(true);
         tbPedidos.setItems(olTablaPedidos);
-        tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
-
     }
     
     /**
@@ -283,10 +290,8 @@ public class GestionPedidosController implements Initializable {
         NuevoPedidoController np = (NuevoPedidoController) loader.getController();
         np.setStage(stage);
         np.showStage();
-        /* Pedido nuevoP = new Pedido(1001, "", new Date());
-         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-        String listaJSON = gson.toJson(nuevoP);
-        MainTaller.nuevoPedido(listaJSON);*/
+        
+        visualizarPedidos(new Gson());
     }
 
     /**
@@ -316,10 +321,15 @@ public class GestionPedidosController implements Initializable {
     /**
      *
      */
-    public void eliminarPedido() {
+    public void cancelarPedido() {
         TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
-        if (tp != null) {
-            MainTaller.cancellPedido(tp.getId());
+        if (tp != null && (tp.getEstado() == EstadoPedido.ACTIVE || tp.getEstado() == EstadoPedido.NEW)) {
+            if (MainTaller.cancellPedido(tp.getId())) {
+                olTablaPedidos.remove(tp);
+                tbPedidos.setItems(olTablaPedidos);
+                olTablaPedidosOfertas.remove(tp);
+                tbPedidosOfertas.setItems(olTablaPedidosOfertas);
+            }
         }
         //else //no hay pedido seleccionada
     }
