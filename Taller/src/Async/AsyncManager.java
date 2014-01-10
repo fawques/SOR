@@ -49,7 +49,7 @@ public class AsyncManager {
                 String partes[] = resultAccion.split(":");
                 String name = partes[0];
                 String paramTypes = partes[1];
-                String stringTypes[] = paramTypes.split("|");
+                String stringTypes[] = paramTypes.split("\\|");
                 Class<?>[] types = new Class<?>[stringTypes.length];
                 
                 for (int i = 0; i < stringTypes.length; i++) {
@@ -57,7 +57,7 @@ public class AsyncManager {
                 }
                 String resultParams = acciones.getString("params");
                 
-                Accion nuevo = new Accion(name, types, resultParams.split("|"));
+                Accion nuevo = new Accion(name, types, resultParams.split("\\|"));
                 listaAcciones.add(nuevo);
             }
             for (Accion accion : listaAcciones) {

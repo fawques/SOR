@@ -61,7 +61,7 @@ public class Accion {
                 types += "|";
                 values += "|";
             }
-            types += paramTypes[i];
+            types += paramTypes[i].getName();
             values += paramValues[i];
         }
         return name + ":" + types + ":" + values;

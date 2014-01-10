@@ -61,7 +61,6 @@ public class MainTaller extends Application {
     public void start(Stage stage2) throws Exception {
         stage = stage2;
         
-        
         try {
             hello();
             inicioTaller();
@@ -387,7 +386,7 @@ public class MainTaller extends Application {
      * @return 
      */
 
-    public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+    public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
         try {
             for (int i = 0; i < 10; i++) {
                 try{
@@ -400,7 +399,7 @@ public class MainTaller extends Application {
             // tenemos que guardar el alta en local, y dejarla pendiente de mandar
             class Local {};
             java.lang.reflect.Method m = Local.class.getEnclosingMethod();
-            String params[] = {name,email,address,city,Integer.toString(postalCode),Integer.toString(telephone)};
+            String params[] = {name,email,address,city,postalCode,telephone};
             AsyncManager manager = new AsyncManager("sor_taller");
             manager.guardarAccion(m,params);
             
@@ -412,10 +411,10 @@ public class MainTaller extends Application {
         return false;
     }
 
-    private static boolean alta_WS(String name, String email, String address, String city, int postalCode, int telephone) {
+    private static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.alta(name, email, address, city, postalCode, telephone);
+        return port.aAlta(name, email, address, city, postalCode, telephone);
     }
 
     public static String checkActivacion(java.lang.String mail) {
@@ -459,4 +458,6 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.bajaTaller(tallerID);
     }
+
+    
 }
