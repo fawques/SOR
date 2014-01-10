@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="131.0" prefWidth="300.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.TallerDeBajaController">
+  <children>
+    <Label layoutX="83.0" layoutY="35.0" text="Ha sido dado de baja" />
+    <Button layoutX="58.0" layoutY="76.0" mnemonicParsing="false" onAction="#reactivarTaller" text="Volver a activar mi cuenta" />
+  </children>
+</AnchorPane>

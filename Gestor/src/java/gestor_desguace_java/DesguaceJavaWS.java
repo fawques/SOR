@@ -44,26 +44,31 @@ public class DesguaceJavaWS {
     }
       @WebMethod(operationName = "alta")
     public boolean alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") int postalCode, @WebParam(name = "telephone") int telephone) {
-        try {
-            bd = new InterfazBD("sor_desguace");
+
+        try {       
+            bd = new InterfazBD("sor_gestor");
+
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             boolean res = bd.altaDesguace(stringID, name, email, address, city, postalCode, telephone, 2);
             bd.close();
             return res;
-            
-            
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+
+
+       return false;
+
     }
     
         @WebMethod(operationName = "checkActivacion")
     public String checkActivacion(@WebParam(name = "mail") String email){
-        try {    
+
+        try {
+
             bd = new InterfazBD("sor_gestor");
             Desguace desguace = bd.getDesguace(email);
             String res;
@@ -74,16 +79,19 @@ public class DesguaceJavaWS {
             }
             bd.close();
             return res;
+
             
             
             
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return "";
+
+        return "";
+
     }
 }
 

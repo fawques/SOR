@@ -7,6 +7,7 @@ package taller;
 
 import BD.InterfazBD;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
 import general.EstadoPedido;
 import general.Oferta;
@@ -15,6 +16,7 @@ import general.Pieza;
 import general.Taller;
 import gestor_taller.JMSException_Exception;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -77,11 +79,9 @@ public class MainTaller extends Application {
                  staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             } else { //baja
-                //Yo lo que haria serÃ­a un volver a darme de alta, con los mismos datos
-                //un botÃ³n y prou
-                FXMLLoader loader = changeScene("AltaTaller.fxml");
+                FXMLLoader loader = changeScene("TallerDeBaja.fxml");
                 stage.setTitle("Alta de taller");
-                AltaTallerController staticDataBox = (AltaTallerController) loader.getController();
+                TallerDeBajaController staticDataBox = (TallerDeBajaController) loader.getController();
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             }
@@ -116,7 +116,6 @@ public class MainTaller extends Application {
      */
 
     public FXMLLoader changeScene(String fxml) throws IOException {
-        //Mostrar pÃ¡gina de espera interfaz bÃ¡sica
         URL location = getClass().getResource(fxml);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
@@ -132,24 +131,6 @@ public class MainTaller extends Application {
 
         return loader;
 
-    }
-
-    /**
-     *
-     * @param fxml
-     * @return
-     * @throws Exception
-     */
-    public Parent replaceSceneContent(String fxml) throws Exception {
-        Parent page = (Parent) FXMLLoader.load(MainTaller.class.getResource(fxml), null, new JavaFXBuilderFactory());
-        Scene scene = stage.getScene();
-        if (scene == null) {
-            stage.setScene(scene);
-        } else {
-            stage.getScene().setRoot(page);
-        }
-        stage.sizeToScene();
-        return page;
     }
 
     /**
@@ -246,7 +227,7 @@ public class MainTaller extends Application {
         try {
             bd = new InterfazBD("sor_taller");
             boolean r = bd.activarTallerMainTaller(idRecibido);
-            //bd.close();
+            bd.close();
             return r;
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -257,11 +238,61 @@ public class MainTaller extends Application {
         return false;
     }
 
+    public static ArrayList<Oferta> actualizarOfertas() {
+        String ofertasGson = getOfertas(getPedidosActivos());
+        Gson gson = new Gson();
+        Type collectionType = new TypeToken<ArrayList<Oferta>>() {
+        }.getType();
+        ArrayList<Oferta> listOf = gson.fromJson(ofertasGson, collectionType);
+        try {
+            bd = new InterfazBD("sor_taller");
+            for (Oferta of : listOf) {
+                bd.anadirOferta(of.getID_aux(), of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(), of.getFecha_baja(), of.getFecha_limite());
+            }
+            bd.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listOf;
+    }
+
+    public static String getPedidosActivos() {
+        try {
+            bd = new InterfazBD("sor_taller");
+            ArrayList<Pedido> p = bd.getPedidosConID_aux(EstadoPedido.ACTIVE);
+            bd.close();
+            Gson gson = new Gson();
+            return gson.toJson(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static String getAllPedidos() {
+        try {
+            bd = new InterfazBD("sor_taller");
+            ArrayList<Pedido> p = bd.getPedidosConID_aux();
+            bd.close();
+            Gson gson = new Gson();
+            return gson.toJson(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static ArrayList<Pedido> buscarPedidos(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) {
         try {
             bd = new InterfazBD("sor_taller");
             ArrayList<Pedido> p = bd.buscarPedido(idPedido, idPieza, estado, fechaLimite, modoAceptacion);
-            //bd.close();
+            bd.close();
             return p;
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -271,19 +302,17 @@ public class MainTaller extends Application {
         return null;
     }
 
-    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
-        try {
-            String tallerID = bd.getPrimerTaller().getID();            
+    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+        try {           
             bd = new InterfazBD("sor_taller");
-            int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite);
-            bd.anyadirPiezasAPedido(id, piezas, cantidades);
-            bd.close();
-            Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, piezas, cantidades, new ArrayList<Oferta>());
+            String tallerID = bd.getPrimerTaller().getID();
+            int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite, modoAutomatico);
+            Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, modoAutomatico, piezas, cantidades, new ArrayList<Oferta>());
             Gson gson = new Gson();
             String idFinal = nuevoPedido(gson.toJson(nuevo));
-            nuevo.setID(idFinal);
-            nuevo.setEstado(EstadoPedido.ACTIVE);
-            // habría que meterlo a la BD... esto está muy feo ahora mismo :S
+            bd.activarPedidoTaller(id, idFinal);
+            bd.anyadirPiezasAPedido(idFinal, piezas, cantidades);
+            bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -292,6 +321,74 @@ public class MainTaller extends Application {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+
+    public static boolean reactivarTaller() {
+        try {
+            bd = new InterfazBD("sor_taller");
+            boolean r = bd.activarTaller(taller.getID());
+            bd.close();
+            return r;
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    public static boolean bajaTaller() {
+        try {
+            if (bajaTallerWS(taller.getID())) {
+                bd = new InterfazBD("sor_taller");
+                if (bd.bajaTaller(taller.getID())) {
+                    bd.close();
+                    return true;
+                } else {
+                    System.err.println("Error: No se ha podido cambiar el estado en taller.");
+                }
+            } else {
+                System.err.println("Error: No se ha podido dar de baja en gestor.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public static boolean modificarDatos(String nombre, String email, String direccion, String ciudad, String codPostal, String telefono) {
+        try {
+            if (modificar(taller.getID(), nombre, email, direccion, ciudad, Integer.parseInt(codPostal), Integer.parseInt(telefono))) {
+                bd = new InterfazBD("sor_taller");
+                boolean o = bd.modificarTaller(nombre, email, direccion, ciudad, Integer.parseInt(codPostal), Integer.parseInt(telefono));
+                bd.close();
+                return o;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public static boolean cancellPedido(String idPedido) {
+        try {
+            if (cancelarPedido(idPedido)) {
+                bd = new InterfazBD("sor_taller");
+                boolean o = bd.cancelarPedido(idPedido);
+                bd.close();
+                return o;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     /**
@@ -322,4 +419,40 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(pedido);
     }     
+
+    public static String getOfertas(java.lang.String listaPedidos) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.getOfertas(listaPedidos);
+    }
+
+    public static Boolean aceptarOferta(java.lang.String id) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.aceptarOferta(id);
+    }
+
+    public static Boolean rechazarOferta(java.lang.String id) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.rechazarOferta(id);
+    }
+
+    private static Boolean bajaTallerWS(java.lang.String tallerID) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.bajaTaller(tallerID);
+    }
+
+    public static boolean modificar(java.lang.String id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.modificar(id, name, email, address, city, postalCode, telephone);
+    }
+
+    private static Boolean cancelarPedido(java.lang.String idPedido) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.cancelarPedido(idPedido);
+    }
 }
