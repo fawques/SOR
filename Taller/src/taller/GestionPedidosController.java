@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -291,7 +292,7 @@ public class GestionPedidosController implements Initializable {
         np.setStage(stage);
         np.showStage();
         
-        visualizarPedidos(new Gson());
+        visualizarPedidos(new GsonBuilder().setDateFormat("MMM dd, yyyy").create());
     }
 
     /**
@@ -325,9 +326,9 @@ public class GestionPedidosController implements Initializable {
         TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
         if (tp != null && (tp.getEstado() == EstadoPedido.ACTIVE || tp.getEstado() == EstadoPedido.NEW)) {
             if (MainTaller.cancellPedido(tp.getId())) {
-                olTablaPedidos.remove(tp);
+                tp.setEstado(new SimpleObjectProperty<EstadoPedido>(EstadoPedido.CANCELLED));
                 tbPedidos.setItems(olTablaPedidos);
-                olTablaPedidosOfertas.remove(tp);
+                System.out.println(olTablaPedidosOfertas.remove(tp));
                 tbPedidosOfertas.setItems(olTablaPedidosOfertas);
             }
         }

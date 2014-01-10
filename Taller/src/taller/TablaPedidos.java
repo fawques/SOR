@@ -65,4 +65,32 @@ public class TablaPedidos {
         return fecha_limite.get();
     }
 
+    public void setId_aux(SimpleIntegerProperty id_aux) {
+        this.id_aux = id_aux;
+    }
+
+    public void setId(SimpleStringProperty id) {
+        this.id = id;
+    }
+
+    public void setFecha_alta(SimpleObjectProperty<Date> fecha_alta) {
+        this.fecha_alta = fecha_alta;
+    }
+
+    public void setEstado(SimpleObjectProperty<EstadoPedido> estado) {
+        this.estado = estado;
+    }
+
+    public void setTaller(SimpleStringProperty taller) {
+        this.taller = taller;
+    }
+
+    public void setFecha_baja(SimpleObjectProperty<Date> fecha_baja) {
+        this.fecha_baja = fecha_baja;
+    }
+
+    public void setFecha_limite(SimpleObjectProperty<Date> fecha_limite) {
+        this.fecha_limite = fecha_limite;
+    }
+
 }
