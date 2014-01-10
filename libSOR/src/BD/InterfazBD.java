@@ -268,6 +268,18 @@ public class InterfazBD {
         }
         return pedido;
     }
+
+    public Taller getTallerEnGestor(String id) {
+        ResultSet resultados = conexion.ejecutarSQLSelect("Select * from taller where id='" + id + "'");
+        try {
+            if (resultados.first()) {
+                return new Taller(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"), resultados.getInt("codPostal"), resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
 
     public void getPiezasYCantidades(String pedidoID, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades){
