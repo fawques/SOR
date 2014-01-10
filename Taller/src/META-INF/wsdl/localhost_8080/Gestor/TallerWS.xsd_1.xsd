@@ -14,6 +14,10 @@
 
 <xs:element name="bajaResponse" type="tns:bajaResponse"/>
 
+<xs:element name="cancelarPedido" type="tns:cancelarPedido"/>
+
+<xs:element name="cancelarPedidoResponse" type="tns:cancelarPedidoResponse"/>
+
 <xs:element name="checkActivacion" type="tns:checkActivacion"/>
 
 <xs:element name="checkActivacionResponse" type="tns:checkActivacionResponse"/>
@@ -25,6 +29,10 @@
 <xs:element name="hello" type="tns:hello"/>
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
+
+<xs:element name="modificar" type="tns:modificar"/>
+
+<xs:element name="modificarResponse" type="tns:modificarResponse"/>
 
 <xs:element name="nuevoPedido" type="tns:nuevoPedido"/>
 
@@ -53,23 +61,6 @@
 <xs:complexType name="bajaResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="alta">
-<xs:sequence>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-<xs:element name="email" type="xs:string" minOccurs="0"/>
-<xs:element name="address" type="xs:string" minOccurs="0"/>
-<xs:element name="city" type="xs:string" minOccurs="0"/>
-<xs:element name="postalCode" type="xs:string" minOccurs="0"/>
-<xs:element name="telephone" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="altaResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -111,6 +102,18 @@
 <xs:sequence/>
 </xs:complexType>
 
+<xs:complexType name="cancelarPedido">
+<xs:sequence>
+<xs:element name="idPedido" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancelarPedidoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="rechazarOferta">
 <xs:sequence>
 <xs:element name="ID" type="xs:string" minOccurs="0"/>
@@ -120,6 +123,23 @@
 <xs:complexType name="rechazarOfertaResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="alta">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="address" type="xs:string" minOccurs="0"/>
+<xs:element name="city" type="xs:string" minOccurs="0"/>
+<xs:element name="postalCode" type="xs:string" minOccurs="0"/>
+<xs:element name="telephone" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="altaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -144,6 +164,24 @@
 <xs:complexType name="getOfertasResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="modificar">
+<xs:sequence>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="address" type="xs:string" minOccurs="0"/>
+<xs:element name="city" type="xs:string" minOccurs="0"/>
+<xs:element name="postalCode" type="xs:string" minOccurs="0"/>
+<xs:element name="telephone" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="modificarResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 

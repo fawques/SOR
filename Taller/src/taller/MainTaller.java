@@ -551,7 +551,7 @@ public class MainTaller extends Application {
         return port.rechazarOferta(id);
     }
 
-    public static String hello() {
+    public static String hello() throws javax.xml.ws.WebServiceException{
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.hello();
