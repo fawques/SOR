@@ -6,24 +6,29 @@
 
 package gestor_admin;
 
+import BD.InterfazBD;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import general.Desguace;
 import general.Oferta;
 import general.Pedido;
 import general.Taller;
-import general.Desguace;
-import general.EstadoGeneral;
-import general.Pieza;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.jws.WebService;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import BD.InterfazBD;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.google.gson.GsonBuilder;
-import java.text.DateFormat;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 
 /**
@@ -32,7 +37,64 @@ import java.text.DateFormat;
  */
 @WebService(serviceName = "AdminWS")
 public class AdminWS {
- InterfazBD bd;
+    InterfazBD bd;
+
+    /**
+     *
+     * @param from
+     * @param to
+     * @param subject
+     * @param text
+     */
+    public void sendMail(final String from, String to, String subject, String text) {
+        String SMTP_HOST_NAME = "smtp.gmail.com";
+        String SMTP_PORT = "465";
+        String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+        Properties props = new Properties();
+        props.put("mail.smtp.host", SMTP_HOST_NAME);
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.debug", "true");
+        props.put("mail.smtp.port", SMTP_PORT);
+        props.put("mail.smtp.socketFactory.port", SMTP_PORT);
+        props.put("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.put("mail.smtp.socketFactory.fallback", "false");
+
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        //a priori, para que funcione en otro pc,
+                        //a lo mejor habría que generar otra contrasenya, pero creo que no
+                        return new PasswordAuthentication("pablovm1990@gmail.com",
+                                "gcjacxtujgfqigxt");
+                    }
+                });
+
+        session.setDebug(true);
+
+        Message simpleMessage = new MimeMessage(session);
+        InternetAddress fromAddress = null;
+        InternetAddress toAddress = null;
+        try {
+            fromAddress = new InternetAddress(from);
+            toAddress = new InternetAddress(to);
+        } catch (AddressException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            simpleMessage.setFrom(fromAddress);
+            simpleMessage.setRecipient(Message.RecipientType.TO, toAddress);
+            simpleMessage.setSubject(subject);
+            simpleMessage.setContent(text, "text/html");
+
+            Transport.send(simpleMessage);
+        } catch (MessagingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     /**
      * This is a sample web service operation
      */
@@ -212,7 +274,21 @@ public class AdminWS {
     public Boolean darAccesoTaller(@WebParam(name = "ID") String ID) {
      try {
          bd = new InterfazBD("sor_gestor");
-        return  bd.activarTaller(ID);
+         boolean res = bd.activarTaller(ID);
+         Taller t = bd.getTaller(ID);
+         if (res) {
+             sendMail("pablovm1990@gmail.com", t.getEmail(), "Usuario SorApp creado correctamente",
+                     "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
+                     + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
+                     + "<li>" + t.getName() + "</li><br/>"
+                     + "<li>" + t.getAddress() + "</li><br/>"
+                     + "<li>" + t.getCity() + "</li><br/>"
+                     + "<li>" + t.getPostalCode() + "</li><br/>"
+                     + "<li>" + t.getTelephone() + "</li><br/>"
+                     + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");
+         }
+         bd.close();
+         return res;
         
      } catch (SQLException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
