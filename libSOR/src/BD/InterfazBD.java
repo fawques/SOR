@@ -477,7 +477,7 @@ public class InterfazBD {
         // método que llama el gestor, pasándole el id como un string (resultado del md5)
     public boolean altaDesguace(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
         int res = conexion.ejecutarInsert("insert into desguace (id,nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
-        return res > 0;
+        return res >= 0;
     }
     
     // método que llaman talleres y desguaces, sin id (lo autogenera la bd)
