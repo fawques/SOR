@@ -318,12 +318,12 @@ public class MainTaller extends Application {
         return null;
     }
 
-    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
         try {           
             bd = new InterfazBD("sor_taller");
             String tallerID = bd.getPrimerTaller().getID();
-            int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite);
-            Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, piezas, cantidades, new ArrayList<Oferta>());
+            int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite, modoAutomatico);
+            Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, modoAutomatico, piezas, cantidades, new ArrayList<Oferta>());
             Gson gson = new Gson();
             String idFinal = nuevoPedido(gson.toJson(nuevo));
             bd.activarPedidoTaller(id, idFinal);
@@ -366,6 +366,38 @@ public class MainTaller extends Application {
                 }
             } else {
                 System.err.println("Error: No se ha podido dar de baja en gestor.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public static boolean modificarDatos(String nombre, String email, String direccion, String ciudad, String codPostal, String telefono) {
+        try {
+            if (modificar(taller.getID(), nombre, email, direccion, ciudad, codPostal, telefono)) {
+                bd = new InterfazBD("sor_taller");
+                boolean o = bd.modificarTaller(nombre, email, direccion, ciudad, Integer.parseInt(codPostal), Integer.parseInt(telefono));
+                bd.close();
+                return o;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public static boolean cancellPedido(String idPedido) {
+        try {
+            if (cancelarPedido(idPedido)) {
+                bd = new InterfazBD("sor_taller");
+                boolean o = bd.cancelarPedido(idPedido);
+                bd.close();
+                return o;
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -550,4 +582,51 @@ public class MainTaller extends Application {
     }
 
     
+    public static boolean modificar(java.lang.String id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
+        AsyncManager manager = new AsyncManager("sor_taller");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                Boolean ret = modificar_WS(id, name, email, address, city, postalCode, telephone);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {id, name, email, address, city, postalCode, telephone};
+        manager.guardarAccion(m,params);
+        return false;
+    }
+
+    private static boolean modificar_WS(String id, String name, String email, String address, String city, String postalCode, String telephone) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.modificar(id, name, email, address, city, postalCode, telephone);
+    }
+
+    private static Boolean cancelarPedido(java.lang.String idPedido) {
+        AsyncManager manager = new AsyncManager("sor_taller");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                Boolean ret = cancelarPedido_WS(idPedido);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {idPedido};
+        manager.guardarAccion(m,params);
+        return false;
+    }
+
+    private static Boolean cancelarPedido_WS(String idPedido) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.cancelarPedido(idPedido);
+    }
 }
