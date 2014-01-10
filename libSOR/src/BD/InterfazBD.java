@@ -503,39 +503,7 @@ public class InterfazBD {
     
     
     
-    
-    
-        // método que llama el gestor, pasándole el id como un string (resultado del md5)
-    public boolean altaDesguace(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
-        int res = conexion.ejecutarInsert("insert into desguace (id,nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
-        return res > 0;
-    }
-    
-    // método que llaman talleres y desguaces, sin id (lo autogenera la bd)
-    public int altaDesguace(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
-        return conexion.ejecutarInsert("insert into desguace (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
-    }
-
-    public String getMD5IdDesguace(String email) {
-        ResultSet res = conexion.ejecutarSQLSelect("SELECT id from desguace where email='" + email + "';");
-        try {
-            if (res.first()) {
-                return res.getString("id");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "ERROR";
-    }
-    
-    public boolean modificarDesguace(String ID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, EstadoGeneral estado){
-        return conexion.ejecutarSQL("UPDATE `desguace` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "', `estado`='" + estado.ordinal() + "' WHERE `id`='" + ID + "';");
-    }
-    
-    
-    
-    
-    public void close(){
+      public void close(){
         conexion.closeConexion();
     }
 
@@ -553,9 +521,7 @@ public class InterfazBD {
     public boolean activarDesguaceMainDesguace(String idRecibido) {
         return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0' where `id`='" + idRecibido + "'");
     }
-    public boolean activarDesguaceMainDesguace(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0' where `id`='" + idRecibido + "'");
-    }
+
     public boolean activarTaller(String idRecibido) {
         return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0' where `id`='" + idRecibido + "'");
     }
