@@ -249,16 +249,6 @@ public class AltaTallerController implements Initializable {
             else{
                 System.err.println("alta me ha devuelto < 0");
             }
-            //Faltaría anyadir el código recibido por el gestor hay que pasarlo al gestor
-            /*MainTaller.sendMail("pablovm1990@gmail.com", tfEmail.getText(), "Usuario SorApp creado correctamente",
-             "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
-             + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
-             + "<li>" + tfNombreTaller.getText() + "</li><br/>"
-             + "<li>" + tfDireccion.getText() + "</li><br/>"
-             + "<li>" + tfCiudad.getText() + "</li><br/>"
-             + "<li>" + tfCp.getText() + "</li><br/>"
-             + "<li>" + tfTelefono.getText() + "</li><br/>"
-             + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");*/
         }
         //else nothing
     }
