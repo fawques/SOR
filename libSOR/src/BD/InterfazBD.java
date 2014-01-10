@@ -351,7 +351,44 @@ public class InterfazBD {
         return lista;
 
     }
-    
+     public Desguace getDesguace(){
+        ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace");
+        try {
+            if (resultados.first()) {
+                final String tallerID = resultados.getString("id");
+                if("".equals(tallerID)){
+                     return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
+                }else{
+                    ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                }
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+     }
+     public Desguace getDesguace(String email){
+        ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace WHERE email='" + email + "';");
+        try {
+            if (resultados.first()) {
+                final String tallerID = resultados.getString("id");
+                if("".equals(tallerID)){
+                     return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
+                }else{
+                    ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                }
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+     }   
     public Taller getTaller(String email){
         ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller WHERE email='" + email + "';");
         try {
@@ -424,6 +461,37 @@ public class InterfazBD {
         return conexion.ejecutarSQL("UPDATE `taller` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "'");
     }
     
+    
+        // método que llama el gestor, pasándole el id como un string (resultado del md5)
+    public boolean altaDesguace(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
+        int res = conexion.ejecutarInsert("insert into desguace (id,nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
+        return res > 0;
+    }
+    
+    // método que llaman talleres y desguaces, sin id (lo autogenera la bd)
+    public int altaDesguace(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
+        return conexion.ejecutarInsert("insert into desguace (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
+    }
+
+    public String getMD5IdDesguace(String email) {
+        ResultSet res = conexion.ejecutarSQLSelect("SELECT id from desguace where email='" + email + "';");
+        try {
+            if (res.first()) {
+                return res.getString("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "ERROR";
+    }
+    
+    public boolean modificarDesguace(String ID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, EstadoGeneral estado){
+        return conexion.ejecutarSQL("UPDATE `desguace` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "', `estado`='" + estado.ordinal() + "' WHERE `id`='" + ID + "';");
+    }
+    
+    
+    
+    
     public void close(){
         conexion.closeConexion();
     }
@@ -438,6 +506,9 @@ public class InterfazBD {
      */
     public boolean activarTallerMainTaller(String idRecibido) {
         return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0', `id`='" + idRecibido + "'");
+    }
+    public boolean activarDesguaceMainDesguace(String idRecibido) {
+        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0' where `id`='" + idRecibido + "'");
     }
     public boolean activarTaller(String idRecibido) {
         return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0' where `id`='" + idRecibido + "'");

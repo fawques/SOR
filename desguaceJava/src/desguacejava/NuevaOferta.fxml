@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="372.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="desguace.NuevaOferta">
+  <children>
+    <Button fx:id="btConfirmarEnvio" layoutX="103.0" layoutY="376.0" mnemonicParsing="false" onAction="#realizarPedido" text="Confirmar envío" />
+    <TextField id="tfIdPieza" fx:id="tfIdOferta" layoutX="103.0" layoutY="35.0" prefWidth="115.0" />
+    <Label layoutX="36.0" layoutY="35.0" text="ID oferta" />
+    <Label layoutX="36.0" layoutY="75.0" text="Piezas" />
+    <TextArea fx:id="taPiezas" layoutX="103.0" layoutY="75.0" prefHeight="137.0" prefWidth="217.0" wrapText="true" />
+    <TextField id="tfIdPieza" fx:id="tfPVP" layoutX="103.0" layoutY="240.0" prefWidth="73.0" />
+    <Label layoutX="36.0" layoutY="240.0" text="PVP total" />
+    <Label layoutX="16.0" layoutY="286.0" text="Fecha limite" />
+    <HBox id="tf" layoutX="103.0" layoutY="283.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
+      <children>
+        <TextField fx:id="tfLimiteDia" minWidth="30.0" prefWidth="150.0" />
+        <TextField fx:id="tfLimiteMes" minWidth="30.0" prefWidth="150.0" />
+        <TextField fx:id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
+      </children>
+    </HBox>
+    <Label layoutX="16.0" layoutY="325.0" text="Fecha entrega" />
+    <HBox layoutX="103.0" layoutY="322.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
+      <children>
+        <TextField id="tfLimiteDia" fx:id="tfEntregaDia" minWidth="30.0" prefWidth="150.0" />
+        <TextField id="tfLimiteMes" fx:id="tfEntregaMes" minWidth="30.0" prefWidth="150.0" />
+        <TextField id="tfLimiteAnyo" fx:id="tfEntregaAnyo" minWidth="50.0" prefWidth="50.0" />
+      </children>
+    </HBox>
+    <Button fx:id="btCancelar" layoutX="232.0" layoutY="376.0" mnemonicParsing="false" onAction="#realizarPedido" text="Cancelar" />
+  </children>
+</AnchorPane>

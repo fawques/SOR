@@ -40,7 +40,7 @@ public class Consumer {
          consumer = session.createConsumer(queue);
     }
  
-    public void consumeMessage() throws JMSException {
+    public String consumeMessage() throws JMSException {
 
         //Start Connection
         /** Starts (or restarts) a connection's delivery of incoming messages. */
@@ -48,8 +48,9 @@ public class Consumer {
         //Consume Message
         TextMessage message = (TextMessage) consumer.receive();
         //Display Message
+        
         System.out.println(message.getText());
-
+        return message.getText();
     }
     public void closeConsumer() throws JMSException{
             //Close Consumer
