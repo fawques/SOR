@@ -58,7 +58,7 @@
                 </TitledPane>
                 <TableView id="tvGrid" fx:id="tbPedidos" layoutX="28.0" layoutY="243.0" prefHeight="268.0" prefWidth="721.0" />
                 <Button fx:id="btNuevoPedido" layoutX="30.0" layoutY="196.0" mnemonicParsing="false" onAction="#onClickNuevoPedido" prefHeight="32.0" prefWidth="103.0" text="Nuevo pedido" />
-                <Button layoutX="160.0" layoutY="196.0" mnemonicParsing="false" onAction="#eliminarPedido" prefHeight="32.0" text="Cancelar pedido" />
+                <Button layoutX="160.0" layoutY="196.0" mnemonicParsing="false" onAction="#cancelarPedido" prefHeight="32.0" text="Cancelar pedido" />
                 <Text layoutX="373.0" layoutY="217.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos" />
                 <Button layoutX="641.0" layoutY="4.0" mnemonicParsing="false" onAction="#bajaTaller" text="Darme de baja" />
                 <Button layoutX="476.0" layoutY="4.0" mnemonicParsing="false" onAction="#modificarTaller" text="Modificar mis datos" />
