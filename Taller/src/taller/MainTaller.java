@@ -356,7 +356,7 @@ public class MainTaller extends Application {
 
     public static boolean bajaTaller() {
         try {
-            if (bajaTallerWS(taller.getID())) {
+            if (baja(taller.getID())) {
                 bd = new InterfazBD("sor_taller");
                 if (bd.bajaTaller(taller.getID())) {
                     bd.close();
@@ -387,61 +387,133 @@ public class MainTaller extends Application {
      */
 
     public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
-        try {
-            for (int i = 0; i < 10; i++) {
-                try{
-                    boolean ret = alta_WS(name, email, address, city, postalCode, telephone);
-                    // si no ha lanzado excepción, devolvemos correctamente
-                    return ret;
-                }catch(javax.xml.ws.WebServiceException e){}
-            }
-            System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
-            // tenemos que guardar el alta en local, y dejarla pendiente de mandar
-            class Local {};
-            java.lang.reflect.Method m = Local.class.getEnclosingMethod();
-            String params[] = {name,email,address,city,postalCode,telephone};
-            AsyncManager manager = new AsyncManager("sor_taller");
-            manager.guardarAccion(m,params);
-            
-        } catch (SecurityException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        AsyncManager manager = new AsyncManager("sor_taller");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                boolean ret = alta_WS(name, email, address, city, postalCode, telephone);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
         }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        // tenemos que guardar el alta en local, y dejarla pendiente de mandar
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {name,email,address,city,postalCode,telephone};
+        manager.guardarAccion(m,params);
         return false;
     }
 
     private static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.aAlta(name, email, address, city, postalCode, telephone);
+        return port.alta(name, email, address, city, postalCode, telephone);
     }
 
     public static String checkActivacion(java.lang.String mail) {
+        for (int i = 0; i < 10; i++) {
+            try{
+                String ret = checkActivacion_WS(mail);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        return "";
+    }
+
+    private static String checkActivacion_WS(String mail) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.checkActivacion(mail);
     }
     
     public static String nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
+        AsyncManager manager = new AsyncManager("sor_taller");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                String ret = nuevoPedido_WS(pedido);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {pedido};
+        manager.guardarAccion(m,params);
+        return "";
+    }
+
+    private static String nuevoPedido_WS(String pedido) throws JMSException_Exception {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(pedido);
     }     
 
     public static String getOfertas(java.lang.String listaPedidos) {
+        for (int i = 0; i < 10; i++) {
+            try{
+                String ret = getOfertas_WS(listaPedidos);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        return "";
+    }
+
+    private static String getOfertas_WS(String listaPedidos) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.getOfertas(listaPedidos);
     }
 
     public static Boolean aceptarOferta(java.lang.String id) {
+        AsyncManager manager = new AsyncManager("sor_taller");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                Boolean ret = aceptarOferta_WS(id);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {id};
+        manager.guardarAccion(m,params);
+        return false;
+    }
+
+    private static Boolean aceptarOferta_WS(String id) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.aceptarOferta(id);
     }
 
     public static Boolean rechazarOferta(java.lang.String id) {
+        AsyncManager manager = new AsyncManager("sor_taller");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                Boolean ret = rechazarOferta_WS(id);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {id};
+        manager.guardarAccion(m,params);
+        return false;
+    }
+
+    private static Boolean rechazarOferta_WS(String id) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.rechazarOferta(id);
@@ -453,10 +525,28 @@ public class MainTaller extends Application {
         return port.hello();
     }
     
-    private static Boolean bajaTallerWS(java.lang.String tallerID) {
+    private static Boolean baja(java.lang.String tallerID) {
+        AsyncManager manager = new AsyncManager("sor_taller");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                Boolean ret = baja_WS(tallerID);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {tallerID};
+        manager.guardarAccion(m,params);
+        return false;
+    }
+
+    private static Boolean baja_WS(String tallerID) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.bajaTaller(tallerID);
+        return port.baja(tallerID);
     }
 
     

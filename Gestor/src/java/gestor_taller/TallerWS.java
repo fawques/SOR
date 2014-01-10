@@ -38,34 +38,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class TallerWS {
     
     InterfazBD bd;
-    /**
-     * 
-     * @param name
-     * @param email
-     * @param address
-     * @param city
-     * @param postalCode
-     * @param telephone
-     * @return
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
-    @WebMethod(operationName = "alta")
-    public boolean alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone) {
-        try {
-            bd = new InterfazBD("sor_gestor");
-            Date ahora = new Date();
-            String stringID  = DigestUtils.md5Hex(ahora.toString());
-            boolean res = bd.altaTaller(stringID, name, email, address, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), EstadoGeneral.PENDIENTE.ordinal());
-            bd.close();
-            return res;
-        } catch (java.sql.SQLException ex) {
-            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
     
     /**
      *
@@ -193,7 +165,7 @@ public class TallerWS {
         return "hello";
     }
     
-    @WebMethod(operationName = "bajaTaller")
+    @WebMethod(operationName = "baja")
     public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID) {
         try {
             bd = new InterfazBD("sor_gestor");
@@ -211,7 +183,7 @@ public class TallerWS {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "AAlta")
+    @WebMethod(operationName = "alta")
     public boolean AAlta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone) {
         try {
             bd = new InterfazBD("sor_gestor");
