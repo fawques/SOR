@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="372.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.NuevoPedidoController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="372.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="desguace.NuevaOferta">
   <children>
     <Button fx:id="btConfirmarEnvio" layoutX="103.0" layoutY="376.0" mnemonicParsing="false" onAction="#realizarPedido" text="Confirmar envío" />
     <TextField id="tfIdPieza" fx:id="tfIdOferta" layoutX="103.0" layoutY="35.0" prefWidth="115.0" />

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="779.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.GestionPedidosController">
+<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="779.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="desguace.GestionPedidos">
   <children>
     <TabPane layoutX="-1.0" layoutY="0.0" prefHeight="576.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
