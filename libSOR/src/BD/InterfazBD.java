@@ -537,13 +537,13 @@ public class InterfazBD {
         while (resultados.next()) {
             cancelarOfertas(resultados.getString("id"));
         }
-        conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where taller='" + idTaller + "'");
-        return false;
+        return conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where taller='" + idTaller + "'");
     }
 
     public boolean cancelarPedido(String idPedido) {
-        cancelarOfertas(idPedido);
-        conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where id='" + idPedido + "'");
+        if (cancelarOfertas(idPedido)) {
+            return conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where id='" + idPedido + "'");
+        }
         return false;
     }
 
