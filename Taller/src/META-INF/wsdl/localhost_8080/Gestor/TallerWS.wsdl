@@ -10,6 +10,21 @@
 <message name="altaResponse">
 <part name="parameters" element="tns:altaResponse"/>
 </message>
+<message name="modificar">
+<part name="parameters" element="tns:modificar"/>
+</message>
+<message name="modificarResponse">
+<part name="parameters" element="tns:modificarResponse"/>
+</message>
+<message name="nuevoPedido">
+<part name="parameters" element="tns:nuevoPedido"/>
+</message>
+<message name="nuevoPedidoResponse">
+<part name="parameters" element="tns:nuevoPedidoResponse"/>
+</message>
+<message name="JMSException">
+<part name="fault" element="tns:JMSException"/>
+</message>
 <message name="getOfertas">
 <part name="parameters" element="tns:getOfertas"/>
 </message>
@@ -22,32 +37,11 @@
 <message name="aceptarOfertaResponse">
 <part name="parameters" element="tns:aceptarOfertaResponse"/>
 </message>
-<message name="baja">
-<part name="parameters" element="tns:baja"/>
+<message name="bajaTaller">
+<part name="parameters" element="tns:bajaTaller"/>
 </message>
-<message name="bajaResponse">
-<part name="parameters" element="tns:bajaResponse"/>
-</message>
-<message name="nuevoPedido">
-<part name="parameters" element="tns:nuevoPedido"/>
-</message>
-<message name="nuevoPedidoResponse">
-<part name="parameters" element="tns:nuevoPedidoResponse"/>
-</message>
-<message name="JMSException">
-<part name="fault" element="tns:JMSException"/>
-</message>
-<message name="modificar">
-<part name="parameters" element="tns:modificar"/>
-</message>
-<message name="modificarResponse">
-<part name="parameters" element="tns:modificarResponse"/>
-</message>
-<message name="hello">
-<part name="parameters" element="tns:hello"/>
-</message>
-<message name="helloResponse">
-<part name="parameters" element="tns:helloResponse"/>
+<message name="bajaTallerResponse">
+<part name="parameters" element="tns:bajaTallerResponse"/>
 </message>
 <message name="checkActivacion">
 <part name="parameters" element="tns:checkActivacion"/>
@@ -72,6 +66,15 @@
 <input wsam:Action="http://gestor_taller/TallerWS/altaRequest" message="tns:alta"/>
 <output wsam:Action="http://gestor_taller/TallerWS/altaResponse" message="tns:altaResponse"/>
 </operation>
+<operation name="modificar">
+<input wsam:Action="http://gestor_taller/TallerWS/modificarRequest" message="tns:modificar"/>
+<output wsam:Action="http://gestor_taller/TallerWS/modificarResponse" message="tns:modificarResponse"/>
+</operation>
+<operation name="nuevoPedido">
+<input wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoRequest" message="tns:nuevoPedido"/>
+<output wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoResponse" message="tns:nuevoPedidoResponse"/>
+<fault message="tns:JMSException" name="JMSException" wsam:Action="http://gestor_taller/TallerWS/nuevoPedido/Fault/JMSException"/>
+</operation>
 <operation name="getOfertas">
 <input wsam:Action="http://gestor_taller/TallerWS/getOfertasRequest" message="tns:getOfertas"/>
 <output wsam:Action="http://gestor_taller/TallerWS/getOfertasResponse" message="tns:getOfertasResponse"/>
@@ -80,22 +83,9 @@
 <input wsam:Action="http://gestor_taller/TallerWS/aceptarOfertaRequest" message="tns:aceptarOferta"/>
 <output wsam:Action="http://gestor_taller/TallerWS/aceptarOfertaResponse" message="tns:aceptarOfertaResponse"/>
 </operation>
-<operation name="baja">
-<input wsam:Action="http://gestor_taller/TallerWS/bajaRequest" message="tns:baja"/>
-<output wsam:Action="http://gestor_taller/TallerWS/bajaResponse" message="tns:bajaResponse"/>
-</operation>
-<operation name="nuevoPedido">
-<input wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoRequest" message="tns:nuevoPedido"/>
-<output wsam:Action="http://gestor_taller/TallerWS/nuevoPedidoResponse" message="tns:nuevoPedidoResponse"/>
-<fault message="tns:JMSException" name="JMSException" wsam:Action="http://gestor_taller/TallerWS/nuevoPedido/Fault/JMSException"/>
-</operation>
-<operation name="modificar">
-<input wsam:Action="http://gestor_taller/TallerWS/modificarRequest" message="tns:modificar"/>
-<output wsam:Action="http://gestor_taller/TallerWS/modificarResponse" message="tns:modificarResponse"/>
-</operation>
-<operation name="hello">
-<input wsam:Action="http://gestor_taller/TallerWS/helloRequest" message="tns:hello"/>
-<output wsam:Action="http://gestor_taller/TallerWS/helloResponse" message="tns:helloResponse"/>
+<operation name="bajaTaller">
+<input wsam:Action="http://gestor_taller/TallerWS/bajaTallerRequest" message="tns:bajaTaller"/>
+<output wsam:Action="http://gestor_taller/TallerWS/bajaTallerResponse" message="tns:bajaTallerResponse"/>
 </operation>
 <operation name="checkActivacion">
 <input wsam:Action="http://gestor_taller/TallerWS/checkActivacionRequest" message="tns:checkActivacion"/>
@@ -121,25 +111,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getOfertas">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="aceptarOferta">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="baja">
+<operation name="modificar">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -160,7 +132,7 @@
 <soap:fault name="JMSException" use="literal"/>
 </fault>
 </operation>
-<operation name="modificar">
+<operation name="getOfertas">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -169,7 +141,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="hello">
+<operation name="aceptarOferta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="bajaTaller">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

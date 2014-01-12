@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package taller;
+package desguace;
 
 import BD.InterfazBD;
+import com.google.gson.Gson;
+import desguacejava.DesguaceJava;
+import general.Pedido;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -26,7 +30,7 @@ import javafx.stage.Stage;
  *
  * @author Pablo
  */
-public class AltaTallerController implements Initializable {
+public class AltaDesguace implements Initializable {
 
     Stage thisStage;
     InterfazBD bd;
@@ -34,7 +38,7 @@ public class AltaTallerController implements Initializable {
      * Class Fxml variables
      */
     @FXML
-    public TextField tfNombreTaller;
+    public TextField tfNombreDesguace;
     public TextField tfEmail;
     public TextField tfDireccion;
     public TextField tfCiudad;
@@ -54,28 +58,28 @@ public class AltaTallerController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        assert tfNombreTaller != null : "fx:id=\"myButton\" was not injected: check your FXML file 'simple.fxml'.";
+        assert tfNombreDesguace != null : "fx:id=\"myButton\" was not injected: check your FXML file 'simple.fxml'.";
         /**
          *
          */
-        tfNombreTaller.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        tfNombreDesguace.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (MainTaller.validarNombre(tfNombreTaller.getText())) {
-                        tfNombreTaller.setStyle("-fx-border-color: green;");
+                    if (DesguaceJava.validarNombre(tfNombreDesguace.getText())) {
+                        tfNombreDesguace.setStyle("-fx-border-color: green;");
                         errorNombreTaller.setText("");
                     } else {
                         //add errors in the interface
-                        if (tfNombreTaller.getText().length() < 22) {
+                        if (tfNombreDesguace.getText().length() < 22) {
                             errorNombreTaller.setText("No pueden contener carácteres extraños, ni números");
-                        } else if (tfNombreTaller.getText().isEmpty()) {
+                        } else if (tfNombreDesguace.getText().isEmpty()) {
                             errorNombreTaller.setText("No puede ser vacio");
                         } else {
                             errorNombreTaller.setText("No más de 21 carácteres");
                         }
 
-                        tfNombreTaller.setStyle("-fx-border-color: red;");
+                        tfNombreDesguace.setStyle("-fx-border-color: red;");
                     }
                 }
             }
@@ -85,7 +89,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (MainTaller.validarEmail(tfEmail.getText())) {
+                    if (DesguaceJava.validarEmail(tfEmail.getText())) {
                         tfEmail.setStyle("-fx-border-color: green;");
                         errorEmail.setText("");
                     } else {
@@ -105,7 +109,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (MainTaller.validarNombre(tfCiudad.getText())) {
+                    if (DesguaceJava.validarNombre(tfCiudad.getText())) {
                         tfCiudad.setStyle("-fx-border-color: green;");
                         errorCiudad.setText("");
                     } else {
@@ -127,7 +131,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (MainTaller.validarDireccion(tfDireccion.getText())) {
+                    if (DesguaceJava.validarDireccion(tfDireccion.getText())) {
                         tfDireccion.setStyle("-fx-border-color: green;");
                         errorDireccion.setText("");
                     } else {
@@ -143,7 +147,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (MainTaller.validarSoloNumeros(tfCp.getText())) {
+                    if (DesguaceJava.validarSoloNumeros(tfCp.getText())) {
                         tfCp.setStyle("-fx-border-color: green;");
                         errorCp.setText("");
                     } else {
@@ -165,7 +169,7 @@ public class AltaTallerController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
                 if (!arg2) { //Code here the action when the object lose the focus
-                    if (MainTaller.validarSoloNumeros(tfTelefono.getText())) {
+                    if (DesguaceJava.validarSoloNumeros(tfTelefono.getText())) {
                         tfTelefono.setStyle("-fx-border-color: green;");
                         errorTelefono.setText("");
                     } else {
@@ -202,7 +206,7 @@ public class AltaTallerController implements Initializable {
     }
 
     public void setEditableAllInputs(boolean b) {
-        tfNombreTaller.setEditable(b);
+        tfNombreDesguace.setEditable(b);
         tfEmail.setEditable(b);
         tfDireccion.setEditable(b);
         tfCiudad.setEditable(b);
@@ -224,13 +228,13 @@ public class AltaTallerController implements Initializable {
         String listaJSON = g.toJson(nuevoP);
         MainTaller.nuevoPedido(listaJSON);*/
         setEditableAllInputs(false);
-        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
+        if (DesguaceJava.validar(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
-            if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(),tfCp.getText(), tfTelefono.getText())) {
+            if (DesguaceJava.alta(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()))) {
                 //METER en base de datos si está todo ok.
                 bd = new InterfazBD("sor_taller");
-                if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
+                if (bd.altaTaller(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
                     URL location = getClass().getResource("tallerPendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
@@ -238,7 +242,7 @@ public class AltaTallerController implements Initializable {
                     Parent page = (Parent) loader.load(location.openStream());
                     thisStage.getScene().setRoot(page);
                     thisStage.setTitle("Esperando código de aceptación");
-                    TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
+                    DesguacerPendienteActivacionController staticDataBox = (DesguacerPendienteActivacionController) loader.getController();
                     staticDataBox.setStage(thisStage);
                     staticDataBox.showStage();
                 } else {
@@ -249,30 +253,18 @@ public class AltaTallerController implements Initializable {
             else{
                 System.err.println("alta me ha devuelto < 0");
             }
+            //Faltaría anyadir el código recibido por el gestor hay que pasarlo al gestor
+            /*MainTaller.sendMail("pablovm1990@gmail.com", tfEmail.getText(), "Usuario SorApp creado correctamente",
+             "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
+             + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
+             + "<li>" + tfNombreTaller.getText() + "</li><br/>"
+             + "<li>" + tfDireccion.getText() + "</li><br/>"
+             + "<li>" + tfCiudad.getText() + "</li><br/>"
+             + "<li>" + tfCp.getText() + "</li><br/>"
+             + "<li>" + tfTelefono.getText() + "</li><br/>"
+             + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");*/
         }
         //else nothing
     }
 
-    /**
-     * Basicamente cambia a gestion pedido otra vez
-     */
-    public void irAGestionPedidos() throws IOException {
-        URL location = getClass().getResource("GestionPedidos.fxml");
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(location);
-        loader.setBuilderFactory(new JavaFXBuilderFactory());
-        Parent page = (Parent) loader.load(location.openStream());
-        thisStage.getScene().setRoot(page);
-        GestionPedidosController tdCont = (GestionPedidosController) loader.getController();
-        tdCont.setStage(thisStage);
-        tdCont.showStage();
-    }
-
-    public void modificarTaller() throws IOException {
-        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
-            System.out.println("Enviando...");
-            if (MainTaller.modificarDatos(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText()))
-                irAGestionPedidos();
-        }
-    }
 }
