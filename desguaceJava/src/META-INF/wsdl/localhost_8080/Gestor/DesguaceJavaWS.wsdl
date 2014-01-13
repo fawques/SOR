@@ -4,11 +4,11 @@
 <xsd:import namespace="http://gestor_desguace_java/" schemaLocation="http://localhost:8080/Gestor/DesguaceJavaWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="getPedidos">
-<part name="parameters" element="tns:getPedidos"/>
+<message name="checkActivacion">
+<part name="parameters" element="tns:checkActivacion"/>
 </message>
-<message name="getPedidosResponse">
-<part name="parameters" element="tns:getPedidosResponse"/>
+<message name="checkActivacionResponse">
+<part name="parameters" element="tns:checkActivacionResponse"/>
 </message>
 <message name="alta">
 <part name="parameters" element="tns:alta"/>
@@ -16,29 +16,29 @@
 <message name="altaResponse">
 <part name="parameters" element="tns:altaResponse"/>
 </message>
-<message name="checkActivacion">
-<part name="parameters" element="tns:checkActivacion"/>
+<message name="getPedidos">
+<part name="parameters" element="tns:getPedidos"/>
 </message>
-<message name="checkActivacionResponse">
-<part name="parameters" element="tns:checkActivacionResponse"/>
+<message name="getPedidosResponse">
+<part name="parameters" element="tns:getPedidosResponse"/>
 </message>
 <portType name="DesguaceJavaWS">
-<operation name="getPedidos">
-<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosRequest" message="tns:getPedidos"/>
-<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosResponse" message="tns:getPedidosResponse"/>
+<operation name="checkActivacion">
+<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest" message="tns:checkActivacion"/>
+<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse" message="tns:checkActivacionResponse"/>
 </operation>
 <operation name="alta">
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest" message="tns:alta"/>
 <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaResponse" message="tns:altaResponse"/>
 </operation>
-<operation name="checkActivacion">
-<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest" message="tns:checkActivacion"/>
-<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse" message="tns:checkActivacionResponse"/>
+<operation name="getPedidos">
+<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosRequest" message="tns:getPedidos"/>
+<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosResponse" message="tns:getPedidosResponse"/>
 </operation>
 </portType>
 <binding name="DesguaceJavaWSPortBinding" type="tns:DesguaceJavaWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="getPedidos">
+<operation name="checkActivacion">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -56,7 +56,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="checkActivacion">
+<operation name="getPedidos">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
