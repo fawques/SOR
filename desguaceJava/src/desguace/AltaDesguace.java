@@ -7,7 +7,6 @@ package desguace;
 
 import BD.InterfazBD;
 import com.google.gson.Gson;
-import desguacejava.DesguaceJava;
 import general.Pedido;
 import java.io.IOException;
 import java.net.URL;
@@ -233,9 +232,9 @@ public class AltaDesguace implements Initializable {
             System.out.println("Enviando...");
             if (DesguaceJava.alta(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()))) {
                 //METER en base de datos si está todo ok.
-                bd = new InterfazBD("sor_taller");
-                if (bd.altaTaller(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
-                    URL location = getClass().getResource("tallerPendienteActivacion.fxml");
+                bd = new InterfazBD("sor_desguace");
+                if (bd.altaDesguace(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
+                    URL location = getClass().getResource("desguacePendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
                     loader.setBuilderFactory(new JavaFXBuilderFactory());

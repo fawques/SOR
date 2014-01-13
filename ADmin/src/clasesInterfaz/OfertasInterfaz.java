@@ -39,7 +39,13 @@ public class OfertasInterfaz {
         this.idPedido= new SimpleStringProperty(oferta.getPedido());
         this.idDesguace= new SimpleStringProperty(oferta.getDesguace());
         this.fecha_alta=new SimpleStringProperty(oferta.getFecha_alta().toString());
-        this.fecha_baja=new SimpleStringProperty(oferta.getFecha_baja().toString());
+        if(oferta.getFecha_baja()!=null){
+            this.fecha_baja=new SimpleStringProperty(oferta.getFecha_baja().toString());
+        }
+        else{
+              this.fecha_baja=new SimpleStringProperty("");
+        }
+        
         this.fecha_limite=new SimpleStringProperty(oferta.getFecha_limite().toString());
         this.precio= new SimpleDoubleProperty(oferta.getPrecio());
     }

@@ -34,6 +34,7 @@ CREATE TABLE `pedido` (
   `taller` char(32) NOT NULL,
   `fecha_baja` date DEFAULT NULL,
   `fecha_limite` date NOT NULL,
+  `modo_automatico` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `pedido_taller_FK_idx` (`taller`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -95,11 +96,12 @@ CREATE TABLE `pedido` (
   `taller` char(32) NOT NULL,
   `fecha_baja` date DEFAULT NULL,
   `fecha_limite` date NOT NULL,
+  `modo_automatico` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_aux`),
   KEY `PRIMARY_GESTOR` (`id`),
   KEY `pedido_taller_FK_idx` (`taller`),
   CONSTRAINT `pedido_taller_FK` FOREIGN KEY (`taller`) REFERENCES `taller` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `pieza` (
   `nombre` varchar(45) NOT NULL,
@@ -164,6 +166,7 @@ CREATE TABLE `pedido` (
   `taller` char(32) NOT NULL,
   `fecha_baja` date DEFAULT NULL,
   `fecha_limite` date NOT NULL,
+  `modo_automatico` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_aux`),
   KEY `PRIMARY_GESTOR` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

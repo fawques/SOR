@@ -275,8 +275,9 @@ public class AdminWS {
      try {
          bd = new InterfazBD("sor_gestor");
          boolean res = bd.activarTaller(ID);
-         Taller t = bd.getTaller(ID);
-         if (res) {
+         Taller t = bd.getTallerEnGestor(ID);
+        //TODO descomentar
+         /* if (res) {
              sendMail("pablovm1990@gmail.com", t.getEmail(), "Usuario SorApp creado correctamente",
                      "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
                      + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
@@ -286,7 +287,7 @@ public class AdminWS {
                      + "<li>" + t.getPostalCode() + "</li><br/>"
                      + "<li>" + t.getTelephone() + "</li><br/>"
                      + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");
-         }
+         }*/
          bd.close();
          return res;
         
