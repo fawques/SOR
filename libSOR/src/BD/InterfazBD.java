@@ -630,8 +630,28 @@ public class InterfazBD {
         return false;
     }
 
-    public boolean bajaTaller(String id) throws SQLException {
-        cancelarPedidosTaller(id);
+    public boolean bajaTaller(String id) {
+        try {
+            cancelarPedidosTaller(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return conexion.ejecutarSQL("Update taller set estado='" + EstadoGeneral.INACTIVE.ordinal() + "' where id='" + id + "'");
+    }
+
+    /**
+     *
+     * @param accion debe tener formato "nombre:param0|param1|...|paramN"
+     * @param paramValues debe tener formato "valor0|valor1|...|valorN"
+     * @return
+     */
+    public boolean guardarAccion(String accion, String paramValues) {
+        return conexion.ejecutarSQL("INSERT INTO `acciones`(`accion`,`params`) VALUES('" + accion + "', '" + paramValues + "');");
+    }
+
+    public ResultSet getAcciones() {
+        ResultSet result = conexion.ejecutarSQLSelect("SELECT * FROM `acciones`;");
+        conexion.ejecutarSQL("DELETE FROM `acciones`;");
+        return result;
     }
 }

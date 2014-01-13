@@ -4,6 +4,30 @@
 <xsd:import namespace="http://gestor_taller/" schemaLocation="http://localhost:8080/Gestor/TallerWS?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="checkActivacion">
+<part name="parameters" element="tns:checkActivacion"/>
+</message>
+<message name="checkActivacionResponse">
+<part name="parameters" element="tns:checkActivacionResponse"/>
+</message>
+<message name="rechazarOferta">
+<part name="parameters" element="tns:rechazarOferta"/>
+</message>
+<message name="rechazarOfertaResponse">
+<part name="parameters" element="tns:rechazarOfertaResponse"/>
+</message>
+<message name="cancelarPedido">
+<part name="parameters" element="tns:cancelarPedido"/>
+</message>
+<message name="cancelarPedidoResponse">
+<part name="parameters" element="tns:cancelarPedidoResponse"/>
+</message>
+<message name="hello">
+<part name="parameters" element="tns:hello"/>
+</message>
+<message name="helloResponse">
+<part name="parameters" element="tns:helloResponse"/>
+</message>
 <message name="alta">
 <part name="parameters" element="tns:alta"/>
 </message>
@@ -37,31 +61,29 @@
 <message name="aceptarOfertaResponse">
 <part name="parameters" element="tns:aceptarOfertaResponse"/>
 </message>
-<message name="bajaTaller">
-<part name="parameters" element="tns:bajaTaller"/>
+<message name="baja">
+<part name="parameters" element="tns:baja"/>
 </message>
-<message name="bajaTallerResponse">
-<part name="parameters" element="tns:bajaTallerResponse"/>
-</message>
-<message name="checkActivacion">
-<part name="parameters" element="tns:checkActivacion"/>
-</message>
-<message name="checkActivacionResponse">
-<part name="parameters" element="tns:checkActivacionResponse"/>
-</message>
-<message name="rechazarOferta">
-<part name="parameters" element="tns:rechazarOferta"/>
-</message>
-<message name="rechazarOfertaResponse">
-<part name="parameters" element="tns:rechazarOfertaResponse"/>
-</message>
-<message name="cancelarPedido">
-<part name="parameters" element="tns:cancelarPedido"/>
-</message>
-<message name="cancelarPedidoResponse">
-<part name="parameters" element="tns:cancelarPedidoResponse"/>
+<message name="bajaResponse">
+<part name="parameters" element="tns:bajaResponse"/>
 </message>
 <portType name="TallerWS">
+<operation name="checkActivacion">
+<input wsam:Action="http://gestor_taller/TallerWS/checkActivacionRequest" message="tns:checkActivacion"/>
+<output wsam:Action="http://gestor_taller/TallerWS/checkActivacionResponse" message="tns:checkActivacionResponse"/>
+</operation>
+<operation name="rechazarOferta">
+<input wsam:Action="http://gestor_taller/TallerWS/rechazarOfertaRequest" message="tns:rechazarOferta"/>
+<output wsam:Action="http://gestor_taller/TallerWS/rechazarOfertaResponse" message="tns:rechazarOfertaResponse"/>
+</operation>
+<operation name="cancelarPedido">
+<input wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoRequest" message="tns:cancelarPedido"/>
+<output wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoResponse" message="tns:cancelarPedidoResponse"/>
+</operation>
+<operation name="hello">
+<input wsam:Action="http://gestor_taller/TallerWS/helloRequest" message="tns:hello"/>
+<output wsam:Action="http://gestor_taller/TallerWS/helloResponse" message="tns:helloResponse"/>
+</operation>
 <operation name="alta">
 <input wsam:Action="http://gestor_taller/TallerWS/altaRequest" message="tns:alta"/>
 <output wsam:Action="http://gestor_taller/TallerWS/altaResponse" message="tns:altaResponse"/>
@@ -83,25 +105,49 @@
 <input wsam:Action="http://gestor_taller/TallerWS/aceptarOfertaRequest" message="tns:aceptarOferta"/>
 <output wsam:Action="http://gestor_taller/TallerWS/aceptarOfertaResponse" message="tns:aceptarOfertaResponse"/>
 </operation>
-<operation name="bajaTaller">
-<input wsam:Action="http://gestor_taller/TallerWS/bajaTallerRequest" message="tns:bajaTaller"/>
-<output wsam:Action="http://gestor_taller/TallerWS/bajaTallerResponse" message="tns:bajaTallerResponse"/>
-</operation>
-<operation name="checkActivacion">
-<input wsam:Action="http://gestor_taller/TallerWS/checkActivacionRequest" message="tns:checkActivacion"/>
-<output wsam:Action="http://gestor_taller/TallerWS/checkActivacionResponse" message="tns:checkActivacionResponse"/>
-</operation>
-<operation name="rechazarOferta">
-<input wsam:Action="http://gestor_taller/TallerWS/rechazarOfertaRequest" message="tns:rechazarOferta"/>
-<output wsam:Action="http://gestor_taller/TallerWS/rechazarOfertaResponse" message="tns:rechazarOfertaResponse"/>
-</operation>
-<operation name="cancelarPedido">
-<input wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoRequest" message="tns:cancelarPedido"/>
-<output wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoResponse" message="tns:cancelarPedidoResponse"/>
+<operation name="baja">
+<input wsam:Action="http://gestor_taller/TallerWS/bajaRequest" message="tns:baja"/>
+<output wsam:Action="http://gestor_taller/TallerWS/bajaResponse" message="tns:bajaResponse"/>
 </operation>
 </portType>
 <binding name="TallerWSPortBinding" type="tns:TallerWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="checkActivacion">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="rechazarOferta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="cancelarPedido">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="hello">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="alta">
 <soap:operation soapAction=""/>
 <input>
@@ -150,34 +196,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="bajaTaller">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="checkActivacion">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="rechazarOferta">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="cancelarPedido">
+<operation name="baja">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
