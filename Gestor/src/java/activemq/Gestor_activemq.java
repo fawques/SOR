@@ -18,12 +18,15 @@ public class Gestor_activemq {
        public     Producer producer;
        public     Consumer consumer;
         public    String nombreCola;
-    public Gestor_activemq(String _nombreCola) throws JMSException {
+    public Gestor_activemq() throws JMSException {
          BasicConfigurator.configure();
-         nombreCola=_nombreCola;
-         producer = new Producer(nombreCola);
-         consumer = new Consumer(nombreCola);
 
+    }
+    public void create_Producer(String _nombreCola) throws JMSException{
+    producer = new Producer(_nombreCola);
+    }
+    public void create_Consumer(String _nombreCola) throws JMSException{
+    consumer = new Consumer(_nombreCola);
     }
     
     

@@ -32,13 +32,16 @@ public class DesguaceJavaWS {
      */
     @WebMethod(operationName = "getPedidos")
     public String getPedidos() {
+        
         try {
-            Gestor_activemq activemq= new Gestor_activemq("Pedidos");
+            Gestor_activemq activemq= new Gestor_activemq();
+            activemq.create_Consumer("patata");
             String pedidos= activemq.consumer.consumeMessage();
             activemq.consumer.closeConsumer();
             return pedidos;
         } catch (JMSException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return "";
     }
