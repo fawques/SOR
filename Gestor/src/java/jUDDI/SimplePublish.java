@@ -16,15 +16,8 @@
  */
 package jUDDI;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.configuration.ConfigurationException;
 import org.uddi.api_v3.*;
 import org.apache.juddi.api_v3.*;
-import org.apache.juddi.v3.client.config.UDDIClient;
-import org.apache.juddi.v3.client.config.UDDIClientContainer;
-import org.apache.juddi.v3.client.transport.Transport;
-import org.apache.juddi.v3.client.transport.TransportException;
 import org.uddi.v3_service.UDDISecurityPortType;
 import org.uddi.v3_service.UDDIPublicationPortType;
 import org.apache.juddi.v3_service.JUDDIApiPortType;
@@ -38,23 +31,23 @@ public class SimplePublish {
     private static UDDIPublicationPortType publish = null;
 
     public SimplePublish(){
-        try {
-        	// create a client and read the config in the archive; 
-            // you can use your config file name
-            UDDIClient uddiClient = new UDDIClient();/*("META-INF/uddi.xml");*/
-        	// a UddiClient can be a client to multiple UDDI nodes, so 
-            // supply the nodeName (defined in your uddi.xml.
-            // The transport can be WS, inVM, RMI etc which is defined in the uddi.xml
-            Transport transport = uddiClient.getTransport("default");
-            // Now you create a reference to the UDDI API
-            security = transport.getUDDISecurityService();
-            juddiApi = transport.getJUDDIApiService();
-            publish = transport.getUDDIPublishService();
-        } catch (TransportException e) {
-            e.printStackTrace();
-        } catch (ConfigurationException ex) {
-            Logger.getLogger(SimplePublish.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//        	// create a client and read the config in the archive; 
+//            // you can use your config file name
+//            UDDIClient uddiClient = new UDDIClient();/*("META-INF/uddi.xml");*/
+//        	// a UddiClient can be a client to multiple UDDI nodes, so 
+//            // supply the nodeName (defined in your uddi.xml.
+//            // The transport can be WS, inVM, RMI etc which is defined in the uddi.xml
+//            Transport transport = uddiClient.getTransport("default");
+//            // Now you create a reference to the UDDI API
+//            security = transport.getUDDISecurityService();
+//            juddiApi = transport.getJUDDIApiService();
+//            publish = transport.getUDDIPublishService();
+//        } catch (TransportException e) {
+//            e.printStackTrace();
+//        } catch (ConfigurationException ex) {
+//            Logger.getLogger(SimplePublish.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public void publish() {
@@ -66,7 +59,7 @@ public class SimplePublish {
             getAuthTokenRoot.setCred("root");
 
             // Making API call that retrieves the authentication token for the 'root' user.
-            AuthToken rootAuthToken = security.getAuthToken(getAuthTokenRoot);
+            AuthToken rootAuthToken = getAuthToken(getAuthTokenRoot);
             System.out.println("root AUTHTOKEN = " + rootAuthToken.getAuthInfo());
 
             // Creating a new publisher that we will use to publish our entities to.
@@ -78,13 +71,13 @@ public class SimplePublish {
             SavePublisher sp = new SavePublisher();
             sp.getPublisher().add(p);
             sp.setAuthInfo(rootAuthToken.getAuthInfo());
-            juddiApi.savePublisher(sp);
+            savePublisher(sp);
 
             // Our publisher is now saved, so now we want to retrieve its authentication token
             GetAuthToken getAuthTokenMyPub = new GetAuthToken();
             getAuthTokenMyPub.setUserID("my-publisher");
             getAuthTokenMyPub.setCred("");
-            AuthToken myPubAuthToken = security.getAuthToken(getAuthTokenMyPub);
+            AuthToken myPubAuthToken = getAuthToken(getAuthTokenMyPub);
             System.out.println("myPub AUTHTOKEN = " + myPubAuthToken.getAuthInfo());
 
             // Creating the parent business entity that will contain our service.
@@ -97,7 +90,7 @@ public class SimplePublish {
             SaveBusiness sb = new SaveBusiness();
             sb.getBusinessEntity().add(myBusEntity);
             sb.setAuthInfo(myPubAuthToken.getAuthInfo());
-            BusinessDetail bd = publish.saveBusiness(sb);
+            BusinessDetail bd = saveBusiness(sb);
             String myBusKey = bd.getBusinessEntity().get(0).getBusinessKey();
             System.out.println("myBusiness key:  " + myBusKey);
 
@@ -112,8 +105,7 @@ public class SimplePublish {
             // Add binding templates, etc...
             BindingTemplate myBindingTemplate = new BindingTemplate();
             AccessPoint accessPoint = new AccessPoint();
-            accessPoint.setUseType(AccessPointType.WSDL_DEPLOYMENT.toString());
-            accessPoint.setValue("http://example.org/services/myservice?wsdl");
+            accessPoint.setValue("http://127.0.0.1//Gestor/TallerWS?wsdl");
             myBindingTemplate.setAccessPoint(accessPoint);
             BindingTemplates myBindingTemplates = new BindingTemplates();
             myBindingTemplates.getBindingTemplate().add(myBindingTemplate);
@@ -123,7 +115,7 @@ public class SimplePublish {
             SaveService ss = new SaveService();
             ss.getBusinessService().add(myService);
             ss.setAuthInfo(myPubAuthToken.getAuthInfo());
-            ServiceDetail sd = publish.saveService(ss);
+            ServiceDetail sd = saveService(ss);
             String myServKey = sd.getBusinessService().get(0).getServiceKey();
             System.out.println("myService key:  " + myServKey);
 
@@ -132,5 +124,41 @@ public class SimplePublish {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    private static AuthToken getAuthToken(org.uddi.api_v3.GetAuthToken body) {
+        org.uddi.v3_service.UDDISecurityService service = new org.uddi.v3_service.UDDISecurityService();
+        org.uddi.v3_service.UDDISecurityPortType port = service.getUDDISecurityImplPort();
+        return port.getAuthToken(body);
+    }
+
+    private static BusinessDetail saveBusiness(org.uddi.api_v3.SaveBusiness body) {
+        org.uddi.v3_service.UDDIPublicationService service = new org.uddi.v3_service.UDDIPublicationService();
+        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
+        return port.saveBusiness(body);
+    }
+
+    private static ServiceDetail saveService(org.uddi.api_v3.SaveService body) {
+        org.uddi.v3_service.UDDIPublicationService service = new org.uddi.v3_service.UDDIPublicationService();
+        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
+        return port.saveService(body);
+    }
+
+    private static void deleteBusiness(org.uddi.api_v3.DeleteBusiness body) {
+        org.uddi.v3_service.UDDIPublicationService service = new org.uddi.v3_service.UDDIPublicationService();
+        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
+        port.deleteBusiness(body);
+    }
+
+    private static BusinessList findBusiness(org.uddi.api_v3.FindBusiness body) {
+        org.uddi.v3_service.UDDIInquiryService service = new org.uddi.v3_service.UDDIInquiryService();
+        org.uddi.v3_service.UDDIInquiryPortType port = service.getUDDIInquiryImplPort();
+        return port.findBusiness(body);
+    }
+
+    private static PublisherDetail savePublisher(org.apache.juddi.api_v3.SavePublisher body) {
+        org.apache.juddi.v3_service.JUDDIApiService service = new org.apache.juddi.v3_service.JUDDIApiService();
+        org.apache.juddi.v3_service.JUDDIApiPortType port = service.getJUDDIApiImplPort();
+        return port.savePublisher(body);
     }
 }

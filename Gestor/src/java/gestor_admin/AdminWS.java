@@ -21,11 +21,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.gson.GsonBuilder;
 import jUDDI.SimplePublish;
-import javax.xml.ws.WebServiceRef;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.juddi.v3.annotations.UDDIService;
-import org.apache.juddi.v3.annotations.UDDIServiceBinding;
-import org.uddi.v3_service.UDDIPublicationService;
 
 /**
  *
