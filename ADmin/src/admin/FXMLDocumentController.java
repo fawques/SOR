@@ -504,7 +504,11 @@ public class FXMLDocumentController implements Initializable {
                     String table= getTableView().getId();
                     if(table.equals("tableTalleres")){
                         if(altaTaller.size()>=selectdIndex){
-                        Admin.darAccesoTaller(altaTaller.get(selectdIndex).getID());
+                            String id=altaTaller.get(selectdIndex).getID();
+                            if(id!=null){
+                                Admin.darAccesoTaller(altaTaller.get(selectdIndex).getID());
+                            }
+                        
                         actualizarAltasTaller();
                     }
                     }

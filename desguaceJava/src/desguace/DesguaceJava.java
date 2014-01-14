@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package desguacejava;
+package desguace;
 
 import BD.InterfazBD;
 import desguace.AltaDesguace;
@@ -46,7 +46,7 @@ public class DesguaceJava extends Application {
             {
                 if (desguace.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
                 {
-                    FXMLLoader loader = changeScene("AltaDesguace.fxml");
+                    FXMLLoader loader = changeScene("desguacePendienteActivacion.fxml");
                     stage.setTitle("Esperando codigo de aceptacion");
                     DesguacerPendienteActivacionController staticDataBox = (DesguacerPendienteActivacionController) loader.getController();
                     staticDataBox.setStage(stage);
@@ -122,7 +122,7 @@ public class DesguaceJava extends Application {
     
     public static boolean activarDesguacesBD(String idRecibido) {
         try {
-            bd = new InterfazBD("sor_desguaces");
+            bd = new InterfazBD("sor_desguace");
             boolean r = bd.activarDesguaceMainDesguace(idRecibido);
             //bd.close();
             return r;

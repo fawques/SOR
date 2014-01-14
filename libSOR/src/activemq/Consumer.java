@@ -10,6 +10,7 @@ import javax.jms.Connection;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
@@ -46,11 +47,17 @@ public class Consumer {
         /** Starts (or restarts) a connection's delivery of incoming messages. */
         connection.start();
         //Consume Message
-        TextMessage message = (TextMessage) consumer.receive();
+        TextMessage message =  (TextMessage) consumer.receiveNoWait();
+        String mensaje="";
+        while(message!=null){
+            mensaje+=message.getText();
+        message = (TextMessage) consumer.receiveNoWait();
+        }
+       
         //Display Message
-        
-        System.out.println(message.getText());
-        return message.getText();
+
+       
+        return mensaje;
     }
     public void closeConsumer() throws JMSException{
             //Close Consumer

@@ -7,7 +7,6 @@
 package desguace;
 
 import BD.InterfazBD;
-import desguacejava.DesguaceJava;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -47,11 +46,11 @@ public class DesguacerPendienteActivacionController implements Initializable {
     
     public void comprobarActivacion() throws  ClassNotFoundException, IOException {
      try {
-         bd = new InterfazBD("sor_taller");
+         bd = new InterfazBD("sor_desguace");
          btRecargar.setDisable(true);
          lbEstado.setText("");
          piIndicador.setVisible(true);
-         
+         String email= bd.getDesguace().getEmail();
          String idRecibido = DesguaceJava.checkActivacion(bd.getDesguace().getEmail());
          if ("".equals(idRecibido)) //No Activado
          {

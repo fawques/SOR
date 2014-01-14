@@ -31,7 +31,12 @@ public class PedidosInterfaz {
         this.ID= new SimpleStringProperty(pedido.getID());
         this.idTaller= new SimpleStringProperty(pedido.getTaller());
         this.fecha_alta=new SimpleStringProperty(pedido.getFecha_alta().toString());
-        this.fecha_baja=new SimpleStringProperty(pedido.getFecha_baja().toString());
+        if(pedido.getFecha_baja()!=null){
+            this.fecha_baja=new SimpleStringProperty(pedido.getFecha_baja().toString());
+        }
+        else{
+            this.fecha_baja=new SimpleStringProperty("");
+        }
         this.fecha_limite=new SimpleStringProperty(pedido.getFecha_limite().toString());
     }
     private final SimpleStringProperty ID ;
