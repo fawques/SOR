@@ -6,11 +6,12 @@
 
 package activemq;
 
-import javax.jms.Connection;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
@@ -42,22 +43,23 @@ public class Consumer {
     }
  
     public String consumeMessage() throws JMSException {
-
+    Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
         //Start Connection
         /** Starts (or restarts) a connection's delivery of incoming messages. */
         connection.start();
         //Consume Message
         TextMessage message =  (TextMessage) consumer.receiveNoWait();
-        String mensaje="";
+        ArrayList<String> mensaje= new ArrayList<String>();
+        
         while(message!=null){
-            mensaje+=message.getText();
+            mensaje.add(message.getText().replace("\"",""));
         message = (TextMessage) consumer.receiveNoWait();
         }
-       
+       String listaJSON = gson.toJson(mensaje);
         //Display Message
 
        
-        return mensaje;
+        return listaJSON;
     }
     public void closeConsumer() throws JMSException{
             //Close Consumer

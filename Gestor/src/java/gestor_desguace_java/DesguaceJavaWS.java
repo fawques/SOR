@@ -8,9 +8,15 @@ package gestor_desguace_java;
 
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import general.Desguace;
 import general.EstadoGeneral;
+import general.Pedido;
+import java.lang.reflect.Type;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,14 +40,30 @@ public class DesguaceJavaWS {
     public String getPedidos() {
         
         try {
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
+            ArrayList<String> listaIdsString = new ArrayList<String>();
+            Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
             Gestor_activemq activemq= new Gestor_activemq();
             activemq.create_Consumer("patata");
-            String pedidos= activemq.consumer.consumeMessage();
+            listaIdsString = gson.fromJson(activemq.consumer.consumeMessage(), collectionType); 
             activemq.consumer.closeConsumer();
-            return pedidos;
+            
+            bd = new InterfazBD("sor_gestor");
+            for(String pedidotaller:listaIdsString){
+                listaPedidos.add(bd.getPedidoID(pedidotaller));
+            }
+            String listaJSON = gson.toJson(listaPedidos);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+ 
         } catch (JMSException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
             
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
