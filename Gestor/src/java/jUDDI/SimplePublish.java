@@ -16,6 +16,7 @@
  */
 package jUDDI;
 
+import java.util.ArrayList;
 import org.uddi.api_v3.*;
 import org.apache.juddi.api_v3.*;
 import org.uddi.v3_service.UDDISecurityPortType;
@@ -51,7 +52,21 @@ public class SimplePublish {
     }
 
     public void publish() {
+        // servcicios[i][0] = Nombre (TallerWS)
+        // servicios[i][1] = Descripcion (Lo que queramos)
+        // servicios[i][2] = URL del wsdl
+        String[][] servicios = new String[3][3];
+        servicios[0][0] = "TallerWS";
+        servicios[0][1] = "TallerWS";
+        servicios[0][2] = "http://localhost:8080/Gestor/TallerWS?wsdl";
+        servicios[1][0] = "AdminWS";
+        servicios[1][1] = "AdminWS";
+        servicios[1][2] = "http://localhost:8080/Gestor/AdminWS?wsdl";
+        servicios[2][0] = "DesguaceJavaWS";
+        servicios[2][1] = "DesguaceJavaWS";
+        servicios[2][2] = "http://localhost:8080/Gestor/DesguaceJavaWS?wsdl";
         try {
+            
             // Setting up the values to get an authentication token for the 'root' user ('root' user has admin privileges
             // and can save other publishers).
             GetAuthToken getAuthTokenRoot = new GetAuthToken();
@@ -64,8 +79,8 @@ public class SimplePublish {
 
             // Creating a new publisher that we will use to publish our entities to.
             Publisher p = new Publisher();
-            p.setAuthorizedName("my-publisher");
-            p.setPublisherName("My Publisher");
+            p.setAuthorizedName("SOR");
+            p.setPublisherName("SOR");
 
             // Adding the publisher to the "save" structure, using the 'root' user authentication info and saving away. 
             SavePublisher sp = new SavePublisher();
@@ -75,15 +90,21 @@ public class SimplePublish {
 
             // Our publisher is now saved, so now we want to retrieve its authentication token
             GetAuthToken getAuthTokenMyPub = new GetAuthToken();
-            getAuthTokenMyPub.setUserID("my-publisher");
+            getAuthTokenMyPub.setUserID("SOR");
             getAuthTokenMyPub.setCred("");
             AuthToken myPubAuthToken = getAuthToken(getAuthTokenMyPub);
-            System.out.println("myPub AUTHTOKEN = " + myPubAuthToken.getAuthInfo());
+            System.out.println("SOR: AUTHTOKEN = " + myPubAuthToken.getAuthInfo());
 
+            
+            /*
+            
+             ====== A partir de aquí está lo que deberia hacer para registrar los WS ========
+            
+            */
             // Creating the parent business entity that will contain our service.
             BusinessEntity myBusEntity = new BusinessEntity();
             Name myBusName = new Name();
-            myBusName.setValue("My Business");
+            myBusName.setValue("Gestor");
             myBusEntity.getName().add(myBusName);
 
             // Adding the business entity to the "save" structure, using our publisher's authentication info and saving away.
@@ -94,33 +115,44 @@ public class SimplePublish {
             String myBusKey = bd.getBusinessEntity().get(0).getBusinessKey();
             System.out.println("myBusiness key:  " + myBusKey);
 
-			// Creating a service to save.  Only adding the minimum data: the parent business key retrieved from saving the business 
-            // above and a single name.
-            BusinessService myService = new BusinessService();
-            myService.setBusinessKey(myBusKey);
-            Name myServName = new Name();
-            myServName.setValue("My Service");
-            myService.getName().add(myServName);
+            /*
+                ======= Foreach webservice ======
+            */
+            for (String[] serv : servicios) {
+                
+            
+                // Creating a service to save.  Only adding the minimum data: the parent business key retrieved from saving the business 
+                // above and a single name.
+                BusinessService myService = new BusinessService();
+                myService.setBusinessKey(myBusKey);
+                Name myServName = new Name();
+                myServName.setValue(serv[0]);
+                myService.getName().add(myServName);
+                Description myServDescription = new Description();
+                myServDescription.setValue(serv[1]);
+                myService.getDescription().add(myServDescription);
 
-            // Add binding templates, etc...
-            BindingTemplate myBindingTemplate = new BindingTemplate();
-            AccessPoint accessPoint = new AccessPoint();
-            accessPoint.setValue("http://127.0.0.1//Gestor/TallerWS?wsdl");
-            myBindingTemplate.setAccessPoint(accessPoint);
-            BindingTemplates myBindingTemplates = new BindingTemplates();
-            myBindingTemplates.getBindingTemplate().add(myBindingTemplate);
-            myService.setBindingTemplates(myBindingTemplates);
+                // Add binding templates, etc...
+                BindingTemplate myBindingTemplate = new BindingTemplate();
+                AccessPoint accessPoint = new AccessPoint();
+                accessPoint.setValue(serv[2]);
+                myBindingTemplate.setAccessPoint(accessPoint);
+                //myBindingTemplate.setBindingKey("TallerWS"); --> no sé si hace falta
+                BindingTemplates myBindingTemplates = new BindingTemplates();
+                myBindingTemplates.getBindingTemplate().add(myBindingTemplate);
+                myService.setBindingTemplates(myBindingTemplates);
 
-            // Adding the service to the "save" structure, using our publisher's authentication info and saving away.
-            SaveService ss = new SaveService();
-            ss.getBusinessService().add(myService);
-            ss.setAuthInfo(myPubAuthToken.getAuthInfo());
-            ServiceDetail sd = saveService(ss);
-            String myServKey = sd.getBusinessService().get(0).getServiceKey();
-            System.out.println("myService key:  " + myServKey);
-
-            // Now you have a publisher saved who in turn published a business and service via 
-            // the jUDDI API!
+                // Adding the service to the "save" structure, using our publisher's authentication info and saving away.
+                SaveService ss = new SaveService();
+                ss.getBusinessService().add(myService);
+                ss.setAuthInfo(myPubAuthToken.getAuthInfo());
+                ServiceDetail sd = saveService(ss);
+                String myServKey = sd.getBusinessService().get(0).getServiceKey();
+                System.out.println("myService key:  " + myServKey);
+            }
+            /*
+                ===== End foreach ==
+            */
         } catch (Exception e) {
             e.printStackTrace();
         }
