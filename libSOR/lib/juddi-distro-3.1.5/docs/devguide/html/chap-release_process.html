@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 3. Release Process</title><link rel="stylesheet" href="css/jbossorg.css" type="text/css"/><meta xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL Stylesheets V1.74.0"/><link rel="home" href="index.html" title="jUDDI Dev Guide"/><link rel="up" href="index.html" title="jUDDI Dev Guide"/><link rel="prev" href="chap-devenvironment_setup.html" title="Chapter 2. Development Environment Setup"/><link rel="next" href="appe-Publican-Revision_History.html" title="Appendix A. Revision History"/><link rel="copyright" href="ln-d0e35.html" title="Legal Notice"/></head><body><p id="title"><a href="http://ws.apache.org/juddi" class="site_href"><strong>Apache jUDDI</strong></a><a href="http://ws.apache.org/juddi/docs" class="doc_href"><strong>Community Documentation</strong></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-devenvironment_setup.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="appe-Publican-Revision_History.html"><strong>Next</strong></a></li></ul><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="chap-release_process"/>Chapter 3. Release Process</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="chap-release_process.html#addgpg">3.1. Add your gpg key to KEYS</a></span></dt><dt><span class="section"><a href="chap-release_process.html#Release steps">3.2. Release steps</a></span></dt></dl></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="addgpg"/>3.1. Add your gpg key to KEYS</h2></div></div></div><p>
+        	In the root of the project there is a KEYS file. Add your key to this file and check it into source control.
+        	Depending on your tool of choice you can use on of the following commands:
+        	</p><pre class="programlisting">
+        	pgp -kxa &lt;your name&gt; and append it to this file.
+        	(pgpk -ll &lt;your name&gt; &amp;&amp; pgpk -xa &lt;your name&gt;) &gt;&gt; this file.
+        	(gpg --list-sigs &lt;your name&gt;
+             	&amp;&amp; gpg --armor --export &lt;your name&gt;) &gt;&gt; this file.
+             </pre><p>
+        </p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Release steps"/>3.2. Release steps</h2></div></div></div><p>
+		<code class="command">
+		Environment: 
+		Apache Maven 2.2.1 (r801777; 2009-08-06 15:16:01-0400)
+		Java version: 1.6.0_17
+		</code>
+		
+		</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li>Run mvn release:prepare, this will set all the right version numbers and create a tag in SVN.</li><li>Run mvn release:perform, will upload the release to a staging area in the Apache Nexus Repository.</li><li>Go into the juddi-dist, and run mvn clean install -Prelease</li><li>Upload the signed distribution artifacts to apache people.</li><li>Start a vote referencing the build artifacts, leave the vote open for 72 hrs.</li></ol></div><p>
+		
+		On successful vote:
+		</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li>Release the staging artifacts in Nexus.</li><li>Copy the distribution artifacts to the mirror.</li><li>Update the website.</li></ol></div><p>
+	</p></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-devenvironment_setup.html"><strong>Prev</strong>Chapter 2. Development Environment Setup</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="appe-Publican-Revision_History.html"><strong>Next</strong>Appendix A. Revision History</a></li></ul></body></html>

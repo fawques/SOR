@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">jUDDI Dev Guide</title><link rel="stylesheet" href="css/jbossorg.css" type="text/css"/><meta xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL Stylesheets V1.74.0"/><meta xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="description" content="This document is a Developer's Guide for jUDDI. jUDDI (pronounced &#34;Judy&#34;) is an open source Java implementation of the Universal Description, Discovery, and Integration (UDDI v3) specification for Web Services."/></head><body><div class="book" lang="en-US"><div class="titlepage"><div><p id="title"><a href="http://ws.apache.org/juddi" class="site_href"><strong>Apache jUDDI</strong></a><a href="http://ws.apache.org/juddi/docs" class="doc_href"><strong>Community Documentation</strong></a></p><div><h1 class="title"><a id="d0e2"/>jUDDI Dev Guide</h1></div><div><h2 class="subtitle">A developer's guide to using jUDDI</h2></div><div><h3 class="corpauthor">
+		<span class="inlinemediaobject"><object type="image/svg+xml" data="Common_Content/images/title_logo.svg"/></span>
+	</h3></div><div><div xmlns="" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="authorgroup"><div class="authors">by <span xmlns="http://www.w3.org/1999/xhtml" class="firstname">Tom</span> <span xmlns="http://www.w3.org/1999/xhtml" class="surname">Cunningham</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="firstname">Kurt</span> <span xmlns="http://www.w3.org/1999/xhtml" class="surname">Stam</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="firstname">Jeff</span> <span xmlns="http://www.w3.org/1999/xhtml" class="surname">Faath</span>, and <span xmlns="http://www.w3.org/1999/xhtml" class="firstname">The jUDDI Community</span> <span xmlns="http://www.w3.org/1999/xhtml" class="orgname"/> <span xmlns="http://www.w3.org/1999/xhtml" class="surname"/></div><div class="editors"/><div class="others">and thanks to <span xmlns="http://www.w3.org/1999/xhtml" class="firstname">Darrin</span> <span xmlns="http://www.w3.org/1999/xhtml" class="surname">Mison</span></div></div></div><div><p class="copyright">Copyright © 2009 jUDDI Community.</p></div><div><a href="ln-d0e35.html">Legal Notice</a></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>
+        This document is a Developer's Guide for jUDDI. jUDDI (pronounced "Judy") is an open
+        source Java implementation of the Universal Description, Discovery, and
+        Integration (UDDI v3) specification for Web Services.
+		</p></div></div></div><hr/></div><div class="toc"><dl><dt><span class="preface"><a href="#Dev_Guide-Preface">Preface</a></span></dt><dd><dl><dt><span class="section"><a href="#d0e85">1. Document Conventions</a></span></dt><dd><dl><dt><span class="section"><a href="#d0e95">1.1. Typographic Conventions</a></span></dt><dt><span class="section"><a href="#d0e311">1.2. Pull-quote Conventions</a></span></dt><dt><span class="section"><a href="#d0e330">1.3. Notes and Warnings</a></span></dt></dl></dd><dt><span class="section"><a href="#d0e351">2. We Need Feedback!</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap-jUDDI_Architecture">1. UDDI Registry</a></span></dt><dd><dl><dt><span class="section"><a href="#jUDDI_Architecture-intro">1.1. jUDDI Architecture for UDDI v3 Project</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap-devenvironment_setup">2. Development Environment Setup</a></span></dt><dd><dl><dt><span class="section"><a href="#Prerequisites">2.1. Prerequisites</a></span></dt><dt><span class="section"><a href="#Building the Project">2.2. Building the Project</a></span></dt><dt><span class="section"><a href="#Source Modules Overview">2.3. Source Modules Overview</a></span></dt><dt><span class="section"><a href="#settingupeclipse">2.4. Setting up Eclipse</a></span></dt><dt><span class="section"><a href="#Running a unittest from within Eclipse">2.5. Running a unittest from within Eclipse</a></span></dt><dt><span class="section"><a href="#Building the JAR">2.6. Building the JAR</a></span></dt><dt><span class="section"><a href="#Building the WAR">2.7. Building the WAR</a></span></dt><dt><span class="section"><a href="#Building the Tomcat Bundle">2.8. Building the Tomcat Bundle</a></span></dt><dt><span class="section"><a href="#Running and Developing Tests">2.9. Running and Developing Tests</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap-release_process">3. Release Process</a></span></dt><dd><dl><dt><span class="section"><a href="#addgpg">3.1. Add your gpg key to KEYS</a></span></dt><dt><span class="section"><a href="#Release steps">3.2. Release steps</a></span></dt></dl></dd><dt><span class="appendix"><a href="#appe-Publican-Revision_History">A. Revision History</a></span></dt></dl></div><div class="preface" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Dev_Guide-Preface"/>Preface</h2></div></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="d0e85"/>1. Document Conventions</h2></div></div></div><p>
+	This manual uses several conventions to highlight certain words and phrases and draw
+    attention to specific pieces of information.
+    </p><p>
+	In PDF and paper editions, this manual uses typefaces drawn from the 
+	<a class="ulink" href="https://fedorahosted.org/liberation-fonts/">Liberation Fonts</a> set. 
+	The Liberation Fonts set is also used in HTML editions if the set is installed on your
+    system. If not, alternative but equivalent typefaces are displayed. Note: Red Hat
+    Enterprise Linux 5 and later includes the Liberation Fonts set by default.
+	</p><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="d0e95"/>1.1. Typographic Conventions</h3></div></div></div><p>
+		Four typographic conventions are used to call attention to specific words and
+        phrases. These conventions, and the circumstances they apply to, are as follows.
+		</p><p>
+		<code class="literal">Mono-spaced Bold</code>
+		</p><p>
+		Used to highlight system input, including shell commands, file names and paths.
+        Also used to highlight key caps and key-combinations. For example:
+		</p><div class="blockquote"><blockquote class="blockquote"><p>
+			To see the contents of the file <code class="filename">my_next_bestselling_novel</code>
+            in your current working directory, enter the <code class="command">cat
+            my_next_bestselling_novel</code> command at the shell prompt and press
+            <span class="keycap"><strong>Enter</strong></span> to execute the command.
+			</p></blockquote></div><p>
+		The above includes a file name, a shell command and a key cap, all presented in
+        Mono-spaced Bold and all distinguishable thanks to context.
+		</p><p>
+		Key-combinations can be distinguished from key caps by the hyphen connecting each
+        part of a key-combination. For example:
+		</p><div class="blockquote"><blockquote class="blockquote"><p>
+			Press <span class="keycap"><strong>Enter</strong></span> to execute the command.
+			</p><p>
+			Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F1</strong></span> to switch to the first virtual terminal. Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F7</strong></span> to return to your X-Windows session.
+			</p></blockquote></div><p>
+		The first sentence highlights the particular key cap to press. The second
+        highlights two sets of three key caps, each set pressed simultaneously.
+		</p><p>
+		If source code is discussed, class names, methods, functions, variable names and
+        returned values mentioned within a paragraph will be presented as above, in
+        <code class="literal">Mono-spaced Bold</code>. For example:
+		</p><div class="blockquote"><blockquote class="blockquote"><p>
+			File-related classes include <code class="classname">filesystem</code> for file
+            systems, <code class="classname">file</code> for files, and <code class="classname">dir</code>
+            for directories. Each class has its own associated set of permissions.
+			</p></blockquote></div><p>
+		<span class="application"><strong>Proportional Bold</strong></span>
+		</p><p>
+		This denotes words or phrases encountered on a system, including application
+        names; dialogue box text; labelled buttons; check-box and radio button labels;
+        menu titles and sub-menu titles. For example:
+		</p><div class="blockquote"><blockquote class="blockquote"><p>
+			Choose <span class="guimenu"><strong>System &gt; Preferences &gt; Mouse</strong></span> from the main
+            menu bar to launch <span class="application"><strong>Mouse Preferences</strong></span>. In the
+            <span class="guilabel"><strong>Buttons</strong></span> tab, click the <span class="guilabel"><strong>Left-handed
+            mouse</strong></span> check box and click <span class="guibutton"><strong>Close</strong></span> to switch
+            the primary mouse button from the left to the right (making the mouse suitable
+            for use in the left hand).
+			</p><p>
+			To insert a special character into a <span class="application"><strong>gedit</strong></span> file,
+            choose <span class="guimenu"><strong>Applications &gt; Accessories &gt; Character Map</strong></span>
+            from the main menu bar. Next, choose <span class="guimenu"><strong>Search &gt;
+            Find</strong></span> from the <span class="application"><strong>Character Map</strong></span> menu
+            bar, type the name of the character in the <span class="guilabel"><strong>Search</strong></span> field
+            and click <span class="guibutton"><strong>Next</strong></span>. The character you sought will be
+            highlighted in the <span class="guilabel"><strong>Character Table</strong></span>. Double-click this
+            highlighted character to place it in the <span class="guilabel"><strong>Text to copy</strong></span>
+            field and then click the <span class="guibutton"><strong>Copy</strong></span> button. Now switch back
+            to your document and choose <span class="guimenu"><strong>Edit &gt; Paste</strong></span> from the
+            <span class="application"><strong>gedit</strong></span> menu bar.
+			</p></blockquote></div><p>
+		The above text includes application names; system-wide menu names and items;
+        application-specific menu names; and buttons and text found within a GUI
+        interface, all presented in Proportional Bold and all distinguishable by context.
+		</p><p>
+		Note the <span class="guimenu"><strong>&gt;</strong></span> shorthand used to indicate traversal through a
+        menu and its sub-menus. This is to avoid the difficult-to-follow 'Select
+        <span class="guimenuitem"><strong>Mouse</strong></span> from the <span class="guimenu"><strong>Preferences</strong></span> sub-menu
+        in the <span class="guimenu"><strong>System</strong></span> menu of the main menu bar' approach.
+		</p><p>
+		<code class="command"><em class="replaceable"><code>Mono-spaced Bold Italic</code></em></code> or
+        <span class="application"><strong><em class="replaceable"><code>Proportional Bold Italic</code></em></strong></span>
+		</p><p>
+		Whether Mono-spaced Bold or Proportional Bold, the addition of Italics indicates
+        replaceable or variable text. Italics denotes text you do not input literally or
+        displayed text that changes depending on circumstance. For example:
+		</p><div class="blockquote"><blockquote class="blockquote"><p>
+				To connect to a remote machine using ssh, type <code class="command">ssh <em class="replaceable"><code>username</code></em>@<em class="replaceable"><code>domain.name</code></em></code> at a shell prompt. If the remote machine is <code class="filename">example.com</code> and your username on that machine is john, type <code class="command">ssh john@example.com</code>.
+			</p><p>
+				The <code class="command">mount -o remount <em class="replaceable"><code>file-system</code></em></code> command remounts the named file system. For example, to remount the <code class="filename">/home</code> file system, the command is <code class="command">mount -o remount /home</code>.
+			</p><p>
+				To see the version of a currently installed package, use the <code class="command">rpm -q <em class="replaceable"><code>package</code></em></code> command. It will return a result as follows: <code class="command"><em class="replaceable"><code>package-version-release</code></em></code>.
+			</p></blockquote></div><p>
+			Note the words in bold italics above  username, domain.name, file-system, package, version and release. Each word is a placeholder, either for text you enter when issuing a command or for text displayed by the system.
+		</p><p>
+			Aside from standard usage for presenting the title of a work, italics denotes the first use of a new and important term. For example:
+		</p><div class="blockquote"><blockquote class="blockquote"><p>
+				When the Apache HTTP Server accepts requests, it dispatches child processes or threads to handle them. This group of child processes or threads is known as a <em class="firstterm">server-pool</em>. Under Apache HTTP Server 2.0, the responsibility for creating and maintaining these server-pools has been abstracted to a group of modules called <em class="firstterm">Multi-Processing Modules</em> (<em class="firstterm">MPMs</em>). Unlike other modules, only one module from the MPM group can be loaded by the Apache HTTP Server.
+			</p></blockquote></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="d0e311"/>1.2. Pull-quote Conventions</h3></div></div></div><p>
+			Two, commonly multi-line, data types are set off visually from the surrounding text.
+		</p><p>
+			Output sent to a terminal is set in <code class="computeroutput">Mono-spaced Roman</code> and presented thus:
+		</p><pre class="screen">
+books        Desktop   documentation  drafts  mss    photos   stuff  svn
+books_tests  Desktop1  downloads      images  notes  scripts  svgs
+</pre><p>
+			Source-code listings are also set in <code class="computeroutput">Mono-spaced Roman</code> but are presented and highlighted as follows:
+		</p><pre xmlns="" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="JAVA"></span>
+<!--  --><br/><span class="java_keyword">package</span><span class="java_plain">&nbsp;org</span><span class="java_separator">.</span><span class="java_plain">jboss</span><span class="java_separator">.</span><span class="java_plain">book</span><span class="java_separator">.</span><span class="java_plain">jca</span><span class="java_separator">.</span><span class="java_plain">ex1</span><span class="java_separator">;</span>
+</span>
+<!--  --><br/><span class="java_keyword">import</span><span class="java_plain">&nbsp;javax</span><span class="java_separator">.</span><span class="java_plain">naming</span><span class="java_separator">.</span><span class="java_type">InitialContext</span><span class="java_separator">;</span>
+</span>
+<!--  --><br/><span class="java_keyword">public</span><span class="java_plain">&nbsp;</span><span class="java_keyword">class</span><span class="java_plain">&nbsp;</span><span class="java_type">ExClient</span>
+<!--  --><br/><span class="java_separator">{</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;</span><span class="java_keyword">public</span><span class="java_plain">&nbsp;</span><span class="java_keyword">static</span><span class="java_plain">&nbsp;</span><span class="java_type">void</span><span class="java_plain">&nbsp;main</span><span class="java_separator">(</span><span class="java_type">String</span><span class="java_plain">&nbsp;args</span><span class="java_separator">[])</span><span class="java_plain">&nbsp;</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_keyword">throws</span><span class="java_plain">&nbsp;</span><span class="java_type">Exception</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;</span><span class="java_separator">{</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_type">InitialContext</span><span class="java_plain">&nbsp;iniCtx&nbsp;</span><span class="java_operator">=</span><span class="java_plain">&nbsp;</span><span class="java_keyword">new</span><span class="java_plain">&nbsp;</span><span class="java_type">InitialContext</span><span class="java_separator">();</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_type">Object</span><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ref&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_operator">=</span><span class="java_plain">&nbsp;iniCtx</span><span class="java_separator">.</span><span class="java_plain">lookup</span><span class="java_separator">(</span><span class="java_literal">&quot;EchoBean&quot;</span><span class="java_separator">);</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_type">EchoHome</span><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;home&nbsp;&nbsp;&nbsp;</span><span class="java_operator">=</span><span class="java_plain">&nbsp;</span><span class="java_separator">(</span><span class="java_type">EchoHome</span><span class="java_separator">)</span><span class="java_plain">&nbsp;ref</span><span class="java_separator">;</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_type">Echo</span><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;&nbsp;&nbsp;</span><span class="java_operator">=</span><span class="java_plain">&nbsp;home</span><span class="java_separator">.</span><span class="java_plain">create</span><span class="java_separator">();</span>
+</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_type">System</span><span class="java_separator">.</span><span class="java_plain">out</span><span class="java_separator">.</span><span class="java_plain">println</span><span class="java_separator">(</span><span class="java_literal">&quot;Created&nbsp;Echo&quot;</span><span class="java_separator">);</span>
+</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="java_type">System</span><span class="java_separator">.</span><span class="java_plain">out</span><span class="java_separator">.</span><span class="java_plain">println</span><span class="java_separator">(</span><span class="java_literal">&quot;Echo.echo('Hello')&nbsp;=&nbsp;&quot;</span><span class="java_plain">&nbsp;</span><span class="java_operator">+</span><span class="java_plain">&nbsp;echo</span><span class="java_separator">.</span><span class="java_plain">echo</span><span class="java_separator">(</span><span class="java_literal">&quot;Hello&quot;</span><span class="java_separator">));</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;</span><span class="java_separator">}</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;&nbsp;</span>
+<!--  --><br/><span class="java_separator">}</span>
+</pre></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="d0e330"/>1.3. Notes and Warnings</h3></div></div></div><p>
+			Finally, we use three visual styles to draw attention to information that might otherwise be overlooked.
+		</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2><p>
+				A Note is a tip or shortcut or alternative approach to the task at hand. Ignoring a note should have no negative consequences, but you might miss out on a trick that makes your life easier.
+			</p></div><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="important"><h2>Important</h2><p>
+				Important boxes detail things that are easily missed: configuration changes that only apply to the current session, or services that need restarting before an update will apply. Ignoring Important boxes won't cause data loss but may cause irritation and frustration.
+			</p></div><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="warning"><h2>Warning</h2><p>
+				A Warning should not be ignored. Ignoring warnings will most likely cause data loss.
+			</p></div></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="d0e351"/>2. We Need Feedback!</h2></div></div></div><p>
+	If you find a typographical error in this manual, or if you have thought of a way
+    to make this manual better, we would love to hear from you! 
+	</p><p>
+	For any issues you find, or improvements you have, please sign up for a JIRA account at https://issues.apache.org/jira/secure/Dashboard.jspa and file a bug under the "jUDDI" component.
+	</p><p>
+    If you have a suggestion for improving the documentation, try to be as specific as
+    possible when describing it. If you have found an error, please include the section number
+    and some of the surrounding text so we can find it easily.
+	</p></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="chap-jUDDI_Architecture"/>Chapter 1. UDDI Registry</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#jUDDI_Architecture-intro">1.1. jUDDI Architecture for UDDI v3 Project</a></span></dt></dl></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="jUDDI_Architecture-intro"/>1.1. jUDDI Architecture for UDDI v3 Project</h2></div></div></div><div class="figure"><a id="fig-jUDDI-Architecture"/><div class="figure-contents"><div class="mediaobject"><img src="images/juddi_architecture.png" alt="jUDDI Architecture"/></div></div><p class="title"><b>Figure 1.1. jUDDI Architecture</b></p></div><br class="figure-break"/><p>
+The diagram above shows the software layers and components employed in the jUDDI project implementation for UDDI v3.  Here is a brief description of each item in the diagram and how they all work together to create the UDDI-compliant registry that is jUDDI:
+	</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+Transport - the transport layer provides the means to receive and send out requests via a network or messaging service.  The UDDI specification details an interface where XML messages are exchanged between client and server but is agnostic as to how those messages are relayed.  By default, jUDDI uses Apache CXF to transport messages via SOAP over HTTP, however, the system is designed so other methods of transport can be easily plugged in (for example, JMS).
+		</p></li><li><p>
+Security - security is provided by the UDDI specification and is based on policies defined in the specification.  jUDDI implements all the mandatory policies and can be extended to support the optional policies.  Chief among these policies is access control to the UDDI API exposed by jUDDI.  jUDDI fully implements this policy, per the specification, which allows users to easily plug in their own third-party authentication framework.
+		</p></li><li><p>
+UDDI Interface - the UDDI interface defines the methods set forth by the UDDI specification to interact with the registry.  Within jUDDI, the interface classes are generated from the UDDI WSDL and they are implemented as POJOs.  These classes are annotated with JAX-WS annotations allowing end-users to easily employ any suitable JAX-WS container to expose the interface.
+		</p></li><li><p>
+In general, the interface implementation accepts incoming UDDI-based requests and ummarshals these requests to the appropriate schema object.  This object is then served to the proceeding layers so the necessary logic can be performed to fulfill the request.  After the request is fulfilled, this layer is responsible for marshalling the result and sending the response to the requesting party.
+		</p></li><li><p>
+As the interface is implemented as POJOs, it can be accessed via an "embedded" mode.  In this scenario, the methods of the implementation classes can be called directly.  This allows users to embed jUDDI directly into their application without having to deploy a full-blown jUDDI server.
+		</p></li><li><p>
+UDDI Schema Objects - The UDDI specification comes equipped with an XML schema for its many data structures.  jUDDI employs XML-binding technology (JAXB) to generate objects from the schema (contained within the WSDL) that are then used as the arguments for the UDDI Interface layer.  These objects needn't  originate from XML – they can also be instantiated directly to make UDDI calls directly in java code.
+		</p></li><li><p>
+Validation – the validation layer reads the schema object input from the UDDI interface layer and, based on rules defined in the specification, makes sure the input is valid for the given UDDI method.  Failed validation results in an exception and an immediate return from the method call.
+		</p></li><li><p>
+Mapping – the mapping layer is responsible for mapping the UDDI schema objects to the persistence layer model.  For all intents and purposes, the mapping layer simply copies data from a schema object to the similar model object.  This occurs in both directions, as input objects must be mapped to the model to perform the necessary logic and results obtained from the call must be mapped back to the schema as output to the caller.
+		</p></li><li><p>
+Business Logic - the business logic layer is responsible for performing all the business logic associated with the UDDI calls.  The logic layer works with objects from the persistence layer and generally consists of querying the model based on user input.
+		</p></li><li><p>
+Persistence - the persistence layer, as its name implies, is responsible for persisting registry data to a storage medium.  To this end, a third-party persistence service that implements the Java Persistence API (Apache OpenJPA, Hibernate) is utilized to manage transactions with the storage medium and also to facilitate the plugging-in of various storage types.  By default, jUDDI is packaged with Apache OpenJPA as the persistence provider and Apache Derby as the storage medium.  This can easily be configured.
+		</p></li></ol></div></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="chap-devenvironment_setup"/>Chapter 2. Development Environment Setup</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#Prerequisites">2.1. Prerequisites</a></span></dt><dt><span class="section"><a href="#Building the Project">2.2. Building the Project</a></span></dt><dt><span class="section"><a href="#Source Modules Overview">2.3. Source Modules Overview</a></span></dt><dt><span class="section"><a href="#settingupeclipse">2.4. Setting up Eclipse</a></span></dt><dt><span class="section"><a href="#Running a unittest from within Eclipse">2.5. Running a unittest from within Eclipse</a></span></dt><dt><span class="section"><a href="#Building the JAR">2.6. Building the JAR</a></span></dt><dt><span class="section"><a href="#Building the WAR">2.7. Building the WAR</a></span></dt><dt><span class="section"><a href="#Building the Tomcat Bundle">2.8. Building the Tomcat Bundle</a></span></dt><dt><span class="section"><a href="#Running and Developing Tests">2.9. Running and Developing Tests</a></span></dt></dl></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Prerequisites"/>2.1. Prerequisites</h2></div></div></div><p>
+	To be able to build and run jUDDI you will need to have the following installed:
+	</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>1.5.X JDK</p></li><li><p>Maven 2.0.8</p></li></ol></div></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Building the Project"/>2.2. Building the Project</h2></div></div></div><p>
+First, check out the jUDDI sources:
+</p><pre class="screen">
+% svn co http://svn.apache.org/repos/asf/webservices/juddi/trunk
+</pre><p>
+Then build the entire project using OpenJPA for persistance use:
+
+</p><pre class="screen">
+% cd trunk
+% mvn clean install -Dpersistence=openjpa
+</pre><p>
+To use Hibernate change the persistence flag to hibernate. Optionally you can use a <code class="filename">settings.xml</code> to set your persistence choice on a permanent basis, so you don't have to provide the persistence variable every time you build. The default location of the <code class="filename">settings.xml</code> is in your <code class="filename">.m2</code> directory.  An example file is checked into our source tree at <code class="filename">etc/.m2/settings.xml</code>.
+        </p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Source Modules Overview"/>2.3. Source Modules Overview</h2></div></div></div><p> 
+	Within jUDDI source, there are the following modules:
+        </p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>uddi-ws: JAXWS stubs built from the WSDLs</p></li><li><p>uddi-tck: Test kit developed by jUDDI for testing UDDI v3 functionality.    The TCK is not jUDDI specific and could be used to verify and validate other UDDI v3 implementations</p></li><li><p>juddi-core: the jUDDI jar containing the model, API, and core jUDDI functionality</p></li><li><p>juddiv3-war: a WAR module agnostic as to JAX-WS provider</p></li><li><p>juddi-cxf: a WAR module that uses CXF as the web service framework, chosen by default</p></li><li><p>juddi-tomcat: a module which builds a Tomcat bundle with juddi-cxf installed and Derby as a backend data base</p></li><li><p>juddi-console: a module which builds upon the juddi-tomcat module and adds a GWT-based administration console</p></li><li><p>uddi-client: a generic client library for communicating with a UDDI server</p></li><li><p>juddi-dist: a module used to produce shippable binary distributions</p></li></ol></div><p>
+jUDDI v3 is set up to produce a number of different deliverables – a JAR, a WAR, and a Tomcat bundle. Depending on the scope of your application, or your interest in the project, you might want to use the Tomcat server bundle packaged with the Derby database and jUDDI, or you may just want to use the jUDDI JAR and make your own database and Web Service choices. jUDDI is set up so that it can support a range of environments.
+	</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="settingupeclipse"/>2.4. Setting up Eclipse</h2></div></div></div><p>
+The easiest way to setup jUDDI in eclipse is to use the m2eclipse plugin which can be found at http://m2eclipse.codehaus.org/update/.   In order to run and debug the project unit tests, it is required that you install this plugin.    After installing the plugin you should select:
+	</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>“Enable Depency Management”</p></li><li><p>Then, “Enable Nested Modules”</p></li><li><p>Then, “Update Project Configuration”</p></li></ol></div><p>
+        </p><div class="figure"><a id="fig-jUDDI-eclipse-maven"/><div class="figure-contents"><div class="mediaobject"><img src="images/eclipse_maven.png" alt="Enable m2eclipse"/></div></div><p class="title"><b>Figure 2.1. Eclipse Maven Integration</b></p></div><br class="figure-break"/><p>
+If you wish to change your persistence.xml for the purposes of testing, either change it and then build, or change <code class="filename">juddi-core/target/classes/META-INF/persistence.xml</code>.
+
+If you choose not to use the m2eclipse plugin you can setup your classpath by following these directions, but there are no guarantees that the unit tests will be debuggable within Eclipse.
+Choose “Eclipse” -&gt; “Preferences”
+In the preference dialog, select “Java” -&gt; “Build Path” -&gt; “Classpath Variables”
+Add a new classpath variable :
+</p><code class="literal">
+	<p>Name: M2_REPO</p>
+	<p>Path : /[path-to-.m2]/.m2 (example : /home/tcunning/.m2)</p>
+
+<p>% cd v3_trunk</p>
+<p>% mvn eclipse:eclipse -Declipse.workspace=/[path-to-workspace]/workspace</p>
+</code><p>
+Then within Eclipse, “Create New Project” and choose “Create from existing source” and choose the source folder that you just checked out from SVN.
+    </p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Running a unittest from within Eclipse"/>2.5. Running a unittest from within Eclipse</h2></div></div></div><p>
+To run one unittest from within eclipse simply right-click the unittest and select Debug As &gt; Junit Test
+	</p><div class="figure"><a id="fig-eclipse-unittest"/><div class="figure-contents"><div class="mediaobject"><img src="images/eclipse_unittest.png" alt="Running unittests from within Eclipse"/></div></div><p class="title"><b>Figure 2.2. Eclipse Maven Integration</b></p></div><br class="figure-break"/><p>
+If you are using OpenJPA you have to make sure that the <code class="filename">openjpa-1.2.jar</code> is on the classpath and that for each unittest you specify the javaagent needed for the enhancement phase
+</p><p>
+<code class="literal">
+-javaagent:/Users/kstam/.m2/repository/org/apache/openjpa/openjpa/1.2.0/openjpa-1.2.0.jar
+</code>
+</p><div class="figure"><a id="fig-jUDDI-eclipse-javaagent"/><div class="figure-contents"><div class="mediaobject"><img src="images/eclipse_javaagent.png" alt="Specifying the javaagent needed by OpenJPA during the enhancement phase"/></div></div><p class="title"><b>Figure 2.3. Eclipse Maven Integration</b></p></div><br class="figure-break"/></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Building the JAR"/>2.6. Building the JAR</h2></div></div></div><p>
+The juddi-core module produces a JAR which contains the jUDDI source and a jUDDI persistence.xml configuration. jUDDI is currently setup so that you can choose between using either OpenJPA or Hibernate as your persistence framework. The juddi-core <code class="filename">pom.xml</code> contains two profiles, triggered on the "persistence" property.
+</p><p>
+OpenJPA
+</p><pre class="screen">
+% cd juddi-core
+% mvn clean install -Dpersistence=openjpa 
+</pre><p>
+Hibernate
+</p><pre class="screen">
+% cd juddi-core
+% mvn clean install -Dpersistence=hibernate 
+</pre><p>
+For juddi 3.0.0 and 3.0.1, the project built with Hibernate by default, but as of 3.0.2 the project now builds with openjpa as the default persistence layer.    Two flavors of juddi-core are available as maven artifacts - juddi-core for hibernate usage and juddi-core-openjpa for use with OpenJPA.
+</p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Building the WAR"/>2.7. Building the WAR</h2></div></div></div><p>
+As with the JAR, you need to make a decision on what framework you would like to use when building the WAR.       The project contains twoWAR modules – juddiv3-war, which produces a JAX-WS agnostic WAR, and juddi-cxf – which produces a WAR with CXF descriptors.       The project would welcome any contribution of docs or descriptors for alternative JAX-WS providers.
+        </p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Building the Tomcat Bundle"/>2.8. Building the Tomcat Bundle</h2></div></div></div><p>
+     Tomcat bundle packages up one of the jUDDI WAR files, Apache Derby, and a few necessary configuration files and provides the user with a pre-configured jUDDI instance.       By default, the WAR produced by the juddi-cxf module is used – the example below shown uses URLs and endpoints using the jUDDI CXF configuration.     If you use the Axis 2 configuration, URLs and endpoints may differ.
+</p><p>
+To get started using the Tomcat bundle, unzip the <code class="filename">juddi-tomcat-bundle.zip</code>, and start Tomcat :
+</p><pre class="screen">
+% cd apache-tomcat-6.0.20/bin
+% ./startup.sh  
+</pre><p>Browse to http://localhost:8080/juddiv3/services</p><div class="figure"><a id="fig-juddi-services"/><div class="figure-contents"><div class="mediaobject"><img src="images/juddi_services.png" alt="jUDDI Service List"/></div></div><p class="title"><b>Figure 2.4. jUDDI Service List</b></p></div><br class="figure-break"/><p>The services page shows you the available endpoints and methods available.      Using any SOAP client, you should be able to send some sample requests to jUDDI to test:</p><div class="figure"><a id="fig-soap-sample-request"/><div class="figure-contents"><div class="mediaobject"><img src="images/soap_request.png" alt="A jUDDI sample SOAP request"/></div></div><p class="title"><b>Figure 2.5. SOAP Sample Request</b></p></div><br class="figure-break"/></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Running and Developing Tests"/>2.9. Running and Developing Tests</h2></div></div></div><p>
+Currently the only unit tests are in juddi-core.      We plan to add a suite of web service tests automated against the juddi-cargo module.
+</p><p>
+Running the tests:
+</p><pre class="screen">
+% cd juddi-core
+% mvn -Dpersistence=hibernate test
+</pre><p>
+The tests are run through a maven-surefire-plugin within the juddi-core <code class="filename">pom.xml</code> :
+</p><pre xmlns="" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="XML"><!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+
+        maven-surefire-plugin
+        2.4.2
+        
+          
+            src/test/resources/suite-init.xml,src/test/resources/suite-subscribe.xml,src/test/resources/suite-clean.xml
+          
+        
+      <!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_plain"></span><br />
+</pre><p>
+The NUnit suite files listed here determine what tests are run with what data, and what order they are run in.     <code class="filename">suite-init.xml</code> initializes the jUDDI database with data, <code class="filename">suite-subscribe.xml</code> runs a subscription test, and <code class="filename">suite-clean.xml</code> cleans the database and removes the test data.
+</p><p>
+To develop your own tests, please add another maven-surefire-plugin segment and the same ordering of XML files (<code class="filename">suite-init.xml</code>, your custom suite, and then <code class="filename">suite-clean.xml</code>).  
+</p></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="chap-release_process"/>Chapter 3. Release Process</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#addgpg">3.1. Add your gpg key to KEYS</a></span></dt><dt><span class="section"><a href="#Release steps">3.2. Release steps</a></span></dt></dl></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="addgpg"/>3.1. Add your gpg key to KEYS</h2></div></div></div><p>
+        	In the root of the project there is a KEYS file. Add your key to this file and check it into source control.
+        	Depending on your tool of choice you can use on of the following commands:
+        	</p><pre class="programlisting">
+        	pgp -kxa &lt;your name&gt; and append it to this file.
+        	(pgpk -ll &lt;your name&gt; &amp;&amp; pgpk -xa &lt;your name&gt;) &gt;&gt; this file.
+        	(gpg --list-sigs &lt;your name&gt;
+             	&amp;&amp; gpg --armor --export &lt;your name&gt;) &gt;&gt; this file.
+             </pre><p>
+        </p></div><div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="Release steps"/>3.2. Release steps</h2></div></div></div><p>
+		<code class="command">
+		Environment: 
+		Apache Maven 2.2.1 (r801777; 2009-08-06 15:16:01-0400)
+		Java version: 1.6.0_17
+		</code>
+		
+		</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li>Run mvn release:prepare, this will set all the right version numbers and create a tag in SVN.</li><li>Run mvn release:perform, will upload the release to a staging area in the Apache Nexus Repository.</li><li>Go into the juddi-dist, and run mvn clean install -Prelease</li><li>Upload the signed distribution artifacts to apache people.</li><li>Start a vote referencing the build artifacts, leave the vote open for 72 hrs.</li></ol></div><p>
+		
+		On successful vote:
+		</p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li>Release the staging artifacts in Nexus.</li><li>Copy the distribution artifacts to the mirror.</li><li>Update the website.</li></ol></div><p>
+	</p></div></div><div class="appendix" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="appe-Publican-Revision_History"/>Appendix A. Revision History</h2></div></div></div><p>
+		<div class="revhistory"><table border="0" width="100%" summary="Revision history"><tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr><tr><td align="left">Revision 1.1</td><td align="left">Thu Jan 07 2010</td><td align="left"><span class="author"><span class="firstname">Tom</span> <span class="surname">Cunningham</span></span></td></tr><tr><td align="left" colspan="3">
+			<table class="simplelist" border="0" summary="Simple list"><tr><td>Translated Dev Guide to docbook</td></tr></table>
+			</td></tr><tr><td align="left">Revision 1.0</td><td align="left">Mon Nov 16 2009</td><td align="left"><span class="author"><span class="firstname">Darrin</span> <span class="surname">Mison</span></span></td></tr><tr><td align="left" colspan="3">
+                    	<table class="simplelist" border="0" summary="Simple list"><tr><td>Created from community jUDDI Guide</td></tr></table>
+                	</td></tr></table></div>
+	</p></div></div></body></html>
