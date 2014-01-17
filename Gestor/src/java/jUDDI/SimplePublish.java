@@ -16,7 +16,11 @@
  */
 package jUDDI;
 
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.uddi.api_v3.*;
 import org.apache.juddi.api_v3.*;
 import org.uddi.v3_service.UDDISecurityPortType;
@@ -52,19 +56,26 @@ public class SimplePublish {
     }
 
     public void publish() {
+        String ip = "localhost";
+        try {
+             ip = Inet4Address.getLocalHost().getHostAddress();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(SimplePublish.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         // servcicios[i][0] = Nombre (TallerWS)
         // servicios[i][1] = Descripcion (Lo que queramos)
         // servicios[i][2] = URL del wsdl
         String[][] servicios = new String[3][3];
         servicios[0][0] = "TallerWS";
         servicios[0][1] = "TallerWS";
-        servicios[0][2] = "http://localhost:8080/Gestor/TallerWS?wsdl";
+        servicios[0][2] = "http://" + ip + ":8080/Gestor/TallerWS?wsdl";
         servicios[1][0] = "AdminWS";
         servicios[1][1] = "AdminWS";
-        servicios[1][2] = "http://localhost:8080/Gestor/AdminWS?wsdl";
+        servicios[1][2] = "http://" + ip + ":8080/Gestor/AdminWS?wsdl";
         servicios[2][0] = "DesguaceJavaWS";
         servicios[2][1] = "DesguaceJavaWS";
-        servicios[2][2] = "http://localhost:8080/Gestor/DesguaceJavaWS?wsdl";
+        servicios[2][2] = "http://" + ip + ":8080/Gestor/DesguaceJavaWS?wsdl";
         try {
             
             // Setting up the values to get an authentication token for the 'root' user ('root' user has admin privileges
