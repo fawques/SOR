@@ -34,6 +34,7 @@ CREATE TABLE `pedido` (
   `taller` char(32) NOT NULL,
   `fecha_baja` date DEFAULT NULL,
   `fecha_limite` date NOT NULL,
+  `modo_automatico` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `pedido_taller_FK_idx` (`taller`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -75,7 +76,7 @@ use sor_taller;
 
 CREATE TABLE `taller` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) NOT NULL,
+  `id` char(32) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `direccion` varchar(200) DEFAULT NULL,
@@ -95,11 +96,12 @@ CREATE TABLE `pedido` (
   `taller` char(32) NOT NULL,
   `fecha_baja` date DEFAULT NULL,
   `fecha_limite` date NOT NULL,
+  `modo_automatico` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_aux`),
   KEY `PRIMARY_GESTOR` (`id`),
   KEY `pedido_taller_FK_idx` (`taller`),
   CONSTRAINT `pedido_taller_FK` FOREIGN KEY (`taller`) REFERENCES `taller` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `pieza` (
   `nombre` varchar(45) NOT NULL,
@@ -134,12 +136,17 @@ CREATE TABLE `oferta` (
   CONSTRAINT `oferta_pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `acciones` (
+  `accion` varchar(10000) NOT NULL,
+  `params` varchar(10000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE DATABASE IF NOT EXISTS `sor_desguace` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `sor_desguace`;
 
 CREATE TABLE `desguace` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) NOT NULL,
+  `id` char(32) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `direccion` varchar(200) DEFAULT NULL,
@@ -159,6 +166,7 @@ CREATE TABLE `pedido` (
   `taller` char(32) NOT NULL,
   `fecha_baja` date DEFAULT NULL,
   `fecha_limite` date NOT NULL,
+  `modo_automatico` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_aux`),
   KEY `PRIMARY_GESTOR` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -194,4 +202,9 @@ CREATE TABLE `pedido_pieza` (
   KEY `pieza_FK_idx` (`pieza`),
   CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `acciones` (
+  `accion` varchar(10000) NOT NULL,
+  `params` varchar(10000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

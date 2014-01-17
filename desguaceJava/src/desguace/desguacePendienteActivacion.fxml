@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="119.99980000000505" prefWidth="224.99990000000253" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="desguace.DesguacerPendienteActivacionController">
+  <children>
+    <ProgressIndicator fx:id="piIndicador" layoutX="94.0" layoutY="21.0" progress="-1.0" visible="false" />
+    <Button fx:id="btRecargar" layoutX="74.0" layoutY="85.0" mnemonicParsing="false" onAction="#comprobarActivacion" text="Recargar" />
+    <Label fx:id="lbEstado" layoutX="36.0" layoutY="32.0" prefHeight="27.999908447265625" text="" textAlignment="CENTER" textFill="#ff3333" />
+  </children>
+</AnchorPane>

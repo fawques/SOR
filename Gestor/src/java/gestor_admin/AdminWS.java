@@ -5,7 +5,10 @@
  */
 package gestor_admin;
 
+import BD.InterfazBD;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import general.Desguace;
 import general.Oferta;
 import general.Pedido;
 import general.Taller;
@@ -17,10 +20,23 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import BD.InterfazBD;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.gson.GsonBuilder;
 import jUDDI.SimplePublish;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -30,35 +46,67 @@ import jUDDI.SimplePublish;
 public class AdminWS {
     InterfazBD bd;
     /**
-     * This is a sample web service operation
+     *
+     * @param from
+     * @param to
+     * @param subject
+     * @param text
      */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+    public void sendMail(final String from, String to, String subject, String text) {
+        String SMTP_HOST_NAME = "smtp.gmail.com";
+        String SMTP_PORT = "465";
+        String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+        Properties props = new Properties();
+        props.put("mail.smtp.host", SMTP_HOST_NAME);
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.debug", "true");
+        props.put("mail.smtp.port", SMTP_PORT);
+        props.put("mail.smtp.socketFactory.port", SMTP_PORT);
+        props.put("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.put("mail.smtp.socketFactory.fallback", "false");
+
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        //a priori, para que funcione en otro pc,
+                        //a lo mejor habría que generar otra contrasenya, pero creo que no
+                        return new PasswordAuthentication("pablovm1990@gmail.com",
+                                "gcjacxtujgfqigxt");
+                    }
+                });
+
+        session.setDebug(true);
+
+        Message simpleMessage = new MimeMessage(session);
+        InternetAddress fromAddress = null;
+        InternetAddress toAddress = null;
+        try {
+            fromAddress = new InternetAddress(from);
+            toAddress = new InternetAddress(to);
+        } catch (AddressException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        try {
+            simpleMessage.setFrom(fromAddress);
+            simpleMessage.setRecipient(Message.RecipientType.TO, toAddress);
+            simpleMessage.setSubject(subject);
+            simpleMessage.setContent(text, "text/html");
+
+            Transport.send(simpleMessage);
+        } catch (MessagingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
-     * Web service operation
+     * This is a sample web service operation
      */
-    @WebMethod(operationName = "getAltas")
-    public String getAltas() {
-        try {
-            bd = new InterfazBD("sor_gestor");
-            ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
-     //   listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-            //  listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-            listaTalleres = bd.getTalleres();
-            listaTalleres.get(0).nuevoPedido(new Date());
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-            String listaJSON = gson.toJson(listaTalleres);
-            System.out.println("listaJSON = " + listaJSON);
-            return listaJSON;
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    @WebMethod(operationName = "hello")
+    public String hello() {
+        return "Hello";
     }
 
     /**
@@ -138,10 +186,7 @@ public class AdminWS {
         try {
             bd = new InterfazBD("sor_gestor");
             ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
-            listaTalleres = bd.getTalleres();
-            //listaTalleres.add(new Taller(1,"Silvia", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-            //listaTalleres.add(new Taller(2,"Silvia2", "sdgm1@alu.ua.es", "Miau", "España", 1234,124124));
-            listaTalleres.get(0).nuevoPedido(new Date());
+            listaTalleres=bd.getTalleres();
             Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);
@@ -207,5 +252,102 @@ public class AdminWS {
         SimplePublish sp = new SimplePublish();
         sp.publish();
         return "hola";
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getAltaTalleres")
+    public String getAltaTalleres() {
+         try{
+            bd = new InterfazBD("sor_gestor");
+             ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
+             listaTalleres=bd.getAltasTaller();
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gson.toJson(listaTalleres);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        return null;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "darAccesoTaller")
+    public Boolean darAccesoTaller(@WebParam(name = "ID") String ID) {
+     try {
+         bd = new InterfazBD("sor_gestor");
+         boolean res = bd.activarTaller(ID);
+         Taller t = bd.getTallerEnGestor(ID);
+        //TODO descomentar
+         /* if (res) {
+             sendMail("pablovm1990@gmail.com", t.getEmail(), "Usuario SorApp creado correctamente",
+                     "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
+                     + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
+                     + "<li>" + t.getName() + "</li><br/>"
+                     + "<li>" + t.getAddress() + "</li><br/>"
+                     + "<li>" + t.getCity() + "</li><br/>"
+                     + "<li>" + t.getPostalCode() + "</li><br/>"
+                     + "<li>" + t.getTelephone() + "</li><br/>"
+                     + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");
+         }*/
+         bd.close();
+         return res;
+        
+     } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
+            
+            
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "addAccesoDesguace")
+    public Boolean addAccesoDesguace(@WebParam(name = "ID") String ID) {
+     try {
+         bd = new InterfazBD("sor_gestor");
+        return  bd.activarDesguace(ID);
+        
+     } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
+            
+            
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getAltaDesguace")
+    public String getAltaDesguace() {
+         try{
+            bd = new InterfazBD("sor_gestor");
+             ArrayList<Desguace> listaDesguace = new ArrayList<Desguace>();
+             listaDesguace=bd.getAltasDesguaces();
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gson.toJson(listaDesguace);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+        }        
+        catch (ClassNotFoundException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+         Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        return null;
     }
 }

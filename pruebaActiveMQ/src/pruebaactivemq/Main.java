@@ -13,11 +13,11 @@ public class Main {
  
     public static void main(String[] args) throws JMSException {
         //BasicConfigurator.configure();
-        String queueName = "Pedidos";
-        //Producer producer = new Producer();
-        Consumer consumer = new Consumer();
+        String queueName = "prueba";
+        Producer producer = new Producer();
+       // Consumer consumer = new Consumer();
          
-        //producer.produceMessage(queueName);
-        consumer.consumeMessage(queueName);
+        producer.produceMessage(queueName);
+        //consumer.consumeMessage(queueName);
     }
 }
