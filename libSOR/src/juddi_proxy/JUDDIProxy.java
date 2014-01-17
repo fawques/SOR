@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package webservices;
+package juddi_proxy;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,7 +29,7 @@ import org.uddi.api_v3.ServiceList;
  *
  * @author fawques
  */
-public class jUDDIProxy {
+public class JUDDIProxy {
     private static URL wsdl;
 
     public static void loadWsdl(String servicio) {
@@ -60,7 +60,7 @@ public class jUDDIProxy {
         try {
             wsdl = new URL(wsdlString);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(jUDDIProxy.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JUDDIProxy.class.getName()).log(Level.SEVERE, null, ex);
             wsdl = null;
         }
         System.out.println("WSDL: " + wsdlString);
