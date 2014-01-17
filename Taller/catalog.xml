@@ -4,4 +4,5 @@
     <system systemId="http://169.254.106.177:8080/Gestor/TallerWS?xsd=1" uri="xml-resources/web-service-references/TallerWS/wsdl/169.254.106.177_8080/Gestor/TallerWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/Gestor/TallerWS?wsdl" uri="xml-resources/web-service-references/TallerWS/wsdl/localhost_8080/Gestor/TallerWS.wsdl"/>
     <system systemId="http://localhost:8080/Gestor/TallerWS?xsd=1" uri="xml-resources/web-service-references/TallerWS/wsdl/localhost_8080/Gestor/TallerWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8081/juddiv3/services/inquiry?wsdl" uri="xml-resources/web-service-references/inquiry/wsdl/localhost_8081/juddiv3/services/inquiry.wsdl"/>
 </catalog>

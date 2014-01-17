@@ -33,5 +33,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/TallerWS"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/gestor_taller"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-TallerWS"/>
+    <target name="wsimport-client-inquiry" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/inquiry"/>
+        <property name="wsdl-inquiry" location="xml-resources/web-service-references/inquiry/wsdl/localhost_8081/juddiv3/services/inquiry.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/inquiry" destdir="${build.generated.dir}/jax-wsCache/inquiry" wsdl="${wsdl-inquiry}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/inquiry?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-inquiry}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/inquiry"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/inquiry">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-inquiry" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/inquiry"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/uddi-org:v3_service"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-TallerWS, wsimport-client-inquiry"/>
 </project>

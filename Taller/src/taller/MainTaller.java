@@ -17,7 +17,6 @@ import general.Pieza;
 import general.Taller;
 import gestor_taller.JMSException_Exception;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,6 +32,8 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import webservices.jUDDIProxy;
+import static webservices.webservices.nuevoPedido_WS;
 
 /**
  *
@@ -74,6 +75,7 @@ public class MainTaller extends Application {
     }
 
     public static void inicioTaller() throws IOException, ClassNotFoundException, SQLException {
+        jUDDIProxy.loadWsdl("TallerWS");
         bd = new InterfazBD("sor_taller");
         //System.out.println(bd.getPedidosActivos());
         taller = bd.getPrimerTaller();
@@ -319,7 +321,7 @@ public class MainTaller extends Application {
     }
 
     public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
-        try {           
+        try {       
             bd = new InterfazBD("sor_taller");
             String tallerID = bd.getPrimerTaller().getID();
             int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite, modoAutomatico);
@@ -479,12 +481,7 @@ public class MainTaller extends Application {
         return "";
     }
 
-    private static String nuevoPedido_WS(String pedido) throws JMSException_Exception {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.nuevoPedido(pedido);
-    }     
-
+         
     public static String getOfertas(java.lang.String listaPedidos) {
         for (int i = 0; i < 10; i++) {
             try{
@@ -629,4 +626,5 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.cancelarPedido(idPedido);
     }
+
 }
