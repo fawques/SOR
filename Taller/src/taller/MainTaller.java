@@ -32,7 +32,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import juddi_proxy.JUDDIProxy;
+import jUDDI.JUDDIProxy;
 import webservices.Webservices;
 import static webservices.Webservices.aceptarOferta_WS;
 import static webservices.Webservices.alta_WS;

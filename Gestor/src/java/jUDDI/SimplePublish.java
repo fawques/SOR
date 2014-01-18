@@ -19,6 +19,7 @@ package jUDDI;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.uddi.api_v3.*;
@@ -112,12 +113,24 @@ public class SimplePublish {
              ====== A partir de aquí está lo que deberia hacer para registrar los WS ========
             
             */
+            
             // Creating the parent business entity that will contain our service.
             BusinessEntity myBusEntity = new BusinessEntity();
             Name myBusName = new Name();
             myBusName.setValue("Gestor");
             myBusEntity.getName().add(myBusName);
-
+            
+            FindBusiness fb = new FindBusiness();
+            Name n = new Name();
+            n.setValue("Gestor");
+            fb.getName().add(n);
+            BusinessList busList = findBusiness(fb);
+            BusinessInfos businessInfos = busList.getBusinessInfos();
+            List<BusinessInfo> businessInfoList = businessInfos.getBusinessInfo();
+            if (businessInfoList.size()> 0) {
+                myBusEntity.setBusinessKey(businessInfoList.get(0).getBusinessKey());
+            }
+            
             // Adding the business entity to the "save" structure, using our publisher's authentication info and saving away.
             SaveBusiness sb = new SaveBusiness();
             sb.getBusinessEntity().add(myBusEntity);
@@ -174,12 +187,12 @@ public class SimplePublish {
         org.uddi.v3_service.UDDISecurityPortType port = service.getUDDISecurityImplPort();
         return port.getAuthToken(body);
     }
-
+    
     private static BusinessDetail saveBusiness(org.uddi.api_v3.SaveBusiness body) {
         org.uddi.v3_service.UDDIPublicationService service = new org.uddi.v3_service.UDDIPublicationService();
         org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
         return port.saveBusiness(body);
-    }
+}
 
     private static ServiceDetail saveService(org.uddi.api_v3.SaveService body) {
         org.uddi.v3_service.UDDIPublicationService service = new org.uddi.v3_service.UDDIPublicationService();

@@ -6,7 +6,7 @@
 
 package webservices;
 
-import juddi_proxy.JUDDIProxy;
+import jUDDI.JUDDIProxy;
 import gestor_taller.JMSException_Exception;
 
 /**

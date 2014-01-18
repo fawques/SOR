@@ -4,20 +4,24 @@
  * and open the template in the editor.
  */
 
-package juddi_proxy;
+package jUDDI;
 
+import java.net.Inet4Address;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.uddi.api_v3.AccessPoint;
+import org.uddi.api_v3.AuthToken;
 import org.uddi.api_v3.BindingTemplate;
 import org.uddi.api_v3.BindingTemplates;
 import org.uddi.api_v3.BusinessList;
 import org.uddi.api_v3.BusinessService;
 import org.uddi.api_v3.FindQualifiers;
 import org.uddi.api_v3.FindService;
+import org.uddi.api_v3.GetAuthToken;
 import org.uddi.api_v3.GetServiceDetail;
 import org.uddi.api_v3.Name;
 import org.uddi.api_v3.ServiceDetail;
@@ -31,7 +35,7 @@ import org.uddi.api_v3.ServiceList;
  */
 public class JUDDIProxy {
     private static URL wsdl;
-
+    
     public static void loadWsdl(String servicio) {
         FindService fs = new FindService();
         FindQualifiers fq = new FindQualifiers();
