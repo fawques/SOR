@@ -35,11 +35,14 @@ public class InterfazBD {
     
     // DESGUACES 
     // setterss
-    public int anadirOferta(int id, Date fechaAlta, double importe, int estado, String pedido, String desguace, Date fechaBaja, Date fechaLimite) {
-        // TODO: cambiar el id
-        return conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('" + id + "','" + fechaAlta + "', '" + importe + "','" + estado + "','" + pedido + "';" + desguace + "','" + fechaBaja + "','" + fechaLimite + "');");
+    public void anadirOferta(String id, Date fechaAlta, double importe, int estado, String pedido, String desguace, Date fechaBaja, Date fechaLimite) {
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('" + id + "','" +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ", '" + importe + "','" + estado + "','" + pedido + "';" + desguace + "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + "');");
     }
-    
+    public int anadirOferta(Date fechaAlta,  int estado,double importe, String pedido, String desguace, Date fechaBaja, Date fechaLimite) {
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        return conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('', " +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "';" + desguace + "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + "');");
+    }
     public void anadirPedido(String id, Date fechaAlta, int estado, String taller, Date fechaBaja, Date fechaLimite, boolean modoAutomatico)    {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         conexion.ejecutarSQL("insert INTO pedido (id, fecha_alta, estado, taller, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado + "','" + taller + "'," + (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja) + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
@@ -539,7 +542,7 @@ public class InterfazBD {
         return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0', `id`='" + idRecibido + "'");
     }
     public boolean activarDesguaceMainDesguace(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0' where `id`='" + idRecibido + "'");
+        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0', `id`='" + idRecibido + "'");
     }
 
     public boolean activarTaller(String idRecibido) {
@@ -630,7 +633,9 @@ public class InterfazBD {
     public boolean activarPedidoTaller(int id_aux, String id) {
         return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
     }
-
+    public boolean activarOfertaDesguace(int id_aux, String id) {
+        return conexion.ejecutarSQL("Update oferta set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
+    }
     public boolean cancelarOfertas(String idPedido) {
         return conexion.ejecutarSQL("Update oferta set estado='" + EstadoOferta.CANCELLED.ordinal() + "' where pedido='" + idPedido + "'");
     }

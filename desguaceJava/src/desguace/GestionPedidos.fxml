@@ -14,15 +14,14 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TitledPane animated="false" layoutX="34.0" layoutY="40.0" prefHeight="147.0" prefWidth="721.0" text="Filtro de búsqueda">
+                <TitledPane animated="false" layoutX="34.0" layoutY="40.0" prefHeight="147.0" prefWidth="721.0" text="Crear oferta">
                   <content>
                     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                       <children>
-                        <TextField id="tfIDPedido" fx:id="tfNombreTaller" layoutX="125.0" layoutY="20.0" prefWidth="186.082275390625" />
-                        <Label layoutX="31.0" layoutY="23.0" text="Nombre taller" />
-                        <TextField id="tf" fx:id="tfNombrePieza" layoutX="433.0" layoutY="20.0" prefWidth="144.0" />
-                        <Label layoutX="346.0" layoutY="23.0" text="Nombre pieza" />
-                        <Button fx:id="btBuscarPedido" layoutX="566.0" layoutY="70.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscar" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
+                        <Label layoutX="31.0" layoutY="23.0" text="ID pedido" />
+                        <TextField id="tf" fx:id="tfPrecio" layoutX="388.0" layoutY="20.0" prefWidth="144.0" />
+                        <Label layoutX="346.0" layoutY="23.0" text="Precio" />
+                        <Button id="btBuscarPedido" fx:id="btrealizarOferta" layoutX="566.0" layoutY="70.0" minHeight="16.0" mnemonicParsing="false" onAction="#realizarOferta" prefHeight="22.0" prefWidth="90.0" text="Hacer oferta" />
                         <Label layoutX="31.0" layoutY="61.0" text="Fecha limite" />
                         <HBox layoutX="118.0" layoutY="59.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
                           <children>
@@ -31,11 +30,12 @@
                             <TextField fx:id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
                           </children>
                         </HBox>
+                        <Label fx:id="lbID" layoutX="120.0" layoutY="23.0" text="" />
                       </children>
                     </AnchorPane>
                   </content>
                 </TitledPane>
-                <TableView fx:id="tablePedidos" layoutX="28.0" layoutY="243.0" prefHeight="268.0" prefWidth="721.0" />
+                <TableView fx:id="tablePedidos" layoutX="28.0" layoutY="243.0" prefHeight="239.0" prefWidth="721.0" />
                 <Text layoutX="324.0" layoutY="217.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos recibidos" />
               </children>
             </AnchorPane>

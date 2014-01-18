@@ -8,9 +8,27 @@
 
 <xs:element name="checkActivacionResponse" type="tns:checkActivacionResponse"/>
 
-<xs:element name="getPedidos" type="tns:getPedidos"/>
+<xs:element name="getOfertas" type="tns:getOfertas"/>
 
-<xs:element name="getPedidosResponse" type="tns:getPedidosResponse"/>
+<xs:element name="getOfertasResponse" type="tns:getOfertasResponse"/>
+
+<xs:element name="getPedidosporID" type="tns:getPedidosporID"/>
+
+<xs:element name="getPedidosporIDResponse" type="tns:getPedidosporIDResponse"/>
+
+<xs:element name="nuevaOferta" type="tns:nuevaOferta"/>
+
+<xs:element name="nuevaOfertaResponse" type="tns:nuevaOfertaResponse"/>
+
+<xs:complexType name="getOfertas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getOfertasResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="checkActivacion">
 <xs:sequence>
@@ -19,16 +37,6 @@
 </xs:complexType>
 
 <xs:complexType name="checkActivacionResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getPedidos">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getPedidosResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -48,6 +56,30 @@
 <xs:complexType name="altaResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nuevaOferta">
+<xs:sequence>
+<xs:element name="oferta" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nuevaOfertaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPedidosporID">
+<xs:sequence>
+<xs:element name="string" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPedidosporIDResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

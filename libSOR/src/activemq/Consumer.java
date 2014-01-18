@@ -9,6 +9,8 @@ package activemq;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -40,6 +42,7 @@ public class Consumer {
         queue = session.createQueue(queueName);
         //Create Consumer
          consumer = session.createConsumer(queue);
+         
     }
  
     public String consumeMessage() throws JMSException {
@@ -47,8 +50,17 @@ public class Consumer {
         //Start Connection
         /** Starts (or restarts) a connection's delivery of incoming messages. */
         connection.start();
+          try {
+            //Consume Message
+            Thread.sleep(10);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //Consume Message
         TextMessage message =  (TextMessage) consumer.receiveNoWait();
+       /* if(message==null){
+            throw new javax.jms.IllegalStateException("no ha cogido ningún mensaje");
+        }*/
         ArrayList<String> mensaje= new ArrayList<String>();
         
         while(message!=null){
