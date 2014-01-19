@@ -101,7 +101,7 @@ public class DesguaceJavaWS {
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
-             bd.anadirOferta(stringID, p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACCEPTED.ordinal(),  p.getPedido(), p.getDesguace(), p.getFecha_baja(),p.getFecha_limite());
+             bd.anadirOferta(stringID, p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACTIVE.ordinal(),  p.getPedido(), p.getDesguace(), p.getFecha_baja(),p.getFecha_limite());
             bd.close();
             return stringID;
         } catch (SQLException ex) {

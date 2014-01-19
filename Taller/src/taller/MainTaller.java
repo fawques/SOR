@@ -8,6 +8,7 @@ package taller;
 import Async.AsyncManager;
 import BD.InterfazBD;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
 import general.EstadoPedido;
@@ -255,11 +256,14 @@ public class MainTaller extends Application {
     }
 
     public static ArrayList<Oferta> actualizarOfertas() {
-        String ofertasGson = getOfertas(getPedidosActivos());
-        Gson gson = new Gson();
-        Type collectionType = new TypeToken<ArrayList<Oferta>>() {
-        }.getType();
-        ArrayList<Oferta> listOf = gson.fromJson(ofertasGson, collectionType);
+        
+         Gson gson = new Gson();
+          
+       String ofertasGson = getOfertas(getPedidosActivos());
+       Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
+        ArrayList<Oferta> listOf= new ArrayList<Oferta>();
+        listOf= gson.fromJson(ofertasGson, collectionType);
+        //listOf = gson.fromJson(ofertasGson, collectionType);
         try {
             bd = new InterfazBD("sor_taller");
             for (Oferta of : listOf) {

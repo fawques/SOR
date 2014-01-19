@@ -127,8 +127,10 @@ public class TallerWS {
                 Pedido p = it.next();
                 listaOferta.addAll(bd.getOfertasPedido(p.getID(), EstadoOferta.ACTIVE));
             }
+             Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String retu=gsonn.toJson(listaOferta);
             bd.close();
-            return gson.toJson(listaOferta);
+            return retu;
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

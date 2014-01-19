@@ -256,11 +256,11 @@ public class DesguaceJava extends Application {
         }
         return of;
     }
-    public static boolean cambiarEstadoOferta(String id){
+    public static boolean cambiarEstadoOferta(String id,EstadoOferta estado){
     Boolean realizado=false;
         try {
             bd= new InterfazBD("sor_desguace");
-            realizado= bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+            realizado= bd.cambiarEstadoOferta(estado, id);
             return realizado;
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);

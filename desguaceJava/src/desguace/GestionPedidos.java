@@ -111,7 +111,7 @@ public class GestionPedidos implements Initializable {
      try {
             bd= new InterfazBD("sor_desguace");
               ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
-        
+      
        Callback<TableColumn, TableCell> integerCellFactory =
                 new Callback<TableColumn, TableCell>() {
             @Override
@@ -159,14 +159,14 @@ public class GestionPedidos implements Initializable {
         fecha_limiteCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_limite"));
         fecha_limiteCol.setCellFactory(stringCellFactory);
 
-       
+       CompararOfertasGestorDesguace();
         TablaOfertas tpOf;
         ofertas= DesguaceJava.actualizarOfertasAceptadas();
           for (Oferta of : ofertas) {
             tpOf = new TablaOfertas(of);
             olTablaOfertasAceptadas.add(tpOf);
         }
-        
+      
       
         tableOfertasAceptadas.setEditable(true);
         tableOfertasAceptadas.setItems(olTablaOfertasAceptadas);
@@ -178,6 +178,26 @@ public class GestionPedidos implements Initializable {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void CompararOfertasGestorDesguace(){
+        
+    ArrayList<Oferta>  ofertas= DesguaceJava.actualizarOfertas();   
+    ArrayList<Oferta> ofertasgestor= new ArrayList<Oferta>();
+      Gson gson = new Gson();
+        Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
+        String ofertasstring= DesguaceJava.getOfertas();
+        if(!ofertasstring.equals("") && ofertasstring!=null){
+            ofertasgestor = gson.fromJson(ofertasstring, collectionType);
+        }
+       for(Oferta ofertagestor:ofertasgestor){
+           for(Oferta ofertadesguace:ofertas){
+               if(ofertagestor.getID().equals(ofertadesguace.getID())){
+                    if(ofertagestor.getEstado()!=ofertadesguace.getEstado()){
+                           DesguaceJava.cambiarEstadoOferta(ofertagestor.getID(),ofertagestor.getEstado());
+                    }
+               }
+           }
+       }
     }
     private void tablaPedidos(){
         try {
@@ -427,7 +447,7 @@ public class GestionPedidos implements Initializable {
             if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
                Boolean gestorlohacambiado= DesguaceJava.aceptarOfertaFin(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
                   if(gestorlohacambiado==true){
-                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
+                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.FINISHED_OK);
                     if(aceptado==false){
                         System.err.println("No se ha podido aceptar la oferta");
                     }
