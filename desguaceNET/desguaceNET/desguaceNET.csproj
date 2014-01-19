@@ -66,6 +66,7 @@
     <Compile Include="AltaDesguace.Designer.cs">
       <DependentUpon>AltaDesguace.cs</DependentUpon>
     </Compile>
+    <Compile Include="DesguaceNet.cs" />
     <Compile Include="DesguacerPendienteActivacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +79,16 @@
     <Compile Include="GestionPedidos.Designer.cs">
       <DependentUpon>GestionPedidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="libSOR\BD\Conexion.cs" />
+    <Compile Include="libSOR\BD\InterfazBD.cs" />
+    <Compile Include="libSOR\general\Desguace.cs" />
+    <Compile Include="libSOR\general\EstadoGeneral.cs" />
+    <Compile Include="libSOR\general\EstadoOferta.cs" />
+    <Compile Include="libSOR\general\EstadoPedido.cs" />
+    <Compile Include="libSOR\general\Oferta.cs" />
+    <Compile Include="libSOR\general\Pedido.cs" />
+    <Compile Include="libSOR\general\Pieza.cs" />
+    <Compile Include="libSOR\general\Usuario.cs" />
     <Compile Include="NuevaOferta.cs">
       <SubType>Form</SubType>
     </Compile>
