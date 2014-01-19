@@ -56,6 +56,7 @@ public class GestionPedidos implements Initializable {
     Stage thisStage;
     public TableView tablePedidos;
     public TableView tableOfertas;
+    public TableView tableOfertasAceptadas;
     @FXML
     private Label lbID;
     @FXML 
@@ -84,9 +85,12 @@ public class GestionPedidos implements Initializable {
     private Button btNuevaOferta;
     @FXML
     private Button btAnularOferta;
-ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayList();
-  ObservableList<TablaOfertas> olTablaOfertas = FXCollections.observableArrayList();
-  InterfazBD bd;
+    private int borrarOferta=-1;
+    private int borrarOfertaAceptadas=-1;
+    ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayList();
+    ObservableList<TablaOfertas> olTablaOfertas = FXCollections.observableArrayList();
+    ObservableList<TablaOfertas> olTablaOfertasAceptadas = FXCollections.observableArrayList();
+    InterfazBD bd;
   
     /**
      * Initializes the controller class.
@@ -94,6 +98,7 @@ ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayLis
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tablaPedidos();
+        tablaOfertasActivas();
     }    
 
     @FXML
@@ -102,15 +107,88 @@ ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayLis
         public void setStage(Stage stage) {
         thisStage = stage;
     }
-    private void tablaPedidos(){
-        try {
+    private void tablaOfertasActivas(){
+     try {
             bd= new InterfazBD("sor_desguace");
+              ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
+        
+       Callback<TableColumn, TableCell> integerCellFactory =
+                new Callback<TableColumn, TableCell>() {
+            @Override
+            public TableCell call(TableColumn p) {
+                MyIntegerTableCell cell = new MyIntegerTableCell();
+                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+                return cell;
+            }
+        };
+ 
+        Callback<TableColumn, TableCell> stringCellFactory =
+                new Callback<TableColumn, TableCell>() {
+            @Override
+            public TableCell call(TableColumn p) {
+                MyStringTableCell cell = new MyStringTableCell();
+                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+                return cell;
+            }
+        };      
+        TableColumn id_auxCol = new TableColumn("Id_aux");
+        id_auxCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Integer>("id_aux"));
+        id_auxCol.setCellFactory(integerCellFactory);
+        TableColumn idCol = new TableColumn("Id");
+        idCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("id"));
+        idCol.setCellFactory(stringCellFactory);
+        TableColumn fecha_altaCol = new TableColumn("Fecha alta");
+        fecha_altaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_alta"));
+        fecha_altaCol.setCellFactory(stringCellFactory);
+        TableColumn importeCol = new TableColumn("Importe");
+        importeCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("importe"));
+        importeCol.setCellFactory(stringCellFactory);
+        TableColumn estadoCol = new TableColumn("Estado");
+        estadoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("estado"));
+        estadoCol.setCellFactory(stringCellFactory);
+        TableColumn pedidoCol = new TableColumn("Pedido");
+        pedidoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("pedido"));
+        pedidoCol.setCellFactory(stringCellFactory);
+        TableColumn desguaceCol = new TableColumn("Desguace");
+        desguaceCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguace"));
+        desguaceCol.setCellFactory(stringCellFactory);
+        TableColumn fecha_bajaCol = new TableColumn("Fecha baja");
+        fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_baja"));
+        fecha_bajaCol.setCellFactory(stringCellFactory);
+        TableColumn fecha_limiteCol = new TableColumn("Fecha limite");
+        fecha_limiteCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_limite"));
+        fecha_limiteCol.setCellFactory(stringCellFactory);
+
+       
+        TablaOfertas tpOf;
+        ofertas= DesguaceJava.actualizarOfertasAceptadas();
+          for (Oferta of : ofertas) {
+            tpOf = new TablaOfertas(of);
+            olTablaOfertasAceptadas.add(tpOf);
+        }
+        
+      
+        tableOfertasAceptadas.setEditable(true);
+        tableOfertasAceptadas.setItems(olTablaOfertasAceptadas);
+        tableOfertasAceptadas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
+        bd.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
+    }
+    private void tablaPedidos(){
+        try {
+            bd= new InterfazBD("sor_desguace");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          datatablePedidos.clear();
       Callback<TableColumn, TableCell> integerCellFactory =
                 new Callback<TableColumn, TableCell>() {
             @Override
@@ -198,24 +276,33 @@ ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayLis
 
         
         
-           TableColumn id_auxCol = new TableColumn("Id_aux");
+        TableColumn id_auxCol = new TableColumn("Id_aux");
         id_auxCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Integer>("id_aux"));
+        id_auxCol.setCellFactory(integerCellFactory);
         TableColumn idCol = new TableColumn("Id");
         idCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("id"));
+        idCol.setCellFactory(stringCellFactory);
         TableColumn fecha_altaCol = new TableColumn("Fecha alta");
-        fecha_altaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Date>("fecha_alta"));
+        fecha_altaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_alta"));
+        fecha_altaCol.setCellFactory(stringCellFactory);
         TableColumn importeCol = new TableColumn("Importe");
-        importeCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Double>("importe"));
+        importeCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("importe"));
+        importeCol.setCellFactory(stringCellFactory);
         TableColumn estadoCol = new TableColumn("Estado");
-        estadoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, EstadoOferta>("estado"));
+        estadoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("estado"));
+        estadoCol.setCellFactory(stringCellFactory);
         TableColumn pedidoCol = new TableColumn("Pedido");
         pedidoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("pedido"));
+        pedidoCol.setCellFactory(stringCellFactory);
         TableColumn desguaceCol = new TableColumn("Desguace");
         desguaceCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguace"));
+        desguaceCol.setCellFactory(stringCellFactory);
         TableColumn fecha_bajaCol = new TableColumn("Fecha baja");
-        fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Date>("fecha_baja"));
+        fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_baja"));
+        fecha_bajaCol.setCellFactory(stringCellFactory);
         TableColumn fecha_limiteCol = new TableColumn("Fecha limite");
-        fecha_limiteCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Date>("fecha_limite"));
+        fecha_limiteCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_limite"));
+        fecha_limiteCol.setCellFactory(stringCellFactory);
 
         ofertas = DesguaceJava.actualizarOfertas();
         TablaOfertas tpOf;
@@ -224,9 +311,11 @@ ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayLis
             olTablaOfertas.add(tpOf);
         }
 
+        
         tableOfertas.setEditable(true);
         tableOfertas.setItems(olTablaOfertas);
         tableOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
+        bd.close();
     }
     public void showStage() {
         thisStage.sizeToScene();
@@ -247,6 +336,23 @@ ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayLis
           //  lbMensaje.setText("La oferta se ha creado correctamente");
 
        
+    }
+   public void actualizarPestañaOfertas(){
+      actualizarOfertas();
+      //actualizarOfertasOfertadas();
+   }
+     public void actualizarOfertasOfertadas() {
+        ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
+        olTablaOfertasAceptadas.clear();
+       ofertas = DesguaceJava.actualizarOfertasAceptadas();
+        TablaOfertas tpOf;
+        for (Oferta of : ofertas) {
+            tpOf = new TablaOfertas(of);
+            olTablaOfertasAceptadas.add(tpOf);
+        }
+
+        
+        tableOfertasAceptadas.setItems(olTablaOfertasAceptadas);
     }
    public void actualizarOfertas() {
         ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
@@ -313,8 +419,26 @@ ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayLis
        
         tablePedidos.setItems(datatablePedidos);
       
-
+        bd.close();
     }
+     public void aceptarOferta(){
+         Boolean aceptado=false;
+        if(borrarOfertaAceptadas!=-1){
+            if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
+               Boolean gestorlohacambiado= DesguaceJava.aceptarOfertaFin(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
+                  if(gestorlohacambiado==true){
+                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
+                    if(aceptado==false){
+                        System.err.println("No se ha podido aceptar la oferta");
+                    }
+                  }
+                  else{
+                    System.err.println("No se ha podido cambiar la oferta en gestor a finalizado");
+                  }
+            }
+        }
+        actualizarOfertasOfertadas();
+     }
    
     class MyIntegerTableCell extends TableCell<TablaPedidos, Integer> {
  
@@ -352,10 +476,21 @@ ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayLis
             TableCell c = (TableCell) t.getSource();
             String tabla= c.getTableView().getId();
             int index = c.getIndex();
-            if(datatablePedidos.size()>=index){
-                lbID.setText(datatablePedidos.get(index).getId());
+            if(tabla.equals("tablePedidos")){
+                if(datatablePedidos.size()>=index){
+                    lbID.setText(datatablePedidos.get(index).getId());
+                }
             }
-           
+            else if(tabla.equals("tableOfertasAceptadas")){
+            if(olTablaOfertasAceptadas.size()>=index){
+                    borrarOfertaAceptadas=index;
+                }
+            }
+            else{
+                if(olTablaOfertas.size()>=index){
+                    borrarOferta=index;
+                }
+            }
 
            
             

@@ -41,47 +41,16 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab onSelectionChanged="#actualizarOfertas" text="Ofertas">
+        <Tab onSelectionChanged="#actualizarPestañaOfertas" text="Ofertas">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="780.0">
               <children>
-                <TitledPane animated="false" prefHeight="133.0" prefWidth="718.0" text="Filtro de búsqueda" AnchorPane.bottomAnchor="384.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="28.0">
-                  <content>
-                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="104.0" prefWidth="714.0">
-                      <children>
-                        <Label id="tbNombrePieza" layoutX="24.0" layoutY="27.0" text="ID oferta" />
-                        <TextField id="tbNombrePieza" fx:id="tfIDOferta" layoutX="118.0" layoutY="24.0" prefWidth="98.0" />
-                        <Label id="tbNombrePieza" layoutX="24.0" layoutY="65.0" text="PVP entre" />
-                        <TextField id="tbNombrePieza" fx:id="tfPVPmin" layoutX="118.0" layoutY="62.0" prefWidth="64.0" />
-                        <ComboBox id="cbEstado" fx:id="cbEstadoOfertas" layoutX="366.0" layoutY="24.0">
-                          <items>
-                            <FXCollections fx:factory="observableArrayList">
-                              <String fx:value="Item 1" />
-                              <String fx:value="Item 2" />
-                              <String fx:value="Item 3" />
-                            </FXCollections>
-                          </items>
-                        </ComboBox>
-                        <Label id="tbNombrePieza" layoutX="271.0" layoutY="27.0" text="Estado" />
-                        <Label id="tbNombrePieza" layoutX="482.0" layoutY="26.0" text="Fecha limite" />
-                        <HBox layoutX="576.0" layoutY="22.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
-                          <children>
-                            <TextField id="tfLimiteDia" minWidth="30.0" prefWidth="150.0" />
-                            <TextField id="tfLimiteMes" minWidth="30.0" prefWidth="150.0" />
-                            <TextField id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
-                          </children>
-                        </HBox>
-                        <Button id="btBuscar" fx:id="btBuscarOfertas" layoutX="596.0" layoutY="67.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscar" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
-                        <Label id="tbNombrePieza" layoutX="207.0" layoutY="67.0" text="y" />
-                        <TextField id="tbNombrePieza" fx:id="tfPVPMax" layoutX="235.0" layoutY="65.0" prefWidth="64.0" />
-                      </children>
-                    </AnchorPane>
-                  </content>
-                </TitledPane>
-                <TableView fx:id="tableOfertas" layoutX="28.0" layoutY="228.0" prefHeight="254.0" prefWidth="718.0" />
-                <Button id="btNuevaPieza" fx:id="btNuevaOferta" layoutX="27.0" layoutY="503.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Nueva oferta" />
-                <Button id="btNuevaPieza" fx:id="btAnularOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Anular oferta" />
-                <Text layoutX="343.0" layoutY="203.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas enviadas" />
+                <TableView fx:id="tableOfertas" layoutX="28.0" layoutY="62.0" prefHeight="173.0" prefWidth="718.0" />
+                <Button id="btNuevaPieza" fx:id="btAceptar" layoutX="28.0" layoutY="503.0" mnemonicParsing="false" onAction="#aceptarOferta" prefHeight="22.0" prefWidth="135.0" text="Aceptar oferta" />
+                <Button id="btNuevaPieza" fx:id="btAnularOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Anular oferta aceptada" />
+                <Text layoutX="329.0" layoutY="32.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas enviadas" />
+                <TableView fx:id="tableOfertasAceptadas" layoutX="28.0" layoutY="308.0" prefHeight="161.0" prefWidth="718.0" />
+                <Button id="btNuevaPieza" layoutX="28.0" layoutY="255.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Anular oferta enviada" />
               </children>
             </AnchorPane>
           </content>

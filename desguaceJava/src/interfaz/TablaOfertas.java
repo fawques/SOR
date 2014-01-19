@@ -21,24 +21,26 @@ import javafx.beans.property.SimpleStringProperty;
 public class TablaOfertas {
     SimpleIntegerProperty id_aux;
     SimpleStringProperty id;
-    SimpleObjectProperty<Date> fecha_alta;
-    SimpleDoubleProperty importe;
-    SimpleObjectProperty<EstadoOferta> estado;
+    SimpleStringProperty fecha_alta;
+    SimpleStringProperty importe;
+    SimpleStringProperty estado;
     SimpleStringProperty pedido;
     SimpleStringProperty desguace;
-    SimpleObjectProperty<Date> fecha_baja;
-    SimpleObjectProperty<Date> fecha_limite;
+    SimpleStringProperty fecha_baja;
+    SimpleStringProperty fecha_limite;
 
    public TablaOfertas(Oferta of) {
         this.id_aux = new SimpleIntegerProperty(of.getID_aux());
         this.id = new SimpleStringProperty(of.getID());
-        this.fecha_alta = new SimpleObjectProperty<>(of.getFecha_alta());
-        this.importe = new SimpleDoubleProperty(of.getPrecio());
-        this.estado = new SimpleObjectProperty<>(of.getEstado());
+        this.fecha_alta = new SimpleStringProperty(of.getFecha_alta().toString());
+        this.importe = new SimpleStringProperty(Double.toString(of.getPrecio()));
+        this.estado = new SimpleStringProperty(of.getEstado().toString());
         this.pedido = new SimpleStringProperty(of.getPedido());
         this.desguace = new SimpleStringProperty(of.getDesguace());
-        this.fecha_baja = new SimpleObjectProperty<>(of.getFecha_baja());
-        this.fecha_limite = new SimpleObjectProperty<>(of.getFecha_limite());
+        if(of.getFecha_baja()!=null){
+            this.fecha_baja = new SimpleStringProperty(of.getFecha_baja().toString());
+        }
+        this.fecha_limite = new SimpleStringProperty(of.getFecha_limite().toString());
     }
 
     public int getId_aux() {
@@ -49,15 +51,15 @@ public class TablaOfertas {
         return id.get();
     }
 
-    public Date getFecha_alta() {
+    public String getFecha_alta() {
         return fecha_alta.get();
     }
 
-    public Double getImporte() {
+    public String getImporte() {
         return importe.get();
     }
 
-    public EstadoOferta getEstado() {
+    public String getEstado() {
         return estado.get();
     }
 
@@ -69,11 +71,14 @@ public class TablaOfertas {
         return desguace.get();
     }
 
-    public Date getFecha_baja() {
+    public String getFecha_baja() {
+        if(fecha_baja==null){
+            return "";
+        }
         return fecha_baja.get();
     }
 
-    public Date getFecha_limite() {
+    public String getFecha_limite() {
         return fecha_limite.get();
     }
 

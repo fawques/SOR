@@ -10,12 +10,6 @@
 <message name="altaResponse">
 <part name="parameters" element="tns:altaResponse"/>
 </message>
-<message name="checkActivacion">
-<part name="parameters" element="tns:checkActivacion"/>
-</message>
-<message name="checkActivacionResponse">
-<part name="parameters" element="tns:checkActivacionResponse"/>
-</message>
 <message name="getOfertas">
 <part name="parameters" element="tns:getOfertas"/>
 </message>
@@ -28,20 +22,28 @@
 <message name="nuevaOfertaResponse">
 <part name="parameters" element="tns:nuevaOfertaResponse"/>
 </message>
+<message name="checkActivacion">
+<part name="parameters" element="tns:checkActivacion"/>
+</message>
+<message name="checkActivacionResponse">
+<part name="parameters" element="tns:checkActivacionResponse"/>
+</message>
 <message name="getPedidosporID">
 <part name="parameters" element="tns:getPedidosporID"/>
 </message>
 <message name="getPedidosporIDResponse">
 <part name="parameters" element="tns:getPedidosporIDResponse"/>
 </message>
+<message name="aceptarOfertaFin">
+<part name="parameters" element="tns:aceptarOfertaFin"/>
+</message>
+<message name="aceptarOfertaFinResponse">
+<part name="parameters" element="tns:aceptarOfertaFinResponse"/>
+</message>
 <portType name="DesguaceJavaWS">
 <operation name="alta">
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest" message="tns:alta"/>
 <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaResponse" message="tns:altaResponse"/>
-</operation>
-<operation name="checkActivacion">
-<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest" message="tns:checkActivacion"/>
-<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse" message="tns:checkActivacionResponse"/>
 </operation>
 <operation name="getOfertas">
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest" message="tns:getOfertas"/>
@@ -51,9 +53,17 @@
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest" message="tns:nuevaOferta"/>
 <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse" message="tns:nuevaOfertaResponse"/>
 </operation>
+<operation name="checkActivacion">
+<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest" message="tns:checkActivacion"/>
+<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse" message="tns:checkActivacionResponse"/>
+</operation>
 <operation name="getPedidosporID">
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosporIDRequest" message="tns:getPedidosporID"/>
 <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosporIDResponse" message="tns:getPedidosporIDResponse"/>
+</operation>
+<operation name="aceptarOfertaFin">
+<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinRequest" message="tns:aceptarOfertaFin"/>
+<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinResponse" message="tns:aceptarOfertaFinResponse"/>
 </operation>
 </portType>
 <binding name="DesguaceJavaWSPortBinding" type="tns:DesguaceJavaWS">
@@ -67,15 +77,6 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="checkActivacion">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="getOfertas">
 <soap:operation soapAction=""/>
 <input>
@@ -94,7 +95,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="checkActivacion">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getPedidosporID">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="aceptarOfertaFin">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

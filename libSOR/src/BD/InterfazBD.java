@@ -37,7 +37,8 @@ public class InterfazBD {
     // setterss
     public void anadirOferta(String id, Date fechaAlta, double importe, int estado, String pedido, String desguace, Date fechaBaja, Date fechaLimite) {
          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('" + id + "','" +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ", '" + importe + "','" + estado + "','" + pedido + "';" + desguace + "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + "');");
+          conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('" + id + "',"  +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ");");
+
     }
     public int anadirOferta(Date fechaAlta,  int estado,double importe, String pedido, String desguace, Date fechaBaja, Date fechaLimite) {
          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");

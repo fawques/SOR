@@ -162,6 +162,26 @@ public class DesguaceJavaWS {
            
         return null;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "aceptarOfertaFin")
+    public Boolean aceptarOfertaFin(@WebParam(name = "id") String id) {
+        Boolean aceptada=false;
+        try {
+            bd = new InterfazBD("sor_gestor");
+            aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+            bd.close();
+            return aceptada;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return aceptada;
+    }
     
 }
 
