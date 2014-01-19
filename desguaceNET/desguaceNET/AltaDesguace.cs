@@ -1,4 +1,5 @@
-﻿using System;
+﻿using desguaceNET.desguaceWS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,6 +30,11 @@ namespace desguaceNET
                 Console.WriteLine(item["email"]);
                 Console.WriteLine("AAA");
             }
+
+            DesguaceJavaWSClient client = new desguaceWS.DesguaceJavaWSClient();
+            string respuesta = client.checkActivacion(filas[0]["email"].ToString());
+            Console.WriteLine(respuesta);
+
         }
     }
 }
