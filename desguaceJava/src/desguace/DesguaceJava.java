@@ -228,7 +228,7 @@ public class DesguaceJava extends Application {
     }
     
     public static ArrayList<Oferta> actualizarOfertas() {
-        ArrayList<Oferta> of = bd.getOfertas();
+        ArrayList<Oferta> of = bd.getOfertasConID_aux(EstadoOferta.ACTIVE);
         return of;
     }
     /**

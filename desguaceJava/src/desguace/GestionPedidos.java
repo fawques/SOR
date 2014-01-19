@@ -251,17 +251,70 @@ ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayLis
    public void actualizarOfertas() {
         ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
         olTablaOfertas.clear();
-        ofertas = DesguaceJava.actualizarOfertas();
+       ofertas = DesguaceJava.actualizarOfertas();
         TablaOfertas tpOf;
         for (Oferta of : ofertas) {
             tpOf = new TablaOfertas(of);
             olTablaOfertas.add(tpOf);
         }
 
-        tableOfertas.setEditable(true);
+        
         tableOfertas.setItems(olTablaOfertas);
     }
-   
+      public void actualizarPedidos() {
+           try {
+            bd= new InterfazBD("sor_desguace");
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+          ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
+        datatablePedidos.clear();
+          Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+            Gestor_activemq activemq;
+            String listaIdsString = null;
+
+             ArrayList<String>  listaids = new ArrayList<String>();
+        try {
+            activemq = new Gestor_activemq();
+            activemq.create_Consumer("pedidos");
+            
+            listaIdsString= activemq.consumer.consumeMessage();
+            
+           
+            activemq.consumer.closeConsumer();
+        } catch (JMSException ex) {
+            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String pedidosstring=null;
+        collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
+        if(listaIdsString!=null){
+            pedidosstring= DesguaceJava.getPedidosporID(listaIdsString);
+        }
+        if(!pedidosstring.equals("") && pedidosstring!=null){
+            listaPedidos = gson.fromJson(pedidosstring, collectionType);
+        }
+        
+        System.out.println("pasa por aqui");
+        TablaPedidos interfaz= new TablaPedidos();
+         for (Pedido pedido : listaPedidos) {
+            bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
+            interfaz= new TablaPedidos(pedido);
+             datatablePedidos.add(interfaz);
+             
+        }
+        for (Pedido pedido : bd.getPedidosConID_aux(EstadoPedido.ACTIVE)) {         
+            interfaz= new TablaPedidos(pedido);
+             datatablePedidos.add(interfaz);
+             
+        }
+       
+        tablePedidos.setItems(datatablePedidos);
+      
+
+    }
    
     class MyIntegerTableCell extends TableCell<TablaPedidos, Integer> {
  

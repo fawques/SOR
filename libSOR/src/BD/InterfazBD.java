@@ -41,7 +41,7 @@ public class InterfazBD {
     }
     public int anadirOferta(Date fechaAlta,  int estado,double importe, String pedido, String desguace, Date fechaBaja, Date fechaLimite) {
          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        return conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('', " +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "';" + desguace + "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + "');");
+        return conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('', " +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ");");
     }
     public void anadirPedido(String id, Date fechaAlta, int estado, String taller, Date fechaBaja, Date fechaLimite, boolean modoAutomatico)    {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -203,7 +203,24 @@ public class InterfazBD {
         return lista;
 
     }
+public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
+        ArrayList<Oferta> lista = new ArrayList<Oferta>();
+        try {
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta where estado='" + estado.ordinal() + "'");
+            while (resultados.next()) {
+                String ofertaID = resultados.getString("id");
 
+
+                Oferta nuevo = new Oferta(ofertaID, resultados.getInt("id_aux"), resultados.getDouble("importe"),resultados.getString("desguace"), resultados.getString("pedido"), resultados.getDate("fecha_alta"),  resultados.getDate("fecha_baja"),  resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+                lista.add(nuevo);
+           }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+
+    }
     public ArrayList<Taller> getTalleres()
     {
         ArrayList<Taller> lista= new ArrayList<>();
