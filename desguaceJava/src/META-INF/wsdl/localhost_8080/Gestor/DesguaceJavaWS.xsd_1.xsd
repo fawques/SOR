@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://gestor_desguace_java/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://gestor_desguace_java/">
 
+<xs:element name="aceptarOfertaFin" type="tns:aceptarOfertaFin"/>
+
+<xs:element name="aceptarOfertaFinResponse" type="tns:aceptarOfertaFinResponse"/>
+
 <xs:element name="alta" type="tns:alta"/>
 
 <xs:element name="altaResponse" type="tns:altaResponse"/>
@@ -8,9 +12,17 @@
 
 <xs:element name="checkActivacionResponse" type="tns:checkActivacionResponse"/>
 
-<xs:element name="getPedidos" type="tns:getPedidos"/>
+<xs:element name="getOfertas" type="tns:getOfertas"/>
 
-<xs:element name="getPedidosResponse" type="tns:getPedidosResponse"/>
+<xs:element name="getOfertasResponse" type="tns:getOfertasResponse"/>
+
+<xs:element name="getPedidosporID" type="tns:getPedidosporID"/>
+
+<xs:element name="getPedidosporIDResponse" type="tns:getPedidosporIDResponse"/>
+
+<xs:element name="nuevaOferta" type="tns:nuevaOferta"/>
+
+<xs:element name="nuevaOfertaResponse" type="tns:nuevaOfertaResponse"/>
 
 <xs:complexType name="checkActivacion">
 <xs:sequence>
@@ -24,11 +36,11 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getPedidos">
+<xs:complexType name="getOfertas">
 <xs:sequence/>
 </xs:complexType>
 
-<xs:complexType name="getPedidosResponse">
+<xs:complexType name="getOfertasResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -48,6 +60,42 @@
 <xs:complexType name="altaResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nuevaOferta">
+<xs:sequence>
+<xs:element name="oferta" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nuevaOfertaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPedidosporID">
+<xs:sequence>
+<xs:element name="string" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPedidosporIDResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="aceptarOfertaFin">
+<xs:sequence>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="aceptarOfertaFinResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

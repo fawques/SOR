@@ -21,29 +21,31 @@ public class TablaPedidos {
 
     SimpleIntegerProperty id_aux;
     SimpleStringProperty id;
-    SimpleObjectProperty<Date> fecha_alta;
-    SimpleObjectProperty<EstadoPedido> estado;
+    SimpleStringProperty fecha_alta;
+    SimpleIntegerProperty estado;
     SimpleStringProperty taller;
-    SimpleObjectProperty<Date> fecha_baja;
-    SimpleObjectProperty<Date> fecha_limite;
+    SimpleStringProperty fecha_baja;
+    SimpleStringProperty fecha_limite;
 
     public TablaPedidos(Pedido p) {
         this.id_aux = new SimpleIntegerProperty(p.getID_aux());
         this.id = new SimpleStringProperty(p.getID());
-        this.fecha_alta = new SimpleObjectProperty<>(p.getFecha_alta());
-        this.estado = new SimpleObjectProperty<>(p.getEstado());
+        this.fecha_alta = new SimpleStringProperty(p.getFecha_alta().toString());
+        this.estado = new SimpleIntegerProperty(p.getEstado().ordinal());
         this.taller = new SimpleStringProperty(p.getTaller());
-        this.fecha_baja = new SimpleObjectProperty<>(p.getFecha_baja());
-        this.fecha_limite = new SimpleObjectProperty<>(p.getFecha_limite());
+        if(p.getFecha_baja()!=null){
+            this.fecha_baja = new SimpleStringProperty(p.getFecha_baja().toString());
+        }
+        this.fecha_limite = new SimpleStringProperty(p.getFecha_limite().toString());
     }
        public TablaPedidos() {
         this.id_aux = new SimpleIntegerProperty();
         this.id = new SimpleStringProperty("");
-        this.fecha_alta = new SimpleObjectProperty<>();
-        this.estado = new SimpleObjectProperty<>();
+        this.fecha_alta = new SimpleStringProperty("");
+        this.estado = new SimpleIntegerProperty();
         this.taller = new SimpleStringProperty("");
-        this.fecha_baja = new SimpleObjectProperty<>();
-        this.fecha_limite = new SimpleObjectProperty<>();
+        this.fecha_baja = new SimpleStringProperty("");
+        this.fecha_limite = new SimpleStringProperty("");
     }
 
     public int getId_aux() {
@@ -54,11 +56,11 @@ public class TablaPedidos {
         return id.get();
     }
 
-    public Date getFecha_alta() {
+    public String getFecha_alta() {
         return fecha_alta.get();
     }
 
-    public EstadoPedido getEstado() {
+    public int getEstado() {
         return estado.get();
     }
 
@@ -66,11 +68,14 @@ public class TablaPedidos {
         return taller.get();
     }
 
-    public Date getFecha_baja() {
+    public String getFecha_baja() {
+        if(fecha_baja==null){
+        return "";
+        }
         return fecha_baja.get();
     }
 
-    public Date getFecha_limite() {
+    public String getFecha_limite() {
         return fecha_limite.get();
     }
 
@@ -82,11 +87,11 @@ public class TablaPedidos {
         this.id = id;
     }
 
-    public void setFecha_alta(SimpleObjectProperty<Date> fecha_alta) {
-        this.fecha_alta = fecha_alta;
+    public void setFecha_alta(SimpleStringProperty fecha_alta) {
+        this.fecha_alta =  fecha_alta;
     }
 
-    public void setEstado(SimpleObjectProperty<EstadoPedido> estado) {
+    public void setEstado(SimpleIntegerProperty estado) {
         this.estado = estado;
     }
 
@@ -94,12 +99,12 @@ public class TablaPedidos {
         this.taller = taller;
     }
 
-    public void setFecha_baja(SimpleObjectProperty<Date> fecha_baja) {
-        this.fecha_baja = fecha_baja;
+    public void setFecha_baja(SimpleStringProperty fecha_baja) {
+        this.fecha_baja =fecha_baja;
     }
 
-    public void setFecha_limite(SimpleObjectProperty<Date> fecha_limite) {
-        this.fecha_limite = fecha_limite;
+    public void setFecha_limite(SimpleStringProperty fecha_limite) {
+        this.fecha_limite =  fecha_limite;
     }
 
 }

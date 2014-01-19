@@ -7,14 +7,21 @@
 package desguace;
 
 import BD.InterfazBD;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import desguace.AltaDesguace;
 import desguace.DesguacerPendienteActivacionController;
 import desguace.GestionPedidos;
 import general.Desguace;
 import general.EstadoGeneral;
+import general.EstadoOferta;
+import general.Oferta;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -74,6 +81,7 @@ public class DesguaceJava extends Application {
                 staticDataBox.setStage(stage);
                 staticDataBox.showStage();
             }
+            bd.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -124,8 +132,9 @@ public class DesguaceJava extends Application {
         try {
             bd = new InterfazBD("sor_desguace");
             boolean r = bd.activarDesguaceMainDesguace(idRecibido);
-            //bd.close();
+            bd.close();
             return r;
+            
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -200,7 +209,66 @@ public class DesguaceJava extends Application {
         }
         return true;
     }
+    public static void crearOferta(Date fechaAlta,Date fechaLimite,String idPedido,double precio) {
+        try {           
+            bd = new InterfazBD("sor_desguace");
+            String desguaceID = bd.getDesguace().getID();            
+            int id = bd.anadirOferta(fechaAlta,0,precio,idPedido, desguaceID,null,fechaLimite);
+            Oferta nuevo = new Oferta("", id, precio, desguaceID, idPedido,fechaAlta, null, fechaLimite, EstadoOferta.NEW);
+            Gson gson = new Gson();
+            String idFinal = nuevaOferta(gson.toJson(nuevo));
+            bd.activarOfertaDesguace(id, idFinal);
+            bd.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+
+        
+    }
+   public static ArrayList<Oferta> actualizarOfertasAceptadas(){
+   ArrayList<Oferta> of = new ArrayList<Oferta>();
+        try {
+            bd = new InterfazBD("sor_desguace");
+            of = bd.getOfertasConID_aux(EstadoOferta.ACCEPTED);
+            bd.close();
+             return of;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return of;
+   }
+    public static ArrayList<Oferta> actualizarOfertas() {
+       ArrayList<Oferta> of = new ArrayList<Oferta>();
+        try {
+            bd = new InterfazBD("sor_desguace");
+            of = bd.getOfertasConID_aux(EstadoOferta.ACTIVE);
+            bd.close();
+             return of;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return of;
+    }
+    public static boolean cambiarEstadoOferta(String id){
+    Boolean realizado=false;
+        try {
+            bd= new InterfazBD("sor_desguace");
+            realizado= bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+            return realizado;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return realizado;
+    }
     /**
      *
      * @param nombreTaller
@@ -227,10 +295,29 @@ public class DesguaceJava extends Application {
         return port.checkActivacion(mail);
     }
 
-    public static String getPedidos() {
+
+    public static String nuevaOferta(java.lang.String oferta) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.getPedidos();
+        return port.nuevaOferta(oferta);
+    }
+
+    public static String getOfertas() {
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.getOfertas();
+    }
+
+    public static String getPedidosporID(java.lang.String string) {
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.getPedidosporID(string);
+    }
+
+    public static Boolean aceptarOfertaFin(java.lang.String id) {
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.aceptarOfertaFin(id);
     }
 
 }

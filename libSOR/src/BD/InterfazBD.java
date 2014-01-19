@@ -35,11 +35,15 @@ public class InterfazBD {
     
     // DESGUACES 
     // setterss
-    public int anadirOferta(int id, Date fechaAlta, double importe, int estado, String pedido, String desguace, Date fechaBaja, Date fechaLimite) {
-        // TODO: cambiar el id
-        return conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('" + id + "','" + fechaAlta + "', '" + importe + "','" + estado + "','" + pedido + "';" + desguace + "','" + fechaBaja + "','" + fechaLimite + "');");
+    public void anadirOferta(String id, Date fechaAlta, double importe, int estado, String pedido, String desguace, Date fechaBaja, Date fechaLimite) {
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+          conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('" + id + "',"  +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ");");
+
     }
-    
+    public int anadirOferta(Date fechaAlta,  int estado,double importe, String pedido, String desguace, Date fechaBaja, Date fechaLimite) {
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        return conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('', " +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ");");
+    }
     public void anadirPedido(String id, Date fechaAlta, int estado, String taller, Date fechaBaja, Date fechaLimite, boolean modoAutomatico)    {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         conexion.ejecutarSQL("insert INTO pedido (id, fecha_alta, estado, taller, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado + "','" + taller + "'," + (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja) + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
@@ -136,7 +140,27 @@ public class InterfazBD {
         return lista;
         
     }
-
+    public Pedido getPedidoID(String id){ //devuelve pedidos en general
+        Pedido pedido=null;
+        try{
+            //conexion.ejecutarSQL("INSERT INTO pedido (id, taller, estado, fecha_alta, fecha_baja, fecha_limite) values ('4', '5','4','2013-03-12', '2013-03-12', '2013-03-12');");
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where id = '" + id + "';");
+            while(resultados.next()){
+                String pedidoID = resultados.getString("id");
+                ArrayList<Pieza> piezas = new ArrayList<>();
+                ArrayList<Integer> cantidades = new ArrayList<>();
+                getPiezasYCantidades(pedidoID, piezas, cantidades);
+                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
+                return nuevo;
+                //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return pedido;
+        
+    }
     public ArrayList<Pedido> getPedidosConID_aux() { //devuelve pedidos en general
         ArrayList<Pedido> lista = new ArrayList<>();
         try {
@@ -180,7 +204,24 @@ public class InterfazBD {
         return lista;
 
     }
+public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
+        ArrayList<Oferta> lista = new ArrayList<Oferta>();
+        try {
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta where estado='" + estado.ordinal() + "'");
+            while (resultados.next()) {
+                String ofertaID = resultados.getString("id");
 
+
+                Oferta nuevo = new Oferta(ofertaID, resultados.getInt("id_aux"), resultados.getDouble("importe"),resultados.getString("desguace"), resultados.getString("pedido"), resultados.getDate("fecha_alta"),  resultados.getDate("fecha_baja"),  resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+                lista.add(nuevo);
+           }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+
+    }
     public ArrayList<Taller> getTalleres()
     {
         ArrayList<Taller> lista= new ArrayList<>();
@@ -519,7 +560,7 @@ public class InterfazBD {
         return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0', `id`='" + idRecibido + "'");
     }
     public boolean activarDesguaceMainDesguace(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0' where `id`='" + idRecibido + "'");
+        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0', `id`='" + idRecibido + "'");
     }
 
     public boolean activarTaller(String idRecibido) {
@@ -610,7 +651,9 @@ public class InterfazBD {
     public boolean activarPedidoTaller(int id_aux, String id) {
         return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
     }
-
+    public boolean activarOfertaDesguace(int id_aux, String id) {
+        return conexion.ejecutarSQL("Update oferta set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
+    }
     public boolean cancelarOfertas(String idPedido) {
         return conexion.ejecutarSQL("Update oferta set estado='" + EstadoOferta.CANCELLED.ordinal() + "' where pedido='" + idPedido + "'");
     }

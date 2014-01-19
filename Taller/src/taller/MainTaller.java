@@ -275,7 +275,7 @@ public class MainTaller extends Application {
         try {
             bd = new InterfazBD("sor_taller");
             for (Oferta of : listOf) {
-                bd.anadirOferta(of.getID_aux(), of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(), of.getFecha_baja(), of.getFecha_limite());
+                bd.anadirOferta(of.getID(), of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(), of.getFecha_baja(), of.getFecha_limite());
             }
             bd.close();
         } catch (SQLException ex) {

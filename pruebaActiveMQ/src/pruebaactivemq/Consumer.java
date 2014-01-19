@@ -6,6 +6,8 @@
 
 package pruebaactivemq;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -30,11 +32,17 @@ public class Consumer {
         //Start Connection
         /** Starts (or restarts) a connection's delivery of incoming messages. */
         connection.start();
-        //Consume Message
-        TextMessage message = (TextMessage) consumer.receive();
+        try {
+            //Consume Message
+            Thread.sleep(10);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        TextMessage message = (TextMessage) consumer.receiveNoWait();
         //Display Message
-        System.out.println(message.getText());
-        //Close Consumer
+        if(message!=null){
+            System.out.println(message.getText());
+        }//Close Consumer
         consumer.close();
         //Close Session
         session.close();

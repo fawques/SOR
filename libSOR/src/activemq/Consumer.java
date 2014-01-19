@@ -6,11 +6,14 @@
 
 package activemq;
 
-import javax.jms.Connection;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
@@ -39,25 +42,36 @@ public class Consumer {
         queue = session.createQueue(queueName);
         //Create Consumer
          consumer = session.createConsumer(queue);
+         
     }
  
     public String consumeMessage() throws JMSException {
-
+    Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
         //Start Connection
         /** Starts (or restarts) a connection's delivery of incoming messages. */
         connection.start();
+          try {
+            //Consume Message
+            Thread.sleep(10);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //Consume Message
         TextMessage message =  (TextMessage) consumer.receiveNoWait();
-        String mensaje="";
+       /* if(message==null){
+            throw new javax.jms.IllegalStateException("no ha cogido ningún mensaje");
+        }*/
+        ArrayList<String> mensaje= new ArrayList<String>();
+        
         while(message!=null){
-            mensaje+=message.getText();
+            mensaje.add(message.getText().replace("\"",""));
         message = (TextMessage) consumer.receiveNoWait();
         }
-       
+       String listaJSON = gson.toJson(mensaje);
         //Display Message
 
        
-        return mensaje;
+        return listaJSON;
     }
     public void closeConsumer() throws JMSException{
             //Close Consumer

@@ -95,7 +95,7 @@ public class TallerWS {
             p.setID(stringID);
              bd.anadirPedido(stringID, p.getFecha_alta(), EstadoPedido.ACCEPTED.ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
             Gestor_activemq activemq= new Gestor_activemq();
-            activemq.create_Producer("patata");
+            activemq.create_Producer("pedidos");
             String pedidoFinal = gson.toJson(p.getID());
             activemq.producer.produceMessage(pedidoFinal);
             activemq.producer.closeProduce();

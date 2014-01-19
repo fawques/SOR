@@ -6,6 +6,8 @@
 
 package activemq;
 
+import activemq.Consumer;
+import activemq.Producer;
 import javax.jms.JMSException;
 import org.apache.log4j.BasicConfigurator;
 
