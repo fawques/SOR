@@ -199,6 +199,42 @@ public class GestionPedidos implements Initializable {
            }
        }
     }
+    public void anularOfertaAceptada(){
+       Boolean aceptado=false;
+        if(borrarOfertaAceptadas!=-1){
+            if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
+               Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
+                  if(gestorlohacambiado==true){
+                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.CANCELLED);
+                    if(aceptado==false){
+                        System.err.println("No se ha podido aceptar la oferta");
+                    }
+                  }
+                  else{
+                    System.err.println("No se ha podido cambiar la oferta en gestor a finalizado");
+                  }
+            }
+        }
+        actualizarOfertasOfertadas();
+    }
+        public void anularOfertaCreada(){
+       Boolean aceptado=false;
+        if(borrarOferta!=-1){
+            if(olTablaOfertas.size()>=borrarOferta){
+               Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(olTablaOfertas.get(borrarOferta).getId());
+                  if(gestorlohacambiado==true){
+                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertas.get(borrarOferta).getId(),EstadoOferta.CANCELLED);
+                    if(aceptado==false){
+                        System.err.println("No se ha podido aceptar la oferta");
+                    }
+                  }
+                  else{
+                    System.err.println("No se ha podido cambiar la oferta en gestor a finalizado");
+                  }
+            }
+        }
+        actualizarOfertas();
+    }
     private void tablaPedidos(){
         try {
             bd= new InterfazBD("sor_desguace");

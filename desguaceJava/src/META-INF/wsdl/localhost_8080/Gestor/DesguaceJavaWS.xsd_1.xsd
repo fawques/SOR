@@ -8,6 +8,10 @@
 
 <xs:element name="altaResponse" type="tns:altaResponse"/>
 
+<xs:element name="cancelarOferta" type="tns:cancelarOferta"/>
+
+<xs:element name="cancelarOfertaResponse" type="tns:cancelarOfertaResponse"/>
+
 <xs:element name="checkActivacion" type="tns:checkActivacion"/>
 
 <xs:element name="checkActivacionResponse" type="tns:checkActivacionResponse"/>
@@ -72,6 +76,18 @@
 <xs:complexType name="nuevaOfertaResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancelarOferta">
+<xs:sequence>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancelarOfertaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

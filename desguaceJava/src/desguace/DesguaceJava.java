@@ -320,4 +320,10 @@ public class DesguaceJava extends Application {
         return port.aceptarOfertaFin(id);
     }
 
+    public static Boolean cancelarOferta(java.lang.String id) {
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.cancelarOferta(id);
+    }
+
 }

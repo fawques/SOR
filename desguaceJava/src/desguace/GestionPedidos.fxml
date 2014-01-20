@@ -47,10 +47,10 @@
               <children>
                 <TableView fx:id="tableOfertas" layoutX="28.0" layoutY="62.0" prefHeight="173.0" prefWidth="718.0" />
                 <Button id="btNuevaPieza" fx:id="btAceptar" layoutX="28.0" layoutY="503.0" mnemonicParsing="false" onAction="#aceptarOferta" prefHeight="22.0" prefWidth="135.0" text="Aceptar oferta" />
-                <Button id="btNuevaPieza" fx:id="btAnularOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Anular oferta aceptada" />
+                <Button id="btNuevaPieza" fx:id="btAnularOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" onAction="#anularOfertaAceptada" prefHeight="22.0" prefWidth="148.0" text="Anular oferta aceptada" />
                 <Text layoutX="329.0" layoutY="32.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas enviadas" />
                 <TableView fx:id="tableOfertasAceptadas" layoutX="28.0" layoutY="308.0" prefHeight="161.0" prefWidth="718.0" />
-                <Button id="btNuevaPieza" layoutX="28.0" layoutY="255.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Anular oferta enviada" />
+                <Button id="btNuevaPieza" layoutX="28.0" layoutY="255.0" mnemonicParsing="false" onAction="#anularOfertaCreada" prefHeight="22.0" prefWidth="135.0" text="Anular oferta creada" />
               </children>
             </AnchorPane>
           </content>

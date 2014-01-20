@@ -40,6 +40,12 @@
 <message name="aceptarOfertaFinResponse">
 <part name="parameters" element="tns:aceptarOfertaFinResponse"/>
 </message>
+<message name="cancelarOferta">
+<part name="parameters" element="tns:cancelarOferta"/>
+</message>
+<message name="cancelarOfertaResponse">
+<part name="parameters" element="tns:cancelarOfertaResponse"/>
+</message>
 <portType name="DesguaceJavaWS">
 <operation name="alta">
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest" message="tns:alta"/>
@@ -64,6 +70,10 @@
 <operation name="aceptarOfertaFin">
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinRequest" message="tns:aceptarOfertaFin"/>
 <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinResponse" message="tns:aceptarOfertaFinResponse"/>
+</operation>
+<operation name="cancelarOferta">
+<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaRequest" message="tns:cancelarOferta"/>
+<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaResponse" message="tns:cancelarOfertaResponse"/>
 </operation>
 </portType>
 <binding name="DesguaceJavaWSPortBinding" type="tns:DesguaceJavaWS">
@@ -114,6 +124,15 @@
 </output>
 </operation>
 <operation name="aceptarOfertaFin">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="cancelarOferta">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
