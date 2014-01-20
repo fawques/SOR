@@ -38,7 +38,7 @@ namespace desguaceNET
             {
                 bd = new InterfazBD("sor_desguace");
                 string desguaceID = bd.getDesguace().getID();
-                int id = bd.anadirOferta(fechaAlta, 0, precio, idPedido, desguaceID, fechaLimite);
+                int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID, fechaLimite);
                 Oferta nuevo = new Oferta(id, precio, desguaceID, idPedido, fechaLimite);
                 string idFinal = nuevaOferta(JsonConvert.SerializeObject(nuevo));
                 bd.activarOfertaDesguace(id, idFinal);
