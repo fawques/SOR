@@ -20,21 +20,15 @@ namespace desguaceNET
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sor_desguaceDataSet dataSet = new sor_desguaceDataSet();
-            sor_desguaceDataSetTableAdapters.desguaceTableAdapter aux = new sor_desguaceDataSetTableAdapters.desguaceTableAdapter();
-            aux.Fill(dataSet.desguace);
-            System.Data.DataRow[] filas = dataSet.desguace.Select();
-            foreach (var item in filas)
+            DesguaceNet main = new DesguaceNet();
+            if (main.alta("pepe", "hola@email.com", "calle de las pipas", "ciudad", 123, 456))
             {
-                Console.WriteLine("AAA");
-                Console.WriteLine(item["email"]);
-                Console.WriteLine("AAA");
+                Console.WriteLine("Alta ha devuelto true");
             }
-
-            DesguaceJavaWSClient client = new desguaceWS.DesguaceJavaWSClient();
-            string respuesta = client.checkActivacion(filas[0]["email"].ToString());
-            Console.WriteLine(respuesta);
-
+            else
+            {
+                Console.WriteLine("Alta ha devuelto FALSE");
+            }
         }
     }
 }

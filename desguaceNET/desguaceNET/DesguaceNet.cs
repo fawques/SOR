@@ -97,38 +97,43 @@ namespace desguaceNET
             return realizado;
         }
 
-        public bool alta(string name, string email, string address, string city, int postalCode, int telephone)
+        public bool hacerAlta(string name, string email, string address, string city, int postalCode, int telephone){
+            // TODO: meter a la BD y esas cosas que en java están en el controller de interfaz
+            return alta(name, email, address, city, postalCode, telephone);
+        }
+
+        private bool alta(string name, string email, string address, string city, int postalCode, int telephone)
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
             return client.alta(name, email, address, city, postalCode, telephone);
         }
 
-        public string checkActivacion(string mail)
+        private string checkActivacion(string mail)
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
             return client.checkActivacion(mail);
         }
 
 
-        public string nuevaOferta(string oferta)
+        private string nuevaOferta(string oferta)
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
             return client.nuevaOferta(oferta);
         }
 
-        public string getOfertas()
+        private string getOfertas()
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
             return client.getOfertas();
         }
 
-        public string getPedidosporID(string str)
+        private string getPedidosporID(string str)
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
             return client.getPedidosporID(str);
         }
 
-        public bool aceptarOfertaFin(string id)
+        private bool aceptarOfertaFin(string id)
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
             return client.aceptarOfertaFin(id);
