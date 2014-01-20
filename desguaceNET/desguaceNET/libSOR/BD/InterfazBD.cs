@@ -22,6 +22,11 @@ namespace desguaceNET.libSOR.BD
         {
             return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "'," + (fechaBaja != null ? "'" + fechaBaja.ToString("yyyy/MM/dd") + "'" : null) + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
         }
+        
+        public int anadirOferta(DateTime fechaAlta, int estado, double importe, string pedido, string desguace, DateTime fechaLimite)
+        {
+            return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
+        }
 
         public int anadirDesguace(int id, string nombre, string email, string direccion, string ciudad, int codPostal, int telefono, int estado)
         {
@@ -265,6 +270,93 @@ namespace desguaceNET.libSOR.BD
     
     public bool modificarDesguace(string ID, string nombre, string email, string direccion, string ciudad, int codPostal, int telefono, EstadoGeneral estado){
         return conexion.ejecutarSQL(new MySqlCommand("UPDATE `desguace` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "', `estado`='" + (int)estado + "' WHERE `id`='" + ID + "';"));
+    }
+
+        public bool activarDesguaceMainDesguace(String idRecibido) {
+        return conexion.ejecutarSQL(new MySqlCommand("UPDATE `desguace` SET  `estado`='0', `id`='" + idRecibido + "'"));
+    }
+
+    public List<Pedido> buscarPedido(String idPedido, String idPieza, String estado, DateTime fechaLimite, String modoAceptacion){
+        List<Pedido> alPedidos = new List<Pedido>();
+
+        String sWhere = "";
+        DataSet pedidos;
+
+        sWhere = crearWhereDeSelect(idPedido, sWhere, modoAceptacion, fechaLimite, estado);
+
+        if (sWhere == "") {
+            pedidos = conexion.ejecutarSQLSelect(new MySqlCommand("Select * from pedido;"));
+        } else {
+            pedidos = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM pedido where " + sWhere));
+        }
+        DataTableReader reader = pedidos.CreateDataReader();
+        while (reader.Read()) {
+            List<Pieza> piezas = new List<Pieza>();
+            List<int> cantidades = new List<int>();
+            getPiezasYCantidades(idPedido, piezas, cantidades);
+            //falta filtrar por pieza
+            Pedido p = new Pedido(reader.GetString(1), reader.GetInt32(0), reader.GetString(4), reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), reader.GetBoolean(7), piezas, cantidades, getOfertasPedido(reader.GetString(1)));
+            alPedidos.Add(p);
+        }
+
+        return alPedidos;
+    }
+
+    //falta añadir el modoAceptación
+    private String crearWhereDeSelect(String idPedido, String sWhere, String modoAceptacion, DateTime fechaLimite, String estado) {
+        if (idPedido == "") {
+            sWhere += " (id_aux='" + idPedido + "' or id='" + idPedido + "')";
+        }
+        if (modoAceptacion == "") {            if (sWhere == "") {
+                sWhere += " and ";
+            }
+            sWhere += "modo_automatico='" + ("Automatico".Equals(modoAceptacion) ? 1 : 0) + "'";
+         }
+        if (fechaLimite.ToString() == "") {
+            if (sWhere == "") {
+                sWhere += " and ";
+            }
+            sWhere += "fecha_limite='" + fechaLimite.ToString() + "'";
+        }
+        //estado debe ser el último porque es un and
+        if (estado == "") {
+            if (sWhere == "") {
+                sWhere += " and ";
+            }
+            sWhere += "estado='" + estado + "'";
+        }
+        return sWhere;
+    }
+
+    public bool cambiarEstadoOferta(EstadoOferta eOf, String id) {
+        return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado='" + (int)eOf + "' where id='" + id + "'"));
+    }
+
+
+    public bool activarOfertaDesguace(int id_aux, String id) {
+        return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado='1', id='" + id + "' where id_aux='" + id_aux + "';"));
+    }
+    public bool cancelarOfertas(String idPedido) {
+        return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado='" + (int)EstadoOferta.CANCELLED + "' where pedido='" + idPedido + "'"));
+    }
+
+
+
+
+    /**
+     *
+     * @param accion debe tener formato "nombre:param0|param1|...|paramN"
+     * @param paramValues debe tener formato "valor0|valor1|...|valorN"
+     * @return
+     */
+    public bool guardarAccion(String accion, String paramValues) {
+        return conexion.ejecutarSQL(new MySqlCommand("INSERT INTO `acciones`(`accion`,`params`) VALUES('" + accion + "', '" + paramValues + "');"));
+    }
+
+    public DataSet getAcciones() {
+        DataSet result = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM `acciones`;"));
+        conexion.ejecutarSQL(new MySqlCommand("DELETE FROM `acciones`;"));
+        return result;
     }
 
     }
