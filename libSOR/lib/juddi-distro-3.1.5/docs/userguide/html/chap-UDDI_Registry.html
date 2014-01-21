@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 1. UDDI Registry</title><link rel="stylesheet" type="text/css" href="css/jbossorg.css"/><meta xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL Stylesheets V1.76.1"/><link rel="home" href="index.html" title="jUDDI User Guide"/><link rel="up" href="index.html" title="jUDDI User Guide"/><link rel="prev" href="User_Guide-Preface.html" title="Preface"/><link rel="next" href="chap-Getting_Started.html" title="Chapter 2. Getting Started"/><link rel="copyright" href="ln-d0e35.html" title="Legal Notice"/></head><body><p id="title"><a href="http://juddi.apache.org/" class="site_href"><strong>Apache jUDDI</strong></a><a href="http://juddi.apache.org/docs.html" class="doc_href"><strong>Community Documentation</strong></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="User_Guide-Preface.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="chap-Getting_Started.html"><strong>Next</strong></a></li></ul><div class="chapter" title="Chapter 1. UDDI Registry"><div class="titlepage"><div><div><h2 class="title"><a id="chap-UDDI_Registry"/>Chapter 1. UDDI Registry</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="chap-UDDI_Registry.html#sect-UDDI_Registry-intro">1.1. Introduction</a></span></dt><dt><span class="section"><a href="chap-UDDI_Registry.html#sect-UDDI_Registry">1.2. UDDI Registry</a></span></dt></dl></div><div class="section" title="1.1. Introduction"><div class="titlepage"><div><div><h2 class="title"><a id="sect-UDDI_Registry-intro"/>1.1. Introduction</h2></div></div></div><p>
+        The Universal Description, Discovery and Integration (UDDI) protocol is one of the
+        major building blocks required for successful Web services. UDDI creates a standard
+        interoperable platform that enables companies and applications to quickly, easily, and
+        dynamically find and use Web services over the Internet. UDDI also allows operational
+        registries to be maintained for different purposes in different contexts. UDDI is a
+        cross-industry effort driven by major platform and software providers, as well as
+        marketplace operators and e-business leaders within the OASIS standards consortium.
+        UDDI has gone through 3 revisions and the latest version is 3.0.2. Additional
+        information regarding UDDI can be found at <a class="ulink" href="http://uddi.xml.org">http://uddi.xml.org</a>.
+        </p></div><div class="section" title="1.2. UDDI Registry"><div class="titlepage"><div><div><h2 class="title"><a id="sect-UDDI_Registry"/>1.2. UDDI Registry</h2></div></div></div><p>
+        The UDDI Registry implements the UDDI specification. UDDI is a Web-based distributed
+        directory that enables businesses to list themselves on the Internet and discover each
+        other, similar to a traditional phone book's yellow and white pages. The UDDI registry
+        is both a white pages business directory and a technical specifications library. The
+        Registry is designed to store information about Businesses and Services and it holds
+        references to detailed documentation.
+        </p><div class="figure"><a id="fig-UDDI_Registry_Invocation_Pattern"/><div class="figure-contents"><div class="mediaobject"><img src="images/UDDI_Registry_invocation_pattern.png" alt="Invocation Pattern using the UDDI Registry"/></div></div><p class="title"><strong>Figure 1.1. Invocation Pattern using the UDDI Registry</strong></p></div><br class="figure-break"/><p>
+        A business publishes services to the UDDI registry. A client looks up the service in
+        the registry and receives service binding information. The client then uses the binding
+        information to invoke the service. The UDDI APIs are SOAP based for interoperability
+        reasons. The UDDI v3 specification defines 9 APIs:
+        </p><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li class="listitem"><p>
+                <code class="classname">UDDI_Security_PortType</code>, defines the API to obtain a
+                security token. With a valid security token a publisher can publish to the
+                registry. A security token can be used for the entire session.
+                </p></li><li class="listitem"><p>
+                <code class="classname">UDDI_Publication_PortType</code>, defines the API to publish
+                business and service information to the UDDI registry.
+                </p></li><li class="listitem"><p>
+                <code class="classname">UDDI_Inquiry_PortType</code>, defines the API to query the
+                UDDI registry. Typically this API does not require a security token.
+                </p></li><li class="listitem"><p>
+                <code class="classname">UDDI_CustodyTransfer_PortType</code>, this API can be used to
+                transfer the custody of a business from one UDDI node to another.
+                </p></li><li class="listitem"><p>
+                <code class="classname">UDDI_Subscription_PortType</code>, defines the API to
+                register for updates on a particular business of service.
+                </p></li><li class="listitem"><p>
+                <code class="classname">UDDI_SubscriptionListener_PortType</code>, defines the API a
+                client must implement to receive subscription notifications from a UDDI node.
+                </p></li><li class="listitem"><p>
+                <code class="classname">UDDI_Replication_PortType</code>, defines the API to replicate
+                registry data between UDDI nodes.
+                </p></li><li class="listitem"><p>
+                <code class="classname">UDDI_ValueSetValidation_PortType</code>, by nodes to allow
+                external providers of value set validation. Web services to assess whether
+                keyedReferences or keyedReferenceGroups are valid.
+                </p></li><li class="listitem"><p>
+                <code class="classname">UDDI_ValueSetCaching_PortType</code>, UDDI nodes may perform
+                validation of publisher references themselves using the cached values obtained
+                from such a Web service.
+                </p></li></ol></div></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="User_Guide-Preface.html"><strong>Prev</strong>Preface</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="chap-Getting_Started.html"><strong>Next</strong>Chapter 2. Getting Started</a></li></ul></body></html>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 10. Administration</title><link rel="stylesheet" type="text/css" href="css/jbossorg.css"/><meta xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL Stylesheets V1.76.1"/><link rel="home" href="index.html" title="jUDDI User Guide"/><link rel="up" href="index.html" title="jUDDI User Guide"/><link rel="prev" href="chap-Subscription.html" title="Chapter 9. Subscription"/><link rel="next" href="chap-deployjboss.html" title="Chapter 11. Deploying to JBoss 6.0.0.GA"/><link rel="copyright" href="ln-d0e35.html" title="Legal Notice"/></head><body><p id="title"><a href="http://juddi.apache.org/" class="site_href"><strong>Apache jUDDI</strong></a><a href="http://juddi.apache.org/docs.html" class="doc_href"><strong>Community Documentation</strong></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-Subscription.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="chap-deployjboss.html"><strong>Next</strong></a></li></ul><div class="chapter" title="Chapter 10. Administration"><div class="titlepage"><div><div><h2 class="title"><a id="chap-Administration"/>Chapter 10. Administration</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="chap-Administration.html#sect-admin_intro">10.1. Introduction</a></span></dt><dt><span class="section"><a href="chap-Administration.html#sect-changing_listener_port">10.2. Changing the Listener Port</a></span></dt><dt><span class="section"><a href="chap-Administration.html#sect-changing_oracle_sequence_name">10.3. Changing the Oracle Sequence name</a></span></dt><dt><span class="section"><a href="chap-Administration.html#sect-persistence">10.4. Persistence</a></span></dt></dl></div><div class="section" title="10.1. Introduction"><div class="titlepage"><div><div><h2 class="title"><a id="sect-admin_intro"/>10.1. Introduction</h2></div></div></div><p>
+        General Stuff about administration.
+        </p></div><div class="section" title="10.2. Changing the Listener Port"><div class="titlepage"><div><div><h2 class="title"><a id="sect-changing_listener_port"/>10.2. Changing the Listener Port</h2></div></div></div><p>
+        If you want to change the port Tomcat listens on to something non-standard
+        (something other than 8080):
+        </p><div class="variablelist"><dl><dt><span class="term">jUDDI Server</span></dt><dd><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="procedure"><ol class="1"><li class="step" title="Step 1"><p>
+                            edit <code class="filename">conf/server.xml</code> and change the port
+                            within the <code class="code">&lt;Connector&gt;</code> element
+                            </p></li><li class="step" title="Step 2"><p>
+                            edit
+                            <code class="filename">webapps/juddiv3/WEB-INF/classes/juddiv3.properties</code>
+                            and change the port number
+                            </p></li></ol></div></dd><dt><span class="term">jUDDI Portal</span></dt><dd><div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="procedure"><ol class="1"><li class="step" title="Step 1"><p>
+                            edit
+                            <code class="filename">webapps/uddi-portlets/WEB-INF/classes/META-INF/uddi.xml</code>
+                            and change the port numbers within the endpoint URLs
+                            </p></li><li class="step" title="Step 2"><p>
+                            edit <code class="filename">pluto/WEB-INF/classes/server.xml</code> and
+                            change the port within the <code class="code">&lt;Connector&gt;</code>
+                            element
+                            </p></li></ol></div></dd></dl></div></div><div class="section" title="10.3. Changing the Oracle Sequence name"><div class="titlepage"><div><div><h2 class="title"><a id="sect-changing_oracle_sequence_name"/>10.3. Changing the Oracle Sequence name</h2></div></div></div><p>
+	If you are using Hibernate as a persistence layer for jUDDI, then Oracle will generate a default sequence for you ("HIBERNATE_SEQUENCE").     If you are using hibernate elsewhere, you may wish to change the sequence name so that you do not share this sequence with any other applications.    If other applications try to manually create the default hibernate sequence, you may even run into situations where you find conflicts or a race condition.   
+        </p><p>
+	The easiest way to handle this is to create an <code class="filename">orm.xml</code> file and place it within the classpath in a META-INF directory, which will override the jUDDI persistence annotations and will allow you to specify a specific sequence name for use with jUDDI.   The following <code class="filename">orm.xml</code> specifies a "juddi_sequence" sequence to be used with jUDDI.   
+	</p><pre class="programlisting">&lt;entity-mappings
+  xmlns="http://java.sun.com/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+  version="1.0"&gt;
+  
+  &lt;sequence-generator name="juddi_sequence" sequence-name="juddi_sequence"/&gt;
+
+  &lt;entity class="org.apache.juddi.model.Address"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.AddressLine"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.BindingDescr"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.BusinessDescr"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.BusinessIdentifier"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.BusinessName"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.CategoryBag"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.Contact"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.ContactDescr"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.DiscoveryUrl"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.Email"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.InstanceDetailsDescr"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.InstanceDetailsDocDescr"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+ &lt;entity class="org.apache.juddi.model.KeyedReference"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.KeyedReferenceGroup"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.OverviewDoc"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.OverviewDocDescr"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.PersonName"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.Phone"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.ServiceDescr"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.ServiceName"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.SubscriptionMatch"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.TmodelDescr"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.TmodelIdentifier"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.TmodelInstanceInfo"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.TmodelInstanceInfoDescr"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.TransferTokenKey"&gt;
+    &lt;attributes&gt;
+      &lt;id name="id"&gt;
+        &lt;generated-value generator="juddi_sequence" strategy="AUTO"/&gt;
+      &lt;/id&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+
+  &lt;entity class="org.apache.juddi.model.BindingTemplate"&gt;
+    &lt;attributes&gt;
+      &lt;basic name="accessPointUrl"&gt;
+        &lt;column name="access_point_url" length="4000"/&gt;
+      &lt;/basic&gt;
+    &lt;/attributes&gt;
+  &lt;/entity&gt;
+&lt;/entity-mappings&gt;
+</pre></div><div class="section" title="10.4. Persistence"><div class="titlepage"><div><div><h2 class="title"><a id="sect-persistence"/>10.4. Persistence</h2></div></div></div><p>jUDDI supports both OpenJPA and Hibernate as persistence providers.   If you are embedding jUDDI, it is important to note that there are two JARs provided through maven.    If you will be using Hibernate, please use the juddi-core JAR, if you are using OpenJPA, use juddi-core-openjpa.
+	</p><p>The difference between these JARs is that the persistence classes within juddi-core-openjpa have been enhanced (http://people.apache.org/~mprudhom/openjpa/site/openjpa-project/manual/ref_guide_pc_enhance.html).   Unfortunately, the Hibernate classloader does not deal well with these enhanced classes, so it it important to note not to use the juddi-core-openjpa JAR with Hibernate.
+	</p></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="chap-Subscription.html"><strong>Prev</strong>Chapter 9. Subscription</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="chap-deployjboss.html"><strong>Next</strong>Chapter 11. Deploying to JBoss 6.0.0.GA</a></li></ul></body></html>

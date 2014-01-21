@@ -18,7 +18,6 @@ import general.Pieza;
 import general.Taller;
 import gestor_taller.JMSException_Exception;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.sql.SQLException;
@@ -34,6 +33,18 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import jUDDI.JUDDIProxy;
+import webservices.Webservices;
+import static webservices.Webservices.aceptarOferta_WS;
+import static webservices.Webservices.alta_WS;
+import static webservices.Webservices.baja_WS;
+import static webservices.Webservices.cancelarPedido_WS;
+import static webservices.Webservices.checkActivacion_WS;
+import static webservices.Webservices.getOfertas_WS;
+import static webservices.Webservices.hello;
+import static webservices.Webservices.modificar_WS;
+import static webservices.Webservices.nuevoPedido_WS;
+import static webservices.Webservices.rechazarOferta_WS;
 
 /**
  *
@@ -75,6 +86,7 @@ public class MainTaller extends Application {
     }
 
     public static void inicioTaller() throws IOException, ClassNotFoundException, SQLException {
+        JUDDIProxy.loadWsdl("TallerWS");
         bd = new InterfazBD("sor_taller");
         //System.out.println(bd.getPedidosActivos());
         taller = bd.getPrimerTaller();
@@ -323,7 +335,7 @@ public class MainTaller extends Application {
     }
 
     public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
-        try {           
+        try {       
             bd = new InterfazBD("sor_taller");
             String tallerID = bd.getPrimerTaller().getID();
             int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite, modoAutomatico);
@@ -441,12 +453,7 @@ public class MainTaller extends Application {
         return false;
     }
 
-    private static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.alta(name, email, address, city, postalCode, telephone);
-    }
-
+    
     public static String checkActivacion(java.lang.String mail) {
         for (int i = 0; i < 10; i++) {
             try{
@@ -459,11 +466,7 @@ public class MainTaller extends Application {
         return "";
     }
 
-    private static String checkActivacion_WS(String mail) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.checkActivacion(mail);
-    }
+    
     
     public static String nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
         AsyncManager manager = new AsyncManager("sor_taller");
@@ -483,12 +486,7 @@ public class MainTaller extends Application {
         return "";
     }
 
-    private static String nuevoPedido_WS(String pedido) throws JMSException_Exception {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.nuevoPedido(pedido);
-    }     
-
+         
     public static String getOfertas(java.lang.String listaPedidos) {
         for (int i = 0; i < 10; i++) {
             try{
@@ -500,6 +498,7 @@ public class MainTaller extends Application {
         System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
         return "";
     }
+
     public static Boolean cambiarEstadoPedido(EstadoPedido estado,String idPedido){
         try {
             bd= new InterfazBD("sor_taller");
@@ -543,11 +542,7 @@ public class MainTaller extends Application {
         return false;
     }
 
-    private static Boolean aceptarOferta_WS(String id) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.aceptarOferta(id);
-    }
+    
 
     public static Boolean rechazarOferta(java.lang.String id) {
         AsyncManager manager = new AsyncManager("sor_taller");
@@ -567,17 +562,12 @@ public class MainTaller extends Application {
         return false;
     }
 
-    private static Boolean rechazarOferta_WS(String id) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.rechazarOferta(id);
+    
+    public static String hello() throws javax.xml.ws.WebServiceException{
+        return Webservices.hello();
     }
 
-    public static String hello() throws javax.xml.ws.WebServiceException{
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.hello();
-    }
+    
     
     private static Boolean baja(java.lang.String tallerID) {
         AsyncManager manager = new AsyncManager("sor_taller");
@@ -597,11 +587,7 @@ public class MainTaller extends Application {
         return false;
     }
 
-    private static Boolean baja_WS(String tallerID) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.baja(tallerID);
-    }
+    
 
     
     public static boolean modificar(java.lang.String id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
@@ -622,12 +608,7 @@ public class MainTaller extends Application {
         return false;
     }
 
-    private static boolean modificar_WS(String id, String name, String email, String address, String city, String postalCode, String telephone) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.modificar(id, name, email, address, city, postalCode, telephone);
-    }
-
+    
     private static Boolean cancelarPedido(java.lang.String idPedido) {
         AsyncManager manager = new AsyncManager("sor_taller");
         manager.ejecutarAcciones();
@@ -645,6 +626,7 @@ public class MainTaller extends Application {
         manager.guardarAccion(m,params);
         return false;
     }
+
 
     private static Boolean cancelarPedido_WS(String idPedido) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
