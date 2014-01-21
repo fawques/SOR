@@ -100,7 +100,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializableContractResolver.cs" />
     <Compile Include="Service References\desguaceWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\desguaceWS_Silvia\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -154,6 +160,31 @@
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.nuevaOfertaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS.wsdl" />
+    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.aceptarOfertaFinResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.altaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.cancelarOfertaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.checkActivacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.getOfertasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.getPedidosporIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="sor_desguaceDataSet.xsc">
       <DependentUpon>sor_desguaceDataSet.xsd</DependentUpon>
     </None>
@@ -174,6 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\desguaceWS\" />
+    <WCFMetadataStorage Include="Service References\desguaceWS_Silvia\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\desguaceWS\configuration91.svcinfo" />
@@ -183,6 +215,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\desguaceWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\desguaceWS_Silvia\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\desguaceWS_Silvia\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\desguaceWS_Silvia\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

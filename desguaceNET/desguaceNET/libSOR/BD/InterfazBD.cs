@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +21,12 @@ namespace desguaceNET.libSOR.BD
 
         public int anadirOferta(DateTime fechaAlta, int estado, double importe, string pedido, string desguace, DateTime fechaBaja, DateTime fechaLimite)
         {
-            return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "'," + (fechaBaja != null ? "'" + fechaBaja.ToString("yyyy/MM/dd") + "'" : null) + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
+            return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe.ToString("G", new CultureInfo("en-US")) + "','" + estado + "','" + pedido + "','" + desguace + "'," + (fechaBaja != null ? "'" + fechaBaja.ToString("yyyy/MM/dd") + "'" : null) + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
         }
         
         public int anadirOferta(DateTime fechaAlta, int estado, double importe, string pedido, string desguace, DateTime fechaLimite)
         {
-            return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
+            return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe.ToString("G", new CultureInfo("en-US")) + "','" + estado + "','" + pedido + "','" + desguace + "'," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
         }
 
         public int anadirDesguace(int id, string nombre, string email, string direccion, string ciudad, int codPostal, int telefono, int estado)
@@ -157,7 +158,7 @@ namespace desguaceNET.libSOR.BD
         try{
             DataSet resultados = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM oferta WHERE desguace='" + desguaceID + "';"));
             DataTableReader reader = resultados.CreateDataReader(); while(reader.Read()){
-                Oferta nueva = new Oferta(reader.GetString(1),  reader.GetDouble(3), reader.GetString(6), reader.GetString(5),reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
+                Oferta nueva = new Oferta(reader.GetString(1),  reader.GetDouble(3), reader.GetString(6), reader.GetString(5),reader.GetDateTime(2), (!reader.IsDBNull(7)?reader.GetDateTime(7):new DateTime()), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
                 lista.Add(nueva);
             }
         }catch(MySqlException ex){
@@ -209,7 +210,7 @@ namespace desguaceNET.libSOR.BD
         DataSet resultados = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM desguace"));
         try {
             DataTableReader reader = resultados.CreateDataReader();
-            if (reader.NextResult()) {
+            if (reader.Read()) {
                 string tallerID = reader.GetString(1);
                 if(tallerID == ""){
                      return  new Desguace(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5),reader.GetInt32(6),reader.GetInt32(7),(EstadoGeneral)reader.GetInt32(8) ,null);
