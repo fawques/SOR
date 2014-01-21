@@ -203,6 +203,26 @@ public class DesguaceJavaWS {
         }
         return aceptada;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "baja")
+    public Boolean baja(@WebParam(name = "id") String id) {
+        try {        
+            bd = new InterfazBD("sor_gestor");
+            boolean oool = bd.bajaDesguace(id);
+            bd.close();
+            return oool;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+      
+        return false;
+    }
     
 }
 

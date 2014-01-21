@@ -15,7 +15,9 @@ import desguace.GestionPedidos;
 import general.Desguace;
 import general.EstadoGeneral;
 import general.EstadoOferta;
+import general.EstadoPedido;
 import general.Oferta;
+import general.Pedido;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -40,10 +42,11 @@ import javafx.stage.Stage;
 public class DesguaceJava extends Application {
     public Stage stage;
     static InterfazBD bd;
+    public static Desguace desguace;
     @Override
     public void start(Stage stage2) throws IOException, SQLException{
         try {
-            Desguace desguace;
+            
             stage = stage2;
             bd = new InterfazBD("sor_desguace");
             //System.out.println(bd.getPedidosActivos());
@@ -65,7 +68,17 @@ public class DesguaceJava extends Application {
                     GestionPedidos staticDataBox = (GestionPedidos) loader.getController();
                     staticDataBox.setStage(stage);
                     staticDataBox.showStage();
-                } else { //un botÃ³n y prou
+                    
+                }
+                else if(desguace.getEstado() == EstadoGeneral.INACTIVE){
+                    FXMLLoader loader = changeScene("DesguaceDeBaja.fxml");
+                    stage.setTitle("Gestion de pedidos");
+                    DesguaceDeBajaController staticDataBox = (DesguaceDeBajaController) loader.getController();
+                    staticDataBox.setStage(stage);
+                    staticDataBox.showStage();
+                
+                }
+                else { //un botÃ³n y prou
                     //Yo lo que haria serÃ­a un volver a darme de alta, con los mismos datos
                     //un botÃ³n y prou
                     FXMLLoader loader = changeScene("AltaTaller.fxml");
@@ -242,6 +255,20 @@ public class DesguaceJava extends Application {
         }
         return of;
    }
+ public static ArrayList<Oferta> getOfertasDesguace() {
+       ArrayList<Oferta> of = new ArrayList<Oferta>();
+        try {
+            bd = new InterfazBD("sor_desguace");
+            of = bd.getOfertas();
+            bd.close();
+             return of;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return of;
+    }
     public static ArrayList<Oferta> actualizarOfertas() {
        ArrayList<Oferta> of = new ArrayList<Oferta>();
         try {
@@ -268,6 +295,59 @@ public class DesguaceJava extends Application {
             Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
         }
         return realizado;
+    }
+    public static ArrayList<Pedido> getPedidos(){
+        ArrayList<Pedido> pedidoslista= new ArrayList<Pedido>();
+        try {
+            bd= new InterfazBD("sor_desguace");
+            pedidoslista=bd.getPedidosActivos();
+             bd.close();
+            return pedidoslista;
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pedidoslista;
+    }
+    public static boolean reactivarDesguace() {
+        try {     
+            bd = new InterfazBD("sor_desguace");
+            boolean r = bd.activarDesguace(desguace.getID());
+            bd.close();
+            return r;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       
+
+        return false;
+    }
+        public static boolean bajaDesguace() {
+      try {
+            if (baja(desguace.getID())) {
+               
+                    bd = new InterfazBD("sor_desguace");
+              
+                if (bd.bajaDesguace(desguace.getID())) {
+                    bd.close();
+                    return true;
+                } else {
+                    System.err.println("Error: No se ha podido cambiar el estado en taller.");
+                }
+            } else {
+                System.err.println("Error: No se ha podido dar de baja en gestor.");
+            }
+        } catch (SQLException ex) {
+           Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+           Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     /**
      *
@@ -324,6 +404,12 @@ public class DesguaceJava extends Application {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.cancelarOferta(id);
+    }
+
+    public static Boolean baja(java.lang.String id) {
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.baja(id);
     }
 
 }
