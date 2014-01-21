@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,15 +9,15 @@ namespace desguaceNET.libSOR.general
 {
     class Oferta
     {
-        private String ID;
-        private int ID_aux;
-        private DateTime fecha_alta;
-        private DateTime fecha_baja;
-        private DateTime fecha_limite;
-        private double precio;
-        private String desguaceID;
-        private String pedidoID;
-        private EstadoOferta estado;
+        public string ID { get; set; }
+        public int ID_aux { get; set; }
+        public DateTime fecha_alta { get; set; }
+        public DateTime fecha_baja { get; set; }
+        public DateTime fecha_limite { get; set; }
+        public double precio { get; set; }
+        public string desguaceID { get; set; }
+        public string pedidoID { get; set; }
+        public EstadoOferta estado { get; set; }
 
         /** Constructor para la base de datos.
          *
@@ -30,7 +31,7 @@ namespace desguaceNET.libSOR.general
          * @param fecha_limite
          * @param estado
          */
-        public Oferta(String ID, int ID_aux, double precio, String desguaceID, String pedidoID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoOferta estado)
+        public Oferta(string ID, int ID_aux, double precio, string desguaceID, string pedidoID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoOferta estado)
         {
             this.ID = ID;
             this.ID_aux = ID_aux;
@@ -55,7 +56,7 @@ namespace desguaceNET.libSOR.general
          * @param fecha_limite
          * @param estado
          */
-        public Oferta(String ID, double precio, String desguaceID, String pedidoID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoOferta estado)
+        public Oferta(string ID, double precio, string desguaceID, string pedidoID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoOferta estado)
         {
             this.ID = ID;
             this.ID_aux = -1;
@@ -76,7 +77,7 @@ namespace desguaceNET.libSOR.general
          * @param pedidoID
          * @param fecha_limite fecha límite para recibir ofertas de este pedido. Pasada esa fecha, el pedido se cancelará
          */
-        public Oferta(int ID_aux, double precio, String desguaceID, String pedidoID, DateTime fecha_limite)
+        public Oferta(int ID_aux, double precio, string desguaceID, string pedidoID, DateTime fecha_limite)
         {
             this.ID = "";
             this.ID_aux = ID_aux;
@@ -116,12 +117,12 @@ namespace desguaceNET.libSOR.general
 
         // ============ Getters ==========
 
-        public String getID()
+        public string getID()
         {
             return ID;
         }
 
-        public void setID(String ID)
+        public void setID(string ID)
         {
             this.ID = ID;
         }
@@ -151,12 +152,12 @@ namespace desguaceNET.libSOR.general
             return precio;
         }
 
-        public String getDesguace()
+        public string getDesguace()
         {
             return desguaceID;
         }
 
-        public String getPedido()
+        public string getPedido()
         {
             return pedidoID;
         }

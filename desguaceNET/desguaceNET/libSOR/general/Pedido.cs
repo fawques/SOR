@@ -8,18 +8,18 @@ namespace desguaceNET.libSOR.general
 {
     class Pedido
     {
-        private String ID;
-        private int ID_aux;
-        private String tallerID;
-        private DateTime fecha_alta;
-        private DateTime fecha_baja;
-        private DateTime fecha_limite;
-        private EstadoPedido estado;
-        private bool modoAutomatico;
+        public string ID { get; set; }
+        public int ID_aux { get; set; }
+        public string tallerID { get; set; }
+        public DateTime fecha_alta { get; set; }
+        public DateTime fecha_baja { get; set; }
+        public DateTime fecha_limite { get; set; }
+        public EstadoPedido estado { get; set; }
+        public bool modoAutomatico { get; set; }
 
-        private List<Pieza> listaPiezas;
-        private List<int> listaCantidadesPiezas;
-        private List<Oferta> listaOfertas;
+        public List<Pieza> listaPiezas { get; set; }
+        public List<int> listaCantidadesPiezas { get; set; }
+        public List<Oferta> listaOfertas { get; set; }
 
         /** Constructor para la base de datos.
          *
@@ -34,7 +34,7 @@ namespace desguaceNET.libSOR.general
          * @param listaCantidadesPiezas
          * @param listaOfertas
          */
-        public Pedido(String ID, int ID_aux, String tallerID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoPedido estado, bool modoAutomatico, List<Pieza> listaPiezas, List<int> listaCantidadesPiezas, List<Oferta> listaOfertas)
+        public Pedido(string ID, int ID_aux, string tallerID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoPedido estado, bool modoAutomatico, List<Pieza> listaPiezas, List<int> listaCantidadesPiezas, List<Oferta> listaOfertas)
         {
             this.ID = ID;
             this.ID_aux = ID_aux;
@@ -63,7 +63,7 @@ namespace desguaceNET.libSOR.general
          * @param listaCantidadesPiezas
          * @param listaOfertas
          */
-        public Pedido(String ID, String tallerID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoPedido estado, bool modoAutomatico, List<Pieza> listaPiezas, List<int> listaCantidadesPiezas, List<Oferta> listaOfertas)
+        public Pedido(string ID, string tallerID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoPedido estado, bool modoAutomatico, List<Pieza> listaPiezas, List<int> listaCantidadesPiezas, List<Oferta> listaOfertas)
         {
             this.ID = ID;
             this.tallerID = tallerID;
@@ -84,7 +84,7 @@ namespace desguaceNET.libSOR.general
          * @param tallerID taller que hace el pedido
          * @param fecha_limite fecha límite para recibir ofertas de este pedido. Pasada esa fecha, el pedido se cancelará
          */
-        public Pedido(int ID_aux, String tallerID, DateTime fecha_limite, bool modoAutomatico) {
+        public Pedido(int ID_aux, string tallerID, DateTime fecha_limite, bool modoAutomatico) {
         this.ID = "";
         this.ID_aux = ID_aux;
         this.tallerID = tallerID;
@@ -127,12 +127,12 @@ namespace desguaceNET.libSOR.general
 
         // ======== Getters/Setters ==========
 
-        public String getID()
+        public string getID()
         {
             return ID;
         }
 
-        public void setID(String ID)
+        public void setID(string ID)
         {
             this.ID = ID;
         }
@@ -142,7 +142,7 @@ namespace desguaceNET.libSOR.general
             return ID_aux;
         }
 
-        public String getTaller()
+        public string getTaller()
         {
             return tallerID;
         }

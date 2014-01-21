@@ -8,7 +8,7 @@ namespace desguaceNET.libSOR.general
 {
     class Pieza
     {
-        private string nombre;
+        public string nombre { get; set; }
 
         public Pieza(string nombre)
         {

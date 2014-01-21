@@ -16,14 +16,14 @@ namespace desguaceNET.libSOR.general
         /**
          * id auxiliar para taller o desguace. El valor de error es -1.
          */
-        protected int ID_aux;
-        protected string name;
-        protected string email;
-        protected string address;
-        protected string city;
-        protected int postalCode;
-        protected int telephone;
-        protected EstadoGeneral estado;
+        protected int ID_aux { get; set; }
+        protected string name { get; set; }
+        protected string email { get; set; }
+        protected string address { get; set; }
+        protected string city { get; set; }
+        protected int postalCode { get; set; }
+        protected int telephone { get; set; }
+        protected EstadoGeneral estado { get; set; }
 
         public Usuario(string ID, int ID_aux, string name, string email, string address, string city, int postalCode, int telephone, EstadoGeneral estado)
         {
