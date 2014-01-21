@@ -395,10 +395,11 @@ public class GestionPedidos implements Initializable {
     }
    public void actualizarPestañaOfertas(){
       actualizarOfertas();
-      //actualizarOfertasOfertadas();
+      actualizarOfertasOfertadas();
    }
      public void actualizarOfertasOfertadas() {
-        ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
+      CompararOfertasGestorDesguace();
+         ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
         olTablaOfertasAceptadas.clear();
        ofertas = DesguaceJava.actualizarOfertasAceptadas();
         TablaOfertas tpOf;
@@ -411,6 +412,7 @@ public class GestionPedidos implements Initializable {
         tableOfertasAceptadas.setItems(olTablaOfertasAceptadas);
     }
    public void actualizarOfertas() {
+       CompararOfertasGestorDesguace();
         ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
         olTablaOfertas.clear();
        ofertas = DesguaceJava.actualizarOfertas();

@@ -96,7 +96,7 @@ public class NuevoPedidoController implements Initializable {
             MainTaller.crearPedido(today, EstadoPedido.NEW, fechaLimite, "Automatico".equals(cbModoAutomatico.getValue().toString()), piezasPedido, cantidadPiezas);
             //Mensaje
             lbMensaje.setText("El pedido se ha creado correctamente");
-
+            
         } catch (ParseException ex) {
             lbMensaje.setText("Algo no ha ido bien... :(");
             Logger.getLogger(NuevoPedidoController.class.getName()).log(Level.SEVERE, null, ex);

@@ -647,7 +647,9 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     public boolean cambiarEstadoOferta(EstadoOferta eOf, String id) {
         return conexion.ejecutarSQL("Update oferta set estado='" + eOf.ordinal() + "' where id='" + id + "'");
     }
-
+    public boolean cambiarEstadoPedido(EstadoPedido ePed, String id) {
+        return conexion.ejecutarSQL("Update pedido set estado='" + ePed.ordinal() + "' where id='" + id + "'");
+    }
     public boolean activarPedidoTaller(int id_aux, String id) {
         return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
     }

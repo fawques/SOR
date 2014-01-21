@@ -44,6 +44,10 @@
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
 
+<xs:element name="sendMail" type="tns:sendMail"/>
+
+<xs:element name="sendMailResponse" type="tns:sendMailResponse"/>
+
 <xs:complexType name="getAltaDesguace">
 <xs:sequence/>
 </xs:complexType>
@@ -97,9 +101,7 @@
 </xs:complexType>
 
 <xs:complexType name="hello">
-<xs:sequence>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-</xs:sequence>
+<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="helloResponse">
@@ -150,6 +152,19 @@
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendMail">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+<xs:element name="arg3" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendMailResponse">
+<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="getPedidoID">

@@ -232,4 +232,21 @@ public class TallerWS {
         return false;
     }
 
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "cambiarEstadoPedido")
+    public Boolean cambiarEstadoPedido(@WebParam(name = "estado") int estado, @WebParam(name = "id") String id) {
+        try {
+            bd= new InterfazBD("sor_gestor");
+           return  bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return false;
+    }
+
 }

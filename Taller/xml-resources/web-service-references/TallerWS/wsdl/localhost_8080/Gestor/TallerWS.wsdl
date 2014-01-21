@@ -22,18 +22,6 @@
 <message name="cancelarPedidoResponse">
 <part name="parameters" element="tns:cancelarPedidoResponse"/>
 </message>
-<message name="hello">
-<part name="parameters" element="tns:hello"/>
-</message>
-<message name="helloResponse">
-<part name="parameters" element="tns:helloResponse"/>
-</message>
-<message name="alta">
-<part name="parameters" element="tns:alta"/>
-</message>
-<message name="altaResponse">
-<part name="parameters" element="tns:altaResponse"/>
-</message>
 <message name="modificar">
 <part name="parameters" element="tns:modificar"/>
 </message>
@@ -67,6 +55,24 @@
 <message name="bajaResponse">
 <part name="parameters" element="tns:bajaResponse"/>
 </message>
+<message name="hello">
+<part name="parameters" element="tns:hello"/>
+</message>
+<message name="helloResponse">
+<part name="parameters" element="tns:helloResponse"/>
+</message>
+<message name="alta">
+<part name="parameters" element="tns:alta"/>
+</message>
+<message name="altaResponse">
+<part name="parameters" element="tns:altaResponse"/>
+</message>
+<message name="cambiarEstadoPedido">
+<part name="parameters" element="tns:cambiarEstadoPedido"/>
+</message>
+<message name="cambiarEstadoPedidoResponse">
+<part name="parameters" element="tns:cambiarEstadoPedidoResponse"/>
+</message>
 <portType name="TallerWS">
 <operation name="checkActivacion">
 <input wsam:Action="http://gestor_taller/TallerWS/checkActivacionRequest" message="tns:checkActivacion"/>
@@ -79,14 +85,6 @@
 <operation name="cancelarPedido">
 <input wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoRequest" message="tns:cancelarPedido"/>
 <output wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoResponse" message="tns:cancelarPedidoResponse"/>
-</operation>
-<operation name="hello">
-<input wsam:Action="http://gestor_taller/TallerWS/helloRequest" message="tns:hello"/>
-<output wsam:Action="http://gestor_taller/TallerWS/helloResponse" message="tns:helloResponse"/>
-</operation>
-<operation name="alta">
-<input wsam:Action="http://gestor_taller/TallerWS/altaRequest" message="tns:alta"/>
-<output wsam:Action="http://gestor_taller/TallerWS/altaResponse" message="tns:altaResponse"/>
 </operation>
 <operation name="modificar">
 <input wsam:Action="http://gestor_taller/TallerWS/modificarRequest" message="tns:modificar"/>
@@ -108,6 +106,18 @@
 <operation name="baja">
 <input wsam:Action="http://gestor_taller/TallerWS/bajaRequest" message="tns:baja"/>
 <output wsam:Action="http://gestor_taller/TallerWS/bajaResponse" message="tns:bajaResponse"/>
+</operation>
+<operation name="hello">
+<input wsam:Action="http://gestor_taller/TallerWS/helloRequest" message="tns:hello"/>
+<output wsam:Action="http://gestor_taller/TallerWS/helloResponse" message="tns:helloResponse"/>
+</operation>
+<operation name="alta">
+<input wsam:Action="http://gestor_taller/TallerWS/altaRequest" message="tns:alta"/>
+<output wsam:Action="http://gestor_taller/TallerWS/altaResponse" message="tns:altaResponse"/>
+</operation>
+<operation name="cambiarEstadoPedido">
+<input wsam:Action="http://gestor_taller/TallerWS/cambiarEstadoPedidoRequest" message="tns:cambiarEstadoPedido"/>
+<output wsam:Action="http://gestor_taller/TallerWS/cambiarEstadoPedidoResponse" message="tns:cambiarEstadoPedidoResponse"/>
 </operation>
 </portType>
 <binding name="TallerWSPortBinding" type="tns:TallerWS">
@@ -131,24 +141,6 @@
 </output>
 </operation>
 <operation name="cancelarPedido">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="hello">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="alta">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -197,6 +189,33 @@
 </output>
 </operation>
 <operation name="baja">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="hello">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="alta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="cambiarEstadoPedido">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

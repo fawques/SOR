@@ -500,7 +500,22 @@ public class MainTaller extends Application {
         System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
         return "";
     }
-
+    public static Boolean cambiarEstadoPedido(EstadoPedido estado,String idPedido){
+        try {
+            bd= new InterfazBD("sor_taller");
+            Boolean aceptado=bd.cambiarEstadoPedido(estado, idPedido);
+            
+            bd.close();
+            if(aceptado){
+             return   cambiarEstadoPedido_1(estado.ordinal(),idPedido);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     private static String getOfertas_WS(String listaPedidos) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
@@ -513,6 +528,9 @@ public class MainTaller extends Application {
         for (int i = 0; i < 10; i++) {
             try{
                 Boolean ret = aceptarOferta_WS(id);
+                if(ret){
+                
+                }
                 // si no ha lanzado excepción, devolvemos correctamente
                 return ret;
             }catch(javax.xml.ws.WebServiceException e){}
@@ -632,5 +650,11 @@ public class MainTaller extends Application {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.cancelarPedido(idPedido);
+    }
+
+    private static Boolean cambiarEstadoPedido_1(int estado, java.lang.String id) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.cambiarEstadoPedido(estado, id);
     }
 }
