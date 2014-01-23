@@ -16,6 +16,7 @@ import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
+import general.PedidoCorto;
 import general.Taller;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
@@ -96,7 +97,8 @@ public class TallerWS {
              bd.anadirPedido(stringID, p.getFecha_alta(), EstadoPedido.ACCEPTED.ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
             Gestor_activemq activemq= new Gestor_activemq();
             activemq.create_Producer("pedidos");
-            String pedidoFinal = gson.toJson(p.getID());
+             PedidoCorto pedidocorto= new PedidoCorto(p.getID(), p.getEstado());
+            String pedidoFinal = gson.toJson(pedidocorto);
             activemq.producer.produceMessage(pedidoFinal);
             activemq.producer.closeProduce();
             bd.close();

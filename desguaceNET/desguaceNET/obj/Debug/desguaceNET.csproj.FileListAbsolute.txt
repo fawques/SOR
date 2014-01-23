@@ -1,0 +1,16 @@
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\desguaceNET.exe.config
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\desguaceNET.exe
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\desguaceNET.pdb
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\EntityFramework.dll
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\mysql.data.entity.EF6.dll
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\EntityFramework.xml
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\obj\Debug\desguaceNET.csprojResolveAssemblyReference.cache
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\obj\Debug\desguaceNET.AltaDesguace.resources
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\obj\Debug\desguaceNET.Properties.Resources.resources
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\obj\Debug\desguaceNET.csproj.GenerateResource.Cache
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\obj\Debug\desguaceNET.exe
+C:\Users\Cute\Documents\SOR\desguaceNET\desguaceNET\obj\Debug\desguaceNET.pdb

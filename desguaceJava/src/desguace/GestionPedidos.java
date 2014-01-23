@@ -15,6 +15,7 @@ import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
+import general.PedidoCorto;
 import interfaz.TablaOfertas;
 import interfaz.TablaPedidos;
 import java.io.IOException;
@@ -410,11 +411,24 @@ public class GestionPedidos implements Initializable {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
         String pedidosstring=null;
-        collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
+        ArrayList<String> stringid= new ArrayList<String>();
+        ArrayList<String> stringbueno= new ArrayList<String>();
+        
+        
         if(listaIdsString!=null){
-            pedidosstring= DesguaceJava.getPedidosporID(listaIdsString);
+            stringid= gson.fromJson(listaIdsString, collectionType);
+            collectionType = new TypeToken<ArrayList<PedidoCorto>>(){}.getType();
+            PedidoCorto p=null; 
+            for(String s: stringid){
+                p=gson.fromJson(s, collectionType);
+                stringbueno.add(p.getID());
+            }
+            Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gsonn.toJson(stringbueno);
+            pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
         }
         if(!pedidosstring.equals("") && pedidosstring!=null){
+             collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
             listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
         
@@ -558,10 +572,24 @@ public class GestionPedidos implements Initializable {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
         String pedidosstring=null;
-        collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        if(listaIdsString!=null){
-            pedidosstring= DesguaceJava.getPedidosporID(listaIdsString);
+        ArrayList<PedidoCorto> idlista= new ArrayList<PedidoCorto>();
+        ArrayList<String> idlistabuena= gson.fromJson(listaIdsString,collectionType);
+        collectionType = new TypeToken<PedidoCorto>(){}.getType();
+        PedidoCorto p=new PedidoCorto();
+        for(String o: idlistabuena){
+            p= gson.fromJson(o, collectionType);
+            idlista.add(p);
         }
+        idlistabuena.clear();
+        if(listaIdsString!=null){
+            for(PedidoCorto pcorto: idlista){
+                idlistabuena.add(pcorto.getID());
+            }
+             Gson gsonnuevo = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gsonnuevo.toJson(idlistabuena);
+             pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
+        }
+        collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         if(!pedidosstring.equals("") && pedidosstring!=null){
             listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
