@@ -125,6 +125,12 @@
     <EmbeddedResource Include="AltaDesguace.resx">
       <DependentUpon>AltaDesguace.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DesguacerPendienteActivacion.resx">
+      <DependentUpon>DesguacerPendienteActivacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionPedidos.resx">
+      <DependentUpon>GestionPedidos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
