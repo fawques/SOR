@@ -24,6 +24,16 @@
 
 <xs:element name="nuevaOfertaResponse" type="tns:nuevaOfertaResponse"/>
 
+<xs:complexType name="getOfertas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getOfertasResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="checkActivacion">
 <xs:sequence>
 <xs:element name="mail" type="xs:string" minOccurs="0"/>
@@ -31,16 +41,6 @@
 </xs:complexType>
 
 <xs:complexType name="checkActivacionResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getOfertas">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getOfertasResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
