@@ -33,12 +33,13 @@
             this.ofertasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Pedidos = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btBaja = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btBuscarPedido = new System.Windows.Forms.Button();
             this.tbPrecio = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbNombreTaller = new System.Windows.Forms.TextBox();
+            this.tbIDPedido = new System.Windows.Forms.TextBox();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,11 +51,12 @@
             this.FechaLimite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.envioOferta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ofertas = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.btAnularOfertaAceptada = new System.Windows.Forms.Button();
             this.btAceptarOferta = new System.Windows.Forms.Button();
             this.btAnularOferta = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dgvOfertasAceptadas = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,7 +64,7 @@
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvOfertasEnviadas = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,16 +72,25 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btBaja = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tpHistorico = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dgvHistorico = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.Pedidos.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Ofertas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOfertasAceptadas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOfertasEnviadas)).BeginInit();
+            this.tpHistorico.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorico)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -109,6 +120,7 @@
             // 
             this.Pedidos.Controls.Add(this.tabPage1);
             this.Pedidos.Controls.Add(this.Ofertas);
+            this.Pedidos.Controls.Add(this.tpHistorico);
             this.Pedidos.Location = new System.Drawing.Point(0, 0);
             this.Pedidos.Name = "Pedidos";
             this.Pedidos.SelectedIndex = 0;
@@ -129,6 +141,15 @@
             this.tabPage1.Text = "Pedidos";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btBaja
+            // 
+            this.btBaja.Location = new System.Drawing.Point(602, 480);
+            this.btBaja.Name = "btBaja";
+            this.btBaja.Size = new System.Drawing.Size(96, 28);
+            this.btBaja.TabIndex = 8;
+            this.btBaja.Text = "Dar de baja";
+            this.btBaja.UseVisualStyleBackColor = true;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -144,7 +165,7 @@
             this.panel1.Controls.Add(this.btBuscarPedido);
             this.panel1.Controls.Add(this.tbPrecio);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.tbNombreTaller);
+            this.panel1.Controls.Add(this.tbIDPedido);
             this.panel1.Controls.Add(this.dtpFecha);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
@@ -178,12 +199,12 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Precio";
             // 
-            // tbNombreTaller
+            // tbIDPedido
             // 
-            this.tbNombreTaller.Location = new System.Drawing.Point(138, 31);
-            this.tbNombreTaller.Name = "tbNombreTaller";
-            this.tbNombreTaller.Size = new System.Drawing.Size(136, 20);
-            this.tbNombreTaller.TabIndex = 4;
+            this.tbIDPedido.Location = new System.Drawing.Point(138, 31);
+            this.tbIDPedido.Name = "tbIDPedido";
+            this.tbIDPedido.Size = new System.Drawing.Size(136, 20);
+            this.tbIDPedido.TabIndex = 4;
             // 
             // dtpFecha
             // 
@@ -263,8 +284,8 @@
             this.Ofertas.Controls.Add(this.btAnularOfertaAceptada);
             this.Ofertas.Controls.Add(this.btAceptarOferta);
             this.Ofertas.Controls.Add(this.btAnularOferta);
-            this.Ofertas.Controls.Add(this.dataGridView3);
-            this.Ofertas.Controls.Add(this.dataGridView2);
+            this.Ofertas.Controls.Add(this.dgvOfertasAceptadas);
+            this.Ofertas.Controls.Add(this.dgvOfertasEnviadas);
             this.Ofertas.Location = new System.Drawing.Point(4, 22);
             this.Ofertas.Name = "Ofertas";
             this.Ofertas.Padding = new System.Windows.Forms.Padding(3);
@@ -272,6 +293,15 @@
             this.Ofertas.TabIndex = 1;
             this.Ofertas.Text = "Ofertas";
             this.Ofertas.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(602, 476);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 28);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Dar de baja";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -312,10 +342,10 @@
             this.btAnularOferta.UseVisualStyleBackColor = true;
             this.btAnularOferta.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dataGridView3
+            // dgvOfertasAceptadas
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvOfertasAceptadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOfertasAceptadas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn9,
@@ -323,10 +353,10 @@
             this.dataGridViewTextBoxColumn11,
             this.dataGridViewTextBoxColumn12,
             this.dataGridViewTextBoxColumn13});
-            this.dataGridView3.Location = new System.Drawing.Point(29, 285);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(669, 180);
-            this.dataGridView3.TabIndex = 6;
+            this.dgvOfertasAceptadas.Location = new System.Drawing.Point(29, 285);
+            this.dgvOfertasAceptadas.Name = "dgvOfertasAceptadas";
+            this.dgvOfertasAceptadas.Size = new System.Drawing.Size(669, 180);
+            this.dgvOfertasAceptadas.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -365,10 +395,10 @@
             this.dataGridViewTextBoxColumn13.HeaderText = "Estado";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             // 
-            // dataGridView2
+            // dgvOfertasEnviadas
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvOfertasEnviadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOfertasEnviadas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
@@ -376,11 +406,11 @@
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.Estado});
-            this.dataGridView2.Location = new System.Drawing.Point(29, 41);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(669, 201);
-            this.dataGridView2.TabIndex = 4;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            this.dgvOfertasEnviadas.Location = new System.Drawing.Point(29, 41);
+            this.dgvOfertasEnviadas.Name = "dgvOfertasEnviadas";
+            this.dgvOfertasEnviadas.Size = new System.Drawing.Size(669, 201);
+            this.dgvOfertasEnviadas.TabIndex = 4;
+            this.dgvOfertasEnviadas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -419,23 +449,73 @@
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
             // 
-            // btBaja
+            // tpHistorico
             // 
-            this.btBaja.Location = new System.Drawing.Point(602, 480);
-            this.btBaja.Name = "btBaja";
-            this.btBaja.Size = new System.Drawing.Size(96, 28);
-            this.btBaja.TabIndex = 8;
-            this.btBaja.Text = "Dar de baja";
-            this.btBaja.UseVisualStyleBackColor = true;
+            this.tpHistorico.Controls.Add(this.label6);
+            this.tpHistorico.Controls.Add(this.dgvHistorico);
+            this.tpHistorico.Location = new System.Drawing.Point(4, 22);
+            this.tpHistorico.Name = "tpHistorico";
+            this.tpHistorico.Padding = new System.Windows.Forms.Padding(3);
+            this.tpHistorico.Size = new System.Drawing.Size(725, 516);
+            this.tpHistorico.TabIndex = 2;
+            this.tpHistorico.Text = "Histórico";
+            this.tpHistorico.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // label6
             // 
-            this.button1.Location = new System.Drawing.Point(602, 476);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 28);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Dar de baja";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(275, 34);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(193, 24);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Histórico operaciones";
+            this.label6.Click += new System.EventHandler(this.label6_Click_1);
+            // 
+            // dgvHistorico
+            // 
+            this.dgvHistorico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHistorico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19});
+            this.dgvHistorico.Location = new System.Drawing.Point(28, 88);
+            this.dgvHistorico.Name = "dgvHistorico";
+            this.dgvHistorico.Size = new System.Drawing.Size(669, 382);
+            this.dgvHistorico.TabIndex = 12;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "idPedido";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "idPedidoGestor";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "Taller";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.HeaderText = "Piezas pedidas";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.HeaderText = "Fecha Límite";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.HeaderText = "¿Enviada oferta?";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             // 
             // GestionPedidos
             // 
@@ -457,8 +537,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.Ofertas.ResumeLayout(false);
             this.Ofertas.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOfertasAceptadas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOfertasEnviadas)).EndInit();
+            this.tpHistorico.ResumeLayout(false);
+            this.tpHistorico.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorico)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -475,7 +558,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tbPrecio;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbNombreTaller;
+        private System.Windows.Forms.TextBox tbIDPedido;
         private System.Windows.Forms.DateTimePicker dtpFecha;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -486,7 +569,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn piezasPedidas;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaLimite;
         private System.Windows.Forms.DataGridViewTextBoxColumn envioOferta;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvOfertasEnviadas;
         private System.Windows.Forms.Button btBuscarPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -495,7 +578,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dgvOfertasAceptadas;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
@@ -510,6 +593,15 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btBaja;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tpHistorico;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView dgvHistorico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
 
     }
 }
