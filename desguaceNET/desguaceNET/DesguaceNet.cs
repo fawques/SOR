@@ -39,13 +39,15 @@ namespace desguaceNET
                 bd = new InterfazBD("sor_desguace");
                 string desguaceID = bd.getDesguace().getID();
                 int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID, fechaLimite);
-                Oferta nuevo = new Oferta(id, precio, desguaceID, idPedido, fechaLimite);
-                JsonSerializer bu = new JsonSerializer();
-                string mierdajson = JsonConvert.SerializeObject(nuevo);
-                string idFinal = nuevaOferta(mierdajson);
-                nuevo.setID(idFinal);
-                bd.activarOfertaDesguace(id, idFinal);
-                return nuevo;
+                if (id != -1)
+                {
+                    Oferta nuevo = new Oferta(id, precio, desguaceID, idPedido, fechaLimite);
+                    string mierdajson = JsonConvert.SerializeObject(nuevo);
+                    string idFinal = nuevaOferta(mierdajson);
+                    nuevo.setID(idFinal);
+                    bd.activarOfertaDesguace(id, idFinal);
+                    return nuevo;
+                }
             }
             catch (MySqlException ex)
             {

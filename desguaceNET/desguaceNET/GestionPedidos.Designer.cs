@@ -282,6 +282,7 @@
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.Size = new System.Drawing.Size(669, 180);
             this.dataGridView3.TabIndex = 6;
+            this.dataGridView3.SelectionChanged += new System.EventHandler(this.dataGridView3_SelectionChanged);
             // 
             // dataGridView2
             // 
@@ -293,6 +294,7 @@
             this.dataGridView2.Size = new System.Drawing.Size(669, 201);
             this.dataGridView2.TabIndex = 4;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
             // tpHistorico
             // 

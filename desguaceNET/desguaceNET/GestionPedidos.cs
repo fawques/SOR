@@ -16,6 +16,9 @@ namespace desguaceNET
         List<Pedido> listaPedidos;
         List<Oferta> listaOfertasActivas;
         List<Oferta> listaOfertasAceptadas;
+        string idPedidoSelected;
+        string idOfertaActiva;
+        string idOfertaAceptada;
 
         public GestionPedidos()
         {
@@ -100,19 +103,17 @@ namespace desguaceNET
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            DialogResult res = MessageBox.Show("¿Estás seguro de que quieres cancelar esta oferta?","¿Cancelar?",MessageBoxButtons.YesNo);
+            if(res == DialogResult.Yes){
+                DesguaceNet main = new DesguaceNet();
+                // anular la oferta 
+                //idOfertaActiva
+            }
         }
 
         private void label4_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0) {
-                tbNombreTaller.Text = (string)dataGridView1.SelectedRows[0].Cells[0].Value;
-            }
         }
 
         private void btBuscarPedido_Click(object sender, EventArgs e)
@@ -125,6 +126,37 @@ namespace desguaceNET
             if (of != null)
             {
                 listaOfertasActivas.Add(of);
+            }
+            else
+            {
+                MessageBox.Show("Error al crear oferta", "ERROR", MessageBoxButtons.OK);
+            }
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                idPedidoSelected = (string)dataGridView1.SelectedRows[0].Cells[0].Value;
+                tbNombreTaller.Text = idPedidoSelected;
+            }
+        }
+
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                idOfertaActiva = (string)dataGridView2.SelectedRows[0].Cells[0].Value;
+                tbNombreTaller.Text = idOfertaActiva;
+            }
+        }
+
+        private void dataGridView3_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                idOfertaAceptada = (string)dataGridView3.SelectedRows[0].Cells[0].Value;
+                tbNombreTaller.Text = idOfertaAceptada;
             }
         }
     }
