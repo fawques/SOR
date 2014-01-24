@@ -52,7 +52,7 @@ namespace desguaceNET
         private void button3_Click(object sender, EventArgs e)
         {
             DesguaceNet main = new DesguaceNet();
-            Oferta o = main.crearOferta(DateTime.Today, new DateTime(2020, 5, 15), "948fcb0e9997aeb1a0bb24565e79c143", 13.5);
+            Oferta o = main.crearOferta(DateTime.Today, new DateTime(2020, 5, 15), "pedido", 13.5);
             if (o != null)
             {
                 Console.WriteLine("oferta creada correctamente");

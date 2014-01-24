@@ -16,7 +16,7 @@ namespace desguaceNET
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AltaDesguace());
+            Application.Run(new GestionPedidos());
         }
     }
 }

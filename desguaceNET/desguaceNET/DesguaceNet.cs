@@ -1,4 +1,4 @@
-﻿using desguaceNET.desguaceWS_Silvia;
+﻿using desguaceNET.desguaceWS;
 using desguaceNET.libSOR.BD;
 using desguaceNET.libSOR.general;
 using MySql.Data.MySqlClient;
