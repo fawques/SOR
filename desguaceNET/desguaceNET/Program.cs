@@ -45,6 +45,7 @@ namespace desguaceNET
                 if (pendiente.DialogResult == DialogResult.OK) {
                     string id = pendiente.idResult;
                     desguace.activar(id);
+                    bd.activarDesguaceMainDesguace(id);
                 }
             }
 
