@@ -1,4 +1,5 @@
-﻿using System;
+﻿using desguaceNET.libSOR.general;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,11 +13,34 @@ namespace desguaceNET
 {
     public partial class GestionPedidos : Form
     {
+        List<Pedido> listaPedidos;
+        List<Oferta> listaOfertasActivas;
+        List<Oferta> listaOfertasAceptadas;
+
         public GestionPedidos()
         {
             InitializeComponent();
             DesguaceNet main = new DesguaceNet();
-            dataGridView2.DataSource = main.actualizarOfertas();
+            listaPedidos = new List<Pedido>();
+            listaOfertasActivas = main.actualizarOfertas();
+            listaOfertasAceptadas = main.actualizarOfertasAceptadas();
+
+            
+            Pedido pedido1 = new Pedido("pedido1", 1, "taller1", DateTime.Today, new DateTime(),new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
+            Pedido pedido2 = new Pedido("pedido2", 2, "taller1", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
+            Pedido pedido3 = new Pedido("pedido3", 3, "taller2", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
+            Pedido pedido4 = new Pedido("pedido4", 4, "taller3", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
+            Pedido pedido5 = new Pedido("pedido5", 5, "taller2", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
+            
+            listaPedidos.Add(pedido1);
+            listaPedidos.Add(pedido2);
+            listaPedidos.Add(pedido3);
+            listaPedidos.Add(pedido4);
+            listaPedidos.Add(pedido5);
+            dataGridView1.DataSource = listaPedidos;
+
+            dataGridView2.DataSource = listaOfertasActivas;
+            dataGridView3.DataSource = listaOfertasAceptadas;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -82,6 +106,26 @@ namespace desguaceNET
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0) {
+                tbNombreTaller.Text = (string)dataGridView1.SelectedRows[0].Cells[0].Value;
+            }
+        }
+
+        private void btBuscarPedido_Click(object sender, EventArgs e)
+        {
+            string idPedido = tbNombreTaller.Text;
+            double precio = double.Parse(tbPrecio.Text);
+            DateTime fechaLimite = dtpFecha.Value;
+            DesguaceNet main = new DesguaceNet();
+            Oferta of = main.crearOferta(DateTime.Today, fechaLimite, idPedido, precio);
+            if (of != null)
+            {
+                listaOfertasActivas.Add(of);
+            }
         }
     }
 }
