@@ -21,7 +21,7 @@ namespace desguaceNET
         private void button1_Click(object sender, EventArgs e)
         {
             DesguaceNet main = new DesguaceNet();
-            if (main.hacerAlta("pepe", "hola@email.com", "calle de las pipas", "ciudad", 123, 456))
+            if (main.hacerAlta("pepe", "hola@email.com", "calle de las pipas", "ciudad", "123", "456"))
             {
                 Console.WriteLine("Alta ha devuelto true");
             }
@@ -61,6 +61,25 @@ namespace desguaceNET
             {
                 Console.WriteLine("ERROR creando oferta");
             }
+        }
+
+        private void btAceptar_Click(object sender, EventArgs e)
+        {
+            DesguaceNet main = new DesguaceNet();
+            if (main.hacerAlta(tbNombreDesguace.Text, tbEmail.Text, tbDireccion.Text, tbCiudad.Text, tbCP.Text, tbTelefono.Text))
+            {
+                Console.WriteLine("Alta correcta");
+                DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show("Error al hacer el alta, vuelve a intentarlo", "ERROR", MessageBoxButtons.OK);
+            }
+        }
+
+        private void btCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

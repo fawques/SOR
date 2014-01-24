@@ -1,4 +1,6 @@
-﻿using System;
+﻿using desguaceNET.libSOR.BD;
+using desguaceNET.libSOR.general;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,8 @@ namespace desguaceNET
 {
     public partial class DesguacerPendienteActivacion : Form
     {
+        public string idResult { get; set; }
+
         public DesguacerPendienteActivacion()
         {
             InitializeComponent();
@@ -24,7 +28,15 @@ namespace desguaceNET
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            InterfazBD bd = new InterfazBD("sor_desguace");
+            Desguace desguace = bd.getDesguace();
+            DesguaceNet main = new DesguaceNet();
+            string id = main.comprobarActivacion(desguace.getEmail());
+            if (id != "")
+            {
+                idResult = id;
+                DialogResult = DialogResult.OK;
+            }
         }
     }
 }

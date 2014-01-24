@@ -98,9 +98,20 @@ namespace desguaceNET.libSOR.general
             this.estado = EstadoGeneral.ACTIVE;
         }
 
+        public void activar(string id)
+        {
+            this.estado = EstadoGeneral.ACTIVE;
+            this.ID = id;
+        }
+
         public void baja()
         {
             this.estado = EstadoGeneral.INACTIVE;
+        }
+
+        public void setPendiente()
+        {
+            this.estado = EstadoGeneral.PENDIENTE;
         }
     }
 }

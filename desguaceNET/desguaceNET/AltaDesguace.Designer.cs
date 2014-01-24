@@ -223,6 +223,7 @@
             this.btCancelar.TabIndex = 19;
             this.btCancelar.Text = "Cancelar";
             this.btCancelar.UseVisualStyleBackColor = true;
+            this.btCancelar.Click += new System.EventHandler(this.btCancelar_Click);
             // 
             // btAceptar
             // 
@@ -232,6 +233,7 @@
             this.btAceptar.TabIndex = 20;
             this.btAceptar.Text = "Aceptar";
             this.btAceptar.UseVisualStyleBackColor = true;
+            this.btAceptar.Click += new System.EventHandler(this.btAceptar_Click);
             // 
             // AltaDesguace
             // 

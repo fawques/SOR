@@ -101,13 +101,13 @@ namespace desguaceNET
             return realizado;
         }
 
-        public bool hacerAlta(string name, string email, string address, string city, int postalCode, int telephone){
+        public bool hacerAlta(string name, string email, string address, string city, string postalCode, string telephone){
 
             if (alta(name, email, address, city, postalCode, telephone))
             {
                 //METER en base de datos si está todo ok.
                 bd = new InterfazBD("sor_desguace");
-                if (bd.altaDesguace(name, email, address, city, postalCode, telephone, (int)EstadoGeneral.PENDIENTE) != -1)
+                if (bd.altaDesguace(name, email, address, city, int.Parse(postalCode), int.Parse(telephone), (int)EstadoGeneral.PENDIENTE) != -1)
                 {
 
                     Console.WriteLine("Esperando activación");
@@ -133,10 +133,10 @@ namespace desguaceNET
             return id;
         }
 
-        private bool alta(string name, string email, string address, string city, int postalCode, int telephone)
+        private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
-            return client.alta(name, email, address, city, postalCode, telephone);
+            return client.alta(name, email, address, city, int.Parse(postalCode), int.Parse(telephone));
         }
 
         private string checkActivacion(string mail)
