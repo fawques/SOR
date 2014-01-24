@@ -7,10 +7,11 @@
 </head>
 <body>
 <p class="centrado">Inicio de sesion</p>
-<form class="centrado" action="login">
+<form class="centrado" action="login" method="POST">
  Usuario (mail): <input type="text" name="usuario"><br>
  Contrasenya: <input type="password" name="contrasenya">
  <input type="submit" class="centrado" value="Acceder">
+ <div style="color: #FF0000;">${errorMessage}</div>
  </form> 
 <p class="centrado">¿No eres usuario? <a href="registro.jsp">Registrate</a></p>
 </body>

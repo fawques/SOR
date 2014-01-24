@@ -56,13 +56,17 @@ public class login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String user = request.getParameter("usuario");
-        String pass = request.getParameter("contrasenya");
-        PrintWriter out = response.getWriter();
-        if ("Pepe".equals(user) && "pepe".equals(pass)) {
-            response.sendRedirect("gestion.jsp");
-        } else {
-            out.println("invalid login");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet login</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -77,6 +81,14 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String user = request.getParameter("usuario");
+        String pass = request.getParameter("contrasenya");
+        if ("Pepe".equals(user) && "pepe".equals(pass)) {
+            response.sendRedirect("gestion.jsp");
+        } else {
+            request.setAttribute("errorMessage", "Login invalido");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
     }
 
     /**
