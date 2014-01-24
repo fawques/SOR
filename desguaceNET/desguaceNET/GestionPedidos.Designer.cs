@@ -50,6 +50,9 @@
             this.btAnularOferta = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.tpHistorico = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.Pedidos.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -58,6 +61,8 @@
             this.Ofertas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.tpHistorico.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -87,6 +92,7 @@
             // 
             this.Pedidos.Controls.Add(this.tabPage1);
             this.Pedidos.Controls.Add(this.Ofertas);
+            this.Pedidos.Controls.Add(this.tpHistorico);
             this.Pedidos.Location = new System.Drawing.Point(0, 0);
             this.Pedidos.Name = "Pedidos";
             this.Pedidos.SelectedIndex = 0;
@@ -284,6 +290,36 @@
             this.dataGridView2.TabIndex = 4;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
+            // tpHistorico
+            // 
+            this.tpHistorico.Controls.Add(this.label6);
+            this.tpHistorico.Controls.Add(this.dataGridView4);
+            this.tpHistorico.Location = new System.Drawing.Point(4, 22);
+            this.tpHistorico.Name = "tpHistorico";
+            this.tpHistorico.Padding = new System.Windows.Forms.Padding(3);
+            this.tpHistorico.Size = new System.Drawing.Size(725, 516);
+            this.tpHistorico.TabIndex = 2;
+            this.tpHistorico.Text = "Histórico";
+            this.tpHistorico.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(268, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(193, 24);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Histórico operaciones";
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(28, 54);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(669, 428);
+            this.dataGridView4.TabIndex = 11;
+            // 
             // GestionPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -306,6 +342,9 @@
             this.Ofertas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.tpHistorico.ResumeLayout(false);
+            this.tpHistorico.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,6 +374,9 @@
         private System.Windows.Forms.Button btAceptarOferta;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TabPage tpHistorico;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView dataGridView4;
 
     }
 }
