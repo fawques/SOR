@@ -33,8 +33,9 @@
             this.ofertasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Pedidos = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.Ofertas = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btBuscarPedido = new System.Windows.Forms.Button();
             this.tbPrecio = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbNombreTaller = new System.Windows.Forms.TextBox();
@@ -48,15 +49,11 @@
             this.piezasPedidas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaLimite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.envioOferta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.btBuscarPedido = new System.Windows.Forms.Button();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ofertas = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btAnularOfertaAceptada = new System.Windows.Forms.Button();
+            this.btAceptarOferta = new System.Windows.Forms.Button();
+            this.btAnularOferta = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,19 +62,24 @@
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btAnularOferta = new System.Windows.Forms.Button();
-            this.btAceptarOferta = new System.Windows.Forms.Button();
-            this.btAnularOfertaAceptada = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btBaja = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.Pedidos.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.Ofertas.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.Ofertas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -115,6 +117,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btBaja);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.dataGridView1);
@@ -126,21 +129,15 @@
             this.tabPage1.Text = "Pedidos";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // Ofertas
+            // label5
             // 
-            this.Ofertas.Controls.Add(this.label4);
-            this.Ofertas.Controls.Add(this.btAnularOfertaAceptada);
-            this.Ofertas.Controls.Add(this.btAceptarOferta);
-            this.Ofertas.Controls.Add(this.btAnularOferta);
-            this.Ofertas.Controls.Add(this.dataGridView3);
-            this.Ofertas.Controls.Add(this.dataGridView2);
-            this.Ofertas.Location = new System.Drawing.Point(4, 22);
-            this.Ofertas.Name = "Ofertas";
-            this.Ofertas.Padding = new System.Windows.Forms.Padding(3);
-            this.Ofertas.Size = new System.Drawing.Size(725, 516);
-            this.Ofertas.TabIndex = 1;
-            this.Ofertas.Text = "Ofertas";
-            this.Ofertas.UseVisualStyleBackColor = true;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(275, 171);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(161, 24);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Pedidos recibidos";
             // 
             // panel1
             // 
@@ -155,6 +152,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(669, 131);
             this.panel1.TabIndex = 3;
+            // 
+            // btBuscarPedido
+            // 
+            this.btBuscarPedido.Location = new System.Drawing.Point(545, 85);
+            this.btBuscarPedido.Name = "btBuscarPedido";
+            this.btBuscarPedido.Size = new System.Drawing.Size(96, 28);
+            this.btBuscarPedido.TabIndex = 7;
+            this.btBuscarPedido.Text = "Buscar";
+            this.btBuscarPedido.UseVisualStyleBackColor = true;
             // 
             // tbPrecio
             // 
@@ -250,68 +256,61 @@
             this.envioOferta.HeaderText = "¿Enviada oferta?";
             this.envioOferta.Name = "envioOferta";
             // 
-            // dataGridView2
+            // Ofertas
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.Estado});
-            this.dataGridView2.Location = new System.Drawing.Point(29, 41);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(669, 201);
-            this.dataGridView2.TabIndex = 4;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            this.Ofertas.Controls.Add(this.button1);
+            this.Ofertas.Controls.Add(this.label4);
+            this.Ofertas.Controls.Add(this.btAnularOfertaAceptada);
+            this.Ofertas.Controls.Add(this.btAceptarOferta);
+            this.Ofertas.Controls.Add(this.btAnularOferta);
+            this.Ofertas.Controls.Add(this.dataGridView3);
+            this.Ofertas.Controls.Add(this.dataGridView2);
+            this.Ofertas.Location = new System.Drawing.Point(4, 22);
+            this.Ofertas.Name = "Ofertas";
+            this.Ofertas.Padding = new System.Windows.Forms.Padding(3);
+            this.Ofertas.Size = new System.Drawing.Size(725, 516);
+            this.Ofertas.TabIndex = 1;
+            this.Ofertas.Text = "Ofertas";
+            this.Ofertas.UseVisualStyleBackColor = true;
             // 
-            // btBuscarPedido
+            // label4
             // 
-            this.btBuscarPedido.Location = new System.Drawing.Point(545, 85);
-            this.btBuscarPedido.Name = "btBuscarPedido";
-            this.btBuscarPedido.Size = new System.Drawing.Size(96, 28);
-            this.btBuscarPedido.TabIndex = 7;
-            this.btBuscarPedido.Text = "Buscar";
-            this.btBuscarPedido.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(269, 14);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(149, 24);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Ofertas enviadas";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // dataGridViewTextBoxColumn1
+            // btAnularOfertaAceptada
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "idOferta";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 75;
+            this.btAnularOfertaAceptada.Location = new System.Drawing.Point(154, 479);
+            this.btAnularOfertaAceptada.Name = "btAnularOfertaAceptada";
+            this.btAnularOfertaAceptada.Size = new System.Drawing.Size(147, 23);
+            this.btAnularOfertaAceptada.TabIndex = 9;
+            this.btAnularOfertaAceptada.Text = "Anular oferta aceptada";
+            this.btAnularOfertaAceptada.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn2
+            // btAceptarOferta
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "idOfertaGestor";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 75;
+            this.btAceptarOferta.Location = new System.Drawing.Point(29, 479);
+            this.btAceptarOferta.Name = "btAceptarOferta";
+            this.btAceptarOferta.Size = new System.Drawing.Size(102, 23);
+            this.btAceptarOferta.TabIndex = 8;
+            this.btAceptarOferta.Text = "Aceptar oferta";
+            this.btAceptarOferta.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn3
+            // btAnularOferta
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Taller";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Piezas pedidas";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "PVP ofrecido";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Fecha límite";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
+            this.btAnularOferta.Location = new System.Drawing.Point(29, 256);
+            this.btAnularOferta.Name = "btAnularOferta";
+            this.btAnularOferta.Size = new System.Drawing.Size(102, 23);
+            this.btAnularOferta.TabIndex = 7;
+            this.btAnularOferta.Text = "Anular oferta enviada";
+            this.btAnularOferta.UseVisualStyleBackColor = true;
+            this.btAnularOferta.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView3
             // 
@@ -366,54 +365,77 @@
             this.dataGridViewTextBoxColumn13.HeaderText = "Estado";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             // 
-            // btAnularOferta
+            // dataGridView2
             // 
-            this.btAnularOferta.Location = new System.Drawing.Point(29, 256);
-            this.btAnularOferta.Name = "btAnularOferta";
-            this.btAnularOferta.Size = new System.Drawing.Size(102, 23);
-            this.btAnularOferta.TabIndex = 7;
-            this.btAnularOferta.Text = "Anular oferta enviada";
-            this.btAnularOferta.UseVisualStyleBackColor = true;
-            this.btAnularOferta.Click += new System.EventHandler(this.button1_Click);
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.Estado});
+            this.dataGridView2.Location = new System.Drawing.Point(29, 41);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(669, 201);
+            this.dataGridView2.TabIndex = 4;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
-            // btAceptarOferta
+            // dataGridViewTextBoxColumn1
             // 
-            this.btAceptarOferta.Location = new System.Drawing.Point(29, 479);
-            this.btAceptarOferta.Name = "btAceptarOferta";
-            this.btAceptarOferta.Size = new System.Drawing.Size(102, 23);
-            this.btAceptarOferta.TabIndex = 8;
-            this.btAceptarOferta.Text = "Aceptar oferta";
-            this.btAceptarOferta.UseVisualStyleBackColor = true;
+            this.dataGridViewTextBoxColumn1.HeaderText = "idOferta";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 75;
             // 
-            // btAnularOfertaAceptada
+            // dataGridViewTextBoxColumn2
             // 
-            this.btAnularOfertaAceptada.Location = new System.Drawing.Point(154, 479);
-            this.btAnularOfertaAceptada.Name = "btAnularOfertaAceptada";
-            this.btAnularOfertaAceptada.Size = new System.Drawing.Size(147, 23);
-            this.btAnularOfertaAceptada.TabIndex = 9;
-            this.btAnularOfertaAceptada.Text = "Anular oferta aceptada";
-            this.btAnularOfertaAceptada.UseVisualStyleBackColor = true;
+            this.dataGridViewTextBoxColumn2.HeaderText = "idOfertaGestor";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 75;
             // 
-            // label4
+            // dataGridViewTextBoxColumn3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(269, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(149, 24);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Ofertas enviadas";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.dataGridViewTextBoxColumn3.HeaderText = "Taller";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // label5
+            // dataGridViewTextBoxColumn4
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(275, 171);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(161, 24);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Pedidos recibidos";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Piezas pedidas";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "PVP ofrecido";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Fecha límite";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            // 
+            // btBaja
+            // 
+            this.btBaja.Location = new System.Drawing.Point(602, 480);
+            this.btBaja.Name = "btBaja";
+            this.btBaja.Size = new System.Drawing.Size(96, 28);
+            this.btBaja.TabIndex = 8;
+            this.btBaja.Text = "Dar de baja";
+            this.btBaja.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(602, 476);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 28);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Dar de baja";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // GestionPedidos
             // 
@@ -430,13 +452,13 @@
             this.Pedidos.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.Ofertas.ResumeLayout(false);
-            this.Ofertas.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.Ofertas.ResumeLayout(false);
+            this.Ofertas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -486,6 +508,8 @@
         private System.Windows.Forms.Button btAceptarOferta;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btBaja;
+        private System.Windows.Forms.Button button1;
 
     }
 }
