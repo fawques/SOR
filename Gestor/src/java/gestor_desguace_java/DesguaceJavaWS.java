@@ -101,7 +101,7 @@ public class DesguaceJavaWS {
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
-             bd.anadirOferta(stringID, p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACCEPTED.ordinal(),  p.getPedido(), p.getDesguace(), p.getFecha_baja(),p.getFecha_limite());
+             bd.anadirOferta(stringID, p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACTIVE.ordinal(),  p.getPedido(), p.getDesguace(), p.getFecha_baja(),p.getFecha_limite());
             bd.close();
             return stringID;
         } catch (SQLException ex) {
@@ -181,6 +181,47 @@ public class DesguaceJavaWS {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return aceptada;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "cancelarOferta")
+    public Boolean cancelarOferta(@WebParam(name = "id") String id) {
+        Boolean aceptada=false;
+        try {
+            bd = new InterfazBD("sor_gestor");
+            aceptada=bd.cambiarEstadoOferta(EstadoOferta.CANCELLED, id);
+            bd.close();
+            
+            return aceptada;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return aceptada;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "baja")
+    public Boolean baja(@WebParam(name = "id") String id) {
+        try {        
+            bd = new InterfazBD("sor_gestor");
+            boolean oool = bd.bajaDesguace(id);
+            bd.close();
+            return oool;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+      
+        return false;
     }
     
 }

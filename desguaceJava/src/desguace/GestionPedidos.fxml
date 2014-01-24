@@ -37,6 +37,7 @@
                 </TitledPane>
                 <TableView fx:id="tablePedidos" layoutX="28.0" layoutY="243.0" prefHeight="239.0" prefWidth="721.0" />
                 <Text layoutX="324.0" layoutY="217.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos recibidos" />
+                <Button layoutX="668.0" layoutY="14.0" mnemonicParsing="false" onAction="#bajaDesguace" text="Dar de baja" />
               </children>
             </AnchorPane>
           </content>
@@ -47,10 +48,23 @@
               <children>
                 <TableView fx:id="tableOfertas" layoutX="28.0" layoutY="62.0" prefHeight="173.0" prefWidth="718.0" />
                 <Button id="btNuevaPieza" fx:id="btAceptar" layoutX="28.0" layoutY="503.0" mnemonicParsing="false" onAction="#aceptarOferta" prefHeight="22.0" prefWidth="135.0" text="Aceptar oferta" />
-                <Button id="btNuevaPieza" fx:id="btAnularOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Anular oferta aceptada" />
-                <Text layoutX="329.0" layoutY="32.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas enviadas" />
+                <Button id="btNuevaPieza" fx:id="btAnularOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" onAction="#anularOfertaAceptada" prefHeight="22.0" prefWidth="148.0" text="Anular oferta aceptada" />
+                <Text layoutX="340.0" layoutY="34.0" scaleX="2.0928597272116414" scaleY="1.9561776417753889" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas enviadas" />
                 <TableView fx:id="tableOfertasAceptadas" layoutX="28.0" layoutY="308.0" prefHeight="161.0" prefWidth="718.0" />
-                <Button id="btNuevaPieza" layoutX="28.0" layoutY="255.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="135.0" text="Anular oferta enviada" />
+                <Button id="btNuevaPieza" layoutX="28.0" layoutY="255.0" mnemonicParsing="false" onAction="#anularOfertaCreada" prefHeight="22.0" prefWidth="135.0" text="Anular oferta creada" />
+                <Text layoutX="336.0" layoutY="282.0" scaleX="2.0928597272116414" scaleY="1.9561776417753889" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas aceptadas" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab onSelectionChanged="#actualizarPestañaHistorico" text="Historico">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView fx:id="tablaHistoricoPedidos" layoutX="29.0" layoutY="71.0" prefHeight="191.0" prefWidth="720.0" />
+                <Text layoutX="327.0" layoutY="51.0" scaleX="2.0928597272116414" scaleY="1.9561776417753889" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado de pedidos" />
+                <Text layoutX="327.0" layoutY="293.0" scaleX="2.0928597272116414" scaleY="1.9561776417753889" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado de ofertas" />
+                <TableView id="tablaOfertasHistorico" fx:id="tablaHistoricoOfertas" layoutX="29.0" layoutY="320.0" prefHeight="200.0" prefWidth="720.0" />
               </children>
             </AnchorPane>
           </content>

@@ -75,6 +75,22 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/uddi-org:v3_service"/>
         <delete dir="${build.generated.dir}/jax-wsCache/security"/>
     </target>
+    <target name="wsimport-client-inquiry" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/inquiry"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/inquiry" destdir="${build.generated.dir}/jax-wsCache/inquiry" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/inquiry/wsdl/localhost_8081/juddiv3/services/inquiry.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/inquiry?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/inquiry/wsdl/localhost_8081/juddiv3/services/inquiry.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/inquiry"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/inquiry">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-inquiry" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/uddi-org:v3_service"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/inquiry"/>
+    </target>
     <target name="wsimport-client-publish" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/publish"/>
         <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/publish" destdir="${build.generated.dir}/jax-wsCache/publish" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/publish/wsdl/localhost_8081/juddiv3/services/publish.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/publish?wsdl" xnocompile="true" xendorsed="true">
@@ -107,5 +123,5 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/juddi-apache-org:v3_service"/>
         <delete dir="${build.generated.dir}/jax-wsCache/juddi-api"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-security, wsimport-client-publish, wsimport-client-juddi-api"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-security, wsimport-client-inquiry, wsimport-client-publish, wsimport-client-juddi-api"/>
 </project>

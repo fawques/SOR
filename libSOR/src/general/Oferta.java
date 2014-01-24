@@ -64,7 +64,7 @@ public class Oferta {
         this.ID_aux = -1;
         this.precio = precio;
         this.desguaceID = desguaceID;
-        this.desguaceID = pedidoID;
+        this.pedidoID = pedidoID;
         this.fecha_alta = fecha_alta;
         this.fecha_baja = fecha_baja;
         this.fecha_limite = fecha_limite;

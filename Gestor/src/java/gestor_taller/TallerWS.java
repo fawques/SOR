@@ -16,6 +16,7 @@ import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
+import general.PedidoCorto;
 import general.Taller;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
@@ -96,7 +97,8 @@ public class TallerWS {
              bd.anadirPedido(stringID, p.getFecha_alta(), EstadoPedido.ACCEPTED.ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
             Gestor_activemq activemq= new Gestor_activemq();
             activemq.create_Producer("pedidos");
-            String pedidoFinal = gson.toJson(p.getID());
+             PedidoCorto pedidocorto= new PedidoCorto(p.getID(), p.getEstado());
+            String pedidoFinal = gson.toJson(pedidocorto);
             activemq.producer.produceMessage(pedidoFinal);
             activemq.producer.closeProduce();
             bd.close();
@@ -127,8 +129,10 @@ public class TallerWS {
                 Pedido p = it.next();
                 listaOferta.addAll(bd.getOfertasPedido(p.getID(), EstadoOferta.ACTIVE));
             }
+             Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String retu=gsonn.toJson(listaOferta);
             bd.close();
-            return gson.toJson(listaOferta);
+            return retu;
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -227,6 +231,23 @@ public class TallerWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "cambiarEstadoPedido")
+    public Boolean cambiarEstadoPedido(@WebParam(name = "estado") int estado, @WebParam(name = "id") String id) {
+        try {
+            bd= new InterfazBD("sor_gestor");
+           return  bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         return false;
     }
 

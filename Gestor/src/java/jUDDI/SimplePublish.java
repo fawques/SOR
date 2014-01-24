@@ -18,7 +18,6 @@ package jUDDI;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,10 +125,15 @@ public class SimplePublish {
             fb.getName().add(n);
             BusinessList busList = findBusiness(fb);
             BusinessInfos businessInfos = busList.getBusinessInfos();
-            List<BusinessInfo> businessInfoList = businessInfos.getBusinessInfo();
-            if (businessInfoList.size()> 0) {
-                myBusEntity.setBusinessKey(businessInfoList.get(0).getBusinessKey());
+            if(businessInfos!=null){
+                  
+                  List<BusinessInfo> businessInfoList = businessInfos.getBusinessInfo();
+                  if (businessInfoList.size()> 0) {
+                      myBusEntity.setBusinessKey(businessInfoList.get(0).getBusinessKey());
+                  }
+            
             }
+          
             
             // Adding the business entity to the "save" structure, using our publisher's authentication info and saving away.
             SaveBusiness sb = new SaveBusiness();

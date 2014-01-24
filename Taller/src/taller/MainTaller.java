@@ -8,6 +8,7 @@ package taller;
 import Async.AsyncManager;
 import BD.InterfazBD;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
 import general.EstadoPedido;
@@ -267,11 +268,14 @@ public class MainTaller extends Application {
     }
 
     public static ArrayList<Oferta> actualizarOfertas() {
-        String ofertasGson = getOfertas(getPedidosActivos());
-        Gson gson = new Gson();
-        Type collectionType = new TypeToken<ArrayList<Oferta>>() {
-        }.getType();
-        ArrayList<Oferta> listOf = gson.fromJson(ofertasGson, collectionType);
+        
+         Gson gson = new Gson();
+          
+       String ofertasGson = getOfertas(getPedidosActivos());
+       Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
+        ArrayList<Oferta> listOf= new ArrayList<Oferta>();
+        listOf= gson.fromJson(ofertasGson, collectionType);
+        //listOf = gson.fromJson(ofertasGson, collectionType);
         try {
             bd = new InterfazBD("sor_taller");
             for (Oferta of : listOf) {
@@ -495,7 +499,27 @@ public class MainTaller extends Application {
         return "";
     }
 
-    
+    public static Boolean cambiarEstadoPedido(EstadoPedido estado,String idPedido){
+        try {
+            bd= new InterfazBD("sor_taller");
+            Boolean aceptado=bd.cambiarEstadoPedido(estado, idPedido);
+            
+            bd.close();
+            if(aceptado){
+             return   cambiarEstadoPedido_1(estado.ordinal(),idPedido);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    private static String getOfertas_WS(String listaPedidos) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.getOfertas(listaPedidos);
+    }
 
     public static Boolean aceptarOferta(java.lang.String id) {
         AsyncManager manager = new AsyncManager("sor_taller");
@@ -503,6 +527,9 @@ public class MainTaller extends Application {
         for (int i = 0; i < 10; i++) {
             try{
                 Boolean ret = aceptarOferta_WS(id);
+                if(ret){
+                
+                }
                 // si no ha lanzado excepción, devolvemos correctamente
                 return ret;
             }catch(javax.xml.ws.WebServiceException e){}
@@ -600,5 +627,16 @@ public class MainTaller extends Application {
         return false;
     }
 
-    
+
+    private static Boolean cancelarPedido_WS(String idPedido) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.cancelarPedido(idPedido);
+    }
+
+    private static Boolean cambiarEstadoPedido_1(int estado, java.lang.String id) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.cambiarEstadoPedido(estado, id);
+    }
 }

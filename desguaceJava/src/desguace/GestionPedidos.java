@@ -15,8 +15,10 @@ import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
+import general.PedidoCorto;
 import interfaz.TablaOfertas;
 import interfaz.TablaPedidos;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.sql.SQLException;
@@ -32,7 +34,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -57,6 +62,8 @@ public class GestionPedidos implements Initializable {
     public TableView tablePedidos;
     public TableView tableOfertas;
     public TableView tableOfertasAceptadas;
+    public TableView tablaHistoricoPedidos;
+    public TableView  tablaHistoricoOfertas;
     @FXML
     private Label lbID;
     @FXML 
@@ -88,8 +95,10 @@ public class GestionPedidos implements Initializable {
     private int borrarOferta=-1;
     private int borrarOfertaAceptadas=-1;
     ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayList();
+    ObservableList<TablaPedidos> datatableHistorico = FXCollections.observableArrayList();
     ObservableList<TablaOfertas> olTablaOfertas = FXCollections.observableArrayList();
     ObservableList<TablaOfertas> olTablaOfertasAceptadas = FXCollections.observableArrayList();
+    ObservableList<TablaOfertas> datatableHistoricoOfertas = FXCollections.observableArrayList();
     InterfazBD bd;
   
     /**
@@ -107,11 +116,56 @@ public class GestionPedidos implements Initializable {
         public void setStage(Stage stage) {
         thisStage = stage;
     }
+        private void tablaOfertasHistorico(){
+              ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
+     try {
+            bd= new InterfazBD("sor_desguace");
+     
+        TableColumn id_auxCol = new TableColumn("Id_aux");
+        id_auxCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Integer>("id_aux"));        
+        TableColumn idCol = new TableColumn("Id");
+        idCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("id"));      
+        TableColumn fecha_altaCol = new TableColumn("Fecha alta");
+        fecha_altaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_alta"));      
+        TableColumn importeCol = new TableColumn("Importe");
+        importeCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("importe"));      
+        TableColumn estadoCol = new TableColumn("Estado");
+        estadoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("estado"));       
+        TableColumn pedidoCol = new TableColumn("Pedido");
+        pedidoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("pedido"));      
+        TableColumn desguaceCol = new TableColumn("Desguace");
+        desguaceCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguace"));      
+        TableColumn fecha_bajaCol = new TableColumn("Fecha baja");
+        fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_baja"));      
+        TableColumn fecha_limiteCol = new TableColumn("Fecha limite");
+        fecha_limiteCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_limite"));
+      
+
+       CompararOfertasGestorDesguace();
+        TablaOfertas tpOf;
+        ofertas= DesguaceJava.getOfertasDesguace();
+          for (Oferta of : ofertas) {
+            tpOf = new TablaOfertas(of);
+            datatableHistoricoOfertas.add(tpOf);
+        }
+      
+      
+        tablaHistoricoOfertas.setEditable(true);
+        tablaHistoricoOfertas.setItems(datatableHistoricoOfertas);
+        tablaHistoricoOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
+        bd.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }    
     private void tablaOfertasActivas(){
      try {
             bd= new InterfazBD("sor_desguace");
               ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
-        
+      
        Callback<TableColumn, TableCell> integerCellFactory =
                 new Callback<TableColumn, TableCell>() {
             @Override
@@ -159,14 +213,14 @@ public class GestionPedidos implements Initializable {
         fecha_limiteCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_limite"));
         fecha_limiteCol.setCellFactory(stringCellFactory);
 
-       
+       CompararOfertasGestorDesguace();
         TablaOfertas tpOf;
         ofertas= DesguaceJava.actualizarOfertasAceptadas();
           for (Oferta of : ofertas) {
             tpOf = new TablaOfertas(of);
             olTablaOfertasAceptadas.add(tpOf);
         }
-        
+      
       
         tableOfertasAceptadas.setEditable(true);
         tableOfertasAceptadas.setItems(olTablaOfertasAceptadas);
@@ -178,6 +232,114 @@ public class GestionPedidos implements Initializable {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void CompararOfertasGestorDesguace(){
+        
+    ArrayList<Oferta>  ofertas= DesguaceJava.actualizarOfertas();   
+    ArrayList<Oferta> ofertasgestor= new ArrayList<Oferta>();
+      Gson gson = new Gson();
+        Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
+        String ofertasstring= DesguaceJava.getOfertas();
+        if(!ofertasstring.equals("") && ofertasstring!=null){
+            ofertasgestor = gson.fromJson(ofertasstring, collectionType);
+        }
+       for(Oferta ofertagestor:ofertasgestor){
+           for(Oferta ofertadesguace:ofertas){
+               if(ofertagestor.getID().equals(ofertadesguace.getID())){
+                    if(ofertagestor.getEstado()!=ofertadesguace.getEstado()){
+                           DesguaceJava.cambiarEstadoOferta(ofertagestor.getID(),ofertagestor.getEstado());
+                    }
+               }
+           }
+       }
+    }
+    public void anularOfertaAceptada(){
+       Boolean aceptado=false;
+        if(borrarOfertaAceptadas!=-1){
+            if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
+               Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
+                  if(gestorlohacambiado==true){
+                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.CANCELLED);
+                    if(aceptado==false){
+                        System.err.println("No se ha podido aceptar la oferta");
+                    }
+                  }
+                  else{
+                    System.err.println("No se ha podido cambiar la oferta en gestor a finalizado");
+                  }
+            }
+        }
+        actualizarOfertasOfertadas();
+    }
+        public void anularOfertaCreada(){
+       Boolean aceptado=false;
+        if(borrarOferta!=-1){
+            if(olTablaOfertas.size()>=borrarOferta){
+               Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(olTablaOfertas.get(borrarOferta).getId());
+                  if(gestorlohacambiado==true){
+                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertas.get(borrarOferta).getId(),EstadoOferta.CANCELLED);
+                    if(aceptado==false){
+                        System.err.println("No se ha podido aceptar la oferta");
+                    }
+                  }
+                  else{
+                    System.err.println("No se ha podido cambiar la oferta en gestor a finalizado");
+                  }
+            }
+        }
+        actualizarOfertas();
+    }
+    public void actualizarPestañaHistorico(){
+        tablaHistoricoPedidos();
+        tablaOfertasHistorico();
+    }
+    private void tablaHistoricoPedidos(){
+      try {
+            bd= new InterfazBD("sor_desguace");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          datatableHistorico.clear();
+  
+        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+        ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
+  
+      TableColumn id_auxCol1 = new TableColumn("Id_aux");
+        id_auxCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Integer>("id_aux")); 
+        TableColumn idCol1 = new TableColumn("Id");
+        idCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("id"));
+         
+        TableColumn fecha_altaCol1 = new TableColumn("Fecha alta");
+        fecha_altaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_alta"));
+        
+        TableColumn estadoCol1 = new TableColumn("Estado");
+        estadoCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Integer>("estado"));
+   
+        TableColumn tallerCol = new TableColumn("Taller");
+        tallerCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("taller"));
+       
+        TableColumn fecha_bajaCol1 = new TableColumn("Fecha baja");
+        fecha_bajaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_baja"));
+      
+        TableColumn fecha_limiteCol1 = new TableColumn("Fecha limite");
+        fecha_limiteCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_limite"));
+        
+        listaPedidos=DesguaceJava.getPedidos();
+        TablaPedidos interfaz;
+        for(Pedido pedido: listaPedidos){
+             interfaz= new TablaPedidos(pedido);
+             datatableHistorico.add(interfaz);
+        }
+        
+       
+        tablaHistoricoPedidos.setItems(datatableHistorico);
+        tablaHistoricoPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+
+        
     }
     private void tablaPedidos(){
         try {
@@ -249,11 +411,24 @@ public class GestionPedidos implements Initializable {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
         String pedidosstring=null;
-        collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
+        ArrayList<String> stringid= new ArrayList<String>();
+        ArrayList<String> stringbueno= new ArrayList<String>();
+        
+        
         if(listaIdsString!=null){
-            pedidosstring= DesguaceJava.getPedidosporID(listaIdsString);
+            stringid= gson.fromJson(listaIdsString, collectionType);
+            collectionType = new TypeToken<ArrayList<PedidoCorto>>(){}.getType();
+            PedidoCorto p=null; 
+            for(String s: stringid){
+                p=gson.fromJson(s, collectionType);
+                stringbueno.add(p.getID());
+            }
+            Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gsonn.toJson(stringbueno);
+            pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
         }
         if(!pedidosstring.equals("") && pedidosstring!=null){
+             collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
             listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
         
@@ -339,10 +514,11 @@ public class GestionPedidos implements Initializable {
     }
    public void actualizarPestañaOfertas(){
       actualizarOfertas();
-      //actualizarOfertasOfertadas();
+      actualizarOfertasOfertadas();
    }
      public void actualizarOfertasOfertadas() {
-        ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
+      CompararOfertasGestorDesguace();
+         ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
         olTablaOfertasAceptadas.clear();
        ofertas = DesguaceJava.actualizarOfertasAceptadas();
         TablaOfertas tpOf;
@@ -355,6 +531,7 @@ public class GestionPedidos implements Initializable {
         tableOfertasAceptadas.setItems(olTablaOfertasAceptadas);
     }
    public void actualizarOfertas() {
+       CompararOfertasGestorDesguace();
         ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
         olTablaOfertas.clear();
        ofertas = DesguaceJava.actualizarOfertas();
@@ -395,10 +572,24 @@ public class GestionPedidos implements Initializable {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
         String pedidosstring=null;
-        collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        if(listaIdsString!=null){
-            pedidosstring= DesguaceJava.getPedidosporID(listaIdsString);
+        ArrayList<PedidoCorto> idlista= new ArrayList<PedidoCorto>();
+        ArrayList<String> idlistabuena= gson.fromJson(listaIdsString,collectionType);
+        collectionType = new TypeToken<PedidoCorto>(){}.getType();
+        PedidoCorto p=new PedidoCorto();
+        for(String o: idlistabuena){
+            p= gson.fromJson(o, collectionType);
+            idlista.add(p);
         }
+        idlistabuena.clear();
+        if(listaIdsString!=null){
+            for(PedidoCorto pcorto: idlista){
+                idlistabuena.add(pcorto.getID());
+            }
+             Gson gsonnuevo = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            String listaJSON = gsonnuevo.toJson(idlistabuena);
+             pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
+        }
+        collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         if(!pedidosstring.equals("") && pedidosstring!=null){
             listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
@@ -427,7 +618,7 @@ public class GestionPedidos implements Initializable {
             if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
                Boolean gestorlohacambiado= DesguaceJava.aceptarOfertaFin(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
                   if(gestorlohacambiado==true){
-                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
+                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.FINISHED_OK);
                     if(aceptado==false){
                         System.err.println("No se ha podido aceptar la oferta");
                     }
@@ -439,6 +630,26 @@ public class GestionPedidos implements Initializable {
         }
         actualizarOfertasOfertadas();
      }
+      public void bajaDesguace() throws IOException {
+        if (DesguaceJava.bajaDesguace()) {
+            cambiarAPantallaDesguaceDeBaja();
+        } else {
+            System.err.println("Lo siento, no se ha podido dar de baja.");
+        }
+    }
+
+    private void cambiarAPantallaDesguaceDeBaja() throws IOException {
+        URL location = getClass().getResource("DesguaceDeBaja.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page = (Parent) loader.load(location.openStream());
+        thisStage.getScene().setRoot(page);
+        DesguaceDeBajaController tdCont = (DesguaceDeBajaController) loader.getController();
+        tdCont.setStage(thisStage);
+        tdCont.showStage();
+    }
+
    
     class MyIntegerTableCell extends TableCell<TablaPedidos, Integer> {
  

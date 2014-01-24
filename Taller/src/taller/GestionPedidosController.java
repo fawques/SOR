@@ -241,14 +241,15 @@ public class GestionPedidosController implements Initializable {
         fecha_bajaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_baja"));
         TableColumn fecha_limiteCol1 = new TableColumn("Fecha limite");
         fecha_limiteCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_limite"));
-        visualizarPedidos(gson);
+        visualizarPedidos();
         
         tbPedidosOfertas.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
         tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
         
     }
 
-    public void visualizarPedidos(Gson gson) throws JsonSyntaxException {
+    public void visualizarPedidos() throws JsonSyntaxException {
+        Gson gson= new  GsonBuilder().setDateFormat("MMM dd, yyyy").create();
         olTablaPedidos.clear();
         olTablaPedidosOfertas.clear();
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
@@ -291,7 +292,7 @@ public class GestionPedidosController implements Initializable {
         np.setStage(stage);
         np.showStage();
         
-        visualizarPedidos(new GsonBuilder().setDateFormat("MMM dd, yyyy").create());
+       // visualizarPedidos(new GsonBuilder().setDateFormat("MMM dd, yyyy").create());
     }
 
     /**
@@ -325,7 +326,7 @@ public class GestionPedidosController implements Initializable {
         TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
         if (tp != null && (tp.getEstado() == EstadoPedido.ACTIVE || tp.getEstado() == EstadoPedido.NEW)) {
             if (MainTaller.cancellPedido(tp.getId())) {
-                visualizarPedidos(new GsonBuilder().setDateFormat("MMM dd, yyyy").create());
+                visualizarPedidos();
             }
         }
         //else //no hay pedido seleccionada
@@ -354,6 +355,7 @@ public class GestionPedidosController implements Initializable {
         TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
         if (tpPed != null) {
             MainTaller.aceptarOferta(tpPed.getId());
+            MainTaller.cambiarEstadoPedido(EstadoPedido.ACCEPTED,tpPed.getPedido());
         }
         //else //no hay oferta seleccionada
     }

@@ -647,7 +647,9 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     public boolean cambiarEstadoOferta(EstadoOferta eOf, String id) {
         return conexion.ejecutarSQL("Update oferta set estado='" + eOf.ordinal() + "' where id='" + id + "'");
     }
-
+    public boolean cambiarEstadoPedido(EstadoPedido ePed, String id) {
+        return conexion.ejecutarSQL("Update pedido set estado='" + ePed.ordinal() + "' where id='" + id + "'");
+    }
     public boolean activarPedidoTaller(int id_aux, String id) {
         return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
     }
@@ -657,6 +659,9 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     public boolean cancelarOfertas(String idPedido) {
         return conexion.ejecutarSQL("Update oferta set estado='" + EstadoOferta.CANCELLED.ordinal() + "' where pedido='" + idPedido + "'");
     }
+     public boolean cancelarOfertasDesguace(String idDesguace) {
+        return conexion.ejecutarSQL("Update oferta set estado='" + EstadoOferta.CANCELLED.ordinal() + "' where desguace='" + idDesguace + "'");
+    }
 
     public boolean cancelarPedidosTaller(String idTaller) throws SQLException {
         ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where taller='" + idTaller + "'");
@@ -665,7 +670,13 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         }
         return conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where taller='" + idTaller + "'");
     }
-
+  public boolean cancelarPedidosDesguace(String idDesguace) throws SQLException {
+        ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta where desguace='" + idDesguace+ "'");
+        while (resultados.next()) {
+            cancelarOfertasDesguace(resultados.getString("id"));
+        }
+        return conexion.ejecutarSQL("Update oferta set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where desguace='" + idDesguace + "'");
+    }
     public boolean cancelarPedido(String idPedido) {
         if (cancelarOfertas(idPedido)) {
             return conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where id='" + idPedido + "'");
@@ -681,7 +692,14 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         }
         return conexion.ejecutarSQL("Update taller set estado='" + EstadoGeneral.INACTIVE.ordinal() + "' where id='" + id + "'");
     }
-
+  public boolean bajaDesguace(String id) {
+        try {
+            cancelarPedidosDesguace(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conexion.ejecutarSQL("Update desguace set estado='" + EstadoGeneral.INACTIVE.ordinal() + "' where id='" + id + "'");
+    }
     /**
      *
      * @param accion debe tener formato "nombre:param0|param1|...|paramN"
