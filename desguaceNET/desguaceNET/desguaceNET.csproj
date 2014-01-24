@@ -76,6 +76,12 @@
     <Compile Include="AltaDesguace.Designer.cs">
       <DependentUpon>AltaDesguace.cs</DependentUpon>
     </Compile>
+    <Compile Include="BajaDesguace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BajaDesguace.Designer.cs">
+      <DependentUpon>BajaDesguace.cs</DependentUpon>
+    </Compile>
     <Compile Include="DesguaceNet.cs" />
     <Compile Include="DesguacerPendienteActivacion.cs">
       <SubType>Form</SubType>
@@ -125,6 +131,9 @@
     </Compile>
     <EmbeddedResource Include="AltaDesguace.resx">
       <DependentUpon>AltaDesguace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BajaDesguace.resx">
+      <DependentUpon>BajaDesguace.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DesguacerPendienteActivacion.resx">
       <DependentUpon>DesguacerPendienteActivacion.cs</DependentUpon>
