@@ -16,6 +16,7 @@ Nombre: <input type="text" name="usuario"><br>
  Ciudad: <input type="text" name="ciudad"><br>
  Codigo postal: <input type="text" name="cpostal"><br>
  Telofono: <input type="text" name="telefono"> <br>
+ <div style="color: #FF0000;">${errorMessage}</div>
  <input type="submit" value="Registrarme">
  </form>
 </body>

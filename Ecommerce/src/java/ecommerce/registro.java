@@ -74,7 +74,15 @@ public class registro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        alta(request.getParameter("usuario"), request.getParameter("email"), request.getParameter("direccion"), request.getParameter("ciudad"), request.getParameter("cpostal"), request.getParameter("telefono"));
+        if (alta(request.getParameter("usuario"), request.getParameter("email"), request.getParameter("direccion"), request.getParameter("ciudad"), request.getParameter("cpostal"), request.getParameter("telefono"))) {
+            request.setAttribute("usuario", request.getParameter("usuario"));
+            request.setAttribute("contrasenya", request.getParameter("contrasenya"));
+            request.getRequestDispatcher("/gestion.jsp").forward(request, response);
+        } else {
+            //enviar error
+            request.setAttribute("errorMessage", "Registro invalidad");
+            request.getRequestDispatcher("/registro.jsp").forward(request, response);
+        }
     }
 
     /**
