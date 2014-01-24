@@ -240,11 +240,20 @@ public class TallerWS {
     @WebMethod(operationName = "cambiarEstadoPedido")
     public Boolean cambiarEstadoPedido(@WebParam(name = "estado") int estado, @WebParam(name = "id") String id) {
         try {
+            Gson gson = new Gson();
             bd= new InterfazBD("sor_gestor");
+            Gestor_activemq activemq= new Gestor_activemq();
+            activemq.create_Producer("pedidos");
+            PedidoCorto pedidocorto= new PedidoCorto(id, EstadoPedido.values()[estado]);
+            String pedidoFinal = gson.toJson(pedidocorto);
+            activemq.producer.produceMessage(pedidoFinal);
+            activemq.producer.closeProduce();
            return  bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JMSException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
        

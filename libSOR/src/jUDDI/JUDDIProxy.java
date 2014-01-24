@@ -46,6 +46,7 @@ public class JUDDIProxy {
         fs.getName().add(name);
         ServiceList bi = findService(fs);
         ServiceInfos sis = bi.getServiceInfos();
+        if(sis!=null){
         List<ServiceInfo> siList = sis.getServiceInfo();
         ServiceInfo si = siList.get(0);
 
@@ -68,7 +69,8 @@ public class JUDDIProxy {
             wsdl = null;
         }
         System.out.println("WSDL: " + wsdlString);
-    }
+        }
+        }
 
     public static URL getWsdl() {
         return wsdl;
