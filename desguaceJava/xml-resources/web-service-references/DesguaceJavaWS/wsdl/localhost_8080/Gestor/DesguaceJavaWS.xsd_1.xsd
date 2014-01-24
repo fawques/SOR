@@ -12,6 +12,10 @@
 
 <xs:element name="bajaResponse" type="tns:bajaResponse"/>
 
+<xs:element name="cambiarEstadoPedido" type="tns:cambiarEstadoPedido"/>
+
+<xs:element name="cambiarEstadoPedidoResponse" type="tns:cambiarEstadoPedidoResponse"/>
+
 <xs:element name="cancelarOferta" type="tns:cancelarOferta"/>
 
 <xs:element name="cancelarOfertaResponse" type="tns:cancelarOfertaResponse"/>
@@ -32,6 +36,18 @@
 
 <xs:element name="nuevaOfertaResponse" type="tns:nuevaOfertaResponse"/>
 
+<xs:complexType name="checkActivacion">
+<xs:sequence>
+<xs:element name="mail" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkActivacionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getOfertas">
 <xs:sequence/>
 </xs:complexType>
@@ -42,15 +58,16 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="checkActivacion">
+<xs:complexType name="cambiarEstadoPedido">
 <xs:sequence>
-<xs:element name="mail" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="estado" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="checkActivacionResponse">
+<xs:complexType name="cambiarEstadoPedidoResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

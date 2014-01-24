@@ -301,6 +301,8 @@ public class DesguaceJava extends Application {
         try {
             bd= new InterfazBD("sor_desguace");
             realizado= bd.cambiarEstadoPedido(estado, id);
+            bd.close();
+            cambiarEstadoPedido_1(id,estado.ordinal());
             return realizado;
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
@@ -423,6 +425,12 @@ public class DesguaceJava extends Application {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.baja(id);
+    }
+
+    public static Boolean cambiarEstadoPedido_1(java.lang.String id, int estado) {
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.cambiarEstadoPedido(id, estado);
     }
 
 }

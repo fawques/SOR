@@ -14,8 +14,10 @@ import com.google.gson.reflect.TypeToken;
 import general.Desguace;
 import general.EstadoGeneral;
 import general.EstadoOferta;
+import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
+import general.PedidoCorto;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -221,6 +223,27 @@ public class DesguaceJavaWS {
         }
             
       
+        return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "cambiarEstadoPedido")
+    public Boolean cambiarEstadoPedido(@WebParam(name = "id") String id, @WebParam(name = "estado") int estado) {
+         
+            Gson gson = new Gson();
+        try {
+            bd= new InterfazBD("sor_gestor");
+           return  bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
+      
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       
         return false;
     }
     

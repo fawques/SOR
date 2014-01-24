@@ -259,7 +259,8 @@ public class GestionPedidos implements Initializable {
         if(borrarOfertaAceptadas!=-1){
             if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
                Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
-                  if(gestorlohacambiado==true){
+                Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.ACCEPTED); 
+               if(gestorlohacambiado && gestorpedido){
                     aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.CANCELLED);
                     if(aceptado==false){
                         System.err.println("No se ha podido aceptar la oferta");
@@ -622,7 +623,8 @@ public class GestionPedidos implements Initializable {
         if(borrarOfertaAceptadas!=-1){
             if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
                Boolean gestorlohacambiado= DesguaceJava.aceptarOfertaFin(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
-                  if(gestorlohacambiado==true){
+               Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.FINISHED_OK);
+               if(gestorlohacambiado && gestorpedido){
                     aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.FINISHED_OK);
                     if(aceptado==false){
                         System.err.println("No se ha podido aceptar la oferta");
