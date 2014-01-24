@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Documento sin titulo</title>
+<title>Ecommerce</title>
 <link rel="stylesheet" href="estilos.css" type="text/css" media="screen" /> 
 </head>
 <body>
@@ -12,6 +12,6 @@
  Contrasenya: <input type="password" name="contrasenya">
  <input type="submit" class="centrado" value="Acceder">
  </form> 
-<p class="centrado">Â¿No eres usuario? <a href="registro.html">Registrate</a></p>
+<p class="centrado">¿No eres usuario? <a href="registro.jsp">Registrate</a></p>
 </body>
 </html>

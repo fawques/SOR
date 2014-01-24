@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="estilos.css" type="text/css" media="screen" /> 
 </head>
 <body>
-<p class="centrado">Ir <a href="index.html">ATRAS</a></p>
+<p class="centrado">Ir <a href="index.jsp">ATRAS</a></p>
 <p class="centrado">Registro de usuario</p>
 <form class="centrado" action="registro">
 Nombre: <input type="text" name="usuario"><br>
