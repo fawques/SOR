@@ -75,14 +75,17 @@ public class Conexion {
     */
     public boolean ejecutarSQL(String sql)
     {
+        int lineascambiadas=0;
        try {
           Statement sentencia = conexion.createStatement();
-          sentencia.executeUpdate(sql);
+          lineascambiadas=sentencia.executeUpdate(sql);
        } catch (SQLException ex) {
           ex.printStackTrace();
        return false;
        }
-
+       if(lineascambiadas==0){
+           return false;
+       }
        return true;
     }
 

@@ -421,7 +421,10 @@ public class GestionPedidos implements Initializable {
             PedidoCorto p=null; 
             for(String s: stringid){
                 p=gson.fromJson(s, collectionType);
-                stringbueno.add(p.getID());
+                if(!DesguaceJava.cambiarEstadoPedido(p.getID(), p.getEstado())){
+                    stringbueno.add(p.getID());
+                }
+                
             }
             Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
             String listaJSON = gsonn.toJson(stringbueno);
@@ -583,7 +586,9 @@ public class GestionPedidos implements Initializable {
         idlistabuena.clear();
         if(listaIdsString!=null){
             for(PedidoCorto pcorto: idlista){
-                idlistabuena.add(pcorto.getID());
+                if(!DesguaceJava.cambiarEstadoPedido(p.getID(), p.getEstado())){
+                    idlistabuena.add(pcorto.getID());
+                }
             }
              Gson gsonnuevo = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
             String listaJSON = gsonnuevo.toJson(idlistabuena);

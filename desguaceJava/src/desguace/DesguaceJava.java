@@ -296,6 +296,19 @@ public class DesguaceJava extends Application {
         }
         return realizado;
     }
+        public static boolean cambiarEstadoPedido(String id,EstadoPedido estado){
+    Boolean realizado=false;
+        try {
+            bd= new InterfazBD("sor_desguace");
+            realizado= bd.cambiarEstadoPedido(estado, id);
+            return realizado;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return realizado;
+    }
     public static ArrayList<Pedido> getPedidos(){
         ArrayList<Pedido> pedidoslista= new ArrayList<Pedido>();
         try {
