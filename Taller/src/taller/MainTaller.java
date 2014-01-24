@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoGeneral;
+import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
@@ -279,7 +280,10 @@ public class MainTaller extends Application {
         try {
             bd = new InterfazBD("sor_taller");
             for (Oferta of : listOf) {
-                bd.anadirOferta(of.getID(), of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(), of.getFecha_baja(), of.getFecha_limite());
+
+                if(!MainTaller.cambiarEstadoOferta(of.getEstado(), of.getID())){
+                        bd.anadirOferta(of.getID(), of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(), of.getFecha_baja(), of.getFecha_limite());
+                }
             }
             bd.close();
         } catch (SQLException ex) {
@@ -293,7 +297,7 @@ public class MainTaller extends Application {
     public static String getPedidosActivos() {
         try {
             bd = new InterfazBD("sor_taller");
-            ArrayList<Pedido> p = bd.getPedidosConID_aux(EstadoPedido.ACTIVE);
+            ArrayList<Pedido> p = bd.getPedidosConID_aux();
             bd.close();
             Gson gson = new Gson();
             return gson.toJson(p);
@@ -515,6 +519,22 @@ public class MainTaller extends Application {
         }
         return false;
     }
+    
+        public static Boolean cambiarEstadoOferta(EstadoOferta estado,String idPedido){
+        try {
+            bd= new InterfazBD("sor_taller");
+            Boolean aceptado=bd.cambiarEstadoOferta(estado, idPedido);
+            
+            bd.close();
+            return aceptado;
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     private static String getOfertas_WS(String listaPedidos) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
         gestor_taller.TallerWS port = service.getTallerWSPort();

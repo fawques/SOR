@@ -127,7 +127,7 @@ public class TallerWS {
             bd = new InterfazBD("sor_gestor");
             for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
                 Pedido p = it.next();
-                listaOferta.addAll(bd.getOfertasPedido(p.getID(), EstadoOferta.ACTIVE));
+                listaOferta.addAll(bd.getOfertasPedido(p.getID()));
             }
              Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
             String retu=gsonn.toJson(listaOferta);
