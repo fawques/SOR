@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="estilos.css" type="text/css" media="screen" /> 
 </head>
 <body>
+    <%
+        if(session.getAttribute("usuario")==null){
+            response.sendRedirect("index.jsp");
+        }
+    %>
 <p class="centrado">Bienvenido</p>
  <input type="button" class="centrado" style="width:150px;height:80px;position:relative;float:left;" name="pedido" value="Hacer pedido">
   <input type="button" style="width:150px;height:80px;position:relative;float:left;" name="cuenta" value="Mi cuenta">

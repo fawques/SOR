@@ -81,10 +81,11 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("usuario");
-        String pass = request.getParameter("contrasenya");
-        if ("Pepe".equals(user) && "pepe".equals(pass)) {
-            response.sendRedirect("gestion.jsp");
+        String user = request.getSession().getAttribute("usuario").toString();
+        String pass = request.getSession().getAttribute("contrasenya").toString();
+        //comprobar en la bd http://www.nabisoft.com/tutorials/glassfish/securing-java-ee-6-web-applications-on-glassfish-using-jaas
+        if (request.getParameter("usuario").equals(user) && request.getParameter("contrasenya").equals(pass)) {
+            request.getRequestDispatcher("/gestion.jsp").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Login invalido");
             request.getRequestDispatcher("/index.jsp").forward(request, response);

@@ -8,7 +8,7 @@
 <body>
 <p class="centrado">Ir <a href="index.jsp">ATRAS</a></p>
 <p class="centrado">Registro de usuario</p>
-<form class="centrado" action="registro">
+<form class="centrado" action="registro" method="POST">
 Nombre: <input type="text" name="usuario"><br>
  Email: <input type="text" name="email"> <br>
  Contrasenya: <input type="password" name="contrasenya"> <br>
