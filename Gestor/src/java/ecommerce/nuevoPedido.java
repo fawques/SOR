@@ -16,6 +16,7 @@ import general.Taller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -104,16 +105,24 @@ public class nuevoPedido extends HttpServlet {
             Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
         ArrayList<Pieza> piezasPedido = new ArrayList<>();
-         ArrayList<Integer> cantidadPiezas = new ArrayList<>();
-        /*for (Iterator it = data.iterator(); it.hasNext();) {            
+        ArrayList<Integer> cantidadPiezas = new ArrayList<>();
+        /*for (Iterator it = data.iterator(); it.hasNext();) {
          TablePieza tp = (TablePieza) it.next();            piezasPedido.add(new Pieza(tp.getId()));
-            cantidadPiezas.add(tp.getCantidad());
-        }*/
-        
-        int id = bd.anadirPedido(today, EstadoPedido.ACTIVE, t.getID(), new Date(1970, 1, 1), fechaLimite, "Automatico".equals(request.getParameter("modo")));
-        if (id != 0) {
-            //bd.anyadirPiezasAPedido(id, piezasPedido, cantidadPiezas);
-            System.out.println("Pedido creado sin piezas");
+         cantidadPiezas.add(tp.getCantidad());
+         }*/
+
+        try {
+            bd = new InterfazBD("sor_gestor");
+            int id = bd.anadirPedido(today, EstadoPedido.ACTIVE, t.getID(), new Date(1970, 1, 1), fechaLimite, "Automatico".equals(request.getParameter("modo")));
+            if (id != 0) {
+                //bd.anyadirPiezasAPedido(id, piezasPedido, cantidadPiezas);
+                System.out.println("Pedido creado sin piezas");
+            }
+            bd.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
