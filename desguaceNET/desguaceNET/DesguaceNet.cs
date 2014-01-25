@@ -14,12 +14,17 @@ namespace desguaceNET
     class DesguaceNet
     {
         InterfazBD bd;
+        Desguace desguace;
+
+        public DesguaceNet(){
+            bd = new InterfazBD("sor_desguace");
+            desguace = bd.getDesguace();
+        }
 
         public bool activarDesguacesBD(string idRecibido)
         {
             try
             {
-                bd = new InterfazBD("sor_desguace");
                 bool r = bd.activarDesguaceMainDesguace(idRecibido);
                 return r;
 
@@ -36,17 +41,20 @@ namespace desguaceNET
         {
             try
             {
-                bd = new InterfazBD("sor_desguace");
-                string desguaceID = bd.getDesguace().getID();
+                string desguaceID = desguace.getID();
                 int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID, fechaLimite);
                 if (id != -1)
                 {
                     Oferta nuevo = new Oferta(id, precio, desguaceID, idPedido, fechaLimite);
                     string mierdajson = JsonConvert.SerializeObject(nuevo);
                     string idFinal = nuevaOferta(mierdajson);
-                    nuevo.setID(idFinal);
-                    bd.activarOfertaDesguace(id, idFinal);
-                    return nuevo;
+                    if (idFinal != "")
+                    {
+                        nuevo.setID(idFinal);
+                        nuevo.setEstado(EstadoOferta.ACTIVE);
+                        bd.activarOfertaDesguace(id, idFinal);
+                        return nuevo;
+                    }                    
                 }
             }
             catch (MySqlException ex)
@@ -62,7 +70,6 @@ namespace desguaceNET
             List<Oferta> of = new List<Oferta>();
             try
             {
-                bd = new InterfazBD("sor_desguace");
                 of = bd.getOfertasConID_aux(EstadoOferta.ACCEPTED);
                 return of;
             }
@@ -77,7 +84,6 @@ namespace desguaceNET
             List<Oferta> of = new List<Oferta>();
             try
             {
-                bd = new InterfazBD("sor_desguace");
                 of = bd.getOfertasConID_aux(EstadoOferta.ACTIVE);
                 return of;
             }
@@ -92,7 +98,6 @@ namespace desguaceNET
             bool realizado = false;
             try
             {
-                bd = new InterfazBD("sor_desguace");
                 realizado = bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
                 return realizado;
             }
@@ -103,12 +108,12 @@ namespace desguaceNET
             return realizado;
         }
 
-        public bool hacerAlta(string name, string email, string address, string city, string postalCode, string telephone){
+        public bool hacerAlta(string name, string email, string address, string city, string postalCode, string telephone)
+        {
 
             if (alta(name, email, address, city, postalCode, telephone))
             {
                 //METER en base de datos si está todo ok.
-                bd = new InterfazBD("sor_desguace");
                 if (bd.altaDesguace(name, email, address, city, int.Parse(postalCode), int.Parse(telephone), (int)EstadoGeneral.PENDIENTE) != -1)
                 {
 
@@ -128,11 +133,93 @@ namespace desguaceNET
             return false;
         }
 
-        public string comprobarActivacion(string mail){
-            bd = new InterfazBD("sor_desguace");
+
+        public string comprobarActivacion(string mail)
+        {
             string id = checkActivacion(mail);
             bd.activarDesguaceMainDesguace(id);
             return id;
+        }
+
+        public bool cancelarOfertaDesguace(string id)
+        {
+            if (cancelarOferta(id))
+            {
+                return cambiarEstadoOferta(id, EstadoOferta.CANCELLED);
+            }
+            return false;
+        }
+
+        public bool cambiarEstadoOferta(String id, EstadoOferta estado)
+        {
+            bool realizado = false;
+            try
+            {
+                realizado = bd.cambiarEstadoOferta(estado, id);
+                return realizado;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+            return realizado;
+        }
+
+        public List<Pedido> getPedidos()
+        {
+            List<Pedido> pedidoslista = new List<Pedido>();
+            try
+            {
+                pedidoslista = bd.getPedidos();
+                return pedidoslista;
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+            return pedidoslista;
+        }
+
+        public bool reactivarDesguace()
+        {
+            try
+            {
+                bool r = bd.activarDesguaceMainDesguace(desguace.getID());
+                return r;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+            return false;
+        }
+
+        public bool bajaDesguace()
+        {
+            try
+            {
+                if (baja(desguace.getID()))
+                {
+                    if (bd.bajaDesguace(desguace.getID()))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: No se ha podido cambiar el estado en taller.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Error: No se ha podido dar de baja en gestor.");
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+            return false;
         }
 
         private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
@@ -170,6 +257,18 @@ namespace desguaceNET
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
             return client.aceptarOfertaFin(id);
+        }
+
+        private bool baja(string id)
+        {
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            return client.baja(id);
+        }
+
+        private bool cancelarOferta(string id)
+        {
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            return client.cancelarOferta(id);
         }
 
     }

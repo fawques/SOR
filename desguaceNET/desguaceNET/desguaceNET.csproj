@@ -95,6 +95,8 @@
     <Compile Include="GestionPedidos.Designer.cs">
       <DependentUpon>GestionPedidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="libSOR\activemq\Consumer.cs" />
+    <Compile Include="libSOR\activemq\Gestor_activemq.cs" />
     <Compile Include="libSOR\BD\Conexion.cs" />
     <Compile Include="libSOR\BD\InterfazBD.cs" />
     <Compile Include="libSOR\general\Desguace.cs" />
@@ -171,6 +173,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.altaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.bajaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.cancelarOfertaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.checkActivacionResponse.datasource">

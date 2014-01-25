@@ -83,8 +83,8 @@ namespace desguaceNET.libSOR.general
             this.ID_aux = ID_aux;
             this.precio = precio;
             this.desguaceID = desguaceID;
-            this.fecha_alta = new DateTime();
-            //this.fecha_baja = null;
+            this.fecha_alta = DateTime.Today;
+            this.fecha_baja = new DateTime(1970,01,01);
             this.pedidoID = pedidoID;
             this.fecha_limite = fecha_limite;
             this.estado = EstadoOferta.NEW;

@@ -53,6 +53,8 @@
             this.tpHistorico = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.Pedidos.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -63,6 +65,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tpHistorico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -93,6 +96,7 @@
             this.Pedidos.Controls.Add(this.tabPage1);
             this.Pedidos.Controls.Add(this.Ofertas);
             this.Pedidos.Controls.Add(this.tpHistorico);
+            this.Pedidos.Controls.Add(this.tabPage2);
             this.Pedidos.Location = new System.Drawing.Point(0, 0);
             this.Pedidos.Name = "Pedidos";
             this.Pedidos.SelectedIndex = 0;
@@ -328,6 +332,27 @@
             this.dataGridView4.Size = new System.Drawing.Size(669, 428);
             this.dataGridView4.TabIndex = 11;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(725, 516);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "Cuenta";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(8, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(288, 146);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Dar de baja";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // GestionPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,6 +378,7 @@
             this.tpHistorico.ResumeLayout(false);
             this.tpHistorico.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -385,6 +411,8 @@
         private System.Windows.Forms.TabPage tpHistorico;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button1;
 
     }
 }

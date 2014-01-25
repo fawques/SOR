@@ -15,26 +15,19 @@ namespace desguaceNET.desguaceWS {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://gestor_desguace_java/", ConfigurationName="desguaceWS.DesguaceJavaWS")]
     public interface DesguaceJavaWS {
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento return del espacio de nombres  no está marcado para aceptar valores nil.
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse")]
-        desguaceNET.desguaceWS.getOfertasResponse getOfertas(desguaceNET.desguaceWS.getOfertasRequest request);
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento mail del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse")]
+        desguaceNET.desguaceWS.checkActivacionResponse checkActivacion(desguaceNET.desguaceWS.checkActivacionRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse")]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS.getOfertasResponse> getOfertasAsync(desguaceNET.desguaceWS.getOfertasRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.checkActivacionResponse> checkActivacionAsync(desguaceNET.desguaceWS.checkActivacionRequest request);
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento name del espacio de nombres  no está marcado para aceptar valores nil.
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/altaResponse")]
-        desguaceNET.desguaceWS.altaResponse alta(desguaceNET.desguaceWS.altaRequest request);
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento id del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinResponse")]
+        desguaceNET.desguaceWS.aceptarOfertaFinResponse aceptarOfertaFin(desguaceNET.desguaceWS.aceptarOfertaFinRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/altaResponse")]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS.altaResponse> altaAsync(desguaceNET.desguaceWS.altaRequest request);
-        
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento oferta del espacio de nombres  no está marcado para aceptar valores nil.
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse")]
-        desguaceNET.desguaceWS.nuevaOfertaResponse nuevaOferta(desguaceNET.desguaceWS.nuevaOfertaRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse")]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS.nuevaOfertaResponse> nuevaOfertaAsync(desguaceNET.desguaceWS.nuevaOfertaRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.aceptarOfertaFinResponse> aceptarOfertaFinAsync(desguaceNET.desguaceWS.aceptarOfertaFinRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento string del espacio de nombres  no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosporIDRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getPedidosporIDResponse")]
@@ -44,60 +37,54 @@ namespace desguaceNET.desguaceWS {
         System.Threading.Tasks.Task<desguaceNET.desguaceWS.getPedidosporIDResponse> getPedidosporIDAsync(desguaceNET.desguaceWS.getPedidosporIDRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento id del espacio de nombres  no está marcado para aceptar valores nil.
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinResponse")]
-        desguaceNET.desguaceWS.aceptarOfertaFinResponse aceptarOfertaFin(desguaceNET.desguaceWS.aceptarOfertaFinRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaResponse")]
+        desguaceNET.desguaceWS.cancelarOfertaResponse cancelarOferta(desguaceNET.desguaceWS.cancelarOfertaRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinResponse")]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS.aceptarOfertaFinResponse> aceptarOfertaFinAsync(desguaceNET.desguaceWS.aceptarOfertaFinRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.cancelarOfertaResponse> cancelarOfertaAsync(desguaceNET.desguaceWS.cancelarOfertaRequest request);
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento mail del espacio de nombres  no está marcado para aceptar valores nil.
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse")]
-        desguaceNET.desguaceWS.checkActivacionResponse checkActivacion(desguaceNET.desguaceWS.checkActivacionRequest request);
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento name del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/altaResponse")]
+        desguaceNET.desguaceWS.altaResponse alta(desguaceNET.desguaceWS.altaRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse")]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS.checkActivacionResponse> checkActivacionAsync(desguaceNET.desguaceWS.checkActivacionRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/altaResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.altaResponse> altaAsync(desguaceNET.desguaceWS.altaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento return del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse")]
+        desguaceNET.desguaceWS.getOfertasResponse getOfertas(desguaceNET.desguaceWS.getOfertasRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.getOfertasResponse> getOfertasAsync(desguaceNET.desguaceWS.getOfertasRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento id del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/bajaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/bajaResponse")]
+        desguaceNET.desguaceWS.bajaResponse baja(desguaceNET.desguaceWS.bajaRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/bajaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/bajaResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.bajaResponse> bajaAsync(desguaceNET.desguaceWS.bajaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento oferta del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse")]
+        desguaceNET.desguaceWS.nuevaOfertaResponse nuevaOferta(desguaceNET.desguaceWS.nuevaOfertaRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.nuevaOfertaResponse> nuevaOfertaAsync(desguaceNET.desguaceWS.nuevaOfertaRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class getOfertasRequest {
+    public partial class checkActivacionRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="getOfertas", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS.getOfertasRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="checkActivacion", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.checkActivacionRequestBody Body;
         
-        public getOfertasRequest() {
+        public checkActivacionRequest() {
         }
         
-        public getOfertasRequest(desguaceNET.desguaceWS.getOfertasRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class getOfertasRequestBody {
-        
-        public getOfertasRequestBody() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class getOfertasResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="getOfertasResponse", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS.getOfertasResponseBody Body;
-        
-        public getOfertasResponse() {
-        }
-        
-        public getOfertasResponse(desguaceNET.desguaceWS.getOfertasResponseBody Body) {
+        public checkActivacionRequest(desguaceNET.desguaceWS.checkActivacionRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -106,15 +93,253 @@ namespace desguaceNET.desguaceWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class getOfertasResponseBody {
+    public partial class checkActivacionRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string mail;
+        
+        public checkActivacionRequestBody() {
+        }
+        
+        public checkActivacionRequestBody(string mail) {
+            this.mail = mail;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class checkActivacionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="checkActivacionResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.checkActivacionResponseBody Body;
+        
+        public checkActivacionResponse() {
+        }
+        
+        public checkActivacionResponse(desguaceNET.desguaceWS.checkActivacionResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class checkActivacionResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string @return;
         
-        public getOfertasResponseBody() {
+        public checkActivacionResponseBody() {
         }
         
-        public getOfertasResponseBody(string @return) {
+        public checkActivacionResponseBody(string @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class aceptarOfertaFinRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="aceptarOfertaFin", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.aceptarOfertaFinRequestBody Body;
+        
+        public aceptarOfertaFinRequest() {
+        }
+        
+        public aceptarOfertaFinRequest(desguaceNET.desguaceWS.aceptarOfertaFinRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class aceptarOfertaFinRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string id;
+        
+        public aceptarOfertaFinRequestBody() {
+        }
+        
+        public aceptarOfertaFinRequestBody(string id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class aceptarOfertaFinResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="aceptarOfertaFinResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.aceptarOfertaFinResponseBody Body;
+        
+        public aceptarOfertaFinResponse() {
+        }
+        
+        public aceptarOfertaFinResponse(desguaceNET.desguaceWS.aceptarOfertaFinResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class aceptarOfertaFinResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool @return;
+        
+        public aceptarOfertaFinResponseBody() {
+        }
+        
+        public aceptarOfertaFinResponseBody(bool @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getPedidosporIDRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getPedidosporID", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.getPedidosporIDRequestBody Body;
+        
+        public getPedidosporIDRequest() {
+        }
+        
+        public getPedidosporIDRequest(desguaceNET.desguaceWS.getPedidosporIDRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class getPedidosporIDRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string @string;
+        
+        public getPedidosporIDRequestBody() {
+        }
+        
+        public getPedidosporIDRequestBody(string @string) {
+            this.@string = @string;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getPedidosporIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getPedidosporIDResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.getPedidosporIDResponseBody Body;
+        
+        public getPedidosporIDResponse() {
+        }
+        
+        public getPedidosporIDResponse(desguaceNET.desguaceWS.getPedidosporIDResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class getPedidosporIDResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string @return;
+        
+        public getPedidosporIDResponseBody() {
+        }
+        
+        public getPedidosporIDResponseBody(string @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class cancelarOfertaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="cancelarOferta", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.cancelarOfertaRequestBody Body;
+        
+        public cancelarOfertaRequest() {
+        }
+        
+        public cancelarOfertaRequest(desguaceNET.desguaceWS.cancelarOfertaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class cancelarOfertaRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string id;
+        
+        public cancelarOfertaRequestBody() {
+        }
+        
+        public cancelarOfertaRequestBody(string id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class cancelarOfertaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="cancelarOfertaResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.cancelarOfertaResponseBody Body;
+        
+        public cancelarOfertaResponse() {
+        }
+        
+        public cancelarOfertaResponse(desguaceNET.desguaceWS.cancelarOfertaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class cancelarOfertaResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool @return;
+        
+        public cancelarOfertaResponseBody() {
+        }
+        
+        public cancelarOfertaResponseBody(bool @return) {
             this.@return = @return;
         }
     }
@@ -211,6 +436,135 @@ namespace desguaceNET.desguaceWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getOfertasRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getOfertas", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.getOfertasRequestBody Body;
+        
+        public getOfertasRequest() {
+        }
+        
+        public getOfertasRequest(desguaceNET.desguaceWS.getOfertasRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class getOfertasRequestBody {
+        
+        public getOfertasRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getOfertasResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getOfertasResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.getOfertasResponseBody Body;
+        
+        public getOfertasResponse() {
+        }
+        
+        public getOfertasResponse(desguaceNET.desguaceWS.getOfertasResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class getOfertasResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string @return;
+        
+        public getOfertasResponseBody() {
+        }
+        
+        public getOfertasResponseBody(string @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class bajaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="baja", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.bajaRequestBody Body;
+        
+        public bajaRequest() {
+        }
+        
+        public bajaRequest(desguaceNET.desguaceWS.bajaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class bajaRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string id;
+        
+        public bajaRequestBody() {
+        }
+        
+        public bajaRequestBody(string id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class bajaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="bajaResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.bajaResponseBody Body;
+        
+        public bajaResponse() {
+        }
+        
+        public bajaResponse(desguaceNET.desguaceWS.bajaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class bajaResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool @return;
+        
+        public bajaResponseBody() {
+        }
+        
+        public bajaResponseBody(bool @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class nuevaOfertaRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="nuevaOferta", Namespace="http://gestor_desguace_java/", Order=0)]
@@ -275,210 +629,6 @@ namespace desguaceNET.desguaceWS {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class getPedidosporIDRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="getPedidosporID", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS.getPedidosporIDRequestBody Body;
-        
-        public getPedidosporIDRequest() {
-        }
-        
-        public getPedidosporIDRequest(desguaceNET.desguaceWS.getPedidosporIDRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class getPedidosporIDRequestBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string @string;
-        
-        public getPedidosporIDRequestBody() {
-        }
-        
-        public getPedidosporIDRequestBody(string @string) {
-            this.@string = @string;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class getPedidosporIDResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="getPedidosporIDResponse", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS.getPedidosporIDResponseBody Body;
-        
-        public getPedidosporIDResponse() {
-        }
-        
-        public getPedidosporIDResponse(desguaceNET.desguaceWS.getPedidosporIDResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class getPedidosporIDResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string @return;
-        
-        public getPedidosporIDResponseBody() {
-        }
-        
-        public getPedidosporIDResponseBody(string @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class aceptarOfertaFinRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="aceptarOfertaFin", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS.aceptarOfertaFinRequestBody Body;
-        
-        public aceptarOfertaFinRequest() {
-        }
-        
-        public aceptarOfertaFinRequest(desguaceNET.desguaceWS.aceptarOfertaFinRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class aceptarOfertaFinRequestBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string id;
-        
-        public aceptarOfertaFinRequestBody() {
-        }
-        
-        public aceptarOfertaFinRequestBody(string id) {
-            this.id = id;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class aceptarOfertaFinResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="aceptarOfertaFinResponse", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS.aceptarOfertaFinResponseBody Body;
-        
-        public aceptarOfertaFinResponse() {
-        }
-        
-        public aceptarOfertaFinResponse(desguaceNET.desguaceWS.aceptarOfertaFinResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class aceptarOfertaFinResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public bool @return;
-        
-        public aceptarOfertaFinResponseBody() {
-        }
-        
-        public aceptarOfertaFinResponseBody(bool @return) {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class checkActivacionRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="checkActivacion", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS.checkActivacionRequestBody Body;
-        
-        public checkActivacionRequest() {
-        }
-        
-        public checkActivacionRequest(desguaceNET.desguaceWS.checkActivacionRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class checkActivacionRequestBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string mail;
-        
-        public checkActivacionRequestBody() {
-        }
-        
-        public checkActivacionRequestBody(string mail) {
-            this.mail = mail;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class checkActivacionResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="checkActivacionResponse", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS.checkActivacionResponseBody Body;
-        
-        public checkActivacionResponse() {
-        }
-        
-        public checkActivacionResponse(desguaceNET.desguaceWS.checkActivacionResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class checkActivacionResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string @return;
-        
-        public checkActivacionResponseBody() {
-        }
-        
-        public checkActivacionResponseBody(string @return) {
-            this.@return = @return;
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface DesguaceJavaWSChannel : desguaceNET.desguaceWS.DesguaceJavaWS, System.ServiceModel.IClientChannel {
     }
@@ -507,26 +657,103 @@ namespace desguaceNET.desguaceWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        desguaceNET.desguaceWS.getOfertasResponse desguaceNET.desguaceWS.DesguaceJavaWS.getOfertas(desguaceNET.desguaceWS.getOfertasRequest request) {
-            return base.Channel.getOfertas(request);
+        desguaceNET.desguaceWS.checkActivacionResponse desguaceNET.desguaceWS.DesguaceJavaWS.checkActivacion(desguaceNET.desguaceWS.checkActivacionRequest request) {
+            return base.Channel.checkActivacion(request);
         }
         
-        public string getOfertas() {
-            desguaceNET.desguaceWS.getOfertasRequest inValue = new desguaceNET.desguaceWS.getOfertasRequest();
-            inValue.Body = new desguaceNET.desguaceWS.getOfertasRequestBody();
-            desguaceNET.desguaceWS.getOfertasResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getOfertas(inValue);
+        public string checkActivacion(string mail) {
+            desguaceNET.desguaceWS.checkActivacionRequest inValue = new desguaceNET.desguaceWS.checkActivacionRequest();
+            inValue.Body = new desguaceNET.desguaceWS.checkActivacionRequestBody();
+            inValue.Body.mail = mail;
+            desguaceNET.desguaceWS.checkActivacionResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).checkActivacion(inValue);
             return retVal.Body.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS.getOfertasResponse> desguaceNET.desguaceWS.DesguaceJavaWS.getOfertasAsync(desguaceNET.desguaceWS.getOfertasRequest request) {
-            return base.Channel.getOfertasAsync(request);
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.checkActivacionResponse> desguaceNET.desguaceWS.DesguaceJavaWS.checkActivacionAsync(desguaceNET.desguaceWS.checkActivacionRequest request) {
+            return base.Channel.checkActivacionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getOfertasResponse> getOfertasAsync() {
-            desguaceNET.desguaceWS.getOfertasRequest inValue = new desguaceNET.desguaceWS.getOfertasRequest();
-            inValue.Body = new desguaceNET.desguaceWS.getOfertasRequestBody();
-            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getOfertasAsync(inValue);
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.checkActivacionResponse> checkActivacionAsync(string mail) {
+            desguaceNET.desguaceWS.checkActivacionRequest inValue = new desguaceNET.desguaceWS.checkActivacionRequest();
+            inValue.Body = new desguaceNET.desguaceWS.checkActivacionRequestBody();
+            inValue.Body.mail = mail;
+            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).checkActivacionAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        desguaceNET.desguaceWS.aceptarOfertaFinResponse desguaceNET.desguaceWS.DesguaceJavaWS.aceptarOfertaFin(desguaceNET.desguaceWS.aceptarOfertaFinRequest request) {
+            return base.Channel.aceptarOfertaFin(request);
+        }
+        
+        public bool aceptarOfertaFin(string id) {
+            desguaceNET.desguaceWS.aceptarOfertaFinRequest inValue = new desguaceNET.desguaceWS.aceptarOfertaFinRequest();
+            inValue.Body = new desguaceNET.desguaceWS.aceptarOfertaFinRequestBody();
+            inValue.Body.id = id;
+            desguaceNET.desguaceWS.aceptarOfertaFinResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).aceptarOfertaFin(inValue);
+            return retVal.Body.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.aceptarOfertaFinResponse> desguaceNET.desguaceWS.DesguaceJavaWS.aceptarOfertaFinAsync(desguaceNET.desguaceWS.aceptarOfertaFinRequest request) {
+            return base.Channel.aceptarOfertaFinAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.aceptarOfertaFinResponse> aceptarOfertaFinAsync(string id) {
+            desguaceNET.desguaceWS.aceptarOfertaFinRequest inValue = new desguaceNET.desguaceWS.aceptarOfertaFinRequest();
+            inValue.Body = new desguaceNET.desguaceWS.aceptarOfertaFinRequestBody();
+            inValue.Body.id = id;
+            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).aceptarOfertaFinAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        desguaceNET.desguaceWS.getPedidosporIDResponse desguaceNET.desguaceWS.DesguaceJavaWS.getPedidosporID(desguaceNET.desguaceWS.getPedidosporIDRequest request) {
+            return base.Channel.getPedidosporID(request);
+        }
+        
+        public string getPedidosporID(string @string) {
+            desguaceNET.desguaceWS.getPedidosporIDRequest inValue = new desguaceNET.desguaceWS.getPedidosporIDRequest();
+            inValue.Body = new desguaceNET.desguaceWS.getPedidosporIDRequestBody();
+            inValue.Body.@string = @string;
+            desguaceNET.desguaceWS.getPedidosporIDResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getPedidosporID(inValue);
+            return retVal.Body.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.getPedidosporIDResponse> desguaceNET.desguaceWS.DesguaceJavaWS.getPedidosporIDAsync(desguaceNET.desguaceWS.getPedidosporIDRequest request) {
+            return base.Channel.getPedidosporIDAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getPedidosporIDResponse> getPedidosporIDAsync(string @string) {
+            desguaceNET.desguaceWS.getPedidosporIDRequest inValue = new desguaceNET.desguaceWS.getPedidosporIDRequest();
+            inValue.Body = new desguaceNET.desguaceWS.getPedidosporIDRequestBody();
+            inValue.Body.@string = @string;
+            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getPedidosporIDAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        desguaceNET.desguaceWS.cancelarOfertaResponse desguaceNET.desguaceWS.DesguaceJavaWS.cancelarOferta(desguaceNET.desguaceWS.cancelarOfertaRequest request) {
+            return base.Channel.cancelarOferta(request);
+        }
+        
+        public bool cancelarOferta(string id) {
+            desguaceNET.desguaceWS.cancelarOfertaRequest inValue = new desguaceNET.desguaceWS.cancelarOfertaRequest();
+            inValue.Body = new desguaceNET.desguaceWS.cancelarOfertaRequestBody();
+            inValue.Body.id = id;
+            desguaceNET.desguaceWS.cancelarOfertaResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).cancelarOferta(inValue);
+            return retVal.Body.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.cancelarOfertaResponse> desguaceNET.desguaceWS.DesguaceJavaWS.cancelarOfertaAsync(desguaceNET.desguaceWS.cancelarOfertaRequest request) {
+            return base.Channel.cancelarOfertaAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.cancelarOfertaResponse> cancelarOfertaAsync(string id) {
+            desguaceNET.desguaceWS.cancelarOfertaRequest inValue = new desguaceNET.desguaceWS.cancelarOfertaRequest();
+            inValue.Body = new desguaceNET.desguaceWS.cancelarOfertaRequestBody();
+            inValue.Body.id = id;
+            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).cancelarOfertaAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -565,6 +792,54 @@ namespace desguaceNET.desguaceWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        desguaceNET.desguaceWS.getOfertasResponse desguaceNET.desguaceWS.DesguaceJavaWS.getOfertas(desguaceNET.desguaceWS.getOfertasRequest request) {
+            return base.Channel.getOfertas(request);
+        }
+        
+        public string getOfertas() {
+            desguaceNET.desguaceWS.getOfertasRequest inValue = new desguaceNET.desguaceWS.getOfertasRequest();
+            inValue.Body = new desguaceNET.desguaceWS.getOfertasRequestBody();
+            desguaceNET.desguaceWS.getOfertasResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getOfertas(inValue);
+            return retVal.Body.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.getOfertasResponse> desguaceNET.desguaceWS.DesguaceJavaWS.getOfertasAsync(desguaceNET.desguaceWS.getOfertasRequest request) {
+            return base.Channel.getOfertasAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getOfertasResponse> getOfertasAsync() {
+            desguaceNET.desguaceWS.getOfertasRequest inValue = new desguaceNET.desguaceWS.getOfertasRequest();
+            inValue.Body = new desguaceNET.desguaceWS.getOfertasRequestBody();
+            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getOfertasAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        desguaceNET.desguaceWS.bajaResponse desguaceNET.desguaceWS.DesguaceJavaWS.baja(desguaceNET.desguaceWS.bajaRequest request) {
+            return base.Channel.baja(request);
+        }
+        
+        public bool baja(string id) {
+            desguaceNET.desguaceWS.bajaRequest inValue = new desguaceNET.desguaceWS.bajaRequest();
+            inValue.Body = new desguaceNET.desguaceWS.bajaRequestBody();
+            inValue.Body.id = id;
+            desguaceNET.desguaceWS.bajaResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).baja(inValue);
+            return retVal.Body.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.bajaResponse> desguaceNET.desguaceWS.DesguaceJavaWS.bajaAsync(desguaceNET.desguaceWS.bajaRequest request) {
+            return base.Channel.bajaAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.bajaResponse> bajaAsync(string id) {
+            desguaceNET.desguaceWS.bajaRequest inValue = new desguaceNET.desguaceWS.bajaRequest();
+            inValue.Body = new desguaceNET.desguaceWS.bajaRequestBody();
+            inValue.Body.id = id;
+            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).bajaAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         desguaceNET.desguaceWS.nuevaOfertaResponse desguaceNET.desguaceWS.DesguaceJavaWS.nuevaOferta(desguaceNET.desguaceWS.nuevaOfertaRequest request) {
             return base.Channel.nuevaOferta(request);
         }
@@ -587,81 +862,6 @@ namespace desguaceNET.desguaceWS {
             inValue.Body = new desguaceNET.desguaceWS.nuevaOfertaRequestBody();
             inValue.Body.oferta = oferta;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).nuevaOfertaAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        desguaceNET.desguaceWS.getPedidosporIDResponse desguaceNET.desguaceWS.DesguaceJavaWS.getPedidosporID(desguaceNET.desguaceWS.getPedidosporIDRequest request) {
-            return base.Channel.getPedidosporID(request);
-        }
-        
-        public string getPedidosporID(string @string) {
-            desguaceNET.desguaceWS.getPedidosporIDRequest inValue = new desguaceNET.desguaceWS.getPedidosporIDRequest();
-            inValue.Body = new desguaceNET.desguaceWS.getPedidosporIDRequestBody();
-            inValue.Body.@string = @string;
-            desguaceNET.desguaceWS.getPedidosporIDResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getPedidosporID(inValue);
-            return retVal.Body.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS.getPedidosporIDResponse> desguaceNET.desguaceWS.DesguaceJavaWS.getPedidosporIDAsync(desguaceNET.desguaceWS.getPedidosporIDRequest request) {
-            return base.Channel.getPedidosporIDAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getPedidosporIDResponse> getPedidosporIDAsync(string @string) {
-            desguaceNET.desguaceWS.getPedidosporIDRequest inValue = new desguaceNET.desguaceWS.getPedidosporIDRequest();
-            inValue.Body = new desguaceNET.desguaceWS.getPedidosporIDRequestBody();
-            inValue.Body.@string = @string;
-            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getPedidosporIDAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        desguaceNET.desguaceWS.aceptarOfertaFinResponse desguaceNET.desguaceWS.DesguaceJavaWS.aceptarOfertaFin(desguaceNET.desguaceWS.aceptarOfertaFinRequest request) {
-            return base.Channel.aceptarOfertaFin(request);
-        }
-        
-        public bool aceptarOfertaFin(string id) {
-            desguaceNET.desguaceWS.aceptarOfertaFinRequest inValue = new desguaceNET.desguaceWS.aceptarOfertaFinRequest();
-            inValue.Body = new desguaceNET.desguaceWS.aceptarOfertaFinRequestBody();
-            inValue.Body.id = id;
-            desguaceNET.desguaceWS.aceptarOfertaFinResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).aceptarOfertaFin(inValue);
-            return retVal.Body.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS.aceptarOfertaFinResponse> desguaceNET.desguaceWS.DesguaceJavaWS.aceptarOfertaFinAsync(desguaceNET.desguaceWS.aceptarOfertaFinRequest request) {
-            return base.Channel.aceptarOfertaFinAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.aceptarOfertaFinResponse> aceptarOfertaFinAsync(string id) {
-            desguaceNET.desguaceWS.aceptarOfertaFinRequest inValue = new desguaceNET.desguaceWS.aceptarOfertaFinRequest();
-            inValue.Body = new desguaceNET.desguaceWS.aceptarOfertaFinRequestBody();
-            inValue.Body.id = id;
-            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).aceptarOfertaFinAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        desguaceNET.desguaceWS.checkActivacionResponse desguaceNET.desguaceWS.DesguaceJavaWS.checkActivacion(desguaceNET.desguaceWS.checkActivacionRequest request) {
-            return base.Channel.checkActivacion(request);
-        }
-        
-        public string checkActivacion(string mail) {
-            desguaceNET.desguaceWS.checkActivacionRequest inValue = new desguaceNET.desguaceWS.checkActivacionRequest();
-            inValue.Body = new desguaceNET.desguaceWS.checkActivacionRequestBody();
-            inValue.Body.mail = mail;
-            desguaceNET.desguaceWS.checkActivacionResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).checkActivacion(inValue);
-            return retVal.Body.@return;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS.checkActivacionResponse> desguaceNET.desguaceWS.DesguaceJavaWS.checkActivacionAsync(desguaceNET.desguaceWS.checkActivacionRequest request) {
-            return base.Channel.checkActivacionAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.checkActivacionResponse> checkActivacionAsync(string mail) {
-            desguaceNET.desguaceWS.checkActivacionRequest inValue = new desguaceNET.desguaceWS.checkActivacionRequest();
-            inValue.Body = new desguaceNET.desguaceWS.checkActivacionRequestBody();
-            inValue.Body.mail = mail;
-            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).checkActivacionAsync(inValue);
         }
     }
 }

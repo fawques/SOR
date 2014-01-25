@@ -29,17 +29,18 @@ namespace desguaceNET
             listaOfertasAceptadas = main.actualizarOfertasAceptadas();
 
             
-            Pedido pedido1 = new Pedido("pedido1", 1, "taller1", DateTime.Today, new DateTime(),new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
+            //Pedido pedido1 = new Pedido("pedido1", 1, "taller1", DateTime.Today, new DateTime(),new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
             Pedido pedido2 = new Pedido("pedido2", 2, "taller1", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
             Pedido pedido3 = new Pedido("pedido3", 3, "taller2", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
             Pedido pedido4 = new Pedido("pedido4", 4, "taller3", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
             Pedido pedido5 = new Pedido("pedido5", 5, "taller2", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
             
-            listaPedidos.Add(pedido1);
+            //listaPedidos.Add(pedido1);
             listaPedidos.Add(pedido2);
             listaPedidos.Add(pedido3);
             listaPedidos.Add(pedido4);
             listaPedidos.Add(pedido5);
+            listaPedidos.AddRange(main.getPedidos());
             dataGridView1.DataSource = listaPedidos;
 
             dataGridView2.DataSource = listaOfertasActivas;
@@ -106,8 +107,7 @@ namespace desguaceNET
             DialogResult res = MessageBox.Show("¿Estás seguro de que quieres cancelar esta oferta?","¿Cancelar?",MessageBoxButtons.YesNo);
             if(res == DialogResult.Yes){
                 DesguaceNet main = new DesguaceNet();
-                // anular la oferta 
-                //idOfertaActiva
+                if(main.cancelarOfertaDesguace(idOfertaActiva));
             }
         }
 
@@ -126,6 +126,8 @@ namespace desguaceNET
             if (of != null)
             {
                 listaOfertasActivas.Add(of);
+                dataGridView2.DataSource = null;
+                dataGridView2.DataSource = listaOfertasActivas;
             }
             else
             {
@@ -157,6 +159,23 @@ namespace desguaceNET
             {
                 idOfertaAceptada = (string)dataGridView3.SelectedRows[0].Cells[0].Value;
                 tbNombreTaller.Text = idOfertaAceptada;
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("¿Estás seguro de que quieres darte de baja?", "¿Seguro?", MessageBoxButtons.YesNo);
+            if (res == DialogResult.Yes)
+            {
+                DesguaceNet main = new DesguaceNet();
+                if (main.bajaDesguace())
+                {
+                    DialogResult = DialogResult.Abort;
+                }
+                else
+                {
+                    MessageBox.Show("Error al procesar la baja", "ERROR", MessageBoxButtons.OK);
+                }
             }
         }
     }

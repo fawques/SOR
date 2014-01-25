@@ -18,7 +18,11 @@ namespace desguaceNET
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            init();
+        }
 
+        static void init()
+        {
             InterfazBD bd = new InterfazBD("sor_desguace");
             Desguace desguace = bd.getDesguace();
             if (desguace == null)
@@ -36,13 +40,15 @@ namespace desguaceNET
                 {
                     desguace.setPendiente();
                 }*/
+                Console.WriteLine("interfaz de desguace inactivo");
             }
 
             if (desguace.getEstado() == EstadoGeneral.PENDIENTE) //pendiente de activacion
             {
                 DesguacerPendienteActivacion pendiente = new DesguacerPendienteActivacion();
                 pendiente.ShowDialog();
-                if (pendiente.DialogResult == DialogResult.OK) {
+                if (pendiente.DialogResult == DialogResult.OK)
+                {
                     string id = pendiente.idResult;
                     desguace.activar(id);
                     bd.activarDesguaceMainDesguace(id);
@@ -54,10 +60,12 @@ namespace desguaceNET
                 //Cargar GestionPedido
                 GestionPedidos pedidos = new GestionPedidos();
                 pedidos.ShowDialog();
+                if (pedidos.DialogResult == DialogResult.Abort)
+                {
+                    init();
+                }
 
             }
-            
-            
         }
     }
 }

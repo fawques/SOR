@@ -52,6 +52,28 @@ namespace desguaceNET.libSOR.BD
             return lista;    
         }
 
+        public List<Pedido> getPedidos(){ //devuelve pedidos en general
+        List<Pedido> lista= new List<Pedido>();
+        try{
+            DataSet resultados = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM pedido;"));
+            DataTableReader reader = resultados.CreateDataReader();
+            while(reader.Read()){
+                String pedidoID = reader.GetString(1);
+                List<Pieza> piezas = new List<Pieza>();
+                List<int> cantidades = new List<int>();
+                getPiezasYCantidades(pedidoID, piezas, cantidades);
+
+                Pedido nuevo = new Pedido(pedidoID, (string)reader["taller"], reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(pedidoID));
+                lista.Add(nuevo);
+            }
+        }catch(MySqlException ex){
+            Console.WriteLine(ex.StackTrace);
+            return null;
+        }
+        return lista;
+        
+    }
+
         public List<Pedido> getPedidosConID_aux(EstadoPedido estado) {
         List<Pedido> lista = new List<Pedido>();
         try {
@@ -335,12 +357,24 @@ namespace desguaceNET.libSOR.BD
 
 
     public bool activarOfertaDesguace(int id_aux, String id) {
-        return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado='1', id='" + id + "' where id_aux='" + id_aux + "';"));
+        return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado=" + (int)EstadoOferta.ACTIVE + ", id='" + id + "' where id_aux='" + id_aux + "';"));
     }
     public bool cancelarOfertas(String idPedido) {
         return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado='" + (int)EstadoOferta.CANCELLED + "' where pedido='" + idPedido + "'"));
     }
 
+    public bool cancelarOfertasDesguace(string idDesguace) {
+        return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado='" + (int)EstadoOferta.CANCELLED + "' where desguace='" + idDesguace + "'"));
+    }
+
+    public bool bajaDesguace(String id) {
+        try {
+            cancelarOfertasDesguace(id);
+        } catch (MySqlException ex) {
+            Console.WriteLine(ex.StackTrace);
+        }
+        return conexion.ejecutarSQL(new MySqlCommand("Update desguace set estado='" + (int)EstadoGeneral.INACTIVE + "' where id='" + id + "'"));
+    }
 
 
 
