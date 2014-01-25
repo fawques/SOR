@@ -42,7 +42,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab onSelectionChanged="#actualizarPestañaOfertas" text="Ofertas">
+        <Tab onSelectionChanged="#actualizarPestanyaOfertas" text="Ofertas">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="780.0">
               <children>
@@ -57,7 +57,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab onSelectionChanged="#actualizarPestañaHistorico" text="Historico">
+        <Tab onSelectionChanged="#actualizarPestanyaHistorico" text="Historico">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>

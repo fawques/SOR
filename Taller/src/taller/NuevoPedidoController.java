@@ -93,7 +93,7 @@ public class NuevoPedidoController implements Initializable {
                 cantidadPiezas.add(tp.getCantidad());
             }
 
-            MainTaller.crearPedido(today, EstadoPedido.NEW, fechaLimite, "Automatico".equals(cbModoAutomatico.getValue().toString()), piezasPedido, cantidadPiezas);
+            MainTaller.crearPedido(today, EstadoPedido.ACTIVE, fechaLimite, "Automatico".equals(cbModoAutomatico.getValue().toString()), piezasPedido, cantidadPiezas);
             //Mensaje
             lbMensaje.setText("El pedido se ha creado correctamente");
             

@@ -94,7 +94,7 @@ public class TallerWS {
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
-             bd.anadirPedido(stringID, p.getFecha_alta(), EstadoPedido.ACCEPTED.ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
+             bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
             Gestor_activemq activemq= new Gestor_activemq();
             activemq.create_Producer("pedidos");
              PedidoCorto pedidocorto= new PedidoCorto(p.getID(), p.getEstado());
@@ -127,7 +127,7 @@ public class TallerWS {
             bd = new InterfazBD("sor_gestor");
             for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
                 Pedido p = it.next();
-                listaOferta.addAll(bd.getOfertasPedido(p.getID(), EstadoOferta.ACTIVE));
+                listaOferta.addAll(bd.getOfertasPedido(p.getID()));
             }
              Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
             String retu=gsonn.toJson(listaOferta);
@@ -240,15 +240,49 @@ public class TallerWS {
     @WebMethod(operationName = "cambiarEstadoPedido")
     public Boolean cambiarEstadoPedido(@WebParam(name = "estado") int estado, @WebParam(name = "id") String id) {
         try {
+            Gson gson = new Gson();
             bd= new InterfazBD("sor_gestor");
+            Gestor_activemq activemq= new Gestor_activemq();
+            activemq.create_Producer("pedidos");
+            PedidoCorto pedidocorto= new PedidoCorto(id, EstadoPedido.values()[estado]);
+            String pedidoFinal = gson.toJson(pedidocorto);
+            activemq.producer.produceMessage(pedidoFinal);
+            activemq.producer.closeProduce();
            return  bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JMSException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
        
         return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getPedidos")
+    public String getPedidos() {
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+        //Dec 7, 2013 5:46:35 PM
+       
+            ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
+        try {
+            bd = new InterfazBD("sor_gestor");
+            listaPedidos = bd.getPedidosActivos();
+            String listaJSON = gson.toJson(listaPedidos);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+      
+        return null;
     }
 
 }

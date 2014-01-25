@@ -4,42 +4,6 @@
 <xsd:import namespace="http://gestor_taller/" schemaLocation="http://localhost:8080/Gestor/TallerWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="checkActivacion">
-<part name="parameters" element="tns:checkActivacion"/>
-</message>
-<message name="checkActivacionResponse">
-<part name="parameters" element="tns:checkActivacionResponse"/>
-</message>
-<message name="rechazarOferta">
-<part name="parameters" element="tns:rechazarOferta"/>
-</message>
-<message name="rechazarOfertaResponse">
-<part name="parameters" element="tns:rechazarOfertaResponse"/>
-</message>
-<message name="cancelarPedido">
-<part name="parameters" element="tns:cancelarPedido"/>
-</message>
-<message name="cancelarPedidoResponse">
-<part name="parameters" element="tns:cancelarPedidoResponse"/>
-</message>
-<message name="cambiarEstadoPedido">
-<part name="parameters" element="tns:cambiarEstadoPedido"/>
-</message>
-<message name="cambiarEstadoPedidoResponse">
-<part name="parameters" element="tns:cambiarEstadoPedidoResponse"/>
-</message>
-<message name="hello">
-<part name="parameters" element="tns:hello"/>
-</message>
-<message name="helloResponse">
-<part name="parameters" element="tns:helloResponse"/>
-</message>
-<message name="alta">
-<part name="parameters" element="tns:alta"/>
-</message>
-<message name="altaResponse">
-<part name="parameters" element="tns:altaResponse"/>
-</message>
 <message name="modificar">
 <part name="parameters" element="tns:modificar"/>
 </message>
@@ -73,31 +37,49 @@
 <message name="bajaResponse">
 <part name="parameters" element="tns:bajaResponse"/>
 </message>
+<message name="getPedidos">
+<part name="parameters" element="tns:getPedidos"/>
+</message>
+<message name="getPedidosResponse">
+<part name="parameters" element="tns:getPedidosResponse"/>
+</message>
+<message name="hello">
+<part name="parameters" element="tns:hello"/>
+</message>
+<message name="helloResponse">
+<part name="parameters" element="tns:helloResponse"/>
+</message>
+<message name="alta">
+<part name="parameters" element="tns:alta"/>
+</message>
+<message name="altaResponse">
+<part name="parameters" element="tns:altaResponse"/>
+</message>
+<message name="checkActivacion">
+<part name="parameters" element="tns:checkActivacion"/>
+</message>
+<message name="checkActivacionResponse">
+<part name="parameters" element="tns:checkActivacionResponse"/>
+</message>
+<message name="rechazarOferta">
+<part name="parameters" element="tns:rechazarOferta"/>
+</message>
+<message name="rechazarOfertaResponse">
+<part name="parameters" element="tns:rechazarOfertaResponse"/>
+</message>
+<message name="cancelarPedido">
+<part name="parameters" element="tns:cancelarPedido"/>
+</message>
+<message name="cancelarPedidoResponse">
+<part name="parameters" element="tns:cancelarPedidoResponse"/>
+</message>
+<message name="cambiarEstadoPedido">
+<part name="parameters" element="tns:cambiarEstadoPedido"/>
+</message>
+<message name="cambiarEstadoPedidoResponse">
+<part name="parameters" element="tns:cambiarEstadoPedidoResponse"/>
+</message>
 <portType name="TallerWS">
-<operation name="checkActivacion">
-<input wsam:Action="http://gestor_taller/TallerWS/checkActivacionRequest" message="tns:checkActivacion"/>
-<output wsam:Action="http://gestor_taller/TallerWS/checkActivacionResponse" message="tns:checkActivacionResponse"/>
-</operation>
-<operation name="rechazarOferta">
-<input wsam:Action="http://gestor_taller/TallerWS/rechazarOfertaRequest" message="tns:rechazarOferta"/>
-<output wsam:Action="http://gestor_taller/TallerWS/rechazarOfertaResponse" message="tns:rechazarOfertaResponse"/>
-</operation>
-<operation name="cancelarPedido">
-<input wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoRequest" message="tns:cancelarPedido"/>
-<output wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoResponse" message="tns:cancelarPedidoResponse"/>
-</operation>
-<operation name="cambiarEstadoPedido">
-<input wsam:Action="http://gestor_taller/TallerWS/cambiarEstadoPedidoRequest" message="tns:cambiarEstadoPedido"/>
-<output wsam:Action="http://gestor_taller/TallerWS/cambiarEstadoPedidoResponse" message="tns:cambiarEstadoPedidoResponse"/>
-</operation>
-<operation name="hello">
-<input wsam:Action="http://gestor_taller/TallerWS/helloRequest" message="tns:hello"/>
-<output wsam:Action="http://gestor_taller/TallerWS/helloResponse" message="tns:helloResponse"/>
-</operation>
-<operation name="alta">
-<input wsam:Action="http://gestor_taller/TallerWS/altaRequest" message="tns:alta"/>
-<output wsam:Action="http://gestor_taller/TallerWS/altaResponse" message="tns:altaResponse"/>
-</operation>
 <operation name="modificar">
 <input wsam:Action="http://gestor_taller/TallerWS/modificarRequest" message="tns:modificar"/>
 <output wsam:Action="http://gestor_taller/TallerWS/modificarResponse" message="tns:modificarResponse"/>
@@ -119,63 +101,37 @@
 <input wsam:Action="http://gestor_taller/TallerWS/bajaRequest" message="tns:baja"/>
 <output wsam:Action="http://gestor_taller/TallerWS/bajaResponse" message="tns:bajaResponse"/>
 </operation>
+<operation name="getPedidos">
+<input wsam:Action="http://gestor_taller/TallerWS/getPedidosRequest" message="tns:getPedidos"/>
+<output wsam:Action="http://gestor_taller/TallerWS/getPedidosResponse" message="tns:getPedidosResponse"/>
+</operation>
+<operation name="hello">
+<input wsam:Action="http://gestor_taller/TallerWS/helloRequest" message="tns:hello"/>
+<output wsam:Action="http://gestor_taller/TallerWS/helloResponse" message="tns:helloResponse"/>
+</operation>
+<operation name="alta">
+<input wsam:Action="http://gestor_taller/TallerWS/altaRequest" message="tns:alta"/>
+<output wsam:Action="http://gestor_taller/TallerWS/altaResponse" message="tns:altaResponse"/>
+</operation>
+<operation name="checkActivacion">
+<input wsam:Action="http://gestor_taller/TallerWS/checkActivacionRequest" message="tns:checkActivacion"/>
+<output wsam:Action="http://gestor_taller/TallerWS/checkActivacionResponse" message="tns:checkActivacionResponse"/>
+</operation>
+<operation name="rechazarOferta">
+<input wsam:Action="http://gestor_taller/TallerWS/rechazarOfertaRequest" message="tns:rechazarOferta"/>
+<output wsam:Action="http://gestor_taller/TallerWS/rechazarOfertaResponse" message="tns:rechazarOfertaResponse"/>
+</operation>
+<operation name="cancelarPedido">
+<input wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoRequest" message="tns:cancelarPedido"/>
+<output wsam:Action="http://gestor_taller/TallerWS/cancelarPedidoResponse" message="tns:cancelarPedidoResponse"/>
+</operation>
+<operation name="cambiarEstadoPedido">
+<input wsam:Action="http://gestor_taller/TallerWS/cambiarEstadoPedidoRequest" message="tns:cambiarEstadoPedido"/>
+<output wsam:Action="http://gestor_taller/TallerWS/cambiarEstadoPedidoResponse" message="tns:cambiarEstadoPedidoResponse"/>
+</operation>
 </portType>
 <binding name="TallerWSPortBinding" type="tns:TallerWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="checkActivacion">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="rechazarOferta">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="cancelarPedido">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="cambiarEstadoPedido">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="hello">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="alta">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="modificar">
 <soap:operation soapAction=""/>
 <input>
@@ -216,6 +172,69 @@
 </output>
 </operation>
 <operation name="baja">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getPedidos">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="hello">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="alta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="checkActivacion">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="rechazarOferta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="cancelarPedido">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="cambiarEstadoPedido">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

@@ -296,6 +296,24 @@ public class DesguaceJava extends Application {
         }
         return realizado;
     }
+        public static boolean cambiarEstadoPedido(String id,EstadoPedido estado){
+    Boolean realizado=false;
+        try {
+            bd= new InterfazBD("sor_desguace");
+            realizado= bd.cambiarEstadoPedido(estado, id);
+            if(realizado){
+                cambiarEstadoPedido_1(id,estado.ordinal());
+            }
+            bd.close();
+            
+            return realizado;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return realizado;
+    }
     public static ArrayList<Pedido> getPedidos(){
         ArrayList<Pedido> pedidoslista= new ArrayList<Pedido>();
         try {
@@ -410,6 +428,12 @@ public class DesguaceJava extends Application {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.baja(id);
+    }
+
+    public static Boolean cambiarEstadoPedido_1(java.lang.String id, int estado) {
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.cambiarEstadoPedido(id, estado);
     }
 
 }

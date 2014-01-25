@@ -52,7 +52,7 @@ public class Consumer {
         connection.start();
           try {
             //Consume Message
-            Thread.sleep(10);
+            Thread.sleep(100);
         } catch (InterruptedException ex) {
             Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
         }

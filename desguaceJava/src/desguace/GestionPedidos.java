@@ -259,7 +259,8 @@ public class GestionPedidos implements Initializable {
         if(borrarOfertaAceptadas!=-1){
             if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
                Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
-                  if(gestorlohacambiado==true){
+                Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.ACCEPTED); 
+               if(gestorlohacambiado && gestorpedido){
                     aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.CANCELLED);
                     if(aceptado==false){
                         System.err.println("No se ha podido aceptar la oferta");
@@ -290,7 +291,7 @@ public class GestionPedidos implements Initializable {
         }
         actualizarOfertas();
     }
-    public void actualizarPestañaHistorico(){
+    public void actualizarPestanyaHistorico(){
         tablaHistoricoPedidos();
         tablaOfertasHistorico();
     }
@@ -421,7 +422,10 @@ public class GestionPedidos implements Initializable {
             PedidoCorto p=null; 
             for(String s: stringid){
                 p=gson.fromJson(s, collectionType);
-                stringbueno.add(p.getID());
+                if(!DesguaceJava.cambiarEstadoPedido(p.getID(), p.getEstado())){
+                    stringbueno.add(p.getID());
+                }
+                
             }
             Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
             String listaJSON = gsonn.toJson(stringbueno);
@@ -512,7 +516,7 @@ public class GestionPedidos implements Initializable {
 
        
     }
-   public void actualizarPestañaOfertas(){
+   public void actualizarPestanyaOfertas(){
       actualizarOfertas();
       actualizarOfertasOfertadas();
    }
@@ -583,7 +587,9 @@ public class GestionPedidos implements Initializable {
         idlistabuena.clear();
         if(listaIdsString!=null){
             for(PedidoCorto pcorto: idlista){
-                idlistabuena.add(pcorto.getID());
+                if(!DesguaceJava.cambiarEstadoPedido(p.getID(), p.getEstado())){
+                    idlistabuena.add(pcorto.getID());
+                }
             }
              Gson gsonnuevo = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
             String listaJSON = gsonnuevo.toJson(idlistabuena);
@@ -617,7 +623,8 @@ public class GestionPedidos implements Initializable {
         if(borrarOfertaAceptadas!=-1){
             if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
                Boolean gestorlohacambiado= DesguaceJava.aceptarOfertaFin(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
-                  if(gestorlohacambiado==true){
+               Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.FINISHED_OK);
+               if(gestorlohacambiado && gestorpedido){
                     aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.FINISHED_OK);
                     if(aceptado==false){
                         System.err.println("No se ha podido aceptar la oferta");
