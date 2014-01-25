@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Documento sin título</title>
+<title>Hacer pedido</title>
 <link rel="stylesheet" href="estilos.css" type="text/css" media="screen" /> 
 </head>
 <p class="centrado">Pedido</p>
 <div id="detalle" class="centrado">
-    <p >Descripción detallada de las piezas</p>
+    <p >Descripcion detallada de las piezas</p>
      <input type="input" name="piezas" style="width:300px;">
  </div>
 <div id="cantidad" class="centrado">
@@ -15,28 +15,25 @@
   	<input type="input" name="cantidad" style="width:50px;">
   </div>
   <br>
-<input class="centrado" type="button" name="anadir" value="Añadir a pedido"><br>
+<input class="centrado" type="button" name="anadir" value="Anadir a pedido"><br>
 
-<p class="centrado">Calidad</p>
-  <select name="programa" class="centrado">    
-       <option value="Windows" selected="selected">Windows</option>
-       <option value="Machintosh">Mac</option>
-       <option value="Linux">Linux</option>
-   </select>
-   
-	<p class="centrado">Fecha máx. entrega</p>
+	<p class="centrado">Fecha max. entrega</p>
 <input class="centrado" type="date" name="fecha">
 
-	<p class="centrado">Si la decisión debe tomarse de forma AUTOMÁTICA, por favor indique:</p>
+	<p class="centrado">Modo:</p>
 
-    <input class="centrado" type="radio" name="decision" value="pvp" />PVP mínimo <br>
-    <input class="centrado" type="radio" name="decision" value="fecha" />Fecha entrega más próxima
-
+    <select class="centrado" >
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+    
+	
 <br>
 <br>
-   <input class="centrado" type="button" name="pedido" value="Confirmar envío">
-   <input class="centrado-1" type="button" name="pedido" value="Cancelar">
-   <input class="centrado-1" type="button" name="pedido" value="Cerrar sesión">
+   <input class="centrado" type="button" name="pedido" value="Confirmar envio">
+   <a href="gestion.jsp"> Cancelar </a>
 <body>
 </body>
 </html>

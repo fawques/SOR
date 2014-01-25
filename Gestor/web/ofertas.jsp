@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Documento sin título</title>
+<title>Ofertas recibidas</title>
 <link rel="stylesheet" href="estilos.css" type="text/css" media="screen" /> 
 </head>
 <p class="centrado">Ver ofertas recibidas</p>
@@ -11,15 +11,14 @@ Pedido:
 <br>
 Tipo pieza: 
 <br>
-PVP máximo: 
+PVP maximo: 
+
 <br>
-Calidad mínimo:
+Fecha maxima:
 <br>
-Fecha máxima:
+Descripcion:
 <br>
-Descripción:
-<br>
-Tipo decisión:
+Tipo decision:
 <br>
 
 
@@ -27,9 +26,9 @@ Tipo decisión:
 </div>
 <br>
 <br>
-   <a href="seguimiento.html"><input class="centrado" type="button" name="pedido" value="Atrás"></a>
+   <a href="seguimiento.jsp" class="centrado">
+   	AtrÃ¡s  </a>
    <input class="centrado-1" type="button" name="pedido" value="Aceptar oferta">
-   <input class="centrado-1" type="button" name="pedido" value="Cerrar sesión">
 <body>
 </body>
 </html>

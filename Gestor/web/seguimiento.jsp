@@ -9,10 +9,9 @@
 
 <br>
 <br>
-   <a href="areaPersonal.html"><input class="centrado" type="button" name="pedido" value="Atrás"></a>
+   <a href="gestion.jsp"><input class="centrado" type="button" name="pedido" value="Atrás"></a>
    <input class="centrado-1" type="button" name="pedido" value="Cancelar pedido">
    <input class="centrado-1" type="button" name="pedido" value="Ver ofertas">
-   <input class="centrado-1" type="button" name="pedido" value="Cerrar sesión">
 <body>
 </body>
 </html>
