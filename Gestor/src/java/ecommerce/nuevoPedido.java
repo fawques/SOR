@@ -89,40 +89,53 @@ public class nuevoPedido extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-        Cookie cs = request.getCookies()[0];
-        Type collectionType = new TypeToken<Taller>() {
-        }.getType();
-
-        Taller t = gson.fromJson(cs.getValue(), collectionType);
-
-        Date today = new Date();
-        String fecha = request.getParameter("fecha");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaLimite = new Date();
-        try {
-            fechaLimite = dateFormat.parse(fecha);
-        } catch (ParseException ex) {
-            Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ArrayList<Pieza> piezasPedido = new ArrayList<>();
-        ArrayList<Integer> cantidadPiezas = new ArrayList<>();
-        /*for (Iterator it = data.iterator(); it.hasNext();) {
-         TablePieza tp = (TablePieza) it.next();            piezasPedido.add(new Pieza(tp.getId()));
-         cantidadPiezas.add(tp.getCantidad());
-         }*/
-
-        try {
-            bd = new InterfazBD("sor_gestor");
-            int id = bd.anadirPedido(today, EstadoPedido.ACTIVE, t.getID(), new Date(1970, 1, 1), fechaLimite, "Automatico".equals(request.getParameter("modo")));
-            if (id != 0) {
-                //bd.anyadirPiezasAPedido(id, piezasPedido, cantidadPiezas);
-                System.out.println("Pedido creado sin piezas");
+        String cookieName = "usuario";
+        Cookie cookies[] = request.getCookies();
+        Cookie myCookie = null;
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals(cookieName)) {
+                    myCookie = cookies[i];
+                    break;
+                }
             }
-            bd.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (myCookie != null) {
+            Type collectionType = new TypeToken<Taller>() {
+            }.getType();
+
+            Taller t = gson.fromJson(myCookie.getValue(), collectionType);
+
+            Date today = new Date();
+            String fecha = request.getParameter("fecha");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date fechaLimite = new Date();
+            try {
+                fechaLimite = dateFormat.parse(fecha);
+            } catch (ParseException ex) {
+                Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ArrayList<Pieza> piezasPedido = new ArrayList<>();
+            ArrayList<Integer> cantidadPiezas = new ArrayList<>();
+            /*for (Iterator it = data.iterator(); it.hasNext();) {
+             TablePieza tp = (TablePieza) it.next();            piezasPedido.add(new Pieza(tp.getId()));
+             cantidadPiezas.add(tp.getCantidad());
+             }*/
+
+            try {
+                bd = new InterfazBD("sor_gestor");
+                int id = bd.anadirPedido(today, EstadoPedido.ACTIVE, t.getID(), new Date(1970, 1, 1), fechaLimite, "Automatico".equals(request.getParameter("modo")));
+                if (id != 0) {
+                    //bd.anyadirPiezasAPedido(id, piezasPedido, cantidadPiezas);
+                    System.out.println("Pedido creado sin piezas");
+                }
+                bd.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
