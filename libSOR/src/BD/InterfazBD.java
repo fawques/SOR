@@ -183,7 +183,45 @@ public class InterfazBD {
         return lista;
 
     }
+    public ArrayList<Oferta> getOfertasPorEstado(EstadoOferta estado){
+        ArrayList<Oferta> lista = new ArrayList<>();
+        try {
+            Oferta nueva;
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta where estado='" + estado.ordinal() + "'");
+            while (resultados.next()) {    
 
+                nueva = new Oferta(resultados.getString("id"), resultados.getDouble("importe"), resultados.getString("desguace"), resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+                lista.add(nueva);
+           }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+
+    
+    }
+    public ArrayList<Pedido> getPedidosPorEstado(EstadoPedido estado){
+        ArrayList<Pedido> lista = new ArrayList<>();
+        try {
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido where estado='" + estado.ordinal() + "'");
+            while (resultados.next()) {
+                String pedidoID = resultados.getString("id");
+                ArrayList<Pieza> piezas = new ArrayList<>();
+                ArrayList<Integer> cantidades = new ArrayList<>();
+                getPiezasYCantidades(pedidoID, piezas, cantidades);
+
+                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
+                lista.add(nuevo);
+           }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+
+    
+    }
     public ArrayList<Pedido> getPedidosConID_aux(EstadoPedido estado) {
         ArrayList<Pedido> lista = new ArrayList<>();
         try {

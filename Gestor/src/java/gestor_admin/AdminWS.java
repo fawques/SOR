@@ -25,7 +25,13 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import general.EstadoOferta;
+import general.EstadoPedido;
 import jUDDI.SimplePublish;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.Type;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -37,6 +43,7 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.Timer;
 
 /**
  *
@@ -52,6 +59,42 @@ public class AdminWS {
      * @param subject
      * @param text
      */
+    
+    private ActionListener actionListener = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                try {
+                    bd = new InterfazBD("sor_gestor");
+                       Gson gson= new Gson();
+                ArrayList<Oferta> listaOferta= bd.getOfertasPorEstado(EstadoOferta.ACTIVE);
+                listaOferta.addAll(bd.getOfertasPorEstado(EstadoOferta.ACCEPTED));
+                ArrayList<Pedido> listaPedido=bd.getPedidosPorEstado(EstadoPedido.ACTIVE);
+                listaPedido.addAll(bd.getPedidosPorEstado(EstadoPedido.ACCEPTED));
+                
+                
+                for(Oferta oferta:listaOferta){
+                    if((new Date()).after(oferta.getFecha_limite())){                
+                        bd.cambiarEstadoOferta(EstadoOferta.CANCELLED,oferta.getID());
+                    }
+                }
+                for(Pedido pedido:listaPedido){
+                    if((new Date()).after(pedido.getFecha_limite())){                
+                        bd.cambiarEstadoPedido(EstadoPedido.CANCELLED,pedido.getID());
+                    }
+                }
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+                }
+             
+                
+            }
+
+        };
+    public Timer timer = new Timer(6000,actionListener); // Timer(TimeInMilliSeconds, ActionListener) 1000ms = 1s 
+
     public void sendMail(final String from, String to, String subject, String text) {
         String SMTP_HOST_NAME = "smtp.gmail.com";
         String SMTP_PORT = "465";

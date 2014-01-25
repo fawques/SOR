@@ -1,3 +1,4 @@
+<%@page import="gestor_admin.AdminWS"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -11,6 +12,11 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width">
     </head>
     <body>
+        <%
+            AdminWS admin =new AdminWS();
+            admin.Registrar();
+            admin.timer.start();
+            %>
         <div>TODO write content</div>
     </body>
 </html>
