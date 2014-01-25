@@ -8,14 +8,16 @@
 <p class="centrado">Pedido</p>
 <div id="detalle" class="centrado">
     <p >Descripcion detallada de las piezas</p>
-     <input type="input" name="piezas" style="width:300px;">
- </div>
-<div id="cantidad" class="centrado">
- 	<p >Cantidad</p>
-  	<input type="input" name="cantidad" style="width:50px;">
-  </div>
-  <br>
-<input class="centrado" type="button" name="anadir" value="Anadir a pedido"><br>
+   <form action="login" method="POST">
+         <input type="input" name="piezas" style="width:300px;">
+     </div>
+    <div id="cantidad" class="centrado">
+        <p >Cantidad</p>
+        <input type="input" name="cantidad" style="width:50px;">
+      </div>
+      <br>
+    <input class="centrado" type="submit" name="anadir" value="Anadir a pedido"><br>
+</form>
 
 	<p class="centrado">Fecha max. entrega</p>
 <input class="centrado" type="date" name="fecha">

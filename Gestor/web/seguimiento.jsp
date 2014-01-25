@@ -13,6 +13,19 @@
     %>
 
 <br>
+<table class="centrado">
+<tr>
+<th>ID</th>
+<th>Pedido</th>
+<th>Fecha alta</th>
+<th>Desguace</th>
+<th>Importe</th>
+</tr>
+<tr>
+<%
+CÓDIGO %>
+</tr>
+</table>
 <br>
    <a href="gestion.jsp"><input class="centrado" type="button" name="pedido" value="Atras"></a>
    <input class="centrado-1" type="button" name="pedido" value="Cancelar pedido">
