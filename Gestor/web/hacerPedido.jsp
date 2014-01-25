@@ -5,7 +5,6 @@
 <title>Documento sin título</title>
 <link rel="stylesheet" href="estilos.css" type="text/css" media="screen" /> 
 </head>
-<form action="nuevoPedido" method="POST">
 <p class="centrado">Pedido</p>
 <div id="detalle" class="centrado">
     <p >Descripción detallada de las piezas</p>
@@ -35,10 +34,9 @@
 
 <br>
 <br>
-   <input class="centrado" type="submit" name="pedido" value="Confirmar envío">
+   <input class="centrado" type="button" name="pedido" value="Confirmar envío">
    <input class="centrado-1" type="button" name="pedido" value="Cancelar">
    <input class="centrado-1" type="button" name="pedido" value="Cerrar sesión">
-</form>
 <body>
 </body>
 </html>
