@@ -23,10 +23,8 @@
 	<p class="centrado">Modo:</p>
 
     <select class="centrado" >
-      <option value="volvo">Volvo</option>
-      <option value="saab">Saab</option>
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
+      <option value="automatico">Automatico</option>
+      <option value="manual">Manual</option>
     </select>
     
 	
