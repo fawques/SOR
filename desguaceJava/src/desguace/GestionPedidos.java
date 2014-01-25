@@ -291,7 +291,7 @@ public class GestionPedidos implements Initializable {
         }
         actualizarOfertas();
     }
-    public void actualizarPestañaHistorico(){
+    public void actualizarPestanyaHistorico(){
         tablaHistoricoPedidos();
         tablaOfertasHistorico();
     }
@@ -516,7 +516,7 @@ public class GestionPedidos implements Initializable {
 
        
     }
-   public void actualizarPestañaOfertas(){
+   public void actualizarPestanyaOfertas(){
       actualizarOfertas();
       actualizarOfertasOfertadas();
    }

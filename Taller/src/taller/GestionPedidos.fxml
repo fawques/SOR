@@ -10,7 +10,7 @@
   <children>
     <TabPane layoutX="-1.0" layoutY="-7.0" prefHeight="576.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-        <Tab text="Pedidos">
+        <Tab onSelectionChanged="#visualizarPedidos" text="Pedidos">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
@@ -67,7 +67,7 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab text="Ofertas">
+        <Tab onSelectionChanged="#actualizarPestanyaOfertas" text="Ofertas">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="780.0">
               <children>

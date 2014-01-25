@@ -301,8 +301,11 @@ public class DesguaceJava extends Application {
         try {
             bd= new InterfazBD("sor_desguace");
             realizado= bd.cambiarEstadoPedido(estado, id);
+            if(realizado){
+                cambiarEstadoPedido_1(id,estado.ordinal());
+            }
             bd.close();
-            cambiarEstadoPedido_1(id,estado.ordinal());
+            
             return realizado;
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);

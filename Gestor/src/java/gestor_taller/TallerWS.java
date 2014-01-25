@@ -94,7 +94,7 @@ public class TallerWS {
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
-             bd.anadirPedido(stringID, p.getFecha_alta(), EstadoPedido.ACCEPTED.ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
+             bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
             Gestor_activemq activemq= new Gestor_activemq();
             activemq.create_Producer("pedidos");
              PedidoCorto pedidocorto= new PedidoCorto(p.getID(), p.getEstado());
@@ -258,6 +258,31 @@ public class TallerWS {
         }
        
         return false;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getPedidos")
+    public String getPedidos() {
+            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+        //Dec 7, 2013 5:46:35 PM
+       
+            ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
+        try {
+            bd = new InterfazBD("sor_gestor");
+            listaPedidos = bd.getPedidosActivos();
+            String listaJSON = gson.toJson(listaPedidos);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+        } catch (SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+      
+        return null;
     }
 
 }

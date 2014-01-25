@@ -247,27 +247,34 @@ public class GestionPedidosController implements Initializable {
         tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
         
     }
-
-    public void visualizarPedidos() throws JsonSyntaxException {
-        Gson gson= new  GsonBuilder().setDateFormat("MMM dd, yyyy").create();
-        olTablaPedidos.clear();
+    public void actualizarTablaPedidosOferta(){
+    Gson gson= new  GsonBuilder().setDateFormat("MMM dd, yyyy").create();
         olTablaPedidosOfertas.clear();
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
-        ArrayList<Pedido> alPedidos = gson.fromJson(MainTaller.getPedidosActivos(), collectionType);
         TablaPedidos tpPed;
-        for (Pedido pedido : alPedidos) {
+        ArrayList<Pedido> alPedidosActivos = gson.fromJson(MainTaller.getPedidosActivos(), collectionType);
+        for (Pedido pedido : alPedidosActivos) {
             tpPed = new TablaPedidos(pedido);
             olTablaPedidosOfertas.add(tpPed);
-        }
+        }  
         tbPedidosOfertas.setEditable(true);
         tbPedidosOfertas.setItems(olTablaPedidosOfertas);
+
+   
+    
+    }
+    public void visualizarPedidos() throws JsonSyntaxException {
+        Gson gson= new  GsonBuilder().setDateFormat("MMM dd, yyyy").create();
         olTablaPedidos.clear();
+        Type collectionType = new TypeToken<ArrayList<Pedido>>() {
+        }.getType();
+        TablaPedidos tpPed;
         ArrayList<Pedido> alPedidosActivos = gson.fromJson(MainTaller.getAllPedidos(), collectionType);
         for (Pedido pedido : alPedidosActivos) {
             tpPed = new TablaPedidos(pedido);
             olTablaPedidos.add(tpPed);
-        }
+        }  
         tbPedidos.setEditable(true);
         tbPedidos.setItems(olTablaPedidos);
     }
@@ -376,6 +383,10 @@ public class GestionPedidosController implements Initializable {
     /**
      *
      */
+    public void actualizarPestanyaOfertas(){
+        actualizarOfertas();
+         actualizarTablaPedidosOferta();
+    }
     public void actualizarOfertas() {
         olTablaOfertas.clear();
         ofertas = MainTaller.actualizarOfertas();
@@ -393,6 +404,7 @@ public class GestionPedidosController implements Initializable {
      *
      */
     public void verOfertas() {
+        actualizarOfertas();
         TablaPedidos tp = (TablaPedidos) tbPedidosOfertas.getSelectionModel().getSelectedItem();
         if (tp != null) {
             olTablaOfertas.clear();

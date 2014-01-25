@@ -4,18 +4,6 @@
 <xsd:import namespace="http://gestor_desguace_java/" schemaLocation="http://localhost:8080/Gestor/DesguaceJavaWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="baja">
-<part name="parameters" element="tns:baja"/>
-</message>
-<message name="bajaResponse">
-<part name="parameters" element="tns:bajaResponse"/>
-</message>
-<message name="alta">
-<part name="parameters" element="tns:alta"/>
-</message>
-<message name="altaResponse">
-<part name="parameters" element="tns:altaResponse"/>
-</message>
 <message name="getOfertas">
 <part name="parameters" element="tns:getOfertas"/>
 </message>
@@ -27,6 +15,18 @@
 </message>
 <message name="nuevaOfertaResponse">
 <part name="parameters" element="tns:nuevaOfertaResponse"/>
+</message>
+<message name="baja">
+<part name="parameters" element="tns:baja"/>
+</message>
+<message name="bajaResponse">
+<part name="parameters" element="tns:bajaResponse"/>
+</message>
+<message name="alta">
+<part name="parameters" element="tns:alta"/>
+</message>
+<message name="altaResponse">
+<part name="parameters" element="tns:altaResponse"/>
 </message>
 <message name="checkActivacion">
 <part name="parameters" element="tns:checkActivacion"/>
@@ -59,14 +59,6 @@
 <part name="parameters" element="tns:cancelarOfertaResponse"/>
 </message>
 <portType name="DesguaceJavaWS">
-<operation name="baja">
-<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/bajaRequest" message="tns:baja"/>
-<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/bajaResponse" message="tns:bajaResponse"/>
-</operation>
-<operation name="alta">
-<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest" message="tns:alta"/>
-<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaResponse" message="tns:altaResponse"/>
-</operation>
 <operation name="getOfertas">
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest" message="tns:getOfertas"/>
 <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse" message="tns:getOfertasResponse"/>
@@ -74,6 +66,14 @@
 <operation name="nuevaOferta">
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest" message="tns:nuevaOferta"/>
 <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse" message="tns:nuevaOfertaResponse"/>
+</operation>
+<operation name="baja">
+<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/bajaRequest" message="tns:baja"/>
+<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/bajaResponse" message="tns:bajaResponse"/>
+</operation>
+<operation name="alta">
+<input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest" message="tns:alta"/>
+<output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaResponse" message="tns:altaResponse"/>
 </operation>
 <operation name="checkActivacion">
 <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest" message="tns:checkActivacion"/>
@@ -98,24 +98,6 @@
 </portType>
 <binding name="DesguaceJavaWSPortBinding" type="tns:DesguaceJavaWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="baja">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="alta">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="getOfertas">
 <soap:operation soapAction=""/>
 <input>
@@ -126,6 +108,24 @@
 </output>
 </operation>
 <operation name="nuevaOferta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="baja">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="alta">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
