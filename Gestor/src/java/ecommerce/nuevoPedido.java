@@ -9,15 +9,14 @@ package ecommerce;
 import BD.InterfazBD;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import general.EstadoPedido;
-import general.Pieza;
 import gestor_taller.TallerWS;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -88,22 +87,28 @@ public class nuevoPedido extends HttpServlet {
         Cookie cs = request.getCookies()[0];
         
         Date today = new Date();
-        String fecha = "" + tfLimiteAnyo.getText() + "/" + tfLimiteMes.getText() + "/" + tfLimiteDia.getText();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date fechaLimite = dateFormat.parse(fecha);
-        ArrayList<Pieza> piezasPedido = new ArrayList<>();
-        ArrayList<Integer> cantidadPiezas = new ArrayList<>();
+        String fecha = request.getParameter("fecha");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaLimite;
+        try {
+            fechaLimite = dateFormat.parse(fecha);
+        } catch (ParseException ex) {
+            Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /*ArrayList<Pieza> piezasPedido = new ArrayList<>();
+         ArrayList<Integer> cantidadPiezas = new ArrayList<>();
         for (Iterator it = data.iterator(); it.hasNext();) {
             TablePieza tp = (TablePieza) it.next();
             piezasPedido.add(new Pieza(tp.getId()));
             cantidadPiezas.add(tp.getCantidad());
+        }*/
+
+        /*if (bd.anadirPedido(today, EstadoPedido.ACTIVE, fechaLimite, "Automatico".equals(cbModoAutomatico.getValue().toString()), piezasPedido, cantidadPiezas);
+         {
+
         }
 
-        if (bd.anadirPedido(today, EstadoPedido.ACTIVE, fechaLimite, "Automatico".equals(cbModoAutomatico.getValue().toString()), piezasPedido, cantidadPiezas);
-        {
-        }
-
-        }
+        }*/
     }
 
     /**
