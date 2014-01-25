@@ -6,11 +6,19 @@
 
 package ecommerce;
 
+import BD.InterfazBD;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import general.Taller;
 import gestor_admin.AdminWS;
 import gestor_taller.TallerWS;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class registro extends HttpServlet {
 
+    InterfazBD bd;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -75,13 +84,20 @@ public class registro extends HttpServlet {
         TallerWS tws = new TallerWS();
         AdminWS aws = new AdminWS();
         if (tws.alta(request.getParameter("usuario"), request.getParameter("email"), request.getParameter("direccion"), request.getParameter("ciudad"), request.getParameter("cpostal"), request.getParameter("telefono"))) {
-            //Crear getTaller(email);
-            //Taller t = getTaller(email);
-            //Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-            
-            //Cookie c = new Cookie("usuario", gson.toJson(t));
-            //response.addCookie(c);
-            System.out.println("Registro ok");
+            try {
+                bd = new InterfazBD("sor_gestor");
+                Taller t = bd.getTaller(request.getParameter("email"));
+                Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+
+                Cookie c = new Cookie("usuario", gson.toJson(t));
+                response.addCookie(c);
+                System.out.println("Registro ok");
+                bd.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(registro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(registro.class.getName()).log(Level.SEVERE, null, ex);
+            }
             request.getRequestDispatcher("/gestion.jsp").forward(request, response);
         } else {
             //enviar error

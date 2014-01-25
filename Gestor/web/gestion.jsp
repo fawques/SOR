@@ -21,10 +21,10 @@
                 }
             }
         }
-        if(myCookie == null){
+        /*if(myCookie == null){
             System.out.println("No hay usuario");
             response.sendRedirect("index.jsp");
-        }
+        }*/
     %>
     <p class="centrado">Bienvenido</p>
 <a href="hacerPedido.jsp" class="centrado" style="width:150px;height:80px;position:relative;float:left;" name="pedido" >Nuevo pedido</a>

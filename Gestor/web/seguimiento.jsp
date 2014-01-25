@@ -42,6 +42,8 @@
             Type collectionType = new TypeToken<Pedido>() {
                 }.getType();
             alP = gson.fromJson(myCookie.getValue(), collectionType);
+            System.out.println(myCookie.getValue());
+            System.out.println(alP.size());
             for(int i=0; i<alP.size(); i++){
                 out.println("<td>"+alP.get(i).getID()+"</td>");
                 out.println("<td>"+alP.get(i).getFecha_alta()+"</td>");
@@ -57,7 +59,7 @@
    <a href="gestion.jsp"><input class="centrado" type="button" name="pedido" value="Atras"></a>
    <input class="centrado-1" type="button" name="pedido" value="Cancelar pedido">
    <input class="centrado-1" type="button" name="pedido" value="Ver ofertas">
-   <form action="actualizarOfetasYPedidos" method="post">
+   <form action="actualizarPedidos" method="post">
        <input class="centrado-1" type="submit" value="Actualizar">
    </form>
 </body>

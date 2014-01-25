@@ -27,7 +27,7 @@ Tipo decision:
 <br>
 <br>
    <a href="gestion.jsp" class="centrado">
-   	Atrás  </a>
+   	Atras  </a>
    <input class="centrado-1" type="button" name="pedido" value="Aceptar oferta">
 <body>
 </body>

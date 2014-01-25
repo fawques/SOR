@@ -17,8 +17,8 @@
         <servlet-class>ecommerce.nuevoPedido</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>actualizarOfertasYPedidos</servlet-name>
-        <servlet-class>ecommerce.actualizarOfertasYPedidos</servlet-class>
+        <servlet-name>actualizarPedidos</servlet-name>
+        <servlet-class>ecommerce.actualizarPedidos</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>registro</servlet-name>
