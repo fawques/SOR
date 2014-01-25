@@ -21,11 +21,29 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.uddi.api_v3.*;
-import org.apache.juddi.api_v3.*;
-import org.uddi.v3_service.UDDISecurityPortType;
-import org.uddi.v3_service.UDDIPublicationPortType;
+import org.apache.juddi.api_v3.Publisher;
+import org.apache.juddi.api_v3.PublisherDetail;
+import org.apache.juddi.api_v3.SavePublisher;
 import org.apache.juddi.v3_service.JUDDIApiPortType;
+import org.uddi.api_v3.AccessPoint;
+import org.uddi.api_v3.AuthToken;
+import org.uddi.api_v3.BindingTemplate;
+import org.uddi.api_v3.BindingTemplates;
+import org.uddi.api_v3.BusinessDetail;
+import org.uddi.api_v3.BusinessEntity;
+import org.uddi.api_v3.BusinessInfo;
+import org.uddi.api_v3.BusinessInfos;
+import org.uddi.api_v3.BusinessList;
+import org.uddi.api_v3.BusinessService;
+import org.uddi.api_v3.Description;
+import org.uddi.api_v3.FindBusiness;
+import org.uddi.api_v3.GetAuthToken;
+import org.uddi.api_v3.Name;
+import org.uddi.api_v3.SaveBusiness;
+import org.uddi.api_v3.SaveService;
+import org.uddi.api_v3.ServiceDetail;
+import org.uddi.v3_service.UDDIPublicationPortType;
+import org.uddi.v3_service.UDDISecurityPortType;
 
 
 public class SimplePublish {

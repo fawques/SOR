@@ -7,9 +7,10 @@
 </head>
 <body>
     <%
-        if(session.getAttribute("usuario")==null){
+        /*if(request.getAttribute("usuario")==null){
+            System.out.println("No hay usuario");
             response.sendRedirect("index.jsp");
-        }
+        }*/
     %>
 <p class="centrado">Bienvenido</p>
  <input type="button" class="centrado" style="width:150px;height:80px;position:relative;float:left;" name="pedido" value="Hacer pedido">
