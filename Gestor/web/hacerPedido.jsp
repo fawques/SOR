@@ -21,7 +21,7 @@
 <input class="centrado" type="date" name="fecha">
 
 	<p class="centrado">Modo:</p>
-	<input type="checkbox" class="centrado" name="modo" >Automático<br>
+	<input type="checkbox" class="centrado" name="modo" value="Automatico">Automatico<br>
     
 	
 <br>

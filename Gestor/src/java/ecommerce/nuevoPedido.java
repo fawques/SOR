@@ -9,11 +9,16 @@ package ecommerce;
 import BD.InterfazBD;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import gestor_taller.TallerWS;
+import com.google.gson.reflect.TypeToken;
+import general.EstadoPedido;
+import general.Pieza;
+import general.Taller;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,33 +87,34 @@ public class nuevoPedido extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TallerWS tws = new TallerWS();
         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
         Cookie cs = request.getCookies()[0];
-        
+        Type collectionType = new TypeToken<Taller>() {
+        }.getType();
+
+        Taller t = gson.fromJson(cs.getValue(), collectionType);
+
         Date today = new Date();
         String fecha = request.getParameter("fecha");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaLimite;
+        Date fechaLimite = new Date();
         try {
             fechaLimite = dateFormat.parse(fecha);
         } catch (ParseException ex) {
             Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*ArrayList<Pieza> piezasPedido = new ArrayList<>();
+        ArrayList<Pieza> piezasPedido = new ArrayList<>();
          ArrayList<Integer> cantidadPiezas = new ArrayList<>();
-        for (Iterator it = data.iterator(); it.hasNext();) {
-            TablePieza tp = (TablePieza) it.next();
-            piezasPedido.add(new Pieza(tp.getId()));
+        /*for (Iterator it = data.iterator(); it.hasNext();) {            
+         TablePieza tp = (TablePieza) it.next();            piezasPedido.add(new Pieza(tp.getId()));
             cantidadPiezas.add(tp.getCantidad());
         }*/
-
-        /*if (bd.anadirPedido(today, EstadoPedido.ACTIVE, fechaLimite, "Automatico".equals(cbModoAutomatico.getValue().toString()), piezasPedido, cantidadPiezas);
-         {
-
+        
+        int id = bd.anadirPedido(today, EstadoPedido.ACTIVE, t.getID(), new Date(1970, 1, 1), fechaLimite, "Automatico".equals(request.getParameter("modo")));
+        if (id != 0) {
+            //bd.anyadirPiezasAPedido(id, piezasPedido, cantidadPiezas);
+            System.out.println("Pedido creado sin piezas");
         }
-
-        }*/
     }
 
     /**
