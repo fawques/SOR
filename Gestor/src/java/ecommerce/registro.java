@@ -6,6 +6,7 @@
 
 package ecommerce;
 
+import gestor_admin.AdminWS;
 import gestor_taller.TallerWS;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,9 +73,14 @@ public class registro extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         TallerWS tws = new TallerWS();
+        AdminWS aws = new AdminWS();
         if (tws.alta(request.getParameter("usuario"), request.getParameter("email"), request.getParameter("direccion"), request.getParameter("ciudad"), request.getParameter("cpostal"), request.getParameter("telefono"))) {
-            request.setAttribute("usuario", request.getParameter("usuario"));
-            request.setAttribute("contrasenya", request.getParameter("contrasenya"));
+            //Crear getTaller(email);
+            //Taller t = getTaller(email);
+            //Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            
+            //Cookie c = new Cookie("usuario", gson.toJson(t));
+            //response.addCookie(c);
             System.out.println("Registro ok");
             request.getRequestDispatcher("/gestion.jsp").forward(request, response);
         } else {

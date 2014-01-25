@@ -7,10 +7,24 @@
 </head>
 <body>
     <%
-        /*if(request.getAttribute("usuario")==null){
+        String cookieName = "usuario";
+        Cookie cookies [] = request.getCookies ();
+        Cookie myCookie = null;
+        if (cookies != null)
+        {
+            for (int i = 0; i < cookies.length; i++) 
+            {
+                if (cookies [i].getName().equals (cookieName))
+                {
+                    myCookie = cookies[i];
+                    break;
+                }
+            }
+        }
+        if(myCookie == null){
             System.out.println("No hay usuario");
             response.sendRedirect("index.jsp");
-        }*/
+        }
     %>
 <p class="centrado">Bienvenido</p>
 <a href="hacerPedido.jsp" type="button" class="centrado" style="width:150px;height:80px;position:relative;float:left;" name="pedido" >Nuevo pedido</a>
