@@ -29,6 +29,21 @@ namespace desguaceNET.libSOR.BD
             return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe.ToString("G", new CultureInfo("en-US")) + "','" + estado + "','" + pedido + "','" + desguace + "'," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
         }
 
+        public void anadirPedido(string id, DateTime fechaAlta, int estado, string taller, DateTime fechaBaja, DateTime fechaLimite, bool modoAutomatico)
+        {
+            conexion.ejecutarSQL(new MySqlCommand("insert INTO pedido (id, fecha_alta, estado, taller, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + estado + "','" + taller + "'," + (fechaBaja != null ? "'" + fechaBaja.ToString("yyyy/MM/dd") + "'" : null) + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ", '" + (modoAutomatico ? 1 : 0) + "');"));
+        }
+
+        public int anadirPedido(DateTime fechaAlta, EstadoPedido estado, string taller, DateTime fechaBaja, DateTime fechaLimite, bool modoAutomatico)
+        {
+            return conexion.ejecutarInsert(new MySqlCommand("insert INTO pedido (id, fecha_alta, estado, taller, fecha_limite, modo_automatico) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + (int)estado + "','" + taller + "', " + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ", '" + (modoAutomatico ? 1 : 0) + "');"));
+        }
+
+        public int anadirPedido(Pedido p)
+        {
+            return conexion.ejecutarInsert(new MySqlCommand("insert INTO pedido (id,id_aux, fecha_alta, estado, taller, fecha_limite, fecha_baja, modo_automatico) values ('" + p.ID + "', '" + p.ID_aux + "','" + (int)p.estado + "','" + p.tallerID + "', '" + p.fecha_limite + "', '" + p.fecha_baja + "', '" + (p.modoAutomatico ? 1 : 0) + "');"));
+        }
+
         public int anadirDesguace(int id, string nombre, string email, string direccion, string ciudad, int codPostal, int telefono, int estado)
         {
             return conexion.ejecutarInsert(new MySqlCommand("insert INTO desguace (id, nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + id + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "','" + codPostal + "','" + telefono + "','" + estado + "');"));
@@ -58,7 +73,7 @@ namespace desguaceNET.libSOR.BD
             DataSet resultados = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM pedido;"));
             DataTableReader reader = resultados.CreateDataReader();
             while(reader.Read()){
-                String pedidoID = reader.GetString(1);
+                string pedidoID = reader.GetString(1);
                 List<Pieza> piezas = new List<Pieza>();
                 List<int> cantidades = new List<int>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
@@ -295,14 +310,14 @@ namespace desguaceNET.libSOR.BD
         return conexion.ejecutarSQL(new MySqlCommand("UPDATE `desguace` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "', `estado`='" + (int)estado + "' WHERE `id`='" + ID + "';"));
     }
 
-        public bool activarDesguaceMainDesguace(String idRecibido) {
+        public bool activarDesguaceMainDesguace(string idRecibido) {
         return conexion.ejecutarSQL(new MySqlCommand("UPDATE `desguace` SET  `estado`='0', `id`='" + idRecibido + "'"));
     }
 
-    public List<Pedido> buscarPedido(String idPedido, String idPieza, String estado, DateTime fechaLimite, String modoAceptacion){
+    public List<Pedido> buscarPedido(string idPedido, string idPieza, string estado, DateTime fechaLimite, string modoAceptacion){
         List<Pedido> alPedidos = new List<Pedido>();
 
-        String sWhere = "";
+        string sWhere = "";
         DataSet pedidos;
 
         sWhere = crearWhereDeSelect(idPedido, sWhere, modoAceptacion, fechaLimite, estado);
@@ -326,7 +341,7 @@ namespace desguaceNET.libSOR.BD
     }
 
     //falta añadir el modoAceptación
-    private String crearWhereDeSelect(String idPedido, String sWhere, String modoAceptacion, DateTime fechaLimite, String estado) {
+    private string crearWhereDeSelect(string idPedido, string sWhere, string modoAceptacion, DateTime fechaLimite, string estado) {
         if (idPedido == "") {
             sWhere += " (id_aux='" + idPedido + "' or id='" + idPedido + "')";
         }
@@ -351,15 +366,15 @@ namespace desguaceNET.libSOR.BD
         return sWhere;
     }
 
-    public bool cambiarEstadoOferta(EstadoOferta eOf, String id) {
+    public bool cambiarEstadoOferta(EstadoOferta eOf, string id) {
         return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado='" + (int)eOf + "' where id='" + id + "'"));
     }
 
 
-    public bool activarOfertaDesguace(int id_aux, String id) {
+    public bool activarOfertaDesguace(int id_aux, string id) {
         return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado=" + (int)EstadoOferta.ACTIVE + ", id='" + id + "' where id_aux='" + id_aux + "';"));
     }
-    public bool cancelarOfertas(String idPedido) {
+    public bool cancelarOfertas(string idPedido) {
         return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado='" + (int)EstadoOferta.CANCELLED + "' where pedido='" + idPedido + "'"));
     }
 
@@ -367,13 +382,18 @@ namespace desguaceNET.libSOR.BD
         return conexion.ejecutarSQL(new MySqlCommand("Update oferta set estado='" + (int)EstadoOferta.CANCELLED + "' where desguace='" + idDesguace + "'"));
     }
 
-    public bool bajaDesguace(String id) {
+    public bool bajaDesguace(string id) {
         try {
             cancelarOfertasDesguace(id);
         } catch (MySqlException ex) {
             Console.WriteLine(ex.StackTrace);
         }
         return conexion.ejecutarSQL(new MySqlCommand("Update desguace set estado='" + (int)EstadoGeneral.INACTIVE + "' where id='" + id + "'"));
+    }
+
+    public bool cambiarEstadoPedido(EstadoPedido ePed, string id)
+    {
+        return conexion.ejecutarSQL(new MySqlCommand("Update pedido set estado='" + (int)ePed + "' where id='" + id + "'"));
     }
 
 
@@ -384,7 +404,7 @@ namespace desguaceNET.libSOR.BD
      * @param paramValues debe tener formato "valor0|valor1|...|valorN"
      * @return
      */
-    public bool guardarAccion(String accion, String paramValues) {
+    public bool guardarAccion(string accion, string paramValues) {
         return conexion.ejecutarSQL(new MySqlCommand("INSERT INTO `acciones`(`accion`,`params`) VALUES('" + accion + "', '" + paramValues + "');"));
     }
 

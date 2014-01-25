@@ -587,7 +587,7 @@ public class GestionPedidos implements Initializable {
         idlistabuena.clear();
         if(listaIdsString!=null){
             for(PedidoCorto pcorto: idlista){
-                if(!DesguaceJava.cambiarEstadoPedido(p.getID(), p.getEstado())){
+                if(!DesguaceJava.cambiarEstadoPedido(pcorto.getID(), pcorto.getEstado())){
                     idlistabuena.add(pcorto.getID());
                 }
             }
@@ -596,7 +596,7 @@ public class GestionPedidos implements Initializable {
              pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
         }
         collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        if(!pedidosstring.equals("") && pedidosstring!=null){
+        if(pedidosstring!=null && !pedidosstring.equals("")){
             listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
         

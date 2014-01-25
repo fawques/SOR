@@ -1,4 +1,5 @@
 ﻿using desguaceNET.desguaceWS;
+using desguaceNET.libSOR.activemq;
 using desguaceNET.libSOR.BD;
 using desguaceNET.libSOR.general;
 using MySql.Data.MySqlClient;
@@ -222,6 +223,64 @@ namespace desguaceNET
             return false;
         }
 
+        public void actualizarPedidos()
+        {
+            // coger los pedidos de activeMQ
+            Gestor_activemq activemq = new Gestor_activemq();
+            activemq.create_Consumer("pedidos");
+            string listaIdsString = activemq.consumer.consumeMessage();
+            activemq.consumer.closeConsumer();
+
+            List<PedidoCorto> listaPedidosCortos= new List<PedidoCorto>();
+            List<string> listaPedidosCortosString = JsonConvert.DeserializeObject <List<string>>(listaIdsString);
+            PedidoCorto p = null;
+            foreach (string item in listaPedidosCortosString)
+	        {
+		        p = JsonConvert.DeserializeObject<PedidoCorto>(item);
+                listaPedidosCortos.Add(p);
+	        }
+
+            // cambias el estado de tu BD según ponga activeMQ
+            List<string> listaIDs = new List<string>();
+            foreach (PedidoCorto pcorto in listaPedidosCortos)
+	        {
+                DesguaceNet main = new DesguaceNet();
+                if (!main.cambiarEstadoPedidoDesguace(pcorto.getID(), pcorto.getEstado()))
+                {
+                    listaIDs.Add(pcorto.getID());
+                }
+	        }
+            // si no puedes cambiarlos, creas nuevos
+            string listaJSON = JsonConvert.SerializeObject(listaIDs);
+            string pedidosstring = getPedidosporID(listaJSON);
+            List<Pedido> listaPedidos = null;
+            if (pedidosstring != null && pedidosstring != "")
+            {
+                listaPedidos = JsonConvert.DeserializeObject<List<Pedido>>(pedidosstring);
+                foreach (Pedido ped in listaPedidos)
+                {
+                    bd.anadirPedido(ped);
+
+                }
+            }
+        }
+
+    public bool cambiarEstadoPedidoDesguace(String id,EstadoPedido estado){
+    bool realizado=false;
+        try {
+            realizado= bd.cambiarEstadoPedido(estado, id);
+            if(realizado){
+                cambiarEstadoPedido(id,(int)estado);
+            }
+            
+            return realizado;
+        } catch (MySqlException ex) {
+            Console.WriteLine(ex.StackTrace);
+        }
+        return realizado;
+    }
+
+        // ============================
         private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
@@ -269,6 +328,11 @@ namespace desguaceNET
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
             return client.cancelarOferta(id);
+        }
+
+        private bool cambiarEstadoPedido(string id, int estado) {
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            return client.cambiarEstadoPedido(id,estado);
         }
 
     }

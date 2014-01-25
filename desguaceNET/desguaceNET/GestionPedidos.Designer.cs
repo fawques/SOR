@@ -102,6 +102,7 @@
             this.Pedidos.SelectedIndex = 0;
             this.Pedidos.Size = new System.Drawing.Size(733, 542);
             this.Pedidos.TabIndex = 3;
+            this.Pedidos.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Pedidos_MouseClick);
             // 
             // tabPage1
             // 

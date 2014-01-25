@@ -105,6 +105,7 @@
     <Compile Include="libSOR\general\EstadoPedido.cs" />
     <Compile Include="libSOR\general\Oferta.cs" />
     <Compile Include="libSOR\general\Pedido.cs" />
+    <Compile Include="libSOR\general\PedidoCorto.cs" />
     <Compile Include="libSOR\general\Pieza.cs" />
     <Compile Include="libSOR\general\Usuario.cs" />
     <Compile Include="NuevaOferta.cs">
@@ -176,6 +177,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.bajaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.cambiarEstadoPedidoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.cancelarOfertaResponse.datasource">

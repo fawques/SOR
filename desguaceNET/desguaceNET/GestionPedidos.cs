@@ -178,5 +178,14 @@ namespace desguaceNET
                 }
             }
         }
+
+        private void Pedidos_MouseClick(object sender, MouseEventArgs e)
+        {
+            DesguaceNet main = new DesguaceNet();
+            main.actualizarPedidos();
+            listaPedidos = main.getPedidos();
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = listaPedidos;
+        }
     }
 }

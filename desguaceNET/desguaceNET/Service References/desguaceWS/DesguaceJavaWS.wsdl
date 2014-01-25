@@ -11,6 +11,12 @@
   <message name="checkActivacionResponse">
     <part name="parameters" element="tns:checkActivacionResponse" />
   </message>
+  <message name="cambiarEstadoPedido">
+    <part name="parameters" element="tns:cambiarEstadoPedido" />
+  </message>
+  <message name="cambiarEstadoPedidoResponse">
+    <part name="parameters" element="tns:cambiarEstadoPedidoResponse" />
+  </message>
   <message name="aceptarOfertaFin">
     <part name="parameters" element="tns:aceptarOfertaFin" />
   </message>
@@ -58,6 +64,10 @@
       <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest" message="tns:checkActivacion" />
       <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse" message="tns:checkActivacionResponse" />
     </operation>
+    <operation name="cambiarEstadoPedido">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/cambiarEstadoPedidoRequest" message="tns:cambiarEstadoPedido" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/cambiarEstadoPedidoResponse" message="tns:cambiarEstadoPedidoResponse" />
+    </operation>
     <operation name="aceptarOfertaFin">
       <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinRequest" message="tns:aceptarOfertaFin" />
       <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinResponse" message="tns:aceptarOfertaFinResponse" />
@@ -90,6 +100,15 @@
   <binding name="DesguaceJavaWSPortBinding" type="tns:DesguaceJavaWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <operation name="checkActivacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="cambiarEstadoPedido">
       <soap:operation soapAction="" />
       <input>
         <soap:body use="literal" />
