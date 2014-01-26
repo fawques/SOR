@@ -108,6 +108,8 @@ public class GestionPedidos implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         tablaPedidos();
         tablaOfertasActivas();
+        tablaHistoricoPedidos();
+        tablaOfertasHistorico();
     }    
 
     @FXML
@@ -116,11 +118,20 @@ public class GestionPedidos implements Initializable {
         public void setStage(Stage stage) {
         thisStage = stage;
     }
-        private void tablaOfertasHistorico(){
-              ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
-     try {
-            bd= new InterfazBD("sor_desguace");
-     
+    private void actualizarOfertasHistorico(){
+        datatableHistoricoOfertas.clear();
+        ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
+        CompararOfertasGestorDesguace();
+        TablaOfertas tpOf;
+        ofertas= DesguaceJava.getOfertasDesguace();
+        for (Oferta of : ofertas) {
+            tpOf = new TablaOfertas(of);
+            datatableHistoricoOfertas.add(tpOf);
+        }
+        
+    }
+    private void tablaOfertasHistorico(){
+        actualizarOfertasHistorico();
         TableColumn id_auxCol = new TableColumn("Id_aux");
         id_auxCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Integer>("id_aux"));        
         TableColumn idCol = new TableColumn("Id");
@@ -141,25 +152,13 @@ public class GestionPedidos implements Initializable {
         fecha_limiteCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_limite"));
       
 
-       CompararOfertasGestorDesguace();
-        TablaOfertas tpOf;
-        ofertas= DesguaceJava.getOfertasDesguace();
-          for (Oferta of : ofertas) {
-            tpOf = new TablaOfertas(of);
-            datatableHistoricoOfertas.add(tpOf);
-        }
-      
       
         tablaHistoricoOfertas.setEditable(true);
         tablaHistoricoOfertas.setItems(datatableHistoricoOfertas);
         tablaHistoricoOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
-        bd.close();
+     
             
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+     
     }    
     private void tablaOfertasActivas(){
      try {
@@ -259,7 +258,7 @@ public class GestionPedidos implements Initializable {
         if(borrarOfertaAceptadas!=-1){
             if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
                Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
-                Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.ACCEPTED); 
+                Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.ACTIVE); 
                if(gestorlohacambiado && gestorpedido){
                     aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.CANCELLED);
                     if(aceptado==false){
@@ -292,24 +291,24 @@ public class GestionPedidos implements Initializable {
         actualizarOfertas();
     }
     public void actualizarPestanyaHistorico(){
-        tablaHistoricoPedidos();
-        tablaOfertasHistorico();
+        actualizarHistoricoPedidos();
+        actualizarOfertasHistorico();
+    }
+    private void actualizarHistoricoPedidos(){
+        ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
+        datatableHistorico.clear();
+         listaPedidos=DesguaceJava.getPedidos();
+         TablaPedidos interfaz;
+         for(Pedido pedido: listaPedidos){
+             interfaz= new TablaPedidos(pedido);
+             datatableHistorico.add(interfaz);
+        }
+
     }
     private void tablaHistoricoPedidos(){
-      try {
-            bd= new InterfazBD("sor_desguace");
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          datatableHistorico.clear();
-  
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
-        ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
-  
-      TableColumn id_auxCol1 = new TableColumn("Id_aux");
+        
+        actualizarHistoricoPedidos();
+        TableColumn id_auxCol1 = new TableColumn("Id_aux");
         id_auxCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Integer>("id_aux")); 
         TableColumn idCol1 = new TableColumn("Id");
         idCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("id"));
@@ -318,7 +317,7 @@ public class GestionPedidos implements Initializable {
         fecha_altaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_alta"));
         
         TableColumn estadoCol1 = new TableColumn("Estado");
-        estadoCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Integer>("estado"));
+        estadoCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("estado"));
    
         TableColumn tallerCol = new TableColumn("Taller");
         tallerCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("taller"));
@@ -328,15 +327,7 @@ public class GestionPedidos implements Initializable {
       
         TableColumn fecha_limiteCol1 = new TableColumn("Fecha limite");
         fecha_limiteCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_limite"));
-        
-        listaPedidos=DesguaceJava.getPedidos();
-        TablaPedidos interfaz;
-        for(Pedido pedido: listaPedidos){
-             interfaz= new TablaPedidos(pedido);
-             datatableHistorico.add(interfaz);
-        }
-        
-       
+
         tablaHistoricoPedidos.setItems(datatableHistorico);
         tablaHistoricoPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
 
@@ -383,8 +374,8 @@ public class GestionPedidos implements Initializable {
         fecha_altaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_alta"));
          fecha_altaCol1.setCellFactory(stringCellFactory);
         TableColumn estadoCol1 = new TableColumn("Estado");
-        estadoCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Integer>("estado"));
-         estadoCol1.setCellFactory(integerCellFactory);
+        estadoCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("estado"));
+         estadoCol1.setCellFactory(stringCellFactory);
         TableColumn tallerCol = new TableColumn("Taller");
         tallerCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("taller"));
          tallerCol.setCellFactory(stringCellFactory);

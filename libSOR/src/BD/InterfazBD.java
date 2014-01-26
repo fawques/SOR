@@ -260,6 +260,24 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         return lista;
 
     }
+    public ArrayList<Oferta> getOfertasConID_aux() {
+        ArrayList<Oferta> lista = new ArrayList<Oferta>();
+        try {
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta ");
+            while (resultados.next()) {
+                String ofertaID = resultados.getString("id");
+
+
+                Oferta nuevo = new Oferta(ofertaID, resultados.getInt("id_aux"), resultados.getDouble("importe"),resultados.getString("desguace"), resultados.getString("pedido"), resultados.getDate("fecha_alta"),  resultados.getDate("fecha_baja"),  resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+                lista.add(nuevo);
+           }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;
+
+    }
     public ArrayList<Taller> getTalleres()
     {
         ArrayList<Taller> lista= new ArrayList<>();

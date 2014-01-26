@@ -259,7 +259,7 @@ public class DesguaceJava extends Application {
        ArrayList<Oferta> of = new ArrayList<Oferta>();
         try {
             bd = new InterfazBD("sor_desguace");
-            of = bd.getOfertas();
+            of = bd.getOfertasConID_aux();
             bd.close();
              return of;
         } catch (SQLException ex) {
@@ -318,7 +318,7 @@ public class DesguaceJava extends Application {
         ArrayList<Pedido> pedidoslista= new ArrayList<Pedido>();
         try {
             bd= new InterfazBD("sor_desguace");
-            pedidoslista=bd.getPedidosActivos();
+            pedidoslista=bd.getPedidosConID_aux();
              bd.close();
             return pedidoslista;
            
