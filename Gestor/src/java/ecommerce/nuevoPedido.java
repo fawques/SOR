@@ -130,6 +130,7 @@ public class nuevoPedido extends HttpServlet {
             try {
                 if (!"".equals(tws.nuevoPedido(gson.toJson(p)))) {
                     System.out.println("pedido creado");
+                    request.getRequestDispatcher("/gestion.jsp").forward(request, response);
                 }
             } catch (JMSException ex) {
                 Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
