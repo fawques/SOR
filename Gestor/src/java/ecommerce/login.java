@@ -110,7 +110,10 @@ public class login extends HttpServlet {
 
             t = gson.fromJson(myCookie.getValue(), collectionType);
         }
-        String pass = myCookie2.getValue();
+        String pass = null;
+        if (myCookie2 != null) {
+            pass = myCookie2.getValue();
+        }
         //comprobar en la bd http://www.nabisoft.com/tutorials/glassfish/securing-java-ee-6-web-applications-on-glassfish-using-jaas
         if (t != null && pass != null) {
             if (request.getParameter("usuario").equals(t.getEmail().toString()) && request.getParameter("contrasenya").equals(pass.toString())) {
