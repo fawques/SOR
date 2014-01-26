@@ -1,0 +1,504 @@
+ene 18, 2014 11:38:19 AM org.apache.catalina.core.AprLifecycleListener init
+Información: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento óptimo en entornos de desarrollo no ha sido hallada en java.library.path: C:\Program Files\Java\jdk1.7.0_45\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\MySQL\MySQL Utilities 1.3.4\;.
+ene 18, 2014 11:38:19 AM org.apache.coyote.http11.Http11Protocol init
+Información: Inicializando Coyote HTTP/1.1 en puerto http-8081
+ene 18, 2014 11:38:19 AM org.apache.catalina.startup.Catalina load
+Información: Initialization processed in 1041 ms
+ene 18, 2014 11:38:19 AM org.apache.catalina.core.StandardService start
+Información: Arrancando servicio Catalina
+ene 18, 2014 11:38:19 AM org.apache.catalina.core.StandardEngine start
+Información: Starting Servlet Engine: Apache Tomcat/6.0.26
+ene 18, 2014 11:38:19 AM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración host-manager.xml
+ene 18, 2014 11:38:21 AM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración juddiv3.xml
+ene 18, 2014 11:38:23 AM org.springframework.web.context.ContextLoader initWebApplicationContext
+Información: Root WebApplicationContext: initialization started
+ene 18, 2014 11:38:24 AM org.springframework.context.support.AbstractApplicationContext prepareRefresh
+Información: Refreshing Root WebApplicationContext: startup date [Sat Jan 18 11:38:24 CET 2014]; root of context hierarchy
+ene 18, 2014 11:38:24 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+ene 18, 2014 11:38:26 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+ene 18, 2014 11:38:26 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+ene 18, 2014 11:38:26 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+ene 18, 2014 11:38:26 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+ene 18, 2014 11:38:28 AM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 11:38:28 AM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 11:38:28 AM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 11:38:28 AM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 11:38:28 AM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 11:38:30 AM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+Información: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@63c7b5d1: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+ene 18, 2014 11:38:32 AM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+ene 18, 2014 11:38:36 AM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /inquiry
+ene 18, 2014 11:38:36 AM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+ene 18, 2014 11:38:36 AM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /publish
+ene 18, 2014 11:38:37 AM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+ene 18, 2014 11:38:37 AM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /security
+ene 18, 2014 11:38:37 AM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+ene 18, 2014 11:38:37 AM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /subscription
+ene 18, 2014 11:38:38 AM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+ene 18, 2014 11:38:38 AM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /subscription-listener
+ene 18, 2014 11:38:38 AM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+ene 18, 2014 11:38:38 AM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /custody-transfer
+ene 18, 2014 11:38:38 AM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+ene 18, 2014 11:38:39 AM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /juddi-api
+ene 18, 2014 11:38:39 AM org.springframework.web.context.ContextLoader initWebApplicationContext
+Información: Root WebApplicationContext: initialization completed in 15273 ms
+ene 18, 2014 11:38:39 AM org.apache.juddi.Registry start
+Información: Starting jUDDI registry...
+ene 18, 2014 11:38:39 AM org.apache.juddi.config.AppConfig loadConfiguration
+Información: Reading from properties file:  file:/C:/Users/fawques/Documents/SOR/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+ene 18, 2014 11:38:48 AM org.apache.juddi.Registry start
+Información: jUDDI registry started succesfully.
+ene 18, 2014 11:38:48 AM org.apache.cxf.transport.servlet.CXFServlet updateContext
+Información: Load the bus with application context
+ene 18, 2014 11:38:48 AM org.springframework.context.support.AbstractApplicationContext prepareRefresh
+Información: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@3dff2f0b: startup date [Sat Jan 18 11:38:48 CET 2014]; parent: Root WebApplicationContext
+ene 18, 2014 11:38:48 AM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+Información: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@9e11012: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@63c7b5d1
+ene 18, 2014 11:38:48 AM org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+Información: Servlet transport factory already registered 
+ene 18, 2014 11:38:48 AM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración manager.xml
+ene 18, 2014 11:38:49 AM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio docs de la aplicación web
+ene 18, 2014 11:38:49 AM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio examples de la aplicación web
+ene 18, 2014 11:38:49 AM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio ROOT de la aplicación web
+ene 18, 2014 11:38:49 AM org.apache.coyote.http11.Http11Protocol start
+Información: Arrancando Coyote HTTP/1.1 en puerto http-8081
+ene 18, 2014 11:38:50 AM org.apache.jk.common.ChannelSocket init
+Información: JK: ajp13 listening on /0.0.0.0:8009
+ene 18, 2014 11:38:50 AM org.apache.jk.server.JkMain start
+Información: Jk running ID=0 time=0/100  config=null
+ene 18, 2014 11:38:50 AM org.apache.catalina.startup.Catalina start
+Información: Server startup in 30436 ms
+ene 18, 2014 4:44:15 PM org.apache.catalina.core.AprLifecycleListener init
+Información: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento óptimo en entornos de desarrollo no ha sido hallada en java.library.path: C:\Program Files\Java\jdk1.7.0_45\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\MySQL\MySQL Utilities 1.3.4\;.
+ene 18, 2014 4:44:15 PM org.apache.coyote.http11.Http11Protocol init
+Información: Inicializando Coyote HTTP/1.1 en puerto http-8081
+ene 18, 2014 4:44:15 PM org.apache.catalina.startup.Catalina load
+Información: Initialization processed in 1232 ms
+ene 18, 2014 4:44:15 PM org.apache.catalina.core.StandardService start
+Información: Arrancando servicio Catalina
+ene 18, 2014 4:44:15 PM org.apache.catalina.core.StandardEngine start
+Información: Starting Servlet Engine: Apache Tomcat/6.0.26
+ene 18, 2014 4:44:15 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración host-manager.xml
+ene 18, 2014 4:44:16 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración juddiv3.xml
+ene 18, 2014 4:44:18 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+Información: Root WebApplicationContext: initialization started
+ene 18, 2014 4:44:18 PM org.springframework.context.support.AbstractApplicationContext prepareRefresh
+Información: Refreshing Root WebApplicationContext: startup date [Sat Jan 18 16:44:18 CET 2014]; root of context hierarchy
+ene 18, 2014 4:44:18 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+ene 18, 2014 4:44:19 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+ene 18, 2014 4:44:19 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+ene 18, 2014 4:44:19 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+ene 18, 2014 4:44:19 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+ene 18, 2014 4:44:19 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 4:44:19 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 4:44:19 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 4:44:19 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 4:44:19 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 18, 2014 4:44:19 PM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+Información: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@63c7b5d1: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+ene 18, 2014 4:44:20 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+ene 18, 2014 4:44:22 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /inquiry
+ene 18, 2014 4:44:22 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+ene 18, 2014 4:44:23 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /publish
+ene 18, 2014 4:44:23 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+ene 18, 2014 4:44:23 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /security
+ene 18, 2014 4:44:23 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+ene 18, 2014 4:44:24 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /subscription
+ene 18, 2014 4:44:24 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+ene 18, 2014 4:44:24 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /subscription-listener
+ene 18, 2014 4:44:24 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+ene 18, 2014 4:44:24 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /custody-transfer
+ene 18, 2014 4:44:24 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+ene 18, 2014 4:44:25 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /juddi-api
+ene 18, 2014 4:44:25 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+Información: Root WebApplicationContext: initialization completed in 6753 ms
+ene 18, 2014 4:44:25 PM org.apache.juddi.Registry start
+Información: Starting jUDDI registry...
+ene 18, 2014 4:44:25 PM org.apache.juddi.config.AppConfig loadConfiguration
+Información: Reading from properties file:  file:/C:/Users/fawques/Documents/SOR/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+ene 18, 2014 4:44:35 PM org.apache.juddi.Registry start
+Información: jUDDI registry started succesfully.
+ene 18, 2014 4:44:35 PM org.apache.cxf.transport.servlet.CXFServlet updateContext
+Información: Load the bus with application context
+ene 18, 2014 4:44:35 PM org.springframework.context.support.AbstractApplicationContext prepareRefresh
+Información: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@39535b8a: startup date [Sat Jan 18 16:44:35 CET 2014]; parent: Root WebApplicationContext
+ene 18, 2014 4:44:35 PM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+Información: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@17414937: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@63c7b5d1
+ene 18, 2014 4:44:35 PM org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+Información: Servlet transport factory already registered 
+ene 18, 2014 4:44:35 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración manager.xml
+ene 18, 2014 4:44:35 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio docs de la aplicación web
+ene 18, 2014 4:44:35 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio examples de la aplicación web
+ene 18, 2014 4:44:36 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio ROOT de la aplicación web
+ene 18, 2014 4:44:36 PM org.apache.coyote.http11.Http11Protocol start
+Información: Arrancando Coyote HTTP/1.1 en puerto http-8081
+ene 18, 2014 4:44:36 PM org.apache.jk.common.ChannelSocket init
+Información: JK: ajp13 listening on /0.0.0.0:8009
+ene 18, 2014 4:44:36 PM org.apache.jk.server.JkMain start
+Información: Jk running ID=0 time=0/136  config=null
+ene 18, 2014 4:44:36 PM org.apache.catalina.startup.Catalina start
+Información: Server startup in 20838 ms
+ene 18, 2014 4:45:24 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.interceptor.Fault: No such operation:  (HTTP GET PATH_INFO: /juddiv3/security)
+	at org.apache.cxf.interceptor.URIMappingInterceptor.handleMessage(URIMappingInterceptor.java:88)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doGet(AbstractHTTPServlet.java:108)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:617)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 18, 2014 4:45:24 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.interceptor.Fault: No such operation:  (HTTP GET PATH_INFO: /juddiv3/security)
+	at org.apache.cxf.interceptor.URIMappingInterceptor.handleMessage(URIMappingInterceptor.java:88)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doGet(AbstractHTTPServlet.java:108)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:617)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 18, 2014 4:45:25 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.binding.soap.SoapFault: Error reading XMLStreamReader.
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:222)
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:60)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doOptions(AbstractHTTPServlet.java:132)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:646)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: com.ctc.wstx.exc.WstxEOFException: Unexpected EOF in prolog
+ at [row,col {unknown-source}]: [1,0]
+	at com.ctc.wstx.sr.StreamScanner.throwUnexpectedEOF(StreamScanner.java:682)
+	at com.ctc.wstx.sr.BasicStreamReader.handleEOF(BasicStreamReader.java:2090)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:1996)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1100)
+	at com.ctc.wstx.sr.BasicStreamReader.nextTag(BasicStreamReader.java:1123)
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:122)
+	... 24 more
+
+ene 18, 2014 4:45:33 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.binding.soap.SoapFault: A SOAP 1.2 message is not valid when sent to a SOAP 1.1 only endpoint.
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:136)
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:60)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doPost(AbstractHTTPServlet.java:103)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:637)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 18, 2014 4:45:33 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.binding.soap.SoapFault: A SOAP 1.2 message is not valid when sent to a SOAP 1.1 only endpoint.
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:136)
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:60)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doPost(AbstractHTTPServlet.java:103)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:637)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 18, 2014 4:59:02 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.interceptor.Fault: No such operation:  (HTTP GET PATH_INFO: /juddiv3/security)
+	at org.apache.cxf.interceptor.URIMappingInterceptor.handleMessage(URIMappingInterceptor.java:88)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doGet(AbstractHTTPServlet.java:108)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:617)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 18, 2014 4:59:02 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.interceptor.Fault: No such operation:  (HTTP GET PATH_INFO: /juddiv3/security)
+	at org.apache.cxf.interceptor.URIMappingInterceptor.handleMessage(URIMappingInterceptor.java:88)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doGet(AbstractHTTPServlet.java:108)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:617)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 18, 2014 4:59:02 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.binding.soap.SoapFault: Error reading XMLStreamReader.
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:222)
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:60)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doOptions(AbstractHTTPServlet.java:132)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:646)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: com.ctc.wstx.exc.WstxEOFException: Unexpected EOF in prolog
+ at [row,col {unknown-source}]: [1,0]
+	at com.ctc.wstx.sr.StreamScanner.throwUnexpectedEOF(StreamScanner.java:682)
+	at com.ctc.wstx.sr.BasicStreamReader.handleEOF(BasicStreamReader.java:2090)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:1996)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1100)
+	at com.ctc.wstx.sr.BasicStreamReader.nextTag(BasicStreamReader.java:1123)
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:122)
+	... 24 more
+
+ene 18, 2014 4:59:02 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.binding.soap.SoapFault: A SOAP 1.2 message is not valid when sent to a SOAP 1.1 only endpoint.
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:136)
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:60)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doPost(AbstractHTTPServlet.java:103)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:637)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 18, 2014 4:59:02 PM org.apache.cxf.phase.PhaseInterceptorChain doDefaultLogging
+Advertencia: Interceptor for {urn:uddi-org:v3_service}UDDISecurityService has thrown exception, unwinding now
+org.apache.cxf.binding.soap.SoapFault: A SOAP 1.2 message is not valid when sent to a SOAP 1.1 only endpoint.
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:136)
+	at org.apache.cxf.binding.soap.interceptor.ReadHeadersInterceptor.handleMessage(ReadHeadersInterceptor.java:60)
+	at org.apache.cxf.phase.PhaseInterceptorChain.doIntercept(PhaseInterceptorChain.java:255)
+	at org.apache.cxf.transport.ChainInitiationObserver.onMessage(ChainInitiationObserver.java:113)
+	at org.apache.cxf.transport.servlet.ServletDestination.invoke(ServletDestination.java:97)
+	at org.apache.cxf.transport.servlet.ServletController.invokeDestination(ServletController.java:461)
+	at org.apache.cxf.transport.servlet.ServletController.invoke(ServletController.java:188)
+	at org.apache.cxf.transport.servlet.AbstractCXFServlet.invoke(AbstractCXFServlet.java:148)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.handleRequest(AbstractHTTPServlet.java:179)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.doPost(AbstractHTTPServlet.java:103)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:637)
+	at org.apache.cxf.transport.servlet.AbstractHTTPServlet.service(AbstractHTTPServlet.java:159)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:233)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:191)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.authenticator.SingleSignOn.invoke(SingleSignOn.java:394)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:298)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:852)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:588)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	at java.lang.Thread.run(Thread.java:744)
+

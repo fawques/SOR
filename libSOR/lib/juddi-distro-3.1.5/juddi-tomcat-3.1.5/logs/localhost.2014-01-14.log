@@ -1,0 +1,41 @@
+ene 14, 2014 4:56:14 PM org.apache.catalina.core.ApplicationContext log
+Información: Initializing Spring root WebApplicationContext
+ene 14, 2014 4:57:13 PM org.apache.catalina.core.ApplicationContext log
+Información: ContextListener: contextInitialized()
+ene 14, 2014 4:57:13 PM org.apache.catalina.core.ApplicationContext log
+Información: SessionListener: contextInitialized()
+ene 14, 2014 6:02:39 PM org.apache.catalina.core.ApplicationContext log
+Información: SessionListener: contextDestroyed()
+ene 14, 2014 6:02:39 PM org.apache.catalina.core.ApplicationContext log
+Información: ContextListener: contextDestroyed()
+ene 14, 2014 6:02:40 PM org.apache.catalina.core.ApplicationContext log
+Información: Closing Spring root WebApplicationContext
+ene 14, 2014 6:02:40 PM org.apache.catalina.core.StandardContext listenerStop
+Grave: Excepción enviando evento de contexto destruído a instancia de escuchador de clase org.springframework.web.context.ContextLoaderListener
+java.lang.NoClassDefFoundError: org/springframework/web/context/ContextCleanupListener
+	at org.springframework.web.context.ContextLoaderListener.contextDestroyed(ContextLoaderListener.java:80)
+	at org.apache.catalina.core.StandardContext.listenerStop(StandardContext.java:4011)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4615)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.checkResources(HostConfig.java:1174)
+	at org.apache.catalina.startup.HostConfig.check(HostConfig.java:1342)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:303)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1337)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1601)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1610)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1590)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.lang.ClassNotFoundException: org.springframework.web.context.ContextCleanupListener
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1516)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1361)
+	... 13 more
+
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.ApplicationContext log
+Información: ContextListener: contextInitialized()
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.ApplicationContext log
+Información: SessionListener: contextInitialized()
+ene 14, 2014 6:06:04 PM org.apache.catalina.core.ApplicationContext log
+Información: SessionListener: contextDestroyed()
+ene 14, 2014 6:06:04 PM org.apache.catalina.core.ApplicationContext log
+Información: ContextListener: contextDestroyed()

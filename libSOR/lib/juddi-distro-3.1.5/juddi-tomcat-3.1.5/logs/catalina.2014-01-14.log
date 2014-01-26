@@ -1,0 +1,342 @@
+ene 14, 2014 4:56:02 PM org.apache.catalina.core.AprLifecycleListener init
+Información: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento óptimo en entornos de desarrollo no ha sido hallada en java.library.path: C:\Program Files\Java\jdk1.7.0_45\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\MySQL\MySQL Utilities 1.3.4\;.
+ene 14, 2014 4:56:03 PM org.apache.coyote.http11.Http11Protocol init
+Información: Inicializando Coyote HTTP/1.1 en puerto http-8081
+ene 14, 2014 4:56:03 PM org.apache.catalina.startup.Catalina load
+Información: Initialization processed in 2189 ms
+ene 14, 2014 4:56:03 PM org.apache.catalina.core.StandardService start
+Información: Arrancando servicio Catalina
+ene 14, 2014 4:56:03 PM org.apache.catalina.core.StandardEngine start
+Información: Starting Servlet Engine: Apache Tomcat/6.0.26
+ene 14, 2014 4:56:03 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración host-manager.xml
+ene 14, 2014 4:56:04 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración juddiv3.xml
+ene 14, 2014 4:56:14 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+Información: Root WebApplicationContext: initialization started
+ene 14, 2014 4:56:15 PM org.springframework.context.support.AbstractApplicationContext prepareRefresh
+Información: Refreshing Root WebApplicationContext: startup date [Tue Jan 14 16:56:15 CET 2014]; root of context hierarchy
+ene 14, 2014 4:56:16 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+ene 14, 2014 4:56:20 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+ene 14, 2014 4:56:20 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+ene 14, 2014 4:56:20 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+ene 14, 2014 4:56:20 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+ene 14, 2014 4:56:22 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 14, 2014 4:56:23 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 14, 2014 4:56:23 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 14, 2014 4:56:23 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 14, 2014 4:56:23 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 14, 2014 4:56:26 PM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+Información: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@18fd5fc0: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+ene 14, 2014 4:56:30 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+ene 14, 2014 4:56:43 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /inquiry
+ene 14, 2014 4:56:43 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+ene 14, 2014 4:56:44 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /publish
+ene 14, 2014 4:56:44 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+ene 14, 2014 4:56:45 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /security
+ene 14, 2014 4:56:45 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+ene 14, 2014 4:56:45 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /subscription
+ene 14, 2014 4:56:45 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+ene 14, 2014 4:56:46 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /subscription-listener
+ene 14, 2014 4:56:46 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+ene 14, 2014 4:56:46 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /custody-transfer
+ene 14, 2014 4:56:46 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+ene 14, 2014 4:56:46 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /juddi-api
+ene 14, 2014 4:56:46 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+Información: Root WebApplicationContext: initialization completed in 32427 ms
+ene 14, 2014 4:56:46 PM org.apache.juddi.Registry start
+Información: Starting jUDDI registry...
+ene 14, 2014 4:56:48 PM org.apache.juddi.config.AppConfig loadConfiguration
+Información: Reading from properties file:  file:/C:/Users/fawques/Documents/SOR/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+ene 14, 2014 4:57:12 PM org.apache.juddi.Registry start
+Información: jUDDI registry started succesfully.
+ene 14, 2014 4:57:12 PM org.apache.cxf.transport.servlet.CXFServlet updateContext
+Información: Load the bus with application context
+ene 14, 2014 4:57:12 PM org.springframework.context.support.AbstractApplicationContext prepareRefresh
+Información: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@63ee09a8: startup date [Tue Jan 14 16:57:12 CET 2014]; parent: Root WebApplicationContext
+ene 14, 2014 4:57:12 PM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+Información: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35414822: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@18fd5fc0
+ene 14, 2014 4:57:12 PM org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+Información: Servlet transport factory already registered 
+ene 14, 2014 4:57:12 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración manager.xml
+ene 14, 2014 4:57:12 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio docs de la aplicación web
+ene 14, 2014 4:57:12 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio examples de la aplicación web
+ene 14, 2014 4:57:13 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio ROOT de la aplicación web
+ene 14, 2014 4:57:13 PM org.apache.coyote.http11.Http11Protocol start
+Información: Arrancando Coyote HTTP/1.1 en puerto http-8081
+ene 14, 2014 4:57:14 PM org.apache.jk.common.ChannelSocket init
+Información: JK: ajp13 listening on /0.0.0.0:8009
+ene 14, 2014 4:57:14 PM org.apache.jk.server.JkMain start
+Información: Jk running ID=0 time=0/47  config=null
+ene 14, 2014 4:57:14 PM org.apache.catalina.startup.Catalina start
+Información: Server startup in 70873 ms
+ene 14, 2014 6:02:37 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto 
+ene 14, 2014 6:02:38 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /manager
+ene 14, 2014 6:02:39 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /docs
+ene 14, 2014 6:02:39 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /examples
+ene 14, 2014 6:02:40 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /host-manager
+ene 14, 2014 6:02:40 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /juddiv3
+ene 14, 2014 6:02:40 PM org.apache.juddi.Registry stop
+Información: Stopping jUDDI registry...
+ene 14, 2014 6:02:40 PM org.apache.juddi.Registry stop
+Información: Shutting down SubscriptionNotifier
+ene 14, 2014 6:02:40 PM org.apache.juddi.Registry stop
+Información: jUDDI shutdown completed.
+ene 14, 2014 6:02:40 PM org.springframework.context.support.AbstractApplicationContext doClose
+Información: Closing org.apache.cxf.bus.spring.BusApplicationContext@63ee09a8: startup date [Tue Jan 14 16:57:12 CET 2014]; parent: Root WebApplicationContext
+ene 14, 2014 6:02:40 PM org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+Información: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35414822: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@18fd5fc0
+ene 14, 2014 6:02:40 PM org.springframework.context.support.AbstractApplicationContext doClose
+Información: Closing Root WebApplicationContext: startup date [Tue Jan 14 16:56:15 CET 2014]; root of context hierarchy
+ene 14, 2014 6:02:40 PM org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+Información: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@18fd5fc0: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+ene 14, 2014 6:02:40 PM org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+Grave: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@1c82db5b]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@19e5223d}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+ene 14, 2014 6:02:40 PM org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+Grave: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@1c82db5b]) and a value of type [java.util.WeakHashMap] (value [{class org.apache.juddi.api_v3.SavePublisher=java.lang.ref.WeakReference@122ae013, class java.util.ArrayList=java.lang.ref.WeakReference@3cdd08b6, class org.uddi.api_v3.BindingTemplate=java.lang.ref.WeakReference@536703f1, class org.uddi.api_v3.FindBusiness=java.lang.ref.WeakReference@1033edfe, class org.uddi.api_v3.BusinessService=java.lang.ref.WeakReference@414dc701, class org.uddi.api_v3.SaveService=java.lang.ref.WeakReference@59443425, class org.uddi.api_v3.FindQualifiers=java.lang.ref.WeakReference@cbb96ec, class org.uddi.api_v3.AccessPoint=java.lang.ref.WeakReference@6fb1667b, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@67bf4e86, class org.apache.juddi.api_v3.Publisher=java.lang.ref.WeakReference@40bc74a0, class org.uddi.api_v3.SaveBusiness=java.lang.ref.WeakReference@148cd594, class org.uddi.api_v3.BusinessEntity=java.lang.ref.WeakReference@2a19f216, class org.uddi.api_v3.BindingTemplates=java.lang.ref.WeakReference@d6497f2, class org.uddi.api_v3.GetAuthToken=java.lang.ref.WeakReference@473397bc}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+ene 14, 2014 6:02:40 PM org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+Grave: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@c2edc29]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@58780dfe]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+ene 14, 2014 6:02:41 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio juddiv3 de la aplicación web
+ene 14, 2014 6:02:41 PM org.apache.catalina.startup.ContextConfig defaultWebConfig
+Información: No default web.xml
+ene 14, 2014 6:03:11 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración host-manager.xml
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext resourcesStart
+Grave: Error arrancando Recursos estáticos
+java.lang.IllegalArgumentException: El Documento base C:\Users\fawques\Documents\SOR\libSOR\lib\juddi-distro-3.1.5\juddi-tomcat-3.1.5\webapps\host-manager no existe o no es un directorio legible
+	at org.apache.naming.resources.FileDirContext.setDocBase(FileDirContext.java:142)
+	at org.apache.catalina.core.StandardContext.resourcesStart(StandardContext.java:4086)
+	at org.apache.catalina.core.StandardContext.start(StandardContext.java:4255)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:791)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:771)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:546)
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:637)
+	at org.apache.catalina.startup.HostConfig.deployDescriptors(HostConfig.java:563)
+	at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:498)
+	at org.apache.catalina.startup.HostConfig.check(HostConfig.java:1345)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:303)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1337)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1601)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1610)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1590)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext start
+Grave: Error in resourceStart()
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext start
+Grave: Error getConfigured
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext start
+Grave: Falló en arranque del Contexto [/host-manager] debido a errores previos
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext stop
+Información: No se ha arrancado el Contenedor org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager]
+ene 14, 2014 6:03:11 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración manager.xml
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext resourcesStart
+Grave: Error arrancando Recursos estáticos
+java.lang.IllegalArgumentException: El Documento base C:\Users\fawques\Documents\SOR\libSOR\lib\juddi-distro-3.1.5\juddi-tomcat-3.1.5\webapps\manager no existe o no es un directorio legible
+	at org.apache.naming.resources.FileDirContext.setDocBase(FileDirContext.java:142)
+	at org.apache.catalina.core.StandardContext.resourcesStart(StandardContext.java:4086)
+	at org.apache.catalina.core.StandardContext.start(StandardContext.java:4255)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:791)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:771)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:546)
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:637)
+	at org.apache.catalina.startup.HostConfig.deployDescriptors(HostConfig.java:563)
+	at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:498)
+	at org.apache.catalina.startup.HostConfig.check(HostConfig.java:1345)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:303)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1337)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1601)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1610)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1590)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext start
+Grave: Error in resourceStart()
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext start
+Grave: Error getConfigured
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext start
+Grave: Falló en arranque del Contexto [/manager] debido a errores previos
+ene 14, 2014 6:03:11 PM org.apache.catalina.core.StandardContext stop
+Información: No se ha arrancado el Contenedor org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager]
+ene 14, 2014 6:03:11 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio docs de la aplicación web
+ene 14, 2014 6:03:11 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio examples de la aplicación web
+ene 14, 2014 6:03:11 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio ROOT de la aplicación web
+ene 14, 2014 6:06:02 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto 
+ene 14, 2014 6:06:03 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /manager
+ene 14, 2014 6:06:03 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /docs
+ene 14, 2014 6:06:04 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /examples
+ene 14, 2014 6:06:04 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /host-manager
+ene 14, 2014 6:11:14 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración host-manager.xml
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext resourcesStart
+Grave: Error arrancando Recursos estáticos
+java.lang.IllegalArgumentException: El Documento base C:\Users\fawques\Documents\SOR\libSOR\lib\juddi-distro-3.1.5\juddi-tomcat-3.1.5\webapps\host-manager no existe o no es un directorio legible
+	at org.apache.naming.resources.FileDirContext.setDocBase(FileDirContext.java:142)
+	at org.apache.catalina.core.StandardContext.resourcesStart(StandardContext.java:4086)
+	at org.apache.catalina.core.StandardContext.start(StandardContext.java:4255)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:791)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:771)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:546)
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:637)
+	at org.apache.catalina.startup.HostConfig.deployDescriptors(HostConfig.java:563)
+	at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:498)
+	at org.apache.catalina.startup.HostConfig.check(HostConfig.java:1345)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:303)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1337)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1601)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1610)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1590)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext start
+Grave: Error in resourceStart()
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext start
+Grave: Error getConfigured
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext start
+Grave: Falló en arranque del Contexto [/host-manager] debido a errores previos
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext stop
+Información: No se ha arrancado el Contenedor org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager]
+ene 14, 2014 6:11:14 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración manager.xml
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext resourcesStart
+Grave: Error arrancando Recursos estáticos
+java.lang.IllegalArgumentException: El Documento base C:\Users\fawques\Documents\SOR\libSOR\lib\juddi-distro-3.1.5\juddi-tomcat-3.1.5\webapps\manager no existe o no es un directorio legible
+	at org.apache.naming.resources.FileDirContext.setDocBase(FileDirContext.java:142)
+	at org.apache.catalina.core.StandardContext.resourcesStart(StandardContext.java:4086)
+	at org.apache.catalina.core.StandardContext.start(StandardContext.java:4255)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:791)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:771)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:546)
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:637)
+	at org.apache.catalina.startup.HostConfig.deployDescriptors(HostConfig.java:563)
+	at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:498)
+	at org.apache.catalina.startup.HostConfig.check(HostConfig.java:1345)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:303)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1337)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1601)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1610)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1590)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext start
+Grave: Error in resourceStart()
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext start
+Grave: Error getConfigured
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext start
+Grave: Falló en arranque del Contexto [/manager] debido a errores previos
+ene 14, 2014 6:11:14 PM org.apache.catalina.core.StandardContext stop
+Información: No se ha arrancado el Contenedor org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager]
+ene 14, 2014 6:17:05 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /manager
+ene 14, 2014 6:17:05 PM org.apache.catalina.startup.HostConfig checkResources
+Información: Repliegue (undeploy) de la aplicación web que tiene como trayectoria de contexto /host-manager
+ene 14, 2014 6:34:35 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración host-manager.xml
+ene 14, 2014 6:34:35 PM org.apache.catalina.core.StandardContext resourcesStart
+Grave: Error arrancando Recursos estáticos
+java.lang.IllegalArgumentException: El Documento base C:\Users\fawques\Documents\SOR\libSOR\lib\juddi-distro-3.1.5\juddi-tomcat-3.1.5\webapps\host-manager no existe o no es un directorio legible
+	at org.apache.naming.resources.FileDirContext.setDocBase(FileDirContext.java:142)
+	at org.apache.catalina.core.StandardContext.resourcesStart(StandardContext.java:4086)
+	at org.apache.catalina.core.StandardContext.start(StandardContext.java:4255)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:791)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:771)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:546)
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:637)
+	at org.apache.catalina.startup.HostConfig.deployDescriptors(HostConfig.java:563)
+	at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:498)
+	at org.apache.catalina.startup.HostConfig.check(HostConfig.java:1345)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:303)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1337)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1601)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1610)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1590)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 14, 2014 6:34:35 PM org.apache.catalina.core.StandardContext start
+Grave: Error in resourceStart()
+ene 14, 2014 6:34:36 PM org.apache.catalina.core.StandardContext start
+Grave: Error getConfigured
+ene 14, 2014 6:34:36 PM org.apache.catalina.core.StandardContext start
+Grave: Falló en arranque del Contexto [/host-manager] debido a errores previos
+ene 14, 2014 6:34:36 PM org.apache.catalina.core.StandardContext stop
+Información: No se ha arrancado el Contenedor org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager]
+ene 14, 2014 6:34:36 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración manager.xml
+ene 14, 2014 6:34:36 PM org.apache.catalina.core.StandardContext resourcesStart
+Grave: Error arrancando Recursos estáticos
+java.lang.IllegalArgumentException: El Documento base C:\Users\fawques\Documents\SOR\libSOR\lib\juddi-distro-3.1.5\juddi-tomcat-3.1.5\webapps\manager no existe o no es un directorio legible
+	at org.apache.naming.resources.FileDirContext.setDocBase(FileDirContext.java:142)
+	at org.apache.catalina.core.StandardContext.resourcesStart(StandardContext.java:4086)
+	at org.apache.catalina.core.StandardContext.start(StandardContext.java:4255)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:791)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:771)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:546)
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:637)
+	at org.apache.catalina.startup.HostConfig.deployDescriptors(HostConfig.java:563)
+	at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:498)
+	at org.apache.catalina.startup.HostConfig.check(HostConfig.java:1345)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:303)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1337)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1601)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1610)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1590)
+	at java.lang.Thread.run(Thread.java:744)
+
+ene 14, 2014 6:34:36 PM org.apache.catalina.core.StandardContext start
+Grave: Error in resourceStart()
+ene 14, 2014 6:34:36 PM org.apache.catalina.core.StandardContext start
+Grave: Error getConfigured
+ene 14, 2014 6:34:36 PM org.apache.catalina.core.StandardContext start
+Grave: Falló en arranque del Contexto [/manager] debido a errores previos
+ene 14, 2014 6:34:36 PM org.apache.catalina.core.StandardContext stop
+Información: No se ha arrancado el Contenedor org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager]
