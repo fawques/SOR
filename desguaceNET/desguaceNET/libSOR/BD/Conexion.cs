@@ -42,7 +42,7 @@ namespace desguaceNET.libSOR.BD
             {
                 conexion.Open();
                 sql.Connection = conexion;
-                sql.ExecuteNonQuery();
+                return sql.ExecuteNonQuery() > 0;
             }catch(MySqlException ex){
                 Console.WriteLine(ex.StackTrace);
                 return false;

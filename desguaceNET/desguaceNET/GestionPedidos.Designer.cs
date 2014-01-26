@@ -55,6 +55,8 @@
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.Pedidos.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -66,6 +68,7 @@
             this.tpHistorico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -259,6 +262,7 @@
             this.btAnularOfertaAceptada.TabIndex = 9;
             this.btAnularOfertaAceptada.Text = "Anular oferta aceptada";
             this.btAnularOfertaAceptada.UseVisualStyleBackColor = true;
+            this.btAnularOfertaAceptada.Click += new System.EventHandler(this.btAnularOfertaAceptada_Click);
             // 
             // btAceptarOferta
             // 
@@ -307,6 +311,8 @@
             // 
             // tpHistorico
             // 
+            this.tpHistorico.Controls.Add(this.label7);
+            this.tpHistorico.Controls.Add(this.dataGridView5);
             this.tpHistorico.Controls.Add(this.label6);
             this.tpHistorico.Controls.Add(this.dataGridView4);
             this.tpHistorico.Location = new System.Drawing.Point(4, 22);
@@ -323,9 +329,9 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(268, 27);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(193, 24);
+            this.label6.Size = new System.Drawing.Size(156, 24);
             this.label6.TabIndex = 12;
-            this.label6.Text = "Histórico operaciones";
+            this.label6.Text = "Histórico pedidos";
             // 
             // dataGridView4
             // 
@@ -335,7 +341,7 @@
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.ReadOnly = true;
             this.dataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView4.Size = new System.Drawing.Size(669, 428);
+            this.dataGridView4.Size = new System.Drawing.Size(669, 184);
             this.dataGridView4.TabIndex = 11;
             // 
             // tabPage2
@@ -358,6 +364,27 @@
             this.button1.Text = "Dar de baja";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Location = new System.Drawing.Point(28, 317);
+            this.dataGridView5.MultiSelect = false;
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.ReadOnly = true;
+            this.dataGridView5.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView5.Size = new System.Drawing.Size(669, 185);
+            this.dataGridView5.TabIndex = 13;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(268, 290);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(143, 24);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Histórico ofertas";
             // 
             // GestionPedidos
             // 
@@ -385,6 +412,7 @@
             this.tpHistorico.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,6 +447,8 @@
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridView dataGridView5;
 
     }
 }

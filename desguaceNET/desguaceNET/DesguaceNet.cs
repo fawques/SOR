@@ -1,4 +1,4 @@
-﻿using desguaceNET.desguaceWS_Silvia;
+﻿using desguaceNET.desguaceWS;
 using desguaceNET.libSOR.activemq;
 using desguaceNET.libSOR.BD;
 using desguaceNET.libSOR.general;
@@ -142,10 +142,14 @@ namespace desguaceNET
             return id;
         }
 
-        public bool cancelarOfertaDesguace(string id)
+        public bool cancelarOfertaDesguace(string id,string idPedido = "")
         {
             if (cancelarOferta(id))
             {
+                if (idPedido != "")
+                {
+                    bd.cambiarEstadoPedido(EstadoPedido.ACTIVE, idPedido);
+                }
                 return cambiarEstadoOferta(id, EstadoOferta.CANCELLED);
             }
             return false;
@@ -223,7 +227,7 @@ namespace desguaceNET
             return false;
         }
 
-        public void actualizarPedidos()
+        public List<Pedido> actualizarPedidos()
         {
             // coger los pedidos de activeMQ
             Gestor_activemq activemq = new Gestor_activemq();
@@ -263,6 +267,7 @@ namespace desguaceNET
 
                 }
             }
+            return listaPedidos;
         }
 
     public bool cambiarEstadoPedidoDesguace(String id,EstadoPedido estado){

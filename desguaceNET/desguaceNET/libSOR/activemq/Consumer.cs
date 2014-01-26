@@ -50,8 +50,8 @@ namespace desguaceNET.libSOR.activemq
         List<string> listamensaje= new List<string>();
         
         while(message!=null){
-            listamensaje.Add(textMessage.Text.Replace("\"",""));
-            message =  consumer.ReceiveNoWait();
+            listamensaje.Add(textMessage.Text/*.Replace("\"","")*/);
+            message = consumer.Receive(new TimeSpan(10000));
             textMessage = message as ITextMessage;
         }
         string listaJSON = JsonConvert.SerializeObject(listamensaje);

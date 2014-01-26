@@ -27,21 +27,14 @@ namespace desguaceNET
             InitializeComponent();
             main = new DesguaceNet();
             listaPedidos = new List<Pedido>();
+            main.actualizarPedidos();
             listaOfertasActivas = main.actualizarOfertas();
             listaOfertasAceptadas = main.actualizarOfertasAceptadas();
 
             
-            //Pedido pedido1 = new Pedido("pedido1", 1, "taller1", DateTime.Today, new DateTime(),new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
             Pedido pedido2 = new Pedido("pedido2", 2, "taller1", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
-            Pedido pedido3 = new Pedido("pedido3", 3, "taller2", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
-            Pedido pedido4 = new Pedido("pedido4", 4, "taller3", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
-            Pedido pedido5 = new Pedido("pedido5", 5, "taller2", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
             
-            //listaPedidos.Add(pedido1);
             listaPedidos.Add(pedido2);
-            listaPedidos.Add(pedido3);
-            listaPedidos.Add(pedido4);
-            listaPedidos.Add(pedido5);
             listaPedidos.AddRange(main.getPedidos());
             dataGridView1.DataSource = listaPedidos;
 
@@ -130,9 +123,9 @@ namespace desguaceNET
         {
             DialogResult res = MessageBox.Show("¿Estás seguro de que quieres cancelar esta oferta?","¿Cancelar?",MessageBoxButtons.YesNo);
             if(res == DialogResult.Yes){
-                if (main.cancelarOfertaDesguace(idOfertaActiva))
+                if (!main.cancelarOfertaDesguace(idOfertaActiva))
                 {
-
+                    MessageBox.Show("Error al cancelar la oferta", "ERROR", MessageBoxButtons.OK);
                 }
             }
         }
@@ -224,6 +217,14 @@ namespace desguaceNET
                 MessageBox.Show("Error al aceptar oferta", "ERROR", MessageBoxButtons.OK);
             }
         }
+
+        private void btAnularOfertaAceptada_Click(object sender, EventArgs e)
+        {
+            if (!main.cancelarOfertaDesguace(idOfertaAceptada, idPedidoAceptado))
+            {
+                MessageBox.Show("Error al aceptar oferta", "ERROR", MessageBoxButtons.OK);
+            }
+        }   
 
         
     }
