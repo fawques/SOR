@@ -88,8 +88,9 @@ public class registro extends HttpServlet {
                 bd = new InterfazBD("sor_gestor");
                 Taller t = bd.getTaller(request.getParameter("email"));
                 Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-
                 Cookie c = new Cookie("usuario", gson.toJson(t));
+                response.addCookie(c);
+                c = new Cookie("contrasenya", request.getParameter("contrasenya"));
                 response.addCookie(c);
                 System.out.println("Registro ok");
                 bd.close();
