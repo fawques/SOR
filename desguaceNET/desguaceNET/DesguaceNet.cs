@@ -44,7 +44,7 @@ namespace desguaceNET
             try
             {
                 string desguaceID = desguace.getID();
-                int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID, fechaLimite);
+                int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID,new DateTime(1970-01-01), fechaLimite);
                 if (id != -1)
                 {
                     Oferta nuevo = new Oferta(id, precio, desguaceID, idPedido, fechaLimite);

@@ -12,12 +12,14 @@ namespace desguaceNET.libSOR.general
     {
         public string ID { get; set; }
         public int ID_aux { get; set; }
+        public EstadoPedido estado { get; set; }
         public string tallerID { get; set; }
         public DateTime fecha_alta { get; set; }
-        public DateTime fecha_baja { get; set; }
+        
         public DateTime fecha_limite { get; set; }
-        public EstadoPedido estado { get; set; }
+        
         public bool modoAutomatico { get; set; }
+        public DateTime fecha_baja { get; set; }
 
         public List<Pieza> listaPiezas { get; set; }
         public List<int> listaCantidadesPiezas { get; set; }

@@ -23,11 +23,6 @@ namespace desguaceNET.libSOR.BD
         {
             return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe.ToString("G", new CultureInfo("en-US")) + "','" + estado + "','" + pedido + "','" + desguace + "'," + (fechaBaja != null ? "'" + fechaBaja.ToString("yyyy/MM/dd") + "'" : null) + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
         }
-        
-        public int anadirOferta(DateTime fechaAlta, int estado, double importe, string pedido, string desguace, DateTime fechaLimite)
-        {
-            return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe.ToString("G", new CultureInfo("en-US")) + "','" + estado + "','" + pedido + "','" + desguace + "'," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
-        }
 
         public void anadirPedido(string id, DateTime fechaAlta, int estado, string taller, DateTime fechaBaja, DateTime fechaLimite, bool modoAutomatico)
         {
@@ -41,7 +36,7 @@ namespace desguaceNET.libSOR.BD
 
         public int anadirPedido(Pedido p)
         {
-            return conexion.ejecutarInsert(new MySqlCommand("insert INTO pedido (id,fecha_alta, estado, taller, fecha_limite, fecha_baja, modo_automatico) values ('" + p.ID + "', '" + p.fecha_alta.ToString("yyyy/MM/dd") + "','" + (int)p.estado + "','" + p.tallerID + "', '" + p.fecha_limite.ToString("yyyy/MM/dd") + "', '" + p.fecha_baja.ToString("yyyy/MM/dd") + "', '" + (p.modoAutomatico ? 1 : 0) + "');"));
+            return conexion.ejecutarInsert(new MySqlCommand("insert INTO pedido (id,fecha_alta, estado, taller, fecha_limite, fecha_baja, modo_automatico) values ('" + p.ID + "', '" + p.fecha_alta.ToString("yyyy/MM/dd") + "','" + (int)p.estado + "','" + p.tallerID + "', '" + p.fecha_limite.ToString("yyyy/MM/dd") + "', '" + p.getFecha_baja().ToString("yyyy/MM/dd") + "', '" + (p.modoAutomatico ? 1 : 0) + "');"));
         }
 
         public int anadirDesguace(int id, string nombre, string email, string direccion, string ciudad, int codPostal, int telefono, int estado)

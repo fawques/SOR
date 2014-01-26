@@ -13,13 +13,14 @@ namespace desguaceNET.libSOR.general
     {
         public string ID { get; set; }
         public int ID_aux { get; set; }
+        public EstadoOferta estado { get; set; }
         public DateTime fecha_alta { get; set; }
-        public DateTime fecha_baja { get; set; }
+        
         public DateTime fecha_limite { get; set; }
         public double precio { get; set; }
         public string desguaceID { get; set; }
         public string pedidoID { get; set; }
-        public EstadoOferta estado { get; set; }
+        public DateTime fecha_baja { get; set; }
 
         /** Constructor para la base de datos.
          *
