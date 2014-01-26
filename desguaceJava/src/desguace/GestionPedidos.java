@@ -566,7 +566,7 @@ public class GestionPedidos implements Initializable {
              ArrayList<String>  listaids = new ArrayList<String>();
         try {
             activemq = new Gestor_activemq();
-            activemq.create_Consumer("pedidos");
+            activemq.create_Consumer(DesguaceJava.desguace.getID());
             
             listaIdsString= activemq.consumer.consumeMessage();
             

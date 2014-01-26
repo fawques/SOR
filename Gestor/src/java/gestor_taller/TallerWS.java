@@ -11,6 +11,7 @@ import activemq.Gestor_activemq;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import general.Desguace;
 import general.EstadoGeneral;
 import general.EstadoOferta;
 import general.EstadoPedido;
@@ -79,7 +80,14 @@ public class TallerWS {
         }
         return ""; //devolvemos el estado pendiente, por defecto
     }
-
+    private void enviarPedidoActivemq(String nombreCola,PedidoCorto pedido) throws JMSException{
+            Gson gson = new Gson();
+            Gestor_activemq activemq= new Gestor_activemq();
+            activemq.create_Producer(nombreCola);            
+            String pedidoFinal = gson.toJson(pedido);
+            activemq.producer.produceMessage(pedidoFinal);
+            activemq.producer.closeProduce();
+    }
     /**
      * Web service operation
      */
@@ -95,12 +103,9 @@ public class TallerWS {
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
              bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
-            Gestor_activemq activemq= new Gestor_activemq();
-            activemq.create_Producer("pedidos");
-             PedidoCorto pedidocorto= new PedidoCorto(p.getID(), p.getEstado());
-            String pedidoFinal = gson.toJson(pedidocorto);
-            activemq.producer.produceMessage(pedidoFinal);
-            activemq.producer.closeProduce();
+            for(Desguace desguace: bd.getDesguaces()){
+             enviarPedidoActivemq(desguace.getID(),new PedidoCorto(p.getID(),p.getEstado()));
+            }
             bd.close();
             return stringID;
         } catch (SQLException ex) {
@@ -242,12 +247,9 @@ public class TallerWS {
         try {
             Gson gson = new Gson();
             bd= new InterfazBD("sor_gestor");
-            Gestor_activemq activemq= new Gestor_activemq();
-            activemq.create_Producer("pedidos");
-            PedidoCorto pedidocorto= new PedidoCorto(id, EstadoPedido.values()[estado]);
-            String pedidoFinal = gson.toJson(pedidocorto);
-            activemq.producer.produceMessage(pedidoFinal);
-            activemq.producer.closeProduce();
+            for(Desguace desguace: bd.getDesguaces()){
+                enviarPedidoActivemq(desguace.getID(),new PedidoCorto(id,EstadoPedido.values()[estado]));
+            }
            return  bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);

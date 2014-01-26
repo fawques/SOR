@@ -32,7 +32,8 @@ public class ReintentarConexionController implements Initializable {
     }
 
     public void reintentar() {
-        if (MainTaller.hello() == "hello") {
+        try {
+        if ("hello".equals(MainTaller.hello())) {
             try {
                 MainTaller.inicioTaller();
             } catch (IOException ex) {
@@ -42,6 +43,9 @@ public class ReintentarConexionController implements Initializable {
             } catch (SQLException ex) {
                 Logger.getLogger(ReintentarConexionController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            }
+        } catch (javax.xml.ws.WebServiceException e) {
+            System.err.println(e.getCause());
         }
     }
 

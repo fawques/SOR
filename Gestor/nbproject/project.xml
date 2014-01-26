@@ -36,7 +36,6 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${libs.jUDDI.classpath}</file>
                     <file>${file.reference.slf4j-log4j12-1.7.5.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
