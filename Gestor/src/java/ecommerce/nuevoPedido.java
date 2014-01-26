@@ -11,18 +11,21 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import general.EstadoPedido;
+import general.Oferta;
+import general.Pedido;
 import general.Pieza;
 import general.Taller;
+import gestor_taller.TallerWS;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.jms.JMSException;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -109,7 +112,7 @@ public class nuevoPedido extends HttpServlet {
 
             Date today = new Date();
             String fecha = request.getParameter("fecha");
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaLimite = new Date();
             try {
                 fechaLimite = dateFormat.parse(fecha);
@@ -122,20 +125,18 @@ public class nuevoPedido extends HttpServlet {
              TablePieza tp = (TablePieza) it.next();            piezasPedido.add(new Pieza(tp.getId()));
              cantidadPiezas.add(tp.getCantidad());
              }*/
-
+            TallerWS tws = new TallerWS();
+            Pedido p = new Pedido("", t.getID(), today, new Date(1970, 1, 1), fechaLimite, EstadoPedido.ACTIVE, "Automatico".equals(request.getParameter("modo")), new ArrayList<Pieza>(), new ArrayList<Integer>(), new ArrayList<Oferta>());
             try {
-                bd = new InterfazBD("sor_gestor");
-                int id = bd.anadirPedido(today, EstadoPedido.ACTIVE, t.getID(), new Date(1970, 1, 1), fechaLimite, "Automatico".equals(request.getParameter("modo")));
-                if (id != 0) {
-                    //bd.anyadirPiezasAPedido(id, piezasPedido, cantidadPiezas);
-                    System.out.println("Pedido creado sin piezas");
+                if (!"".equals(tws.nuevoPedido(gson.toJson(p)))) {
+                    System.out.println("pedido creado");
                 }
-                bd.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (JMSException ex) {
                 Logger.getLogger(nuevoPedido.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+        } else {
+            System.out.println("No hay cookie");
         }
     }
 
