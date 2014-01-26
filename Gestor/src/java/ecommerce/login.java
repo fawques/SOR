@@ -6,9 +6,15 @@
 
 package ecommerce;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import general.Taller;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -81,11 +87,33 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Object user = request.getSession().getAttribute("usuario");
-        Object pass = request.getSession().getAttribute("contrasenya");
+
+        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+        String cookieName = "usuario";
+        String cookieName2 = "contrasenya";
+        Cookie cookies[] = request.getCookies();
+        Cookie myCookie = null;
+        Cookie myCookie2 = null;
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals(cookieName)) {
+                    myCookie = cookies[i];
+                } else if (cookies[i].getName().equals(cookieName2)) {
+                    myCookie2 = cookies[i];
+                }
+            }
+        }
+        Taller t = null;
+        if (myCookie != null) {
+            Type collectionType = new TypeToken<Taller>() {
+            }.getType();
+
+            t = gson.fromJson(myCookie.getValue(), collectionType);
+        }
+        String pass = myCookie2.getValue();
         //comprobar en la bd http://www.nabisoft.com/tutorials/glassfish/securing-java-ee-6-web-applications-on-glassfish-using-jaas
-        if (user != null && pass != null) {
-            if (request.getParameter("usuario").equals(user.toString()) && request.getParameter("contrasenya").equals(pass.toString())) {
+        if (t != null && pass != null) {
+            if (request.getParameter("usuario").equals(t.getEmail().toString()) && request.getParameter("contrasenya").equals(pass.toString())) {
                 request.getRequestDispatcher("/gestion.jsp").forward(request, response);
             } else {
                 request.setAttribute("errorMessage", "Login invalido");
