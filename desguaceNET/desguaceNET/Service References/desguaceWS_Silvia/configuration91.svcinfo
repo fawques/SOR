@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="mkUVtVQINe9ySM3JPuU03llN3Ow=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="5AHcqPf2cW3gLemUPGWKyQR/PQg=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="DesguaceJavaWSPortBinding1">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="DesguaceJavaWSPort1" contract="desguaceWS_Silvia.DesguaceJavaWS" bindingType="basicHttpBinding" address="http://192.168.1.16:8080/Gestor/DesguaceJavaWS" bindingConfiguration="DesguaceJavaWSPortBinding1">
+    <endpoint name="DesguaceJavaWSPort1" contract="desguaceWS_Silvia.DesguaceJavaWS" bindingType="basicHttpBinding" address="http://192.168.1.104:8080/Gestor/DesguaceJavaWS" bindingConfiguration="DesguaceJavaWSPortBinding1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.1.16:8080/Gestor/DesguaceJavaWS</serializedValue>
+          <serializedValue>http://192.168.1.104:8080/Gestor/DesguaceJavaWS</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

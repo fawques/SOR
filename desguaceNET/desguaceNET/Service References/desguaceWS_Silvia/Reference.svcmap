@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.1.16:8080/Gestor/DesguaceJavaWS?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.1.104:8080/Gestor/DesguaceJavaWS?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DesguaceJavaWS.xsd" MetadataType="Schema" ID="499a0048-4553-4352-9225-7508052e8b6a" SourceId="1" SourceUrl="http://192.168.1.16:8080/Gestor/DesguaceJavaWS?xsd=1" />
-    <MetadataFile FileName="DesguaceJavaWS.wsdl" MetadataType="Wsdl" ID="5e05be04-f046-4567-b3a4-5226d4e955b7" SourceId="1" SourceUrl="http://192.168.1.16:8080/Gestor/DesguaceJavaWS?wsdl" />
+    <MetadataFile FileName="DesguaceJavaWS1.wsdl" MetadataType="Wsdl" ID="6e998586-0812-48c6-a211-64b41c49d45e" SourceId="1" SourceUrl="http://192.168.1.104:8080/Gestor/DesguaceJavaWS?wsdl" />
+    <MetadataFile FileName="DesguaceJavaWS1.xsd" MetadataType="Schema" ID="9bb21e64-6303-4236-b32c-30442fab7dec" SourceId="1" SourceUrl="http://192.168.1.104:8080/Gestor/DesguaceJavaWS?xsd=1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

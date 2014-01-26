@@ -102,6 +102,7 @@
             this.Pedidos.SelectedIndex = 0;
             this.Pedidos.Size = new System.Drawing.Size(733, 542);
             this.Pedidos.TabIndex = 3;
+            this.Pedidos.SelectedIndexChanged += new System.EventHandler(this.Pedidos_SelectedIndexChanged);
             this.Pedidos.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Pedidos_MouseClick);
             // 
             // tabPage1
@@ -267,6 +268,7 @@
             this.btAceptarOferta.TabIndex = 8;
             this.btAceptarOferta.Text = "Aceptar oferta";
             this.btAceptarOferta.UseVisualStyleBackColor = true;
+            this.btAceptarOferta.Click += new System.EventHandler(this.btAceptarOferta_Click);
             // 
             // btAnularOferta
             // 
@@ -285,6 +287,7 @@
             this.dataGridView3.MultiSelect = false;
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
+            this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView3.Size = new System.Drawing.Size(669, 180);
             this.dataGridView3.TabIndex = 6;
             this.dataGridView3.SelectionChanged += new System.EventHandler(this.dataGridView3_SelectionChanged);
@@ -296,6 +299,7 @@
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(669, 201);
             this.dataGridView2.TabIndex = 4;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
@@ -330,6 +334,7 @@
             this.dataGridView4.MultiSelect = false;
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.ReadOnly = true;
+            this.dataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView4.Size = new System.Drawing.Size(669, 428);
             this.dataGridView4.TabIndex = 11;
             // 

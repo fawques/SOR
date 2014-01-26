@@ -19,11 +19,13 @@ namespace desguaceNET
         string idPedidoSelected;
         string idOfertaActiva;
         string idOfertaAceptada;
+        string idPedidoAceptado;
+        DesguaceNet main;
 
         public GestionPedidos()
         {
             InitializeComponent();
-            DesguaceNet main = new DesguaceNet();
+            main = new DesguaceNet();
             listaPedidos = new List<Pedido>();
             listaOfertasActivas = main.actualizarOfertas();
             listaOfertasAceptadas = main.actualizarOfertasAceptadas();
@@ -45,6 +47,28 @@ namespace desguaceNET
 
             dataGridView2.DataSource = listaOfertasActivas;
             dataGridView3.DataSource = listaOfertasAceptadas;
+        }
+
+        private void updatePedidos()
+        {
+            main.actualizarPedidos();
+            listaPedidos = main.getPedidos();
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = listaPedidos;
+        }
+
+        private void updateOfertasActivas()
+        {
+            listaOfertasActivas = main.actualizarOfertas();
+            dataGridView2.DataSource = null;
+            dataGridView2.DataSource = listaOfertasActivas;
+        }
+
+        private void updateOfertasAceptadas()
+        {
+            listaOfertasAceptadas = main.actualizarOfertasAceptadas();
+            dataGridView2.DataSource = null;
+            dataGridView2.DataSource = listaOfertasAceptadas;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -106,8 +130,10 @@ namespace desguaceNET
         {
             DialogResult res = MessageBox.Show("¿Estás seguro de que quieres cancelar esta oferta?","¿Cancelar?",MessageBoxButtons.YesNo);
             if(res == DialogResult.Yes){
-                DesguaceNet main = new DesguaceNet();
-                if(main.cancelarOfertaDesguace(idOfertaActiva));
+                if (main.cancelarOfertaDesguace(idOfertaActiva))
+                {
+
+                }
             }
         }
 
@@ -121,7 +147,6 @@ namespace desguaceNET
             string idPedido = tbNombreTaller.Text;
             double precio = double.Parse(tbPrecio.Text);
             DateTime fechaLimite = dtpFecha.Value;
-            DesguaceNet main = new DesguaceNet();
             Oferta of = main.crearOferta(DateTime.Today, fechaLimite, idPedido, precio);
             if (of != null)
             {
@@ -149,7 +174,6 @@ namespace desguaceNET
             if (dataGridView2.SelectedRows.Count > 0)
             {
                 idOfertaActiva = (string)dataGridView2.SelectedRows[0].Cells[0].Value;
-                tbNombreTaller.Text = idOfertaActiva;
             }
         }
 
@@ -158,7 +182,8 @@ namespace desguaceNET
             if (dataGridView3.SelectedRows.Count > 0)
             {
                 idOfertaAceptada = (string)dataGridView3.SelectedRows[0].Cells[0].Value;
-                tbNombreTaller.Text = idOfertaAceptada;
+                idPedidoAceptado = (string)dataGridView3.SelectedRows[0].Cells[7].Value;
+
             }
         }
 
@@ -167,7 +192,6 @@ namespace desguaceNET
             DialogResult res = MessageBox.Show("¿Estás seguro de que quieres darte de baja?", "¿Seguro?", MessageBoxButtons.YesNo);
             if (res == DialogResult.Yes)
             {
-                DesguaceNet main = new DesguaceNet();
                 if (main.bajaDesguace())
                 {
                     DialogResult = DialogResult.Abort;
@@ -181,11 +205,26 @@ namespace desguaceNET
 
         private void Pedidos_MouseClick(object sender, MouseEventArgs e)
         {
-            DesguaceNet main = new DesguaceNet();
-            main.actualizarPedidos();
-            listaPedidos = main.getPedidos();
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = listaPedidos;
+            updatePedidos();
+            updateOfertasActivas();
+            updateOfertasAceptadas();
         }
+
+        private void Pedidos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updatePedidos();
+            updateOfertasActivas();
+            updateOfertasAceptadas();
+        }
+
+        private void btAceptarOferta_Click(object sender, EventArgs e)
+        {
+            if (!main.aceptarOferta(idOfertaAceptada, idPedidoAceptado))
+            {
+                MessageBox.Show("Error al aceptar oferta", "ERROR", MessageBoxButtons.OK);
+            }
+        }
+
+        
     }
 }

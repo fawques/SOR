@@ -1,4 +1,4 @@
-﻿using desguaceNET.desguaceWS;
+﻿using desguaceNET.desguaceWS_Silvia;
 using desguaceNET.libSOR.activemq;
 using desguaceNET.libSOR.BD;
 using desguaceNET.libSOR.general;
@@ -227,7 +227,7 @@ namespace desguaceNET
         {
             // coger los pedidos de activeMQ
             Gestor_activemq activemq = new Gestor_activemq();
-            activemq.create_Consumer("pedidos");
+            activemq.create_Consumer(desguace.getID());
             string listaIdsString = activemq.consumer.consumeMessage();
             activemq.consumer.closeConsumer();
 
@@ -236,7 +236,7 @@ namespace desguaceNET
             PedidoCorto p = null;
             foreach (string item in listaPedidosCortosString)
 	        {
-		        p = JsonConvert.DeserializeObject<PedidoCorto>(item);
+                p = JsonConvert.DeserializeObject<PedidoCorto>(item);
                 listaPedidosCortos.Add(p);
 	        }
 
@@ -278,6 +278,17 @@ namespace desguaceNET
             Console.WriteLine(ex.StackTrace);
         }
         return realizado;
+    }
+
+    public bool aceptarOferta(string id,string idPedido)
+    {
+        bool ped = false;
+        if (aceptarOfertaFin(id))
+        {
+            ped = bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+            ped = ped && bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK, idPedido);
+        }
+        return ped;
     }
 
         // ============================

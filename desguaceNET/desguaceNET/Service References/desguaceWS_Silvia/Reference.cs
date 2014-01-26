@@ -15,19 +15,19 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://gestor_desguace_java/", ConfigurationName="desguaceWS_Silvia.DesguaceJavaWS")]
     public interface DesguaceJavaWS {
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento return del espacio de nombres  no está marcado para aceptar valores nil.
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse")]
-        desguaceNET.desguaceWS_Silvia.getOfertasResponse getOfertas(desguaceNET.desguaceWS_Silvia.getOfertasRequest request);
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento id del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/bajaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/bajaResponse")]
+        desguaceNET.desguaceWS_Silvia.bajaResponse baja(desguaceNET.desguaceWS_Silvia.bajaRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse")]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.getOfertasResponse> getOfertasAsync(desguaceNET.desguaceWS_Silvia.getOfertasRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/bajaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/bajaResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.bajaResponse> bajaAsync(desguaceNET.desguaceWS_Silvia.bajaRequest request);
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento oferta del espacio de nombres  no está marcado para aceptar valores nil.
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse")]
-        desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse nuevaOferta(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest request);
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento name del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/altaResponse")]
+        desguaceNET.desguaceWS_Silvia.altaResponse alta(desguaceNET.desguaceWS_Silvia.altaRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse")]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse> nuevaOfertaAsync(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/altaResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.altaResponse> altaAsync(desguaceNET.desguaceWS_Silvia.altaRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento mail del espacio de nombres  no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse")]
@@ -35,6 +35,13 @@ namespace desguaceNET.desguaceWS_Silvia {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse")]
         System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.checkActivacionResponse> checkActivacionAsync(desguaceNET.desguaceWS_Silvia.checkActivacionRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento id del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/cambiarEstadoPedidoRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/cambiarEstadoPedidoResponse")]
+        desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponse cambiarEstadoPedido(desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/cambiarEstadoPedidoRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/cambiarEstadoPedidoResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponse> cambiarEstadoPedidoAsync(desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento string del espacio de nombres  no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosporIDRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getPedidosporIDResponse")]
@@ -57,54 +64,34 @@ namespace desguaceNET.desguaceWS_Silvia {
         [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaResponse")]
         System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.cancelarOfertaResponse> cancelarOfertaAsync(desguaceNET.desguaceWS_Silvia.cancelarOfertaRequest request);
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento name del espacio de nombres  no está marcado para aceptar valores nil.
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/altaResponse")]
-        desguaceNET.desguaceWS_Silvia.altaResponse alta(desguaceNET.desguaceWS_Silvia.altaRequest request);
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento oferta del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse")]
+        desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse nuevaOferta(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/altaResponse")]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.altaResponse> altaAsync(desguaceNET.desguaceWS_Silvia.altaRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse> nuevaOfertaAsync(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento return del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse")]
+        desguaceNET.desguaceWS_Silvia.getOfertasResponse getOfertas(desguaceNET.desguaceWS_Silvia.getOfertasRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest", ReplyAction="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.getOfertasResponse> getOfertasAsync(desguaceNET.desguaceWS_Silvia.getOfertasRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class getOfertasRequest {
+    public partial class bajaRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="getOfertas", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS_Silvia.getOfertasRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="baja", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.bajaRequestBody Body;
         
-        public getOfertasRequest() {
+        public bajaRequest() {
         }
         
-        public getOfertasRequest(desguaceNET.desguaceWS_Silvia.getOfertasRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class getOfertasRequestBody {
-        
-        public getOfertasRequestBody() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class getOfertasResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="getOfertasResponse", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS_Silvia.getOfertasResponseBody Body;
-        
-        public getOfertasResponse() {
-        }
-        
-        public getOfertasResponse(desguaceNET.desguaceWS_Silvia.getOfertasResponseBody Body) {
+        public bajaRequest(desguaceNET.desguaceWS_Silvia.bajaRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -113,15 +100,49 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class getOfertasResponseBody {
+    public partial class bajaRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string @return;
+        public string id;
         
-        public getOfertasResponseBody() {
+        public bajaRequestBody() {
         }
         
-        public getOfertasResponseBody(string @return) {
+        public bajaRequestBody(string id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class bajaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="bajaResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.bajaResponseBody Body;
+        
+        public bajaResponse() {
+        }
+        
+        public bajaResponse(desguaceNET.desguaceWS_Silvia.bajaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class bajaResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool @return;
+        
+        public bajaResponseBody() {
+        }
+        
+        public bajaResponseBody(bool @return) {
             this.@return = @return;
         }
     }
@@ -130,15 +151,15 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class nuevaOfertaRequest {
+    public partial class altaRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="nuevaOferta", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS_Silvia.nuevaOfertaRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="alta", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.altaRequestBody Body;
         
-        public nuevaOfertaRequest() {
+        public altaRequest() {
         }
         
-        public nuevaOfertaRequest(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequestBody Body) {
+        public altaRequest(desguaceNET.desguaceWS_Silvia.altaRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -147,16 +168,36 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class nuevaOfertaRequestBody {
+    public partial class altaRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string oferta;
+        public string name;
         
-        public nuevaOfertaRequestBody() {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string email;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string address;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string city;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public int postalCode;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+        public int telephone;
+        
+        public altaRequestBody() {
         }
         
-        public nuevaOfertaRequestBody(string oferta) {
-            this.oferta = oferta;
+        public altaRequestBody(string name, string email, string address, string city, int postalCode, int telephone) {
+            this.name = name;
+            this.email = email;
+            this.address = address;
+            this.city = city;
+            this.postalCode = postalCode;
+            this.telephone = telephone;
         }
     }
     
@@ -164,15 +205,15 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class nuevaOfertaResponse {
+    public partial class altaResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="nuevaOfertaResponse", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS_Silvia.nuevaOfertaResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="altaResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.altaResponseBody Body;
         
-        public nuevaOfertaResponse() {
+        public altaResponse() {
         }
         
-        public nuevaOfertaResponse(desguaceNET.desguaceWS_Silvia.nuevaOfertaResponseBody Body) {
+        public altaResponse(desguaceNET.desguaceWS_Silvia.altaResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -181,15 +222,15 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class nuevaOfertaResponseBody {
+    public partial class altaResponseBody {
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string @return;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool @return;
         
-        public nuevaOfertaResponseBody() {
+        public altaResponseBody() {
         }
         
-        public nuevaOfertaResponseBody(string @return) {
+        public altaResponseBody(bool @return) {
             this.@return = @return;
         }
     }
@@ -258,6 +299,78 @@ namespace desguaceNET.desguaceWS_Silvia {
         }
         
         public checkActivacionResponseBody(string @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class cambiarEstadoPedidoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="cambiarEstadoPedido", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequestBody Body;
+        
+        public cambiarEstadoPedidoRequest() {
+        }
+        
+        public cambiarEstadoPedidoRequest(desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class cambiarEstadoPedidoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string id;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int estado;
+        
+        public cambiarEstadoPedidoRequestBody() {
+        }
+        
+        public cambiarEstadoPedidoRequestBody(string id, int estado) {
+            this.id = id;
+            this.estado = estado;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class cambiarEstadoPedidoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="cambiarEstadoPedidoResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponseBody Body;
+        
+        public cambiarEstadoPedidoResponse() {
+        }
+        
+        public cambiarEstadoPedidoResponse(desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class cambiarEstadoPedidoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool @return;
+        
+        public cambiarEstadoPedidoResponseBody() {
+        }
+        
+        public cambiarEstadoPedidoResponseBody(bool @return) {
             this.@return = @return;
         }
     }
@@ -470,15 +583,15 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class altaRequest {
+    public partial class nuevaOfertaRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="alta", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS_Silvia.altaRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="nuevaOferta", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.nuevaOfertaRequestBody Body;
         
-        public altaRequest() {
+        public nuevaOfertaRequest() {
         }
         
-        public altaRequest(desguaceNET.desguaceWS_Silvia.altaRequestBody Body) {
+        public nuevaOfertaRequest(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -487,36 +600,16 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class altaRequestBody {
+    public partial class nuevaOfertaRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string name;
+        public string oferta;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string email;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string address;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string city;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public int postalCode;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-        public int telephone;
-        
-        public altaRequestBody() {
+        public nuevaOfertaRequestBody() {
         }
         
-        public altaRequestBody(string name, string email, string address, string city, int postalCode, int telephone) {
-            this.name = name;
-            this.email = email;
-            this.address = address;
-            this.city = city;
-            this.postalCode = postalCode;
-            this.telephone = telephone;
+        public nuevaOfertaRequestBody(string oferta) {
+            this.oferta = oferta;
         }
     }
     
@@ -524,15 +617,15 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class altaResponse {
+    public partial class nuevaOfertaResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="altaResponse", Namespace="http://gestor_desguace_java/", Order=0)]
-        public desguaceNET.desguaceWS_Silvia.altaResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="nuevaOfertaResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.nuevaOfertaResponseBody Body;
         
-        public altaResponse() {
+        public nuevaOfertaResponse() {
         }
         
-        public altaResponse(desguaceNET.desguaceWS_Silvia.altaResponseBody Body) {
+        public nuevaOfertaResponse(desguaceNET.desguaceWS_Silvia.nuevaOfertaResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -541,15 +634,76 @@ namespace desguaceNET.desguaceWS_Silvia {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class altaResponseBody {
+    public partial class nuevaOfertaResponseBody {
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public bool @return;
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string @return;
         
-        public altaResponseBody() {
+        public nuevaOfertaResponseBody() {
         }
         
-        public altaResponseBody(bool @return) {
+        public nuevaOfertaResponseBody(string @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getOfertasRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getOfertas", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.getOfertasRequestBody Body;
+        
+        public getOfertasRequest() {
+        }
+        
+        public getOfertasRequest(desguaceNET.desguaceWS_Silvia.getOfertasRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class getOfertasRequestBody {
+        
+        public getOfertasRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getOfertasResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getOfertasResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS_Silvia.getOfertasResponseBody Body;
+        
+        public getOfertasResponse() {
+        }
+        
+        public getOfertasResponse(desguaceNET.desguaceWS_Silvia.getOfertasResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class getOfertasResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string @return;
+        
+        public getOfertasResponseBody() {
+        }
+        
+        public getOfertasResponseBody(string @return) {
             this.@return = @return;
         }
     }
@@ -582,51 +736,63 @@ namespace desguaceNET.desguaceWS_Silvia {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        desguaceNET.desguaceWS_Silvia.getOfertasResponse desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.getOfertas(desguaceNET.desguaceWS_Silvia.getOfertasRequest request) {
-            return base.Channel.getOfertas(request);
+        desguaceNET.desguaceWS_Silvia.bajaResponse desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.baja(desguaceNET.desguaceWS_Silvia.bajaRequest request) {
+            return base.Channel.baja(request);
         }
         
-        public string getOfertas() {
-            desguaceNET.desguaceWS_Silvia.getOfertasRequest inValue = new desguaceNET.desguaceWS_Silvia.getOfertasRequest();
-            inValue.Body = new desguaceNET.desguaceWS_Silvia.getOfertasRequestBody();
-            desguaceNET.desguaceWS_Silvia.getOfertasResponse retVal = ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).getOfertas(inValue);
+        public bool baja(string id) {
+            desguaceNET.desguaceWS_Silvia.bajaRequest inValue = new desguaceNET.desguaceWS_Silvia.bajaRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.bajaRequestBody();
+            inValue.Body.id = id;
+            desguaceNET.desguaceWS_Silvia.bajaResponse retVal = ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).baja(inValue);
             return retVal.Body.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.getOfertasResponse> desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.getOfertasAsync(desguaceNET.desguaceWS_Silvia.getOfertasRequest request) {
-            return base.Channel.getOfertasAsync(request);
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.bajaResponse> desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.bajaAsync(desguaceNET.desguaceWS_Silvia.bajaRequest request) {
+            return base.Channel.bajaAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.getOfertasResponse> getOfertasAsync() {
-            desguaceNET.desguaceWS_Silvia.getOfertasRequest inValue = new desguaceNET.desguaceWS_Silvia.getOfertasRequest();
-            inValue.Body = new desguaceNET.desguaceWS_Silvia.getOfertasRequestBody();
-            return ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).getOfertasAsync(inValue);
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.bajaResponse> bajaAsync(string id) {
+            desguaceNET.desguaceWS_Silvia.bajaRequest inValue = new desguaceNET.desguaceWS_Silvia.bajaRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.bajaRequestBody();
+            inValue.Body.id = id;
+            return ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).bajaAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.nuevaOferta(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest request) {
-            return base.Channel.nuevaOferta(request);
+        desguaceNET.desguaceWS_Silvia.altaResponse desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.alta(desguaceNET.desguaceWS_Silvia.altaRequest request) {
+            return base.Channel.alta(request);
         }
         
-        public string nuevaOferta(string oferta) {
-            desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest inValue = new desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest();
-            inValue.Body = new desguaceNET.desguaceWS_Silvia.nuevaOfertaRequestBody();
-            inValue.Body.oferta = oferta;
-            desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse retVal = ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).nuevaOferta(inValue);
+        public bool alta(string name, string email, string address, string city, int postalCode, int telephone) {
+            desguaceNET.desguaceWS_Silvia.altaRequest inValue = new desguaceNET.desguaceWS_Silvia.altaRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.altaRequestBody();
+            inValue.Body.name = name;
+            inValue.Body.email = email;
+            inValue.Body.address = address;
+            inValue.Body.city = city;
+            inValue.Body.postalCode = postalCode;
+            inValue.Body.telephone = telephone;
+            desguaceNET.desguaceWS_Silvia.altaResponse retVal = ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).alta(inValue);
             return retVal.Body.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse> desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.nuevaOfertaAsync(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest request) {
-            return base.Channel.nuevaOfertaAsync(request);
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.altaResponse> desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.altaAsync(desguaceNET.desguaceWS_Silvia.altaRequest request) {
+            return base.Channel.altaAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse> nuevaOfertaAsync(string oferta) {
-            desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest inValue = new desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest();
-            inValue.Body = new desguaceNET.desguaceWS_Silvia.nuevaOfertaRequestBody();
-            inValue.Body.oferta = oferta;
-            return ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).nuevaOfertaAsync(inValue);
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.altaResponse> altaAsync(string name, string email, string address, string city, int postalCode, int telephone) {
+            desguaceNET.desguaceWS_Silvia.altaRequest inValue = new desguaceNET.desguaceWS_Silvia.altaRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.altaRequestBody();
+            inValue.Body.name = name;
+            inValue.Body.email = email;
+            inValue.Body.address = address;
+            inValue.Body.city = city;
+            inValue.Body.postalCode = postalCode;
+            inValue.Body.telephone = telephone;
+            return ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).altaAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -652,6 +818,33 @@ namespace desguaceNET.desguaceWS_Silvia {
             inValue.Body = new desguaceNET.desguaceWS_Silvia.checkActivacionRequestBody();
             inValue.Body.mail = mail;
             return ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).checkActivacionAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponse desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.cambiarEstadoPedido(desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequest request) {
+            return base.Channel.cambiarEstadoPedido(request);
+        }
+        
+        public bool cambiarEstadoPedido(string id, int estado) {
+            desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequest inValue = new desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequestBody();
+            inValue.Body.id = id;
+            inValue.Body.estado = estado;
+            desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponse retVal = ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).cambiarEstadoPedido(inValue);
+            return retVal.Body.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponse> desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.cambiarEstadoPedidoAsync(desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequest request) {
+            return base.Channel.cambiarEstadoPedidoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponse> cambiarEstadoPedidoAsync(string id, int estado) {
+            desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequest inValue = new desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoRequestBody();
+            inValue.Body.id = id;
+            inValue.Body.estado = estado;
+            return ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).cambiarEstadoPedidoAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -730,38 +923,51 @@ namespace desguaceNET.desguaceWS_Silvia {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        desguaceNET.desguaceWS_Silvia.altaResponse desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.alta(desguaceNET.desguaceWS_Silvia.altaRequest request) {
-            return base.Channel.alta(request);
+        desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.nuevaOferta(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest request) {
+            return base.Channel.nuevaOferta(request);
         }
         
-        public bool alta(string name, string email, string address, string city, int postalCode, int telephone) {
-            desguaceNET.desguaceWS_Silvia.altaRequest inValue = new desguaceNET.desguaceWS_Silvia.altaRequest();
-            inValue.Body = new desguaceNET.desguaceWS_Silvia.altaRequestBody();
-            inValue.Body.name = name;
-            inValue.Body.email = email;
-            inValue.Body.address = address;
-            inValue.Body.city = city;
-            inValue.Body.postalCode = postalCode;
-            inValue.Body.telephone = telephone;
-            desguaceNET.desguaceWS_Silvia.altaResponse retVal = ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).alta(inValue);
+        public string nuevaOferta(string oferta) {
+            desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest inValue = new desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.nuevaOfertaRequestBody();
+            inValue.Body.oferta = oferta;
+            desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse retVal = ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).nuevaOferta(inValue);
             return retVal.Body.@return;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.altaResponse> desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.altaAsync(desguaceNET.desguaceWS_Silvia.altaRequest request) {
-            return base.Channel.altaAsync(request);
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse> desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.nuevaOfertaAsync(desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest request) {
+            return base.Channel.nuevaOfertaAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.altaResponse> altaAsync(string name, string email, string address, string city, int postalCode, int telephone) {
-            desguaceNET.desguaceWS_Silvia.altaRequest inValue = new desguaceNET.desguaceWS_Silvia.altaRequest();
-            inValue.Body = new desguaceNET.desguaceWS_Silvia.altaRequestBody();
-            inValue.Body.name = name;
-            inValue.Body.email = email;
-            inValue.Body.address = address;
-            inValue.Body.city = city;
-            inValue.Body.postalCode = postalCode;
-            inValue.Body.telephone = telephone;
-            return ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).altaAsync(inValue);
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse> nuevaOfertaAsync(string oferta) {
+            desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest inValue = new desguaceNET.desguaceWS_Silvia.nuevaOfertaRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.nuevaOfertaRequestBody();
+            inValue.Body.oferta = oferta;
+            return ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).nuevaOfertaAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        desguaceNET.desguaceWS_Silvia.getOfertasResponse desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.getOfertas(desguaceNET.desguaceWS_Silvia.getOfertasRequest request) {
+            return base.Channel.getOfertas(request);
+        }
+        
+        public string getOfertas() {
+            desguaceNET.desguaceWS_Silvia.getOfertasRequest inValue = new desguaceNET.desguaceWS_Silvia.getOfertasRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.getOfertasRequestBody();
+            desguaceNET.desguaceWS_Silvia.getOfertasResponse retVal = ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).getOfertas(inValue);
+            return retVal.Body.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.getOfertasResponse> desguaceNET.desguaceWS_Silvia.DesguaceJavaWS.getOfertasAsync(desguaceNET.desguaceWS_Silvia.getOfertasRequest request) {
+            return base.Channel.getOfertasAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS_Silvia.getOfertasResponse> getOfertasAsync() {
+            desguaceNET.desguaceWS_Silvia.getOfertasRequest inValue = new desguaceNET.desguaceWS_Silvia.getOfertasRequest();
+            inValue.Body = new desguaceNET.desguaceWS_Silvia.getOfertasRequestBody();
+            return ((desguaceNET.desguaceWS_Silvia.DesguaceJavaWS)(this)).getOfertasAsync(inValue);
         }
     }
 }

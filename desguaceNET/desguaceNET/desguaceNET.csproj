@@ -197,14 +197,20 @@
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.nuevaOfertaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS.wsdl" />
-    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS.xsd">
+    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS1.wsdl" />
+    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.aceptarOfertaFinResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.altaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.bajaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.cancelarOfertaResponse.datasource">

@@ -11,6 +11,11 @@ namespace desguaceNET.libSOR.general
         public string ID {get;set;}
         public EstadoPedido estado { get; set; }
 
+        public PedidoCorto()
+        {
+            this.ID = "";
+            this.estado = EstadoPedido.NEW;
+        }
         public PedidoCorto(string ID, EstadoPedido estado)
         {
             this.ID = ID;
