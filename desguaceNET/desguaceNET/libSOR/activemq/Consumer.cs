@@ -22,7 +22,7 @@ namespace desguaceNET.libSOR.activemq
         public Consumer(string queueName)
         {
             //Create ConnectionFactory
-            connectionFactory = new ConnectionFactory("failover:(tcp://192.168.1.104:61616)");
+            connectionFactory = new ConnectionFactory("failover:(tcp://localhost:61616)");
             //Create Connection
             connection = connectionFactory.CreateConnection();
             //Create Session

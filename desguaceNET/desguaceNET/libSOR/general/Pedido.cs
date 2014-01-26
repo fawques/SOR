@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace desguaceNET.libSOR.general
 {
+    [JsonObject(MemberSerialization.OptIn)]
     class Pedido
     {
         public string ID { get; set; }
@@ -34,6 +36,7 @@ namespace desguaceNET.libSOR.general
          * @param listaCantidadesPiezas
          * @param listaOfertas
          */
+        [JsonConstructor]
         public Pedido(string ID, int ID_aux, string tallerID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoPedido estado, bool modoAutomatico, List<Pieza> listaPiezas, List<int> listaCantidadesPiezas, List<Oferta> listaOfertas)
         {
             this.ID = ID;

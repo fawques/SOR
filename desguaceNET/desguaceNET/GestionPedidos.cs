@@ -45,7 +45,7 @@ namespace desguaceNET
         private void updatePedidos()
         {
             main.actualizarPedidos();
-            listaPedidos = main.getPedidos();
+            listaPedidos = main.getPedidosActivos();
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = listaPedidos;
         }
@@ -60,8 +60,20 @@ namespace desguaceNET
         private void updateOfertasAceptadas()
         {
             listaOfertasAceptadas = main.actualizarOfertasAceptadas();
-            dataGridView2.DataSource = null;
-            dataGridView2.DataSource = listaOfertasAceptadas;
+            dataGridView3.DataSource = null;
+            dataGridView3.DataSource = listaOfertasAceptadas;
+        }
+
+        private void updateHistoricoOfertas()
+        {
+            dataGridView5.DataSource = null;
+            dataGridView5.DataSource = main.getOfertasLocal();
+        }
+
+        private void updateHistoricoPedidos()
+        {
+            dataGridView4.DataSource = null;
+            dataGridView4.DataSource = main.getPedidos();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -201,6 +213,8 @@ namespace desguaceNET
             updatePedidos();
             updateOfertasActivas();
             updateOfertasAceptadas();
+            updateHistoricoOfertas();
+            updateHistoricoPedidos();
         }
 
         private void Pedidos_SelectedIndexChanged(object sender, EventArgs e)
@@ -208,6 +222,8 @@ namespace desguaceNET
             updatePedidos();
             updateOfertasActivas();
             updateOfertasAceptadas();
+            updateHistoricoOfertas();
+            updateHistoricoPedidos();
         }
 
         private void btAceptarOferta_Click(object sender, EventArgs e)

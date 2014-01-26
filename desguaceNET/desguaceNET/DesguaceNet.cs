@@ -175,7 +175,23 @@ namespace desguaceNET
             List<Pedido> pedidoslista = new List<Pedido>();
             try
             {
-                pedidoslista = bd.getPedidos();
+                pedidoslista = bd.getPedidosConID_aux();
+                return pedidoslista;
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+            return pedidoslista;
+        }
+
+        public List<Pedido> getPedidosActivos()
+        {
+            List<Pedido> pedidoslista = new List<Pedido>();
+            try
+            {
+                pedidoslista = bd.getPedidosConID_aux(EstadoPedido.ACTIVE);
                 return pedidoslista;
 
             }
@@ -294,6 +310,11 @@ namespace desguaceNET
             ped = ped && bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK, idPedido);
         }
         return ped;
+    }
+
+    public List<Oferta> getOfertasLocal()
+    {
+        return bd.getOfertasConID_aux();
     }
 
         // ============================
