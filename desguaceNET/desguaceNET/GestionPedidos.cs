@@ -59,6 +59,7 @@ namespace desguaceNET
 
         private void updateOfertasAceptadas()
         {
+            main.CompararOfertasGestorDesguace();
             listaOfertasAceptadas = main.actualizarOfertasAceptadas();
             dataGridView3.DataSource = null;
             dataGridView3.DataSource = listaOfertasAceptadas;
@@ -211,19 +212,15 @@ namespace desguaceNET
         private void Pedidos_MouseClick(object sender, MouseEventArgs e)
         {
             updatePedidos();
-            updateOfertasActivas();
             updateOfertasAceptadas();
+            updateOfertasActivas();
             updateHistoricoOfertas();
             updateHistoricoPedidos();
         }
 
         private void Pedidos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            updatePedidos();
-            updateOfertasActivas();
-            updateOfertasAceptadas();
-            updateHistoricoOfertas();
-            updateHistoricoPedidos();
+            
         }
 
         private void btAceptarOferta_Click(object sender, EventArgs e)

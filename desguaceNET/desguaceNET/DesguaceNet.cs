@@ -17,7 +17,8 @@ namespace desguaceNET
         InterfazBD bd;
         Desguace desguace;
 
-        public DesguaceNet(){
+        public DesguaceNet()
+        {
             bd = new InterfazBD("sor_desguace");
             desguace = bd.getDesguace();
         }
@@ -55,7 +56,7 @@ namespace desguaceNET
                         nuevo.setEstado(EstadoOferta.ACTIVE);
                         bd.activarOfertaDesguace(id, idFinal);
                         return nuevo;
-                    }                    
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -142,7 +143,7 @@ namespace desguaceNET
             return id;
         }
 
-        public bool cancelarOfertaDesguace(string id,string idPedido = "")
+        public bool cancelarOfertaDesguace(string id, string idPedido = "")
         {
             if (cancelarOferta(id))
             {
@@ -155,7 +156,7 @@ namespace desguaceNET
             return false;
         }
 
-        public bool cambiarEstadoOferta(String id, EstadoOferta estado)
+        public bool cambiarEstadoOferta(string id, EstadoOferta estado)
         {
             bool realizado = false;
             try
@@ -248,28 +249,28 @@ namespace desguaceNET
             // coger los pedidos de activeMQ
             Gestor_activemq activemq = new Gestor_activemq();
             activemq.create_Consumer(desguace.getID());
-            string listaIdsString = activemq.consumer.consumeMessage();
+            string listaIdsstring = activemq.consumer.consumeMessage();
             activemq.consumer.closeConsumer();
 
-            List<PedidoCorto> listaPedidosCortos= new List<PedidoCorto>();
-            List<string> listaPedidosCortosString = JsonConvert.DeserializeObject <List<string>>(listaIdsString);
+            List<PedidoCorto> listaPedidosCortos = new List<PedidoCorto>();
+            List<string> listaPedidosCortosstring = JsonConvert.DeserializeObject<List<string>>(listaIdsstring);
             PedidoCorto p = null;
-            foreach (string item in listaPedidosCortosString)
-	        {
+            foreach (string item in listaPedidosCortosstring)
+            {
                 p = JsonConvert.DeserializeObject<PedidoCorto>(item);
                 listaPedidosCortos.Add(p);
-	        }
+            }
 
             // cambias el estado de tu BD según ponga activeMQ
             List<string> listaIDs = new List<string>();
             foreach (PedidoCorto pcorto in listaPedidosCortos)
-	        {
+            {
                 DesguaceNet main = new DesguaceNet();
                 if (!main.cambiarEstadoPedidoDesguace(pcorto.getID(), pcorto.getEstado()))
                 {
                     listaIDs.Add(pcorto.getID());
                 }
-	        }
+            }
             // si no puedes cambiarlos, creas nuevos
             string listaJSON = JsonConvert.SerializeObject(listaIDs);
             string pedidosstring = getPedidosporID(listaJSON);
@@ -286,36 +287,66 @@ namespace desguaceNET
             return listaPedidos;
         }
 
-    public bool cambiarEstadoPedidoDesguace(String id,EstadoPedido estado){
-    bool realizado=false;
-        try {
-            realizado= bd.cambiarEstadoPedido(estado, id);
-            if(realizado){
-                cambiarEstadoPedido(id,(int)estado);
-            }
-            
-            return realizado;
-        } catch (MySqlException ex) {
-            Console.WriteLine(ex.StackTrace);
-        }
-        return realizado;
-    }
-
-    public bool aceptarOferta(string id,string idPedido)
-    {
-        bool ped = false;
-        if (aceptarOfertaFin(id))
+        public bool cambiarEstadoPedidoDesguace(string id, EstadoPedido estado)
         {
-            ped = bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
-            ped = ped && bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK, idPedido);
-        }
-        return ped;
-    }
+            bool realizado = false;
+            try
+            {
+                realizado = bd.cambiarEstadoPedido(estado, id);
+                if (realizado)
+                {
+                    cambiarEstadoPedido(id, (int)estado);
+                }
 
-    public List<Oferta> getOfertasLocal()
-    {
-        return bd.getOfertasConID_aux();
-    }
+                return realizado;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+            return realizado;
+        }
+
+        public bool aceptarOferta(string id, string idPedido)
+        {
+            bool ped = false;
+            if (aceptarOfertaFin(id))
+            {
+                ped = bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+                ped = ped && bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK, idPedido);
+            }
+            return ped;
+        }
+
+        public List<Oferta> getOfertasLocal()
+        {
+            return bd.getOfertasConID_aux();
+        }
+
+        public void CompararOfertasGestorDesguace()
+        {
+
+            List<Oferta> ofertas = actualizarOfertas();
+            List<Oferta> ofertasgestor = new List<Oferta>();
+            string ofertasstring = getOfertas();
+            if (ofertasstring != null && ofertasstring != "")
+            {
+                ofertasgestor = JsonConvert.DeserializeObject<List<Oferta>>(ofertasstring);
+            }
+            foreach (Oferta ofertagestor in ofertasgestor)
+            {
+                foreach (Oferta ofertadesguace in ofertas)
+                {
+                    if (ofertagestor.getID() == ofertadesguace.getID())
+                    {
+                        if (ofertagestor.getEstado() != ofertadesguace.getEstado())
+                        {
+                            cambiarEstadoOferta(ofertagestor.getID(), ofertagestor.getEstado());
+                        }
+                    }
+                }
+            }
+        }
 
         // ============================
         private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
@@ -367,9 +398,10 @@ namespace desguaceNET
             return client.cancelarOferta(id);
         }
 
-        private bool cambiarEstadoPedido(string id, int estado) {
+        private bool cambiarEstadoPedido(string id, int estado)
+        {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
-            return client.cambiarEstadoPedido(id,estado);
+            return client.cambiarEstadoPedido(id, estado);
         }
 
     }
