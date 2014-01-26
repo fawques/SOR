@@ -1,22 +1,28 @@
 <%@page import="gestor_admin.AdminWS"%>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!doctype html>
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-    </head>
-    <body>
-        <%
+<head>
+<meta charset="utf-8">
+<title>Inicio sesion</title>
+<link rel="stylesheet" href="estilos.css" type="text/css" media="screen" /> 
+</head>
+<body>
+    <%
             AdminWS admin =new AdminWS();
             admin.Registrar();
             admin.timer.start();
             %>
-        <div>TODO write content</div>
-    </body>
+<p class="centrado">Inicio de sesion</p>
+<form class="centrado" action="login" method="POST">
+ Usuario (mail): <input type="text" name="usuario"><br>
+ Contrasenya: <input type="password" name="contrasenya">
+ <br>
+ <br>
+
+ <input type="submit" class="centrado" value="Acceder">
+ <div style="color: #FF0000;">${errorMessage}</div>
+ </form> 
+<p class="centrado">No eres usuario? <a href="registro.jsp">Registrate</a></p>
+</body>
 </html>
+
