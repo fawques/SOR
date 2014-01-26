@@ -8,18 +8,14 @@ package desguace;
 
 import BD.InterfazBD;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import desguace.AltaDesguace;
-import desguace.DesguacerPendienteActivacionController;
-import desguace.GestionPedidos;
 import general.Desguace;
 import general.EstadoGeneral;
 import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
+import jUDDI.JUDDIProxy;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,7 +42,7 @@ public class DesguaceJava extends Application {
     @Override
     public void start(Stage stage2) throws IOException, SQLException{
         try {
-            
+            JUDDIProxy.loadWsdl("DesguaceJavaWS");
             stage = stage2;
             bd = new InterfazBD("sor_desguace");
             //System.out.println(bd.getPedidosActivos());
@@ -382,56 +378,56 @@ public class DesguaceJava extends Application {
     }
 
     public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
     public static String checkActivacion(java.lang.String mail) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.checkActivacion(mail);
     }
 
 
     public static String nuevaOferta(java.lang.String oferta) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.nuevaOferta(oferta);
     }
 
     public static String getOfertas() {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.getOfertas();
     }
 
     public static String getPedidosporID(java.lang.String string) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.getPedidosporID(string);
     }
 
     public static Boolean aceptarOfertaFin(java.lang.String id) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.aceptarOfertaFin(id);
     }
 
     public static Boolean cancelarOferta(java.lang.String id) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.cancelarOferta(id);
     }
 
     public static Boolean baja(java.lang.String id) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.baja(id);
     }
 
     public static Boolean cambiarEstadoPedido_1(java.lang.String id, int estado) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service();
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.cambiarEstadoPedido(id, estado);
     }
