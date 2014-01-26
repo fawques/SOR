@@ -72,17 +72,17 @@ public class AdminWS {
                 ArrayList<Pedido> listaPedido=bd.getPedidosPorEstado(EstadoPedido.ACTIVE);
                 listaPedido.addAll(bd.getPedidosPorEstado(EstadoPedido.ACCEPTED));
                 
-                
+                 for(Pedido pedido:listaPedido){
+                    if((new Date()).after(pedido.getFecha_limite())){                
+                        bd.cancelarPedido(pedido.getID());
+                    }
+                }
                 for(Oferta oferta:listaOferta){
                     if((new Date()).after(oferta.getFecha_limite())){                
                         bd.cambiarEstadoOferta(EstadoOferta.CANCELLED,oferta.getID());
                     }
                 }
-                for(Pedido pedido:listaPedido){
-                    if((new Date()).after(pedido.getFecha_limite())){                
-                        bd.cambiarEstadoPedido(EstadoPedido.CANCELLED,pedido.getID());
-                    }
-                }
+               
                 } catch (SQLException ex) {
                     Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
