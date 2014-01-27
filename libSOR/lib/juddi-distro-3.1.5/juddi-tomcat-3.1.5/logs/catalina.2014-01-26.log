@@ -198,3 +198,103 @@ ene 26, 2014 6:26:29 PM org.apache.jk.server.JkMain start
 Información: Jk running ID=0 time=0/132  config=null
 ene 26, 2014 6:26:29 PM org.apache.catalina.startup.Catalina start
 Información: Server startup in 214626 ms
+ene 26, 2014 8:15:44 PM org.apache.catalina.core.AprLifecycleListener init
+Información: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento óptimo en entornos de desarrollo no ha sido hallada en java.library.path: C:\Program Files\Java\jdk1.7.0_45\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\NVIDIA Corporation\PhysX\Common;C:\Program Files\AMD APP\bin\x86;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Calibre2\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\VisualSVN\bin;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Utilities 1.3.4\;C:\Program Files\Windows Kits\8.1\Windows Performance Toolkit\;;C:\SocketeQ\windowsandroid_root\system\bin;C:\SocketeQ\windowsandroid_root\system\lib;C:\Users\Cute\Desktop\gradle-1.7\bin;.
+ene 26, 2014 8:15:45 PM org.apache.coyote.http11.Http11Protocol init
+Información: Inicializando Coyote HTTP/1.1 en puerto http-8081
+ene 26, 2014 8:15:45 PM org.apache.catalina.startup.Catalina load
+Información: Initialization processed in 872 ms
+ene 26, 2014 8:15:45 PM org.apache.catalina.core.StandardService start
+Información: Arrancando servicio Catalina
+ene 26, 2014 8:15:45 PM org.apache.catalina.core.StandardEngine start
+Información: Starting Servlet Engine: Apache Tomcat/6.0.26
+ene 26, 2014 8:15:45 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración host-manager.xml
+ene 26, 2014 8:15:46 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración juddiv3.xml
+ene 26, 2014 8:15:47 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+Información: Root WebApplicationContext: initialization started
+ene 26, 2014 8:15:47 PM org.springframework.context.support.AbstractApplicationContext prepareRefresh
+Información: Refreshing Root WebApplicationContext: startup date [Sun Jan 26 20:15:47 CET 2014]; root of context hierarchy
+ene 26, 2014 8:15:47 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+ene 26, 2014 8:15:48 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+ene 26, 2014 8:15:48 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+ene 26, 2014 8:15:48 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+ene 26, 2014 8:15:48 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+Información: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+ene 26, 2014 8:15:48 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 26, 2014 8:15:48 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 26, 2014 8:15:48 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 26, 2014 8:15:48 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 26, 2014 8:15:48 PM org.apache.juddi.api.impl.UDDIServiceCounter getServer
+Información: Found MBean server
+ene 26, 2014 8:15:49 PM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+Información: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@f8b275: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+ene 26, 2014 8:15:50 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+ene 26, 2014 8:15:54 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /inquiry
+ene 26, 2014 8:15:54 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+ene 26, 2014 8:15:54 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /publish
+ene 26, 2014 8:15:54 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+ene 26, 2014 8:15:55 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /security
+ene 26, 2014 8:15:55 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+ene 26, 2014 8:15:55 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /subscription
+ene 26, 2014 8:15:55 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+ene 26, 2014 8:15:55 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /subscription-listener
+ene 26, 2014 8:15:55 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+ene 26, 2014 8:15:56 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /custody-transfer
+ene 26, 2014 8:15:56 PM org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+Información: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+ene 26, 2014 8:15:56 PM org.apache.cxf.endpoint.ServerImpl initDestination
+Información: Setting the server's publish address to be /juddi-api
+ene 26, 2014 8:15:56 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+Información: Root WebApplicationContext: initialization completed in 9060 ms
+ene 26, 2014 8:15:56 PM org.apache.juddi.Registry start
+Información: Starting jUDDI registry...
+ene 26, 2014 8:15:56 PM org.apache.juddi.config.AppConfig loadConfiguration
+Información: Reading from properties file:  file:/C:/Users/Cute/Documents/SOR/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+ene 26, 2014 8:16:07 PM org.apache.juddi.Registry start
+Información: jUDDI registry started succesfully.
+ene 26, 2014 8:16:07 PM org.apache.cxf.transport.servlet.CXFServlet updateContext
+Información: Load the bus with application context
+ene 26, 2014 8:16:07 PM org.springframework.context.support.AbstractApplicationContext prepareRefresh
+Información: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@ee81d1: startup date [Sun Jan 26 20:16:07 CET 2014]; parent: Root WebApplicationContext
+ene 26, 2014 8:16:07 PM org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+Información: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@92fe37: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@f8b275
+ene 26, 2014 8:16:07 PM org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+Información: Servlet transport factory already registered 
+ene 26, 2014 8:16:07 PM org.apache.catalina.startup.HostConfig deployDescriptor
+Información: Desplieque del descriptor de configuración manager.xml
+ene 26, 2014 8:16:08 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio docs de la aplicación web
+ene 26, 2014 8:16:08 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio examples de la aplicación web
+ene 26, 2014 8:16:08 PM org.apache.catalina.startup.HostConfig deployDirectory
+Información: Despliegue del directorio ROOT de la aplicación web
+ene 26, 2014 8:16:08 PM org.apache.coyote.http11.Http11Protocol start
+Información: Arrancando Coyote HTTP/1.1 en puerto http-8081
+ene 26, 2014 8:16:08 PM org.apache.jk.common.ChannelSocket init
+Información: JK: ajp13 listening on /0.0.0.0:8009
+ene 26, 2014 8:16:08 PM org.apache.jk.server.JkMain start
+Información: Jk running ID=0 time=0/29  config=null
+ene 26, 2014 8:16:08 PM org.apache.catalina.startup.Catalina start
+Información: Server startup in 23425 ms

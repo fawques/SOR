@@ -10,3 +10,9 @@ ene 26, 2014 6:26:28 PM org.apache.catalina.core.ApplicationContext log
 Información: ContextListener: contextInitialized()
 ene 26, 2014 6:26:28 PM org.apache.catalina.core.ApplicationContext log
 Información: SessionListener: contextInitialized()
+ene 26, 2014 8:15:47 PM org.apache.catalina.core.ApplicationContext log
+Información: Initializing Spring root WebApplicationContext
+ene 26, 2014 8:16:08 PM org.apache.catalina.core.ApplicationContext log
+Información: ContextListener: contextInitialized()
+ene 26, 2014 8:16:08 PM org.apache.catalina.core.ApplicationContext log
+Información: SessionListener: contextInitialized()

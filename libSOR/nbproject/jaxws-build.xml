@@ -31,7 +31,7 @@
     </target>
     <target name="wsimport-client-clean-inquiry" depends="-init-project">
         <delete dir="${build.generated.dir}/jax-wsCache/inquiry"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/uddi-org:v3_service"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/uddi/v3_service"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-inquiry"/>
 </project>

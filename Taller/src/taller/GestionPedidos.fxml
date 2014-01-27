@@ -14,52 +14,10 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TitledPane animated="false" layoutX="34.0" layoutY="33.0" prefHeight="147.0" prefWidth="721.0" text="Filtro de búsqueda">
-                  <content>
-                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                      <children>
-                        <TextField fx:id="tfIDPedido" layoutX="101.0" layoutY="20.0" prefWidth="43.0" />
-                        <Label layoutX="31.0" layoutY="23.0" text="Id pedido" />
-                        <TextField id="tf" fx:id="tfIDPieza" layoutX="230.0" layoutY="20.0" prefWidth="60.0" />
-                        <Label layoutX="168.0" layoutY="23.0" text="Id pieza" />
-                        <Label layoutX="32.0" layoutY="72.0" text="Tipo de aceptación" />
-                        <Label layoutX="315.0" layoutY="26.0" text="Estado pedido" />
-                        <ComboBox id="cbEstadoPedido" fx:id="cbEstado" layoutX="419.0" layoutY="23.0" prefWidth="110.0" promptText="Cualquiera" value="Cualquiera">
-                          <items>
-                            <FXCollections fx:factory="observableArrayList">
-                              <String fx:value="Cualquiera" />
-                              <String fx:value="Emitido" />
-                              <String fx:value="Sin ofertas" />
-                              <String fx:value="Con ofertas" />
-                            </FXCollections>
-                          </items>
-                        </ComboBox>
-                        <Button fx:id="btBuscarPedido" layoutX="563.0" layoutY="72.0" minHeight="16.0" mnemonicParsing="false" onAction="#buscarPedido" prefHeight="22.0" prefWidth="90.0" text="Buscar" />
-                        <Label layoutX="286.0" layoutY="72.0" text="Fecha limite" />
-                        <ComboBox fx:id="cbModo" disable="false" layoutX="162.0" layoutY="70.0" prefWidth="100.0" promptText="Cualquiera" value="Cualquiera">
-                          <items>
-                            <FXCollections fx:factory="observableArrayList">
-                              <String fx:value="Cualquiera" />
-                              <String fx:value="Manual" />
-                              <String fx:value="Automático" />
-                            </FXCollections>
-                          </items>
-                        </ComboBox>
-                        <HBox layoutX="373.0" layoutY="70.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
-                          <children>
-                            <TextField fx:id="tfLimiteDia" minWidth="30.0" prefWidth="150.0" />
-                            <TextField fx:id="tfLimiteMes" minWidth="30.0" prefWidth="150.0" />
-                            <TextField fx:id="tfLimiteAnyo" minWidth="50.0" prefWidth="50.0" />
-                          </children>
-                        </HBox>
-                      </children>
-                    </AnchorPane>
-                  </content>
-                </TitledPane>
-                <TableView id="tvGrid" fx:id="tbPedidos" layoutX="34.0" layoutY="241.0" prefHeight="232.0" prefWidth="721.0" />
-                <Button fx:id="btNuevoPedido" layoutX="34.0" layoutY="185.0" mnemonicParsing="false" onAction="#onClickNuevoPedido" prefHeight="32.0" prefWidth="103.0" text="Nuevo pedido" />
-                <Button layoutX="180.0" layoutY="185.0" mnemonicParsing="false" onAction="#cancelarPedido" prefHeight="32.0" text="Cancelar pedido" />
-                <Text layoutX="373.0" layoutY="217.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos" />
+                <TableView id="tvGrid" fx:id="tbPedidos" layoutX="34.0" layoutY="74.0" prefHeight="399.0" prefWidth="721.0" />
+                <Button fx:id="btNuevoPedido" layoutX="178.0" layoutY="497.0" mnemonicParsing="false" onAction="#onClickNuevoPedido" prefHeight="21.0" prefWidth="103.0" text="Nuevo pedido" />
+                <Button layoutX="305.0" layoutY="497.0" mnemonicParsing="false" onAction="#cancelarPedido" prefHeight="21.0" text="Cancelar pedido" />
+                <Text layoutX="369.0" layoutY="53.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos" />
                 <Button layoutX="641.0" layoutY="4.0" mnemonicParsing="false" onAction="#bajaTaller" text="Darme de baja" />
                 <Button layoutX="476.0" layoutY="4.0" mnemonicParsing="false" onAction="#modificarTaller" text="Modificar mis datos" />
                 <Button layoutX="36.0" layoutY="497.0" mnemonicParsing="false" onAction="#visualizarPedidos" text="Actualizar pedidos" />

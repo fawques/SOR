@@ -363,6 +363,7 @@ public class GestionPedidosController implements Initializable {
         if (tpPed != null) {
             MainTaller.aceptarOferta(tpPed.getId());
             MainTaller.cambiarEstadoPedido(EstadoPedido.ACCEPTED,tpPed.getPedido());
+            actualizarPestanyaOfertas();
         }
         //else //no hay oferta seleccionada
     }

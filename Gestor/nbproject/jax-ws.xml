@@ -15,7 +15,7 @@
     <client name="security">
       <wsdl-url>http://localhost:8081/juddiv3/services/security?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8081/juddiv3/services/security.wsdl</local-wsdl-file>
-      <package-name>uddi-org:v3_service</package-name>
+      <package-name>org.uddi.v3_service</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -47,7 +47,7 @@
     <client name="inquiry">
       <wsdl-url>http://localhost:8081/juddiv3/services/inquiry?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8081/juddiv3/services/inquiry.wsdl</local-wsdl-file>
-      <package-name>uddi-org:v3_service</package-name>
+      <package-name>org.uddi.v3_service</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -79,7 +79,7 @@
     <client name="publish">
       <wsdl-url>http://localhost:8081/juddiv3/services/publish?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8081/juddiv3/services/publish.wsdl</local-wsdl-file>
-      <package-name>uddi-org:v3_service</package-name>
+      <package-name>org.uddi.v3_service</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
