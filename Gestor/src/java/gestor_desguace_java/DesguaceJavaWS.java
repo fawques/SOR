@@ -96,7 +96,7 @@ public class DesguaceJavaWS {
     public String nuevaOferta(@WebParam(name = "oferta") String oferta) {
         try {          
             bd = new InterfazBD("sor_gestor");
-             Gson gson = new Gson();
+             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
              Type collectionType = new TypeToken<Oferta>() {
              }.getType();
              Oferta p = gson.fromJson(oferta, collectionType);

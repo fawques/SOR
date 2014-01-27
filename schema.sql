@@ -76,7 +76,7 @@ use sor_taller;
 
 CREATE TABLE `taller` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) DEFAULT NULL,
+  `id` char(32) DEFAULT '',
   `nombre` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `direccion` varchar(200) DEFAULT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE `taller` (
 
 CREATE TABLE `pedido` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) NOT NULL,
+  `id` char(32) DEFAULT '',
   `fecha_alta` date NOT NULL,
   `estado` int(11) NOT NULL,
   `taller` char(32) NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE `pedido_pieza` (
 
 CREATE TABLE `oferta` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) NOT NULL,
+  `id` char(32) DEFAULT '',
   `fecha_alta` date NOT NULL,
   `importe` double NOT NULL,
   `estado` int(11) NOT NULL,
@@ -146,7 +146,7 @@ USE `sor_desguace`;
 
 CREATE TABLE `desguace` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) DEFAULT NULL,
+  `id` char(32) DEFAULT '',
   `nombre` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `direccion` varchar(200) DEFAULT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE `desguace` (
 
 CREATE TABLE `pedido` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) NOT NULL,
+  `id` char(32) DEFAULT '',
   `fecha_alta` date NOT NULL,
   `estado` int(11) NOT NULL,
   `taller` char(32) NOT NULL,
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `pieza` (
 
 CREATE TABLE `oferta` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) NOT NULL,
+  `id` char(32) DEFAULT '',
   `fecha_alta` date NOT NULL,
   `importe` double NOT NULL,
   `estado` int(11) NOT NULL,

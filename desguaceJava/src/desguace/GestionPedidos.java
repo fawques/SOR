@@ -587,7 +587,7 @@ public class GestionPedidos implements Initializable {
              pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
         }
         collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        if(!pedidosstring.equals("") && pedidosstring!=null){
+        if(pedidosstring!=null && !pedidosstring.equals("")){
             listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
         

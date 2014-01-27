@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://gestor_desguace_java/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="DesguaceJavaWS" targetNamespace="http://gestor_desguace_java/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://192.168.1.104:8080/Gestor/DesguaceJavaWS?xsd=1" namespace="http://gestor_desguace_java/" />
+    </xsd:schema>
+  </types>
+  <message name="baja">
+    <part name="parameters" element="tns:baja" />
+  </message>
+  <message name="bajaResponse">
+    <part name="parameters" element="tns:bajaResponse" />
+  </message>
+  <message name="alta">
+    <part name="parameters" element="tns:alta" />
+  </message>
+  <message name="altaResponse">
+    <part name="parameters" element="tns:altaResponse" />
+  </message>
+  <message name="checkActivacion">
+    <part name="parameters" element="tns:checkActivacion" />
+  </message>
+  <message name="checkActivacionResponse">
+    <part name="parameters" element="tns:checkActivacionResponse" />
+  </message>
+  <message name="cambiarEstadoPedido">
+    <part name="parameters" element="tns:cambiarEstadoPedido" />
+  </message>
+  <message name="cambiarEstadoPedidoResponse">
+    <part name="parameters" element="tns:cambiarEstadoPedidoResponse" />
+  </message>
+  <message name="getPedidosporID">
+    <part name="parameters" element="tns:getPedidosporID" />
+  </message>
+  <message name="getPedidosporIDResponse">
+    <part name="parameters" element="tns:getPedidosporIDResponse" />
+  </message>
+  <message name="aceptarOfertaFin">
+    <part name="parameters" element="tns:aceptarOfertaFin" />
+  </message>
+  <message name="aceptarOfertaFinResponse">
+    <part name="parameters" element="tns:aceptarOfertaFinResponse" />
+  </message>
+  <message name="cancelarOferta">
+    <part name="parameters" element="tns:cancelarOferta" />
+  </message>
+  <message name="cancelarOfertaResponse">
+    <part name="parameters" element="tns:cancelarOfertaResponse" />
+  </message>
+  <message name="nuevaOferta">
+    <part name="parameters" element="tns:nuevaOferta" />
+  </message>
+  <message name="nuevaOfertaResponse">
+    <part name="parameters" element="tns:nuevaOfertaResponse" />
+  </message>
+  <message name="getOfertas">
+    <part name="parameters" element="tns:getOfertas" />
+  </message>
+  <message name="getOfertasResponse">
+    <part name="parameters" element="tns:getOfertasResponse" />
+  </message>
+  <portType name="DesguaceJavaWS">
+    <operation name="baja">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/bajaRequest" message="tns:baja" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/bajaResponse" message="tns:bajaResponse" />
+    </operation>
+    <operation name="alta">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaRequest" message="tns:alta" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/altaResponse" message="tns:altaResponse" />
+    </operation>
+    <operation name="checkActivacion">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionRequest" message="tns:checkActivacion" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/checkActivacionResponse" message="tns:checkActivacionResponse" />
+    </operation>
+    <operation name="cambiarEstadoPedido">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/cambiarEstadoPedidoRequest" message="tns:cambiarEstadoPedido" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/cambiarEstadoPedidoResponse" message="tns:cambiarEstadoPedidoResponse" />
+    </operation>
+    <operation name="getPedidosporID">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosporIDRequest" message="tns:getPedidosporID" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getPedidosporIDResponse" message="tns:getPedidosporIDResponse" />
+    </operation>
+    <operation name="aceptarOfertaFin">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinRequest" message="tns:aceptarOfertaFin" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/aceptarOfertaFinResponse" message="tns:aceptarOfertaFinResponse" />
+    </operation>
+    <operation name="cancelarOferta">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaRequest" message="tns:cancelarOferta" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/cancelarOfertaResponse" message="tns:cancelarOfertaResponse" />
+    </operation>
+    <operation name="nuevaOferta">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaRequest" message="tns:nuevaOferta" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/nuevaOfertaResponse" message="tns:nuevaOfertaResponse" />
+    </operation>
+    <operation name="getOfertas">
+      <input wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasRequest" message="tns:getOfertas" />
+      <output wsam:Action="http://gestor_desguace_java/DesguaceJavaWS/getOfertasResponse" message="tns:getOfertasResponse" />
+    </operation>
+  </portType>
+  <binding name="DesguaceJavaWSPortBinding" type="tns:DesguaceJavaWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="baja">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="alta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="checkActivacion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="cambiarEstadoPedido">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getPedidosporID">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="aceptarOfertaFin">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="cancelarOferta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="nuevaOferta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getOfertas">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="DesguaceJavaWS">
+    <port name="DesguaceJavaWSPort" binding="tns:DesguaceJavaWSPortBinding">
+      <soap:address location="http://192.168.1.104:8080/Gestor/DesguaceJavaWS" />
+    </port>
+  </service>
+</definitions>

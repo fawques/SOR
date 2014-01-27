@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B1119FB-868C-4511-A354-9B3A76492D8B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>desguaceNET</RootNamespace>
+    <AssemblyName>desguaceNET</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Apache.NMS">
+      <HintPath>..\packages\Apache.NMS.1.6.0.3083\lib\net40\Apache.NMS.dll</HintPath>
+    </Reference>
+    <Reference Include="Apache.NMS.ActiveMQ">
+      <HintPath>..\packages\Apache.NMS.ActiveMQ.1.6.2\lib\net40\Apache.NMS.ActiveMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MySql.Data.6.8.3\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="mysql.data.entity.EF6">
+      <HintPath>..\packages\MySql.Data.Entities.6.8.3.0\lib\net45\mysql.data.entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AltaDesguace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AltaDesguace.Designer.cs">
+      <DependentUpon>AltaDesguace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BajaDesguace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BajaDesguace.Designer.cs">
+      <DependentUpon>BajaDesguace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DesguaceNet.cs" />
+    <Compile Include="DesguacerPendienteActivacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DesguacerPendienteActivacion.Designer.cs">
+      <DependentUpon>DesguacerPendienteActivacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionPedidos.Designer.cs">
+      <DependentUpon>GestionPedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="libSOR\activemq\Consumer.cs" />
+    <Compile Include="libSOR\activemq\Gestor_activemq.cs" />
+    <Compile Include="libSOR\BD\Conexion.cs" />
+    <Compile Include="libSOR\BD\InterfazBD.cs" />
+    <Compile Include="libSOR\general\Desguace.cs" />
+    <Compile Include="libSOR\general\EstadoGeneral.cs" />
+    <Compile Include="libSOR\general\EstadoOferta.cs" />
+    <Compile Include="libSOR\general\EstadoPedido.cs" />
+    <Compile Include="libSOR\general\Oferta.cs" />
+    <Compile Include="libSOR\general\Pedido.cs" />
+    <Compile Include="libSOR\general\PedidoCorto.cs" />
+    <Compile Include="libSOR\general\Pieza.cs" />
+    <Compile Include="libSOR\general\Usuario.cs" />
+    <Compile Include="NuevaOferta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuevaOferta.Designer.cs">
+      <DependentUpon>NuevaOferta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializableContractResolver.cs" />
+    <Compile Include="Service References\desguaceWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\desguaceWS_Silvia\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="sor_desguaceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sor_desguaceDataSet.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AltaDesguace.resx">
+      <DependentUpon>AltaDesguace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BajaDesguace.resx">
+      <DependentUpon>BajaDesguace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DesguacerPendienteActivacion.resx">
+      <DependentUpon>DesguacerPendienteActivacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionPedidos.resx">
+      <DependentUpon>GestionPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuevaOferta.resx">
+      <DependentUpon>NuevaOferta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Service References\desguaceWS\DesguaceJavaWS.wsdl" />
+    <None Include="Service References\desguaceWS\DesguaceJavaWS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.aceptarOfertaFinResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.altaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.bajaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.cambiarEstadoPedidoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.cancelarOfertaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.checkActivacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.getOfertasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.getPedidosporIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.nuevaOfertaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS1.wsdl" />
+    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.aceptarOfertaFinResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.altaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.bajaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.cancelarOfertaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.checkActivacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.getOfertasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.getPedidosporIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="sor_desguaceDataSet.xsc">
+      <DependentUpon>sor_desguaceDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="sor_desguaceDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>sor_desguaceDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="sor_desguaceDataSet.xss">
+      <DependentUpon>sor_desguaceDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\desguaceWS\" />
+    <WCFMetadataStorage Include="Service References\desguaceWS_Silvia\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\desguaceWS\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\desguaceWS\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\desguaceWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\desguaceWS_Silvia\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\desguaceWS_Silvia\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\desguaceWS_Silvia\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
