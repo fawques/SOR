@@ -10,7 +10,7 @@
 
 build/
 dist/
-nbproject/private/
+**/nbproject/private/
 
 # ActiveMQ #
 *.log
