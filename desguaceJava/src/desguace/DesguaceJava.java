@@ -30,6 +30,9 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import webservices.Webservices;
+import static webservices.Webservices.alta_WS;
+import Async.AsyncManager;
 
 /**
  *
@@ -377,59 +380,154 @@ public class DesguaceJava extends Application {
         return validarNombre(nombreTaller) && validarEmail(email) && validarNombre(ciudad) && validarSoloNumeros(cp) && validarSoloNumeros(telefono) && validarDireccion(direccion);
     }
 
-    public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, int postalCode, int telephone) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.alta(name, email, address, city, postalCode, telephone);
+    public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
+        AsyncManager manager = new AsyncManager("sor_desguace");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                boolean ret = Webservices.alta_WS(name, email, address, city, postalCode, telephone);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        // tenemos que guardar el alta en local, y dejarla pendiente de mandar
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {name,email,address,city,postalCode,telephone};
+        manager.guardarAccion(m,params);
+        return false;
     }
 
+    
     public static String checkActivacion(java.lang.String mail) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.checkActivacion(mail);
+        for (int i = 0; i < 10; i++) {
+            try{
+                String ret = Webservices.checkActivacion_WS(mail);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        return "";
     }
 
 
     public static String nuevaOferta(java.lang.String oferta) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.nuevaOferta(oferta);
+        AsyncManager manager = new AsyncManager("sor_desguace");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                String ret = Webservices.nuevaOferta_WS(oferta);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {oferta};
+        manager.guardarAccion(m,params);
+        return "";
     }
 
     public static String getOfertas() {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.getOfertas();
+        for (int i = 0; i < 10; i++) {
+            try{
+                String ret = Webservices.getOfertas_WS();
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        return "";
     }
 
     public static String getPedidosporID(java.lang.String string) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.getPedidosporID(string);
+        for (int i = 0; i < 10; i++) {
+            try{
+                String ret = getPedidosporID(string);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        return "";
     }
 
     public static Boolean aceptarOfertaFin(java.lang.String id) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.aceptarOfertaFin(id);
+        AsyncManager manager = new AsyncManager("sor_desguace");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                Boolean ret = Webservices.aceptarOfertaFin_WS(id);
+                if(ret){
+                
+                }
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {id};
+        manager.guardarAccion(m,params);
+        return false;
     }
 
     public static Boolean cancelarOferta(java.lang.String id) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.cancelarOferta(id);
+        AsyncManager manager = new AsyncManager("sor_desguace");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                Boolean ret = Webservices.cancelarOferta_WS(id);
+                if(ret){
+                
+                }
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {id};
+        manager.guardarAccion(m,params);
+        return false;
     }
 
     public static Boolean baja(java.lang.String id) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.baja(id);
+        AsyncManager manager = new AsyncManager("sor_desguace");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+                Boolean ret = Webservices.baja_WS(id);
+                if(ret){
+                
+                }
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {id};
+        manager.guardarAccion(m,params);
+        return false;
     }
 
     public static Boolean cambiarEstadoPedido_1(java.lang.String id, int estado) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.cambiarEstadoPedido(id, estado);
+        for (int i = 0; i < 10; i++) {
+            try{
+                Boolean ret = Webservices.cambiarEstadoPedido_1_WS(id, ""+estado);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        return false;
     }
 
 }

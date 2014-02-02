@@ -44,38 +44,6 @@
         </wsimport-option>
       </wsimport-options>
     </client>
-    <client name="inquiry">
-      <wsdl-url>http://localhost:8081/juddiv3/services/inquiry?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8081/juddiv3/services/inquiry.wsdl</local-wsdl-file>
-      <package-name>org.uddi.v3_service</package-name>
-      <catalog-file>catalog.xml</catalog-file>
-      <wsimport-options>
-        <wsimport-option>
-          <wsimport-option-name>extension</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>verbose</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>fork</wsimport-option-name>
-          <wsimport-option-value>false</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8081/juddiv3/services/inquiry?wsdl</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>xnocompile</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>xendorsed</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-      </wsimport-options>
-    </client>
     <client name="publish">
       <wsdl-url>http://localhost:8081/juddiv3/services/publish?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8081/juddiv3/services/publish.wsdl</local-wsdl-file>
@@ -111,7 +79,7 @@
     <client name="juddi-api">
       <wsdl-url>http://localhost:8081/juddiv3/services/juddi-api?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8081/juddiv3/services/juddi-api.wsdl</local-wsdl-file>
-      <package-name>juddi-apache-org:v3_service</package-name>
+      <package-name>org.apache.juddi.v3_service</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -137,6 +105,38 @@
         <wsimport-option>
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+      </wsimport-options>
+    </client>
+    <client name="inquiry">
+      <wsdl-url>http://localhost:8081/juddiv3/services/inquiry?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_8081/juddiv3/services/inquiry.wsdl</local-wsdl-file>
+      <package-name>uddi-org:v3_service</package-name>
+      <catalog-file>catalog.xml</catalog-file>
+      <wsimport-options>
+        <wsimport-option>
+          <wsimport-option-name>extension</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>verbose</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>wsdlLocation</wsimport-option-name>
+          <wsimport-option-value>http://localhost:8081/juddiv3/services/inquiry?wsdl</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xnocompile</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xendorsed</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>target</wsimport-option-name>
+          <wsimport-option-value>2.1</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

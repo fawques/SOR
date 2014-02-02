@@ -23,7 +23,7 @@
         <copy todir="${build.classes.dir}/META-INF">
             <fileset dir="${webinf.dir}" includes="wsit-gestor_taller.TallerWS.xml"/>
         </copy>
-        <wsgen sourcedestdir="${build.generated.sources.dir}/jax-ws" resourcedestdir="${build.generated.sources.dir}/jax-ws/resources/" destdir="${build.generated.sources.dir}/jax-ws" verbose="true" keep="true" genwsdl="true" sei="gestor_taller.TallerWS" xendorsed="true">
+        <wsgen sourcedestdir="${build.generated.sources.dir}/jax-ws" resourcedestdir="${build.generated.sources.dir}/jax-ws/resources/" destdir="${build.generated.sources.dir}/jax-ws" verbose="true" xendorsed="true" keep="true" genwsdl="true" sei="gestor_taller.TallerWS">
             <classpath path="${java.home}/../lib/tools.jar:${build.classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
         </wsgen>
     </target>
@@ -31,7 +31,7 @@
         <copy todir="${build.classes.dir}/META-INF">
             <fileset dir="${webinf.dir}" includes="wsit-gestor_admin.AdminWS.xml"/>
         </copy>
-        <wsgen sourcedestdir="${build.generated.sources.dir}/jax-ws" resourcedestdir="${build.generated.sources.dir}/jax-ws/resources/" destdir="${build.generated.sources.dir}/jax-ws" verbose="true" keep="true" genwsdl="true" sei="gestor_admin.AdminWS" xendorsed="true">
+        <wsgen sourcedestdir="${build.generated.sources.dir}/jax-ws" resourcedestdir="${build.generated.sources.dir}/jax-ws/resources/" destdir="${build.generated.sources.dir}/jax-ws" verbose="true" xendorsed="true" keep="true" genwsdl="true" sei="gestor_admin.AdminWS">
             <classpath path="${java.home}/../lib/tools.jar:${build.classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
         </wsgen>
     </target>
@@ -39,7 +39,7 @@
         <copy todir="${build.classes.dir}/META-INF">
             <fileset dir="${webinf.dir}" includes="wsit-gestor_desguace_java.DesguaceJavaWS.xml"/>
         </copy>
-        <wsgen sourcedestdir="${build.generated.sources.dir}/jax-ws" resourcedestdir="${build.generated.sources.dir}/jax-ws/resources/" destdir="${build.generated.sources.dir}/jax-ws" verbose="true" keep="true" genwsdl="true" sei="gestor_desguace_java.DesguaceJavaWS" xendorsed="true">
+        <wsgen sourcedestdir="${build.generated.sources.dir}/jax-ws" resourcedestdir="${build.generated.sources.dir}/jax-ws/resources/" destdir="${build.generated.sources.dir}/jax-ws" verbose="true" xendorsed="true" keep="true" genwsdl="true" sei="gestor_desguace_java.DesguaceJavaWS">
             <classpath path="${java.home}/../lib/tools.jar:${build.classes.dir}:${j2ee.platform.wsgen.classpath}:${javac.classpath}"/>
         </wsgen>
     </target>
@@ -61,7 +61,7 @@
     </target>
     <target name="wsimport-client-security" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/security"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/security" destdir="${build.generated.dir}/jax-wsCache/security" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/security/wsdl/localhost_8081/juddiv3/services/security.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/security?wsdl" xnocompile="true" xendorsed="true">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/security" destdir="${build.generated.dir}/jax-wsCache/security" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/security/wsdl/localhost_8081/juddiv3/services/security.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/security?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/security/wsdl/localhost_8081/juddiv3/services/security.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/security"/>
         </wsimport>
@@ -75,25 +75,9 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/org/uddi/v3_service"/>
         <delete dir="${build.generated.dir}/jax-wsCache/security"/>
     </target>
-    <target name="wsimport-client-inquiry" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/inquiry"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/inquiry" destdir="${build.generated.dir}/jax-wsCache/inquiry" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/inquiry/wsdl/localhost_8081/juddiv3/services/inquiry.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/inquiry?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/inquiry/wsdl/localhost_8081/juddiv3/services/inquiry.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/inquiry"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/inquiry">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-inquiry" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/org/uddi/v3_service"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/inquiry"/>
-    </target>
     <target name="wsimport-client-publish" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/publish"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/publish" destdir="${build.generated.dir}/jax-wsCache/publish" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/publish/wsdl/localhost_8081/juddiv3/services/publish.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/publish?wsdl" xnocompile="true" xendorsed="true">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/publish" destdir="${build.generated.dir}/jax-wsCache/publish" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/publish/wsdl/localhost_8081/juddiv3/services/publish.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/publish?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/publish/wsdl/localhost_8081/juddiv3/services/publish.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/publish"/>
         </wsimport>
@@ -109,7 +93,7 @@
     </target>
     <target name="wsimport-client-juddi-api" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/juddi-api"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/juddi-api" destdir="${build.generated.dir}/jax-wsCache/juddi-api" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/juddi-api/wsdl/localhost_8081/juddiv3/services/juddi-api.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/juddi-api?wsdl" xnocompile="true" xendorsed="true">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/juddi-api" destdir="${build.generated.dir}/jax-wsCache/juddi-api" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/juddi-api/wsdl/localhost_8081/juddiv3/services/juddi-api.wsdl" catalog="catalog.xml" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8081/juddiv3/services/juddi-api?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/juddi-api/wsdl/localhost_8081/juddiv3/services/juddi-api.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/juddi-api"/>
         </wsimport>
@@ -120,8 +104,24 @@
         </copy>
     </target>
     <target name="wsimport-client-clean-juddi-api" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/juddi-apache-org:v3_service"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/apache/juddi/v3_service"/>
         <delete dir="${build.generated.dir}/jax-wsCache/juddi-api"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-security, wsimport-client-inquiry, wsimport-client-publish, wsimport-client-juddi-api"/>
+    <target name="wsimport-client-inquiry" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/inquiry"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/inquiry" destdir="${build.generated.dir}/jax-wsCache/inquiry" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/inquiry/wsdl/localhost_8081/juddiv3/services/inquiry.wsdl" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8081/juddiv3/services/inquiry?wsdl" xnocompile="true" xendorsed="true" target="2.1">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/inquiry/wsdl/localhost_8081/juddiv3/services/inquiry.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/inquiry"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/inquiry">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-inquiry" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/uddi-org:v3_service"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/inquiry"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-security, wsimport-client-publish, wsimport-client-juddi-api, wsimport-client-inquiry"/>
 </project>

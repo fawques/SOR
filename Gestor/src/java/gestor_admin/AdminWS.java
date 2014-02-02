@@ -293,7 +293,7 @@ public class AdminWS {
     @WebMethod(operationName = "Registrar")
     public String Registrar() {
         SimplePublish sp = new SimplePublish();
-        sp.publish();
+        //sp.publish();
         return "hola";
     }
 

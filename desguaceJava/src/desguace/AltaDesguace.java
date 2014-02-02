@@ -230,7 +230,7 @@ public class AltaDesguace implements Initializable {
         if (DesguaceJava.validar(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
-            if (DesguaceJava.alta(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()))) {
+            if (DesguaceJava.alta(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
                 //METER en base de datos si está todo ok.
                 bd = new InterfazBD("sor_desguace");
                 if (bd.altaDesguace(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {

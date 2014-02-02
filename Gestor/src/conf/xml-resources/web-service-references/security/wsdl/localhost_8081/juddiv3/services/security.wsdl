@@ -80,6 +80,26 @@
       <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:bindingKey"/>
     </xs:sequence>
   </xs:complexType>
+<xs:complexType name="get_subscriptionResults">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="ns1:authInfo"/>
+      <xs:element name="subscriptionKey" type="xs:string"/>
+      <xs:element name="coveragePeriod" type="tns:coveragePeriod"/>
+      <xs:element minOccurs="0" name="chunkToken" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="coveragePeriod">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="startPoint" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="endPoint" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="save_subscription">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="ns1:authInfo"/>
+      <xs:element maxOccurs="unbounded" name="subscription" type="tns:subscription"/>
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="subscription">
     <xs:sequence>
       <xs:element minOccurs="0" name="subscriptionKey" type="xs:string"/>
@@ -105,29 +125,9 @@
       <xs:element minOccurs="0" ref="ns1:get_assertionStatusReport"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="coveragePeriod">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="startPoint" type="xs:dateTime"/>
-      <xs:element minOccurs="0" name="endPoint" type="xs:dateTime"/>
-    </xs:sequence>
-  </xs:complexType>
 <xs:complexType name="subscriptions">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="subscription" nillable="true" type="tns:subscription"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="get_subscriptionResults">
-    <xs:sequence>
-      <xs:element minOccurs="0" ref="ns1:authInfo"/>
-      <xs:element name="subscriptionKey" type="xs:string"/>
-      <xs:element name="coveragePeriod" type="tns:coveragePeriod"/>
-      <xs:element minOccurs="0" name="chunkToken" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="save_subscription">
-    <xs:sequence>
-      <xs:element minOccurs="0" ref="ns1:authInfo"/>
-      <xs:element maxOccurs="unbounded" name="subscription" type="tns:subscription"/>
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="subscriptionResultsList">
@@ -160,10 +160,10 @@
     </xs:sequence>
   </xs:complexType>
 </xs:schema>
-<xs:schema elementFormDefault="qualified" targetNamespace="urn:uddi-org:repl_v3" version="1.0" xmlns:ns1="urn:uddi-org:custody_v3" xmlns:ns2="urn:uddi-org:api_v3" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" xmlns:tns="urn:uddi-org:repl_v3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xs:import namespace="urn:uddi-org:custody_v3"/>
+<xs:schema elementFormDefault="qualified" targetNamespace="urn:uddi-org:repl_v3" version="1.0" xmlns:ns1="urn:uddi-org:api_v3" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" xmlns:ns3="urn:uddi-org:custody_v3" xmlns:tns="urn:uddi-org:repl_v3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xs:import namespace="urn:uddi-org:api_v3"/>
 <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"/>
+<xs:import namespace="urn:uddi-org:custody_v3"/>
 <xs:element name="changeRecord">
     <xs:complexType>
       <xs:sequence>
@@ -217,7 +217,7 @@
 <xs:element name="changeRecordDeleteAssertion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="ns2:publisherAssertion"/>
+        <xs:element ref="ns1:publisherAssertion"/>
         <xs:element name="fromBusinessCheck" type="xs:boolean"/>
         <xs:element name="toBusinessCheck" type="xs:boolean"/>
         <xs:element name="modified" type="xs:anySimpleType"/>
@@ -235,11 +235,11 @@
 <xs:element name="changeRecordNewData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" ref="ns2:businessEntity"/>
-        <xs:element minOccurs="0" ref="ns2:businessService"/>
-        <xs:element minOccurs="0" ref="ns2:bindingTemplate"/>
-        <xs:element minOccurs="0" ref="ns2:tModel"/>
-        <xs:element name="operationalInfo" type="ns2:operationalInfo"/>
+        <xs:element minOccurs="0" ref="ns1:businessEntity"/>
+        <xs:element minOccurs="0" ref="ns1:businessService"/>
+        <xs:element minOccurs="0" ref="ns1:bindingTemplate"/>
+        <xs:element minOccurs="0" ref="ns1:tModel"/>
+        <xs:element name="operationalInfo" type="ns1:operationalInfo"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -254,7 +254,7 @@
 <xs:element name="changeRecordPublisherAssertion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="ns2:publisherAssertion"/>
+        <xs:element ref="ns1:publisherAssertion"/>
         <xs:element name="fromBusinessCheck" type="xs:boolean"/>
         <xs:element name="toBusinessCheck" type="xs:boolean"/>
         <xs:element name="modified" type="xs:anySimpleType"/>
@@ -313,7 +313,7 @@
 <xs:element name="fromSignatures">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" minOccurs="0" name="Signature" type="ns3:SignatureType"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="Signature" type="ns2:SignatureType"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -346,9 +346,9 @@
       <xs:sequence>
         <xs:element name="operatorNodeID" type="xs:string"/>
         <xs:element name="operatorStatus" type="tns:operatorStatus_type"/>
-        <xs:element maxOccurs="unbounded" name="contact" type="ns2:contact"/>
+        <xs:element maxOccurs="unbounded" name="contact" type="ns1:contact"/>
         <xs:element name="soapReplicationURL" type="xs:anyURI"/>
-        <xs:element maxOccurs="unbounded" minOccurs="0" name="KeyInfo" type="ns3:KeyInfoType"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="KeyInfo" type="ns2:KeyInfoType"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -361,7 +361,7 @@
         <xs:element name="registryContact">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="contact" type="ns2:contact"/>
+              <xs:element name="contact" type="ns1:contact"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -370,34 +370,27 @@
             <xs:sequence>
               <xs:element name="operatorNodeID" type="xs:string"/>
               <xs:element name="operatorStatus" type="tns:operatorStatus_type"/>
-              <xs:element maxOccurs="unbounded" name="contact" type="ns2:contact"/>
+              <xs:element maxOccurs="unbounded" name="contact" type="ns1:contact"/>
               <xs:element name="soapReplicationURL" type="xs:anyURI"/>
-              <xs:element maxOccurs="unbounded" minOccurs="0" name="KeyInfo" type="ns3:KeyInfoType"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="KeyInfo" type="ns2:KeyInfoType"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element minOccurs="0" ref="tns:communicationGraph"/>
         <xs:element minOccurs="0" name="maximumTimeToSyncRegistry" type="xs:integer"/>
         <xs:element name="maximumTimeToGetChanges" type="xs:integer"/>
-        <xs:element maxOccurs="unbounded" minOccurs="0" name="Signature" type="ns3:SignatureType"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="Signature" type="ns2:SignatureType"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 <xs:element name="toSignatures">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" minOccurs="0" name="Signature" type="ns3:SignatureType"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" name="Signature" type="ns2:SignatureType"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 <xs:element name="transfer_custody" type="tns:transfer_custody"/>
-<xs:complexType name="transfer_custody">
-    <xs:sequence>
-      <xs:element ref="ns1:transferToken"/>
-      <xs:element ref="ns1:keyBag"/>
-      <xs:element ref="ns1:transferOperationalInfo"/>
-    </xs:sequence>
-  </xs:complexType>
 <xs:complexType name="changeRecordID_type">
     <xs:sequence>
       <xs:element name="nodeID" type="xs:string"/>
@@ -407,6 +400,13 @@
 <xs:complexType name="highWaterMarkVector_type">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="highWaterMark" nillable="true" type="tns:changeRecordID_type"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="transfer_custody">
+    <xs:sequence>
+      <xs:element ref="ns3:transferToken"/>
+      <xs:element ref="ns3:keyBag"/>
+      <xs:element ref="ns3:transferOperationalInfo"/>
     </xs:sequence>
   </xs:complexType>
 <xs:simpleType name="operatorStatus_type">
@@ -443,8 +443,8 @@
   </xs:simpleType>
 </xs:schema>
 <xs:schema elementFormDefault="qualified" targetNamespace="urn:uddi-org:policy_v3" version="1.0" xmlns:ns1="http://www.w3.org/2000/09/xmldsig#" xmlns:tns="urn:uddi-org:policy_v3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
 <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"/>
+<xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
 <xs:element name="policies">
     <xs:complexType>
       <xs:sequence>
@@ -489,18 +489,6 @@
 <xs:element name="transferOperationalInfo" type="tns:transferOperationalInfo"/>
 <xs:element name="transferToken" type="tns:transferToken"/>
 <xs:element name="transfer_entities" type="tns:transfer_entities"/>
-<xs:complexType name="transferToken">
-    <xs:sequence>
-      <xs:element ref="ns1:nodeID"/>
-      <xs:element name="expirationTime" type="xs:dateTime"/>
-      <xs:element name="opaqueToken" type="xs:base64Binary"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="keyBag">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="key" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
 <xs:complexType name="transferOperationalInfo">
     <xs:sequence>
       <xs:element minOccurs="0" ref="ns1:authorizedName"/>
@@ -512,6 +500,18 @@
       <xs:element minOccurs="0" ref="ns1:authInfo"/>
       <xs:element name="transferToken" type="tns:transferToken"/>
       <xs:element name="keyBag" type="tns:keyBag"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="transferToken">
+    <xs:sequence>
+      <xs:element ref="ns1:nodeID"/>
+      <xs:element name="expirationTime" type="xs:dateTime"/>
+      <xs:element name="opaqueToken" type="xs:base64Binary"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="keyBag">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="key" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="discard_transferToken">
@@ -529,8 +529,8 @@
   </xs:complexType>
 </xs:schema>
 <xs:schema elementFormDefault="qualified" targetNamespace="urn:uddi-org:api_v3" version="1.0" xmlns:ns1="http://www.w3.org/2000/09/xmldsig#" xmlns:tns="urn:uddi-org:api_v3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
 <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"/>
+<xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
 <xs:element name="accessPoint" type="tns:accessPoint"/>
 <xs:element name="actualCount" type="xs:int"/>
 <xs:element name="add_publisherAssertions" type="tns:add_publisherAssertions"/>
@@ -649,83 +649,18 @@
       <xs:element name="authInfo" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="find_binding">
+<xs:complexType name="businessEntity">
     <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
-      <xs:element minOccurs="0" name="tModelBag" type="tns:tModelBag"/>
-      <xs:element minOccurs="0" name="find_tModel" type="tns:find_tModel"/>
-      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
-    </xs:sequence>
-    <xs:attribute name="maxRows" type="xs:int"/>
-    <xs:attribute name="serviceKey" type="xs:string"/>
-    <xs:attribute name="listHead" type="xs:int"/>
-  </xs:complexType>
-<xs:complexType name="findQualifiers">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="findQualifier" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="tModelBag">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="tModelKey" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="find_tModel">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
-      <xs:element minOccurs="0" name="name" type="tns:name"/>
-      <xs:element minOccurs="0" name="identifierBag" type="tns:identifierBag"/>
-      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
-    </xs:sequence>
-    <xs:attribute name="maxRows" type="xs:int"/>
-    <xs:attribute name="listHead" type="xs:int"/>
-  </xs:complexType>
-<xs:complexType name="name">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute ref="xml:lang"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-<xs:complexType name="identifierBag">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="keyedReference" type="tns:keyedReference"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="keyedReference">
-    <xs:sequence/>
-    <xs:attribute name="tModelKey" type="xs:string" use="required"/>
-    <xs:attribute name="keyName" type="xs:string"/>
-    <xs:attribute name="keyValue" type="xs:string" use="required"/>
-  </xs:complexType>
-<xs:complexType name="categoryBag">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="keyedReference" type="tns:keyedReference"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="keyedReferenceGroup" type="tns:keyedReferenceGroup"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="keyedReferenceGroup">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="keyedReference" nillable="true" type="tns:keyedReference"/>
-    </xs:sequence>
-    <xs:attribute name="tModelKey" type="xs:string" use="required"/>
-  </xs:complexType>
-<xs:complexType name="find_business">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="name" nillable="true" type="tns:name"/>
-      <xs:element minOccurs="0" name="identifierBag" type="tns:identifierBag"/>
-      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
-      <xs:element minOccurs="0" name="tModelBag" type="tns:tModelBag"/>
-      <xs:element minOccurs="0" name="find_tModel" type="tns:find_tModel"/>
       <xs:element minOccurs="0" name="discoveryURLs" type="tns:discoveryURLs"/>
-      <xs:element minOccurs="0" name="find_relatedBusinesses" type="tns:find_relatedBusinesses"/>
+      <xs:element maxOccurs="unbounded" name="name" type="tns:name"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
+      <xs:element minOccurs="0" name="contacts" type="tns:contacts"/>
+      <xs:element minOccurs="0" name="businessServices" type="tns:businessServices"/>
+      <xs:element minOccurs="0" name="identifierBag" type="tns:identifierBag"/>
+      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:Signature"/>
     </xs:sequence>
-    <xs:attribute name="maxRows" type="xs:int"/>
-    <xs:attribute name="listHead" type="xs:int"/>
+    <xs:attribute name="businessKey" type="xs:string"/>
   </xs:complexType>
 <xs:complexType name="discoveryURLs">
     <xs:sequence>
@@ -739,86 +674,12 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-<xs:complexType name="find_relatedBusinesses">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
-      <xs:element minOccurs="0" name="businessKey" type="xs:string"/>
-      <xs:element minOccurs="0" name="fromKey" type="xs:string"/>
-      <xs:element minOccurs="0" name="toKey" type="xs:string"/>
-      <xs:element minOccurs="0" name="keyedReference" type="tns:keyedReference"/>
-    </xs:sequence>
-    <xs:attribute name="maxRows" type="xs:int"/>
-    <xs:attribute name="listHead" type="xs:int"/>
-  </xs:complexType>
-<xs:complexType name="find_service">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="name" nillable="true" type="tns:name"/>
-      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
-      <xs:element minOccurs="0" name="tModelBag" type="tns:tModelBag"/>
-      <xs:element minOccurs="0" name="find_tModel" type="tns:find_tModel"/>
-    </xs:sequence>
-    <xs:attribute name="maxRows" type="xs:int"/>
-    <xs:attribute name="businessKey" type="xs:string"/>
-    <xs:attribute name="listHead" type="xs:int"/>
-  </xs:complexType>
-<xs:complexType name="get_bindingDetail">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" name="bindingKey" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="get_businessDetail">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" name="businessKey" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="get_serviceDetail">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" name="serviceKey" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="get_tModelDetail">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" name="tModelKey" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="get_assertionStatusReport">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element minOccurs="0" name="completionStatus" type="tns:completionStatus"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="bindingDetail">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="listDescription" type="tns:listDescription"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="bindingTemplate" nillable="true" type="tns:bindingTemplate"/>
-    </xs:sequence>
-    <xs:attribute name="truncated" type="xs:boolean"/>
-  </xs:complexType>
-<xs:complexType name="listDescription">
-    <xs:sequence>
-      <xs:element name="includeCount" type="xs:int"/>
-      <xs:element name="actualCount" type="xs:int"/>
-      <xs:element name="listHead" type="xs:int"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="bindingTemplate">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
-      <xs:element minOccurs="0" name="accessPoint" type="tns:accessPoint"/>
-      <xs:element minOccurs="0" name="hostingRedirector" type="tns:hostingRedirector"/>
-      <xs:element minOccurs="0" name="tModelInstanceDetails" type="tns:tModelInstanceDetails"/>
-      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:Signature"/>
-    </xs:sequence>
-    <xs:attribute name="bindingKey" type="xs:string"/>
-    <xs:attribute name="serviceKey" type="xs:string"/>
+<xs:complexType name="name">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="xml:lang"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 <xs:complexType name="description">
     <xs:simpleContent>
@@ -826,68 +687,6 @@
         <xs:attribute ref="xml:lang"/>
       </xs:extension>
     </xs:simpleContent>
-  </xs:complexType>
-<xs:complexType name="accessPoint">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="useType" type="xs:string"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-<xs:complexType name="hostingRedirector">
-    <xs:sequence/>
-    <xs:attribute name="bindingKey" type="xs:string" use="required"/>
-  </xs:complexType>
-<xs:complexType name="tModelInstanceDetails">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="tModelInstanceInfo" type="tns:tModelInstanceInfo"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="tModelInstanceInfo">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
-      <xs:element minOccurs="0" name="instanceDetails" type="tns:instanceDetails"/>
-    </xs:sequence>
-    <xs:attribute name="tModelKey" type="xs:string" use="required"/>
-  </xs:complexType>
-<xs:complexType name="instanceDetails">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" type="tns:description"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="overviewDoc" type="tns:overviewDoc"/>
-      <xs:element minOccurs="0" name="instanceParms" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="overviewDoc">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" type="tns:description"/>
-      <xs:element minOccurs="0" name="overviewURL" type="tns:overviewURL"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="overviewURL">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="useType" type="xs:string"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-<xs:complexType name="businessDetail">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="businessEntity" nillable="true" type="tns:businessEntity"/>
-    </xs:sequence>
-    <xs:attribute name="truncated" type="xs:boolean"/>
-  </xs:complexType>
-<xs:complexType name="businessEntity">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="discoveryURLs" type="tns:discoveryURLs"/>
-      <xs:element maxOccurs="unbounded" name="name" type="tns:name"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
-      <xs:element minOccurs="0" name="contacts" type="tns:contacts"/>
-      <xs:element minOccurs="0" name="businessServices" type="tns:businessServices"/>
-      <xs:element minOccurs="0" name="identifierBag" type="tns:identifierBag"/>
-      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:Signature"/>
-    </xs:sequence>
-    <xs:attribute name="businessKey" type="xs:string"/>
   </xs:complexType>
 <xs:complexType name="contacts">
     <xs:sequence>
@@ -963,17 +762,83 @@
       <xs:element maxOccurs="unbounded" ref="tns:bindingTemplate"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="serviceDetail">
+<xs:complexType name="bindingTemplate">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="businessService" nillable="true" type="tns:businessService"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
+      <xs:element minOccurs="0" name="accessPoint" type="tns:accessPoint"/>
+      <xs:element minOccurs="0" name="hostingRedirector" type="tns:hostingRedirector"/>
+      <xs:element minOccurs="0" name="tModelInstanceDetails" type="tns:tModelInstanceDetails"/>
+      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:Signature"/>
     </xs:sequence>
-    <xs:attribute name="truncated" type="xs:boolean"/>
+    <xs:attribute name="bindingKey" type="xs:string"/>
+    <xs:attribute name="serviceKey" type="xs:string"/>
   </xs:complexType>
-<xs:complexType name="tModelDetail">
+<xs:complexType name="accessPoint">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="useType" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+<xs:complexType name="hostingRedirector">
+    <xs:sequence/>
+    <xs:attribute name="bindingKey" type="xs:string" use="required"/>
+  </xs:complexType>
+<xs:complexType name="tModelInstanceDetails">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="tModel" nillable="true" type="tns:tModel"/>
+      <xs:element maxOccurs="unbounded" name="tModelInstanceInfo" type="tns:tModelInstanceInfo"/>
     </xs:sequence>
-    <xs:attribute name="truncated" type="xs:boolean"/>
+  </xs:complexType>
+<xs:complexType name="tModelInstanceInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
+      <xs:element minOccurs="0" name="instanceDetails" type="tns:instanceDetails"/>
+    </xs:sequence>
+    <xs:attribute name="tModelKey" type="xs:string" use="required"/>
+  </xs:complexType>
+<xs:complexType name="instanceDetails">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" type="tns:description"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="overviewDoc" type="tns:overviewDoc"/>
+      <xs:element minOccurs="0" name="instanceParms" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="overviewDoc">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" type="tns:description"/>
+      <xs:element minOccurs="0" name="overviewURL" type="tns:overviewURL"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="overviewURL">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="useType" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+<xs:complexType name="categoryBag">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="keyedReference" type="tns:keyedReference"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="keyedReferenceGroup" type="tns:keyedReferenceGroup"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="keyedReference">
+    <xs:sequence/>
+    <xs:attribute name="tModelKey" type="xs:string" use="required"/>
+    <xs:attribute name="keyName" type="xs:string"/>
+    <xs:attribute name="keyValue" type="xs:string" use="required"/>
+  </xs:complexType>
+<xs:complexType name="keyedReferenceGroup">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="keyedReference" nillable="true" type="tns:keyedReference"/>
+    </xs:sequence>
+    <xs:attribute name="tModelKey" type="xs:string" use="required"/>
+  </xs:complexType>
+<xs:complexType name="identifierBag">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="keyedReference" type="tns:keyedReference"/>
+    </xs:sequence>
   </xs:complexType>
 <xs:complexType name="tModel">
     <xs:sequence>
@@ -987,29 +852,12 @@
     <xs:attribute name="tModelKey" type="xs:string"/>
     <xs:attribute name="deleted" type="xs:boolean"/>
   </xs:complexType>
-<xs:complexType name="businessList">
+<xs:complexType name="publisherAssertion">
     <xs:sequence>
-      <xs:element minOccurs="0" name="listDescription" type="tns:listDescription"/>
-      <xs:element minOccurs="0" name="businessInfos" type="tns:businessInfos"/>
-    </xs:sequence>
-    <xs:attribute name="truncated" type="xs:boolean"/>
-  </xs:complexType>
-<xs:complexType name="businessInfos">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="businessInfo" type="tns:businessInfo"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="businessInfo">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="name" type="tns:name"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
-      <xs:element minOccurs="0" name="serviceInfos" type="tns:serviceInfos"/>
-    </xs:sequence>
-    <xs:attribute name="businessKey" type="xs:string" use="required"/>
-  </xs:complexType>
-<xs:complexType name="serviceInfos">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="serviceInfo" type="tns:serviceInfo"/>
+      <xs:element name="fromKey" type="xs:string"/>
+      <xs:element name="toKey" type="xs:string"/>
+      <xs:element name="keyedReference" type="tns:keyedReference"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:Signature"/>
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="serviceInfo">
@@ -1018,6 +866,77 @@
     </xs:sequence>
     <xs:attribute name="serviceKey" type="xs:string" use="required"/>
     <xs:attribute name="businessKey" type="xs:string" use="required"/>
+  </xs:complexType>
+<xs:complexType name="tModelList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="listDescription" type="tns:listDescription"/>
+      <xs:element minOccurs="0" name="tModelInfos" type="tns:tModelInfos"/>
+    </xs:sequence>
+    <xs:attribute name="truncated" type="xs:boolean"/>
+  </xs:complexType>
+<xs:complexType name="listDescription">
+    <xs:sequence>
+      <xs:element name="includeCount" type="xs:int"/>
+      <xs:element name="actualCount" type="xs:int"/>
+      <xs:element name="listHead" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="tModelInfos">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="tModelInfo" type="tns:tModelInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="tModelInfo">
+    <xs:sequence>
+      <xs:element name="name" type="tns:name"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
+    </xs:sequence>
+    <xs:attribute name="tModelKey" type="xs:string" use="required"/>
+  </xs:complexType>
+<xs:complexType name="get_publisherAssertions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="find_service">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="name" nillable="true" type="tns:name"/>
+      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
+      <xs:element minOccurs="0" name="tModelBag" type="tns:tModelBag"/>
+      <xs:element minOccurs="0" name="find_tModel" type="tns:find_tModel"/>
+    </xs:sequence>
+    <xs:attribute name="maxRows" type="xs:int"/>
+    <xs:attribute name="businessKey" type="xs:string"/>
+    <xs:attribute name="listHead" type="xs:int"/>
+  </xs:complexType>
+<xs:complexType name="findQualifiers">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="findQualifier" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="tModelBag">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="tModelKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="find_tModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
+      <xs:element minOccurs="0" name="name" type="tns:name"/>
+      <xs:element minOccurs="0" name="identifierBag" type="tns:identifierBag"/>
+      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
+    </xs:sequence>
+    <xs:attribute name="maxRows" type="xs:int"/>
+    <xs:attribute name="listHead" type="xs:int"/>
+  </xs:complexType>
+<xs:complexType name="get_assertionStatusReport">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element minOccurs="0" name="completionStatus" type="tns:completionStatus"/>
+    </xs:sequence>
   </xs:complexType>
 <xs:complexType name="relatedBusinessesList">
     <xs:sequence>
@@ -1047,39 +966,55 @@
     </xs:sequence>
     <xs:attribute name="direction" type="tns:direction" use="required"/>
   </xs:complexType>
-<xs:complexType name="publisherAssertion">
+<xs:complexType name="dispositionReport">
     <xs:sequence>
-      <xs:element name="fromKey" type="xs:string"/>
-      <xs:element name="toKey" type="xs:string"/>
-      <xs:element name="keyedReference" type="tns:keyedReference"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:Signature"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="serviceList">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="listDescription" type="tns:listDescription"/>
-      <xs:element minOccurs="0" name="serviceInfos" type="tns:serviceInfos"/>
+      <xs:element maxOccurs="unbounded" name="result" type="tns:result"/>
     </xs:sequence>
     <xs:attribute name="truncated" type="xs:boolean"/>
   </xs:complexType>
-<xs:complexType name="tModelList">
+<xs:complexType name="result">
     <xs:sequence>
-      <xs:element minOccurs="0" name="listDescription" type="tns:listDescription"/>
-      <xs:element minOccurs="0" name="tModelInfos" type="tns:tModelInfos"/>
+      <xs:element minOccurs="0" name="errInfo" type="tns:errInfo"/>
     </xs:sequence>
-    <xs:attribute name="truncated" type="xs:boolean"/>
+    <xs:attribute name="keyType" type="tns:keyType"/>
+    <xs:attribute name="errno" type="xs:int" use="required"/>
   </xs:complexType>
-<xs:complexType name="tModelInfos">
+<xs:complexType name="errInfo">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="errCode" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+<xs:complexType name="save_binding">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="tModelInfo" type="tns:tModelInfo"/>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" ref="tns:bindingTemplate"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="tModelInfo">
+<xs:complexType name="get_serviceDetail">
     <xs:sequence>
-      <xs:element name="name" type="tns:name"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" name="serviceKey" type="xs:string"/>
     </xs:sequence>
-    <xs:attribute name="tModelKey" type="xs:string" use="required"/>
+  </xs:complexType>
+<xs:complexType name="save_business">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" ref="tns:businessEntity"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="get_registeredInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="infoSelection" type="tns:infoSelection" use="required"/>
+  </xs:complexType>
+<xs:complexType name="save_tModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" ref="tns:tModel"/>
+    </xs:sequence>
   </xs:complexType>
 <xs:complexType name="assertionStatusReport">
     <xs:sequence>
@@ -1101,42 +1036,16 @@
       <xs:element minOccurs="0" name="toKey" type="xs:string"/>
     </xs:all>
   </xs:complexType>
-<xs:complexType name="errInfo">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="errCode" type="xs:string" use="required"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-<xs:complexType name="result">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="errInfo" type="tns:errInfo"/>
-    </xs:sequence>
-    <xs:attribute name="keyType" type="tns:keyType"/>
-    <xs:attribute name="errno" type="xs:int" use="required"/>
-  </xs:complexType>
-<xs:complexType name="save_binding">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" ref="tns:bindingTemplate"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="save_business">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" ref="tns:businessEntity"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="save_tModel">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" ref="tns:tModel"/>
-    </xs:sequence>
-  </xs:complexType>
 <xs:complexType name="save_service">
     <xs:sequence>
       <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
       <xs:element maxOccurs="unbounded" ref="tns:businessService"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="get_bindingDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" name="bindingKey" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="registeredInfo">
@@ -1146,10 +1055,34 @@
     </xs:sequence>
     <xs:attribute name="truncated" type="xs:boolean"/>
   </xs:complexType>
+<xs:complexType name="businessInfos">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="businessInfo" type="tns:businessInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="businessInfo">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="name" type="tns:name"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="tns:description"/>
+      <xs:element minOccurs="0" name="serviceInfos" type="tns:serviceInfos"/>
+    </xs:sequence>
+    <xs:attribute name="businessKey" type="xs:string" use="required"/>
+  </xs:complexType>
+<xs:complexType name="serviceInfos">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="serviceInfo" type="tns:serviceInfo"/>
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="delete_business">
     <xs:sequence>
       <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
       <xs:element maxOccurs="unbounded" name="businessKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="get_operationalInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" name="entityKey" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="delete_service">
@@ -1168,10 +1101,82 @@
     </xs:sequence>
     <xs:attribute name="entityKey" type="xs:string" use="required"/>
   </xs:complexType>
+<xs:complexType name="bindingDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="listDescription" type="tns:listDescription"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="bindingTemplate" nillable="true" type="tns:bindingTemplate"/>
+    </xs:sequence>
+    <xs:attribute name="truncated" type="xs:boolean"/>
+  </xs:complexType>
 <xs:complexType name="delete_tModel">
     <xs:sequence>
       <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
       <xs:element maxOccurs="unbounded" name="tModelKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="find_binding">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
+      <xs:element minOccurs="0" name="tModelBag" type="tns:tModelBag"/>
+      <xs:element minOccurs="0" name="find_tModel" type="tns:find_tModel"/>
+      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
+    </xs:sequence>
+    <xs:attribute name="maxRows" type="xs:int"/>
+    <xs:attribute name="serviceKey" type="xs:string"/>
+    <xs:attribute name="listHead" type="xs:int"/>
+  </xs:complexType>
+<xs:complexType name="serviceList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="listDescription" type="tns:listDescription"/>
+      <xs:element minOccurs="0" name="serviceInfos" type="tns:serviceInfos"/>
+    </xs:sequence>
+    <xs:attribute name="truncated" type="xs:boolean"/>
+  </xs:complexType>
+<xs:complexType name="get_businessDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" name="businessKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="find_relatedBusinesses">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
+      <xs:element minOccurs="0" name="businessKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="fromKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="toKey" type="xs:string"/>
+      <xs:element minOccurs="0" name="keyedReference" type="tns:keyedReference"/>
+    </xs:sequence>
+    <xs:attribute name="maxRows" type="xs:int"/>
+    <xs:attribute name="listHead" type="xs:int"/>
+  </xs:complexType>
+<xs:complexType name="businessDetail">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="businessEntity" nillable="true" type="tns:businessEntity"/>
+    </xs:sequence>
+    <xs:attribute name="truncated" type="xs:boolean"/>
+  </xs:complexType>
+<xs:complexType name="publisherAssertionsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="publisherAssertion" nillable="true" type="tns:publisherAssertion"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="serviceDetail">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="businessService" nillable="true" type="tns:businessService"/>
+    </xs:sequence>
+    <xs:attribute name="truncated" type="xs:boolean"/>
+  </xs:complexType>
+<xs:complexType name="tModelDetail">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="tModel" nillable="true" type="tns:tModel"/>
+    </xs:sequence>
+    <xs:attribute name="truncated" type="xs:boolean"/>
+  </xs:complexType>
+<xs:complexType name="publisherAssertions">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="publisherAssertion" nillable="true" type="tns:publisherAssertion"/>
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="delete_binding">
@@ -1180,33 +1185,33 @@
       <xs:element maxOccurs="unbounded" name="bindingKey" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="get_publisherAssertions">
+<xs:complexType name="get_tModelDetail">
     <xs:sequence>
       <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" name="tModelKey" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="dispositionReport">
+<xs:complexType name="find_business">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="result" type="tns:result"/>
+      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
+      <xs:element minOccurs="0" name="findQualifiers" type="tns:findQualifiers"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="name" nillable="true" type="tns:name"/>
+      <xs:element minOccurs="0" name="identifierBag" type="tns:identifierBag"/>
+      <xs:element minOccurs="0" name="categoryBag" type="tns:categoryBag"/>
+      <xs:element minOccurs="0" name="tModelBag" type="tns:tModelBag"/>
+      <xs:element minOccurs="0" name="find_tModel" type="tns:find_tModel"/>
+      <xs:element minOccurs="0" name="discoveryURLs" type="tns:discoveryURLs"/>
+      <xs:element minOccurs="0" name="find_relatedBusinesses" type="tns:find_relatedBusinesses"/>
+    </xs:sequence>
+    <xs:attribute name="maxRows" type="xs:int"/>
+    <xs:attribute name="listHead" type="xs:int"/>
+  </xs:complexType>
+<xs:complexType name="businessList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="listDescription" type="tns:listDescription"/>
+      <xs:element minOccurs="0" name="businessInfos" type="tns:businessInfos"/>
     </xs:sequence>
     <xs:attribute name="truncated" type="xs:boolean"/>
-  </xs:complexType>
-<xs:complexType name="get_registeredInfo">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-    </xs:sequence>
-    <xs:attribute name="infoSelection" type="tns:infoSelection" use="required"/>
-  </xs:complexType>
-<xs:complexType name="get_operationalInfo">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" name="entityKey" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="publisherAssertions">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="publisherAssertion" nillable="true" type="tns:publisherAssertion"/>
-    </xs:sequence>
   </xs:complexType>
 <xs:complexType name="operationalInfos">
     <xs:sequence>
@@ -1223,11 +1228,6 @@
 <xs:complexType name="set_publisherAssertions">
     <xs:sequence>
       <xs:element minOccurs="0" name="authInfo" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="publisherAssertion" nillable="true" type="tns:publisherAssertion"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="publisherAssertionsResponse">
-    <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="publisherAssertion" nillable="true" type="tns:publisherAssertion"/>
     </xs:sequence>
   </xs:complexType>
@@ -1296,6 +1296,29 @@
 <xs:element name="Transform" type="tns:TransformType"/>
 <xs:element name="Transforms" type="tns:TransformsType"/>
 <xs:element name="X509Data" type="tns:X509DataType"/>
+<xs:complexType name="SignatureType">
+    <xs:sequence>
+      <xs:element name="SignedInfo" type="tns:SignedInfoType"/>
+      <xs:element name="SignatureValue" type="tns:SignatureValueType"/>
+      <xs:element minOccurs="0" name="KeyInfo" type="tns:KeyInfoType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Object" type="tns:ObjectType"/>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:ID"/>
+  </xs:complexType>
+<xs:complexType name="SignedInfoType">
+    <xs:sequence>
+      <xs:element name="CanonicalizationMethod" type="tns:CanonicalizationMethodType"/>
+      <xs:element name="SignatureMethod" type="tns:SignatureMethodType"/>
+      <xs:element maxOccurs="unbounded" name="Reference" type="tns:ReferenceType"/>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:ID"/>
+  </xs:complexType>
+<xs:complexType mixed="true" name="CanonicalizationMethodType">
+    <xs:sequence>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+    <xs:attribute name="Algorithm" type="xs:anyURI" use="required"/>
+  </xs:complexType>
 <xs:complexType mixed="true" name="ObjectType">
     <xs:sequence>
       <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
@@ -1334,18 +1357,47 @@
     </xs:sequence>
     <xs:attribute name="Algorithm" type="xs:anyURI" use="required"/>
   </xs:complexType>
-<xs:complexType name="RSAKeyValueType">
+<xs:complexType mixed="true" name="KeyValueType">
     <xs:sequence>
-      <xs:element name="Modulus" type="xs:base64Binary"/>
-      <xs:element name="Exponent" type="xs:base64Binary"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="tns:DSAKeyValue"/>
+        <xs:element ref="tns:RSAKeyValue"/>
+        <xs:any namespace="##other" processContents="lax"/>
+      </xs:choice>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="RetrievalMethodType">
+<xs:complexType mixed="true" name="SignatureMethodType">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Transforms" type="tns:TransformsType"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element name="HMACOutputLength" type="xs:integer"/>
+        <xs:any namespace="##other" processContents="lax"/>
+      </xs:choice>
     </xs:sequence>
-    <xs:attribute name="URI" type="xs:anyURI"/>
-    <xs:attribute name="Type" type="xs:anyURI"/>
+    <xs:attribute name="Algorithm" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+<xs:complexType name="SignaturePropertiesType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="SignatureProperty" type="tns:SignaturePropertyType"/>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:ID"/>
+  </xs:complexType>
+<xs:complexType mixed="true" name="SignaturePropertyType">
+    <xs:sequence>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+    <xs:attribute name="Target" type="xs:anyURI" use="required"/>
+    <xs:attribute name="Id" type="xs:ID"/>
+  </xs:complexType>
+<xs:complexType name="DSAKeyValueType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="P" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="Q" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="G" type="xs:base64Binary"/>
+      <xs:element name="Y" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="J" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="Seed" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="PgenCounter" type="xs:base64Binary"/>
+    </xs:sequence>
   </xs:complexType>
 <xs:complexType name="X509DataType">
     <xs:sequence>
@@ -1359,34 +1411,17 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="SignedInfoType">
-    <xs:sequence>
-      <xs:element name="CanonicalizationMethod" type="tns:CanonicalizationMethodType"/>
-      <xs:element name="SignatureMethod" type="tns:SignatureMethodType"/>
-      <xs:element maxOccurs="unbounded" name="Reference" type="tns:ReferenceType"/>
-    </xs:sequence>
-    <xs:attribute name="Id" type="xs:ID"/>
-  </xs:complexType>
-<xs:complexType mixed="true" name="CanonicalizationMethodType">
-    <xs:sequence>
-      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
-    </xs:sequence>
-    <xs:attribute name="Algorithm" type="xs:anyURI" use="required"/>
-  </xs:complexType>
-<xs:complexType mixed="true" name="SignatureMethodType">
-    <xs:sequence>
-      <xs:choice maxOccurs="unbounded" minOccurs="0">
-        <xs:element name="HMACOutputLength" type="xs:integer"/>
-        <xs:any namespace="##other" processContents="lax"/>
-      </xs:choice>
-    </xs:sequence>
-    <xs:attribute name="Algorithm" type="xs:anyURI" use="required"/>
-  </xs:complexType>
 <xs:complexType name="ManifestType">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" name="Reference" type="tns:ReferenceType"/>
     </xs:sequence>
     <xs:attribute name="Id" type="xs:ID"/>
+  </xs:complexType>
+<xs:complexType name="RSAKeyValueType">
+    <xs:sequence>
+      <xs:element name="Modulus" type="xs:base64Binary"/>
+      <xs:element name="Exponent" type="xs:base64Binary"/>
+    </xs:sequence>
   </xs:complexType>
 <xs:complexType name="SPKIDataType">
     <xs:sequence>
@@ -1395,6 +1430,19 @@
         <xs:any namespace="##other" processContents="lax"/>
       </xs:choice>
     </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="X509IssuerSerialType">
+    <xs:sequence>
+      <xs:element name="X509IssuerName" type="xs:string"/>
+      <xs:element name="X509SerialNumber" type="xs:integer"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="RetrievalMethodType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Transforms" type="tns:TransformsType"/>
+    </xs:sequence>
+    <xs:attribute name="URI" type="xs:anyURI"/>
+    <xs:attribute name="Type" type="xs:anyURI"/>
   </xs:complexType>
 <xs:complexType name="PGPDataType">
     <xs:sequence>
@@ -1420,60 +1468,12 @@
     </xs:sequence>
     <xs:attribute name="Id" type="xs:ID"/>
   </xs:complexType>
-<xs:complexType mixed="true" name="KeyValueType">
-    <xs:sequence>
-      <xs:choice maxOccurs="unbounded" minOccurs="0">
-        <xs:element ref="tns:DSAKeyValue"/>
-        <xs:element ref="tns:RSAKeyValue"/>
-        <xs:any namespace="##other" processContents="lax"/>
-      </xs:choice>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="DSAKeyValueType">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="P" type="xs:base64Binary"/>
-      <xs:element minOccurs="0" name="Q" type="xs:base64Binary"/>
-      <xs:element minOccurs="0" name="G" type="xs:base64Binary"/>
-      <xs:element name="Y" type="xs:base64Binary"/>
-      <xs:element minOccurs="0" name="J" type="xs:base64Binary"/>
-      <xs:element minOccurs="0" name="Seed" type="xs:base64Binary"/>
-      <xs:element minOccurs="0" name="PgenCounter" type="xs:base64Binary"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="SignatureType">
-    <xs:sequence>
-      <xs:element name="SignedInfo" type="tns:SignedInfoType"/>
-      <xs:element name="SignatureValue" type="tns:SignatureValueType"/>
-      <xs:element minOccurs="0" name="KeyInfo" type="tns:KeyInfoType"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="Object" type="tns:ObjectType"/>
-    </xs:sequence>
-    <xs:attribute name="Id" type="xs:ID"/>
-  </xs:complexType>
 <xs:complexType name="SignatureValueType">
     <xs:simpleContent>
       <xs:extension base="xs:base64Binary">
         <xs:attribute name="Id" type="xs:ID"/>
       </xs:extension>
     </xs:simpleContent>
-  </xs:complexType>
-<xs:complexType name="SignaturePropertiesType">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="SignatureProperty" type="tns:SignaturePropertyType"/>
-    </xs:sequence>
-    <xs:attribute name="Id" type="xs:ID"/>
-  </xs:complexType>
-<xs:complexType mixed="true" name="SignaturePropertyType">
-    <xs:sequence>
-      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
-    </xs:sequence>
-    <xs:attribute name="Target" type="xs:anyURI" use="required"/>
-    <xs:attribute name="Id" type="xs:ID"/>
-  </xs:complexType>
-<xs:complexType name="X509IssuerSerialType">
-    <xs:sequence>
-      <xs:element name="X509IssuerName" type="xs:string"/>
-      <xs:element name="X509SerialNumber" type="xs:integer"/>
-    </xs:sequence>
   </xs:complexType>
 </xs:schema>
   </wsdl:types>
