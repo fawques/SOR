@@ -76,6 +76,8 @@
     <Compile Include="AltaDesguace.Designer.cs">
       <DependentUpon>AltaDesguace.cs</DependentUpon>
     </Compile>
+    <Compile Include="Async\Accion.cs" />
+    <Compile Include="Async\AsyncManager.cs" />
     <Compile Include="BajaDesguace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +110,7 @@
     <Compile Include="libSOR\general\PedidoCorto.cs" />
     <Compile Include="libSOR\general\Pieza.cs" />
     <Compile Include="libSOR\general\Usuario.cs" />
+    <Compile Include="libSOR\jUDDI\jUDDIProxy.cs" />
     <Compile Include="NuevaOferta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +126,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\desguaceWS_Silvia\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\juddi\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -228,6 +236,64 @@
     <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.bindingDetail.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.businessDetail.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.businessList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.find_bindingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.find_businessResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.find_relatedBusinessesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.find_serviceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.find_tModelResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.get_bindingDetailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.get_businessDetailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.get_operationalInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.get_serviceDetailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.get_tModelDetailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.operationalInfos.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.relatedBusinessesList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.serviceDetail.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.serviceList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.tModelDetail.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\desguaceNET.juddi.tModelList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\juddi\UDDIInquiryService.wsdl" />
     <None Include="sor_desguaceDataSet.xsc">
       <DependentUpon>sor_desguaceDataSet.xsd</DependentUpon>
     </None>
@@ -249,6 +315,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\desguaceWS\" />
     <WCFMetadataStorage Include="Service References\desguaceWS_Silvia\" />
+    <WCFMetadataStorage Include="Service References\juddi\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\desguaceWS\configuration91.svcinfo" />
@@ -270,6 +337,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\desguaceWS_Silvia\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\juddi\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\juddi\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\juddi\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
