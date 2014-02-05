@@ -13,11 +13,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/libSOR_eclipse"/>
-	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/google-gson-2.2.4/gson-2.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/javamail-1.4.7/mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/commons-codec-1.8/commons-codec-1.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/apache-activemq-5.9.0/activemq-all-5.9.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/juddi-distro-3.1.5/bin/uddi-ws-3.1.5.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/libSOR"/>
+	<classpathentry kind="lib" path="/libSOR/lib/google-gson-2.2.4/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="/libSOR/lib/apache-activemq-5.9.0/activemq-all-5.9.0.jar"/>
+	<classpathentry kind="lib" path="/libSOR/lib/commons-codec-1.8/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="/libSOR/lib/javamail-1.4.7/mail.jar"/>
+	<classpathentry kind="lib" path="/libSOR/lib/juddi-distro-3.1.5/bin/uddi-ws-3.1.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
