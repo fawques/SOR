@@ -1,0 +1,88 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\fawques\Dropbox\__Universidad\5o\SOR\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Gestor_eclipse\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="AdminWS" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="getPedidos" qname="ns1:getPedidos" returnQName="ns1:getPedidosReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
+  <ns1:operation name="getOfertas" qname="ns2:getOfertas" returnQName="ns2:getOfertasReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="hello" qname="ns3:hello" returnQName="ns3:helloReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="sendMail" qname="ns4:sendMail" soapAction="" xmlns:ns4="http://gestor_admin">
+   <ns1:parameter qname="ns4:in0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:in1" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:in2" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:in3" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getDesguaces" qname="ns5:getDesguaces" returnQName="ns5:getDesguacesReturn" returnType="xsd:string" soapAction="" xmlns:ns5="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getTalleres" qname="ns6:getTalleres" returnQName="ns6:getTalleresReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getPedidoID" qname="ns7:getPedidoID" returnQName="ns7:getPedidoIDReturn" returnType="xsd:string" soapAction="" xmlns:ns7="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns7:in0" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="registrar" qname="ns8:Registrar" returnQName="ns8:RegistrarReturn" returnType="xsd:string" soapAction="" xmlns:ns8="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getOfertasporPedido" qname="ns9:getOfertasporPedido" returnQName="ns9:getOfertasporPedidoReturn" returnType="xsd:string" soapAction="" xmlns:ns9="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns9:in0" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="addAccesoDesguace" qname="ns10:addAccesoDesguace" returnQName="ns10:addAccesoDesguaceReturn" returnType="xsd:boolean" soapAction="" xmlns:ns10="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns10:in0" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="darAccesoTaller" qname="ns11:darAccesoTaller" returnQName="ns11:darAccesoTallerReturn" returnType="xsd:boolean" soapAction="" xmlns:ns11="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns11:in0" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getAltaTalleres" qname="ns12:getAltaTalleres" returnQName="ns12:getAltaTalleresReturn" returnType="xsd:string" soapAction="" xmlns:ns12="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getAltaDesguace" qname="ns13:getAltaDesguace" returnQName="ns13:getAltaDesguaceReturn" returnType="xsd:string" soapAction="" xmlns:ns13="http://gestor_admin" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:parameter name="allowedMethods" value="getDesguaces registrar getOfertasporPedido getPedidoID getTalleres sendMail addAccesoDesguace hello darAccesoTaller getPedidos getAltaDesguace getOfertas getAltaTalleres"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="AdminWS"/>
+  <ns1:parameter name="className" value="gestor_admin.AdminWS"/>
+  <ns1:parameter name="wsdlServicePort" value="AdminWS"/>
+  <ns1:parameter name="schemaQualified" value="http://gestor_admin"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://gestor_admin"/>
+  <ns1:parameter name="wsdlServiceElement" value="AdminWSService"/>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

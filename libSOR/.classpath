@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/google-gson-2.2.4/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/commons-codec-1.8/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/commons-collections-3.2.1/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/commons-configuration-1.10/commons-configuration-1.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/commons-lang-2.6/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/commons-logging-1.1.3/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/juddi-distro-3.1.5/bin/juddi-client-3.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/juddi-distro-3.1.5/bin/juddi-core-3.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/juddi-distro-3.1.5/bin/uddi-ws-3.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/apache-activemq-5.9.0/activemq-all-5.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fawques/Dropbox/__Universidad/5o/SOR/libSOR_eclipse/lib/mysql-connector-java-5.1.27-bin.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

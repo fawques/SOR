@@ -1,0 +1,60 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AdminWSService WSDL service -->
+
+  <service name="AdminWS" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://gestor_admin"/>
+      <parameter name="wsdlServiceElement" value="AdminWSService"/>
+      <parameter name="schemaQualified" value="http://gestor_admin"/>
+      <parameter name="wsdlServicePort" value="AdminWS"/>
+      <parameter name="className" value="gestor_admin.AdminWSSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="AdminWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getPedidos" qname="operNS:getPedidos" xmlns:operNS="http://gestor_admin" returnQName="retNS:getPedidosReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getOfertas" qname="operNS:getOfertas" xmlns:operNS="http://gestor_admin" returnQName="retNS:getOfertasReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="hello" qname="operNS:hello" xmlns:operNS="http://gestor_admin" returnQName="retNS:helloReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="sendMail" qname="operNS:sendMail" xmlns:operNS="http://gestor_admin" soapAction="" >
+        <parameter qname="pns:in0" xmlns:pns="http://gestor_admin" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:in1" xmlns:pns="http://gestor_admin" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:in2" xmlns:pns="http://gestor_admin" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:in3" xmlns:pns="http://gestor_admin" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getDesguaces" qname="operNS:getDesguaces" xmlns:operNS="http://gestor_admin" returnQName="retNS:getDesguacesReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getTalleres" qname="operNS:getTalleres" xmlns:operNS="http://gestor_admin" returnQName="retNS:getTalleresReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getPedidoID" qname="operNS:getPedidoID" xmlns:operNS="http://gestor_admin" returnQName="retNS:getPedidoIDReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:in0" xmlns:pns="http://gestor_admin" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="registrar" qname="operNS:Registrar" xmlns:operNS="http://gestor_admin" returnQName="retNS:RegistrarReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getOfertasporPedido" qname="operNS:getOfertasporPedido" xmlns:operNS="http://gestor_admin" returnQName="retNS:getOfertasporPedidoReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:in0" xmlns:pns="http://gestor_admin" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addAccesoDesguace" qname="operNS:addAccesoDesguace" xmlns:operNS="http://gestor_admin" returnQName="retNS:addAccesoDesguaceReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:in0" xmlns:pns="http://gestor_admin" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="darAccesoTaller" qname="operNS:darAccesoTaller" xmlns:operNS="http://gestor_admin" returnQName="retNS:darAccesoTallerReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:in0" xmlns:pns="http://gestor_admin" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAltaTalleres" qname="operNS:getAltaTalleres" xmlns:operNS="http://gestor_admin" returnQName="retNS:getAltaTalleresReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getAltaDesguace" qname="operNS:getAltaDesguace" xmlns:operNS="http://gestor_admin" returnQName="retNS:getAltaDesguaceReturn" xmlns:retNS="http://gestor_admin" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="getDesguaces registrar getOfertasporPedido getPedidoID getTalleres sendMail addAccesoDesguace hello darAccesoTaller getPedidos getAltaDesguace getOfertas getAltaTalleres"/>
+
+  </service>
+</deployment>

@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://gestor_admin" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://gestor_admin" xmlns:intf="http://gestor_admin" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://gestor_admin" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getPedidos">
+    <complexType/>
+   </element>
+   <element name="getPedidosResponse">
+    <complexType>
+     <sequence>
+      <element name="getPedidosReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOfertas">
+    <complexType/>
+   </element>
+   <element name="getOfertasResponse">
+    <complexType>
+     <sequence>
+      <element name="getOfertasReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="hello">
+    <complexType/>
+   </element>
+   <element name="helloResponse">
+    <complexType>
+     <sequence>
+      <element name="helloReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendMail">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+      <element name="in1" type="xsd:string"/>
+      <element name="in2" type="xsd:string"/>
+      <element name="in3" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendMailResponse">
+    <complexType/>
+   </element>
+   <element name="getDesguaces">
+    <complexType/>
+   </element>
+   <element name="getDesguacesResponse">
+    <complexType>
+     <sequence>
+      <element name="getDesguacesReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTalleres">
+    <complexType/>
+   </element>
+   <element name="getTalleresResponse">
+    <complexType>
+     <sequence>
+      <element name="getTalleresReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPedidoID">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPedidoIDResponse">
+    <complexType>
+     <sequence>
+      <element name="getPedidoIDReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="Registrar">
+    <complexType/>
+   </element>
+   <element name="RegistrarResponse">
+    <complexType>
+     <sequence>
+      <element name="RegistrarReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOfertasporPedido">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getOfertasporPedidoResponse">
+    <complexType>
+     <sequence>
+      <element name="getOfertasporPedidoReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addAccesoDesguace">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addAccesoDesguaceResponse">
+    <complexType>
+     <sequence>
+      <element name="addAccesoDesguaceReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="darAccesoTaller">
+    <complexType>
+     <sequence>
+      <element name="in0" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="darAccesoTallerResponse">
+    <complexType>
+     <sequence>
+      <element name="darAccesoTallerReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAltaTalleres">
+    <complexType/>
+   </element>
+   <element name="getAltaTalleresResponse">
+    <complexType>
+     <sequence>
+      <element name="getAltaTalleresReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAltaDesguace">
+    <complexType/>
+   </element>
+   <element name="getAltaDesguaceResponse">
+    <complexType>
+     <sequence>
+      <element name="getAltaDesguaceReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getAltaTalleresResponse">
+
+      <wsdl:part element="impl:getAltaTalleresResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAltaDesguaceResponse">
+
+      <wsdl:part element="impl:getAltaDesguaceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDesguacesRequest">
+
+      <wsdl:part element="impl:getDesguaces" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOfertasResponse">
+
+      <wsdl:part element="impl:getOfertasResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPedidoIDRequest">
+
+      <wsdl:part element="impl:getPedidoID" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPedidosRequest">
+
+      <wsdl:part element="impl:getPedidos" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPedidoIDResponse">
+
+      <wsdl:part element="impl:getPedidoIDResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOfertasporPedidoResponse">
+
+      <wsdl:part element="impl:getOfertasporPedidoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="helloResponse">
+
+      <wsdl:part element="impl:helloResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addAccesoDesguaceResponse">
+
+      <wsdl:part element="impl:addAccesoDesguaceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="darAccesoTallerResponse">
+
+      <wsdl:part element="impl:darAccesoTallerResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAltaDesguaceRequest">
+
+      <wsdl:part element="impl:getAltaDesguace" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendMailResponse">
+
+      <wsdl:part element="impl:sendMailResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="RegistrarResponse">
+
+      <wsdl:part element="impl:RegistrarResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOfertasRequest">
+
+      <wsdl:part element="impl:getOfertas" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addAccesoDesguaceRequest">
+
+      <wsdl:part element="impl:addAccesoDesguace" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDesguacesResponse">
+
+      <wsdl:part element="impl:getDesguacesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTalleresRequest">
+
+      <wsdl:part element="impl:getTalleres" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="RegistrarRequest">
+
+      <wsdl:part element="impl:Registrar" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAltaTalleresRequest">
+
+      <wsdl:part element="impl:getAltaTalleres" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getOfertasporPedidoRequest">
+
+      <wsdl:part element="impl:getOfertasporPedido" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="darAccesoTallerRequest">
+
+      <wsdl:part element="impl:darAccesoTaller" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTalleresResponse">
+
+      <wsdl:part element="impl:getTalleresResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="helloRequest">
+
+      <wsdl:part element="impl:hello" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendMailRequest">
+
+      <wsdl:part element="impl:sendMail" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPedidosResponse">
+
+      <wsdl:part element="impl:getPedidosResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="AdminWS">
+
+      <wsdl:operation name="getPedidos">
+
+         <wsdl:input message="impl:getPedidosRequest" name="getPedidosRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPedidosResponse" name="getPedidosResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOfertas">
+
+         <wsdl:input message="impl:getOfertasRequest" name="getOfertasRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getOfertasResponse" name="getOfertasResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="hello">
+
+         <wsdl:input message="impl:helloRequest" name="helloRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:helloResponse" name="helloResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendMail">
+
+         <wsdl:input message="impl:sendMailRequest" name="sendMailRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:sendMailResponse" name="sendMailResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDesguaces">
+
+         <wsdl:input message="impl:getDesguacesRequest" name="getDesguacesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDesguacesResponse" name="getDesguacesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTalleres">
+
+         <wsdl:input message="impl:getTalleresRequest" name="getTalleresRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getTalleresResponse" name="getTalleresResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPedidoID">
+
+         <wsdl:input message="impl:getPedidoIDRequest" name="getPedidoIDRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPedidoIDResponse" name="getPedidoIDResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="Registrar">
+
+         <wsdl:input message="impl:RegistrarRequest" name="RegistrarRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:RegistrarResponse" name="RegistrarResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOfertasporPedido">
+
+         <wsdl:input message="impl:getOfertasporPedidoRequest" name="getOfertasporPedidoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getOfertasporPedidoResponse" name="getOfertasporPedidoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addAccesoDesguace">
+
+         <wsdl:input message="impl:addAccesoDesguaceRequest" name="addAccesoDesguaceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addAccesoDesguaceResponse" name="addAccesoDesguaceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="darAccesoTaller">
+
+         <wsdl:input message="impl:darAccesoTallerRequest" name="darAccesoTallerRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:darAccesoTallerResponse" name="darAccesoTallerResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAltaTalleres">
+
+         <wsdl:input message="impl:getAltaTalleresRequest" name="getAltaTalleresRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAltaTalleresResponse" name="getAltaTalleresResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAltaDesguace">
+
+         <wsdl:input message="impl:getAltaDesguaceRequest" name="getAltaDesguaceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAltaDesguaceResponse" name="getAltaDesguaceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="AdminWSSoapBinding" type="impl:AdminWS">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getPedidos">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPedidosRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPedidosResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOfertas">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getOfertasRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getOfertasResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="hello">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="helloRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="helloResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendMail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendMailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendMailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDesguaces">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDesguacesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDesguacesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTalleres">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTalleresRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTalleresResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPedidoID">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPedidoIDRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPedidoIDResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="Registrar">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="RegistrarRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="RegistrarResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getOfertasporPedido">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getOfertasporPedidoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getOfertasporPedidoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addAccesoDesguace">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addAccesoDesguaceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addAccesoDesguaceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="darAccesoTaller">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="darAccesoTallerRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="darAccesoTallerResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAltaTalleres">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAltaTalleresRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAltaTalleresResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAltaDesguace">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAltaDesguaceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAltaDesguaceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="AdminWSService">
+
+      <wsdl:port binding="impl:AdminWSSoapBinding" name="AdminWS">
+
+         <wsdlsoap:address location="http://localhost:8080/Gestor_eclipse/services/AdminWS"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
