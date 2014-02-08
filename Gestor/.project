@@ -3,6 +3,7 @@
 	<name>Gestor</name>
 	<comment></comment>
 	<projects>
+		<project>libSOR</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

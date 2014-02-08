@@ -19,5 +19,10 @@
 	<classpathentry kind="lib" path="/libSOR/lib/commons-codec-1.8/commons-codec-1.8.jar"/>
 	<classpathentry kind="lib" path="/libSOR/lib/javamail-1.4.7/mail.jar"/>
 	<classpathentry kind="lib" path="/libSOR/lib/juddi-distro-3.1.5/bin/uddi-ws-3.1.5.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.ws.cxf.core.CXF_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -6,32 +6,43 @@
 package gestor_admin;
 
 import BD.InterfazBD;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import general.Desguace;
 import general.Oferta;
 import general.Pedido;
 import general.Taller;
 import general.Desguace;
+
 import java.util.ArrayList;
 import java.util.Date;
+
+import javax.jws.HandlerChain;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+
 import BD.InterfazBD;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import general.EstadoOferta;
 import general.EstadoPedido;
 import jUDDI.SimplePublish;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Type;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -49,8 +60,9 @@ import javax.swing.Timer;
  *
  * @author Cute
  */
-@WebService(serviceName = "AdminWS")
-public class AdminWS {
+@HandlerChain(file = "handler-chain.xml")
+@WebService(serviceName = "AdminWS", endpointInterface = "gestor_admin.AdminWS_endpoint")
+public class AdminWS implements AdminWS_endpoint {
     InterfazBD bd;
     /**
      *

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from DesguaceJavaWSService WSDL service -->
+
+  <service name="DesguaceJavaWS" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://gestor_desguace_java"/>
+      <parameter name="wsdlServiceElement" value="DesguaceJavaWSService"/>
+      <parameter name="schemaQualified" value="http://gestor_desguace_java"/>
+      <parameter name="wsdlServicePort" value="DesguaceJavaWS"/>
+      <parameter name="className" value="gestor_desguace_java.DesguaceJavaWS"/>
+      <parameter name="wsdlPortType" value="DesguaceJavaWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://gestor_desguace_java" xmlns:retNS="http://gestor_desguace_java" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="checkActivacion" qname="operNS:checkActivacion" returnQName="retNS:checkActivacionReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://gestor_desguace_java" xmlns:retNS="http://gestor_desguace_java" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getPedidosporID" qname="operNS:getPedidosporID" returnQName="retNS:getPedidosporIDReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:string" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://gestor_desguace_java" xmlns:retNS="http://gestor_desguace_java" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="aceptarOfertaFin" qname="operNS:aceptarOfertaFin" returnQName="retNS:aceptarOfertaFinReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://gestor_desguace_java" xmlns:retNS="http://gestor_desguace_java" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="cambiarEstadoPedido" qname="operNS:cambiarEstadoPedido" returnQName="retNS:cambiarEstadoPedidoReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:string"/>
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:estado" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://gestor_desguace_java" xmlns:retNS="http://gestor_desguace_java" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="cancelarOferta" qname="operNS:cancelarOferta" returnQName="retNS:cancelarOfertaReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://gestor_desguace_java" xmlns:retNS="http://gestor_desguace_java" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getOfertas" qname="operNS:getOfertas" returnQName="retNS:getOfertasReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://gestor_desguace_java" xmlns:retNS="http://gestor_desguace_java" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="baja" qname="operNS:baja" returnQName="retNS:bajaReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://gestor_desguace_java" xmlns:retNS="http://gestor_desguace_java" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="alta" qname="operNS:alta" returnQName="retNS:altaReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:name" type="tns:string"/>
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:address" type="tns:string"/>
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:city" type="tns:string"/>
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:postalCode" type="tns:string"/>
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:telephone" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://gestor_desguace_java" xmlns:retNS="http://gestor_desguace_java" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="nuevaOferta" qname="operNS:nuevaOferta" returnQName="retNS:nuevaOfertaReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://gestor_desguace_java" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:oferta" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="nuevaOferta alta cambiarEstadoPedido getOfertas checkActivacion aceptarOfertaFin getPedidosporID cancelarOferta baja"/>
+
+  </service>
+</deployment>

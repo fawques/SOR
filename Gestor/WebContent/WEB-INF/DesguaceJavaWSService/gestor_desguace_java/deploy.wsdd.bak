@@ -1,0 +1,58 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from DesguaceJavaWSService WSDL service -->
+
+  <service name="DesguaceJavaWS" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://gestor_desguace_java"/>
+      <parameter name="wsdlServiceElement" value="DesguaceJavaWSService"/>
+      <parameter name="schemaQualified" value="http://gestor_desguace_java"/>
+      <parameter name="wsdlServicePort" value="DesguaceJavaWS"/>
+      <parameter name="className" value="gestor_desguace_java.DesguaceJavaWSSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="DesguaceJavaWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="checkActivacion" qname="operNS:checkActivacion" xmlns:operNS="http://gestor_desguace_java" returnQName="retNS:checkActivacionReturn" xmlns:retNS="http://gestor_desguace_java" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:email" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getPedidosporID" qname="operNS:getPedidosporID" xmlns:operNS="http://gestor_desguace_java" returnQName="retNS:getPedidosporIDReturn" xmlns:retNS="http://gestor_desguace_java" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:string" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="aceptarOfertaFin" qname="operNS:aceptarOfertaFin" xmlns:operNS="http://gestor_desguace_java" returnQName="retNS:aceptarOfertaFinReturn" xmlns:retNS="http://gestor_desguace_java" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="cambiarEstadoPedido" qname="operNS:cambiarEstadoPedido" xmlns:operNS="http://gestor_desguace_java" returnQName="retNS:cambiarEstadoPedidoReturn" xmlns:retNS="http://gestor_desguace_java" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:estado" xmlns:pns="http://gestor_desguace_java" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="cancelarOferta" qname="operNS:cancelarOferta" xmlns:operNS="http://gestor_desguace_java" returnQName="retNS:cancelarOfertaReturn" xmlns:retNS="http://gestor_desguace_java" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getOfertas" qname="operNS:getOfertas" xmlns:operNS="http://gestor_desguace_java" returnQName="retNS:getOfertasReturn" xmlns:retNS="http://gestor_desguace_java" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="baja" qname="operNS:baja" xmlns:operNS="http://gestor_desguace_java" returnQName="retNS:bajaReturn" xmlns:retNS="http://gestor_desguace_java" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="alta" qname="operNS:alta" xmlns:operNS="http://gestor_desguace_java" returnQName="retNS:altaReturn" xmlns:retNS="http://gestor_desguace_java" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:name" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:email" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:address" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:city" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:postalCode" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:telephone" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="nuevaOferta" qname="operNS:nuevaOferta" xmlns:operNS="http://gestor_desguace_java" returnQName="retNS:nuevaOfertaReturn" xmlns:retNS="http://gestor_desguace_java" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:oferta" xmlns:pns="http://gestor_desguace_java" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="nuevaOferta alta cambiarEstadoPedido getOfertas checkActivacion aceptarOfertaFin getPedidosporID cancelarOferta baja"/>
+
+  </service>
+</deployment>
