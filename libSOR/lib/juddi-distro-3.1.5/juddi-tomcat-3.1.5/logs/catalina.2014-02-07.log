@@ -1,0 +1,342 @@
+07-feb-2014 17:25:50 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+07-feb-2014 17:25:50 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+07-feb-2014 17:25:50 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 424 ms
+07-feb-2014 17:25:50 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+07-feb-2014 17:25:50 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+07-feb-2014 17:25:50 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+07-feb-2014 17:25:50 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+07-feb-2014 17:25:50 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+07-feb-2014 17:25:50 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Fri Feb 07 17:25:50 CET 2014]; root of context hierarchy
+07-feb-2014 17:25:50 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+07-feb-2014 17:25:51 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+07-feb-2014 17:25:51 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+07-feb-2014 17:25:51 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+07-feb-2014 17:25:51 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+07-feb-2014 17:25:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+07-feb-2014 17:25:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+07-feb-2014 17:25:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+07-feb-2014 17:25:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+07-feb-2014 17:25:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+07-feb-2014 17:25:51 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@5059cbda: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+07-feb-2014 17:25:51 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+07-feb-2014 17:25:53 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+07-feb-2014 17:25:53 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+07-feb-2014 17:25:53 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+07-feb-2014 17:25:53 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+07-feb-2014 17:25:54 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+07-feb-2014 17:25:54 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+07-feb-2014 17:25:54 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+07-feb-2014 17:25:54 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+07-feb-2014 17:25:54 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+07-feb-2014 17:25:54 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+07-feb-2014 17:25:55 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+07-feb-2014 17:25:55 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+07-feb-2014 17:25:55 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+07-feb-2014 17:25:55 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4312 ms
+07-feb-2014 17:25:55 org.apache.juddi.Registry start
+INFO: Starting jUDDI registry...
+07-feb-2014 17:25:55 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+07-feb-2014 17:25:58 org.apache.juddi.Registry start
+INFO: jUDDI registry started succesfully.
+07-feb-2014 17:25:58 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+07-feb-2014 17:25:58 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@52a7478f: startup date [Fri Feb 07 17:25:58 CET 2014]; parent: Root WebApplicationContext
+07-feb-2014 17:25:58 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@230ec447: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@5059cbda
+07-feb-2014 17:25:58 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+07-feb-2014 17:25:58 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+07-feb-2014 17:25:58 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+07-feb-2014 17:25:58 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+07-feb-2014 17:25:58 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+07-feb-2014 17:25:58 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+07-feb-2014 17:25:59 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8009
+07-feb-2014 17:25:59 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/20  config=null
+07-feb-2014 17:25:59 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 8685 ms
+07-feb-2014 19:47:23 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+07-feb-2014 19:47:24 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager doUnload
+GRAVE: IOException al salvar sesiones persistidas: java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/_/SESSIONS.ser (No such file or directory)
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/_/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager stop
+GRAVE: Excepci—n descargando sesiones a almacenamiento persistente
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/_/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager doUnload
+GRAVE: IOException al salvar sesiones persistidas: java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/manager/SESSIONS.ser (No such file or directory)
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/manager/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager stop
+GRAVE: Excepci—n descargando sesiones a almacenamiento persistente
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/manager/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager doUnload
+GRAVE: IOException al salvar sesiones persistidas: java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/docs/SESSIONS.ser (No such file or directory)
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/docs/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager stop
+GRAVE: Excepci—n descargando sesiones a almacenamiento persistente
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/docs/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager doUnload
+GRAVE: IOException al salvar sesiones persistidas: java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/examples/SESSIONS.ser (No such file or directory)
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/examples/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager stop
+GRAVE: Excepci—n descargando sesiones a almacenamiento persistente
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/examples/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager doUnload
+GRAVE: IOException al salvar sesiones persistidas: java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/host-manager/SESSIONS.ser (No such file or directory)
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/host-manager/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.catalina.session.StandardManager stop
+GRAVE: Excepci—n descargando sesiones a almacenamiento persistente
+java.io.FileNotFoundException: /Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work/Catalina/localhost/host-manager/SESSIONS.ser (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:84)
+	at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:489)
+	at org.apache.catalina.session.StandardManager.unload(StandardManager.java:463)
+	at org.apache.catalina.session.StandardManager.stop(StandardManager.java:667)
+	at org.apache.catalina.core.StandardContext.stop(StandardContext.java:4611)
+	at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:924)
+	at org.apache.catalina.startup.HostConfig.undeployApps(HostConfig.java:1319)
+	at org.apache.catalina.startup.HostConfig.stop(HostConfig.java:1290)
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:323)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:119)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1086)
+	at org.apache.catalina.core.ContainerBase.stop(ContainerBase.java:1098)
+	at org.apache.catalina.core.StandardEngine.stop(StandardEngine.java:448)
+	at org.apache.catalina.core.StandardService.stop(StandardService.java:587)
+	at org.apache.catalina.core.StandardServer.stop(StandardServer.java:744)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:648)
+	at org.apache.catalina.startup.Catalina$CatalinaShutdownHook.run(Catalina.java:692)
+07-feb-2014 19:47:24 org.apache.juddi.Registry stop
+INFO: Stopping jUDDI registry...
+07-feb-2014 19:47:24 org.apache.juddi.Registry stop
+INFO: Shutting down SubscriptionNotifier
+07-feb-2014 19:47:24 org.apache.juddi.Registry stop
+INFO: jUDDI shutdown completed.
+07-feb-2014 19:47:24 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@52a7478f: startup date [Fri Feb 07 17:25:58 CET 2014]; parent: Root WebApplicationContext
+07-feb-2014 19:47:24 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@230ec447: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@5059cbda
+07-feb-2014 19:47:24 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Fri Feb 07 17:25:50 CET 2014]; root of context hierarchy
+07-feb-2014 19:47:24 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@5059cbda: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+07-feb-2014 19:47:24 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@7dab0576]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@73f18153}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+07-feb-2014 19:47:25 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081

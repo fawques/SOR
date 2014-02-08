@@ -1,0 +1,12 @@
+08-feb-2014 9:15:34 org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring root WebApplicationContext
+08-feb-2014 9:15:42 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+08-feb-2014 9:15:42 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+08-feb-2014 11:25:46 org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+08-feb-2014 11:25:46 org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
+08-feb-2014 11:25:46 org.apache.catalina.core.ApplicationContext log
+INFO: Closing Spring root WebApplicationContext

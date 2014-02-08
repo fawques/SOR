@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.DetallePiezaController">
+  <children>
+    <Label id="tbNombrePieza" layoutX="44.0" layoutY="36.0" text="Nombre pieza" />
+    <TextField id="tbNombrePieza" fx:id="tfNombrePieza" layoutX="138.0" layoutY="33.0" prefWidth="200.0" />
+    <Button id="btNuevaPieza" fx:id="btBaja" layoutX="468.0" layoutY="34.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="91.0" text="Dar de baja" />
+    <Label id="tbNombrePieza" layoutX="44.0" layoutY="63.0" text="Tipo" />
+    <Label id="tbNombrePieza" layoutX="44.0" layoutY="108.0" text="Estado" />
+    <Label id="tbNombrePieza" layoutX="44.0" layoutY="148.0" text="Stock" />
+    <TextField id="tbNombrePieza" fx:id="tfStock" layoutX="138.0" layoutY="145.0" prefWidth="63.000099999997474" />
+    <ComboBox id="cbEstado" fx:id="cbTipo" layoutX="138.0" layoutY="106.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <ComboBox id="cbEstado" fx:id="cbTipo" layoutX="138.0" layoutY="69.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Label id="tbNombrePieza" layoutX="42.0" layoutY="198.0" text="Descripción" />
+    <TextArea fx:id="taDescripcion" layoutX="138.0" layoutY="198.0" prefWidth="200.0" wrapText="true" />
+    <CheckBox fx:id="chActiva" layoutX="294.0" layoutY="68.0" mnemonicParsing="false" text="Activa" />
+    <Label id="tbNombrePieza" layoutX="294.0" layoutY="101.0" text="Fecha baja" />
+    <HBox layoutX="359.0" layoutY="99.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
+      <children>
+        <TextField id="tfLimiteDia" fx:id="tfBajaDia" minWidth="30.0" prefWidth="150.0" />
+        <TextField id="tfLimiteMes" fx:id="tfBajaMes" minWidth="30.0" prefWidth="150.0" />
+        <TextField id="tfLimiteAnyo" fx:id="tfBajaAnyo" minWidth="50.0" prefWidth="50.0" />
+      </children>
+    </HBox>
+  </children>
+</AnchorPane>

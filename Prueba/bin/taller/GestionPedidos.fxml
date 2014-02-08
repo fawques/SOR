@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="779.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.GestionPedidosController">
+  <children>
+    <TabPane layoutX="-1.0" layoutY="-7.0" prefHeight="576.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab onSelectionChanged="#visualizarPedidos" text="Pedidos">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView id="tvGrid" fx:id="tbPedidos" layoutX="34.0" layoutY="74.0" prefHeight="399.0" prefWidth="721.0" />
+                <Button fx:id="btNuevoPedido" layoutX="178.0" layoutY="497.0" mnemonicParsing="false" onAction="#onClickNuevoPedido" prefHeight="21.0" prefWidth="103.0" text="Nuevo pedido" />
+                <Button layoutX="305.0" layoutY="497.0" mnemonicParsing="false" onAction="#cancelarPedido" prefHeight="21.0" text="Cancelar pedido" />
+                <Text layoutX="369.0" layoutY="53.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos" />
+                <Button layoutX="641.0" layoutY="4.0" mnemonicParsing="false" onAction="#bajaTaller" text="Darme de baja" />
+                <Button layoutX="476.0" layoutY="4.0" mnemonicParsing="false" onAction="#modificarTaller" text="Modificar mis datos" />
+                <Button layoutX="36.0" layoutY="497.0" mnemonicParsing="false" onAction="#visualizarPedidos" text="Actualizar pedidos" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab onSelectionChanged="#actualizarPestanyaOfertas" text="Ofertas">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="780.0">
+              <children>
+                <TableView fx:id="tbPedidosOfertas" layoutX="19.0" layoutY="71.0" prefHeight="201.5" prefWidth="718.0" />
+                <TableView fx:id="tbOfertas" layoutX="28.0" layoutY="326.0" prefHeight="156.0" prefWidth="718.0" />
+                <Button id="btNuevaPieza" fx:id="btAceptarOferta" layoutX="27.0" layoutY="503.0" mnemonicParsing="false" onAction="#aceptarOferta" prefHeight="22.0" prefWidth="135.0" text="Aceptar oferta" />
+                <Button id="btNuevaPieza" fx:id="btRechazarOferta" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" onAction="#rechazarOferta" prefHeight="22.0" prefWidth="135.0" text="Rechazar oferta" />
+                <Text layoutX="329.0" layoutY="50.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos realizados" />
+                <Text layoutX="356.0" layoutY="309.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Ofertas recibidas" />
+                <Button layoutX="334.0" layoutY="504.0" mnemonicParsing="false" onAction="#actualizarOfertas" text="Actualizar Ofertas" />
+                <Button layoutX="17.0" layoutY="283.0" mnemonicParsing="false" onAction="#verOfertas" text="Ver ofertas" />
+                <Button layoutX="632.0" layoutY="4.0" mnemonicParsing="false" onAction="#bajaTaller" text="Darme de baja" />
+                <Button layoutX="470.0" layoutY="4.0" mnemonicParsing="false" onAction="#modificarTaller" text="Modificar mis datos" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>
