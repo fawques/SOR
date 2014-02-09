@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-2014-02-04 09:24:00.997 GMT:
- Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-0143-fc36-1340-000001602f10
-on database directory C:\Users\fawques\Documents\SOR\libSOR_eclipse\lib\juddi-distro-3.1.5\juddi-tomcat-3.1.5\bin\target\juddi-derby-test-db  
+2014-02-09 13:13:37.372 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-0144-16c8-1ab1-0000053836e8
+on database directory C:\Users\fawques\Documents\SOR\libSOR\lib\juddi-distro-3.1.5\juddi-tomcat-3.1.5\bin\target\juddi-derby-test-db  
 
 Database Class Loader started - derby.database.classpath=''

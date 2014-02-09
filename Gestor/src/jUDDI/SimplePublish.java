@@ -18,9 +18,11 @@ package jUDDI;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.juddi.api_v3.Publisher;
 import org.apache.juddi.api_v3.PublisherDetail;
 import org.apache.juddi.api_v3.SavePublisher;
@@ -42,6 +44,7 @@ import org.uddi.api_v3.Name;
 import org.uddi.api_v3.SaveBusiness;
 import org.uddi.api_v3.SaveService;
 import org.uddi.api_v3.ServiceDetail;
+import org.uddi.v3_service.DispositionReportFaultMessage;
 import org.uddi.v3_service.UDDIPublicationPortType;
 import org.uddi.v3_service.UDDISecurityPortType;
 
@@ -228,7 +231,7 @@ public class SimplePublish {
         port.deleteBusiness(body);
     }
 
-    private static BusinessList findBusiness(org.uddi.api_v3.FindBusiness body) {
+    private static BusinessList findBusiness(org.uddi.api_v3.FindBusiness body) throws RemoteException {
         org.uddi.v3_service.UDDIInquiryService service = new org.uddi.v3_service.UDDIInquiryService();
         org.uddi.v3_service.UDDIInquiryPortType port = service.getUDDIInquiryImplPort();
         return port.findBusiness(body);

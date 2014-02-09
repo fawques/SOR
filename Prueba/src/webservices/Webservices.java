@@ -7,7 +7,7 @@
 package webservices;
 
 import jUDDI.JUDDIProxy;
-import gestor_taller.JMSException_Exception;
+import gestor_taller.JMSException;
 import gestor_taller.TallerWS_PortType;
 import gestor_taller.TallerWS_Service;
 
@@ -16,7 +16,7 @@ import gestor_taller.TallerWS_Service;
  * @author fawques
  */
 public class Webservices {
-    static public String nuevoPedido_WS(String pedido) throws JMSException_Exception {
+    static public String nuevoPedido_WS(String pedido) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(pedido);

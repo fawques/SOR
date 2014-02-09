@@ -72,9 +72,9 @@ public class SignatureMethodType {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Object }
-     * {@link String }
-     * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
      * {@link Element }
+     * {@link JAXBElement }{@code <}{@link BigInteger }{@code >}
+     * {@link String }
      * 
      * 
      */

@@ -97,7 +97,7 @@
 
   <xs:complexType name="addAccesoDesguace">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="ID" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -139,7 +139,7 @@
 
   <xs:complexType name="getPedidoID">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -151,7 +151,7 @@
 
   <xs:complexType name="darAccesoTaller">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="ID" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -173,7 +173,7 @@
 
   <xs:complexType name="getOfertasporPedido">
     <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="idPedido" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 

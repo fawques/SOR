@@ -7,9 +7,11 @@ package taller;
 
 import Async.AsyncManager;
 import BD.InterfazBD;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import general.EstadoGeneral;
 import general.EstadoOferta;
 import general.EstadoPedido;
@@ -17,7 +19,8 @@ import general.Oferta;
 import general.Pedido;
 import general.Pieza;
 import general.Taller;
-import gestor_taller.JMSException_Exception;
+import gestor_taller.JMSException;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -28,6 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -376,8 +380,6 @@ public class MainTaller extends Application {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JMSException_Exception ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -495,7 +497,7 @@ public class MainTaller extends Application {
 
     
     
-    public static String nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
+    public static String nuevoPedido(java.lang.String pedido) {
         AsyncManager manager = new AsyncManager("sor_taller");
         manager.ejecutarAcciones();
         for (int i = 0; i < 10; i++) {
