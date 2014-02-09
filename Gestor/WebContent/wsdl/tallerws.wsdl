@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="TallerWS" targetNamespace="http://gestor_taller/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gestor_taller/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://gestor_taller/" schemaLocation="tallerws_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="helloResponse">
+    <wsdl:part name="parameters" element="tns:helloResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cambiarEstadoPedidoResponse">
+    <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPedidos">
+    <wsdl:part name="parameters" element="tns:getPedidos">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkActivacion">
+    <wsdl:part name="parameters" element="tns:checkActivacion">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOfertas">
+    <wsdl:part name="parameters" element="tns:getOfertas">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rechazarOfertaResponse">
+    <wsdl:part name="parameters" element="tns:rechazarOfertaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hello">
+    <wsdl:part name="parameters" element="tns:hello">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rechazarOferta">
+    <wsdl:part name="parameters" element="tns:rechazarOferta">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cambiarEstadoPedido">
+    <wsdl:part name="parameters" element="tns:cambiarEstadoPedido">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="nuevoPedido">
+    <wsdl:part name="parameters" element="tns:nuevoPedido">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPedidosResponse">
+    <wsdl:part name="parameters" element="tns:getPedidosResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="altaResponse">
+    <wsdl:part name="parameters" element="tns:altaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="nuevoPedidoResponse">
+    <wsdl:part name="parameters" element="tns:nuevoPedidoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="aceptarOferta">
+    <wsdl:part name="parameters" element="tns:aceptarOferta">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="JMSException">
+    <wsdl:part name="JMSException" element="tns:JMSException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="alta">
+    <wsdl:part name="parameters" element="tns:alta">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelarPedido">
+    <wsdl:part name="parameters" element="tns:cancelarPedido">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modificarResponse">
+    <wsdl:part name="parameters" element="tns:modificarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="aceptarOfertaResponse">
+    <wsdl:part name="parameters" element="tns:aceptarOfertaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOfertasResponse">
+    <wsdl:part name="parameters" element="tns:getOfertasResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelarPedidoResponse">
+    <wsdl:part name="parameters" element="tns:cancelarPedidoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="baja">
+    <wsdl:part name="parameters" element="tns:baja">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modificar">
+    <wsdl:part name="parameters" element="tns:modificar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkActivacionResponse">
+    <wsdl:part name="parameters" element="tns:checkActivacionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="bajaResponse">
+    <wsdl:part name="parameters" element="tns:bajaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TallerWS">
+    <wsdl:operation name="alta">
+      <wsdl:input name="alta" message="tns:alta">
+    </wsdl:input>
+      <wsdl:output name="altaResponse" message="tns:altaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelarPedido">
+      <wsdl:input name="cancelarPedido" message="tns:cancelarPedido">
+    </wsdl:input>
+      <wsdl:output name="cancelarPedidoResponse" message="tns:cancelarPedidoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPedidos">
+      <wsdl:input name="getPedidos" message="tns:getPedidos">
+    </wsdl:input>
+      <wsdl:output name="getPedidosResponse" message="tns:getPedidosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cambiarEstadoPedido">
+      <wsdl:input name="cambiarEstadoPedido" message="tns:cambiarEstadoPedido">
+    </wsdl:input>
+      <wsdl:output name="cambiarEstadoPedidoResponse" message="tns:cambiarEstadoPedidoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="baja">
+      <wsdl:input name="baja" message="tns:baja">
+    </wsdl:input>
+      <wsdl:output name="bajaResponse" message="tns:bajaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modificar">
+      <wsdl:input name="modificar" message="tns:modificar">
+    </wsdl:input>
+      <wsdl:output name="modificarResponse" message="tns:modificarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="hello">
+      <wsdl:input name="hello" message="tns:hello">
+    </wsdl:input>
+      <wsdl:output name="helloResponse" message="tns:helloResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOfertas">
+      <wsdl:input name="getOfertas" message="tns:getOfertas">
+    </wsdl:input>
+      <wsdl:output name="getOfertasResponse" message="tns:getOfertasResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkActivacion">
+      <wsdl:input name="checkActivacion" message="tns:checkActivacion">
+    </wsdl:input>
+      <wsdl:output name="checkActivacionResponse" message="tns:checkActivacionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="aceptarOferta">
+      <wsdl:input name="aceptarOferta" message="tns:aceptarOferta">
+    </wsdl:input>
+      <wsdl:output name="aceptarOfertaResponse" message="tns:aceptarOfertaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechazarOferta">
+      <wsdl:input name="rechazarOferta" message="tns:rechazarOferta">
+    </wsdl:input>
+      <wsdl:output name="rechazarOfertaResponse" message="tns:rechazarOfertaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="nuevoPedido">
+      <wsdl:input name="nuevoPedido" message="tns:nuevoPedido">
+    </wsdl:input>
+      <wsdl:output name="nuevoPedidoResponse" message="tns:nuevoPedidoResponse">
+    </wsdl:output>
+      <wsdl:fault name="JMSException" message="tns:JMSException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TallerWSSoapBinding" type="tns:TallerWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="alta">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="alta">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="altaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelarPedido">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="cancelarPedido">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelarPedidoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cambiarEstadoPedido">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="cambiarEstadoPedido">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cambiarEstadoPedidoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPedidos">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getPedidos">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPedidosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="baja">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="baja">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="bajaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="hello">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="hello">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="helloResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modificar">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="modificar">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="modificarResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkActivacion">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkActivacion">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkActivacionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOfertas">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getOfertas">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getOfertasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="aceptarOferta">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="aceptarOferta">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="aceptarOfertaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="nuevoPedido">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="nuevoPedido">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="nuevoPedidoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="JMSException">
+        <soap:fault name="JMSException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="rechazarOferta">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="rechazarOferta">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="rechazarOfertaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TallerWS">
+    <wsdl:port name="TallerWSPort" binding="tns:TallerWSSoapBinding">
+      <soap:address location="http://localhost:9090/TallerWSPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

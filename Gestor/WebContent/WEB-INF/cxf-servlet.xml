@@ -10,4 +10,19 @@
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>
 	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://gestor_desguace_java/"
+		id="desguacejavaws" implementor="gestor_desguace_java.DesguaceJavaWS"
+		wsdlLocation="wsdl/desguacejavaws.wsdl" endpointName="tns:DesguaceJavaWSPort"
+		serviceName="tns:DesguaceJavaWS" address="/DesguaceJavaWSPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
+	<jaxws:endpoint xmlns:tns="http://gestor_taller/" id="tallerws"
+		implementor="gestor_taller.TallerWS" wsdlLocation="wsdl/tallerws.wsdl"
+		endpointName="tns:TallerWSPort" serviceName="tns:TallerWS" address="/TallerWSPort">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+		</jaxws:features>
+	</jaxws:endpoint>
 </beans>
