@@ -22,7 +22,7 @@ public class CambiarEstadoPedido {
     @XmlElement(name = "id")
     private java.lang.String id;
     @XmlElement(name = "estado")
-    private int estado;
+    private java.lang.String estado;
 
     public java.lang.String getId() {
         return this.id;
@@ -33,11 +33,11 @@ public class CambiarEstadoPedido {
     }
 
     public int getEstado() {
-        return this.estado;
+        return Integer.parseInt(this.estado);
     }
 
     public void setEstado(int newEstado)  {
-        this.estado = newEstado;
+        this.estado = Integer.toString(newEstado);
     }
 
 }

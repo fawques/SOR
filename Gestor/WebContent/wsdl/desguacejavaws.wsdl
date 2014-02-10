@@ -219,7 +219,7 @@
   </wsdl:binding>
   <wsdl:service name="DesguaceJavaWS">
     <wsdl:port name="DesguaceJavaWSPort" binding="tns:DesguaceJavaWSSoapBinding">
-      <soap:address location="http://localhost:8080/DesguaceJavaWSPort"/>
+      <soap:address location="http://localhost:9090/DesguaceJavaWSPort"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -230,12 +230,12 @@ public class DesguaceJavaWS {
      * Web service operation
      */
     @WebMethod(operationName = "cambiarEstadoPedido")
-    public Boolean cambiarEstadoPedido(@WebParam(name = "id") String id, @WebParam(name = "estado") int estado) {
+    public Boolean cambiarEstadoPedido(@WebParam(name = "id") String id, @WebParam(name = "estado") String estado) {
          
-            Gson gson = new Gson();
+           
         try {
             bd= new InterfazBD("sor_gestor");
-           return  bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
+           return  bd.cambiarEstadoPedido(EstadoPedido.values()[Integer.parseInt(estado)], id);
       
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);

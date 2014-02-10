@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 public class CambiarEstadoPedido {
 
     protected String id;
-    protected int estado;
+    protected String estado;
 
     /**
      * Obtiene el valor de la propiedad id.
@@ -63,16 +63,24 @@ public class CambiarEstadoPedido {
     /**
      * Obtiene el valor de la propiedad estado.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
     /**
      * Define el valor de la propiedad estado.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setEstado(int value) {
+    public void setEstado(String value) {
         this.estado = value;
     }
 

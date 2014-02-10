@@ -80,7 +80,7 @@
   <xs:complexType name="cambiarEstadoPedido">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string"/>
-      <xs:element name="estado" type="xs:int"/>
+      <xs:element minOccurs="0" name="estado" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
