@@ -111,7 +111,7 @@ public class DesguaceJava extends Application {
         launch(args);
     }
         public FXMLLoader changeScene(String fxml) throws IOException {
-        //Mostrar pÃ¡gina de espera interfaz bÃ¡sica
+        //Mostrar pagina de espera interfaz basica
         URL location = getClass().getResource(fxml);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
