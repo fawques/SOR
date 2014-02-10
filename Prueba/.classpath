@@ -2,11 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Axis2"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/libSOR"/>
-	<classpathentry kind="lib" path="C:/Users/fawques/Documents/apache-cxf-3.0.0-milestone1/lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="/libSOR/lib/jfxrt.jar"/>
 	<classpathentry kind="lib" path="/libSOR/lib/google-gson-2.2.4/gson-2.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fawques/Documents/SOR/libSOR/lib"/>
+	<classpathentry kind="lib" path="/libSOR/lib/commons-lang-2.6/commons-lang-2.6.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.ws.cxf.core.CXF_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -8,7 +8,7 @@ package webservices;
 
 import jUDDI.JUDDIProxy;
 import gestor_taller.JMSException;
-import gestor_taller.TallerWS_PortType;
+import gestor_taller.JMSException_Exception;
 import gestor_taller.TallerWS_Service;
 
 /**
@@ -16,7 +16,7 @@ import gestor_taller.TallerWS_Service;
  * @author fawques
  */
 public class Webservices {
-    static public String nuevoPedido_WS(String pedido) {
+    static public String nuevoPedido_WS(String pedido) throws JMSException_Exception {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(pedido);
@@ -30,25 +30,25 @@ public class Webservices {
     
     public static String checkActivacion_WS(String mail) {
         TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
-        TallerWS_PortType port = service.getTallerWSPort();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.checkActivacion(mail);
     }
     
     public static String getOfertas_WS(String listaPedidos) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
-        TallerWS_PortType port = service.getTallerWSPort();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.getOfertas(listaPedidos);
     }
     
     public static Boolean aceptarOferta_WS(String id) {
-        gestor_taller.TallerWS_Service service;
-        TallerWS_PortType port = service.getTallerWSPort();
+        gestor_taller.TallerWS_Service service= new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());;
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.aceptarOferta(id);
     }
     
     public static Boolean rechazarOferta_WS(String id) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
-        TallerWS_PortType port = service.getTallerWSPort();
+        gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.rechazarOferta(id);
     }
     

@@ -1,163 +1,89 @@
-/**
- * JMSException.java
- *
- * This file was auto-generated from WSDL
- * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
- */
 
 package gestor_taller;
 
-public class JMSException  extends org.apache.axis.AxisFault  implements java.io.Serializable {
-    private java.lang.String errorCode;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
-    private java.lang.String message1;
 
-    public JMSException() {
-    }
+/**
+ * <p>Clase Java para JMSException complex type.
+ * 
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * 
+ * <pre>
+ * &lt;complexType name="JMSException">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="errorCode" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "JMSException", propOrder = {
+    "errorCode",
+    "message"
+})
+public class JMSException {
 
-    public JMSException(
-           java.lang.String errorCode,
-           java.lang.String message1) {
-        this.errorCode = errorCode;
-        this.message1 = message1;
-    }
-
+    @XmlElement(required = true, nillable = true)
+    protected String errorCode;
+    protected String message;
 
     /**
-     * Gets the errorCode value for this JMSException.
+     * Obtiene el valor de la propiedad errorCode.
      * 
-     * @return errorCode
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public java.lang.String getErrorCode() {
+    public String getErrorCode() {
         return errorCode;
     }
 
-
     /**
-     * Sets the errorCode value for this JMSException.
+     * Define el valor de la propiedad errorCode.
      * 
-     * @param errorCode
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setErrorCode(java.lang.String errorCode) {
-        this.errorCode = errorCode;
+    public void setErrorCode(String value) {
+        this.errorCode = value;
     }
 
-
     /**
-     * Gets the message1 value for this JMSException.
+     * Obtiene el valor de la propiedad message.
      * 
-     * @return message1
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public java.lang.String getMessage1() {
-        return message1;
+    public String getMessage() {
+        return message;
     }
 
-
     /**
-     * Sets the message1 value for this JMSException.
+     * Define el valor de la propiedad message.
      * 
-     * @param message1
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setMessage1(java.lang.String message1) {
-        this.message1 = message1;
+    public void setMessage(String value) {
+        this.message = value;
     }
 
-    private java.lang.Object __equalsCalc = null;
-    public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof JMSException)) return false;
-        JMSException other = (JMSException) obj;
-        if (obj == null) return false;
-        if (this == obj) return true;
-        if (__equalsCalc != null) {
-            return (__equalsCalc == obj);
-        }
-        __equalsCalc = obj;
-        boolean _equals;
-        _equals = true && 
-            ((this.errorCode==null && other.getErrorCode()==null) || 
-             (this.errorCode!=null &&
-              this.errorCode.equals(other.getErrorCode()))) &&
-            ((this.message1==null && other.getMessage1()==null) || 
-             (this.message1!=null &&
-              this.message1.equals(other.getMessage1())));
-        __equalsCalc = null;
-        return _equals;
-    }
-
-    private boolean __hashCodeCalc = false;
-    public synchronized int hashCode() {
-        if (__hashCodeCalc) {
-            return 0;
-        }
-        __hashCodeCalc = true;
-        int _hashCode = 1;
-        if (getErrorCode() != null) {
-            _hashCode += getErrorCode().hashCode();
-        }
-        if (getMessage1() != null) {
-            _hashCode += getMessage1().hashCode();
-        }
-        __hashCodeCalc = false;
-        return _hashCode;
-    }
-
-    // Type metadata
-    private static org.apache.axis.description.TypeDesc typeDesc =
-        new org.apache.axis.description.TypeDesc(JMSException.class, true);
-
-    static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://gestor_taller/", "JMSException"));
-        org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("errorCode");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "errorCode"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("message1");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "message"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setMinOccurs(0);
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-    }
-
-    /**
-     * Return type metadata object
-     */
-    public static org.apache.axis.description.TypeDesc getTypeDesc() {
-        return typeDesc;
-    }
-
-    /**
-     * Get Custom Serializer
-     */
-    public static org.apache.axis.encoding.Serializer getSerializer(
-           java.lang.String mechType, 
-           java.lang.Class _javaType,  
-           javax.xml.namespace.QName _xmlType) {
-        return 
-          new  org.apache.axis.encoding.ser.BeanSerializer(
-            _javaType, _xmlType, typeDesc);
-    }
-
-    /**
-     * Get Custom Deserializer
-     */
-    public static org.apache.axis.encoding.Deserializer getDeserializer(
-           java.lang.String mechType, 
-           java.lang.Class _javaType,  
-           javax.xml.namespace.QName _xmlType) {
-        return 
-          new  org.apache.axis.encoding.ser.BeanDeserializer(
-            _javaType, _xmlType, typeDesc);
-    }
-
-
-    /**
-     * Writes the exception data to the faultDetails
-     */
-    public void writeDetails(javax.xml.namespace.QName qname, org.apache.axis.encoding.SerializationContext context) throws java.io.IOException {
-        context.serialize(qname, null, this);
-    }
 }

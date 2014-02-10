@@ -19,7 +19,7 @@ import general.Oferta;
 import general.Pedido;
 import general.Pieza;
 import general.Taller;
-import gestor_taller.JMSException;
+import gestor_taller.JMSException_Exception;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -365,7 +365,7 @@ public class MainTaller extends Application {
         return null;
     }
 
-    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) throws JMSException_Exception {
         try {       
             bd = new InterfazBD("sor_taller");
             String tallerID = bd.getPrimerTaller().getID();
@@ -497,7 +497,7 @@ public class MainTaller extends Application {
 
     
     
-    public static String nuevoPedido(java.lang.String pedido) {
+    public static String nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
         AsyncManager manager = new AsyncManager("sor_taller");
         manager.ejecutarAcciones();
         for (int i = 0; i < 10; i++) {
