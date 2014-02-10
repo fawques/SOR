@@ -311,7 +311,7 @@
   </wsdl:binding>
   <wsdl:service name="AdminWS">
     <wsdl:port name="AdminWSPort" binding="tns:AdminWSSoapBinding">
-      <soap:address location="http://localhost:9090/AdminWSPort"/>
+      <soap:address location="http://localhost:8080/Gestor/services/AdminWSPort"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

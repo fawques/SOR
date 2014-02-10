@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * 
  */
 @WebService(targetNamespace = "urn:juddi-apache-org:v3_service", name = "JUDDI_Api_PortType")
-@XmlSeeAlso({org.uddi.api_v3.ObjectFactory.class, .ObjectFactory.class, org.apache.juddi.api_v3.ObjectFactory.class, org.uddi.sub_v3.ObjectFactory.class, org.w3._2000._09.xmldsig.ObjectFactory.class})
+@XmlSeeAlso({org.uddi.api_v3.ObjectFactory.class, org.uddi.api_v3.ObjectFactory.class, org.apache.juddi.api_v3.ObjectFactory.class, org.uddi.sub_v3.ObjectFactory.class, org.w3._2000._09.xmldsig.ObjectFactory.class})
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public interface JUDDIApiPortType {
 
