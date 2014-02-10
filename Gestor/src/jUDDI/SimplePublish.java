@@ -89,14 +89,14 @@ public class SimplePublish {
         // servicios[i][2] = URL del wsdl
         String[][] servicios = new String[3][3];
         servicios[0][0] = "TallerWS";
-        servicios[0][1] = "TallerWS";
-        servicios[0][2] = "http://" + ip + ":8080/Gestor/TallerWS?wsdl";
+        servicios[0][1] = "TallerWSPort";
+        servicios[0][2] = "http://" + ip + ":8080/Gestor/services/TallerWSPort?wsdl";
         servicios[1][0] = "AdminWS";
-        servicios[1][1] = "AdminWS";
-        servicios[1][2] = "http://" + ip + ":8080/Gestor/AdminWS?wsdl";
+        servicios[1][1] = "AdminWSPort";
+        servicios[1][2] = "http://" + ip + ":8080/Gestor/services/AdminWSPort?wsdl";
         servicios[2][0] = "DesguaceJavaWS";
-        servicios[2][1] = "DesguaceJavaWS";
-        servicios[2][2] = "http://" + ip + ":8080/Gestor/DesguaceJavaWS?wsdl";
+        servicios[2][1] = "DesguaceJavaWSPort";
+        servicios[2][2] = "http://" + ip + ":8080/Gestor/services/DesguaceJavaWSPort?wsdl";
         try {
             
             // Setting up the values to get an authentication token for the 'root' user ('root' user has admin privileges
