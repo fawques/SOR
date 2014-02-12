@@ -353,7 +353,7 @@ namespace desguaceNET
         private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.alta(name, email, address, city, int.Parse(postalCode), int.Parse(telephone));
+            return client.alta(name, email, address, city, postalCode, telephone);
         }
 
         private string checkActivacion(string mail)
@@ -402,7 +402,7 @@ namespace desguaceNET
         private bool cambiarEstadoPedido(string id, int estado)
         {
             DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.cambiarEstadoPedido(id, estado);
+            return client.cambiarEstadoPedido(id, estado.ToString());
         }
 
     }

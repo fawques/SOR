@@ -18,12 +18,19 @@
   <xs:element name="getPedidosporIDResponse" type="tns:getPedidosporIDResponse" />
   <xs:element name="nuevaOferta" type="tns:nuevaOferta" />
   <xs:element name="nuevaOfertaResponse" type="tns:nuevaOfertaResponse" />
-  <xs:complexType name="getOfertas">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="getOfertasResponse">
+  <xs:complexType name="alta">
     <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:string" />
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+      <xs:element minOccurs="0" name="address" type="xs:string" />
+      <xs:element minOccurs="0" name="city" type="xs:string" />
+      <xs:element minOccurs="0" name="postalCode" type="xs:string" />
+      <xs:element minOccurs="0" name="telephone" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="altaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="checkActivacion">
@@ -36,30 +43,43 @@
       <xs:element minOccurs="0" name="return" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="alta">
+  <xs:complexType name="getPedidosporID">
     <xs:sequence>
-      <xs:element minOccurs="0" name="name" type="xs:string" />
-      <xs:element minOccurs="0" name="email" type="xs:string" />
-      <xs:element minOccurs="0" name="address" type="xs:string" />
-      <xs:element minOccurs="0" name="city" type="xs:string" />
-      <xs:element name="postalCode" type="xs:int" />
-      <xs:element name="telephone" type="xs:int" />
+      <xs:element minOccurs="0" name="string" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="altaResponse">
+  <xs:complexType name="getPedidosporIDResponse">
     <xs:sequence>
-      <xs:element name="return" type="xs:boolean" />
+      <xs:element minOccurs="0" name="return" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="cambiarEstadoPedido">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string" />
-      <xs:element name="estado" type="xs:int" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="cambiarEstadoPedidoResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aceptarOfertaFin">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="aceptarOfertaFinResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getOfertas">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="getOfertasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="nuevaOferta">
@@ -88,26 +108,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="cancelarOfertaResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="getPedidosporID">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="string" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="getPedidosporIDResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="aceptarOfertaFin">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="id" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="aceptarOfertaFinResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:boolean" />
     </xs:sequence>
