@@ -17,6 +17,8 @@
 package jUDDI;
 
 import java.net.Inet4Address;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -55,8 +57,9 @@ public class SimplePublish {
 
     private static JUDDIApiPortType juddiApi = null;
     private static UDDIPublicationPortType publish = null;
-
+    private static String urlUddi;
     public SimplePublish(){
+    	urlUddi="http://192.168.1.160:8081/juddiv3/services/";
 //        try {
 //        	// create a client and read the config in the archive; 
 //            // you can use your config file name
@@ -208,38 +211,81 @@ public class SimplePublish {
     }
     
     private static AuthToken getAuthToken(org.uddi.api_v3.GetAuthToken body) {
-        org.uddi.v3_service.UDDISecurityService service = new org.uddi.v3_service.UDDISecurityService();
-        org.uddi.v3_service.UDDISecurityPortType port = service.getUDDISecurityImplPort();
-        return port.getAuthToken(body);
+        org.uddi.v3_service.UDDISecurityService service;
+		try {
+			service = new org.uddi.v3_service.UDDISecurityService(new URL(urlUddi+"security?wsdl"));
+			org.uddi.v3_service.UDDISecurityPortType port = service.getUDDISecurityImplPort();
+			return port.getAuthToken(body);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        return null;
     }
     
     private static BusinessDetail saveBusiness(org.uddi.api_v3.SaveBusiness body) {
-        org.uddi.v3_service.UDDIPublicationService service = new org.uddi.v3_service.UDDIPublicationService();
-        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
-        return port.saveBusiness(body);
+        org.uddi.v3_service.UDDIPublicationService service;
+		try {
+			service = new org.uddi.v3_service.UDDIPublicationService(new URL(urlUddi+"publication?wsdl"));
+			org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
+	        return port.saveBusiness(body);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return null;
 }
 
     private static ServiceDetail saveService(org.uddi.api_v3.SaveService body) {
-        org.uddi.v3_service.UDDIPublicationService service = new org.uddi.v3_service.UDDIPublicationService();
-        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
-        return port.saveService(body);
+        org.uddi.v3_service.UDDIPublicationService service;
+		try {
+			service = new org.uddi.v3_service.UDDIPublicationService(new URL(urlUddi+"publication?wsdl"));
+	        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
+	        return port.saveService(body);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
     }
 
     private static void deleteBusiness(org.uddi.api_v3.DeleteBusiness body) {
-        org.uddi.v3_service.UDDIPublicationService service = new org.uddi.v3_service.UDDIPublicationService();
-        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
-        port.deleteBusiness(body);
+        org.uddi.v3_service.UDDIPublicationService service;
+		try {
+			service = new org.uddi.v3_service.UDDIPublicationService(new URL(urlUddi+"publication?wsdl"));
+	        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
+	        port.deleteBusiness(body);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
     }
 
     private static BusinessList findBusiness(org.uddi.api_v3.FindBusiness body) throws RemoteException {
-        org.uddi.v3_service.UDDIInquiryService service = new org.uddi.v3_service.UDDIInquiryService();
-        org.uddi.v3_service.UDDIInquiryPortType port = service.getUDDIInquiryImplPort();
-        return port.findBusiness(body);
+        org.uddi.v3_service.UDDIInquiryService service;
+		try {
+			service = new org.uddi.v3_service.UDDIInquiryService(new URL(urlUddi+"inquiry?wsdl"));
+	        org.uddi.v3_service.UDDIInquiryPortType port = service.getUDDIInquiryImplPort();
+	        return port.findBusiness(body);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
     }
 
     private static PublisherDetail savePublisher(org.apache.juddi.api_v3.SavePublisher body) {
-        org.apache.juddi.v3_service.JUDDIApiService service = new org.apache.juddi.v3_service.JUDDIApiService();
-        org.apache.juddi.v3_service.JUDDIApiPortType port = service.getJUDDIApiImplPort();
-        return port.savePublisher(body);
+        org.apache.juddi.v3_service.JUDDIApiService service;
+		try {
+			service = new org.apache.juddi.v3_service.JUDDIApiService(new URL(urlUddi+"juddi-api?wsdl"));
+	        org.apache.juddi.v3_service.JUDDIApiPortType port = service.getJUDDIApiImplPort();
+	        return port.savePublisher(body);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
     }
 }

@@ -28,8 +28,14 @@ import org.uddi.v3_service.UDDIInquiryService;
  */
 public class JUDDIProxy {
     private static URL wsdl;
-    
+    private static URL urlUddi;
     public static void loadWsdl(String servicio) throws RemoteException {
+    	try {
+			urlUddi= new URL("http://192.168.1.160:8081/juddiv3/services/inquiry?wsdl");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         FindService fs = new FindService();
         FindQualifiers fq = new FindQualifiers();
         fq.getFindQualifier().add("exactMatch");
@@ -74,19 +80,19 @@ public class JUDDIProxy {
     
     
     private static ServiceList findService(org.uddi.api_v3.FindService body) throws RemoteException {
-        UDDIInquiryService service = new UDDIInquiryService();
+        UDDIInquiryService service = new UDDIInquiryService(urlUddi);
         org.uddi.v3_service.UDDIInquiryPortType port = service.getUDDIInquiryImplPort();
         return port.findService(body);
     }
 
     private static ServiceDetail getServiceDetail(org.uddi.api_v3.GetServiceDetail body) throws RemoteException {
-        UDDIInquiryService service = new UDDIInquiryService();
+        UDDIInquiryService service = new UDDIInquiryService(urlUddi);
         org.uddi.v3_service.UDDIInquiryPortType port = service.getUDDIInquiryImplPort();
         return port.getServiceDetail(body);
     }
 
     private static BusinessList findBusiness(org.uddi.api_v3.FindBusiness body) throws RemoteException {
-        UDDIInquiryService service = new UDDIInquiryService();
+        UDDIInquiryService service = new UDDIInquiryService(urlUddi);
         org.uddi.v3_service.UDDIInquiryPortType port = service.getUDDIInquiryImplPort();
         return port.findBusiness(body);
     }
