@@ -19,11 +19,12 @@ namespace desguaceNET.libSOR.jUDDI
             findQualifiers[0] = "exactMatch";
             fs.findQualifiers = findQualifiers;
             name[] names = new name[1];
+            names[0] = new name();
             names[0].Value = servicio;
             fs.name = names;
             serviceList bi = client.find_service(fs);
             serviceInfo[] sis = bi.serviceInfos;
-            if(sis.Length != 0){
+            if(sis != null && sis.Length != 0){
             serviceInfo si = sis[0];
 
             string serviceKey = si.serviceKey;
