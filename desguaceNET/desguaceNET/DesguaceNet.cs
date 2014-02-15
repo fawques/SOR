@@ -2,6 +2,7 @@
 using desguaceNET.libSOR.activemq;
 using desguaceNET.libSOR.BD;
 using desguaceNET.libSOR.general;
+using desguaceNET.libSOR.jUDDI;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
@@ -351,56 +352,56 @@ namespace desguaceNET
         // ============================
         private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
             return client.alta(name, email, address, city, int.Parse(postalCode), int.Parse(telephone));
         }
 
         private string checkActivacion(string mail)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
             return client.checkActivacion(mail);
         }
 
 
         private string nuevaOferta(string oferta)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
             return client.nuevaOferta(oferta);
         }
 
         private string getOfertas()
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
             return client.getOfertas();
         }
 
         private string getPedidosporID(string str)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
             return client.getPedidosporID(str);
         }
 
         private bool aceptarOfertaFin(string id)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
             return client.aceptarOfertaFin(id);
         }
 
         private bool baja(string id)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
             return client.baja(id);
         }
 
         private bool cancelarOferta(string id)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
             return client.cancelarOferta(id);
         }
 
         private bool cambiarEstadoPedido(string id, int estado)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(/*Aquí irá jUDDI*/);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
             return client.cambiarEstadoPedido(id, estado);
         }
 

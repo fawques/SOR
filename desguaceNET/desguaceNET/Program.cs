@@ -23,6 +23,7 @@ namespace desguaceNET
 
         static void init()
         {
+            desguaceNET.libSOR.jUDDI.jUDDIProxy.loadWsdl("DesguaceJavaWS");
             InterfazBD bd = new InterfazBD("sor_desguace");
             Desguace desguace = bd.getDesguace();
             if (desguace == null)
