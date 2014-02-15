@@ -227,7 +227,7 @@ public class SimplePublish {
     private static BusinessDetail saveBusiness(org.uddi.api_v3.SaveBusiness body) {
         org.uddi.v3_service.UDDIPublicationService service;
 		try {
-			service = new org.uddi.v3_service.UDDIPublicationService(new URL(urlUddi+"publication?wsdl"));
+			service = new org.uddi.v3_service.UDDIPublicationService(new URL(urlUddi+"publish?wsdl"));
 			org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
 	        return port.saveBusiness(body);
 		} catch (MalformedURLException e) {
@@ -240,7 +240,7 @@ public class SimplePublish {
     private static ServiceDetail saveService(org.uddi.api_v3.SaveService body) {
         org.uddi.v3_service.UDDIPublicationService service;
 		try {
-			service = new org.uddi.v3_service.UDDIPublicationService(new URL(urlUddi+"publication?wsdl"));
+			service = new org.uddi.v3_service.UDDIPublicationService(new URL(urlUddi+"publish?wsdl"));
 	        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
 	        return port.saveService(body);
 		} catch (MalformedURLException e) {
@@ -253,7 +253,7 @@ public class SimplePublish {
     private static void deleteBusiness(org.uddi.api_v3.DeleteBusiness body) {
         org.uddi.v3_service.UDDIPublicationService service;
 		try {
-			service = new org.uddi.v3_service.UDDIPublicationService(new URL(urlUddi+"publication?wsdl"));
+			service = new org.uddi.v3_service.UDDIPublicationService(new URL(urlUddi+"publish?wsdl"));
 	        org.uddi.v3_service.UDDIPublicationPortType port = service.getUDDIPublicationImplPort();
 	        port.deleteBusiness(body);
 		} catch (MalformedURLException e) {
