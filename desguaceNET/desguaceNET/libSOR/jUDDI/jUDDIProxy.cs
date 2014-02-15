@@ -29,8 +29,10 @@ namespace desguaceNET.libSOR.jUDDI
 
             string serviceKey = si.serviceKey;
             get_serviceDetail gsd = new get_serviceDetail();
-            string[] servkey = gsd.serviceKey;
+            string[] servkey = new string[1];
             servkey[0] = serviceKey;
+            gsd.serviceKey = servkey;
+            
 
             serviceDetail sd = client.get_serviceDetail(gsd);
             businessService[] bsList = sd.businessService;

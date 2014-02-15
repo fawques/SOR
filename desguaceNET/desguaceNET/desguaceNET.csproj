@@ -44,9 +44,6 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="juddi-dotnet-client">
-      <HintPath>..\..\libSOR\lib\juddi-distro-3.1.5\juddi-client.net\juddi-client.net\bin\Debug\juddi-dotnet-client.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Data.6.8.3\lib\net45\MySql.Data.dll</HintPath>
@@ -353,6 +350,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\Documents\SOR\libSOR\lib\juddi-distro-3.1.5\juddi-client.net\juddi-client.net\juddi-client.net.csproj">
+      <Project>{c3d005cd-6c26-49fd-a4d8-08699b66af6f}</Project>
+      <Name>juddi-client.net</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
