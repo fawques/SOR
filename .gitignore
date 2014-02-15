@@ -6,6 +6,9 @@
 *.war
 *.ear
 
+.metadata
+
+
 # Netbeans #
 
 build/

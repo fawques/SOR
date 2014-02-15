@@ -79,6 +79,7 @@ public class MainTaller extends Application {
         stage = stage2;
         
         try {
+        	JUDDIProxy.loadWsdl("TallerWS");
             hello();
             inicioTaller();
         } catch (javax.xml.ws.WebServiceException e) {
@@ -91,7 +92,7 @@ public class MainTaller extends Application {
     }
 
     public static void inicioTaller() throws IOException, ClassNotFoundException, SQLException {
-        JUDDIProxy.loadWsdl("TallerWS");
+        
         bd = new InterfazBD("sor_taller");
         //System.out.println(bd.getPedidosActivos());
         taller = bd.getPrimerTaller();
