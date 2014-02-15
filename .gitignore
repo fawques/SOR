@@ -15,11 +15,10 @@ build/
 dist/
 **/nbproject/private/
 
-# ActiveMQ #
-*.log
-*.data
-*/db.redo
-libSOR/lib/apache-activemq-5.9.0/data/*
+
+
+# jUDDI #
+libSOR/**/.log
 libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/bin/target
 
 
