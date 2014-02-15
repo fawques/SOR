@@ -11,8 +11,14 @@ namespace desguaceNET.libSOR.jUDDI
     {
         private static inquiry.UDDI_Inquiry_PortTypeClient client = new inquiry.UDDI_Inquiry_PortTypeClient();
         private static Uri wsdl;
+        private static Uri urlActiveMQ;
+        // urlUddi se puede configurar en Service References > inquiry > Configurar referencia de servicio...
     
-        public static void loadWsdl(string servicio) {
+        public static void loadWsdl(String servicio){
+            load(servicio);
+            load("ActiveMQ");
+        }
+        public static void load(String servicio){
             
             find_service fs = new find_service();
             string[] findQualifiers = new string[1];
@@ -41,7 +47,14 @@ namespace desguaceNET.libSOR.jUDDI
             bindingTemplate bt = btList[0];
             accessPoint ap = bt.accessPoint;
             String wsdlString = ap.Value;
-            wsdl = new Uri(wsdlString);
+            if (servicio =="ActiveMQ")
+            {
+                urlActiveMQ = new Uri(wsdlString);
+            }
+            else
+            {
+                wsdl = new Uri(wsdlString);
+            }
             
             Console.WriteLine("WSDL: " + wsdlString);
             }
@@ -49,6 +62,11 @@ namespace desguaceNET.libSOR.jUDDI
 
         public static Uri getWsdl() {
             return wsdl;
+        }
+
+        public static Uri getActiveMQ()
+        {
+            return urlActiveMQ;
         }
     }
 }

@@ -28,8 +28,13 @@ import org.uddi.v3_service.UDDIInquiryService;
  */
 public class JUDDIProxy {
     private static URL wsdl;
+    private static URL urlActiveMQ;
     private static URL urlUddi;
     public static void loadWsdl(String servicio) throws RemoteException {
+        load(servicio);
+        load("ActiveMQ");
+    }
+    public static void load(String servicio) throws RemoteException {
     	try {
 			urlUddi= new URL("http://192.168.1.160:8081/juddiv3/services/inquiry?wsdl");
 		} catch (MalformedURLException e) {
@@ -62,20 +67,31 @@ public class JUDDIProxy {
         AccessPoint ap = bt.getAccessPoint();
         String wsdlString = ap.getValue();
         try {
-            wsdl = new URL(wsdlString);
+            if (servicio.equals("ActiveMQ")) {
+                urlActiveMQ = new URL(wsdlString);
+            }else{
+                wsdl = new URL(wsdlString);
+            }
+            
         } catch (MalformedURLException ex) {
             Logger.getLogger(JUDDIProxy.class.getName()).log(Level.SEVERE, null, ex);
-            wsdl = null;
+            if (servicio.equals("ActiveMQ")) {
+                activeMQ = null;
+            }else{
+                wsdl = null;            
+            }
         }
         System.out.println("WSDL: " + wsdlString);
         }
-        }
+    }
 
     public static URL getWsdl() {
         return wsdl;
     }
     
-    
+    public static URL getActiveMQ() {
+        return urlActiveMQ;
+    }
     
     
     
