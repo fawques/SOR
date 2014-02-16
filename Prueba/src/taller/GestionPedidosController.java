@@ -195,7 +195,7 @@ public class GestionPedidosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 
         TableColumn id_auxCol = new TableColumn("Id_aux");
         id_auxCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Integer>("id_aux"));
@@ -248,7 +248,7 @@ public class GestionPedidosController implements Initializable {
         
     }
     public void actualizarTablaPedidosOferta(){
-    Gson gson= new  GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         olTablaPedidosOfertas.clear();
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
@@ -265,7 +265,7 @@ public class GestionPedidosController implements Initializable {
     
     }
     public void visualizarPedidos() throws JsonSyntaxException {
-        Gson gson= new  GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         olTablaPedidos.clear();
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
@@ -299,7 +299,7 @@ public class GestionPedidosController implements Initializable {
         np.setStage(stage);
         np.showStage();
         
-       // visualizarPedidos(new GsonBuilder().setDateFormat("MMM dd, yyyy").create());
+      
     }
 
     /**

@@ -7,7 +7,10 @@
 package desguace;
 
 import BD.InterfazBD;
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import general.Desguace;
 import general.EstadoGeneral;
 import general.EstadoOferta;
@@ -15,6 +18,7 @@ import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
 import jUDDI.JUDDIProxy;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -24,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -31,7 +36,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import webservices.Webservices;
-import static webservices.Webservices.alta_WS;
+import static webservices.Webservices.*;
 import Async.AsyncManager;
 
 /**
@@ -227,7 +232,7 @@ public class DesguaceJava extends Application {
             String desguaceID = bd.getDesguace().getID();            
             int id = bd.anadirOferta(fechaAlta,0,precio,idPedido, desguaceID,null,fechaLimite);
             Oferta nuevo = new Oferta("", id, precio, desguaceID, idPedido,fechaAlta, null, fechaLimite, EstadoOferta.NEW);
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String idFinal = nuevaOferta(gson.toJson(nuevo));
             bd.activarOfertaDesguace(id, idFinal);
             bd.close();
@@ -446,7 +451,7 @@ public class DesguaceJava extends Application {
     public static String getPedidosporID(java.lang.String string) {
         for (int i = 0; i < 10; i++) {
             try{
-                String ret = getPedidosporID(string);
+                String ret = getPedidosporID_WS(string);
                 // si no ha lanzado excepción, devolvemos correctamente
                 return ret;
             }catch(javax.xml.ws.WebServiceException e){}
@@ -521,7 +526,7 @@ public class DesguaceJava extends Application {
     public static Boolean cambiarEstadoPedido_1(java.lang.String id, int estado) {
         for (int i = 0; i < 10; i++) {
             try{
-                Boolean ret = Webservices.cambiarEstadoPedido_1_WS(id, ""+estado);
+                Boolean ret = Webservices.cambiarEstadoPedido_WS(id, EstadoPedido.values()[estado].name());
                 // si no ha lanzado excepción, devolvemos correctamente
                 return ret;
             }catch(javax.xml.ws.WebServiceException e){}

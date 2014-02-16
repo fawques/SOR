@@ -34,10 +34,12 @@ public class ObjectFactory {
     private final static QName _GetPedidosporID_QNAME = new QName("http://gestor_desguace_java/", "getPedidosporID");
     private final static QName _CancelarOferta_QNAME = new QName("http://gestor_desguace_java/", "cancelarOferta");
     private final static QName _AltaResponse_QNAME = new QName("http://gestor_desguace_java/", "altaResponse");
-    private final static QName _AceptarOfertaFinResponse_QNAME = new QName("http://gestor_desguace_java/", "aceptarOfertaFinResponse");
+    private final static QName _CambiarEstadoPedidoOtravezResponse_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedidoOtravezResponse");
+	private final static QName _AceptarOfertaFinResponse_QNAME = new QName("http://gestor_desguace_java/", "aceptarOfertaFinResponse");
     private final static QName _GetPedidosporIDResponse_QNAME = new QName("http://gestor_desguace_java/", "getPedidosporIDResponse");
     private final static QName _Alta_QNAME = new QName("http://gestor_desguace_java/", "alta");
-    private final static QName _CancelarOfertaResponse_QNAME = new QName("http://gestor_desguace_java/", "cancelarOfertaResponse");
+    private final static QName _CambiarEstadoPedidoOtravez_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedidoOtravez");
+	private final static QName _CancelarOfertaResponse_QNAME = new QName("http://gestor_desguace_java/", "cancelarOfertaResponse");
     private final static QName _GetOfertasResponse_QNAME = new QName("http://gestor_desguace_java/", "getOfertasResponse");
     private final static QName _BajaResponse_QNAME = new QName("http://gestor_desguace_java/", "bajaResponse");
     private final static QName _CheckActivacionResponse_QNAME = new QName("http://gestor_desguace_java/", "checkActivacionResponse");
@@ -59,6 +61,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CambiarEstadoPedidoOtravez }
+     * 
+     */
+    public CambiarEstadoPedidoOtravez createCambiarEstadoPedidoOtravez() {
+        return new CambiarEstadoPedidoOtravez();
+    }
+
+	/**
      * Create an instance of {@link CancelarOfertaResponse }
      * 
      */
@@ -179,6 +189,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CambiarEstadoPedidoOtravezResponse }
+     * 
+     */
+    public CambiarEstadoPedidoOtravezResponse createCambiarEstadoPedidoOtravezResponse() {
+        return new CambiarEstadoPedidoOtravezResponse();
+    }
+
+	/**
      * Create an instance of {@link GetPedidosporIDResponse }
      * 
      */
@@ -285,6 +303,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CambiarEstadoPedidoOtravezResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "cambiarEstadoPedidoOtravezResponse")
+    public JAXBElement<CambiarEstadoPedidoOtravezResponse> createCambiarEstadoPedidoOtravezResponse(CambiarEstadoPedidoOtravezResponse value) {
+        return new JAXBElement<CambiarEstadoPedidoOtravezResponse>(_CambiarEstadoPedidoOtravezResponse_QNAME, CambiarEstadoPedidoOtravezResponse.class, null, value);
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link AceptarOfertaFinResponse }{@code >}}
      * 
      */
@@ -312,6 +339,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CambiarEstadoPedidoOtravez }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "cambiarEstadoPedidoOtravez")
+    public JAXBElement<CambiarEstadoPedidoOtravez> createCambiarEstadoPedidoOtravez(CambiarEstadoPedidoOtravez value) {
+        return new JAXBElement<CambiarEstadoPedidoOtravez>(_CambiarEstadoPedidoOtravez_QNAME, CambiarEstadoPedidoOtravez.class, null, value);
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link CancelarOfertaResponse }{@code >}}
      * 
      */

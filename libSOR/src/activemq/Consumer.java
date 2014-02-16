@@ -51,7 +51,7 @@ public class Consumer {
     }
  
     public String consumeMessage() throws JMSException {
-    Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         //Start Connection
         /** Starts (or restarts) a connection's delivery of incoming messages. */
         connection.start();

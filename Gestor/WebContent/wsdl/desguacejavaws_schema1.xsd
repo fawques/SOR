@@ -1,4 +1,4 @@
-<xs:schema xmlns:tns="http://gestor_desguace_java/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://gestor_desguace_java/" version="1.0">
+<xs:schema xmlns:tns="http://gestor_desguace_java/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://gestor_desguace_java/" version="1.0">
 
   <xs:element name="aceptarOfertaFin" type="tns:aceptarOfertaFin"/>
 
@@ -13,6 +13,10 @@
   <xs:element name="bajaResponse" type="tns:bajaResponse"/>
 
   <xs:element name="cambiarEstadoPedido" type="tns:cambiarEstadoPedido"/>
+
+  <xs:element name="cambiarEstadoPedidoOtravez" type="tns:cambiarEstadoPedidoOtravez"/>
+
+  <xs:element name="cambiarEstadoPedidoOtravezResponse" type="tns:cambiarEstadoPedidoOtravezResponse"/>
 
   <xs:element name="cambiarEstadoPedidoResponse" type="tns:cambiarEstadoPedidoResponse"/>
 
@@ -131,6 +135,19 @@
   </xs:complexType>
 
   <xs:complexType name="bajaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cambiarEstadoPedidoOtravez">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="estado" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cambiarEstadoPedidoOtravezResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:boolean"/>
     </xs:sequence>
