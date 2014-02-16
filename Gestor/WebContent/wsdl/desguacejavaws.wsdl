@@ -45,6 +45,10 @@
     <wsdl:part name="parameters" element="tns:altaResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="cambiarEstadoPedidoOtravezResponse">
+    <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoOtravezResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getPedidosporIDResponse">
     <wsdl:part name="parameters" element="tns:getPedidosporIDResponse">
     </wsdl:part>
@@ -55,6 +59,10 @@
   </wsdl:message>
   <wsdl:message name="alta">
     <wsdl:part name="parameters" element="tns:alta">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cambiarEstadoPedidoOtravez">
+    <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoOtravez">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="cancelarOfertaResponse">
@@ -124,6 +132,12 @@
       <wsdl:input name="baja" message="tns:baja">
     </wsdl:input>
       <wsdl:output name="bajaResponse" message="tns:bajaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cambiarEstadoPedidoOtravez">
+      <wsdl:input name="cambiarEstadoPedidoOtravez" message="tns:cambiarEstadoPedidoOtravez">
+    </wsdl:input>
+      <wsdl:output name="cambiarEstadoPedidoOtravezResponse" message="tns:cambiarEstadoPedidoOtravezResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="cancelarOferta">
@@ -204,6 +218,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="nuevaOfertaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cambiarEstadoPedidoOtravez">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="cambiarEstadoPedidoOtravez">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cambiarEstadoPedidoOtravezResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

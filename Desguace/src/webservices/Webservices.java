@@ -35,7 +35,7 @@ public class Webservices {
         return port.nuevaOferta(oferta);
     }
 
-    public static String getPedidosporID(java.lang.String string) {
+    public static String getPedidosporID_WS(java.lang.String string) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.getPedidosporID(string);
@@ -59,9 +59,9 @@ public class Webservices {
         return port.baja(id);
     }
 
-    public static Boolean cambiarEstadoPedido_1_WS(java.lang.String id, java.lang.String estado) {
+    public static Boolean cambiarEstadoPedido_WS(java.lang.String id, java.lang.String estado) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.cambiarEstadoPedido(id, estado);
+        return port.cambiarEstadoPedidoOtravez(id, estado);
     }
 }

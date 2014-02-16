@@ -6,9 +6,14 @@
 package taller;
 
 import BD.InterfazBD;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -220,7 +225,7 @@ public class AltaTallerController implements Initializable {
         //If the validation goes well
         //bloquear los inputs
         /*Pedido nuevoP = new Pedido(1, "", new Date());
-        Gson g = new Gson();
+         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         String listaJSON = g.toJson(nuevoP);
         MainTaller.nuevoPedido(listaJSON);*/
         setEditableAllInputs(false);

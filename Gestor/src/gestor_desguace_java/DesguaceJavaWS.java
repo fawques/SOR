@@ -97,11 +97,10 @@ public class DesguaceJavaWS {
         try {          
             bd = new InterfazBD("sor_gestor");
              Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-             Type collectionType = new TypeToken<Oferta>() {
-             }.getType();
-             Oferta p = gson.fromJson(oferta, collectionType);
+
+             Oferta p = gson.fromJson(oferta,Oferta.class);
             Date ahora = new Date();
-            String stringID  = DigestUtils.md5Hex(ahora.toString());
+            String stringID  = DigestUtils.md5Hex(ahora.toString()); 
             p.setID(stringID);
              bd.anadirOferta(stringID, p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACTIVE.ordinal(),  p.getPedido(), p.getDesguace(), p.getFecha_baja(),p.getFecha_limite());
             bd.close();
@@ -126,7 +125,7 @@ public class DesguaceJavaWS {
             bd = new InterfazBD("sor_gestor");
              ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
             listaOfertas=bd.getOfertas();
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaOfertas);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;
@@ -143,7 +142,7 @@ public class DesguaceJavaWS {
      */
     @WebMethod(operationName = "getPedidosporID")
     public String getPedidosporID(@WebParam(name = "string") String string) {
-          Gson gson = new Gson();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         try {
             bd = new InterfazBD("sor_gestor");
              Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
@@ -152,8 +151,8 @@ public class DesguaceJavaWS {
              for(String s: listaids){
                  listapedidos.add(bd.getPedidoID(s));
              }
-             Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-            String listaJSON = gsonn.toJson(listapedidos);
+             
+            String listaJSON = gson.toJson(listapedidos);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;
         } catch (SQLException ex) {
@@ -235,7 +234,8 @@ public class DesguaceJavaWS {
            
         try {
             bd= new InterfazBD("sor_gestor");
-           return  bd.cambiarEstadoPedido(EstadoPedido.values()[Integer.parseInt(estado)], id);
+            System.out.println("miau");
+           return  bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
       
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -246,6 +246,23 @@ public class DesguaceJavaWS {
        
         return false;
     }
-    
+    @WebMethod(operationName = "cambiarEstadoPedidoOtravez")
+    public Boolean cambiarEstadoPedidoOtravez(@WebParam(name = "id") String id, @WebParam(name = "estado") String estado) {
+         
+           
+        try {
+            bd= new InterfazBD("sor_gestor");
+            System.out.println("miau");
+           return  bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+      
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       
+        return false;
+    }
 }
 

@@ -12,6 +12,7 @@ import clasesInterfaz.PiezasInterfaz;
 import clasesInterfaz.UsuarioInterface;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import general.Desguace;
@@ -90,7 +91,7 @@ public class FXMLDocumentController implements Initializable {
     public void actualizarPedidos(){
         personDataPedidos.clear();
     ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
-     Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
       Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring= Admin.getPedidos();
         if(!pedidosstring.equals("") && pedidosstring!=null){
@@ -111,7 +112,7 @@ public class FXMLDocumentController implements Initializable {
     }
     public void  pedidosInterfaz(){
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      TableColumn columnID = new TableColumn("ID");
      TableColumn columnIDtaller = new TableColumn("idTaller");
      TableColumn columnAlta = new TableColumn("fecha_alta");
@@ -181,7 +182,7 @@ public class FXMLDocumentController implements Initializable {
     }
     public void actualizarOfertas(){
      ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      personDataOferta.clear();
      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
       String ofertasstring= Admin.getOfertas();
@@ -201,7 +202,7 @@ public class FXMLDocumentController implements Initializable {
     public void ofertasInterfaz(){
          
      ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      TableColumn columnID = new TableColumn("ID");
      TableColumn columnIDPedido = new TableColumn("idPedido");
      TableColumn columnIDDesguace = new TableColumn("idDesguace");
@@ -257,7 +258,7 @@ public class FXMLDocumentController implements Initializable {
     public void ofertasclickPedido(String id){
     personDataOferta.clear();
      ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
      String ofertasstring=Admin.getOfertasporPedido(id);
      if(!ofertasstring.equals("") && ofertasstring!=null){
@@ -275,7 +276,7 @@ public class FXMLDocumentController implements Initializable {
     }
     public void piezasInterfaz(String id ){
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
-        Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         TableColumn columnCant = new TableColumn("cant");
         TableColumn columnNombre = new TableColumn("nombrePieza");
         tablePiezas.setEditable(true);
@@ -307,8 +308,7 @@ public class FXMLDocumentController implements Initializable {
     public void piezasclickPedido(String id){
         personDataPiezas.clear();
         ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
-        Gson gson = new Gson();
-       
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();       
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring=Admin.getPedidoID(id);
         if(!pedidosstring.equals("") && pedidosstring!=null){
@@ -344,7 +344,7 @@ public class FXMLDocumentController implements Initializable {
     }
     public void actualizarDesguaces(){
     personDataDesguaces.clear();
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
         String desguacestring=Admin.getDesguaces();
@@ -362,7 +362,7 @@ public class FXMLDocumentController implements Initializable {
     }
     public void actualizarAltasDesguaces(){
     altaDesguaces.clear();
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
        Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
         String desguacestring=Admin.getAltaDesguace();
@@ -381,7 +381,7 @@ public class FXMLDocumentController implements Initializable {
     
     public void desguacesInterfaz(){
      ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      TableColumn columnID = new TableColumn("ID");
      TableColumn columnNombre = new TableColumn("nombreTaller");
      TableColumn columnEmail = new TableColumn("email");
@@ -429,7 +429,7 @@ public class FXMLDocumentController implements Initializable {
     }
     public void AltaDesguaces(){
      ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      TableColumn columnID = new TableColumn("ID");
      TableColumn columnNombre = new TableColumn("nombreTaller");
      TableColumn columnEmail = new TableColumn("email");
@@ -554,7 +554,7 @@ public class FXMLDocumentController implements Initializable {
         public void actualizarAltasTaller(){
     altaTaller.clear();
         ArrayList<Taller> listaTalleres= new ArrayList<Taller>();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
         String tallerstring=Admin.getAltaTalleres();
         if( !tallerstring.equals("") && tallerstring!=null ){
@@ -574,7 +574,7 @@ public class FXMLDocumentController implements Initializable {
 public void actualizarTaller(){
     personData.clear();
         ArrayList<Taller> listaTalleres= new ArrayList<Taller>();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
         String tallerstring=Admin.getTalleres();
         if( !tallerstring.equals("") && tallerstring!=null ){
@@ -594,7 +594,7 @@ public void actualizarTaller(){
     public void altaTaller(){
         
         ArrayList<Taller> listaTalleres= new ArrayList<Taller>();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
          TableColumn columnID = new TableColumn("ID");
          TableColumn columnNombre = new TableColumn("nombreTaller");
           TableColumn columnEmail = new TableColumn("email");
@@ -670,7 +670,7 @@ public void actualizarTaller(){
     }
     public void talleresInterfaz(){
         ArrayList<Taller> listaTalleres= new ArrayList<Taller>();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
          TableColumn columnID = new TableColumn("ID");
          TableColumn columnNombre = new TableColumn("nombreTaller");
           TableColumn columnEmail = new TableColumn("email");

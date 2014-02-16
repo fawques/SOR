@@ -7,8 +7,11 @@
 package admin;
 
 
+import jUDDI.JUDDIProxy;
+
 import java.io.IOException;
 import java.net.URL;
+
 
 
 import javafx.application.Application;
@@ -40,6 +43,7 @@ public class Admin extends Application {
     
     @Override
     public void start(Stage stage2) throws Exception {
+    	JUDDIProxy.loadWsdl("AdminWS");
     	 stage = stage2;
         FXMLLoader loader = changeScene("FXMLDocument.fxml");
         stage.setTitle("Alta de desguace");
@@ -79,31 +83,31 @@ public class Admin extends Application {
     }
 
     public static String getOfertas() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getOfertas();
     }
 
     public static String getPedidos() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getPedidos();
     }
 
     public static String getTalleres() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getTalleres();
     }
 
     public static String getPedidoID(java.lang.String id) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getPedidoID(id);
     }
 
     public static String getOfertasporPedido(java.lang.String idPedido) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getOfertasporPedido(idPedido);
     }
@@ -111,7 +115,7 @@ public class Admin extends Application {
  
 
     public static String getDesguaces() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getDesguaces();
     }
@@ -119,25 +123,25 @@ public class Admin extends Application {
 
 
     public static String getAltaTalleres() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getAltaTalleres();
     }
 
     public static void darAccesoTaller(java.lang.String id) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         port.darAccesoTaller(id);
     }
 
     public static Boolean addAccesoDesguace(java.lang.String id) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.addAccesoDesguace(id);
     }
 
     public static String getAltaDesguace() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service();
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getAltaDesguace();
     }

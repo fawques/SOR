@@ -66,7 +66,7 @@ public class AdminWS {
             public void actionPerformed(ActionEvent arg0) {
                 try {
                     bd = new InterfazBD("sor_gestor");
-                       Gson gson= new Gson();
+                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                 ArrayList<Oferta> listaOferta= bd.getOfertasPorEstado(EstadoOferta.ACTIVE);
                 listaOferta.addAll(bd.getOfertasPorEstado(EstadoOferta.ACCEPTED));
                 ArrayList<Pedido> listaPedido=bd.getPedidosPorEstado(EstadoPedido.ACTIVE);
@@ -157,7 +157,7 @@ public class AdminWS {
      */
     @WebMethod(operationName = "getPedidos")
     public String getPedidos() {
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         //Dec 7, 2013 5:46:35 PM
         try {
             ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
@@ -185,7 +185,7 @@ public class AdminWS {
         //listaOfertas.add(new Oferta(1,new Date(),new Date(), new Date(),32.2,1,1));
             //listaOfertas.add(new Oferta(2,new Date(),new Date(), new Date(),20.0,1,1));
             listaOfertas = bd.getOfertas();
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaOfertas);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;
@@ -209,7 +209,7 @@ public class AdminWS {
        // listaDesguaces.add(new Desguace(1,"Pepito S.L", "comprame@gmai.com", "C/Mariano Luis", "España", 1234,124124));
             //listaDesguaces.add(new Desguace(2,"Construcciones S.L", "todoparavender@gmail.com", "C/ Empresario Rico", "España", 1234,124124));
             listaDesguaces = bd.getDesguaces();
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaDesguaces);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;
@@ -230,7 +230,7 @@ public class AdminWS {
             bd = new InterfazBD("sor_gestor");
             ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
             listaTalleres=bd.getTalleres();
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;
@@ -247,7 +247,7 @@ public class AdminWS {
      */
     @WebMethod(operationName = "getOfertasporPedido")
     public String getOfertasporPedido(@WebParam(name = "idPedido") String idPedido) {
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         //Dec 7, 2013 5:46:35 PM
         try {
             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
@@ -273,7 +273,7 @@ public class AdminWS {
             bd = new InterfazBD("sor_gestor");
             ArrayList<Pedido> listaPedido = new ArrayList<Pedido>();
             listaPedido.add(bd.getPedido(id));
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaPedido);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;
@@ -306,7 +306,7 @@ public class AdminWS {
             bd = new InterfazBD("sor_gestor");
              ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
              listaTalleres=bd.getAltasTaller();
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;
@@ -381,7 +381,7 @@ public class AdminWS {
             bd = new InterfazBD("sor_gestor");
              ArrayList<Desguace> listaDesguace = new ArrayList<Desguace>();
              listaDesguace=bd.getAltasDesguaces();
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaDesguace);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;

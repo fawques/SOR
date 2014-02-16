@@ -28,7 +28,7 @@ import org.uddi.v3_service.UDDIInquiryService;
  */
 public class JUDDIProxy {
     private static URL wsdl;
-    private static URL urlActiveMQ;
+    private static String urlActiveMQ;
     private static URL urlUddi;
     public static void loadWsdl(String servicio) throws RemoteException {
         load(servicio);
@@ -68,7 +68,7 @@ public class JUDDIProxy {
         String wsdlString = ap.getValue();
         try {
             if (servicio.equals("ActiveMQ")) {
-                urlActiveMQ = new URL(wsdlString);
+                urlActiveMQ = wsdlString;
             }else{
                 wsdl = new URL(wsdlString);
             }
@@ -76,7 +76,7 @@ public class JUDDIProxy {
         } catch (MalformedURLException ex) {
             Logger.getLogger(JUDDIProxy.class.getName()).log(Level.SEVERE, null, ex);
             if (servicio.equals("ActiveMQ")) {
-                activeMQ = null;
+                urlActiveMQ = null;
             }else{
                 wsdl = null;            
             }
@@ -89,7 +89,7 @@ public class JUDDIProxy {
         return wsdl;
     }
     
-    public static URL getActiveMQ() {
+    public static String getActiveMQ() {
         return urlActiveMQ;
     }
     

@@ -81,7 +81,7 @@ public class TallerWS {
         return ""; //devolvemos el estado pendiente, por defecto
     }
     private void enviarPedidoActivemq(String nombreCola,PedidoCorto pedido) throws JMSException{
-            Gson gson = new Gson();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             Gestor_activemq activemq= new Gestor_activemq();
             activemq.create_Producer(nombreCola);            
             String pedidoFinal = gson.toJson(pedido);
@@ -95,7 +95,7 @@ public class TallerWS {
     public String nuevoPedido(@WebParam(name = "pedido") String pedido) throws JMSException {
          try {
             bd = new InterfazBD("sor_gestor");
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
              Type collectionType = new TypeToken<Pedido>() {
              }.getType();
              Pedido p = gson.fromJson(pedido, collectionType);
@@ -124,7 +124,7 @@ public class TallerWS {
     public String getOfertas(@WebParam(name = "listaPedidos") String listaPedidos) {
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         ArrayList<Oferta> listaOferta = new ArrayList<>();
         ArrayList<Pedido> arrayPedido = new ArrayList<Pedido>();
         arrayPedido = gson.fromJson(listaPedidos, collectionType);
@@ -134,8 +134,8 @@ public class TallerWS {
                 Pedido p = it.next();
                 listaOferta.addAll(bd.getOfertasPedido(p.getID()));
             }
-             Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-            String retu=gsonn.toJson(listaOferta);
+            
+            String retu=gson.toJson(listaOferta);
             bd.close();
             return retu;
         } catch (SQLException ex) {
@@ -245,7 +245,7 @@ public class TallerWS {
     @WebMethod(operationName = "cambiarEstadoPedido")
     public Boolean cambiarEstadoPedido(@WebParam(name = "estado") int estado, @WebParam(name = "id") String id) {
         try {
-            Gson gson = new Gson();
+        	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             bd= new InterfazBD("sor_gestor");
             for(Desguace desguace: bd.getDesguaces()){
                 enviarPedidoActivemq(desguace.getID(),new PedidoCorto(id,EstadoPedido.values()[estado]));
@@ -267,7 +267,7 @@ public class TallerWS {
      */
     @WebMethod(operationName = "getPedidos")
     public String getPedidos() {
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         //Dec 7, 2013 5:46:35 PM
        
             ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();

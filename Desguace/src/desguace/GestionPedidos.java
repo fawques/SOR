@@ -237,7 +237,7 @@ public class GestionPedidos implements Initializable {
         
     ArrayList<Oferta>  ofertas= DesguaceJava.actualizarOfertas();   
     ArrayList<Oferta> ofertasgestor= new ArrayList<Oferta>();
-      Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
         String ofertasstring= DesguaceJava.getOfertas();
         if(!ofertasstring.equals("") && ofertasstring!=null){
@@ -362,7 +362,7 @@ public class GestionPedidos implements Initializable {
                 return cell;
             }
         };
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
         ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
       TableColumn id_auxCol1 = new TableColumn("Id_aux");
@@ -418,7 +418,7 @@ public class GestionPedidos implements Initializable {
                 }
                 
             }
-            Gson gsonn = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            Gson gsonn = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gsonn.toJson(stringbueno);
             pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
         }
@@ -547,7 +547,7 @@ public class GestionPedidos implements Initializable {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
-          Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+           Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
           ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
         datatablePedidos.clear();
           Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
@@ -582,7 +582,8 @@ public class GestionPedidos implements Initializable {
                     idlistabuena.add(pcorto.getID());
                 }
             }
-             Gson gsonnuevo = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            Gson gsonnuevo = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+           
             String listaJSON = gsonnuevo.toJson(idlistabuena);
              pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
         }
@@ -595,8 +596,8 @@ public class GestionPedidos implements Initializable {
         TablaPedidos interfaz= new TablaPedidos();
          for (Pedido pedido : listaPedidos) {
             bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
-            interfaz= new TablaPedidos(pedido);
-             datatablePedidos.add(interfaz);
+           /* interfaz= new TablaPedidos(pedido);
+             datatablePedidos.add(interfaz);*/
              
         }
         for (Pedido pedido : bd.getPedidosConID_aux(EstadoPedido.ACTIVE)) {         

@@ -40,16 +40,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import jUDDI.JUDDIProxy;
 import webservices.Webservices;
-import static webservices.Webservices.aceptarOferta_WS;
-import static webservices.Webservices.alta_WS;
-import static webservices.Webservices.baja_WS;
-import static webservices.Webservices.cancelarPedido_WS;
-import static webservices.Webservices.checkActivacion_WS;
-import static webservices.Webservices.getOfertas_WS;
-import static webservices.Webservices.hello;
-import static webservices.Webservices.modificar_WS;
-import static webservices.Webservices.nuevoPedido_WS;
-import static webservices.Webservices.rechazarOferta_WS;
+import static webservices.Webservices.*;
 
 /**
  *
@@ -275,7 +266,7 @@ public class MainTaller extends Application {
 
     public static ArrayList<Oferta> actualizarOfertas() {
         
-         Gson gson = new Gson();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
           
        String ofertasGson = getOfertas(getPedidosActivos());
        Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
@@ -283,14 +274,17 @@ public class MainTaller extends Application {
         listOf= gson.fromJson(ofertasGson, collectionType);
         //listOf = gson.fromJson(ofertasGson, collectionType);
         try {
-            bd = new InterfazBD("sor_taller");
+           
             for (Oferta of : listOf) {
 
                 if(!MainTaller.cambiarEstadoOferta(of.getEstado(), of.getID())){
-                        bd.anadirOferta(of.getID(), of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(), of.getFecha_baja(), of.getFecha_limite());
+                	bd = new InterfazBD("sor_taller");  
+                	bd.anadirOferta(of.getID(), of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(), of.getFecha_baja(), of.getFecha_limite());
+                	bd.close();
                 }
+                
             }
-            bd.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -304,7 +298,7 @@ public class MainTaller extends Application {
             bd = new InterfazBD("sor_taller");
             ArrayList<Pedido> p = bd.getPedidosConID_aux();
             bd.close();
-             Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             return gson.toJson(p);
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -320,7 +314,7 @@ public class MainTaller extends Application {
             bd = new InterfazBD("sor_taller");
             ArrayList<Pedido> p = bd.getPedidosConID_aux();
             bd.close();
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             return gson.toJson(p);
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -333,10 +327,10 @@ public class MainTaller extends Application {
         
     ArrayList<Pedido>  pedidos=new ArrayList<Pedido>();  
     ArrayList<Pedido> pedidosgestor= new ArrayList<Pedido>();
-      Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosString= getPedidosActivos();
-        String pedidosGestorString= getPedidos();
+        String pedidosGestorString= getPedidos_WS();
         if(!pedidosString.equals("") && !pedidosGestorString.equals("")){
             pedidosgestor = gson.fromJson(pedidosGestorString, collectionType);
             pedidos= gson.fromJson(pedidosString, collectionType);
@@ -372,7 +366,7 @@ public class MainTaller extends Application {
             String tallerID = bd.getPrimerTaller().getID();
             int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite, modoAutomatico);
             Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, modoAutomatico, piezas, cantidades, new ArrayList<Oferta>());
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String idFinal = nuevoPedido(gson.toJson(nuevo));
             bd.activarPedidoTaller(id, idFinal);
             bd.anyadirPiezasAPedido(idFinal, piezas, cantidades);
@@ -536,7 +530,7 @@ public class MainTaller extends Application {
             
             bd.close();
             if(aceptado){
-             return   cambiarEstadoPedido_1(estado.ordinal(),idPedido);
+             return   cambiarEstadoPedido_WS(estado.ordinal(),idPedido);
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -561,11 +555,7 @@ public class MainTaller extends Application {
         return false;
     }
     
-    private static String getOfertas_WS(String listaPedidos) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.getOfertas(listaPedidos);
-    }
+    
 
     public static Boolean aceptarOferta(java.lang.String id) {
         AsyncManager manager = new AsyncManager("sor_taller");
@@ -674,21 +664,4 @@ public class MainTaller extends Application {
     }
 
 
-    private static Boolean cancelarPedido_WS(String idPedido) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.cancelarPedido(idPedido);
-    }
-
-    private static Boolean cambiarEstadoPedido_1(int estado, java.lang.String id) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.cambiarEstadoPedido(estado, id);
-    }
-
-    public static String getPedidos() {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service();
-        gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.getPedidos();
-    }
 }
