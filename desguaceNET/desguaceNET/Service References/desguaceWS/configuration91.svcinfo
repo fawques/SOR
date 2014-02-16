@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="n802/+J1ShPDbxN1cIPJigfvAnU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="sm/QXCGRFqQDw8H5p4SoV9gGcHs=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="DesguaceJavaWSPortBinding">
+    <bindingConfiguration bindingType="basicHttpBinding" name="DesguaceJavaWSSoapBinding">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>DesguaceJavaWSPortBinding</serializedValue>
+          <serializedValue>DesguaceJavaWSSoapBinding</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="DesguaceJavaWSPort" contract="desguaceWS.DesguaceJavaWS" bindingType="basicHttpBinding" address="http://localhost:8080/Gestor/DesguaceJavaWS" bindingConfiguration="DesguaceJavaWSPortBinding">
+    <endpoint name="DesguaceJavaWSPort" contract="desguaceWS.DesguaceJavaWS" bindingType="basicHttpBinding" address="http://192.168.1.134:8080/Gestor/services/DesguaceJavaWSPort" bindingConfiguration="DesguaceJavaWSSoapBinding">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8080/Gestor/DesguaceJavaWS</serializedValue>
+          <serializedValue>http://192.168.1.134:8080/Gestor/services/DesguaceJavaWSPort</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -124,7 +124,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>DesguaceJavaWSPortBinding</serializedValue>
+          <serializedValue>DesguaceJavaWSSoapBinding</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>desguaceWS.DesguaceJavaWS</serializedValue>

@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -296,7 +297,7 @@ namespace desguaceNET
                 realizado = bd.cambiarEstadoPedido(estado, id);
                 if (realizado)
                 {
-                    cambiarEstadoPedido(id, (int)estado);
+                    cambiarEstadoPedido(id, ((int)estado).ToString());
                 }
 
                 return realizado;
@@ -352,56 +353,65 @@ namespace desguaceNET
         // ============================
         private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.alta(name, email, address, city, int.Parse(postalCode), int.Parse(telephone));
+            var addr = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", addr);
+            return client.alta(name, email, address, city, postalCode, telephone);
         }
 
         private string checkActivacion(string mail)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
+            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
             return client.checkActivacion(mail);
         }
 
 
         private string nuevaOferta(string oferta)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
+            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
             return client.nuevaOferta(oferta);
         }
 
         private string getOfertas()
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
+            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
             return client.getOfertas();
         }
 
         private string getPedidosporID(string str)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
+            var address = new EndpointAddress("http://"+jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
             return client.getPedidosporID(str);
         }
 
         private bool aceptarOfertaFin(string id)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
+            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
             return client.aceptarOfertaFin(id);
         }
 
         private bool baja(string id)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
+            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
             return client.baja(id);
         }
 
         private bool cancelarOferta(string id)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
+            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
             return client.cancelarOferta(id);
         }
 
-        private bool cambiarEstadoPedido(string id, int estado)
+        private bool cambiarEstadoPedido(string id, string estado)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
+            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
             return client.cambiarEstadoPedido(id, estado);
         }
 
