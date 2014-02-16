@@ -7,12 +7,15 @@
 package activemq;
 
  
+import jUDDI.JUDDIProxy;
+
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
  
 public class Producer {
@@ -24,7 +27,7 @@ public class Producer {
             MessageProducer producer;
  
     public Producer(String nombreCola) throws JMSException {
-        connectionFactory = new ActiveMQConnectionFactory();
+        connectionFactory = new ActiveMQConnectionFactory(/*"failover:(" + JUDDIProxy.getActiveMQ() + ")"*/);
         connection = connectionFactory.createConnection();
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         queue = session.createQueue(nombreCola);

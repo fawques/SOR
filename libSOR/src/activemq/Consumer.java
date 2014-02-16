@@ -8,15 +8,20 @@ package activemq;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import jUDDI.JUDDIProxy;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
  
 public class Consumer {
@@ -33,7 +38,7 @@ public class Consumer {
         MessageConsumer consumer;
     public Consumer(String queueName) throws JMSException {
             //Create ConnectionFactory
-        connectionFactory = new ActiveMQConnectionFactory();
+        connectionFactory = new ActiveMQConnectionFactory(/*"failover:(" + JUDDIProxy.getActiveMQ() + ")"*/);
         //Create Connection
        connection = connectionFactory.createConnection();
         //Create Session
