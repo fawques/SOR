@@ -44,9 +44,6 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="juddi-dotnet-client">
-      <HintPath>..\..\libSOR\lib\juddi-distro-3.1.5\juddi-client.net\juddi-client.net\bin\Debug\juddi-dotnet-client.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MySql.Data.6.8.3\lib\net45\MySql.Data.dll</HintPath>
@@ -126,11 +123,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\desguaceWS_Silvia\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Service References\inquiry\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -204,37 +196,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.nuevaOfertaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS1.wsdl" />
-    <None Include="Service References\desguaceWS_Silvia\DesguaceJavaWS1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.aceptarOfertaFinResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.altaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.bajaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.cambiarEstadoPedidoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.cancelarOfertaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.checkActivacionResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.getOfertasResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.getPedidosporIDResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\desguaceWS_Silvia\desguaceNET.desguaceWS_Silvia.nuevaOfertaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\inquiry\desguaceNET.inquiry.bindingDetail.datasource">
@@ -315,7 +276,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\desguaceWS\" />
-    <WCFMetadataStorage Include="Service References\desguaceWS_Silvia\" />
     <WCFMetadataStorage Include="Service References\inquiry\" />
   </ItemGroup>
   <ItemGroup>
@@ -331,18 +291,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\desguaceWS_Silvia\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\desguaceWS_Silvia\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\desguaceWS_Silvia\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\inquiry\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +301,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\Documents\SOR\libSOR\lib\juddi-distro-3.1.5\juddi-client.net\juddi-client.net\juddi-client.net.csproj">
+      <Project>{c3d005cd-6c26-49fd-a4d8-08699b66af6f}</Project>
+      <Name>juddi-client.net</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,7 +22,7 @@ namespace desguaceNET.libSOR.activemq
         public Consumer(string queueName)
         {
             //Create ConnectionFactory
-            connectionFactory = new ConnectionFactory("failover:(tcp://localhost:61616)");
+            connectionFactory = new ConnectionFactory("failover:(" + jUDDI.jUDDIProxy.getActiveMQ().OriginalString + ")");
             //Create Connection
             connection = connectionFactory.CreateConnection();
             //Create Session

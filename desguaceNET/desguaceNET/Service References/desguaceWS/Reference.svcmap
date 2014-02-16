@@ -22,8 +22,8 @@
     <MetadataSource Address="http://192.168.1.134:8080/Gestor/services/DesguaceJavaWSPort?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DesguaceJavaWS1.wsdl" MetadataType="Wsdl" ID="380991f1-ba03-49fc-a973-2013d28aecce" SourceId="1" SourceUrl="http://192.168.1.134:8080/Gestor/services/DesguaceJavaWSPort?wsdl" />
-    <MetadataFile FileName="DesguaceJavaWSPort.xsd" MetadataType="Schema" ID="11ce4391-0284-4c23-9e01-4c2b67358e58" SourceId="1" SourceUrl="http://192.168.1.134:8080/Gestor/services/DesguaceJavaWSPort?xsd=desguacejavaws_schema1.xsd" />
+    <MetadataFile FileName="DesguaceJavaWS1.wsdl" MetadataType="Wsdl" ID="1f2ccca4-659e-41de-85a6-80daa1661456" SourceId="1" SourceUrl="http://192.168.1.134:8080/Gestor/services/DesguaceJavaWSPort?wsdl" />
+    <MetadataFile FileName="DesguaceJavaWSPort.xsd" MetadataType="Schema" ID="64c7e318-15c5-40e6-ab63-e3675c250752" SourceId="1" SourceUrl="http://192.168.1.134:8080/Gestor/services/DesguaceJavaWSPort?xsd=desguacejavaws_schema1.xsd" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
