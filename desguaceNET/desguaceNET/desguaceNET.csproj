@@ -76,6 +76,8 @@
     <Compile Include="AltaDesguace.Designer.cs">
       <DependentUpon>AltaDesguace.cs</DependentUpon>
     </Compile>
+    <Compile Include="Async\Accion.cs" />
+    <Compile Include="Async\AsyncManager.cs" />
     <Compile Include="BajaDesguace.cs">
       <SubType>Form</SubType>
     </Compile>
