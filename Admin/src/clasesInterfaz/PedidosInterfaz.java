@@ -5,64 +5,80 @@
  */
 
 package clasesInterfaz;
+
+import general.EstadoPedido;
 import general.Pedido;
-import javafx.beans.property.*;
+import java.util.Date;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
- * @author Cute
+ * @author pablovm1990
  */
 public class PedidosInterfaz {
 
-    public PedidosInterfaz() {
-        this.ID= new SimpleStringProperty();
-        this.idTaller= new SimpleStringProperty();
-        this.fecha_alta=new SimpleStringProperty("");
-        this.fecha_baja=new SimpleStringProperty("");
-        this.fecha_limite=new SimpleStringProperty("");
-    }
-     public PedidosInterfaz(String _ID,String _Idtaller,String fecha_alta, String fecha_baja,String fecha_limite) {
-        this.ID= new SimpleStringProperty(_ID);
-        this.idTaller= new SimpleStringProperty(_Idtaller);
-        this.fecha_alta=new SimpleStringProperty(fecha_alta);
-        this.fecha_baja=new SimpleStringProperty(fecha_baja);
-        this.fecha_limite=new SimpleStringProperty(fecha_limite);
-    }
-    public PedidosInterfaz(Pedido pedido){
-        this.ID= new SimpleStringProperty(pedido.getID());
-        this.idTaller= new SimpleStringProperty(pedido.getTaller());
-        this.fecha_alta=new SimpleStringProperty(pedido.getFecha_alta().toString());
-        if(pedido.getFecha_baja()!=null){
-            this.fecha_baja=new SimpleStringProperty(pedido.getFecha_baja().toString());
-        }
-        else{
-            this.fecha_baja=new SimpleStringProperty("");
-        }
-        this.fecha_limite=new SimpleStringProperty(pedido.getFecha_limite().toString());
-    }
-    private final SimpleStringProperty ID ;
-    private final SimpleStringProperty idTaller;
-    private final SimpleStringProperty fecha_alta;
-    private final SimpleStringProperty fecha_baja;
-    private final SimpleStringProperty fecha_limite;
+    SimpleIntegerProperty id_aux;
+    SimpleStringProperty id;
+    SimpleStringProperty fecha_alta;
+    SimpleStringProperty estado;
+    SimpleStringProperty taller;
+    SimpleStringProperty fecha_baja;
+    SimpleStringProperty fecha_limite;
 
-    public String getID() {
-        return ID.get();
+    public PedidosInterfaz(Pedido p) {
+        this.id_aux = new SimpleIntegerProperty(p.getID_aux());
+        this.id = new SimpleStringProperty(p.getID());
+        this.fecha_alta = new SimpleStringProperty(p.getFecha_alta().toString());
+        this.estado =new SimpleStringProperty(p.getEstado().toString());
+        this.taller = new SimpleStringProperty(p.getTaller());
+        if(p.getFecha_baja()!=null){
+            this.fecha_baja = new SimpleStringProperty(p.getFecha_baja().toString());
+        }
+        this.fecha_limite = new SimpleStringProperty(p.getFecha_limite().toString());
+    }
+       public PedidosInterfaz() {
+        this.id_aux = new SimpleIntegerProperty();
+        this.id = new SimpleStringProperty("");
+        this.fecha_alta = new SimpleStringProperty("");
+        this.estado = new SimpleStringProperty("");
+        this.taller = new SimpleStringProperty("");
+        this.fecha_baja = new SimpleStringProperty("");
+        this.fecha_limite = new SimpleStringProperty("");
     }
 
-    public String getIdTaller() {
-        return idTaller.get();
+    public int getId_aux() {
+        return id_aux.get();
+    }
+
+    public String getId() {
+        return id.get();
     }
 
     public String getFecha_alta() {
         return fecha_alta.get();
     }
 
+    public String getEstado() {
+        return estado.get();
+    }
+
+    public String getTaller() {
+        return taller.get();
+    }
+
     public String getFecha_baja() {
+        if(fecha_baja==null){
+        return "";
+        }
         return fecha_baja.get();
     }
 
     public String getFecha_limite() {
         return fecha_limite.get();
     }
-    
+
+
+
 }

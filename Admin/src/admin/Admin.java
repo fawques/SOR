@@ -99,7 +99,11 @@ public class Admin extends Application {
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getTalleres();
     }
-
+    public static String getTalleresAceptados() {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getTalleresAceptados();
+    }
     public static String getPedidoID(java.lang.String id) {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
@@ -112,7 +116,11 @@ public class Admin extends Application {
         return port.getOfertasporPedido(idPedido);
     }
 
- 
+    public static String getDesguacesAceptados() {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getDesguacesAceptados();
+    }
 
     public static String getDesguaces() {
         gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());

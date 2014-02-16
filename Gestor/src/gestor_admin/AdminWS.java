@@ -220,7 +220,28 @@ public class AdminWS {
         }
         return null;
     }
-
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getDesguacesAceptados")
+    public String getDesguacesAceptados() {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            ArrayList<Desguace> listaDesguaces = new ArrayList<Desguace>();
+       // listaDesguaces.add(new Desguace(1,"Pepito S.L", "comprame@gmai.com", "C/Mariano Luis", "España", 1234,124124));
+            //listaDesguaces.add(new Desguace(2,"Construcciones S.L", "todoparavender@gmail.com", "C/ Empresario Rico", "España", 1234,124124));
+            listaDesguaces = bd.getDesguacesAceptados();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            String listaJSON = gson.toJson(listaDesguaces);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     /**
      * Web service operation
      */
@@ -241,7 +262,27 @@ public class AdminWS {
         }
         return null;
     }
-
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getTalleresAceptados")
+    public String getTalleresAceptados() {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
+            listaTalleres=bd.getTalleresAceptados();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            String listaJSON = gson.toJson(listaTalleres);
+            System.out.println("listaJSON = " + listaJSON);
+            return listaJSON;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+   
     /**
      * Web service operation
      */

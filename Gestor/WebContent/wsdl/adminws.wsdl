@@ -5,12 +5,48 @@
   <import namespace="http://gestor_admin/" schemaLocation="adminws_schema1.xsd"/>
 </schema>
   </wsdl:types>
-  <wsdl:message name="Registrar">
-    <wsdl:part name="parameters" element="tns:Registrar">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="getAltaTalleres">
     <wsdl:part name="parameters" element="tns:getAltaTalleres">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTalleresResponse">
+    <wsdl:part name="parameters" element="tns:getTalleresResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTalleresAceptadosResponse">
+    <wsdl:part name="parameters" element="tns:getTalleresAceptadosResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPedidosResponse">
+    <wsdl:part name="parameters" element="tns:getPedidosResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendMail">
+    <wsdl:part name="parameters" element="tns:sendMail">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RegistrarResponse">
+    <wsdl:part name="parameters" element="tns:RegistrarResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendMailResponse">
+    <wsdl:part name="parameters" element="tns:sendMailResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDesguacesAceptados">
+    <wsdl:part name="parameters" element="tns:getDesguacesAceptados">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDesguacesResponse">
+    <wsdl:part name="parameters" element="tns:getDesguacesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDesguaces">
+    <wsdl:part name="parameters" element="tns:getDesguaces">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Registrar">
+    <wsdl:part name="parameters" element="tns:Registrar">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getPedidos">
@@ -21,12 +57,12 @@
     <wsdl:part name="parameters" element="tns:helloResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getAltaDesguace">
-    <wsdl:part name="parameters" element="tns:getAltaDesguace">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="addAccesoDesguaceResponse">
     <wsdl:part name="parameters" element="tns:addAccesoDesguaceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAltaDesguace">
+    <wsdl:part name="parameters" element="tns:getAltaDesguace">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getOfertas">
@@ -37,20 +73,12 @@
     <wsdl:part name="parameters" element="tns:hello">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getTalleresResponse">
-    <wsdl:part name="parameters" element="tns:getTalleresResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="darAccesoTallerResponse">
     <wsdl:part name="parameters" element="tns:darAccesoTallerResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="darAccesoTaller">
     <wsdl:part name="parameters" element="tns:darAccesoTaller">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getPedidosResponse">
-    <wsdl:part name="parameters" element="tns:getPedidosResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getOfertasResponse">
@@ -65,10 +93,6 @@
     <wsdl:part name="parameters" element="tns:getTalleres">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="sendMail">
-    <wsdl:part name="parameters" element="tns:sendMail">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="addAccesoDesguace">
     <wsdl:part name="parameters" element="tns:addAccesoDesguace">
     </wsdl:part>
@@ -81,14 +105,6 @@
     <wsdl:part name="parameters" element="tns:getOfertasporPedidoResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="sendMailResponse">
-    <wsdl:part name="parameters" element="tns:sendMailResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="RegistrarResponse">
-    <wsdl:part name="parameters" element="tns:RegistrarResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="getOfertasporPedido">
     <wsdl:part name="parameters" element="tns:getOfertasporPedido">
     </wsdl:part>
@@ -97,16 +113,16 @@
     <wsdl:part name="parameters" element="tns:getAltaTalleresResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getDesguacesResponse">
-    <wsdl:part name="parameters" element="tns:getDesguacesResponse">
+  <wsdl:message name="getDesguacesAceptadosResponse">
+    <wsdl:part name="parameters" element="tns:getDesguacesAceptadosResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getAltaDesguaceResponse">
     <wsdl:part name="parameters" element="tns:getAltaDesguaceResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getDesguaces">
-    <wsdl:part name="parameters" element="tns:getDesguaces">
+  <wsdl:message name="getTalleresAceptados">
+    <wsdl:part name="parameters" element="tns:getTalleresAceptados">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="AdminWS">
@@ -146,16 +162,34 @@
       <wsdl:output name="RegistrarResponse" message="tns:RegistrarResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getDesguacesAceptados">
+      <wsdl:input name="getDesguacesAceptados" message="tns:getDesguacesAceptados">
+    </wsdl:input>
+      <wsdl:output name="getDesguacesAceptadosResponse" message="tns:getDesguacesAceptadosResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getDesguaces">
       <wsdl:input name="getDesguaces" message="tns:getDesguaces">
     </wsdl:input>
       <wsdl:output name="getDesguacesResponse" message="tns:getDesguacesResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getOfertasporPedido">
+      <wsdl:input name="getOfertasporPedido" message="tns:getOfertasporPedido">
+    </wsdl:input>
+      <wsdl:output name="getOfertasporPedidoResponse" message="tns:getOfertasporPedidoResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="hello">
       <wsdl:input name="hello" message="tns:hello">
     </wsdl:input>
       <wsdl:output name="helloResponse" message="tns:helloResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTalleresAceptados">
+      <wsdl:input name="getTalleresAceptados" message="tns:getTalleresAceptados">
+    </wsdl:input>
+      <wsdl:output name="getTalleresAceptadosResponse" message="tns:getTalleresAceptadosResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getPedidoID">
@@ -174,12 +208,6 @@
       <wsdl:input name="getAltaTalleres" message="tns:getAltaTalleres">
     </wsdl:input>
       <wsdl:output name="getAltaTalleresResponse" message="tns:getAltaTalleresResponse">
-    </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getOfertasporPedido">
-      <wsdl:input name="getOfertasporPedido" message="tns:getOfertasporPedido">
-    </wsdl:input>
-      <wsdl:output name="getOfertasporPedidoResponse" message="tns:getOfertasporPedidoResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getOfertas">
@@ -245,6 +273,15 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getDesguacesAceptados">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getDesguacesAceptados">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDesguacesAceptadosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getDesguaces">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="getDesguaces">
@@ -254,12 +291,30 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getOfertasporPedido">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getOfertasporPedido">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getOfertasporPedidoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="hello">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="hello">
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="helloResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTalleresAceptados">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getTalleresAceptados">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTalleresAceptadosResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -287,15 +342,6 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getAltaTalleresResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getOfertasporPedido">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="getOfertasporPedido">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getOfertasporPedidoResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

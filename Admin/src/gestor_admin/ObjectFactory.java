@@ -26,7 +26,8 @@ public class ObjectFactory {
 
     private final static QName _Registrar_QNAME = new QName("http://gestor_admin/", "Registrar");
     private final static QName _GetAltaTalleres_QNAME = new QName("http://gestor_admin/", "getAltaTalleres");
-    private final static QName _GetPedidos_QNAME = new QName("http://gestor_admin/", "getPedidos");
+    private final static QName _GetTalleresAceptadosResponse_QNAME = new QName("http://gestor_admin/", "getTalleresAceptadosResponse");
+	private final static QName _GetPedidos_QNAME = new QName("http://gestor_admin/", "getPedidos");
     private final static QName _HelloResponse_QNAME = new QName("http://gestor_admin/", "helloResponse");
     private final static QName _AddAccesoDesguaceResponse_QNAME = new QName("http://gestor_admin/", "addAccesoDesguaceResponse");
     private final static QName _GetAltaDesguace_QNAME = new QName("http://gestor_admin/", "getAltaDesguace");
@@ -44,12 +45,15 @@ public class ObjectFactory {
     private final static QName _GetPedidoIDResponse_QNAME = new QName("http://gestor_admin/", "getPedidoIDResponse");
     private final static QName _GetOfertasporPedidoResponse_QNAME = new QName("http://gestor_admin/", "getOfertasporPedidoResponse");
     private final static QName _SendMailResponse_QNAME = new QName("http://gestor_admin/", "sendMailResponse");
-    private final static QName _RegistrarResponse_QNAME = new QName("http://gestor_admin/", "RegistrarResponse");
+    private final static QName _GetDesguacesAceptados_QNAME = new QName("http://gestor_admin/", "getDesguacesAceptados");
+	private final static QName _RegistrarResponse_QNAME = new QName("http://gestor_admin/", "RegistrarResponse");
     private final static QName _GetOfertasporPedido_QNAME = new QName("http://gestor_admin/", "getOfertasporPedido");
     private final static QName _GetAltaTalleresResponse_QNAME = new QName("http://gestor_admin/", "getAltaTalleresResponse");
-    private final static QName _GetDesguacesResponse_QNAME = new QName("http://gestor_admin/", "getDesguacesResponse");
+    private final static QName _GetDesguacesAceptadosResponse_QNAME = new QName("http://gestor_admin/", "getDesguacesAceptadosResponse");
+	private final static QName _GetDesguacesResponse_QNAME = new QName("http://gestor_admin/", "getDesguacesResponse");
     private final static QName _GetAltaDesguaceResponse_QNAME = new QName("http://gestor_admin/", "getAltaDesguaceResponse");
-    private final static QName _GetDesguaces_QNAME = new QName("http://gestor_admin/", "getDesguaces");
+    private final static QName _GetTalleresAceptados_QNAME = new QName("http://gestor_admin/", "getTalleresAceptados");
+	private final static QName _GetDesguaces_QNAME = new QName("http://gestor_admin/", "getDesguaces");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: gestor_admin
@@ -91,6 +95,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetDesguacesAceptados }
+     * 
+     */
+    public GetDesguacesAceptados createGetDesguacesAceptados() {
+        return new GetDesguacesAceptados();
+    }
+
+	/**
      * Create an instance of {@link SendMail }
      * 
      */
@@ -107,6 +119,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetTalleresAceptadosResponse }
+     * 
+     */
+    public GetTalleresAceptadosResponse createGetTalleresAceptadosResponse() {
+        return new GetTalleresAceptadosResponse();
+    }
+
+	/**
      * Create an instance of {@link GetPedidosResponse }
      * 
      */
@@ -131,6 +151,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetTalleresAceptados }
+     * 
+     */
+    public GetTalleresAceptados createGetTalleresAceptados() {
+        return new GetTalleresAceptados();
+    }
+
+	/**
      * Create an instance of {@link GetOfertasporPedido }
      * 
      */
@@ -147,6 +175,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetDesguacesAceptadosResponse }
+     * 
+     */
+    public GetDesguacesAceptadosResponse createGetDesguacesAceptadosResponse() {
+        return new GetDesguacesAceptadosResponse();
+    }
+
+	/**
      * Create an instance of {@link GetPedidoIDResponse }
      * 
      */
@@ -285,6 +321,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTalleresAceptadosResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getTalleresAceptadosResponse")
+    public JAXBElement<GetTalleresAceptadosResponse> createGetTalleresAceptadosResponse(GetTalleresAceptadosResponse value) {
+        return new JAXBElement<GetTalleresAceptadosResponse>(_GetTalleresAceptadosResponse_QNAME, GetTalleresAceptadosResponse.class, null, value);
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetPedidos }{@code >}}
      * 
      */
@@ -447,6 +492,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguacesAceptados }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getDesguacesAceptados")
+    public JAXBElement<GetDesguacesAceptados> createGetDesguacesAceptados(GetDesguacesAceptados value) {
+        return new JAXBElement<GetDesguacesAceptados>(_GetDesguacesAceptados_QNAME, GetDesguacesAceptados.class, null, value);
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link RegistrarResponse }{@code >}}
      * 
      */
@@ -474,6 +528,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguacesAceptadosResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getDesguacesAceptadosResponse")
+    public JAXBElement<GetDesguacesAceptadosResponse> createGetDesguacesAceptadosResponse(GetDesguacesAceptadosResponse value) {
+        return new JAXBElement<GetDesguacesAceptadosResponse>(_GetDesguacesAceptadosResponse_QNAME, GetDesguacesAceptadosResponse.class, null, value);
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguacesResponse }{@code >}}
      * 
      */
@@ -492,6 +555,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTalleresAceptados }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getTalleresAceptados")
+    public JAXBElement<GetTalleresAceptados> createGetTalleresAceptados(GetTalleresAceptados value) {
+        return new JAXBElement<GetTalleresAceptados>(_GetTalleresAceptados_QNAME, GetTalleresAceptados.class, null, value);
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguaces }{@code >}}
      * 
      */

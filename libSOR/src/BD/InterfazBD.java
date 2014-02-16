@@ -96,6 +96,31 @@ public class InterfazBD {
         return lista;    
     }
     
+    public ArrayList<Desguace> getDesguacesAceptados()
+    {
+        ArrayList<Desguace> lista= new ArrayList<>();
+        try{
+        	  ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace where estado='0'");
+            while(resultados.next()){
+                ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                lista.add(nuevo);
+                //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
+            }
+           resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace where estado='1'");
+            while(resultados.next()){
+                ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                lista.add(nuevo);
+                //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;    
+    }
+
     public ArrayList<Pedido> getPedidosActivos(){ //devuelve pedidos en general
         ArrayList<Pedido> lista= new ArrayList<>();
         try{
@@ -277,6 +302,32 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         }
         return lista;
 
+    }
+    public ArrayList<Taller> getTalleresAceptados()
+    {
+        ArrayList<Taller> lista= new ArrayList<>();
+        try{
+        	  ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller where estado='0'");
+        	  while(resultados.next()){
+                  ArrayList<Pedido> listaDePedidos = new ArrayList<>();
+                  listaDePedidos = null; // no se necesita para el alta
+                  Taller nuevo = new Taller(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+                  lista.add(nuevo);
+                  //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
+              }
+           resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller where estado='1'");
+           while(resultados.next()){
+               ArrayList<Pedido> listaDePedidos = new ArrayList<>();
+               listaDePedidos = null; // no se necesita para el alta
+               Taller nuevo = new Taller(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+               lista.add(nuevo);
+               //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
+           }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }
+        return lista;    
     }
     public ArrayList<Taller> getTalleres()
     {
