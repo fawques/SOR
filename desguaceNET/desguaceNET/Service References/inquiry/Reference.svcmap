@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.1.5:8081/juddiv3/services/inquiry?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.1.4:8081/juddiv3/services/inquiry?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UDDIInquiryService.wsdl" MetadataType="Wsdl" ID="8d0043af-688e-45e7-a2df-4b14264eb45e" SourceId="1" SourceUrl="http://192.168.1.5:8081/juddiv3/services/inquiry?wsdl" />
+    <MetadataFile FileName="UDDIInquiryService1.wsdl" MetadataType="Wsdl" ID="99c3db87-72ed-4b2d-81f8-7822e26d3b56" SourceId="1" SourceUrl="http://192.168.1.4:8081/juddiv3/services/inquiry?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

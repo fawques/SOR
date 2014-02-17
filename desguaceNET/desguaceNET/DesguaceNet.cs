@@ -297,7 +297,7 @@ namespace desguaceNET
                 realizado = bd.cambiarEstadoPedido(estado, id);
                 if (realizado)
                 {
-                    cambiarEstadoPedido(id, ((estado).ToString());
+                    cambiarEstadoPedido(id, ((int)estado).ToString());
                 }
 
                 return realizado;
