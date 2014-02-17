@@ -297,7 +297,7 @@ namespace desguaceNET
                 realizado = bd.cambiarEstadoPedido(estado, id);
                 if (realizado)
                 {
-                    cambiarEstadoPedido(id, ((int)estado).ToString());
+                    cambiarEstadoPedido(id, (estado).ToString());
                 }
 
                 return realizado;
@@ -316,6 +316,7 @@ namespace desguaceNET
             {
                 ped = bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
                 ped = ped && bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK, idPedido);
+                cambiarEstadoPedido(idPedido, (EstadoPedido.FINISHED_OK).ToString());
             }
             return ped;
         }
