@@ -412,7 +412,7 @@ namespace desguaceNET
         {
             var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
             DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-            return client.cambiarEstadoPedido(id, estado);
+            return client.cambiarEstadoPedidoOtravez(id, estado);
         }
 
     }

@@ -169,8 +169,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\desguaceWS\DesguaceJavaWS1.wsdl" />
-    <None Include="Service References\desguaceWS\DesguaceJavaWSPort.xsd">
+    <None Include="Service References\desguaceWS\DesguaceJavaWS.wsdl" />
+    <None Include="Service References\desguaceWS\DesguaceJavaWSPort1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.aceptarOfertaFinResponse.datasource">
@@ -180,6 +180,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.bajaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.cambiarEstadoPedidoOtravezResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.cambiarEstadoPedidoResponse.datasource">
