@@ -274,7 +274,7 @@ public class MainTaller extends Application {
         listOf= gson.fromJson(ofertasGson, collectionType);
         //listOf = gson.fromJson(ofertasGson, collectionType);
         try {
-           
+           if(listOf!=null){
             for (Oferta of : listOf) {
 
                 if(!MainTaller.cambiarEstadoOferta(of.getEstado(), of.getID())){
@@ -284,6 +284,7 @@ public class MainTaller extends Application {
                 }
                 
             }
+           }
             
         } catch (SQLException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
@@ -331,19 +332,21 @@ public class MainTaller extends Application {
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosString= getPedidosActivos();
         String pedidosGestorString= getPedidos_WS();
-        if(!pedidosString.equals("") && !pedidosGestorString.equals("")){
+        if(!"".equals(pedidosString) && !"".equals(pedidosGestorString)){
             pedidosgestor = gson.fromJson(pedidosGestorString, collectionType);
             pedidos= gson.fromJson(pedidosString, collectionType);
         }
-       for(Pedido pedidogestor:pedidosgestor){
-           for(Pedido pedidodesguace:pedidos){
-               if(pedidogestor.getID().equals(pedidodesguace.getID())){
-                    if(pedidogestor.getEstado()!=pedidodesguace.getEstado()){
-                           cambiarEstadoPedido(pedidogestor.getEstado(),pedidogestor.getID());
-                    }
-               }
-           }
-       }
+        if(pedidosgestor!=null){
+	       for(Pedido pedidogestor:pedidosgestor){
+	           for(Pedido pedidodesguace:pedidos){
+	               if(pedidogestor.getID().equals(pedidodesguace.getID())){
+	                    if(pedidogestor.getEstado()!=pedidodesguace.getEstado()){
+	                           cambiarEstadoPedido(pedidogestor.getEstado(),pedidogestor.getID());
+	                    }
+	               }
+	           }
+	       }
+        }
     }
 
     public static ArrayList<Pedido> buscarPedidos(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) {

@@ -785,10 +785,8 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         return conexion.ejecutarSQL("Update oferta set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where desguace='" + idDesguace + "'");
     }
     public boolean cancelarPedido(String idPedido) {
-        if (cancelarOfertas(idPedido)) {
-            return conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where id='" + idPedido + "'");
-        }
-        return false;
+        cancelarOfertas(idPedido);
+        return conexion.ejecutarSQL("Update pedido set estado='" + EstadoPedido.CANCELLED.ordinal() + "' where id='" + idPedido + "'");
     }
 
     public boolean bajaTaller(String id) {
