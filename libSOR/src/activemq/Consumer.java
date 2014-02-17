@@ -38,7 +38,7 @@ public class Consumer {
         MessageConsumer consumer;
     public Consumer(String queueName) throws JMSException {
             //Create ConnectionFactory
-        connectionFactory = new ActiveMQConnectionFactory(/*"failover:(" + JUDDIProxy.getActiveMQ() + ")"*/);
+        connectionFactory = new ActiveMQConnectionFactory("failover:(" + JUDDIProxy.getActiveMQ() + ")");
         //Create Connection
        connection = connectionFactory.createConnection();
         //Create Session

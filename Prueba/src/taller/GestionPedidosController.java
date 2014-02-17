@@ -389,16 +389,18 @@ public class GestionPedidosController implements Initializable {
          actualizarTablaPedidosOferta();
     }
     public void actualizarOfertas() {
-        olTablaOfertas.clear();
         ofertas = MainTaller.actualizarOfertas();
         TablaOfertas tpOf;
-        for (Oferta of : ofertas) {
-            tpOf = new TablaOfertas(of);
-            olTablaOfertas.add(tpOf);
+        if(ofertas!=null){
+	        olTablaOfertas.clear();
+	        for (Oferta of : ofertas) {
+	            tpOf = new TablaOfertas(of);
+	            olTablaOfertas.add(tpOf);
+	        }
+	
+	        tbOfertas.setEditable(true);
+	        tbOfertas.setItems(olTablaOfertas);
         }
-
-        tbOfertas.setEditable(true);
-        tbOfertas.setItems(olTablaOfertas);
     }
 
     /**
