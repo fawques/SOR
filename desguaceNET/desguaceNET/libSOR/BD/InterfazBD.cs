@@ -266,16 +266,23 @@ namespace desguaceNET.libSOR.BD
      public Desguace getDesguace(){
         DataSet resultados = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM desguace"));
         try {
-            DataTableReader reader = resultados.CreateDataReader();
-            if (reader.Read()) {
-                string desguaceID = reader.GetString(1);
-                if(desguaceID == ""){
-                     return  new Desguace(desguaceID, reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5),reader.GetInt32(6),reader.GetInt32(7),(EstadoGeneral)reader.GetInt32(8) ,null);
-                }else{
-                    List<Oferta> listaOfertas = getOfertasDesguace(reader.GetString(1));
-                return  new Desguace(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5),reader.GetInt32(6),reader.GetInt32(7),(EstadoGeneral)reader.GetInt32(8) ,listaOfertas);
+            if (resultados != null)
+            {
+                DataTableReader reader = resultados.CreateDataReader();
+                if (reader.Read())
+                {
+                    string desguaceID = reader.GetString(1);
+                    if (desguaceID == "")
+                    {
+                        return new Desguace(desguaceID, reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8), null);
+                    }
+                    else
+                    {
+                        List<Oferta> listaOfertas = getOfertasDesguace(reader.GetString(1));
+                        return new Desguace(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8), listaOfertas);
+                    }
+
                 }
-                
             }
 
         } catch (MySqlException ex) {

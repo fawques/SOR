@@ -29,13 +29,9 @@ namespace desguaceNET
             listaPedidos = new List<Pedido>();
             main.actualizarPedidos();
             listaOfertasActivas = main.actualizarOfertas();
-            listaOfertasAceptadas = main.actualizarOfertasAceptadas();
+            listaOfertasAceptadas = main.actualizarOfertasAceptadas();            
+            listaPedidos = main.getPedidos();
 
-            
-            Pedido pedido2 = new Pedido("pedido2", 2, "taller1", DateTime.Today, new DateTime(), new DateTime(), EstadoPedido.ACTIVE, true, new List<Pieza>(), new List<int>(), new List<Oferta>());
-            
-            listaPedidos.Add(pedido2);
-            listaPedidos.AddRange(main.getPedidos());
             dataGridView1.DataSource = listaPedidos;
 
             dataGridView2.DataSource = listaOfertasActivas;
