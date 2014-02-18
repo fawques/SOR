@@ -91,7 +91,7 @@ public class nuevoPedido extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         String cookieName = "usuario";
         Cookie cookies[] = request.getCookies();
         Cookie myCookie = null;
@@ -112,7 +112,7 @@ public class nuevoPedido extends HttpServlet {
 
             Date today = new Date();
             String fecha = request.getParameter("fecha");
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date fechaLimite = new Date();
             try {
                 fechaLimite = dateFormat.parse(fecha);
