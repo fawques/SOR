@@ -260,7 +260,7 @@
     <None Include="Service References\inquiry\desguaceNET.inquiry.tModelList.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\inquiry\UDDIInquiryService.wsdl" />
+    <None Include="Service References\inquiry\UDDIInquiryService1.wsdl" />
     <None Include="sor_desguaceDataSet.xsc">
       <DependentUpon>sor_desguaceDataSet.xsd</DependentUpon>
     </None>
