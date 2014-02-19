@@ -106,7 +106,7 @@ public class FXMLDocumentController implements Initializable {
              System.out.println(pedido);
         }
          if(personDataPedidos.size()!=0){
-             piezasInterfaz(personDataPedidos.get(0).getId());
+             piezasclickPedido(personDataPedidos.get(0).getId());
          }
          
            tablePedidos.setItems(personDataPedidos);
@@ -267,6 +267,7 @@ public class FXMLDocumentController implements Initializable {
       
     }
     public void piezasInterfaz(String id ){
+    	personDataPiezas.clear();
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         TableColumn columnCant = new TableColumn("cant");

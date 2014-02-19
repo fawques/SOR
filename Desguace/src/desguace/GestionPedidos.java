@@ -442,6 +442,7 @@ public class GestionPedidos implements Initializable {
         TablaPedidos interfaz= new TablaPedidos();
          for (Pedido pedido : listaPedidos) {
             bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre() ,pedido.getFecha_baja(),pedido.getFecha_limite(), true);
+            bd.anyadirPiezasAPedido(pedido.getID(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
             interfaz= new TablaPedidos(pedido);
              datatablePedidos.add(interfaz);
              
