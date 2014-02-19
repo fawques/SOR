@@ -229,6 +229,7 @@ public class TallerWS {
         try {
             bd = new InterfazBD("sor_gestor");
             boolean oool = bd.cancelarPedido(idPedido);
+            cambiarEstadoPedido(EstadoPedido.CANCELLED.ordinal(), idPedido);
             bd.close();
             return oool;
         } catch (SQLException ex) {
