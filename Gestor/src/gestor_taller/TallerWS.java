@@ -275,6 +275,16 @@ public class TallerWS {
         try {
             bd = new InterfazBD("sor_gestor");
             listaPedidos = bd.getPedidosActivos();
+            for(Pedido p: listaPedidos){
+            	if(p.getEstado()==EstadoPedido.FINISHED_OK){
+            		ArrayList<Oferta> listaOferta= bd.getOfertasPedido(p.getID());
+            		for(Oferta of: listaOferta){
+            			if(of.getEstado()!=EstadoOferta.FINISHED_OK){
+            				bd.cambiarEstadoOferta(EstadoOferta.REJECTED, of.getID());
+            			}
+            		}
+            	}
+            }
             String listaJSON = gson.toJson(listaPedidos);
             System.out.println("listaJSON = " + listaJSON);
             return listaJSON;

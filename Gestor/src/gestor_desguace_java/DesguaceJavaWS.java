@@ -252,7 +252,6 @@ public class DesguaceJavaWS {
            
         try {
             bd= new InterfazBD("sor_gestor");
-            System.out.println("miau");
            return  bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
       
         } catch (SQLException ex) {

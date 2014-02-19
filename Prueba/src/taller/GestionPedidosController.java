@@ -418,10 +418,10 @@ public class GestionPedidosController implements Initializable {
             TablaOfertas tpOf;
             for (Oferta oferta : ofertas) {
                 if (oferta.getPedido() == null ? tp.getId() == null : oferta.getPedido().equals(tp.getId())) {
-                    if (oferta.getEstado() == EstadoOferta.ACTIVE || oferta.getEstado() == EstadoOferta.ACCEPTED) {
+                   // if (oferta.getEstado() == EstadoOferta.ACTIVE || oferta.getEstado() == EstadoOferta.ACCEPTED) {
                         tpOf = new TablaOfertas(oferta);
                         olTablaOfertas.add(tpOf);
-                    }
+                    //}
                 }
             }
 
