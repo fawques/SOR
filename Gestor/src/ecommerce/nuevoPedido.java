@@ -126,7 +126,7 @@ public class nuevoPedido extends HttpServlet {
              cantidadPiezas.add(tp.getCantidad());
              }*/
             TallerWS tws = new TallerWS();
-            Pedido p = new Pedido("", t.getID(), today, new Date(1970, 1, 1), fechaLimite, EstadoPedido.ACTIVE, "Automatico".equals(request.getParameter("modo")), new ArrayList<Pieza>(), new ArrayList<Integer>(), new ArrayList<Oferta>());
+            Pedido p = new Pedido("", t.getID(),t.getName(), today, new Date(1970, 1, 1), fechaLimite, EstadoPedido.ACTIVE, "Automatico".equals(request.getParameter("modo")), new ArrayList<Pieza>(), new ArrayList<Integer>(), new ArrayList<Oferta>());
             try {
                 if (!"".equals(tws.nuevoPedido(gson.toJson(p)))) {
                     System.out.println("pedido creado");
