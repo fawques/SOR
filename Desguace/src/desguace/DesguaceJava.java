@@ -229,9 +229,11 @@ public class DesguaceJava extends Application {
     public static void crearOferta(Date fechaAlta,Date fechaLimite,String idPedido,double precio) {
         try {           
             bd = new InterfazBD("sor_desguace");
-            String desguaceID = bd.getDesguace().getID();            
-            int id = bd.anadirOferta(fechaAlta,0,precio,idPedido, desguaceID,null,fechaLimite);
-            Oferta nuevo = new Oferta("", id, precio, desguaceID, idPedido,fechaAlta, null, fechaLimite, EstadoOferta.NEW);
+            Desguace desguace= bd.getDesguace();
+            String desguaceNombre = desguace.getName();  
+            String desguaceID=desguace.getID();
+            int id = bd.anadirOferta(fechaAlta,0,precio,idPedido,desguaceID, desguaceNombre,null,fechaLimite);
+            Oferta nuevo = new Oferta("", id, precio,desguaceID, desguaceNombre, idPedido,fechaAlta, null, fechaLimite, EstadoOferta.NEW);
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String idFinal = nuevaOferta(gson.toJson(nuevo));
             bd.activarOfertaDesguace(id, idFinal);

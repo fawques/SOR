@@ -145,7 +145,9 @@ public class GestionPedidos implements Initializable {
         TableColumn pedidoCol = new TableColumn("Pedido");
         pedidoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("pedido"));      
         TableColumn desguaceCol = new TableColumn("Desguace");
-        desguaceCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguace"));      
+        desguaceCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguace"));
+        TableColumn desguaceNombreCol = new TableColumn("Desguace");
+        desguaceNombreCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguaceNombre"));      
         TableColumn fecha_bajaCol = new TableColumn("Fecha baja");
         fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_baja"));      
         TableColumn fecha_limiteCol = new TableColumn("Fecha limite");
@@ -155,7 +157,7 @@ public class GestionPedidos implements Initializable {
       
         tablaHistoricoOfertas.setEditable(true);
         tablaHistoricoOfertas.setItems(datatableHistoricoOfertas);
-        tablaHistoricoOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
+        tablaHistoricoOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol,desguaceNombreCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
      
             
      
@@ -205,6 +207,9 @@ public class GestionPedidos implements Initializable {
         TableColumn desguaceCol = new TableColumn("Desguace");
         desguaceCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguace"));
         desguaceCol.setCellFactory(stringCellFactory);
+        TableColumn desguaceNombreCol = new TableColumn("DesguaceNombre");
+        desguaceNombreCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguaceNombre"));
+        desguaceNombreCol.setCellFactory(stringCellFactory);
         TableColumn fecha_bajaCol = new TableColumn("Fecha baja");
         fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("fecha_baja"));
         fecha_bajaCol.setCellFactory(stringCellFactory);
@@ -223,7 +228,7 @@ public class GestionPedidos implements Initializable {
       
         tableOfertasAceptadas.setEditable(true);
         tableOfertasAceptadas.setItems(olTablaOfertasAceptadas);
-        tableOfertasAceptadas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
+        tableOfertasAceptadas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol,desguaceNombreCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
         bd.close();
             
         } catch (SQLException ex) {
@@ -322,6 +327,9 @@ public class GestionPedidos implements Initializable {
         TableColumn tallerCol = new TableColumn("Taller");
         tallerCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("taller"));
        
+        TableColumn tallerNombreCol = new TableColumn("TallerNombre");
+        tallerNombreCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("tallerNombre"));
+       
         TableColumn fecha_bajaCol1 = new TableColumn("Fecha baja");
         fecha_bajaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_baja"));
       
@@ -329,7 +337,7 @@ public class GestionPedidos implements Initializable {
         fecha_limiteCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_limite"));
 
         tablaHistoricoPedidos.setItems(datatableHistorico);
-        tablaHistoricoPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+        tablaHistoricoPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1,tallerNombreCol, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
 
         
     }
@@ -379,6 +387,9 @@ public class GestionPedidos implements Initializable {
         TableColumn tallerCol = new TableColumn("Taller");
         tallerCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("taller"));
          tallerCol.setCellFactory(stringCellFactory);
+         TableColumn tallerNombreCol = new TableColumn("TallerNombre");
+         tallerNombreCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("tallerNombre"));
+         tallerNombreCol.setCellFactory(stringCellFactory);
         TableColumn fecha_bajaCol1 = new TableColumn("Fecha baja");
         fecha_bajaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_baja"));
          fecha_bajaCol1.setCellFactory(stringCellFactory);
@@ -430,7 +441,7 @@ public class GestionPedidos implements Initializable {
         System.out.println("pasa por aqui");
         TablaPedidos interfaz= new TablaPedidos();
          for (Pedido pedido : listaPedidos) {
-            bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
+            bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre() ,pedido.getFecha_baja(),pedido.getFecha_limite(), true);
             interfaz= new TablaPedidos(pedido);
              datatablePedidos.add(interfaz);
              
@@ -442,7 +453,7 @@ public class GestionPedidos implements Initializable {
         }
        
         tablePedidos.setItems(datatablePedidos);
-        tablePedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+        tablePedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1,tallerNombreCol, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
 
         
         
@@ -595,7 +606,7 @@ public class GestionPedidos implements Initializable {
         System.out.println("pasa por aqui");
         TablaPedidos interfaz= new TablaPedidos();
          for (Pedido pedido : listaPedidos) {
-            bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
+            bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
            /* interfaz= new TablaPedidos(pedido);
              datatablePedidos.add(interfaz);*/
              

@@ -211,6 +211,8 @@ public class GestionPedidosController implements Initializable {
         pedidoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("pedido"));
         TableColumn desguaceCol = new TableColumn("Desguace");
         desguaceCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguace"));
+        TableColumn desguaceNombreCol = new TableColumn("Desguace");
+        desguaceNombreCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguaceNombre"));
         TableColumn fecha_bajaCol = new TableColumn("Fecha baja");
         fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Date>("fecha_baja"));
         TableColumn fecha_limiteCol = new TableColumn("Fecha limite");
@@ -225,7 +227,7 @@ public class GestionPedidosController implements Initializable {
 
         tbOfertas.setEditable(true);
         tbOfertas.setItems(olTablaOfertas);
-        tbOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
+        tbOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol,desguaceNombreCol, fecha_bajaCol, fecha_limiteCol);
 
         TableColumn id_auxCol1 = new TableColumn("Id_aux");
         id_auxCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Integer>("id_aux"));
@@ -235,16 +237,18 @@ public class GestionPedidosController implements Initializable {
         fecha_altaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_alta"));
         TableColumn estadoCol1 = new TableColumn("Estado");
         estadoCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, EstadoOferta>("estado"));
-        TableColumn tallerCol = new TableColumn("Taller");
+        TableColumn tallerCol = new TableColumn("TallerID");
         tallerCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("taller"));
+        TableColumn tallerNombewCol = new TableColumn("TallerNombre");
+        tallerNombewCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("tallerNombre"));
         TableColumn fecha_bajaCol1 = new TableColumn("Fecha baja");
         fecha_bajaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_baja"));
         TableColumn fecha_limiteCol1 = new TableColumn("Fecha limite");
         fecha_limiteCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_limite"));
         visualizarPedidos();
         
-        tbPedidosOfertas.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
-        tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+        tbPedidosOfertas.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol,tallerNombewCol, fecha_bajaCol1, fecha_limiteCol1);
+        tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, tallerNombewCol,fecha_bajaCol1, fecha_limiteCol1);
         
     }
     public void actualizarTablaPedidosOferta(){

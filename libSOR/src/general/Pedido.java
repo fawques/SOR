@@ -17,6 +17,7 @@ public class Pedido {
     private String ID;
     private int ID_aux;
     private String tallerID;
+    private String tallerNombre;
     private Date fecha_alta;
     private Date fecha_baja;
     private Date fecha_limite;
@@ -40,7 +41,7 @@ public class Pedido {
      * @param listaCantidadesPiezas
      * @param listaOfertas
      */
-    public Pedido(String ID, int ID_aux, String tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, boolean modoAutomatico, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
+    public Pedido(String ID, int ID_aux, String tallerID,String tallerNombre, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, boolean modoAutomatico, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
         this.ID = ID;
         this.ID_aux = ID_aux;
         this.tallerID = tallerID;
@@ -52,6 +53,7 @@ public class Pedido {
         this.listaCantidadesPiezas = listaCantidadesPiezas;
         this.listaOfertas = listaOfertas;
         this.modoAutomatico = modoAutomatico;
+        this.tallerNombre=tallerNombre;
     }
 
     /** Constructor para la base de datos sin id_aux.
@@ -68,7 +70,7 @@ public class Pedido {
      * @param listaCantidadesPiezas
      * @param listaOfertas
      */
-    public Pedido(String ID, String tallerID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, boolean modoAutomatico, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
+    public Pedido(String ID, String tallerID,String tallerNombre, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, boolean modoAutomatico, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
         this.ID = ID;
         this.tallerID = tallerID;
         this.fecha_alta = fecha_alta;
@@ -79,6 +81,7 @@ public class Pedido {
         this.listaCantidadesPiezas = listaCantidadesPiezas;
         this.listaOfertas = listaOfertas;
         this.modoAutomatico = modoAutomatico;
+        this.tallerNombre=tallerNombre;
     }
 
     /**
@@ -88,7 +91,7 @@ public class Pedido {
      * @param tallerID taller que hace el pedido
      * @param fecha_limite fecha límite para recibir ofertas de este pedido. Pasada esa fecha, el pedido se cancelará
      */
-    public Pedido(int ID_aux, String tallerID, Date fecha_limite, boolean modoAutomatico) {
+    public Pedido(int ID_aux, String tallerID,String tallerNombre, Date fecha_limite, boolean modoAutomatico) {
         this.ID = "";
         this.ID_aux = ID_aux;
         this.tallerID = tallerID;
@@ -100,6 +103,7 @@ public class Pedido {
         this.listaOfertas = new ArrayList<>();
         this.estado = EstadoPedido.NEW;
         this.modoAutomatico = modoAutomatico;
+        this.tallerNombre=tallerNombre;
     }
     
     /** Constructor de copia
@@ -118,6 +122,7 @@ public class Pedido {
         this.listaOfertas =new ArrayList<>( p.listaOfertas);
         this.estado = p.estado;
         this.modoAutomatico = p.modoAutomatico;
+        this.tallerNombre=p.tallerNombre;
     }
     
     public boolean addPieza(Pieza pieza, Integer cantidad){
@@ -144,6 +149,9 @@ public class Pedido {
 
     public String getTaller() {
         return tallerID;
+    }
+    public String getTallerNombre() {
+        return tallerNombre;
     }
 
     public Date getFecha_alta() {

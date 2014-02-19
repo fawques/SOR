@@ -26,6 +26,7 @@ public class TablaOfertas {
     SimpleObjectProperty<EstadoOferta> estado;
     SimpleStringProperty pedido;
     SimpleStringProperty desguace;
+    SimpleStringProperty desguaceNombre;
     SimpleObjectProperty<Date> fecha_baja;
     SimpleObjectProperty<Date> fecha_limite;
 
@@ -39,6 +40,7 @@ public class TablaOfertas {
         this.desguace = new SimpleStringProperty(of.getDesguace());
         this.fecha_baja = new SimpleObjectProperty<>(of.getFecha_baja());
         this.fecha_limite = new SimpleObjectProperty<>(of.getFecha_limite());
+        this.desguaceNombre= new SimpleStringProperty(of.getDesguaceNombre());
     }
 
     public int getId_aux() {
@@ -68,7 +70,9 @@ public class TablaOfertas {
     public String getDesguace() {
         return desguace.get();
     }
-
+    public String getDesguaceNombre() {
+        return desguaceNombre.get();
+    }
     public Date getFecha_baja() {
         return fecha_baja.get();
     }

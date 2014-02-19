@@ -27,7 +27,7 @@ public class Producer {
             MessageProducer producer;
  
     public Producer(String nombreCola) throws JMSException {
-        connectionFactory = new ActiveMQConnectionFactory(/*"failover:(" + JUDDIProxy.getActiveMQ() + ")"*/);
+        connectionFactory = new ActiveMQConnectionFactory();
         connection = connectionFactory.createConnection();
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         queue = session.createQueue(nombreCola);

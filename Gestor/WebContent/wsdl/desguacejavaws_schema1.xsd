@@ -1,4 +1,4 @@
-<xs:schema xmlns:tns="http://gestor_desguace_java/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://gestor_desguace_java/" version="1.0">
+<xs:schema xmlns:tns="http://gestor_desguace_java/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://gestor_desguace_java/" version="1.0">
 
   <xs:element name="aceptarOfertaFin" type="tns:aceptarOfertaFin"/>
 

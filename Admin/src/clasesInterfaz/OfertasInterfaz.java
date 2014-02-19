@@ -8,7 +8,9 @@ package clasesInterfaz;
 
 import general.EstadoOferta;
 import general.Oferta;
+
 import java.util.Date;
+
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -26,6 +28,7 @@ public class OfertasInterfaz {
     SimpleStringProperty estado;
     SimpleStringProperty pedido;
     SimpleStringProperty desguace;
+    SimpleStringProperty desguaceNombre;
     SimpleStringProperty fecha_baja;
     SimpleStringProperty fecha_limite;
 
@@ -41,7 +44,8 @@ public class OfertasInterfaz {
             this.fecha_baja = new SimpleStringProperty(of.getFecha_baja().toString());
         }
         this.fecha_limite = new SimpleStringProperty(of.getFecha_limite().toString());
-    }
+        this.desguaceNombre = new SimpleStringProperty(of.getDesguaceNombre());
+   }
    public OfertasInterfaz(){
 	   this.id_aux = new SimpleIntegerProperty();
        this.id = new SimpleStringProperty("");
@@ -52,6 +56,7 @@ public class OfertasInterfaz {
        this.desguace = new SimpleStringProperty("");
        this.fecha_baja = new SimpleStringProperty("");
        this.fecha_limite = new SimpleStringProperty("");
+       this.desguaceNombre = new SimpleStringProperty("");
    }
 
     public int getId_aux() {
@@ -88,7 +93,9 @@ public class OfertasInterfaz {
         }
         return fecha_baja.get();
     }
-
+    public String getDesguaceNombre() {
+        return desguaceNombre.get();
+    }
     public String getFecha_limite() {
         return fecha_limite.get();
     }

@@ -279,7 +279,7 @@ public class MainTaller extends Application {
 
                 if(!MainTaller.cambiarEstadoOferta(of.getEstado(), of.getID())){
                 	bd = new InterfazBD("sor_taller");  
-                	bd.anadirOferta(of.getID(), of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(), of.getFecha_baja(), of.getFecha_limite());
+                	bd.anadirOferta(of.getID(),of.getFecha_alta(), of.getPrecio(), of.getEstado().ordinal(), of.getPedido(), of.getDesguace(),of.getDesguaceNombre() ,of.getFecha_baja(), of.getFecha_limite());
                 	bd.close();
                 }
                 
@@ -366,9 +366,11 @@ public class MainTaller extends Application {
     public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) throws JMSException_Exception {
         try {       
             bd = new InterfazBD("sor_taller");
-            String tallerID = bd.getPrimerTaller().getID();
-            int id = bd.anadirPedido(fechaAlta, estado, tallerID, null, fechaLimite, modoAutomatico);
-            Pedido nuevo = new Pedido("", id, tallerID, fechaAlta, null, fechaLimite, estado, modoAutomatico, piezas, cantidades, new ArrayList<Oferta>());
+            Taller taller=bd.getPrimerTaller();
+            String tallerID = taller.getID();
+            String tallerNombre=taller.getName();
+            int id = bd.anadirPedido(fechaAlta, estado, tallerID,tallerNombre, null, fechaLimite, modoAutomatico);
+            Pedido nuevo = new Pedido("", id, tallerID,tallerNombre, fechaAlta, null, fechaLimite, estado, modoAutomatico, piezas, cantidades, new ArrayList<Oferta>());
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String idFinal = nuevoPedido(gson.toJson(nuevo));
             bd.activarPedidoTaller(id, idFinal);

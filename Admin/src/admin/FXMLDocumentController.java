@@ -95,7 +95,7 @@ public class FXMLDocumentController implements Initializable {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
       Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring= Admin.getPedidos();
-        if(!pedidosstring.equals("") && pedidosstring!=null){
+        if(pedidosstring!=null &&  !"".equals(pedidosstring) ){
             listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -148,6 +148,9 @@ public class FXMLDocumentController implements Initializable {
      TableColumn tallerCol = new TableColumn("Taller");
      tallerCol.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("taller"));
      tallerCol.setCellFactory(stringCellFactory);
+     TableColumn tallerNombreCol = new TableColumn("Taller");
+     tallerNombreCol.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("tallerNombre"));
+     tallerNombreCol.setCellFactory(stringCellFactory);
      TableColumn fecha_bajaCol1 = new TableColumn("Fecha baja");
      fecha_bajaCol1.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("fecha_baja"));
      fecha_bajaCol1.setCellFactory(stringCellFactory);
@@ -174,7 +177,7 @@ public class FXMLDocumentController implements Initializable {
          }
          
            tablePedidos.setItems(personDataPedidos);
-           tablePedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+           tablePedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1,tallerNombreCol, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
 
     }
     public void actualizarOfertas(){
@@ -216,6 +219,8 @@ public class FXMLDocumentController implements Initializable {
    
      TableColumn desguaceCol = new TableColumn("Desguace");
      desguaceCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("desguace"));
+     TableColumn desguaceNombreCol = new TableColumn("Desguace");
+     desguaceNombreCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("desguaceNombre"));
      
      TableColumn fecha_bajaCol = new TableColumn("Fecha baja");
      fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("fecha_baja"));
@@ -238,7 +243,7 @@ public class FXMLDocumentController implements Initializable {
              System.out.println(oferta);
         }
            tableOfertas.setItems(personDataOferta);
-           tableOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
+           tableOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol,desguaceNombreCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
      
      
     }

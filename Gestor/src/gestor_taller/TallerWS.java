@@ -102,7 +102,7 @@ public class TallerWS {
             Date ahora = new Date();
             String stringID  = DigestUtils.md5Hex(ahora.toString());
             p.setID(stringID);
-             bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(), p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
+             bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(),p.getTallerNombre() ,p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
             for(Desguace desguace: bd.getDesguaces()){
              enviarPedidoActivemq(desguace.getID(),new PedidoCorto(p.getID(),p.getEstado()));
             }

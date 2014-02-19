@@ -8,7 +8,9 @@ package clasesInterfaz;
 
 import general.EstadoPedido;
 import general.Pedido;
+
 import java.util.Date;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,13 +28,15 @@ public class PedidosInterfaz {
     SimpleStringProperty taller;
     SimpleStringProperty fecha_baja;
     SimpleStringProperty fecha_limite;
-
+    SimpleStringProperty tallerNombre;
+    
     public PedidosInterfaz(Pedido p) {
         this.id_aux = new SimpleIntegerProperty(p.getID_aux());
         this.id = new SimpleStringProperty(p.getID());
         this.fecha_alta = new SimpleStringProperty(p.getFecha_alta().toString());
         this.estado =new SimpleStringProperty(p.getEstado().toString());
         this.taller = new SimpleStringProperty(p.getTaller());
+        this.tallerNombre = new SimpleStringProperty(p.getTallerNombre());
         if(p.getFecha_baja()!=null){
             this.fecha_baja = new SimpleStringProperty(p.getFecha_baja().toString());
         }
@@ -46,6 +50,7 @@ public class PedidosInterfaz {
         this.taller = new SimpleStringProperty("");
         this.fecha_baja = new SimpleStringProperty("");
         this.fecha_limite = new SimpleStringProperty("");
+        this.tallerNombre = new SimpleStringProperty("");
     }
 
     public int getId_aux() {
@@ -63,7 +68,9 @@ public class PedidosInterfaz {
     public String getEstado() {
         return estado.get();
     }
-
+    public String getTallerNombre() {
+        return tallerNombre.get();
+    }
     public String getTaller() {
         return taller.get();
     }

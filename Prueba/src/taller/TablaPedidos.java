@@ -24,6 +24,7 @@ public class TablaPedidos {
     SimpleObjectProperty<Date> fecha_alta;
     SimpleObjectProperty<EstadoPedido> estado;
     SimpleStringProperty taller;
+    SimpleStringProperty tallerNombre;
     SimpleObjectProperty<Date> fecha_baja;
     SimpleObjectProperty<Date> fecha_limite;
 
@@ -33,6 +34,7 @@ public class TablaPedidos {
         this.fecha_alta = new SimpleObjectProperty<>(p.getFecha_alta());
         this.estado = new SimpleObjectProperty<>(p.getEstado());
         this.taller = new SimpleStringProperty(p.getTaller());
+        this.tallerNombre = new SimpleStringProperty(p.getTallerNombre());
         this.fecha_baja = new SimpleObjectProperty<>(p.getFecha_baja());
         this.fecha_limite = new SimpleObjectProperty<>(p.getFecha_limite());
     }
@@ -56,7 +58,9 @@ public class TablaPedidos {
     public String getTaller() {
         return taller.get();
     }
-
+    public String getTallerNombre() {
+        return tallerNombre.get();
+    }
     public Date getFecha_baja() {
         return fecha_baja.get();
     }
@@ -84,7 +88,9 @@ public class TablaPedidos {
     public void setTaller(SimpleStringProperty taller) {
         this.taller = taller;
     }
-
+    public void setTallerNombre(SimpleStringProperty taller) {
+        this.tallerNombre = taller;
+    }
     public void setFecha_baja(SimpleObjectProperty<Date> fecha_baja) {
         this.fecha_baja = fecha_baja;
     }
