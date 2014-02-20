@@ -817,7 +817,12 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
 
     public ResultSet getAcciones() {
         ResultSet result = conexion.ejecutarSQLSelect("SELECT * FROM `acciones`;");
-        conexion.ejecutarSQL("DELETE FROM `acciones`;");
         return result;
+    }
+    
+    public ResultSet getAccionesYBorra(){
+    	ResultSet result = getAcciones();
+    	conexion.ejecutarSQL("DELETE FROM `acciones`;");
+    	return result;
     }
 }

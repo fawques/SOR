@@ -34,7 +34,7 @@ public class AsyncManager {
     
     public void guardarAccion(Method method,String[] valores){
         Accion accion = new Accion(method,valores);
-        String partes[] = accion.toString().split(":");
+        String partes[] = accion.toString().split(":__:");
         String accionYParams = partes[0] + ":" + partes[1];
         String paramValues = partes[2];
         bd.guardarAccion(accionYParams,paramValues);
@@ -42,11 +42,11 @@ public class AsyncManager {
     
     public void ejecutarAcciones(){
         try {
-            ResultSet acciones = bd.getAcciones();
+            ResultSet acciones = bd.getAccionesYBorra();
             ArrayList<Accion> listaAcciones = new ArrayList<>();
             while(acciones.next()){
                 String resultAccion = acciones.getString("accion");
-                String partes[] = resultAccion.split(":");
+                String partes[] = resultAccion.split(":__:");
                 String name = partes[0];
                 String paramTypes = partes[1];
                 String stringTypes[] = paramTypes.split("\\|");
