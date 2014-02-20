@@ -21,12 +21,12 @@
     <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="checkActivacion">
-    <wsdl:part name="parameters" element="tns:checkActivacion">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="getOfertas">
     <wsdl:part name="parameters" element="tns:getOfertas">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkActivacion">
+    <wsdl:part name="parameters" element="tns:checkActivacion">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="aceptarOfertaFin">
@@ -57,6 +57,10 @@
     <wsdl:part name="parameters" element="tns:aceptarOfertaFinResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getPedidoporID">
+    <wsdl:part name="parameters" element="tns:getPedidoporID">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="alta">
     <wsdl:part name="parameters" element="tns:alta">
     </wsdl:part>
@@ -81,6 +85,10 @@
     <wsdl:part name="parameters" element="tns:checkActivacionResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getPedidoporIDResponse">
+    <wsdl:part name="parameters" element="tns:getPedidoporIDResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="baja">
     <wsdl:part name="parameters" element="tns:baja">
     </wsdl:part>
@@ -96,6 +104,12 @@
       <wsdl:input name="checkActivacion" message="tns:checkActivacion">
     </wsdl:input>
       <wsdl:output name="checkActivacionResponse" message="tns:checkActivacionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPedidoporID">
+      <wsdl:input name="getPedidoporID" message="tns:getPedidoporID">
+    </wsdl:input>
+      <wsdl:output name="getPedidoporIDResponse" message="tns:getPedidoporIDResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getPedidosporID">
@@ -164,6 +178,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="checkActivacionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPedidoporID">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getPedidoporID">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPedidoporIDResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

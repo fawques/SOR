@@ -163,7 +163,26 @@ public class DesguaceJavaWS {
            
         return null;
     }
-
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getPedidoporID")
+    public String getPedidoporID(@WebParam(name = "string") String id) {
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        try {
+            bd = new InterfazBD("sor_gestor");
+            String listapedidos="";
+            Pedido p=bd.getPedidoID(id);
+            listapedidos=gson.toJson(p); 
+            return listapedidos;
+        } catch (SQLException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+        return null;
+    }
     /**
      * Web service operation
      */

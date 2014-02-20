@@ -461,7 +461,17 @@ public class DesguaceJava extends Application {
         System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
         return "";
     }
-
+    public static String getPedidoporID(java.lang.String string) {
+        for (int i = 0; i < 10; i++) {
+            try{
+                String ret = getPedidoporID_WS(string);
+                // si no ha lanzado excepción, devolvemos correctamente
+                return ret;
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        return "";
+    }
     public static Boolean aceptarOfertaFin(java.lang.String id) {
         AsyncManager manager = new AsyncManager("sor_desguace");
         manager.ejecutarAcciones();

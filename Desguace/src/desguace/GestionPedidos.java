@@ -8,6 +8,7 @@ package desguace;
 
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
+import interfaz.PiezasInterfaz;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -64,6 +65,7 @@ public class GestionPedidos implements Initializable {
     public TableView tableOfertasAceptadas;
     public TableView tablaHistoricoPedidos;
     public TableView  tablaHistoricoOfertas;
+    public TableView tablePiezas;
     @FXML
     private Label lbID;
     @FXML 
@@ -99,6 +101,7 @@ public class GestionPedidos implements Initializable {
     ObservableList<TablaOfertas> olTablaOfertas = FXCollections.observableArrayList();
     ObservableList<TablaOfertas> olTablaOfertasAceptadas = FXCollections.observableArrayList();
     ObservableList<TablaOfertas> datatableHistoricoOfertas = FXCollections.observableArrayList();
+    ObservableList<PiezasInterfaz> personDataPiezas= FXCollections.observableArrayList();
     InterfazBD bd;
   
     /**
@@ -110,6 +113,7 @@ public class GestionPedidos implements Initializable {
         tablaOfertasActivas();
         tablaHistoricoPedidos();
         tablaOfertasHistorico();
+        piezasInterfaz();
     }    
 
     @FXML
@@ -129,6 +133,42 @@ public class GestionPedidos implements Initializable {
             datatableHistoricoOfertas.add(tpOf);
         }
         
+    }
+    public void piezasInterfaz(){
+    personDataPiezas.clear();
+    
+     
+     TableColumn cantCol = new TableColumn("Cantidad");
+     cantCol.setCellValueFactory(new PropertyValueFactory<PiezasInterfaz, String>("cant"));      
+     TableColumn nombreCol = new TableColumn("Nombre");
+     nombreCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Integer>("nombrePieza"));        
+     tablePiezas.setItems(personDataPiezas);
+     tablePiezas.getColumns().addAll(nombreCol,cantCol);
+     
+    }
+    public void piezasclickPedido(String id){
+        personDataPiezas.clear();
+        Pedido p = null;
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();       
+        Type collectionType = new TypeToken<Pedido>(){}.getType();
+        String pedidosstring=DesguaceJava.getPedidoporID(id);
+        if(!pedidosstring.equals("") && pedidosstring!=null){
+         p = gson.fromJson(pedidosstring, collectionType);
+        }
+        
+       
+         PiezasInterfaz interfaz= new PiezasInterfaz();
+         if(p!=null){
+             for(int i=0;i<p.getListaPiezas().size();i++){
+                interfaz= new PiezasInterfaz(p.getListaCantidadesPiezas().get(i),p.getListaPiezas().get(i).getNombre());
+                personDataPiezas.add(interfaz);
+                
+             }
+         }
+          tablePiezas.setItems(personDataPiezas);
+
+     
+    
     }
     private void tablaOfertasHistorico(){
         actualizarOfertasHistorico();
@@ -452,7 +492,7 @@ public class GestionPedidos implements Initializable {
              datatablePedidos.add(interfaz);
              
         }
-       
+     
         tablePedidos.setItems(datatablePedidos);
         tablePedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1,tallerNombreCol, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
 
@@ -608,7 +648,9 @@ public class GestionPedidos implements Initializable {
         TablaPedidos interfaz= new TablaPedidos();
          for (Pedido pedido : listaPedidos) {
             bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
-           /* interfaz= new TablaPedidos(pedido);
+            bd.anyadirPiezasAPedido(pedido.getID(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
+
+            /* interfaz= new TablaPedidos(pedido);
              datatablePedidos.add(interfaz);*/
              
         }
@@ -701,6 +743,7 @@ public class GestionPedidos implements Initializable {
             if(tabla.equals("tablePedidos")){
                 if(datatablePedidos.size()>=index){
                     lbID.setText(datatablePedidos.get(index).getId());
+                    piezasclickPedido(datatablePedidos.get(index).getId());
                 }
             }
             else if(tabla.equals("tableOfertasAceptadas")){
