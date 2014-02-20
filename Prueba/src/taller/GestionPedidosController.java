@@ -6,20 +6,26 @@
 
 package taller;
 
+import Async.Accion;
+import Async.AsyncManager;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+
 import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,7 +57,7 @@ public class GestionPedidosController implements Initializable {
     ObservableList<TablaOfertas> olTablaOfertas = FXCollections.observableArrayList();
     ObservableList<TablaPedidos> olTablaPedidos = FXCollections.observableArrayList();
     ObservableList<TablaPedidos> olTablaPedidosOfertas = FXCollections.observableArrayList();
-
+    ObservableList<TablaAcciones> olTablaAcciones = FXCollections.observableArrayList();
     @FXML
     Button btNuevoPedido;
 
@@ -59,7 +65,7 @@ public class GestionPedidosController implements Initializable {
      *
      */
     public TextField tfIDPedido;
-
+    
     /**
      *
      */
@@ -94,7 +100,7 @@ public class GestionPedidosController implements Initializable {
      *
      */
     public TableView tbPedidos;
-
+    public TableView tbAcciones;
     /**
      *
      */
@@ -250,6 +256,26 @@ public class GestionPedidosController implements Initializable {
         tbPedidosOfertas.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol,tallerNombewCol, fecha_bajaCol1, fecha_limiteCol1);
         tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, tallerNombewCol,fecha_bajaCol1, fecha_limiteCol1);
         
+        TableColumn accionCol = new TableColumn("Accion");
+        accionCol.setCellValueFactory(new PropertyValueFactory<TablaAcciones, String>("id"));
+        TableColumn jsonCol = new TableColumn("Json");
+        idCol1.setCellValueFactory(new PropertyValueFactory<TablaAcciones, String>("json"));
+        tbAcciones.getColumns().addAll(accionCol,jsonCol);
+        
+    }
+    public void actualizarTablaAcciones(){
+    AsyncManager async= new AsyncManager("sor_taller");
+     olTablaAcciones.clear();
+     TablaAcciones tpAcciones=null;
+     ArrayList<Accion> acciones = async.getAcciones();
+     for (Accion accion : acciones) {
+    	 String partes[]= accion.toString().split(":");
+    	 tpAcciones= new TablaAcciones(partes[0], partes[2]);
+
+         olTablaAcciones.add(tpAcciones);
+     }  
+     tbAcciones.setEditable(true);
+     tbAcciones.setItems(olTablaAcciones);    	
     }
     public void actualizarTablaPedidosOferta(){
     	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
