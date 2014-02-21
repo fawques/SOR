@@ -117,12 +117,15 @@ public class login extends HttpServlet {
         //comprobar en la bd http://www.nabisoft.com/tutorials/glassfish/securing-java-ee-6-web-applications-on-glassfish-using-jaas
         if (t != null && pass != null) {
             if (request.getParameter("usuario").equals(t.getEmail().toString()) && request.getParameter("contrasenya").equals(pass.toString())) {
+            	System.out.println("Usuario y pass correcto");
                 request.getRequestDispatcher("/gestion.jsp").forward(request, response);
             } else {
+            	System.out.println("Error de login");
                 request.setAttribute("errorMessage", "Login invalido");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         } else {
+        	System.out.println("Usuario o pass vacio");
             request.setAttribute("errorMessage", "Login invalido");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }

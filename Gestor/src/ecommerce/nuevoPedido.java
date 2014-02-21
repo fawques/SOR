@@ -112,7 +112,7 @@ public class nuevoPedido extends HttpServlet {
 
             Date today = new Date();
             String fecha = request.getParameter("fecha");
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaLimite = new Date();
             try {
                 fechaLimite = dateFormat.parse(fecha);
