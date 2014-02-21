@@ -50,9 +50,7 @@
 	                out.println("<td>"+alP.get(i).getFecha_alta()+"</td>");
 	                out.println("<td>"+alP.get(i).getFecha_limite()+"</td>");
 	                out.println("<td>"+alP.get(i).getEstado()+"</td>");
-	                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td>");
-	                out.println("<td><a href=CancelarPedido?ped="+alP.get(i).getID()+" >Cancelar</a></td>");
-	                out.println("<td><a href=VerOfertas?ped="+alP.get(i).getID()+" >Ofertas</a></td></tr>");
+	                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td></tr>");
             	
             }
         }
