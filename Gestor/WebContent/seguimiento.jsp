@@ -49,7 +49,8 @@
                 out.println("<td>"+alP.get(i).getFecha_alta()+"</td>");
                 out.println("<td>"+alP.get(i).getFecha_limite()+"</td>");
                 out.println("<td>"+alP.get(i).getEstado()+"</td>");
-                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td></tr>");
+                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td>");
+                out.println("<td><a href=VerOfertas?ped="+alP.get(i).getID()+" >Ofertas</a></td></tr>");
             }
         }
         else{
@@ -62,7 +63,6 @@
 <br>
    <a href="gestion.jsp"><input class="centrado" type="button" name="pedido" value="Atras"></a>
    <input class="centrado-1" type="button" name="pedido" value="Cancelar pedido">
-   <input class="centrado-1" type="button" name="pedido" value="Ver ofertas">
    <form action="actualizarPedidos" method="post">
        <input class="centrado-1" type="submit" value="Actualizar">
    </form>
