@@ -46,8 +46,6 @@
                 }.getType();
             alP = gson.fromJson(myCookie.getValue(), collectionType);
             for(int i=0; i<alP.size(); i++){
-            	if(alP.get(i).getEstado() == EstadoOferta.ACTIVE || alP.get(i).getEstado() == EstadoOferta.ACCEPTED)
-            	{
             		out.println("<tr><td>"+alP.get(i).getID()+"</td>");
 	                out.println("<td>"+alP.get(i).getPedido()+"</td>");
 	                out.println("<td>"+alP.get(i).getDesguaceNombre()+"</td>");
@@ -55,10 +53,18 @@
 	                out.println("<td>"+alP.get(i).getFecha_limite()+"</td>");
 	                out.println("<td>"+alP.get(i).getPrecio()+"</td>");
 	                out.println("<td>"+alP.get(i).getEstado()+"</td>");
-	                out.println("<td><a href=RechazarOferta?oferta="+alP.get(i).getID()+" >Rechazar</a></td>");
-	                out.println("<td><a href=AceptarOferta?oferta="+alP.get(i).getID()+" >Aceptar</a></td></tr>");
-            	}
-            }
+	            	if(alP.get(i).getEstado() == EstadoOferta.ACTIVE)
+	            	{
+	                	out.println("<td><a href=RechazarOferta?oferta="+alP.get(i).getID()+" >Rechazar</a></td>");
+	                	out.println("<td><a href=AceptarOferta?oferta="+alP.get(i).getID()+" >Aceptar</a></td></tr>");
+	            	}
+	            	else if(alP.get(i).getEstado() == EstadoOferta.ACCEPTED){
+	            		out.println("<td><a href=RechazarOferta?oferta="+alP.get(i).getID()+" >Rechazar</a></td></tr>");
+	                }
+	            	else{
+	            		out.println("</tr>");
+	            	}
+            }	
         }
         else{
 

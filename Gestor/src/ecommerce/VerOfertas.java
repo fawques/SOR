@@ -71,6 +71,7 @@ public class VerOfertas extends HttpServlet {
 	            //}
 	            bd.close();
 	            request.getRequestDispatcher("/ofertas.jsp").forward(request, response);
+	            
 	        } catch (SQLException ex) {
 	            Logger.getLogger(actualizarPedidos.class.getName()).log(Level.SEVERE, null, ex);
 	        } catch (ClassNotFoundException ex) {
