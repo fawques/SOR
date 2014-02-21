@@ -1,4 +1,4 @@
-package taller;
+package interfaz;
 
 import Async.Accion;
 import javafx.beans.property.SimpleStringProperty;

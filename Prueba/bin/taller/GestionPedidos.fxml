@@ -47,7 +47,7 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TableView id="tableacciones" fx:id="tbAcciones" layoutX="41.0" layoutY="62.0" prefHeight="426.0" prefWidth="699.0" />
+                <TableView fx:id="tbAcciones" layoutX="42.0" layoutY="62.0" prefHeight="426.0" prefWidth="699.0" />
                 <Label layoutX="294.0" layoutY="14.0" prefHeight="31.0" prefWidth="194.0" text="Acciones pendientes">
                   <font>
                     <Font size="18.0" />

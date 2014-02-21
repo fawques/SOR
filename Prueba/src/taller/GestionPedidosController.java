@@ -258,20 +258,16 @@ public class GestionPedidosController implements Initializable {
         
         TableColumn accionCol = new TableColumn("Accion");
         accionCol.setCellValueFactory(new PropertyValueFactory<TablaAcciones, String>("id"));
-        TableColumn jsonCol = new TableColumn("Json");
-        idCol1.setCellValueFactory(new PropertyValueFactory<TablaAcciones, String>("json"));
-        tbAcciones.getColumns().addAll(accionCol,jsonCol);
-        
+        tbAcciones.getColumns().addAll(accionCol);
+        actualizarTablaAcciones();
     }
     public void actualizarTablaAcciones(){
     AsyncManager async= new AsyncManager("sor_taller");
      olTablaAcciones.clear();
-     TablaAcciones tpAcciones=null;
+     TablaAcciones tpAcciones;
      ArrayList<Accion> acciones = async.getAcciones();
      for (Accion accion : acciones) {
-    	 String partes[]= accion.toString().split(":");
-    	 tpAcciones= new TablaAcciones(partes[0], partes[2]);
-
+    	tpAcciones=new TablaAcciones(accion);
          olTablaAcciones.add(tpAcciones);
      }  
      tbAcciones.setEditable(true);

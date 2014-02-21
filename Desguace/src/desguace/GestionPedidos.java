@@ -6,19 +6,25 @@
 
 package desguace;
 
+import Async.Accion;
+import Async.AsyncManager;
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
 import interfaz.PiezasInterfaz;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
 import general.PedidoCorto;
+import interfaz.TablaAcciones;
 import interfaz.TablaOfertas;
 import interfaz.TablaPedidos;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -30,6 +36,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -50,8 +57,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+
 import javax.jms.JMSException;
 import javax.swing.text.LabelView;
+
+
 
 /**
  * FXML Controller class
@@ -66,6 +76,7 @@ public class GestionPedidos implements Initializable {
     public TableView tablaHistoricoPedidos;
     public TableView  tablaHistoricoOfertas;
     public TableView tablePiezas;
+    public TableView tableAcciones;
     @FXML
     private Label lbID;
     @FXML 
@@ -102,6 +113,8 @@ public class GestionPedidos implements Initializable {
     ObservableList<TablaOfertas> olTablaOfertasAceptadas = FXCollections.observableArrayList();
     ObservableList<TablaOfertas> datatableHistoricoOfertas = FXCollections.observableArrayList();
     ObservableList<PiezasInterfaz> personDataPiezas= FXCollections.observableArrayList();
+    ObservableList<TablaAcciones> olTablaAcciones = FXCollections.observableArrayList();
+
     InterfazBD bd;
   
     /**
@@ -114,6 +127,7 @@ public class GestionPedidos implements Initializable {
         tablaHistoricoPedidos();
         tablaOfertasHistorico();
         piezasInterfaz();
+        tablaAcciones();
     }    
 
     @FXML
@@ -145,6 +159,25 @@ public class GestionPedidos implements Initializable {
      tablePiezas.setItems(personDataPiezas);
      tablePiezas.getColumns().addAll(nombreCol,cantCol);
      
+    }
+    public void actualizarTablaAcciones(){
+        AsyncManager async= new AsyncManager("sor_desguace");
+         olTablaAcciones.clear();
+         TablaAcciones tpAcciones;
+         ArrayList<Accion> acciones = async.getAcciones();
+         for (Accion accion : acciones) {
+        	tpAcciones=new TablaAcciones(accion);
+             olTablaAcciones.add(tpAcciones);
+         }  
+         tableAcciones.setEditable(true);
+         tableAcciones.setItems(olTablaAcciones);    	
+        }
+    public void tablaAcciones(){
+    	
+    	 TableColumn accionCol = new TableColumn("Accion");
+         accionCol.setCellValueFactory(new PropertyValueFactory<TablaAcciones, String>("id"));
+         tableAcciones.getColumns().addAll(accionCol);
+         actualizarTablaAcciones();
     }
     public void piezasclickPedido(String id){
         personDataPiezas.clear();
