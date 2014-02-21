@@ -157,6 +157,7 @@ public class TallerWS {
             bd = new InterfazBD("sor_gestor");
             bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED, ID);
             bd.close();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -174,6 +175,7 @@ public class TallerWS {
             bd = new InterfazBD("sor_gestor");
             bd.cambiarEstadoOferta(EstadoOferta.REJECTED, ID);
             bd.close();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
