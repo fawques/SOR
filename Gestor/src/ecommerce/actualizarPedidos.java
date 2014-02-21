@@ -71,7 +71,7 @@ public class actualizarPedidos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -87,7 +87,7 @@ public class actualizarPedidos extends HttpServlet {
             throws ServletException, IOException {
         try {
             bd = new InterfazBD("sor_gestor");
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             ArrayList<Pedido> alP = new ArrayList<Pedido>();
             String cookieName = "usuario";
             Cookie cookies[] = request.getCookies();

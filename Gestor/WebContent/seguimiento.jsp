@@ -16,7 +16,8 @@
 <br>
 <table class="centrado">
 <tr>
-<th>ID</th>
+<th>Id pedido<th>
+<th>Nombre</th>
 <th>Fecha alta</th>
 <th>Fecha Limite</th>
 <th>Estado</th>
@@ -38,19 +39,22 @@
 
         if (myCookie != null) {
             ArrayList<Pedido> alP = new ArrayList<Pedido>();        
-            Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-            Type collectionType = new TypeToken<Pedido>() {
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            Type collectionType = new TypeToken<ArrayList<Pedido>>() {
                 }.getType();
             alP = gson.fromJson(myCookie.getValue(), collectionType);
-            System.out.println(myCookie.getValue());
-            System.out.println(alP.size());
             for(int i=0; i<alP.size(); i++){
-                out.println("<td>"+alP.get(i).getID()+"</td>");
+            	out.println("<tr><td>"+alP.get(i).getID()+"</td>");
+                out.println("<td>"+alP.get(i).getTallerNombre()+"</td>");
                 out.println("<td>"+alP.get(i).getFecha_alta()+"</td>");
                 out.println("<td>"+alP.get(i).getFecha_limite()+"</td>");
                 out.println("<td>"+alP.get(i).getEstado()+"</td>");
-                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td>");
+                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td></tr>");
             }
+        }
+        else{
+
+        	System.out.println("No hay pedidos");
         }
 %>
 </tr>
