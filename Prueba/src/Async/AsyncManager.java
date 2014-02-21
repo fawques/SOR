@@ -9,6 +9,7 @@ package Async;
 import BD.InterfazBD;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class AsyncManager {
     public void guardarAccion(Method method,String[] valores){
         Accion accion = new Accion(method,valores);
         String partes[] = accion.toString().split(":__:");
-        String accionYParams = partes[0] + ":" + partes[1];
+        String accionYParams = partes[0] + ":__:" + partes[1]/*+ ":__:" + partes[2]*/;
         String paramValues = partes[2];
         bd.guardarAccion(accionYParams,paramValues);
     }
@@ -66,15 +67,18 @@ public class AsyncManager {
 			    String partes[] = resultAccion.split(":__:");
 			    String name = partes[0];
 			    String paramTypes = partes[1];
+			    //String paramTypesTypes = partes[2];
 			    String stringTypes[] = paramTypes.split("\\|");
+			    //String stringTypesTypes[] = paramTypesTypes.split("\\|");
 			    Class<?>[] types = new Class<?>[stringTypes.length];
-			    
+			    //Type[] typesTypes = new Type[stringTypesTypes.length];
 			    for (int i = 0; i < stringTypes.length; i++) {
 			        types[i] = Class.forName(stringTypes[i]);
+			        // TODO: rellenar typesTypes
 			    }
 			    String resultParams = acciones.getString("params");
 			    
-			    Accion nuevo = new Accion(name, types, resultParams.split("\\|"));
+			    Accion nuevo = new Accion(name, types, /*typesTypes, */resultParams.split("\\|"));
 			    listaAcciones.add(nuevo);
 			    
 			}

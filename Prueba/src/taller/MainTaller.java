@@ -27,6 +27,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -384,6 +385,13 @@ public class MainTaller extends Application {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(javax.xml.ws.WebServiceException e){
+        	AsyncManager manager = new AsyncManager("sor_taller");
+        	System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+            class Local {};
+            java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+            String params[] = {gson.toJson(fechaAlta),  gson.toJson(estado), gson.toJson(fechaLimite), gson.toJson(modoAutomatico), gson.toJson(piezas), gson.toJson(cantidades)};
+            manager.guardarAccion(m,params);
         }
         
     }
@@ -501,7 +509,7 @@ public class MainTaller extends Application {
 
     
     
-    public static String nuevoPedido(java.lang.String pedido) throws JMSException_Exception {
+    public static String nuevoPedido(java.lang.String pedido) throws JMSException_Exception,javax.xml.ws.WebServiceException {
         AsyncManager manager = new AsyncManager("sor_taller");
         manager.ejecutarAcciones();
         for (int i = 0; i < 10; i++) {
@@ -511,12 +519,9 @@ public class MainTaller extends Application {
                 return ret;
             }catch(javax.xml.ws.WebServiceException e){}
         }
-        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
-        class Local {};
-        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
-        String params[] = {pedido};
-        manager.guardarAccion(m,params);
-        return "";
+        String ret = nuevoPedido_WS(pedido);
+        // si no ha lanzado excepción, devolvemos correctamente
+        return ret;
     }
 
          
