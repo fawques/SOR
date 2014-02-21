@@ -29,7 +29,7 @@
     <p class="centrado">Bienvenido</p>
 <a href="nuevoPedido.jsp" class="centrado" style="width:150px;height:80px;position:relative;float:left;" name="pedido" >Nuevo pedido</a>
     <a href="" type="button" style="width:150px;height:80px;position:relative;float:left;" name="cuenta" >Mi cuenta</a>
-    <a href="seguimiento.jsp" style="width:150px;height:80px;position:relative;float:left;" name="seguimiento" value="Seguimiento pedidos" >Seguimiento pedidos</a>
+    <a href="actualizarPedidos" style="width:150px;height:80px;position:relative;float:left;" name="seguimiento" value="Seguimiento pedidos" >Seguimiento pedidos</a>
     <a href="ofertas.jsp" class="centrado" style="width:150px;height:80px;position:relative;float:left;" name="historico" value="Historico pedidos">Historico pedidos</a>
     <a href="index.jsp" name="pedido" value="Cerrar sesion" style="width:150px;height:30px;position:relative">Cerrar sesion</a>
 </body>
