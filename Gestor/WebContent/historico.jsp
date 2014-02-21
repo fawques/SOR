@@ -9,11 +9,11 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Seguimiento</title>
+<title>Historico</title>
 <link rel="stylesheet" href="estilos.css" type="text/css" media="screen" /> 
 </head>
 <body>
-<p class="centrado">Seguimiento pedidos</p>
+<p class="centrado">Historico pedidos</p>
 <br>
 <table class="centrado">
 <tr>
@@ -45,16 +45,14 @@
                 }.getType();
             alP = gson.fromJson(myCookie.getValue(), collectionType);
             for(int i=0; i<alP.size(); i++){
-            	if(alP.get(i).getEstado() == EstadoPedido.ACTIVE || alP.get(i).getEstado() == EstadoPedido.ACCEPTED){
 	            	out.println("<tr><td>"+alP.get(i).getID()+"</td>");
 	                out.println("<td>"+alP.get(i).getTallerNombre()+"</td>");
 	                out.println("<td>"+alP.get(i).getFecha_alta()+"</td>");
 	                out.println("<td>"+alP.get(i).getFecha_limite()+"</td>");
 	                out.println("<td>"+alP.get(i).getEstado()+"</td>");
 	                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td>");
-	                out.println("<td><a href=CancelarPedido?ped="+alP.get(i).getID()+" >Cancelar</a></td>");
 	                out.println("<td><a href=VerOfertas?ped="+alP.get(i).getID()+" >Ofertas</a></td></tr>");
-            	}
+            	
             }
         }
         else{

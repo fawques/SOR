@@ -40,6 +40,10 @@
     <servlet-name>actualizarPedidos</servlet-name>
     <servlet-class>ecommerce.actualizarPedidos</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>VerOfertas</servlet-name>
+    <servlet-class>ecommerce.VerOfertas</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>registro</servlet-name>
     <url-pattern>/registro</url-pattern>
@@ -61,6 +65,6 @@
     <url-pattern>/actualizarPedidos</url-pattern>
   </servlet-mapping>
   <session-config>
-    <session-timeout>60</session-timeout>
+    <session-timeout>600</session-timeout>
   </session-config>
 </web-app>
