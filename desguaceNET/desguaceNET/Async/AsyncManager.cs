@@ -25,10 +25,11 @@ namespace desguaceNET.Async
     
         public void guardarAccion(MethodInfo method,string[] valores){
             Accion accion = new Accion(method,valores);
-            char[] delim = new char[1];
-            delim[0] = ':';
+            char[] delim = new char[4];
+            delim[0] = delim[3] = ':';
+            delim[1] = delim[2] = '_';
             string[] partes = accion.ToString().Split(delim);
-            string accionYParams = partes[0] + ":" + partes[1];
+            string accionYParams = partes[0] + ":__:" + partes[1];
             string paramValues = partes[2];
             bd.guardarAccion(accionYParams,paramValues);
         }
@@ -40,7 +41,10 @@ namespace desguaceNET.Async
                 DataTableReader acciones = dataset.CreateDataReader();
                 while(acciones.Read()){
                     string resultAccion = acciones.GetString(0);
-                    string[] partes = resultAccion.Split(((new char[1])[0] = ':'));
+                    char[] delim = new char[4];
+                    delim[0] = delim[3] = ':';
+                    delim[1] = delim[2] = '_';
+                    string[] partes = resultAccion.Split(delim);
                     string name = partes[0];
                     string paramTypes = partes[1];
                     string[] stringTypes = paramTypes.Split(((new char[1])[0] = '|'));

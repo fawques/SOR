@@ -668,7 +668,5 @@ public class MainTaller extends Application {
         return false;
     }
 
-	
-
 
 }
