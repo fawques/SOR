@@ -47,7 +47,7 @@ namespace desguaceNET.Async
                 types += paramTypes[i].Name;
                 values += paramValues[i];
             }
-            return name + ":" + types + ":" + values;
+            return name + ":__:" + types + ":__:" + values;
         }
     }
 }

@@ -363,20 +363,16 @@ public class MainTaller extends Application {
         return null;
     }
 
-    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, Boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) throws JMSException_Exception {
-        Pedido nuevo = null;
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-    	try {
-        	bd = new InterfazBD("sor_taller");
+    public static void crearPedido(Date fechaAlta, EstadoPedido estado, Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) throws JMSException_Exception {
+        try {       
+            bd = new InterfazBD("sor_taller");
             Taller taller=bd.getPrimerTaller();
             String tallerID = taller.getID();
             String tallerNombre=taller.getName();
-        	nuevo = new Pedido(-1, tallerID, tallerNombre, fechaLimite, modoAutomatico);
-            for (int i = 0; i < piezas.size(); i++) {
-				nuevo.addPieza(piezas.get(i), cantidades.get(i));
-			}
-            String idFinal = nuevoPedido(gson.toJson(nuevo));        	
-            int id = bd.anadirPedido(nuevo.getFecha_alta(), estado, tallerID,tallerNombre, null, fechaLimite, modoAutomatico);
+            int id = bd.anadirPedido(fechaAlta, estado, tallerID,tallerNombre, null, fechaLimite, modoAutomatico);
+            Pedido nuevo = new Pedido("", id, tallerID,tallerNombre, fechaAlta, null, fechaLimite, estado, modoAutomatico, piezas, cantidades, new ArrayList<Oferta>());
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            String idFinal = nuevoPedido(gson.toJson(nuevo));
             bd.activarPedidoTaller(id, idFinal);
             bd.anyadirPiezasAPedido(idFinal, piezas, cantidades);
             bd.close();
@@ -671,8 +667,6 @@ public class MainTaller extends Application {
         manager.guardarAccion(m,params);
         return false;
     }
-
-	
 
 
 }

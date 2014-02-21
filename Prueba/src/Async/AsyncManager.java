@@ -36,7 +36,7 @@ public class AsyncManager {
     public void guardarAccion(Method method,String[] valores){
         Accion accion = new Accion(method,valores);
         String partes[] = accion.toString().split(":__:");
-        String accionYParams = partes[0] + ":" + partes[1];
+        String accionYParams = partes[0] + ":__:" + partes[1];
         String paramValues = partes[2];
         bd.guardarAccion(accionYParams,paramValues);
     }
@@ -79,12 +79,10 @@ public class AsyncManager {
 			    
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(AsyncManager.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (SQLException ex) {
+			Logger.getLogger(AsyncManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return listaAcciones;
     }
