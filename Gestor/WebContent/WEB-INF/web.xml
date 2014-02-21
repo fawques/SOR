@@ -41,8 +41,8 @@
     <servlet-class>ecommerce.actualizarPedidos</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>VerOfertas</servlet-name>
-  	<servlet-class>ecommerce.VerOfertas</servlet-class>
+    <servlet-name>VerOfertas</servlet-name>
+    <servlet-class>ecommerce.VerOfertas</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>registro</servlet-name>

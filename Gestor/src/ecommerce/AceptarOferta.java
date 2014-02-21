@@ -1,6 +1,9 @@
 package ecommerce;
 
+import gestor_taller.TallerWS;
+
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +30,14 @@ public class AceptarOferta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		TallerWS tws = new TallerWS();
+		if(tws.aceptarOferta(request.getParameter("oferta"))){
+			request.getRequestDispatcher("/seguimiento.jsp").forward(request, response);
+		}
+		else
+		{
+			System.out.println("Error, no se pudo aceptar la oferta");
+		}
 	}
 
 	/**
