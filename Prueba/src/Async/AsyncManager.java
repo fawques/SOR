@@ -42,24 +42,28 @@ public class AsyncManager {
     }
     
     public void ejecutarAcciones(){
-
-       
-        	ArrayList<Accion> listaAcciones= getAcciones();
-
-            for (Accion accion : listaAcciones) {
-                accion.invocar();
-            }
-     
-        
+    	ArrayList<Accion> listaAcciones= getAccionesYBorra();
+        for (Accion accion : listaAcciones) {
+            accion.invocar();
+        }        
     }
     
     public ArrayList<Accion> getAcciones(){
     	ResultSet acciones = bd.getAcciones();
-        ArrayList<Accion> listaAcciones = new ArrayList<>();
+        return procesarAcciones(acciones);
+    }
+    
+    private ArrayList<Accion> getAccionesYBorra(){
+    	ResultSet acciones = bd.getAccionesYBorra();
+    	return procesarAcciones(acciones);
+    }
+    
+    private ArrayList<Accion> procesarAcciones(ResultSet acciones){
+    	ArrayList<Accion> listaAcciones = new ArrayList<>();
         try {
 			while(acciones.next()){
 			    String resultAccion = acciones.getString("accion");
-			    String partes[] = resultAccion.split(":");
+			    String partes[] = resultAccion.split(":__:");
 			    String name = partes[0];
 			    String paramTypes = partes[1];
 			    String stringTypes[] = paramTypes.split("\\|");
@@ -83,6 +87,5 @@ public class AsyncManager {
 			e.printStackTrace();
 		}
 		return listaAcciones;
-    	
     }
 }
