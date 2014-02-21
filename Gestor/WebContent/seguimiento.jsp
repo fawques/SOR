@@ -1,3 +1,4 @@
+<%@page import="general.EstadoPedido"%>
 <%@page import="java.lang.reflect.Type"%>
 <%@page import="com.google.gson.reflect.TypeToken"%>
 <%@page import="com.google.gson.GsonBuilder"%>
@@ -44,13 +45,16 @@
                 }.getType();
             alP = gson.fromJson(myCookie.getValue(), collectionType);
             for(int i=0; i<alP.size(); i++){
-            	out.println("<tr><td>"+alP.get(i).getID()+"</td>");
-                out.println("<td>"+alP.get(i).getTallerNombre()+"</td>");
-                out.println("<td>"+alP.get(i).getFecha_alta()+"</td>");
-                out.println("<td>"+alP.get(i).getFecha_limite()+"</td>");
-                out.println("<td>"+alP.get(i).getEstado()+"</td>");
-                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td>");
-                out.println("<td><a href=VerOfertas?ped="+alP.get(i).getID()+" >Ofertas</a></td></tr>");
+            	if(alP.get(i).getEstado() == EstadoPedido.ACTIVE || alP.get(i).getEstado() == EstadoPedido.ACCEPTED){
+	            	out.println("<tr><td>"+alP.get(i).getID()+"</td>");
+	                out.println("<td>"+alP.get(i).getTallerNombre()+"</td>");
+	                out.println("<td>"+alP.get(i).getFecha_alta()+"</td>");
+	                out.println("<td>"+alP.get(i).getFecha_limite()+"</td>");
+	                out.println("<td>"+alP.get(i).getEstado()+"</td>");
+	                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td>");
+	                out.println("<td><a href=CancelarPedido?ped="+alP.get(i).getID()+" >Cancelar</a></td>");
+	                out.println("<td><a href=VerOfertas?ped="+alP.get(i).getID()+" >Ofertas</a></td></tr>");
+            	}
             }
         }
         else{
@@ -62,7 +66,6 @@
 </table>
 <br>
    <a href="gestion.jsp"><input class="centrado" type="button" name="pedido" value="Atras"></a>
-   <input class="centrado-1" type="button" name="pedido" value="Cancelar pedido">
    <form action="actualizarPedidos" method="post">
        <input class="centrado-1" type="submit" value="Actualizar">
    </form>
