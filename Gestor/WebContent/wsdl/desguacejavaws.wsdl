@@ -49,16 +49,20 @@
     <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoOtravezResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getPedidosporIDResponse">
-    <wsdl:part name="parameters" element="tns:getPedidosporIDResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="aceptarOfertaFinResponse">
     <wsdl:part name="parameters" element="tns:aceptarOfertaFinResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getPedidosporIDResponse">
+    <wsdl:part name="parameters" element="tns:getPedidosporIDResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getPedidoporID">
     <wsdl:part name="parameters" element="tns:getPedidoporID">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modificarResponse">
+    <wsdl:part name="parameters" element="tns:modificarResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="alta">
@@ -93,13 +97,11 @@
     <wsdl:part name="parameters" element="tns:baja">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="modificar">
+    <wsdl:part name="parameters" element="tns:modificar">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="DesguaceJavaWS">
-    <wsdl:operation name="alta">
-      <wsdl:input name="alta" message="tns:alta">
-    </wsdl:input>
-      <wsdl:output name="altaResponse" message="tns:altaResponse">
-    </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="checkActivacion">
       <wsdl:input name="checkActivacion" message="tns:checkActivacion">
     </wsdl:input>
@@ -118,10 +120,22 @@
       <wsdl:output name="getPedidosporIDResponse" message="tns:getPedidosporIDResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="modificar">
+      <wsdl:input name="modificar" message="tns:modificar">
+    </wsdl:input>
+      <wsdl:output name="modificarResponse" message="tns:modificarResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="cambiarEstadoPedido">
       <wsdl:input name="cambiarEstadoPedido" message="tns:cambiarEstadoPedido">
     </wsdl:input>
       <wsdl:output name="cambiarEstadoPedidoResponse" message="tns:cambiarEstadoPedidoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alta">
+      <wsdl:input name="alta" message="tns:alta">
+    </wsdl:input>
+      <wsdl:output name="altaResponse" message="tns:altaResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="aceptarOfertaFin">
@@ -163,15 +177,6 @@
   </wsdl:portType>
   <wsdl:binding name="DesguaceJavaWSSoapBinding" type="tns:DesguaceJavaWS">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="alta">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="alta">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="altaResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="checkActivacion">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="checkActivacion">
@@ -199,12 +204,12 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="aceptarOfertaFin">
+    <wsdl:operation name="modificar">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="aceptarOfertaFin">
+      <wsdl:input name="modificar">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="aceptarOfertaFinResponse">
+      <wsdl:output name="modificarResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -214,6 +219,24 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="cambiarEstadoPedidoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alta">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="alta">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="altaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="aceptarOfertaFin">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="aceptarOfertaFin">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="aceptarOfertaFinResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

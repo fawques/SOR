@@ -38,13 +38,15 @@ public class ObjectFactory {
 	private final static QName _AceptarOfertaFinResponse_QNAME = new QName("http://gestor_desguace_java/", "aceptarOfertaFinResponse");
     private final static QName _GetPedidosporIDResponse_QNAME = new QName("http://gestor_desguace_java/", "getPedidosporIDResponse");
     private final static QName _GetPedidoporID_QNAME = new QName("http://gestor_desguace_java/", "getPedidoporID");
+	private final static QName _ModificarResponse_QNAME = new QName("http://gestor_desguace_java/", "modificarResponse");
 	private final static QName _Alta_QNAME = new QName("http://gestor_desguace_java/", "alta");
     private final static QName _CambiarEstadoPedidoOtravez_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedidoOtravez");
 	private final static QName _CancelarOfertaResponse_QNAME = new QName("http://gestor_desguace_java/", "cancelarOfertaResponse");
     private final static QName _GetOfertasResponse_QNAME = new QName("http://gestor_desguace_java/", "getOfertasResponse");
     private final static QName _GetPedidoporIDResponse_QNAME = new QName("http://gestor_desguace_java/", "getPedidoporIDResponse");
 	private final static QName _BajaResponse_QNAME = new QName("http://gestor_desguace_java/", "bajaResponse");
-    private final static QName _CheckActivacionResponse_QNAME = new QName("http://gestor_desguace_java/", "checkActivacionResponse");
+    private final static QName _Modificar_QNAME = new QName("http://gestor_desguace_java/", "modificar");
+	private final static QName _CheckActivacionResponse_QNAME = new QName("http://gestor_desguace_java/", "checkActivacionResponse");
     private final static QName _Baja_QNAME = new QName("http://gestor_desguace_java/", "baja");
 
     /**
@@ -60,6 +62,14 @@ public class ObjectFactory {
      */
     public GetPedidoporID createGetPedidoporID() {
         return new GetPedidoporID();
+    }
+
+	/**
+     * Create an instance of {@link ModificarResponse }
+     * 
+     */
+    public ModificarResponse createModificarResponse() {
+        return new ModificarResponse();
     }
 
 	/**
@@ -111,6 +121,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Modificar }
+     * 
+     */
+    public Modificar createModificar() {
+        return new Modificar();
+    }
+
+	/**
      * Create an instance of {@link CheckActivacionResponse }
      * 
      */
@@ -357,6 +375,15 @@ public class ObjectFactory {
     }
 
 	/**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ModificarResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "modificarResponse")
+    public JAXBElement<ModificarResponse> createModificarResponse(ModificarResponse value) {
+        return new JAXBElement<ModificarResponse>(_ModificarResponse_QNAME, ModificarResponse.class, null, value);
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link Alta }{@code >}}
      * 
      */
@@ -411,6 +438,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Modificar }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "modificar")
+    public JAXBElement<Modificar> createModificar(Modificar value) {
+        return new JAXBElement<Modificar>(_Modificar_QNAME, Modificar.class, null, value);
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link CheckActivacionResponse }{@code >}}
      * 
      */

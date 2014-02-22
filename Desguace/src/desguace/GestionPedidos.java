@@ -63,6 +63,7 @@ import javax.swing.text.LabelView;
 
 
 
+
 /**
  * FXML Controller class
  *
@@ -793,6 +794,17 @@ public class GestionPedidos implements Initializable {
            
             
         }
+    }
+    public void modificarDesguace() throws IOException {
+        URL location = getClass().getResource("modificarDatos.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page = (Parent) loader.load(location.openStream());
+        thisStage.getScene().setRoot(page);
+        AltaDesguace tdCont = (AltaDesguace) loader.getController();
+        tdCont.setStage(thisStage);
+        tdCont.showStage();
     }
             
 }

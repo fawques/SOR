@@ -45,7 +45,7 @@ public class AltaTallerController implements Initializable {
     public TextField tfCiudad;
     public TextField tfCp;
     public TextField tfTelefono;
-    public TextField id;
+    public Label id;
     public Label errorNombreTaller;
     public Label errorEmail;
     public Label errorDireccion;
@@ -197,7 +197,7 @@ public class AltaTallerController implements Initializable {
             tfCp.setText(Integer.toString((MainTaller.taller.getPostalCode())));
             tfDireccion.setText(MainTaller.taller.getAddress());
             tfTelefono.setText(Integer.toString((MainTaller.taller.getTelephone())));
-           //No va  id.setText(MainTaller.taller.getID());
+            id.setText(MainTaller.taller.getID());
            
            }
     }

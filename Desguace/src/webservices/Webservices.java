@@ -68,4 +68,9 @@ public class Webservices {
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.cambiarEstadoPedidoOtravez(id, estado);
     }
+    public static boolean modificar_WS(String id, String name, String email, String address, String city, String postalCode, String telephone) {
+    	gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
+    	 gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.modificar(id, name, email, address, city, postalCode, telephone);
+    }
 }

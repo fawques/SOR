@@ -7,23 +7,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" minHeight="439.310546875" prefHeight="439.310546875" prefWidth="600.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.AltaTallerController">
+<AnchorPane id="AnchorPane" minHeight="439.310546875" prefHeight="439.310546875" prefWidth="600.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="desguace.AltaDesguace">
   <children>
-    <Button layoutX="290.0" layoutY="395.0" mnemonicParsing="false" onAction="#modificarTaller" text="Modificar" />
+    <Button layoutX="290.0" layoutY="395.0" mnemonicParsing="false" onAction="#modificarDesguace" text="Modificar" />
     <Button layoutX="120.0" layoutY="395.0" mnemonicParsing="false" onAction="#irAGestionPedidos" text="Cancelar" />
-    <Label layoutX="54.0" layoutY="65.0" text="Nombre Taller" wrapText="false" />
+    <Label layoutX="54.0" layoutY="65.0" text="Nombre Desguace" wrapText="false" />
     <Label layoutX="54.0" layoutY="123.0" text="E-mail" wrapText="false" />
     <Label layoutX="54.0" layoutY="177.0" text="Dirección" wrapText="false" />
     <Label layoutX="54.0" layoutY="239.0" text="Ciudad" />
     <Label layoutX="54.0" layoutY="288.0" text="CP" />
     <Label layoutX="54.0" layoutY="335.0" text="Teléfono" />
-    <TextField fx:id="tfNombreTaller" layoutX="161.0" layoutY="65.0" prefWidth="200.0" />
+    <TextField fx:id="tfNombreDesguace" layoutX="161.0" layoutY="65.0" prefWidth="200.0" />
     <TextField fx:id="tfEmail" layoutX="161.0" layoutY="123.0" prefWidth="200.0" />
     <TextField fx:id="tfDireccion" layoutX="161.0" layoutY="174.0" prefWidth="200.0" />
     <TextField fx:id="tfCiudad" layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
     <TextField fx:id="tfCp" layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
     <TextField fx:id="tfTelefono" layoutX="161.0" layoutY="332.0" prefWidth="200.0" />
-    <Label id="errorN" fx:id="errorNombreTaller" layoutX="369.0" layoutY="68.0" text="" textFill="RED" />
+    <Label id="errorN" fx:id="errorNombreDesguace" layoutX="369.0" layoutY="68.0" text="" textFill="RED" />
     <Label fx:id="errorEmail" layoutX="369.0" layoutY="129.0" text="" textFill="RED">
       <font>
         <Font size="13.0" fx:id="x1" />
@@ -33,5 +33,6 @@
     <Label fx:id="errorCiudad" font="$x1" layoutX="369.0" layoutY="236.0" text="" textFill="RED" />
     <Label fx:id="errorCp" font="$x1" layoutX="369.0" layoutY="291.0" text="" textFill="RED" />
     <Label fx:id="errorTelefono" font="$x1" layoutX="369.0" layoutY="338.0" text="" textFill="RED" />
+    <Label fx:id="labelID" layoutX="54.0" layoutY="31.0" text="" />
   </children>
 </AnchorPane>

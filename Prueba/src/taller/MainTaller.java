@@ -425,6 +425,7 @@ public class MainTaller extends Application {
             if (modificar(taller.getID(), nombre, email, direccion, ciudad, codPostal, telefono)) {
                 bd = new InterfazBD("sor_taller");
                 boolean o = bd.modificarTaller(nombre, email, direccion, ciudad, Integer.parseInt(codPostal), Integer.parseInt(telefono));
+                taller=bd.getPrimerTaller();
                 bd.close();
                 return o;
             }

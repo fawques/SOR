@@ -20,6 +20,7 @@ import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
 import general.PedidoCorto;
+import gestor_taller.TallerWS;
 
 import java.lang.reflect.Type;
 import java.sql.SQLException;
@@ -287,6 +288,19 @@ public class DesguaceJavaWS {
         }
             
        
+        return false;
+    }
+    public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone) {
+        try {
+            bd = new InterfazBD("sor_gestor");
+            boolean res = bd.modificarDesguace(id, name, email, city, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), EstadoGeneral.ACTIVE);
+            bd.close();
+            return res;
+        } catch (java.sql.SQLException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
 }

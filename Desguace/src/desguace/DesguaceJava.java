@@ -636,5 +636,37 @@ public class DesguaceJava extends Application {
 		manager.guardarAccion(m, params);
 		return false;
 	}
-
+	 public static boolean modificarDatos(String nombre, String email, String direccion, String ciudad, String codPostal, String telefono) {
+	        try {
+	            if (modificar(desguace.getID(), nombre, email, direccion, ciudad, codPostal, telefono)) {
+	                bd = new InterfazBD("sor_desguace");
+	                boolean o = bd.modificarDesguace(nombre, email, direccion, ciudad, Integer.parseInt(codPostal), Integer.parseInt(telefono));
+	                desguace=bd.getDesguace();
+	                bd.close();
+	                return o;
+	            }
+	        } catch (SQLException ex) {
+	            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+	        } catch (ClassNotFoundException ex) {
+	            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	        return false;
+	    }
+	    public static boolean modificar(java.lang.String id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
+	        AsyncManager manager = new AsyncManager("sor_taller");
+	        manager.ejecutarAcciones();
+	        for (int i = 0; i < 10; i++) {
+	            try{
+	                Boolean ret = modificar_WS(id, name, email, address, city, postalCode, telephone);
+	                // si no ha lanzado excepción, devolvemos correctamente
+	                return ret;
+	            }catch(javax.xml.ws.WebServiceException e){}
+	        }
+	        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+	        class Local {};
+	        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+	        String params[] = {id, name, email, address, city, postalCode, telephone};
+	        manager.guardarAccion(m,params);
+	        return false;
+	    }
 }

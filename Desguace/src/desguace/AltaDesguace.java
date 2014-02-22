@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -48,13 +47,13 @@ public class AltaDesguace implements Initializable {
     public TextField tfCiudad;
     public TextField tfCp;
     public TextField tfTelefono;
-    public Label errorNombreTaller;
+    public Label errorNombreDesguace;
     public Label errorEmail;
     public Label errorDireccion;
     public Label errorCiudad;
     public Label errorCp;
     public Label errorTelefono;
-
+    public Label labelID;
     /**
      * Initializes the controller class.
      */
@@ -72,15 +71,15 @@ public class AltaDesguace implements Initializable {
                 if (!arg2) { //Code here the action when the object lose the focus
                     if (DesguaceJava.validarNombre(tfNombreDesguace.getText())) {
                         tfNombreDesguace.setStyle("-fx-border-color: green;");
-                        errorNombreTaller.setText("");
+                        errorNombreDesguace.setText("");
                     } else {
                         //add errors in the interface
                         if (tfNombreDesguace.getText().length() < 22) {
-                            errorNombreTaller.setText("No pueden contener carácteres extraños, ni números");
+                        	errorNombreDesguace.setText("No pueden contener carácteres extraños, ni números");
                         } else if (tfNombreDesguace.getText().isEmpty()) {
-                            errorNombreTaller.setText("No puede ser vacio");
+                        	errorNombreDesguace.setText("No puede ser vacio");
                         } else {
-                            errorNombreTaller.setText("No más de 21 carácteres");
+                        	errorNombreDesguace.setText("No más de 21 carácteres");
                         }
 
                         tfNombreDesguace.setStyle("-fx-border-color: red;");
@@ -190,6 +189,17 @@ public class AltaDesguace implements Initializable {
                 }
             }
         });
+        
+        if(DesguaceJava.desguace!=null){
+            tfNombreDesguace.setText(DesguaceJava.desguace.getName());
+            tfEmail.setText(DesguaceJava.desguace.getEmail());
+            tfCiudad.setText(DesguaceJava.desguace.getCity());
+            tfCp.setText(Integer.toString((DesguaceJava.desguace.getPostalCode())));
+            tfDireccion.setText(DesguaceJava.desguace.getAddress());
+            tfTelefono.setText(Integer.toString(DesguaceJava.desguace.getTelephone()));
+            labelID.setText(DesguaceJava.desguace.getID());
+           
+           }
     }
 
     public void setStage(Stage stage) {
@@ -269,6 +279,25 @@ public class AltaDesguace implements Initializable {
              + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");*/
         }
         //else nothing
+    }
+    public void irAGestionPedidos() throws IOException {
+        URL location = getClass().getResource("GestionPedidos.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page = (Parent) loader.load(location.openStream());
+        thisStage.getScene().setRoot(page);
+        GestionPedidos tdCont = (GestionPedidos) loader.getController();
+        tdCont.setStage(thisStage);
+        tdCont.showStage();
+    }
+
+    public void modificarDesguace() throws IOException {
+        if (DesguaceJava.validar(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
+            System.out.println("Enviando...");
+            if (DesguaceJava.modificarDatos(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText()))
+                irAGestionPedidos();
+        }
     }
 
 }

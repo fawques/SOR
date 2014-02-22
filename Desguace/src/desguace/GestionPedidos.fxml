@@ -40,6 +40,7 @@
                 <Button layoutX="685.0" layoutY="503.0" mnemonicParsing="false" onAction="#bajaDesguace" text="Dar de baja" />
                 <TableView fx:id="tablePiezas" layoutX="521.0" layoutY="40.0" prefHeight="147.0" prefWidth="245.0" />
                 <Text layoutX="596.0" layoutY="19.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Piezas por pedido" />
+                <Button layoutX="530.0" layoutY="503.0" mnemonicParsing="false" onAction="#modificarDesguace" text="Modificar desguace" />
               </children>
             </AnchorPane>
           </content>

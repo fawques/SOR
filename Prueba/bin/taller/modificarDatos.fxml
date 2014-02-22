@@ -33,5 +33,6 @@
     <Label fx:id="errorCiudad" font="$x1" layoutX="369.0" layoutY="236.0" text="" textFill="RED" />
     <Label fx:id="errorCp" font="$x1" layoutX="369.0" layoutY="291.0" text="" textFill="RED" />
     <Label fx:id="errorTelefono" font="$x1" layoutX="369.0" layoutY="338.0" text="" textFill="RED" />
+    <Label fx:id="id" layoutX="54.0" layoutY="32.0" text="" />
   </children>
 </AnchorPane>

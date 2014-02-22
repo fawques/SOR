@@ -1,4 +1,4 @@
-<xs:schema xmlns:tns="http://gestor_desguace_java/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://gestor_desguace_java/" version="1.0">
+<xs:schema xmlns:tns="http://gestor_desguace_java/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://gestor_desguace_java/" version="1.0">
 
   <xs:element name="aceptarOfertaFin" type="tns:aceptarOfertaFin"/>
 
@@ -40,26 +40,13 @@
 
   <xs:element name="getPedidosporIDResponse" type="tns:getPedidosporIDResponse"/>
 
+  <xs:element name="modificar" type="tns:modificar"/>
+
+  <xs:element name="modificarResponse" type="tns:modificarResponse"/>
+
   <xs:element name="nuevaOferta" type="tns:nuevaOferta"/>
 
   <xs:element name="nuevaOfertaResponse" type="tns:nuevaOfertaResponse"/>
-
-  <xs:complexType name="alta">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="name" type="xs:string"/>
-      <xs:element minOccurs="0" name="email" type="xs:string"/>
-      <xs:element minOccurs="0" name="address" type="xs:string"/>
-      <xs:element minOccurs="0" name="city" type="xs:string"/>
-      <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
-      <xs:element minOccurs="0" name="telephone" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="altaResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:boolean"/>
-    </xs:sequence>
-  </xs:complexType>
 
   <xs:complexType name="checkActivacion">
     <xs:sequence>
@@ -97,6 +84,24 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="modificar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="address" type="xs:string"/>
+      <xs:element minOccurs="0" name="city" type="xs:string"/>
+      <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="telephone" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="modificarResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="cambiarEstadoPedido">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string"/>
@@ -107,6 +112,23 @@
   <xs:complexType name="cambiarEstadoPedidoResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="alta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="address" type="xs:string"/>
+      <xs:element minOccurs="0" name="city" type="xs:string"/>
+      <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="telephone" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="altaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
     </xs:sequence>
   </xs:complexType>
 
