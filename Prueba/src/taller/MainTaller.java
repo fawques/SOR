@@ -451,6 +451,38 @@ public class MainTaller extends Application {
         }
         return false;
     }
+    
+    public static Boolean cambiarEstadoOferta(EstadoOferta estado,String idPedido){
+        try {
+            bd= new InterfazBD("sor_taller");
+            Boolean aceptado=bd.cambiarEstadoOferta(estado, idPedido);
+            
+            bd.close();
+            return aceptado;
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public static Boolean cambiarEstadoPedido(EstadoPedido estado,String idPedido){
+        try {
+            bd= new InterfazBD("sor_taller");
+            Boolean aceptado=bd.cambiarEstadoPedido(estado, idPedido);
+            
+            bd.close();
+            if(aceptado){
+             return   cambiarEstadoPedido_preWS(Integer.toString(estado.ordinal()),idPedido);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     /**
      * ******************* WebServices *************************
@@ -462,6 +494,23 @@ public class MainTaller extends Application {
      * @param telephone
      * @return 
      */
+    
+    public static boolean cambiarEstadoPedido_preWS(String estado ,String idPedido){
+    	AsyncManager manager = new AsyncManager("sor_taller");
+        manager.ejecutarAcciones();
+        for (int i = 0; i < 10; i++) {
+            try{
+            	cambiarEstadoPedido_WS(Integer.parseInt(estado), idPedido);
+            }catch(javax.xml.ws.WebServiceException e){}
+        }
+        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+        // tenemos que guardar el alta en local, y dejarla pendiente de mandar
+        class Local {};
+        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
+        String params[] = {estado,idPedido};
+        manager.guardarAccion(m,params);
+        return false;
+    }
 
     public static boolean alta(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
         AsyncManager manager = new AsyncManager("sor_taller");
@@ -517,6 +566,8 @@ public class MainTaller extends Application {
 
          
     public static String getOfertas(java.lang.String listaPedidos) {
+    	AsyncManager manager = new AsyncManager("sor_taller");
+        manager.ejecutarAcciones();
         for (int i = 0; i < 10; i++) {
             try{
                 String ret = getOfertas_WS(listaPedidos);
@@ -527,40 +578,6 @@ public class MainTaller extends Application {
         System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
         return "";
     }
-
-    public static Boolean cambiarEstadoPedido(EstadoPedido estado,String idPedido){
-        try {
-            bd= new InterfazBD("sor_taller");
-            Boolean aceptado=bd.cambiarEstadoPedido(estado, idPedido);
-            
-            bd.close();
-            if(aceptado){
-             return   cambiarEstadoPedido_WS(estado.ordinal(),idPedido);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    
-        public static Boolean cambiarEstadoOferta(EstadoOferta estado,String idPedido){
-        try {
-            bd= new InterfazBD("sor_taller");
-            Boolean aceptado=bd.cambiarEstadoOferta(estado, idPedido);
-            
-            bd.close();
-            return aceptado;
-        } catch (SQLException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    
-    
 
     public static Boolean aceptarOferta(java.lang.String id) {
         AsyncManager manager = new AsyncManager("sor_taller");
