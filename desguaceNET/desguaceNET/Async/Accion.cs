@@ -19,7 +19,7 @@ namespace desguaceNET.Async
             this.paramValues = paramValues;
         }
 
-        public Accion(MethodInfo m, string[] paramValues) {
+        public Accion(MethodBase m, string[] paramValues) {
             this.name = m.Name;
             ParameterInfo[] parametros = m.GetParameters();
             paramTypes = new Type[parametros.Length];

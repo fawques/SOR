@@ -1,4 +1,5 @@
-﻿using desguaceNET.desguaceWS;
+﻿using desguaceNET.Async;
+using desguaceNET.desguaceWS;
 using desguaceNET.libSOR.activemq;
 using desguaceNET.libSOR.BD;
 using desguaceNET.libSOR.general;
@@ -8,6 +9,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +48,7 @@ namespace desguaceNET
             try
             {
                 string desguaceID = desguace.getID();
-                int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID,new DateTime(1970-01-01), fechaLimite);
+                int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID, new DateTime(1970 - 01 - 01), fechaLimite);
                 if (id != -1)
                 {
                     Oferta nuevo = new Oferta(id, precio, desguaceID, idPedido, fechaLimite);
@@ -354,66 +356,184 @@ namespace desguaceNET
         // ============================
         private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
         {
-            var addr = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", addr);
-            return client.alta(name, email, address, city, postalCode, telephone);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var addr = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", addr);
+                    return client.alta(name, email, address, city, postalCode, telephone);
+                }
+                catch (EndpointNotFoundException e) { }
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { name, email, address, city, postalCode, telephone };
+            manager.guardarAccion(m, parametros);
+            return false;
         }
 
         private string checkActivacion(string mail)
         {
-            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-            return client.checkActivacion(mail);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.checkActivacion(mail);
+                }
+                catch (EndpointNotFoundException e) { }
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            return "";
         }
 
 
         private string nuevaOferta(string oferta)
         {
-            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-            return client.nuevaOferta(oferta);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.nuevaOferta(oferta);
+                }
+                catch (EndpointNotFoundException e) { }
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { oferta };
+            manager.guardarAccion(m, parametros);
+            return "";
         }
 
         private string getOfertas()
         {
-            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-            return client.getOfertas();
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.getOfertas();
+                }
+                catch (EndpointNotFoundException e) { }
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            return "";
         }
 
         private string getPedidosporID(string str)
         {
-            var address = new EndpointAddress("http://"+jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-            return client.getPedidosporID(str);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.getPedidosporID(str);
+                }
+                catch (EndpointNotFoundException e) { }
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            return "";
         }
 
         private bool aceptarOfertaFin(string id)
         {
-            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-            return client.aceptarOfertaFin(id);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.aceptarOfertaFin(id);
+                }
+                catch (EndpointNotFoundException e) { }
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { id };
+            manager.guardarAccion(m, parametros);
+            return false;
+
         }
 
         private bool baja(string id)
         {
-            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-            return client.baja(id);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.baja(id);
+                }
+                catch (EndpointNotFoundException e) { }
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { id };
+            manager.guardarAccion(m, parametros);
+            return false;
         }
 
         private bool cancelarOferta(string id)
         {
-            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-            return client.cancelarOferta(id);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.cancelarOferta(id);
+                }
+                catch (EndpointNotFoundException e) { }
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { id };
+            manager.guardarAccion(m, parametros);
+            return false;
         }
 
         private bool cambiarEstadoPedido(string id, string estado)
         {
-            var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-            return client.cambiarEstadoPedidoOtravez(id, estado);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.cambiarEstadoPedidoOtravez(id, estado);
+                }
+                catch (EndpointNotFoundException e) { }
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { id, estado };
+            manager.guardarAccion(m, parametros);
+            return false;
         }
 
     }

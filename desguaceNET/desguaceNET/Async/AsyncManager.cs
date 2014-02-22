@@ -23,7 +23,7 @@ namespace desguaceNET.Async
         }
     
     
-        public void guardarAccion(MethodInfo method,string[] valores){
+        public void guardarAccion(MethodBase method,string[] valores){
             Accion accion = new Accion(method,valores);
             char[] delim = new char[4];
             delim[0] = delim[3] = ':';
