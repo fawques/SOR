@@ -54,6 +54,7 @@ public class MainTaller extends Application {
      *
      */
     public static Taller taller;
+    public static Pedido pedidoModificar;
 
     /**
      *
@@ -685,6 +686,21 @@ public class MainTaller extends Application {
         manager.guardarAccion(m,params);
         return false;
     }
+
+	public static void pedidoModificar(String id) {
+	      try {
+	            bd = new InterfazBD("sor_taller");
+	            pedidoModificar = bd.getPedido(id);
+	            bd.close();
+	            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+	            
+	        } catch (SQLException ex) {
+	            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+	        } catch (ClassNotFoundException ex) {
+	            Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	        
+	}
 
 
 }

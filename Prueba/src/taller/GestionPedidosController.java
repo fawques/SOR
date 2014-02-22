@@ -192,7 +192,8 @@ public class GestionPedidosController implements Initializable {
      *
      */
     public TableView tbPedidosOfertas;
-
+    public TablaPedidos tp;
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -492,5 +493,27 @@ public class GestionPedidosController implements Initializable {
         AltaTallerController tdCont = (AltaTallerController) loader.getController();
         tdCont.setStage(thisStage);
         tdCont.showStage();
+    }
+    public void modificarPedido(){
+    	
+		try {
+			tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
+			MainTaller.pedidoModificar(tp.getId());
+			URL location = getClass().getResource("modificarPedido.fxml");
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(location);
+	        loader.setBuilderFactory(new JavaFXBuilderFactory());
+	        Parent page;
+			page = (Parent) loader.load(location.openStream());
+			thisStage.getScene().setRoot(page);
+	        ModificarPedidoController tdCont = (ModificarPedidoController) loader.getController();
+	        tdCont.setStage(thisStage);
+	        tdCont.showStage();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+    	
     }
 }

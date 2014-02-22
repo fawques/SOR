@@ -21,6 +21,7 @@
                 <Button layoutX="641.0" layoutY="4.0" mnemonicParsing="false" onAction="#bajaTaller" text="Darme de baja" />
                 <Button layoutX="476.0" layoutY="4.0" mnemonicParsing="false" onAction="#modificarTaller" text="Modificar mis datos" />
                 <Button layoutX="36.0" layoutY="497.0" mnemonicParsing="false" onAction="#visualizarPedidos" text="Actualizar pedidos" />
+                <Button layoutX="448.0" layoutY="497.0" mnemonicParsing="false" onAction="#modificarPedido" text="Modificar pedido" />
               </children>
             </AnchorPane>
           </content>
