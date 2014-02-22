@@ -32,7 +32,7 @@ import javafx.stage.Stage;
  * @author Pablo
  */
 public class AltaTallerController implements Initializable {
-
+	
     Stage thisStage;
     InterfazBD bd;
     /**
@@ -45,12 +45,14 @@ public class AltaTallerController implements Initializable {
     public TextField tfCiudad;
     public TextField tfCp;
     public TextField tfTelefono;
+    public TextField id;
     public Label errorNombreTaller;
     public Label errorEmail;
     public Label errorDireccion;
     public Label errorCiudad;
     public Label errorCp;
     public Label errorTelefono;
+    
 
     /**
      * Initializes the controller class.
@@ -60,6 +62,7 @@ public class AltaTallerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         assert tfNombreTaller != null : "fx:id=\"myButton\" was not injected: check your FXML file 'simple.fxml'.";
+   
         /**
          *
          */
@@ -187,6 +190,16 @@ public class AltaTallerController implements Initializable {
                 }
             }
         });
+        if(MainTaller.taller!=null){
+            tfNombreTaller.setText(MainTaller.taller.getName());
+            tfEmail.setText(MainTaller.taller.getEmail());
+            tfCiudad.setText(MainTaller.taller.getCity());
+            tfCp.setText(Integer.toString((MainTaller.taller.getPostalCode())));
+            tfDireccion.setText(MainTaller.taller.getAddress());
+            tfTelefono.setText(Integer.toString((MainTaller.taller.getTelephone())));
+           //No va  id.setText(MainTaller.taller.getID());
+           
+           }
     }
 
     public void setStage(Stage stage) {
@@ -213,6 +226,7 @@ public class AltaTallerController implements Initializable {
         tfCiudad.setEditable(b);
         tfCp.setEditable(b);
         tfTelefono.setEditable(b);
+        
     }
 
     /**
