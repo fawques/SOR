@@ -23,6 +23,7 @@
     <TextField fx:id="tfCiudad" layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
     <TextField fx:id="tfCp" layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
     <TextField fx:id="tfTelefono" layoutX="161.0" layoutY="332.0" prefWidth="200.0" />
+    <TextField fx:id="id" layoutX="235.0" layoutY="14.0" prefWidth="200.0" />
     <Label id="errorN" fx:id="errorNombreTaller" layoutX="369.0" layoutY="68.0" text="" textFill="RED">
       <font>
         <Font size="10.0" fx:id="x1" />
@@ -33,5 +34,6 @@
     <Label fx:id="errorCiudad" font="$x1" layoutX="369.0" layoutY="236.0" text="" textFill="RED" />
     <Label fx:id="errorCp" font="$x1" layoutX="369.0" layoutY="291.0" text="" textFill="RED" />
     <Label fx:id="errorTelefono" font="$x1" layoutX="369.0" layoutY="338.0" text="" textFill="RED" />
+    
   </children>
 </AnchorPane>
