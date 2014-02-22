@@ -67,4 +67,7 @@
   <session-config>
     <session-timeout>600</session-timeout>
   </session-config>
+  <listener>
+    <listener-class>repetir.Config</listener-class>
+  </listener>
 </web-app>

@@ -59,42 +59,7 @@ public class AdminWS {
      * @param subject
      * @param text
      */
-    
-    private ActionListener actionListener = new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                try {
-                    bd = new InterfazBD("sor_gestor");
-                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-                ArrayList<Oferta> listaOferta= bd.getOfertasPorEstado(EstadoOferta.ACTIVE);
-                listaOferta.addAll(bd.getOfertasPorEstado(EstadoOferta.ACCEPTED));
-                ArrayList<Pedido> listaPedido=bd.getPedidosPorEstado(EstadoPedido.ACTIVE);
-                listaPedido.addAll(bd.getPedidosPorEstado(EstadoPedido.ACCEPTED));
-                
-                 for(Pedido pedido:listaPedido){
-                    if((new Date()).after(pedido.getFecha_limite())){                
-                        bd.cancelarPedido(pedido.getID());
-                    }
-                }
-                for(Oferta oferta:listaOferta){
-                    if((new Date()).after(oferta.getFecha_limite())){                
-                        bd.cambiarEstadoOferta(EstadoOferta.CANCELLED,oferta.getID());
-                    }
-                }
-               
-                } catch (SQLException ex) {
-                    Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
-                }
-             
-                
-            }
-
-        };
-    public Timer timer = new Timer(6000,actionListener); // Timer(TimeInMilliSeconds, ActionListener) 1000ms = 1s 
-
+     
     public void sendMail(final String from, String to, String subject, String text) {
         String SMTP_HOST_NAME = "smtp.gmail.com";
         String SMTP_PORT = "465";

@@ -574,7 +574,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				cambiarEstadoPedido_WS(Integer.parseInt(estado), idPedido);
+				return cambiarEstadoPedido_WS(Integer.parseInt(estado), idPedido);
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}

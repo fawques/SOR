@@ -7,11 +7,6 @@
 <link rel="stylesheet" href="estilos.css" type="text/css" media="screen" /> 
 </head>
 <body>
-    <%
-            //AdminWS admin =new AdminWS();
-            //admin.Registrar();
-            //admin.timer.start();
-            %>
 <p class="centrado">Inicio de sesion</p>
 <form class="centrado" action="login" method="POST">
  Usuario (mail): <input type="text" name="usuario"><br>
