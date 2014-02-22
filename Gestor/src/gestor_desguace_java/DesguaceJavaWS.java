@@ -8,9 +8,11 @@ package gestor_desguace_java;
 
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import general.Desguace;
 import general.EstadoGeneral;
 import general.EstadoOferta;
@@ -18,16 +20,20 @@ import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
 import general.PedidoCorto;
+
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.jms.JMSException;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -44,7 +50,8 @@ public class DesguaceJavaWS {
             bd = new InterfazBD("sor_gestor");
 
             Date ahora = new Date();
-            String stringID  = DigestUtils.md5Hex(ahora.toString());
+            Random r = new Random(ahora.getTime());
+            String stringID  = DigestUtils.md5Hex(ahora.toString() + r);
             boolean res = bd.altaDesguace(stringID, name, email, address, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), 2);
             bd.close();
             return res;
@@ -100,7 +107,7 @@ public class DesguaceJavaWS {
 
              Oferta p = gson.fromJson(oferta,Oferta.class);
             Date ahora = new Date();
-            String stringID  = DigestUtils.md5Hex(ahora.toString()); 
+            String stringID  = "Oferta_" + bd.getNumOfertas();
             p.setID(stringID);
              bd.anadirOferta(stringID, p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACTIVE.ordinal(),  p.getPedido(), p.getDesguace(),p.getDesguaceNombre(), p.getFecha_baja(),p.getFecha_limite());
             bd.close();

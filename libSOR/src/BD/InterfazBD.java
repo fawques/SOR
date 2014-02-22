@@ -96,6 +96,30 @@ public class InterfazBD {
         return lista;    
     }
     
+    public int getNumPedidos(){
+    	ResultSet resultados = conexion.ejecutarSQLSelect("Select count(*) as num from pedido");
+    	try {
+    		while(resultados.next())
+    			return resultados.getInt("num");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return 0;
+    }
+    
+    public int getNumOfertas(){
+    	ResultSet resultados = conexion.ejecutarSQLSelect("Select count(*) as num from oferta");
+    	try {
+    		while(resultados.next())
+    			return resultados.getInt("num");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return 0;
+    }
+    
     public ArrayList<Desguace> getDesguacesAceptados()
     {
         ArrayList<Desguace> lista= new ArrayList<>();

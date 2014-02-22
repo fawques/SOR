@@ -8,9 +8,11 @@ package gestor_taller;
 
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import general.Desguace;
 import general.EstadoGeneral;
 import general.EstadoOferta;
@@ -19,17 +21,21 @@ import general.Oferta;
 import general.Pedido;
 import general.PedidoCorto;
 import general.Taller;
+
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.jms.JMSException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -100,7 +106,7 @@ public class TallerWS {
              }.getType();
              Pedido p = gson.fromJson(pedido, collectionType);
             Date ahora = new Date();
-            String stringID  = DigestUtils.md5Hex(ahora.toString());
+            String stringID  = "Pedido_"+ bd.getNumPedidos();
             p.setID(stringID);
              bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(),p.getTallerNombre() ,p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
              bd.anyadirPiezasAPedido(p.getID(), p.getListaPiezas(), p.getListaCantidadesPiezas());
@@ -215,7 +221,8 @@ public class TallerWS {
         try {
             bd = new InterfazBD("sor_gestor");
             Date ahora = new Date();
-            String stringID  = DigestUtils.md5Hex(ahora.toString());
+            Random r = new Random(ahora.getTime());
+            String stringID  = DigestUtils.md5Hex(ahora.toString() + r);
             boolean res = bd.altaTaller(stringID, name, email, address, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), EstadoGeneral.PENDIENTE.ordinal());
             bd.close();
             return res;
