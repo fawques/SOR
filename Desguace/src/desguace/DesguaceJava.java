@@ -21,6 +21,7 @@ import jUDDI.JUDDIProxy;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -453,6 +454,14 @@ public class DesguaceJava extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return alta(name, email, address, city, postalCode, telephone);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		// tenemos que guardar el alta en local, y dejarla pendiente de mandar
 		class Local {
@@ -473,6 +482,14 @@ public class DesguaceJava extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return checkActivacion(mail);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return "";
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
@@ -487,6 +504,14 @@ public class DesguaceJava extends Application {
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
+		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return nuevaOferta(oferta);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return "";
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -509,6 +534,14 @@ public class DesguaceJava extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return getOfertas();
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return "";
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
@@ -524,6 +557,14 @@ public class DesguaceJava extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return getPedidosporID(string);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return "";
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
@@ -538,6 +579,14 @@ public class DesguaceJava extends Application {
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
+		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return getPedidoporID(string);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return "";
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
@@ -556,6 +605,14 @@ public class DesguaceJava extends Application {
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
+		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return aceptarOfertaFin(id);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -581,6 +638,14 @@ public class DesguaceJava extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return cancelarOferta(id);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
@@ -605,6 +670,14 @@ public class DesguaceJava extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return baja(id);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
@@ -626,6 +699,14 @@ public class DesguaceJava extends Application {
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
+		}
+		try {
+			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				return cambiarEstadoPedido_1(id, estado);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {

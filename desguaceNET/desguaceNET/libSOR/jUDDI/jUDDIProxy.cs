@@ -79,5 +79,12 @@ namespace desguaceNET.libSOR.jUDDI
         {
             return urlActiveMQ;
         }
+     
+        public static bool loadHasChanged(string servicio){
+    	    Uri wsdl_backup = wsdl;
+    	    loadWsdl(servicio);
+    	    // si son iguales, el endpoint no ha cambiado
+    	    return !wsdl_backup.Equals(wsdl);
+        }
     }
 }

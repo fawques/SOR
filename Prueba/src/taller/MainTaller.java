@@ -24,6 +24,7 @@ import gestor_taller.JMSException_Exception;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -577,6 +578,14 @@ public class MainTaller extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return cambiarEstadoPedido_preWS(estado, idPedido);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		// tenemos que guardar el alta en local, y dejarla pendiente de mandar
 		class Local {
@@ -602,6 +611,14 @@ public class MainTaller extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return alta(name, email, address, city, postalCode, telephone);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		// tenemos que guardar el alta en local, y dejarla pendiente de mandar
 		class Local {
@@ -622,6 +639,14 @@ public class MainTaller extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return checkActivacion(mail);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return "";
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
@@ -637,6 +662,14 @@ public class MainTaller extends Application {
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
+		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return nuevoPedido(pedido);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return "";
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -659,6 +692,14 @@ public class MainTaller extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return getOfertas(listaPedidos);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return "";
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
@@ -676,6 +717,14 @@ public class MainTaller extends Application {
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
+		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return aceptarOferta(id);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -698,6 +747,14 @@ public class MainTaller extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return rechazarOferta(id);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
@@ -709,7 +766,23 @@ public class MainTaller extends Application {
 	}
 
 	public static String hello() throws javax.xml.ws.WebServiceException {
-		return Webservices.hello();
+		AsyncManager manager = new AsyncManager("sor_taller");
+		manager.ejecutarAcciones();
+		for (int i = 0; i < 10; i++) {
+			try {
+				return Webservices.hello();
+			} catch (javax.xml.ws.WebServiceException e) {
+			}
+		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return Webservices.hello();
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return "";
+		}
+		return "";
 	}
 
 	private static Boolean baja(java.lang.String tallerID) {
@@ -722,6 +795,14 @@ public class MainTaller extends Application {
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
+		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return baja(tallerID);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -747,6 +828,15 @@ public class MainTaller extends Application {
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return modificar(id, name, email, address, city, postalCode,
+						telephone);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
+		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
@@ -768,6 +858,14 @@ public class MainTaller extends Application {
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
+		}
+		try {
+			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				return cancelarPedido(idPedido);
+			}
+		} catch (RemoteException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			return false;
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {

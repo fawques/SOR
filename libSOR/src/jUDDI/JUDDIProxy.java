@@ -93,6 +93,12 @@ public class JUDDIProxy {
         return urlActiveMQ;
     }
     
+    public static boolean loadHasChanged(String servicio) throws RemoteException{
+    	URL wsdl_backup = wsdl;
+    	loadWsdl(servicio);
+    	// si son iguales, el endpoint no ha cambiado
+    	return !wsdl_backup.equals(wsdl);
+    }
     
     
     private static ServiceList findService(org.uddi.api_v3.FindService body) throws RemoteException {

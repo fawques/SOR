@@ -368,6 +368,18 @@ namespace desguaceNET
                 }
                 catch (EndpointNotFoundException e) { }
             }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return alta(name, email, address, city, postalCode, telephone);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+                return false;
+            }
             Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
             MethodBase m = MethodBase.GetCurrentMethod();
             string[] parametros = { name, email, address, city, postalCode, telephone };
@@ -389,6 +401,18 @@ namespace desguaceNET
                 }
                 catch (EndpointNotFoundException e) { }
             }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return checkActivacion(mail);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+                return "";
+            }
             Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
             return "";
         }
@@ -407,6 +431,18 @@ namespace desguaceNET
                     return client.nuevaOferta(oferta);
                 }
                 catch (EndpointNotFoundException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return nuevaOferta(oferta);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+                return "";
             }
             Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
             MethodBase m = MethodBase.GetCurrentMethod();
@@ -429,6 +465,18 @@ namespace desguaceNET
                 }
                 catch (EndpointNotFoundException e) { }
             }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return getOfertas();
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+                return "";
+            }
             Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
             return "";
         }
@@ -447,6 +495,18 @@ namespace desguaceNET
                 }
                 catch (EndpointNotFoundException e) { }
             }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return getPedidosporID(str);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+                return "";
+            }
             Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
             return "";
         }
@@ -464,6 +524,18 @@ namespace desguaceNET
                     return client.aceptarOfertaFin(id);
                 }
                 catch (EndpointNotFoundException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return aceptarOfertaFin(id);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+                return false;
             }
             Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
             MethodBase m = MethodBase.GetCurrentMethod();
@@ -487,6 +559,18 @@ namespace desguaceNET
                 }
                 catch (EndpointNotFoundException e) { }
             }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return baja(id);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+                return false;
+            }
             Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
             MethodBase m = MethodBase.GetCurrentMethod();
             string[] parametros = { id };
@@ -508,6 +592,18 @@ namespace desguaceNET
                 }
                 catch (EndpointNotFoundException e) { }
             }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return cancelarOferta(id);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+                return false;
+            }
             Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
             MethodBase m = MethodBase.GetCurrentMethod();
             string[] parametros = { id };
@@ -528,6 +624,18 @@ namespace desguaceNET
                     return client.cambiarEstadoPedidoOtravez(id, estado);
                 }
                 catch (EndpointNotFoundException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return cambiarEstadoPedido(id,estado);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+                return false;
             }
             Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
             MethodBase m = MethodBase.GetCurrentMethod();
