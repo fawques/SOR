@@ -594,11 +594,12 @@ public class GestionPedidos implements Initializable {
        
     }
    public void actualizarPestanyaOfertas(){
+	  CompararOfertasGestorDesguace();
       actualizarOfertas();
       actualizarOfertasOfertadas();
    }
      public void actualizarOfertasOfertadas() {
-      CompararOfertasGestorDesguace();
+      
          ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
         olTablaOfertasAceptadas.clear();
        ofertas = DesguaceJava.actualizarOfertasAceptadas();
