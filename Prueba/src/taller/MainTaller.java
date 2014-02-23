@@ -372,7 +372,17 @@ public class MainTaller extends Application {
 	}
 
 	public static void CompararPedidosGestorDesguace() {
-
+		try {
+			bd = new InterfazBD("sor_taller");
+			taller = bd.getPrimerTaller();
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		ArrayList<Pedido> pedidosgestor = new ArrayList<Pedido>();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
