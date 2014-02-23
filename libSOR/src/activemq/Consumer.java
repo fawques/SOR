@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder;
 
 import jUDDI.JUDDIProxy;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,9 +37,9 @@ public class Consumer {
         Destination queue;
         //Create Consumer
         MessageConsumer consumer;
-    public Consumer(String queueName) throws JMSException {
+    public Consumer(String queueName) throws JMSException,ConnectException {
             //Create ConnectionFactory
-        connectionFactory = new ActiveMQConnectionFactory("failover:(" + JUDDIProxy.getActiveMQ() + ")");
+        connectionFactory = new ActiveMQConnectionFactory("failover:(" + JUDDIProxy.getActiveMQ() + ")?maxReconnectAttempts=2&initialReconnectDelay=500&maxReconnectDelay=500");
         //Create Connection
        connection = connectionFactory.createConnection();
         //Create Session

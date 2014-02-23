@@ -27,6 +27,7 @@ import interfaz.TablaPedidos;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.ConnectException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -592,34 +593,37 @@ public class GestionPedidos implements Initializable {
             
            
             activemq.consumer.closeConsumer();
+            String pedidosstring=null;
+            ArrayList<PedidoCorto> idlista= new ArrayList<PedidoCorto>();
+            ArrayList<String> idlistabuena= gson.fromJson(listaIdsString,collectionType);
+            collectionType = new TypeToken<PedidoCorto>(){}.getType();
+            PedidoCorto p=new PedidoCorto();
+            for(String o: idlistabuena){
+                p= gson.fromJson(o, collectionType);
+                idlista.add(p);
+            }
+            idlistabuena.clear();
+            if(listaIdsString!=null){
+                for(PedidoCorto pcorto: idlista){
+                    if(!DesguaceJava.cambiarEstadoPedido(pcorto.getID(), pcorto.getEstado())){
+                        idlistabuena.add(pcorto.getID());
+                    }
+                }
+                Gson gsonnuevo = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+               
+                String listaJSON = gsonnuevo.toJson(idlistabuena);
+                 pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
+            }
+            collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
+            if(pedidosstring!=null && !pedidosstring.equals("")){
+                listaPedidos = gson.fromJson(pedidosstring, collectionType);
+            }
         } catch (JMSException ex) {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String pedidosstring=null;
-        ArrayList<PedidoCorto> idlista= new ArrayList<PedidoCorto>();
-        ArrayList<String> idlistabuena= gson.fromJson(listaIdsString,collectionType);
-        collectionType = new TypeToken<PedidoCorto>(){}.getType();
-        PedidoCorto p=new PedidoCorto();
-        for(String o: idlistabuena){
-            p= gson.fromJson(o, collectionType);
-            idlista.add(p);
-        }
-        idlistabuena.clear();
-        if(listaIdsString!=null){
-            for(PedidoCorto pcorto: idlista){
-                if(!DesguaceJava.cambiarEstadoPedido(pcorto.getID(), pcorto.getEstado())){
-                    idlistabuena.add(pcorto.getID());
-                }
-            }
-            Gson gsonnuevo = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-           
-            String listaJSON = gsonnuevo.toJson(idlistabuena);
-             pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
-        }
-        collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        if(pedidosstring!=null && !pedidosstring.equals("")){
-            listaPedidos = gson.fromJson(pedidosstring, collectionType);
-        }
+        } catch (ConnectException ex) {
+        	Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
+		}
+        
         
         System.out.println("pasa por aqui");
         TablaPedidos interfaz= new TablaPedidos();
