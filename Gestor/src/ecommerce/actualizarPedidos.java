@@ -85,36 +85,9 @@ public class actualizarPedidos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            bd = new InterfazBD("sor_gestor");
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-            ArrayList<Pedido> alP = new ArrayList<Pedido>();
-            String cookieName = "usuario";
-            Cookie cookies[] = request.getCookies();
-            Cookie myCookie = null;
-            if (cookies != null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    if (cookies[i].getName().equals(cookieName)) {
-                        myCookie = cookies[i];
-                        break;
-                    }
-                }
-            }
-            if (myCookie != null) {
-                Type collectionType = new TypeToken<Taller>() {
-                }.getType();
-                Taller t = gson.fromJson(myCookie.getValue(), collectionType);
-                alP = bd.getPedidosTaller(t.getID());
-                Cookie cs = new Cookie("pedidos", gson.toJson(alP));
-                response.addCookie(cs);
-            }
-            bd.close();
+        
             request.getRequestDispatcher("/seguimiento.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(actualizarPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(actualizarPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 
     /**

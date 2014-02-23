@@ -5,6 +5,8 @@
 <%@page import="com.google.gson.Gson"%>
 <%@page import="general.Pedido"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="general.Taller" %>
+<%@page import="BD.InterfazBD" %>
 <!doctype html>
 <html>
 <head>
@@ -26,41 +28,40 @@
 </tr>
 <tr>
 <%
-    String cookieName = "pedidos";
-        Cookie cookies[] = request.getCookies();
-        Cookie myCookie = null;
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals(cookieName)) {
-                    myCookie = cookies[i];
-                    break;
-                }
+    InterfazBD bd = new InterfazBD("sor_gestor");
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+    ArrayList<Pedido> alP = new ArrayList<Pedido>();
+    String cookieName = "usuario";
+    Cookie cookies[] = request.getCookies();
+    Cookie myCookie = null;
+    if (cookies != null) {
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals(cookieName)) {
+                myCookie = cookies[i];
+                break;
             }
         }
-
-        if (myCookie != null) {
-            ArrayList<Pedido> alP = new ArrayList<Pedido>();        
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-            Type collectionType = new TypeToken<ArrayList<Pedido>>() {
-                }.getType();
-            alP = gson.fromJson(myCookie.getValue(), collectionType);
-            for(int i=0; i<alP.size(); i++){
-            	if(alP.get(i).getEstado() == EstadoPedido.ACTIVE || alP.get(i).getEstado() == EstadoPedido.ACCEPTED){
-	            	out.println("<tr><td>"+alP.get(i).getID()+"</td>");
-	                out.println("<td>"+alP.get(i).getTallerNombre()+"</td>");
-	                out.println("<td>"+alP.get(i).getFecha_alta()+"</td>");
-	                out.println("<td>"+alP.get(i).getFecha_limite()+"</td>");
-	                out.println("<td>"+alP.get(i).getEstado()+"</td>");
-	                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td>");
-	                out.println("<td><a href=CancelarPedido?ped="+alP.get(i).getID()+" >Cancelar</a></td>");
-	                out.println("<td><a href=VerOfertas?ped="+alP.get(i).getID()+" >Ofertas</a></td></tr>");
-            	}
-            }
+    }
+    if (myCookie != null) {
+        Type collectionType = new TypeToken<Taller>() {
+        }.getType();
+        Taller t = gson.fromJson(myCookie.getValue(), collectionType);
+        alP = bd.getPedidosTaller(t.getID());
+        for(int i=0; i<alP.size(); i++){
+        	if(alP.get(i).getEstado() == EstadoPedido.ACTIVE || alP.get(i).getEstado() == EstadoPedido.ACCEPTED){
+            	out.println("<tr><td>"+alP.get(i).getID()+"</td>");
+                out.println("<td>"+alP.get(i).getTallerNombre()+"</td>");
+                out.println("<td>"+alP.get(i).getFecha_alta()+"</td>");
+                out.println("<td>"+alP.get(i).getFecha_limite()+"</td>");
+                out.println("<td>"+alP.get(i).getEstado()+"</td>");
+                out.println("<td>"+alP.get(i).getModoAutomatico()+"</td>");
+                out.println("<td><a href=CancelarPedido?ped="+alP.get(i).getID()+" >Cancelar</a></td>");
+                out.println("<td><a href=VerOfertas?ped="+alP.get(i).getID()+" >Ofertas</a></td></tr>");
+        	}
         }
-        else{
-
-        	System.out.println("No hay pedidos");
-        }
+    }
+    bd.close();
+    
 %>
 </tr>
 </table>
@@ -69,5 +70,6 @@
    <form action="actualizarPedidos" method="post">
        <input class="centrado-1" type="submit" value="Actualizar">
    </form>
+   <script type="text/javascript"></script>
 </body>
 </html>
