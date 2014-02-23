@@ -23,10 +23,10 @@ public class Webservices {
         return port.checkActivacion(mail);
     }
 
-    public static String getOfertas_WS() {
+    public static String getOfertas_WS(java.lang.String id) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.getOfertas();
+        return port.getOfertas(id);
     }
     
     public static String nuevaOferta_WS(java.lang.String oferta) {

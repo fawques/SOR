@@ -128,11 +128,11 @@ public class DesguaceJavaWS {
      * Web service operation
      */
     @WebMethod(operationName = "getOfertas")
-    public String getOfertas() {
+    public String getOfertas(@WebParam(name = "string") String id) {
         try {   
             bd = new InterfazBD("sor_gestor");
              ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
-            listaOfertas=bd.getOfertas();
+            listaOfertas=bd.getOfertasDesguace(id);
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaOfertas);
             System.out.println("listaJSON = " + listaJSON);

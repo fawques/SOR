@@ -366,7 +366,7 @@ public class MainTaller extends Application {
 		Type collectionType = new TypeToken<ArrayList<Pedido>>() {
 		}.getType();
 		String pedidosString = getPedidosActivos();
-		String pedidosGestorString = getPedidos_WS();
+		String pedidosGestorString = getPedidos_WS(taller.getID());
 		if (!"".equals(pedidosString) && !"".equals(pedidosGestorString)) {
 			pedidosgestor = gson.fromJson(pedidosGestorString, collectionType);
 			pedidos = gson.fromJson(pedidosString, collectionType);
@@ -375,10 +375,8 @@ public class MainTaller extends Application {
 			for (Pedido pedidogestor : pedidosgestor) {
 				for (Pedido pedidodesguace : pedidos) {
 					if (pedidogestor.getID().equals(pedidodesguace.getID())) {
-						if (pedidogestor.getEstado() != pedidodesguace
-								.getEstado()) {
-							cambiarEstadoPedido(pedidogestor.getEstado(),
-									pedidogestor.getID());
+						if (pedidogestor.getEstado() != pedidodesguace.getEstado()) {
+							cambiarEstadoPedido(pedidogestor.getEstado(),pedidogestor.getID());
 						}
 					}
 				}

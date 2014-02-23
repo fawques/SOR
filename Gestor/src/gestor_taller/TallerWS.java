@@ -277,14 +277,14 @@ public class TallerWS {
      * Web service operation
      */
     @WebMethod(operationName = "getPedidos")
-    public String getPedidos() {
+    public String getPedidos(@WebParam(name = "id") String id) {
     	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         //Dec 7, 2013 5:46:35 PM
        
             ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
         try {
             bd = new InterfazBD("sor_gestor");
-            listaPedidos = bd.getPedidosActivos();
+            listaPedidos = bd.getPedidosTaller(id);
             for(Pedido p: listaPedidos){
             	if(p.getEstado()==EstadoPedido.FINISHED_OK){
             		ArrayList<Oferta> listaOferta= bd.getOfertasPedido(p.getID());

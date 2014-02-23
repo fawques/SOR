@@ -528,7 +528,7 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = Webservices.getOfertas_WS();
+				String ret = Webservices.getOfertas_WS(desguace.getID());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
