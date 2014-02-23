@@ -105,8 +105,6 @@ public class MainTaller extends Application {
 				staticDataBox.showStage();
 			} else if (taller.getEstado() == EstadoGeneral.ACTIVE) { // activo
 				// Cargar GestionPedido
-
-				
 				FXMLLoader loader = changeScene("GestionPedidos.fxml");
 				stage.setTitle("Gestion de pedidos");
 				GestionPedidosController staticDataBox = (GestionPedidosController) loader
