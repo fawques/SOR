@@ -130,6 +130,7 @@ public class AdminWS {
             listaPedidos = bd.getPedidosActivos();
             String listaJSON = gson.toJson(listaPedidos);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,6 +154,7 @@ public class AdminWS {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaOfertas);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,6 +179,7 @@ public class AdminWS {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaDesguaces);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,6 +202,7 @@ public class AdminWS {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaDesguaces);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -219,6 +223,7 @@ public class AdminWS {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -239,6 +244,7 @@ public class AdminWS {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -261,6 +267,7 @@ public class AdminWS {
             listaOfertas = bd.getOfertasPedido(idPedido);
             String listaJSON = gson.toJson(listaOfertas);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -282,6 +289,7 @@ public class AdminWS {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaPedido);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -315,6 +323,7 @@ public class AdminWS {
              Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         }        
         catch (ClassNotFoundException ex) {
@@ -366,7 +375,10 @@ public class AdminWS {
     public Boolean addAccesoDesguace(@WebParam(name = "ID") String ID) {
      try {
          bd = new InterfazBD("sor_gestor");
-        return  bd.activarDesguace(ID);
+        boolean ool = bd.activarDesguace(ID);
+
+        bd.close();
+        return ool;
         
      } catch (SQLException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -390,6 +402,7 @@ public class AdminWS {
              Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaDesguace);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         }        
         catch (ClassNotFoundException ex) {
