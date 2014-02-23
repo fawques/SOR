@@ -460,7 +460,9 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		// tenemos que guardar el alta en local, y dejarla pendiente de mandar
@@ -488,7 +490,9 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return "";
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
@@ -511,7 +515,9 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return "";
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -540,7 +546,9 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return "";
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
@@ -563,7 +571,9 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return "";
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
@@ -586,7 +596,10 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return "";
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+		
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
@@ -612,7 +625,9 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -644,7 +659,9 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -676,7 +693,9 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -706,7 +725,9 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {

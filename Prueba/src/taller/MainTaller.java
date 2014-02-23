@@ -111,6 +111,7 @@ public class MainTaller extends Application {
 						.getController();
 				staticDataBox.setStage(stage);
 				staticDataBox.showStage();
+				
 			} else { // baja
 				FXMLLoader loader = changeScene("TallerDeBaja.fxml");
 				stage.setTitle("Baja de taller");
@@ -282,7 +283,17 @@ public class MainTaller extends Application {
 	}
 
 	public static ArrayList<Oferta> actualizarOfertas() {
-
+		try {
+			bd = new InterfazBD("sor_taller");
+			taller = bd.getPrimerTaller();
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 				.create();
 
@@ -308,7 +319,8 @@ public class MainTaller extends Application {
 					}
 
 				}
-			}
+			}				
+
 
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
@@ -358,7 +370,17 @@ public class MainTaller extends Application {
 	}
 
 	public static void CompararPedidosGestorDesguace() {
-
+		try {
+			bd = new InterfazBD("sor_taller");
+			taller = bd.getPrimerTaller();
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 		ArrayList<Pedido> pedidosgestor = new ArrayList<Pedido>();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -582,7 +604,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		// tenemos que guardar el alta en local, y dejarla pendiente de mandar
@@ -615,7 +639,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		// tenemos que guardar el alta en local, y dejarla pendiente de mandar
@@ -643,7 +669,10 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return "";
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+		
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
@@ -667,7 +696,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return "";
+			
+		}catch (javax.xml.ws.WebServiceException e) {
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -696,7 +727,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return "";
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
@@ -722,7 +755,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -751,7 +786,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -778,7 +815,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return "";
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		return "";
 	}
@@ -800,7 +839,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -833,7 +874,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
@@ -863,7 +906,9 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-			return false;
+		}catch (javax.xml.ws.WebServiceException e) {
+
+			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
