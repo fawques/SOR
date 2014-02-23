@@ -21,11 +21,13 @@ namespace desguaceNET
         string idOfertaAceptada;
         string idPedidoAceptado;
         DesguaceNet main;
+        Desguace desguace;
 
         public GestionPedidos()
         {
             InitializeComponent();
             main = new DesguaceNet();
+            desguace = main.getDesguace();
             listaPedidos = new List<Pedido>();
             main.actualizarPedidos();
             listaOfertasActivas = main.actualizarOfertas();
@@ -232,6 +234,16 @@ namespace desguaceNET
             if (!main.cancelarOfertaDesguace(idOfertaAceptada, idPedidoAceptado))
             {
                 MessageBox.Show("Error al aceptar oferta", "ERROR", MessageBoxButtons.OK);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ModificarDesguace modificar = new ModificarDesguace();
+            DialogResult res = modificar.ShowDialog();
+            if (res != DialogResult.OK)
+            {
+                MessageBox.Show("Error al modificar", "ERROR", MessageBoxButtons.OK);
             }
         }   
 

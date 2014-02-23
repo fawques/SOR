@@ -16,10 +16,71 @@
   <xs:element name="checkActivacionResponse" type="tns:checkActivacionResponse" />
   <xs:element name="getOfertas" type="tns:getOfertas" />
   <xs:element name="getOfertasResponse" type="tns:getOfertasResponse" />
+  <xs:element name="getPedidoporID" type="tns:getPedidoporID" />
+  <xs:element name="getPedidoporIDResponse" type="tns:getPedidoporIDResponse" />
   <xs:element name="getPedidosporID" type="tns:getPedidosporID" />
   <xs:element name="getPedidosporIDResponse" type="tns:getPedidosporIDResponse" />
+  <xs:element name="modificar" type="tns:modificar" />
+  <xs:element name="modificarResponse" type="tns:modificarResponse" />
   <xs:element name="nuevaOferta" type="tns:nuevaOferta" />
   <xs:element name="nuevaOfertaResponse" type="tns:nuevaOfertaResponse" />
+  <xs:complexType name="checkActivacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="mail" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="checkActivacionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPedidoporID">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="string" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPedidoporIDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPedidosporID">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="string" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getPedidosporIDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string" />
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+      <xs:element minOccurs="0" name="address" type="xs:string" />
+      <xs:element minOccurs="0" name="city" type="xs:string" />
+      <xs:element minOccurs="0" name="postalCode" type="xs:string" />
+      <xs:element minOccurs="0" name="telephone" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modificarResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarEstadoPedido">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string" />
+      <xs:element minOccurs="0" name="estado" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cambiarEstadoPedidoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="alta">
     <xs:sequence>
       <xs:element minOccurs="0" name="name" type="xs:string" />
@@ -35,37 +96,6 @@
       <xs:element name="return" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="checkActivacion">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="mail" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="checkActivacionResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="getPedidosporID">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="string" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="getPedidosporIDResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="cambiarEstadoPedido">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="id" type="xs:string" />
-      <xs:element minOccurs="0" name="estado" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="cambiarEstadoPedidoResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:boolean" />
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="aceptarOfertaFin">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string" />
@@ -77,7 +107,9 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="getOfertas">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element minOccurs="0" name="string" type="xs:string" />
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="getOfertasResponse">
     <xs:sequence>

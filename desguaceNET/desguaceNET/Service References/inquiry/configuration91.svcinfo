@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="YGWj6OshozcFlwxx2oEXtJm0E2A=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="QhIFLa9XBKg6rhzdEypK85f8sRw=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="UDDIInquiryServiceSoapBinding">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="UDDIInquiryImplPort" contract="inquiry.UDDI_Inquiry_PortType" bindingType="basicHttpBinding" address="http://192.168.1.4:8081/juddiv3/services/inquiry" bindingConfiguration="UDDIInquiryServiceSoapBinding">
+    <endpoint name="UDDIInquiryImplPort" contract="inquiry.UDDI_Inquiry_PortType" bindingType="basicHttpBinding" address="http://192.168.1.3:8081/juddiv3/services/inquiry" bindingConfiguration="UDDIInquiryServiceSoapBinding">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.1.4:8081/juddiv3/services/inquiry</serializedValue>
+          <serializedValue>http://192.168.1.3:8081/juddiv3/services/inquiry</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

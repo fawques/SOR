@@ -111,6 +111,12 @@
     <Compile Include="libSOR\general\Pieza.cs" />
     <Compile Include="libSOR\general\Usuario.cs" />
     <Compile Include="libSOR\jUDDI\jUDDIProxy.cs" />
+    <Compile Include="ModificarDesguace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModificarDesguace.Designer.cs">
+      <DependentUpon>ModificarDesguace.cs</DependentUpon>
+    </Compile>
     <Compile Include="NuevaOferta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GestionPedidos.resx">
       <DependentUpon>GestionPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModificarDesguace.resx">
+      <DependentUpon>ModificarDesguace.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NuevaOferta.resx">
       <DependentUpon>NuevaOferta.cs</DependentUpon>
@@ -197,7 +206,13 @@
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.getOfertasResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.getPedidoporIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.getPedidosporIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.modificarResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.nuevaOfertaResponse.datasource">
@@ -260,7 +275,7 @@
     <None Include="Service References\inquiry\desguaceNET.inquiry.tModelList.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\inquiry\UDDIInquiryService1.wsdl" />
+    <None Include="Service References\inquiry\UDDIInquiryService.wsdl" />
     <None Include="sor_desguaceDataSet.xsc">
       <DependentUpon>sor_desguaceDataSet.xsd</DependentUpon>
     </None>
