@@ -470,64 +470,6 @@ public class GestionPedidos implements Initializable {
         TableColumn fecha_limiteCol1 = new TableColumn("Fecha limite");
         fecha_limiteCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("fecha_limite"));
          fecha_limiteCol1.setCellFactory(stringCellFactory);
-        
-          Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
-            Gestor_activemq activemq;
-            String listaIdsString = null;
-
-             ArrayList<String>  listaids = new ArrayList<String>();
-        try {
-            activemq = new Gestor_activemq();
-            activemq.create_Consumer("pedidos");
-            
-            listaIdsString= activemq.consumer.consumeMessage();
-            
-           
-            activemq.consumer.closeConsumer();
-        } catch (JMSException ex) {
-            Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String pedidosstring=null;
-        ArrayList<String> stringid= new ArrayList<String>();
-        ArrayList<String> stringbueno= new ArrayList<String>();
-        
-        
-        if(listaIdsString!=null){
-            stringid= gson.fromJson(listaIdsString, collectionType);
-            collectionType = new TypeToken<ArrayList<PedidoCorto>>(){}.getType();
-            PedidoCorto p=null; 
-            for(String s: stringid){
-                p=gson.fromJson(s, collectionType);
-                if(!DesguaceJava.cambiarEstadoPedido(p.getID(), p.getEstado())){
-                    stringbueno.add(p.getID());
-                }
-                
-            }
-            Gson gsonn = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-            String listaJSON = gsonn.toJson(stringbueno);
-            pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
-        }
-        if(!pedidosstring.equals("") && pedidosstring!=null){
-             collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-            listaPedidos = gson.fromJson(pedidosstring, collectionType);
-        }
-        
-        System.out.println("pasa por aqui");
-        TablaPedidos interfaz= new TablaPedidos();
-         for (Pedido pedido : listaPedidos) {
-            bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre() ,pedido.getFecha_baja(),pedido.getFecha_limite(), true);
-            bd.anyadirPiezasAPedido(pedido.getID(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
-            interfaz= new TablaPedidos(pedido);
-             datatablePedidos.add(interfaz);
-             
-        }
-        for (Pedido pedido : bd.getPedidosConID_aux(EstadoPedido.ACTIVE)) {         
-            interfaz= new TablaPedidos(pedido);
-             datatablePedidos.add(interfaz);
-             
-        }
-     
-        tablePedidos.setItems(datatablePedidos);
         tablePedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1,tallerNombreCol, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
 
         
