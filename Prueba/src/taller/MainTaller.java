@@ -105,12 +105,15 @@ public class MainTaller extends Application {
 				staticDataBox.showStage();
 			} else if (taller.getEstado() == EstadoGeneral.ACTIVE) { // activo
 				// Cargar GestionPedido
+
+				
 				FXMLLoader loader = changeScene("GestionPedidos.fxml");
 				stage.setTitle("Gestion de pedidos");
 				GestionPedidosController staticDataBox = (GestionPedidosController) loader
 						.getController();
 				staticDataBox.setStage(stage);
 				staticDataBox.showStage();
+				
 			} else { // baja
 				FXMLLoader loader = changeScene("TallerDeBaja.fxml");
 				stage.setTitle("Baja de taller");
@@ -282,7 +285,17 @@ public class MainTaller extends Application {
 	}
 
 	public static ArrayList<Oferta> actualizarOfertas() {
-
+		try {
+			bd = new InterfazBD("sor_taller");
+			taller = bd.getPrimerTaller();
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 				.create();
 
@@ -308,7 +321,8 @@ public class MainTaller extends Application {
 					}
 
 				}
-			}
+			}				
+
 
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
