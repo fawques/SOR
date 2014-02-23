@@ -170,6 +170,9 @@ namespace desguaceNET
             {
                 idPedidoSelected = (string)dataGridView1.SelectedRows[0].Cells[0].Value;
                 tbNombreTaller.Text = idPedidoSelected;
+                Pedido pedidoSelect = (Pedido)dataGridView1.SelectedRows[0].DataBoundItem;
+                tablaPiezas.DataSource = null;
+                tablaPiezas.DataSource = pedidoSelect.getListaPiezas();
             }
         }
 
