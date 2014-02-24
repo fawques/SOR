@@ -3,6 +3,7 @@
  */
 package seguridad;
 
+
 /**
  * @author pablovm1990
  *
@@ -15,6 +16,7 @@ public class MainSeguridad {
 	 */
 	public MainSeguridad() {
 		// TODO Auto-generated constructor stub
+		TripleDes t = new TripleDes();
 	}
 
 }

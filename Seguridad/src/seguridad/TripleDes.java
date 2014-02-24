@@ -44,6 +44,30 @@ import javax.crypto.spec.DESedeKeySpec;
  * line.
  */
 public class TripleDes {
+	
+	public TripleDes(){
+		// This is where we'll read the key from or write it to
+		File keyfile = new File("pepe.txt");
+		System.out.print("Generating key. This may take some time...");
+		System.out.flush();
+		SecretKey key;
+		try {
+			key = generateKey();
+			try {
+				writeKey(key, keyfile);
+			} catch (NoSuchAlgorithmException | InvalidKeySpecException
+					| IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("done.");
+		System.out.println("Secret key written to " + "pepe.txt"
+				+ ". Protect that file carefully!");
+	}
 	/**
 	 * The program. The first argument must be -e, -d, or -g to encrypt,
 	 * decrypt, or generate a key. The second argument is the name of a file
@@ -52,7 +76,44 @@ public class TripleDes {
 	 * decrypt to standard output.
 	 */
 	public static void main(String[] args) {
-		try {
+		// This is where we'll read the key from or write it to
+				File keyfile = new File("pepe.txt");
+				System.out.print("Generating key. This may take some time...");
+				System.out.flush();
+				SecretKey key;
+				try {
+					key = generateKey();
+					try {
+						writeKey(key, keyfile);
+					} catch (NoSuchAlgorithmException | InvalidKeySpecException
+							| IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("done.");
+				System.out.println("Secret key written to " + "pepe.txt"
+						+ ". Protect that file carefully!");
+				
+				/*encriptado*/
+				SecretKey key2;
+				try {
+					key2 = readKey(keyfile);
+					try {
+						encrypt(key2, "pepe", System.out);
+					} catch (NoSuchPaddingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (InvalidKeyException | NoSuchAlgorithmException
+						| InvalidKeySpecException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		/*try {
 			// Check to see whether there is a provider that can do TripleDES
 			// encryption. If not, explicitly install the SunJCE provider.
 			try {
@@ -63,12 +124,12 @@ public class TripleDes {
 				// in the $JAVA_HOME/jre/lib/security/java.security file.
 				// Therefore, we have to install the JCE provider explicitly.
 				System.err.println("Installing SunJCE provider.");
-				Provider sunjce = new com.sun.crypto.provider.SunJCE();
-				Security.addProvider(sunjce);
+				//Provider sunjce = new com.sun.crypto.provider.SunJCE();
+				//Security.addProvider(sunjce);
 			}
 
 			// This is where we'll read the key from or write it to
-			File keyfile = new File(args[1]);
+			File keyfile = new File("pepe.txt");
 
 			// Now check the first arg to see what we're going to do
 			if (args[0].equals("-g")) { // Generate a key
@@ -90,7 +151,7 @@ public class TripleDes {
 			System.err.println(e);
 			System.err.println("Usage: java " + TripleDes.class.getName()
 					+ " -d|-e|-g <keyfile>");
-		}
+		}*/
 	}
 
 	/** Generate a secret TripleDES encryption/decryption key */
@@ -138,7 +199,7 @@ public class TripleDes {
 	 * and write them to the output stream. This method uses CipherOutputStream
 	 * to perform the encryption and write bytes at the same time.
 	 */
-	public static void encrypt(SecretKey key, InputStream in, OutputStream out)
+	public static void encrypt(SecretKey key, String in, OutputStream out)
 			throws NoSuchAlgorithmException, InvalidKeyException,
 			NoSuchPaddingException, IOException {
 		// Create and initialize the encryption engine
