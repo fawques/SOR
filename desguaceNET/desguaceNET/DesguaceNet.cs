@@ -1,4 +1,5 @@
-﻿using desguaceNET.desguaceWS;
+﻿using desguaceNET.Async;
+using desguaceNET.desguaceWS;
 using desguaceNET.libSOR.activemq;
 using desguaceNET.libSOR.BD;
 using desguaceNET.libSOR.general;
@@ -8,6 +9,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +25,11 @@ namespace desguaceNET
         {
             bd = new InterfazBD("sor_desguace");
             desguace = bd.getDesguace();
+        }
+
+        public Desguace getDesguace()
+        {
+            return desguace;
         }
 
         public bool activarDesguacesBD(string idRecibido)
@@ -45,7 +53,7 @@ namespace desguaceNET
             try
             {
                 string desguaceID = desguace.getID();
-                int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID,new DateTime(1970-01-01), fechaLimite);
+                int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID, new DateTime(1970 - 01 - 01), fechaLimite);
                 if (id != -1)
                 {
                     Oferta nuevo = new Oferta(id, precio, desguaceID, idPedido, fechaLimite);
@@ -296,7 +304,7 @@ namespace desguaceNET
                 realizado = bd.cambiarEstadoPedido(estado, id);
                 if (realizado)
                 {
-                    cambiarEstadoPedido(id, (int)estado);
+                    cambiarEstadoPedido(id, (estado).ToString());
                 }
 
                 return realizado;
@@ -315,6 +323,7 @@ namespace desguaceNET
             {
                 ped = bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
                 ped = ped && bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK, idPedido);
+                cambiarEstadoPedido(idPedido, (EstadoPedido.FINISHED_OK).ToString());
             }
             return ped;
         }
@@ -349,60 +358,383 @@ namespace desguaceNET
             }
         }
 
+        public bool modificarDesguace(string name, string email, string address, string city, string postalCode, string telephone)
+        {
+            string id = desguace.getID();
+            if (modificar(id, name, email, address, city, postalCode, telephone))
+            {
+                //METER en base de datos si está todo ok.
+                if (bd.modificarDesguace(id,name, email, address, city, int.Parse(postalCode), int.Parse(telephone), desguace.getEstado()))
+                {
+                    desguace = bd.getDesguace();
+                    Console.WriteLine("Esperando activación");
+                    return true;
+                }
+                else
+                {
+                    //devolver un error
+                    Console.WriteLine("Error en el alta en la bd");
+                }
+            }
+            return false;
+
+        }
+
         // ============================
         private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.alta(name, email, address, city, int.Parse(postalCode), int.Parse(telephone));
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var addr = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", addr);
+                    return client.alta(name, email, address, city, postalCode, telephone);
+                }
+                catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return alta(name, email, address, city, postalCode, telephone);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { name, email, address, city, postalCode, telephone };
+            manager.guardarAccion(m, parametros);
+            return false;
         }
 
         private string checkActivacion(string mail)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.checkActivacion(mail);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.checkActivacion(mail);
+                }
+                catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return checkActivacion(mail);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            return "";
         }
 
 
         private string nuevaOferta(string oferta)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.nuevaOferta(oferta);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.nuevaOferta(oferta);
+                }
+                catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return nuevaOferta(oferta);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { oferta };
+            manager.guardarAccion(m, parametros);
+            return "";
         }
 
         private string getOfertas()
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.getOfertas();
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.getOfertas(desguace.getID());
+                }
+                catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return getOfertas();
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            return "";
         }
 
         private string getPedidosporID(string str)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.getPedidosporID(str);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.getPedidosporID(str);
+                }
+                catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return getPedidosporID(str);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            return "";
         }
 
         private bool aceptarOfertaFin(string id)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.aceptarOfertaFin(id);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.aceptarOfertaFin(id);
+                }
+                catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return aceptarOfertaFin(id);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { id };
+            manager.guardarAccion(m, parametros);
+            return false;
+
         }
 
         private bool baja(string id)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.baja(id);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.baja(id);
+                }
+                catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return baja(id);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { id };
+            manager.guardarAccion(m, parametros);
+            return false;
         }
 
         private bool cancelarOferta(string id)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.cancelarOferta(id);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.cancelarOferta(id);
+                }
+                catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return cancelarOferta(id);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { id };
+            manager.guardarAccion(m, parametros);
+            return false;
         }
 
-        private bool cambiarEstadoPedido(string id, int estado)
+        private bool cambiarEstadoPedido(string id, string estado)
         {
-            DesguaceJavaWSClient client = new DesguaceJavaWSClient(jUDDIProxy.getWsdl().OriginalString);
-            return client.cambiarEstadoPedido(id, estado);
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
+                    return client.cambiarEstadoPedidoOtravez(id, estado);
+                }
+                catch (EndpointNotFoundException e) { }
+                catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return cambiarEstadoPedido(id, estado);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { id, estado };
+            manager.guardarAccion(m, parametros);
+            return false;
+        }
+
+        private bool modificar(string id, string name, string email, string address, string city, string postalCode, string telephone)
+        {
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    var addr = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                    DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", addr);
+                    return client.modificar(id, name, email, address, city, postalCode, telephone);
+                }
+                catch (EndpointNotFoundException e) { }
+                catch (TimeoutException e) { }
+            }
+            try
+            {
+                if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
+                {
+                    return modificar(id, name, email, address, city, postalCode, telephone);
+                }
+            }
+            catch (EndpointNotFoundException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine("NO SE HA PODIDO CONECTAR A JUDDI");
+            }
+            Console.WriteLine("NO SE HA PODIDO CONECTAR AL GESTOR");
+            MethodBase m = MethodBase.GetCurrentMethod();
+            string[] parametros = { id, name, email, address, city, postalCode, telephone };
+            manager.guardarAccion(m, parametros);
+            return false;
+
         }
 
     }

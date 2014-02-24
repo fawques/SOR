@@ -24,6 +24,7 @@ public class TablaPedidos {
     SimpleStringProperty fecha_alta;
     SimpleStringProperty estado;
     SimpleStringProperty taller;
+    SimpleStringProperty tallerNombre;
     SimpleStringProperty fecha_baja;
     SimpleStringProperty fecha_limite;
 
@@ -33,6 +34,7 @@ public class TablaPedidos {
         this.fecha_alta = new SimpleStringProperty(p.getFecha_alta().toString());
         this.estado =new SimpleStringProperty(p.getEstado().toString());
         this.taller = new SimpleStringProperty(p.getTaller());
+        this.tallerNombre = new SimpleStringProperty(p.getTallerNombre());
         if(p.getFecha_baja()!=null){
             this.fecha_baja = new SimpleStringProperty(p.getFecha_baja().toString());
         }
@@ -44,6 +46,7 @@ public class TablaPedidos {
         this.fecha_alta = new SimpleStringProperty("");
         this.estado = new SimpleStringProperty("");
         this.taller = new SimpleStringProperty("");
+        this.tallerNombre = new SimpleStringProperty("");
         this.fecha_baja = new SimpleStringProperty("");
         this.fecha_limite = new SimpleStringProperty("");
     }
@@ -67,7 +70,9 @@ public class TablaPedidos {
     public String getTaller() {
         return taller.get();
     }
-
+    public String getTallerNombre() {
+        return tallerNombre.get();
+    }
     public String getFecha_baja() {
         if(fecha_baja==null){
         return "";

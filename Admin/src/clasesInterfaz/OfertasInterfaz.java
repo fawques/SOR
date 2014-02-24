@@ -6,82 +6,98 @@
 
 package clasesInterfaz;
 
-
-
+import general.EstadoOferta;
 import general.Oferta;
-import javafx.beans.property.*;
+
+import java.util.Date;
+
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
- * @author Cute
+ * @author pablovm1990
  */
 public class OfertasInterfaz {
+    SimpleIntegerProperty id_aux;
+    SimpleStringProperty id;
+    SimpleStringProperty fecha_alta;
+    SimpleStringProperty importe;
+    SimpleStringProperty estado;
+    SimpleStringProperty pedido;
+    SimpleStringProperty desguace;
+    SimpleStringProperty desguaceNombre;
+    SimpleStringProperty fecha_baja;
+    SimpleStringProperty fecha_limite;
 
-    public OfertasInterfaz() {
-        this.ID= new SimpleStringProperty();
-        this.idPedido = new SimpleStringProperty();
-        this.idDesguace= new SimpleStringProperty();
-        this.fecha_alta=new SimpleStringProperty("");
-        this.fecha_baja=new SimpleStringProperty("");
-        this.fecha_limite=new SimpleStringProperty("");
-        this.precio = new SimpleDoubleProperty();
-    }
-     public OfertasInterfaz(String _ID,String _IdPedido,String _IdDesguace,String fecha_alta, String fecha_baja,String fecha_limite,Double _precio) {
-        this.ID= new SimpleStringProperty(_ID);
-        this.idPedido= new SimpleStringProperty(_IdPedido);
-        this.idDesguace= new SimpleStringProperty(_IdDesguace);
-        this.fecha_alta=new SimpleStringProperty(fecha_alta);
-        this.fecha_baja=new SimpleStringProperty(fecha_baja);
-        this.fecha_limite=new SimpleStringProperty(fecha_limite);
-        this.precio= new SimpleDoubleProperty(_precio);
-    }
-    public OfertasInterfaz(Oferta oferta){
-        this.ID= new SimpleStringProperty(oferta.getID());
-        this.idPedido= new SimpleStringProperty(oferta.getPedido());
-        this.idDesguace= new SimpleStringProperty(oferta.getDesguace());
-        this.fecha_alta=new SimpleStringProperty(oferta.getFecha_alta().toString());
-        if(oferta.getFecha_baja()!=null){
-            this.fecha_baja=new SimpleStringProperty(oferta.getFecha_baja().toString());
+   public OfertasInterfaz(Oferta of) {
+        this.id_aux = new SimpleIntegerProperty(of.getID_aux());
+        this.id = new SimpleStringProperty(of.getID());
+        this.fecha_alta = new SimpleStringProperty(of.getFecha_alta().toString());
+        this.importe = new SimpleStringProperty(Double.toString(of.getPrecio()));
+        this.estado = new SimpleStringProperty(of.getEstado().toString());
+        this.pedido = new SimpleStringProperty(of.getPedido());
+        this.desguace = new SimpleStringProperty(of.getDesguace());
+        if(of.getFecha_baja()!=null){
+            this.fecha_baja = new SimpleStringProperty(of.getFecha_baja().toString());
         }
-        else{
-              this.fecha_baja=new SimpleStringProperty("");
-        }
-        
-        this.fecha_limite=new SimpleStringProperty(oferta.getFecha_limite().toString());
-        this.precio= new SimpleDoubleProperty(oferta.getPrecio());
-    }
-    private final SimpleStringProperty ID ;
-    private final SimpleStringProperty idPedido;
-    private final SimpleStringProperty idDesguace;
-    private final SimpleStringProperty fecha_alta;
-    private final SimpleStringProperty fecha_baja;
-    private final SimpleStringProperty fecha_limite;
-    private final SimpleDoubleProperty precio;
+        this.fecha_limite = new SimpleStringProperty(of.getFecha_limite().toString());
+        this.desguaceNombre = new SimpleStringProperty(of.getDesguaceNombre());
+   }
+   public OfertasInterfaz(){
+	   this.id_aux = new SimpleIntegerProperty();
+       this.id = new SimpleStringProperty("");
+       this.fecha_alta = new SimpleStringProperty("");
+       this.importe = new SimpleStringProperty("");
+       this.estado = new SimpleStringProperty("");
+       this.pedido = new SimpleStringProperty("");
+       this.desguace = new SimpleStringProperty("");
+       this.fecha_baja = new SimpleStringProperty("");
+       this.fecha_limite = new SimpleStringProperty("");
+       this.desguaceNombre = new SimpleStringProperty("");
+   }
 
-    public double getPrecio(){
-        return precio.get();
+    public int getId_aux() {
+        return id_aux.get();
     }
-    public String getID() {
-        return ID.get();
-    }
-    public String getIdPedido(){
-        return idPedido.get();
-    }
-    public String getIdDesguace() {
-        return idDesguace.get();
+
+    public String getId() {
+        return id.get();
     }
 
     public String getFecha_alta() {
         return fecha_alta.get();
     }
 
-    public String getFecha_baja() {
-        return fecha_baja.get();
+    public String getImporte() {
+        return importe.get();
     }
 
+    public String getEstado() {
+        return estado.get();
+    }
+
+    public String getPedido() {
+        return pedido.get();
+    }
+
+    public String getDesguace() {
+        return desguace.get();
+    }
+
+    public String getFecha_baja() {
+        if(fecha_baja==null){
+            return "";
+        }
+        return fecha_baja.get();
+    }
+    public String getDesguaceNombre() {
+        return desguaceNombre.get();
+    }
     public String getFecha_limite() {
         return fecha_limite.get();
     }
-    
+
 }
-
-

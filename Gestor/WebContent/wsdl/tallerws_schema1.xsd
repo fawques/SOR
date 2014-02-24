@@ -49,7 +49,9 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="getPedidos">
-    <xs:sequence/>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="getPedidosResponse">
     <xs:sequence>

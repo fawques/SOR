@@ -75,4 +75,17 @@ public class Webservices {
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.cancelarPedido(idPedido);
     }
+
+    public static Boolean cambiarEstadoPedido_WS(int estado, java.lang.String id) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.cambiarEstadoPedido(estado, id);
+    }
+
+    public static String getPedidos_WS(String id) {
+        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.getPedidos(id);
+    }
+
 }

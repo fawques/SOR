@@ -63,7 +63,7 @@ public class Taller extends Usuario{
     
     public Pedido nuevoPedido(Date fecha_limite, boolean modoAutomatico) {
         Date ahora = new Date();
-        Pedido nuevo = new Pedido((int) ahora.getTime(), ID, fecha_limite, modoAutomatico);
+        Pedido nuevo = new Pedido((int) ahora.getTime(), ID, name,fecha_limite, modoAutomatico);
         listaPedidos.add(nuevo);
         return nuevo;
     }

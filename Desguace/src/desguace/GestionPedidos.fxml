@@ -14,16 +14,16 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TitledPane animated="false" layoutX="34.0" layoutY="40.0" prefHeight="147.0" prefWidth="721.0" text="Crear oferta">
+                <TitledPane animated="false" layoutX="34.0" layoutY="40.0" minWidth="450.0" prefHeight="147.0" prefWidth="450.0" text="Crear oferta">
                   <content>
-                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="121.0" prefWidth="493.0">
                       <children>
-                        <Label layoutX="31.0" layoutY="23.0" text="ID pedido" />
-                        <TextField id="tf" fx:id="tfPrecio" layoutX="388.0" layoutY="20.0" prefWidth="144.0" />
-                        <Label layoutX="346.0" layoutY="23.0" text="Precio" />
-                        <Button id="btBuscarPedido" fx:id="btrealizarOferta" layoutX="566.0" layoutY="70.0" minHeight="16.0" mnemonicParsing="false" onAction="#realizarOferta" prefHeight="22.0" prefWidth="90.0" text="Hacer oferta" />
-                        <Label layoutX="31.0" layoutY="61.0" text="Fecha limite" />
-                        <HBox layoutX="118.0" layoutY="59.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
+                        <Label layoutX="20.0" layoutY="23.0" text="ID pedido" />
+                        <TextField id="tf" fx:id="tfPrecio" layoutX="86.0" layoutY="53.0" prefWidth="144.0" />
+                        <Label layoutX="20.0" layoutY="53.0" text="Precio" />
+                        <Button id="btBuscarPedido" fx:id="btrealizarOferta" layoutX="346.0" layoutY="77.0" minHeight="16.0" mnemonicParsing="false" onAction="#realizarOferta" prefHeight="22.0" prefWidth="90.0" text="Hacer oferta" />
+                        <Label layoutX="20.0" layoutY="86.0" text="Fecha limite" />
+                        <HBox layoutX="113.0" layoutY="86.0" minWidth="110.0" prefHeight="21.0" prefWidth="110.0">
                           <children>
                             <TextField fx:id="tfLimiteDia" minWidth="30.0" prefWidth="150.0" />
                             <TextField fx:id="tfLimiteMes" minWidth="30.0" prefWidth="150.0" />
@@ -35,9 +35,12 @@
                     </AnchorPane>
                   </content>
                 </TitledPane>
-                <TableView fx:id="tablePedidos" layoutX="28.0" layoutY="243.0" prefHeight="239.0" prefWidth="721.0" />
+                <TableView fx:id="tablePedidos" layoutX="28.0" layoutY="254.0" prefHeight="215.5" prefWidth="721.0" />
                 <Text layoutX="324.0" layoutY="217.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedidos recibidos" />
-                <Button layoutX="668.0" layoutY="14.0" mnemonicParsing="false" onAction="#bajaDesguace" text="Dar de baja" />
+                <Button layoutX="685.0" layoutY="503.0" mnemonicParsing="false" onAction="#bajaDesguace" text="Dar de baja" />
+                <TableView fx:id="tablePiezas" layoutX="521.0" layoutY="40.0" prefHeight="147.0" prefWidth="245.0" />
+                <Text layoutX="596.0" layoutY="19.0" scaleX="1.8539263377345379" scaleY="1.6923641703377386" strokeType="OUTSIDE" strokeWidth="0.0" text="Piezas por pedido" />
+                <Button layoutX="530.0" layoutY="503.0" mnemonicParsing="false" onAction="#modificarDesguace" text="Modificar desguace" />
               </children>
             </AnchorPane>
           </content>
@@ -65,6 +68,20 @@
                 <Text layoutX="327.0" layoutY="51.0" scaleX="2.0928597272116414" scaleY="1.9561776417753889" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado de pedidos" />
                 <Text layoutX="327.0" layoutY="293.0" scaleX="2.0928597272116414" scaleY="1.9561776417753889" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado de ofertas" />
                 <TableView id="tablaOfertasHistorico" fx:id="tablaHistoricoOfertas" layoutX="29.0" layoutY="320.0" prefHeight="200.0" prefWidth="720.0" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab onSelectionChanged="#actualizarTablaAcciones" text="Acciones">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Label layoutX="308.0" layoutY="20.0" text="Acciones pendientes">
+                  <font>
+                    <Font size="18.0" />
+                  </font>
+                </Label>
+                <TableView id="tbAcciones" fx:id="tableAcciones" layoutX="39.0" layoutY="49.0" prefHeight="447.0" prefWidth="714.0" />
               </children>
             </AnchorPane>
           </content>

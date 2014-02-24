@@ -6,9 +6,13 @@
 
 package activemq;
 
+import java.net.ConnectException;
+
 import activemq.Consumer;
 import activemq.Producer;
+
 import javax.jms.JMSException;
+
 import org.apache.log4j.BasicConfigurator;
 
 /**
@@ -27,7 +31,7 @@ public class Gestor_activemq {
     public void create_Producer(String _nombreCola) throws JMSException{
     producer = new Producer(_nombreCola);
     }
-    public void create_Consumer(String _nombreCola) throws JMSException{
+    public void create_Consumer(String _nombreCola) throws JMSException,ConnectException{
     consumer = new Consumer(_nombreCola);
     }
     

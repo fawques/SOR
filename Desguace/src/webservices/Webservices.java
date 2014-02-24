@@ -23,10 +23,10 @@ public class Webservices {
         return port.checkActivacion(mail);
     }
 
-    public static String getOfertas_WS() {
+    public static String getOfertas_WS(java.lang.String id) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.getOfertas();
+        return port.getOfertas(id);
     }
     
     public static String nuevaOferta_WS(java.lang.String oferta) {
@@ -35,12 +35,16 @@ public class Webservices {
         return port.nuevaOferta(oferta);
     }
 
-    public static String getPedidosporID(java.lang.String string) {
+    public static String getPedidosporID_WS(java.lang.String string) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
         return port.getPedidosporID(string);
     }
-
+    public static String getPedidoporID_WS(java.lang.String string) {
+        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
+        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.getPedidoporID(string);
+    }
     public static Boolean aceptarOfertaFin_WS(java.lang.String id) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
@@ -59,9 +63,14 @@ public class Webservices {
         return port.baja(id);
     }
 
-    public static Boolean cambiarEstadoPedido_1_WS(java.lang.String id, java.lang.String estado) {
+    public static Boolean cambiarEstadoPedido_WS(java.lang.String id, java.lang.String estado) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.cambiarEstadoPedido(id, estado);
+        return port.cambiarEstadoPedidoOtravez(id, estado);
+    }
+    public static boolean modificar_WS(String id, String name, String email, String address, String city, String postalCode, String telephone) {
+    	gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
+    	 gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+        return port.modificar(id, name, email, address, city, postalCode, telephone);
     }
 }

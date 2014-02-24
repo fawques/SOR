@@ -6,20 +6,26 @@
 
 package taller;
 
+import Async.Accion;
+import Async.AsyncManager;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+
 import general.EstadoOferta;
 import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,7 +57,7 @@ public class GestionPedidosController implements Initializable {
     ObservableList<TablaOfertas> olTablaOfertas = FXCollections.observableArrayList();
     ObservableList<TablaPedidos> olTablaPedidos = FXCollections.observableArrayList();
     ObservableList<TablaPedidos> olTablaPedidosOfertas = FXCollections.observableArrayList();
-
+    ObservableList<TablaAcciones> olTablaAcciones = FXCollections.observableArrayList();
     @FXML
     Button btNuevoPedido;
 
@@ -59,7 +65,7 @@ public class GestionPedidosController implements Initializable {
      *
      */
     public TextField tfIDPedido;
-
+    
     /**
      *
      */
@@ -94,7 +100,7 @@ public class GestionPedidosController implements Initializable {
      *
      */
     public TableView tbPedidos;
-
+    public TableView tbAcciones;
     /**
      *
      */
@@ -186,7 +192,8 @@ public class GestionPedidosController implements Initializable {
      *
      */
     public TableView tbPedidosOfertas;
-
+    public TablaPedidos tp;
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -195,7 +202,7 @@ public class GestionPedidosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 
         TableColumn id_auxCol = new TableColumn("Id_aux");
         id_auxCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Integer>("id_aux"));
@@ -211,6 +218,8 @@ public class GestionPedidosController implements Initializable {
         pedidoCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("pedido"));
         TableColumn desguaceCol = new TableColumn("Desguace");
         desguaceCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguace"));
+        TableColumn desguaceNombreCol = new TableColumn("Desguace");
+        desguaceNombreCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, String>("desguaceNombre"));
         TableColumn fecha_bajaCol = new TableColumn("Fecha baja");
         fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Date>("fecha_baja"));
         TableColumn fecha_limiteCol = new TableColumn("Fecha limite");
@@ -225,7 +234,7 @@ public class GestionPedidosController implements Initializable {
 
         tbOfertas.setEditable(true);
         tbOfertas.setItems(olTablaOfertas);
-        tbOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
+        tbOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol,desguaceNombreCol, fecha_bajaCol, fecha_limiteCol);
 
         TableColumn id_auxCol1 = new TableColumn("Id_aux");
         id_auxCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Integer>("id_aux"));
@@ -235,20 +244,38 @@ public class GestionPedidosController implements Initializable {
         fecha_altaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_alta"));
         TableColumn estadoCol1 = new TableColumn("Estado");
         estadoCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, EstadoOferta>("estado"));
-        TableColumn tallerCol = new TableColumn("Taller");
+        TableColumn tallerCol = new TableColumn("TallerID");
         tallerCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("taller"));
+        TableColumn tallerNombewCol = new TableColumn("TallerNombre");
+        tallerNombewCol.setCellValueFactory(new PropertyValueFactory<TablaPedidos, String>("tallerNombre"));
         TableColumn fecha_bajaCol1 = new TableColumn("Fecha baja");
         fecha_bajaCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_baja"));
         TableColumn fecha_limiteCol1 = new TableColumn("Fecha limite");
         fecha_limiteCol1.setCellValueFactory(new PropertyValueFactory<TablaPedidos, Date>("fecha_limite"));
         visualizarPedidos();
         
-        tbPedidosOfertas.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
-        tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
+        tbPedidosOfertas.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol,tallerNombewCol, fecha_bajaCol1, fecha_limiteCol1);
+        tbPedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1, tallerCol, tallerNombewCol,fecha_bajaCol1, fecha_limiteCol1);
         
+        TableColumn accionCol = new TableColumn("Accion");
+        accionCol.setCellValueFactory(new PropertyValueFactory<TablaAcciones, String>("id"));
+        tbAcciones.getColumns().addAll(accionCol);
+        actualizarTablaAcciones();
+    }
+    public void actualizarTablaAcciones(){
+    AsyncManager async= new AsyncManager("sor_taller");
+     olTablaAcciones.clear();
+     TablaAcciones tpAcciones;
+     ArrayList<Accion> acciones = async.getAcciones();
+     for (Accion accion : acciones) {
+    	tpAcciones=new TablaAcciones(accion);
+         olTablaAcciones.add(tpAcciones);
+     }  
+     tbAcciones.setEditable(true);
+     tbAcciones.setItems(olTablaAcciones);    	
     }
     public void actualizarTablaPedidosOferta(){
-    Gson gson= new  GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         olTablaPedidosOfertas.clear();
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
@@ -265,7 +292,7 @@ public class GestionPedidosController implements Initializable {
     
     }
     public void visualizarPedidos() throws JsonSyntaxException {
-        Gson gson= new  GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         olTablaPedidos.clear();
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
@@ -299,7 +326,7 @@ public class GestionPedidosController implements Initializable {
         np.setStage(stage);
         np.showStage();
         
-       // visualizarPedidos(new GsonBuilder().setDateFormat("MMM dd, yyyy").create());
+      
     }
 
     /**
@@ -389,16 +416,18 @@ public class GestionPedidosController implements Initializable {
          actualizarTablaPedidosOferta();
     }
     public void actualizarOfertas() {
-        olTablaOfertas.clear();
         ofertas = MainTaller.actualizarOfertas();
         TablaOfertas tpOf;
-        for (Oferta of : ofertas) {
-            tpOf = new TablaOfertas(of);
-            olTablaOfertas.add(tpOf);
+        if(ofertas!=null){
+	        olTablaOfertas.clear();
+	        for (Oferta of : ofertas) {
+	            tpOf = new TablaOfertas(of);
+	            olTablaOfertas.add(tpOf);
+	        }
+	
+	        tbOfertas.setEditable(true);
+	        tbOfertas.setItems(olTablaOfertas);
         }
-
-        tbOfertas.setEditable(true);
-        tbOfertas.setItems(olTablaOfertas);
     }
 
     /**
@@ -412,10 +441,10 @@ public class GestionPedidosController implements Initializable {
             TablaOfertas tpOf;
             for (Oferta oferta : ofertas) {
                 if (oferta.getPedido() == null ? tp.getId() == null : oferta.getPedido().equals(tp.getId())) {
-                    if (oferta.getEstado() == EstadoOferta.ACTIVE || oferta.getEstado() == EstadoOferta.ACCEPTED) {
+                   // if (oferta.getEstado() == EstadoOferta.ACTIVE || oferta.getEstado() == EstadoOferta.ACCEPTED) {
                         tpOf = new TablaOfertas(oferta);
                         olTablaOfertas.add(tpOf);
-                    }
+                    //}
                 }
             }
 
@@ -464,5 +493,27 @@ public class GestionPedidosController implements Initializable {
         AltaTallerController tdCont = (AltaTallerController) loader.getController();
         tdCont.setStage(thisStage);
         tdCont.showStage();
+    }
+    public void modificarPedido(){
+    	
+		try {
+			tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
+			MainTaller.pedidoModificar(tp.getId());
+			URL location = getClass().getResource("modificarPedido.fxml");
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(location);
+	        loader.setBuilderFactory(new JavaFXBuilderFactory());
+	        Parent page;
+			page = (Parent) loader.load(location.openStream());
+			thisStage.getScene().setRoot(page);
+	        ModificarPedidoController tdCont = (ModificarPedidoController) loader.getController();
+	        tdCont.setStage(thisStage);
+	        tdCont.showStage();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+    	
     }
 }

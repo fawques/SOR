@@ -11,15 +11,23 @@ namespace desguaceNET.libSOR.general
     [JsonObject(MemberSerialization.OptIn)]
     class Oferta
     {
+        [JsonProperty]
         public string ID { get; set; }
+        [JsonProperty]
         public int ID_aux { get; set; }
+        [JsonProperty]
         public EstadoOferta estado { get; set; }
+        [JsonProperty]
         public DateTime fecha_alta { get; set; }
-        
+        [JsonProperty]
         public DateTime fecha_limite { get; set; }
+        [JsonProperty]
         public double precio { get; set; }
+        [JsonProperty]
         public string desguaceID { get; set; }
+        [JsonProperty]
         public string pedidoID { get; set; }
+        [JsonProperty]
         public DateTime fecha_baja { get; set; }
 
         /** Constructor para la base de datos.

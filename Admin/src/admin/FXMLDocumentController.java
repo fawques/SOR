@@ -12,6 +12,7 @@ import clasesInterfaz.PiezasInterfaz;
 import clasesInterfaz.UsuarioInterface;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import general.Desguace;
@@ -21,6 +22,7 @@ import general.Taller;
 import admin.Admin;
 
 import com.google.gson.JsonSyntaxException;
+
 
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -90,10 +92,10 @@ public class FXMLDocumentController implements Initializable {
     public void actualizarPedidos(){
         personDataPedidos.clear();
     ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
-     Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
       Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring= Admin.getPedidos();
-        if(!pedidosstring.equals("") && pedidosstring!=null){
+        if(pedidosstring!=null &&  !"".equals(pedidosstring) ){
             listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -104,61 +106,60 @@ public class FXMLDocumentController implements Initializable {
              System.out.println(pedido);
         }
          if(personDataPedidos.size()!=0){
-             piezasInterfaz(personDataPedidos.get(0).getID());
+             piezasclickPedido(personDataPedidos.get(0).getId());
          }
          
            tablePedidos.setItems(personDataPedidos);
     }
     public void  pedidosInterfaz(){
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
-     Gson gson = new Gson();
-     TableColumn columnID = new TableColumn("ID");
-     TableColumn columnIDtaller = new TableColumn("idTaller");
-     TableColumn columnAlta = new TableColumn("fecha_alta");
-     TableColumn columnBaja = new TableColumn("fecha_baja");
-     TableColumn columnLimite = new TableColumn("fecha_limite");
+     Callback<TableColumn, TableCell> integerCellFactory =
+             new Callback<TableColumn, TableCell>() {
+         @Override
+         public TableCell call(TableColumn p) {
+             MyIntegerTableCell cell = new MyIntegerTableCell();
+             cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+             return cell;
+         }
+     };
+
+     Callback<TableColumn, TableCell> stringCellFactory =
+             new Callback<TableColumn, TableCell>() {
+         @Override
+         public TableCell call(TableColumn p) {
+             MyStringTableCell cell = new MyStringTableCell();
+             cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+             return cell;
+         }
+     };
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+     TableColumn id_auxCol1 = new TableColumn("Id_aux");
+     id_auxCol1.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, Integer>("id_aux")); 
+     id_auxCol1.setCellFactory(integerCellFactory);
+     TableColumn idCol1 = new TableColumn("Id");
+     idCol1.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("id"));
+     idCol1.setCellFactory(stringCellFactory);
+     TableColumn fecha_altaCol1 = new TableColumn("Fecha alta");
+     fecha_altaCol1.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("fecha_alta"));
+     fecha_altaCol1.setCellFactory(stringCellFactory);
+     TableColumn estadoCol1 = new TableColumn("Estado");
+     estadoCol1.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("estado"));
+     estadoCol1.setCellFactory(stringCellFactory);
+     TableColumn tallerCol = new TableColumn("Taller");
+     tallerCol.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("taller"));
+     tallerCol.setCellFactory(stringCellFactory);
+     TableColumn tallerNombreCol = new TableColumn("Taller");
+     tallerNombreCol.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("tallerNombre"));
+     tallerNombreCol.setCellFactory(stringCellFactory);
+     TableColumn fecha_bajaCol1 = new TableColumn("Fecha baja");
+     fecha_bajaCol1.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("fecha_baja"));
+     fecha_bajaCol1.setCellFactory(stringCellFactory);
+     TableColumn fecha_limiteCol1 = new TableColumn("Fecha limite");
+     fecha_limiteCol1.setCellValueFactory(new PropertyValueFactory<PedidosInterfaz, String>("fecha_limite"));
+     fecha_limiteCol1.setCellFactory(stringCellFactory);
      tablePedidos.setEditable(true);
-     
-      Callback<TableColumn, TableCell> integerCellFactory =
-                new Callback<TableColumn, TableCell>() {
-            @Override
-            public TableCell call(TableColumn p) {
-                MyIntegerTableCell cell = new MyIntegerTableCell();
-                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
-                return cell;
-            }
-        };
- 
-        Callback<TableColumn, TableCell> stringCellFactory =
-                new Callback<TableColumn, TableCell>() {
-            @Override
-            public TableCell call(TableColumn p) {
-                MyStringTableCell cell = new MyStringTableCell();
-                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
-                return cell;
-            }
-        };
-       columnID.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("ID")
-               );
-       columnID.setCellFactory(stringCellFactory);
+     personDataPedidos.clear();
        
-       columnIDtaller.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("idTaller")
-       );
-       columnIDtaller.setCellFactory(stringCellFactory);
-       columnAlta.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("fecha_alta")
-       );
-       columnAlta.setCellFactory(stringCellFactory);
-       columnBaja.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("fecha_baja")
-       );
-       columnBaja.setCellFactory(stringCellFactory);
-       columnLimite.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("fecha_limite")
-       );
-       columnLimite.setCellFactory(stringCellFactory);
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring= Admin.getPedidos();
         if(!pedidosstring.equals("") && pedidosstring!=null){
@@ -172,16 +173,16 @@ public class FXMLDocumentController implements Initializable {
              System.out.println(pedido);
         }
          if(personDataPedidos.size()!=0){
-             piezasInterfaz(personDataPedidos.get(0).getID());
+             piezasInterfaz(personDataPedidos.get(0).getId());
          }
          
            tablePedidos.setItems(personDataPedidos);
-           tablePedidos.getColumns().addAll(columnID,columnIDtaller,columnAlta,columnBaja,columnLimite);
+           tablePedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1,tallerNombreCol, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
 
     }
     public void actualizarOfertas(){
      ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      personDataOferta.clear();
      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
       String ofertasstring= Admin.getOfertas();
@@ -201,40 +202,32 @@ public class FXMLDocumentController implements Initializable {
     public void ofertasInterfaz(){
          
      ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
-     Gson gson = new Gson();
-     TableColumn columnID = new TableColumn("ID");
-     TableColumn columnIDPedido = new TableColumn("idPedido");
-     TableColumn columnIDDesguace = new TableColumn("idDesguace");
-     TableColumn columnAlta = new TableColumn("fecha_alta");
-     TableColumn columnBaja = new TableColumn("fecha_baja");
-     TableColumn columnLimite = new TableColumn("fecha_limite");
-     TableColumn columnPrecio= new TableColumn("precio");
-     tableOfertas.setEditable(true);
-       columnID.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("ID")
-               );
-    
-       
-       columnIDDesguace.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("idDesguace")
-       );
-       columnIDPedido.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("idPedido")
-       );
-       columnAlta.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("fecha_alta")
-       );
- 
-       columnBaja.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("fecha_baja")
-       );
-       
-       columnLimite.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,String>("fecha_limite")
-       );
-      columnPrecio.setCellValueFactory(
-           new PropertyValueFactory<UsuarioInterface,Double>("precio")
-       );
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+     TableColumn id_auxCol = new TableColumn("Id_aux");
+     id_auxCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, Integer>("id_aux")); 
+     TableColumn idCol = new TableColumn("Id");
+     idCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("id")); 
+     TableColumn fecha_altaCol = new TableColumn("Fecha alta");
+     fecha_altaCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("fecha_alta"));
+     TableColumn importeCol = new TableColumn("Importe");
+     importeCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("importe"));
+     TableColumn estadoCol = new TableColumn("Estado");
+     estadoCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("estado"));   
+
+     TableColumn pedidoCol = new TableColumn("Pedido");
+     pedidoCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("pedido"));
+   
+     TableColumn desguaceCol = new TableColumn("Desguace");
+     desguaceCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("desguace"));
+     TableColumn desguaceNombreCol = new TableColumn("Desguace");
+     desguaceNombreCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("desguaceNombre"));
+     
+     TableColumn fecha_bajaCol = new TableColumn("Fecha baja");
+     fecha_bajaCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("fecha_baja"));
+   
+     TableColumn fecha_limiteCol = new TableColumn("Fecha limite");
+     fecha_limiteCol.setCellValueFactory(new PropertyValueFactory<OfertasInterfaz, String>("fecha_limite"));
+   
       
       Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
       String ofertasstring= Admin.getOfertas();
@@ -250,14 +243,14 @@ public class FXMLDocumentController implements Initializable {
              System.out.println(oferta);
         }
            tableOfertas.setItems(personDataOferta);
-           tableOfertas.getColumns().addAll(columnID,columnIDDesguace,columnIDPedido,columnAlta,columnBaja,columnLimite,columnPrecio);
+           tableOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol,desguaceNombreCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
      
      
     }
     public void ofertasclickPedido(String id){
     personDataOferta.clear();
      ArrayList<Oferta> listaOferta= new ArrayList<Oferta>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
      String ofertasstring=Admin.getOfertasporPedido(id);
      if(!ofertasstring.equals("") && ofertasstring!=null){
@@ -274,8 +267,9 @@ public class FXMLDocumentController implements Initializable {
       
     }
     public void piezasInterfaz(String id ){
+    	personDataPiezas.clear();
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
-        Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         TableColumn columnCant = new TableColumn("cant");
         TableColumn columnNombre = new TableColumn("nombrePieza");
         tablePiezas.setEditable(true);
@@ -307,8 +301,7 @@ public class FXMLDocumentController implements Initializable {
     public void piezasclickPedido(String id){
         personDataPiezas.clear();
         ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
-        Gson gson = new Gson();
-       
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();       
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring=Admin.getPedidoID(id);
         if(!pedidosstring.equals("") && pedidosstring!=null){
@@ -344,10 +337,10 @@ public class FXMLDocumentController implements Initializable {
     }
     public void actualizarDesguaces(){
     personDataDesguaces.clear();
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
-        String desguacestring=Admin.getDesguaces();
+        String desguacestring=Admin.getDesguacesAceptados();
         if(!desguacestring.equals("") && desguacestring!=null){
             listaDesguaces = gson.fromJson(desguacestring, collectionType);
         }
@@ -362,7 +355,7 @@ public class FXMLDocumentController implements Initializable {
     }
     public void actualizarAltasDesguaces(){
     altaDesguaces.clear();
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
        Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
         String desguacestring=Admin.getAltaDesguace();
@@ -381,7 +374,7 @@ public class FXMLDocumentController implements Initializable {
     
     public void desguacesInterfaz(){
      ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      TableColumn columnID = new TableColumn("ID");
      TableColumn columnNombre = new TableColumn("nombreTaller");
      TableColumn columnEmail = new TableColumn("email");
@@ -413,7 +406,7 @@ public class FXMLDocumentController implements Initializable {
            new PropertyValueFactory<UsuarioInterface,String>("direccion")
            );
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
-        String desguacestring=Admin.getDesguaces();
+        String desguacestring=Admin.getDesguacesAceptados();
         if(!desguacestring.equals("") && desguacestring!=null){
             listaDesguaces = gson.fromJson(desguacestring, collectionType);
         }
@@ -429,7 +422,7 @@ public class FXMLDocumentController implements Initializable {
     }
     public void AltaDesguaces(){
      ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      TableColumn columnID = new TableColumn("ID");
      TableColumn columnNombre = new TableColumn("nombreTaller");
      TableColumn columnEmail = new TableColumn("email");
@@ -554,7 +547,7 @@ public class FXMLDocumentController implements Initializable {
         public void actualizarAltasTaller(){
     altaTaller.clear();
         ArrayList<Taller> listaTalleres= new ArrayList<Taller>();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
         String tallerstring=Admin.getAltaTalleres();
         if( !tallerstring.equals("") && tallerstring!=null ){
@@ -574,9 +567,9 @@ public class FXMLDocumentController implements Initializable {
 public void actualizarTaller(){
     personData.clear();
         ArrayList<Taller> listaTalleres= new ArrayList<Taller>();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
-        String tallerstring=Admin.getTalleres();
+        String tallerstring=Admin.getTalleresAceptados();
         if( !tallerstring.equals("") && tallerstring!=null ){
             listaTalleres = gson.fromJson(tallerstring, collectionType);
         }
@@ -594,7 +587,7 @@ public void actualizarTaller(){
     public void altaTaller(){
         
         ArrayList<Taller> listaTalleres= new ArrayList<Taller>();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
          TableColumn columnID = new TableColumn("ID");
          TableColumn columnNombre = new TableColumn("nombreTaller");
           TableColumn columnEmail = new TableColumn("email");
@@ -670,7 +663,7 @@ public void actualizarTaller(){
     }
     public void talleresInterfaz(){
         ArrayList<Taller> listaTalleres= new ArrayList<Taller>();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
          TableColumn columnID = new TableColumn("ID");
          TableColumn columnNombre = new TableColumn("nombreTaller");
           TableColumn columnEmail = new TableColumn("email");
@@ -705,7 +698,7 @@ public void actualizarTaller(){
            
         
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
-        String tallerstring=Admin.getTalleres();
+        String tallerstring=Admin.getTalleresAceptados();
         if( !tallerstring.equals("") && tallerstring!=null ){
             listaTalleres = gson.fromJson(tallerstring, collectionType);
         }
@@ -732,8 +725,8 @@ public void actualizarTaller(){
             String tabla= c.getTableView().getId();
             int index = c.getIndex();
         if(personDataPedidos.size()>=index){
-           ofertasclickPedido( personDataPedidos.get(index).getID());
-           piezasclickPedido(personDataPedidos.get(index).getID());
+           ofertasclickPedido( personDataPedidos.get(index).getId());
+           piezasclickPedido(personDataPedidos.get(index).getId());
         }
            
 

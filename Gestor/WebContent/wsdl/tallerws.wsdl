@@ -297,7 +297,7 @@
   </wsdl:binding>
   <wsdl:service name="TallerWS">
     <wsdl:port name="TallerWSPort" binding="tns:TallerWSSoapBinding">
-      <soap:address location="http://localhost:8080/TallerWSPort"/>
+      <soap:address location="http://localhost:9090/TallerWSPort"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
