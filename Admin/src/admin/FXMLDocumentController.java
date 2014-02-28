@@ -491,7 +491,7 @@ public class FXMLDocumentController implements Initializable {
            tableAltaDesguaces.getColumns().addAll(columnID,columnNombre,columnEmail,columnDireccion,columnCiudad,columnCodigoPostal,columnNumero,col_action);
     }
      private class ButtonCell extends TableCell<UsuarioInterface, Boolean> {
-        final Button cellButton = new Button("Estado");
+        final Button cellButton = new Button("Activar");
          
         ButtonCell(){
              

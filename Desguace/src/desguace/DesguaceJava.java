@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -247,16 +249,18 @@ public class DesguaceJava extends Application {
 	}
 
 	public static void crearOferta(Date fechaAlta, Date fechaLimite,
-			String idPedido, double precio) {
+			String idPedido, double precio) throws ParseException {
 		try {
 			bd = new InterfazBD("sor_desguace");
 			Desguace desguace = bd.getDesguace();
 			String desguaceNombre = desguace.getName();
 			String desguaceID = desguace.getID();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            Date fechafin = dateFormat.parse("1970/1/1");
 			int id = bd.anadirOferta(fechaAlta, 0, precio, idPedido,
-					desguaceID, desguaceNombre, null, fechaLimite);
+					desguaceID, desguaceNombre, fechafin, fechaLimite);
 			Oferta nuevo = new Oferta("", id, precio, desguaceID,
-					desguaceNombre, idPedido, fechaAlta, null, fechaLimite,
+					desguaceNombre, idPedido, fechaAlta, fechafin, fechaLimite,
 					EstadoOferta.NEW);
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();

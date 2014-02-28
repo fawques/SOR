@@ -26,6 +26,8 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -427,16 +429,18 @@ public class MainTaller extends Application {
 
 	public static void crearPedido(Date fechaAlta, EstadoPedido estado,
 			Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas,
-			ArrayList<Integer> cantidades) throws JMSException_Exception {
+			ArrayList<Integer> cantidades) throws JMSException_Exception, ParseException {
 		try {
 			bd = new InterfazBD("sor_taller");
 			Taller taller = bd.getPrimerTaller();
 			String tallerID = taller.getID();
 			String tallerNombre = taller.getName();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            Date fechafin = dateFormat.parse("1970/1/1");
 			int id = bd.anadirPedido(fechaAlta, estado, tallerID, tallerNombre,
-					null, fechaLimite, modoAutomatico);
+					fechafin, fechaLimite, modoAutomatico);
 			Pedido nuevo = new Pedido("", id, tallerID, tallerNombre,
-					fechaAlta, null, fechaLimite, estado, modoAutomatico,
+					fechaAlta, fechafin, fechaLimite, estado, modoAutomatico,
 					piezas, cantidades, new ArrayList<Oferta>());
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
