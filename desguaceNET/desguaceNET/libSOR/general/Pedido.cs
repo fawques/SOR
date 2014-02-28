@@ -19,6 +19,8 @@ namespace desguaceNET.libSOR.general
         [JsonProperty]
         public string tallerID { get; set; }
         [JsonProperty]
+        public string tallerNombre { get; set; }
+        [JsonProperty]
         public DateTime fecha_alta { get; set; }
         [JsonProperty]
         public DateTime fecha_limite { get; set; }
@@ -47,11 +49,12 @@ namespace desguaceNET.libSOR.general
          * @param listaOfertas
          */
         [JsonConstructor]
-        public Pedido(string ID, int ID_aux, string tallerID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoPedido estado, bool modoAutomatico, List<Pieza> listaPiezas, List<int> listaCantidadesPiezas, List<Oferta> listaOfertas)
+        public Pedido(string ID, int ID_aux, string tallerID, string tallerNombre, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoPedido estado, bool modoAutomatico, List<Pieza> listaPiezas, List<int> listaCantidadesPiezas, List<Oferta> listaOfertas)
         {
             this.ID = ID;
             this.ID_aux = ID_aux;
             this.tallerID = tallerID;
+            this.tallerNombre = tallerNombre;
             this.fecha_alta = fecha_alta;
             this.fecha_baja = fecha_baja;
             this.fecha_limite = fecha_limite;
@@ -76,10 +79,11 @@ namespace desguaceNET.libSOR.general
          * @param listaCantidadesPiezas
          * @param listaOfertas
          */
-        public Pedido(string ID, string tallerID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoPedido estado, bool modoAutomatico, List<Pieza> listaPiezas, List<int> listaCantidadesPiezas, List<Oferta> listaOfertas)
+        public Pedido(string ID, string tallerID, string tallerNombre, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoPedido estado, bool modoAutomatico, List<Pieza> listaPiezas, List<int> listaCantidadesPiezas, List<Oferta> listaOfertas)
         {
             this.ID = ID;
             this.tallerID = tallerID;
+            this.tallerNombre = tallerNombre;
             this.fecha_alta = fecha_alta;
             this.fecha_baja = fecha_baja;
             this.fecha_limite = fecha_limite;
@@ -97,10 +101,12 @@ namespace desguaceNET.libSOR.general
          * @param tallerID taller que hace el pedido
          * @param fecha_limite fecha límite para recibir ofertas de este pedido. Pasada esa fecha, el pedido se cancelará
          */
-        public Pedido(int ID_aux, string tallerID, DateTime fecha_limite, bool modoAutomatico) {
+        public Pedido(int ID_aux, string tallerID, string tallerNombre, DateTime fecha_limite, bool modoAutomatico)
+        {
         this.ID = "";
         this.ID_aux = ID_aux;
         this.tallerID = tallerID;
+        this.tallerNombre = tallerNombre;
         this.fecha_alta = new DateTime();
         //this.fecha_baja = null;
         this.fecha_limite = fecha_limite;
@@ -119,6 +125,7 @@ namespace desguaceNET.libSOR.general
         this.ID = p.ID;
         this.ID_aux = p.ID_aux;
         this.tallerID =p.tallerID;
+        this.tallerNombre = p.tallerNombre;
         this.fecha_alta = p.fecha_alta;
         this.fecha_baja = p.fecha_baja;
         this.fecha_limite = p.fecha_limite;

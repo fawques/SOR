@@ -33,6 +33,8 @@
             this.ofertasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Pedidos = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tablaPiezas = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btBuscarPedido = new System.Windows.Forms.Button();
@@ -58,11 +60,12 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.tablaPiezas = new System.Windows.Forms.DataGridView();
-            this.label8 = new System.Windows.Forms.Label();
+            this.Pieza = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.Pedidos.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaPiezas)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Ofertas.SuspendLayout();
@@ -72,7 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablaPiezas)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -126,6 +128,30 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Pedidos";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(865, 171);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 24);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Piezas";
+            // 
+            // tablaPiezas
+            // 
+            this.tablaPiezas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaPiezas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Pieza,
+            this.Cantidad});
+            this.tablaPiezas.Location = new System.Drawing.Point(719, 209);
+            this.tablaPiezas.MultiSelect = false;
+            this.tablaPiezas.Name = "tablaPiezas";
+            this.tablaPiezas.ReadOnly = true;
+            this.tablaPiezas.RowHeadersVisible = false;
+            this.tablaPiezas.Size = new System.Drawing.Size(335, 265);
+            this.tablaPiezas.TabIndex = 12;
             // 
             // label5
             // 
@@ -244,7 +270,7 @@
             this.Ofertas.Location = new System.Drawing.Point(4, 22);
             this.Ofertas.Name = "Ofertas";
             this.Ofertas.Padding = new System.Windows.Forms.Padding(3);
-            this.Ofertas.Size = new System.Drawing.Size(725, 516);
+            this.Ofertas.Size = new System.Drawing.Size(1075, 516);
             this.Ofertas.TabIndex = 1;
             this.Ofertas.Text = "Ofertas";
             this.Ofertas.UseVisualStyleBackColor = true;
@@ -324,7 +350,7 @@
             this.tpHistorico.Location = new System.Drawing.Point(4, 22);
             this.tpHistorico.Name = "tpHistorico";
             this.tpHistorico.Padding = new System.Windows.Forms.Padding(3);
-            this.tpHistorico.Size = new System.Drawing.Size(725, 516);
+            this.tpHistorico.Size = new System.Drawing.Size(1075, 516);
             this.tpHistorico.TabIndex = 2;
             this.tpHistorico.Text = "Histórico";
             this.tpHistorico.UseVisualStyleBackColor = true;
@@ -378,7 +404,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(725, 516);
+            this.tabPage2.Size = new System.Drawing.Size(1075, 516);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Cuenta";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -403,23 +429,19 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // tablaPiezas
+            // Pieza
             // 
-            this.tablaPiezas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaPiezas.Location = new System.Drawing.Point(719, 209);
-            this.tablaPiezas.Name = "tablaPiezas";
-            this.tablaPiezas.Size = new System.Drawing.Size(335, 265);
-            this.tablaPiezas.TabIndex = 12;
+            this.Pieza.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Pieza.HeaderText = "Pieza";
+            this.Pieza.Name = "Pieza";
+            this.Pieza.ReadOnly = true;
             // 
-            // label8
+            // Cantidad
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(865, 171);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 24);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Piezas";
+            this.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
             // GestionPedidos
             // 
@@ -436,6 +458,7 @@
             this.Pedidos.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaPiezas)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -448,7 +471,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablaPiezas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -488,6 +510,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView tablaPiezas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pieza;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
 
     }
 }
