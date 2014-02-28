@@ -47,6 +47,7 @@ public class NuevoPedidoController implements Initializable {
     ObservableList data = FXCollections.observableArrayList();
     @FXML
     public Button btAnadirPieza;
+    public Button lbRealizar;
     public TableView tbPiezas;
     public ComboBox cbModoAutomatico;
     public TextField tfLimiteDia;
@@ -99,7 +100,7 @@ public class NuevoPedidoController implements Initializable {
             MainTaller.crearPedido(today, EstadoPedido.ACTIVE, fechaLimite, "Automatico".equals(cbModoAutomatico.getValue().toString()), piezasPedido, cantidadPiezas);
             //Mensaje
             lbMensaje.setText("El pedido se ha creado correctamente");
-            
+            lbRealizar.setDisable(true);
         } catch (ParseException ex) {
             lbMensaje.setText("Algo no ha ido bien... :(");
             Logger.getLogger(NuevoPedidoController.class.getName()).log(Level.SEVERE, null, ex);
