@@ -120,6 +120,12 @@ namespace desguaceNET
             return realizado;
         }
 
+        public List<Accion> getAcciones()
+        {
+            AsyncManager async = new AsyncManager("sor_desguace");
+            return async.getAcciones();
+        }
+
         public bool hacerAlta(string name, string email, string address, string city, string postalCode, string telephone)
         {
 
@@ -256,11 +262,19 @@ namespace desguaceNET
 
         public List<Pedido> actualizarPedidos()
         {
+            string listaIdsstring = "";
             // coger los pedidos de activeMQ
-            Gestor_activemq activemq = new Gestor_activemq();
-            activemq.create_Consumer(desguace.getID());
-            string listaIdsstring = activemq.consumer.consumeMessage();
-            activemq.consumer.closeConsumer();
+            try
+            {
+                Gestor_activemq activemq = new Gestor_activemq();
+                activemq.create_Consumer(desguace.getID());
+                listaIdsstring = activemq.consumer.consumeMessage();
+                activemq.consumer.closeConsumer();
+            }
+            catch (System.Net.Sockets.SocketException ex)
+            {
+                Console.WriteLine("activemequuuuuuuuuuuuu");
+            }
 
             List<PedidoCorto> listaPedidosCortos = new List<PedidoCorto>();
             List<string> listaPedidosCortosstring = JsonConvert.DeserializeObject<List<string>>(listaIdsstring);

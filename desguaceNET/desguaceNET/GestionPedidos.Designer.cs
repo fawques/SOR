@@ -62,6 +62,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.tbAcciones = new System.Windows.Forms.TabPage();
+            this.tablaAcciones = new System.Windows.Forms.DataGridView();
+            this.accion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parametros = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.Pedidos.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -75,6 +79,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.tbAcciones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaAcciones)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -105,6 +111,7 @@
             this.Pedidos.Controls.Add(this.tabPage1);
             this.Pedidos.Controls.Add(this.Ofertas);
             this.Pedidos.Controls.Add(this.tpHistorico);
+            this.Pedidos.Controls.Add(this.tbAcciones);
             this.Pedidos.Controls.Add(this.tabPage2);
             this.Pedidos.Location = new System.Drawing.Point(0, 0);
             this.Pedidos.Name = "Pedidos";
@@ -443,6 +450,41 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // tbAcciones
+            // 
+            this.tbAcciones.Controls.Add(this.tablaAcciones);
+            this.tbAcciones.Location = new System.Drawing.Point(4, 22);
+            this.tbAcciones.Name = "tbAcciones";
+            this.tbAcciones.Size = new System.Drawing.Size(1075, 516);
+            this.tbAcciones.TabIndex = 4;
+            this.tbAcciones.Text = "Acciones Pendientes";
+            this.tbAcciones.UseVisualStyleBackColor = true;
+            // 
+            // tablaAcciones
+            // 
+            this.tablaAcciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaAcciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.accion,
+            this.parametros});
+            this.tablaAcciones.Location = new System.Drawing.Point(34, 41);
+            this.tablaAcciones.Name = "tablaAcciones";
+            this.tablaAcciones.Size = new System.Drawing.Size(935, 449);
+            this.tablaAcciones.TabIndex = 0;
+            // 
+            // accion
+            // 
+            this.accion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.accion.HeaderText = "accion";
+            this.accion.Name = "accion";
+            this.accion.ReadOnly = true;
+            // 
+            // parametros
+            // 
+            this.parametros.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.parametros.HeaderText = "parametros";
+            this.parametros.Name = "parametros";
+            this.parametros.ReadOnly = true;
+            // 
             // GestionPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,6 +513,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.tbAcciones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tablaAcciones)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -512,6 +556,10 @@
         private System.Windows.Forms.DataGridView tablaPiezas;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pieza;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.TabPage tbAcciones;
+        private System.Windows.Forms.DataGridView tablaAcciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parametros;
 
     }
 }
