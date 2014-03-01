@@ -68,10 +68,11 @@ namespace desguaceNET.libSOR.BD
             DataSet resultados = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM pedido;"));
             DataTableReader reader = resultados.CreateDataReader();
             while(reader.Read()){
-                string pedidoID = reader.GetString(1);
+                int pedidoID_aux = (int)reader["id_aux"];
+                string pedidoID = (string)reader["id"];
                 List<Pieza> piezas = new List<Pieza>();
                 List<int> cantidades = new List<int>();
-                getPiezasYCantidades(pedidoID, piezas, cantidades);
+                getPiezasYCantidades(pedidoID_aux, piezas, cantidades);
 
                 Pedido nuevo = new Pedido(pedidoID,(int)reader["id_aux"], (string)reader["taller"], (string)reader["tallerNombre"],reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.Add(nuevo);
@@ -93,7 +94,7 @@ namespace desguaceNET.libSOR.BD
                 string pedidoID = reader.GetString(1);
                 List<Pieza> piezas = new List<Pieza>();
                 List<int> cantidades = new List<int>();
-                getPiezasYCantidades(pedidoID, piezas, cantidades);
+                getPiezasYCantidades((int)reader["id_aux"], piezas, cantidades);
 
                 Pedido nuevo = new Pedido(pedidoID, reader.GetInt32(0), (string)reader["taller"], (string)reader["tallerNombre"], reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.Add(nuevo);
@@ -163,7 +164,7 @@ namespace desguaceNET.libSOR.BD
                 List<Pieza> piezas =new List<Pieza>();
         
                 List<int> cantidades = new List<int>();
-                getPiezasYCantidades(id, piezas, cantidades);
+                getPiezasYCantidades((int)reader["id_aux"], piezas, cantidades);
 
                 pedido = new Pedido(reader.GetString(1), (string)reader["taller"], (string)reader["tallerNombre"], reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(id));
 
@@ -175,7 +176,7 @@ namespace desguaceNET.libSOR.BD
         return pedido;
     }
 
-        public void getPiezasYCantidades(string pedidoID, List<Pieza> piezas, List<int> cantidades)
+        public void getPiezasYCantidades(int pedidoID, List<Pieza> piezas, List<int> cantidades)
         {
             try
             {
@@ -358,7 +359,7 @@ namespace desguaceNET.libSOR.BD
         while (reader.Read()) {
             List<Pieza> piezas = new List<Pieza>();
             List<int> cantidades = new List<int>();
-            getPiezasYCantidades(idPedido, piezas, cantidades);
+            getPiezasYCantidades((int)reader["id_aux"], piezas, cantidades);
             //falta filtrar por pieza
             Pedido p = new Pedido(reader.GetString(1), reader.GetInt32(0), (string)reader["taller"], (string)reader["tallerNombre"], reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(reader.GetString(1)));
             alPedidos.Add(p);
