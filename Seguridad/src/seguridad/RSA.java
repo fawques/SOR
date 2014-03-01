@@ -25,12 +25,12 @@ import javax.crypto.NoSuchPaddingException;
  * http://www.java2s.com/Tutorial/Java/0490__Security/RSAexamplewithrandomkeygeneration.htm
  */
 public class RSA {
-	RSAPublicKeySpec pubKeySpec;
-	RSAPrivateKeySpec privKeySpec;
-	KeyFactory keyFactory;
-	RSAPublicKey pubKey;
-	RSAPrivateKey privKey;
-	Cipher cipher;
+	private RSAPublicKeySpec pubKeySpec;
+	private RSAPrivateKeySpec privKeySpec;
+	private KeyFactory keyFactory;
+	private RSAPublicKey pubKey;
+	private RSAPrivateKey privKey;
+	private Cipher cipher;
 
 	public RSA() {
 		try {
@@ -92,5 +92,9 @@ public class RSA {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	RSAPublicKey getClavePublica(){
+		return pubKey;
 	}
 }
