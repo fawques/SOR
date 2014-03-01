@@ -355,6 +355,10 @@ public class MainTaller extends Application {
 	public static String getAllPedidos() {
 		try {
 			CompararPedidosGestorDesguace();
+		}catch(javax.xml.ws.WebServiceException ex){
+			System.out.println("Error comparando con el gestor");
+		}
+		try{
 			bd = new InterfazBD("sor_taller");
 			ArrayList<Pedido> p = bd.getPedidosConID_aux();
 			bd.close();
