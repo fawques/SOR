@@ -76,11 +76,11 @@ public class AltaTallerController implements Initializable {
                     } else {
                         //add errors in the interface
                         if (tfNombreTaller.getText().length() < 22) {
-                            errorNombreTaller.setText("No pueden contener carácteres extraños, ni números");
+                            errorNombreTaller.setText("No pueden contener caracteres extranyos, ni numeros");
                         } else if (tfNombreTaller.getText().isEmpty()) {
                             errorNombreTaller.setText("No puede ser vacio");
                         } else {
-                            errorNombreTaller.setText("No más de 21 carácteres");
+                            errorNombreTaller.setText("No mas de 21 caracteres");
                         }
 
                         tfNombreTaller.setStyle("-fx-border-color: red;");
@@ -120,11 +120,11 @@ public class AltaTallerController implements Initializable {
                         tfCiudad.setStyle("-fx-border-color: red;");
                         //add errors in the interface
                         if (tfCiudad.getText().length() < 22) {
-                            errorCiudad.setText("No pueden contener carácteres extraños, ni números");
+                            errorCiudad.setText("No pueden contener caracteres extranyos, ni numeros");
                         } else if (tfCiudad.getText().isEmpty()) {
                             errorCiudad.setText("No puede ser vacio");
                         } else {
-                            errorCiudad.setText("No más de 21 carácteres");
+                            errorCiudad.setText("No mas de 21 caracteres");
                         }
                     }
                 }
@@ -141,7 +141,7 @@ public class AltaTallerController implements Initializable {
                     } else {
                         tfDireccion.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorDireccion.setText("No más de 21 carácteres");
+                        errorDireccion.setText("No mas de 21 caracteres");
                     }
                 }
             }
@@ -158,11 +158,11 @@ public class AltaTallerController implements Initializable {
                         tfCp.setStyle("-fx-border-color: red;");
                         //add errors in the interface
                         if (tfCp.getText().length() >= 10) {
-                            errorCp.setText("No más de 9 carácteres");
+                            errorCp.setText("No mas de 9 caracteres");
                         } else if (tfCp.getText().isEmpty()) {
                             errorCp.setText("No puede ser vacio");
                         } else {
-                            errorCp.setText("Sólo añadir números");
+                            errorCp.setText("Solo anyadir numeros");
                         }
                     }
                 }
@@ -180,11 +180,11 @@ public class AltaTallerController implements Initializable {
                         tfTelefono.setStyle("-fx-border-color: red;");
                         //add errors in the interface
                         if (tfTelefono.getText().length() >= 10) {
-                            errorTelefono.setText("No más de 9 carácteres");
+                            errorTelefono.setText("No mas de 9 caracteres");
                         } else if (tfTelefono.getText().isEmpty()) {
                             errorTelefono.setText("No puede ser vacio");
                         } else {
-                            errorTelefono.setText("Sólo añadir números");
+                            errorTelefono.setText("Solo anyadir numeros");
                         }
                     }
                 }

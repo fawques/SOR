@@ -46,7 +46,7 @@ public class Admin extends Application {
     	JUDDIProxy.loadWsdl("AdminWS");
     	 stage = stage2;
         FXMLLoader loader = changeScene("FXMLDocument.fxml");
-        stage.setTitle("Alta de desguace");
+        stage.setTitle("Admin");
         FXMLDocumentController staticDataBox = (FXMLDocumentController) loader.getController();
         staticDataBox.setStage(stage);
         staticDataBox.showStage();

@@ -75,7 +75,7 @@ public class DesguaceJava extends Application {
 				} else if (desguace.getEstado() == EstadoGeneral.ACTIVE) { // activo
 					// Cargar GestionPedido
 					FXMLLoader loader = changeScene("GestionPedidos.fxml");
-					stage.setTitle("Gestion de pedidos");
+					stage.setTitle("Desguace");
 					GestionPedidos staticDataBox = (GestionPedidos) loader
 							.getController();
 					staticDataBox.setStage(stage);
@@ -83,18 +83,15 @@ public class DesguaceJava extends Application {
 
 				} else if (desguace.getEstado() == EstadoGeneral.INACTIVE) {
 					FXMLLoader loader = changeScene("DesguaceDeBaja.fxml");
-					stage.setTitle("Gestion de pedidos");
+					stage.setTitle("Desguace");
 					DesguaceDeBajaController staticDataBox = (DesguaceDeBajaController) loader
 							.getController();
 					staticDataBox.setStage(stage);
 					staticDataBox.showStage();
 
-				} else { // un botÃ³n y prou
-							// Yo lo que haria serÃ­a un volver a darme de
-							// alta, con los mismos datos
-							// un botÃ³n y prou
-					FXMLLoader loader = changeScene("AltaTaller.fxml");
-					stage.setTitle("Alta de taller");
+				} else { 
+					FXMLLoader loader = changeScene("AltaDesguace.fxml");
+					stage.setTitle("Alta de desguace");
 					AltaDesguace staticDataBox = (AltaDesguace) loader
 							.getController();
 					staticDataBox.setStage(stage);
