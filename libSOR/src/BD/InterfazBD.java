@@ -56,7 +56,7 @@ public class InterfazBD {
 
     public void anadirPedido(String id,Date fechaAlta, int estado, String taller,String tallerNombre, Date fechaBaja, Date fechaLimite, boolean modoAutomatico)    {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        conexion.ejecutarSQL("insert INTO pedido (id, id_aux,fecha_alta, estado, taller,tallerNombre, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado + "','" + taller + "','" + tallerNombre +  "'," +(fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja) + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
+        conexion.ejecutarSQL("insert INTO pedido (id,fecha_alta, estado, taller,tallerNombre, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado + "','" + taller + "','" + tallerNombre +  "'," +(fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja) + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
     }
     public int anadirPedido(Date fechaAlta, EstadoPedido estado, String taller, String tallerNombre,Date fechaBaja, Date fechaLimite, boolean modoAutomatico) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -777,6 +777,15 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
 
     public boolean anyadirPiezasAPedido(int idPedido, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+        if (anyadirPiezasATablaPieza(piezas)) {
+            for (int i = 0; i < piezas.size(); i++) {
+                conexion.ejecutarInsert("Insert into pedido_pieza(pedido,pieza,cantidad) values ('" + idPedido + "', '" + piezas.get(i).getNombre() + "', '" + cantidades.get(i) + "')");
+            }
+            return true;
+        }
+        return false;
+    }
+    public boolean anyadirPiezasAPedido(String idPedido, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
         if (anyadirPiezasATablaPieza(piezas)) {
             for (int i = 0; i < piezas.size(); i++) {
                 conexion.ejecutarInsert("Insert into pedido_pieza(pedido,pieza,cantidad) values ('" + idPedido + "', '" + piezas.get(i).getNombre() + "', '" + cantidades.get(i) + "')");

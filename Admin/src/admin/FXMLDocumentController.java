@@ -172,9 +172,9 @@ public class FXMLDocumentController implements Initializable {
              personDataPedidos.add(interfaz);
              System.out.println(pedido);
         }
-         if(personDataPedidos.size()!=0){
-             piezasInterfaz(personDataPedidos.get(0).getId());
-         }
+         
+             piezasInterfaz();
+         
          
            tablePedidos.setItems(personDataPedidos);
            tablePedidos.getColumns().addAll(id_auxCol1, idCol1, fecha_altaCol1, estadoCol1,tallerNombreCol, tallerCol, fecha_bajaCol1, fecha_limiteCol1);
@@ -266,7 +266,7 @@ public class FXMLDocumentController implements Initializable {
       
       
     }
-    public void piezasInterfaz(String id ){
+    public void piezasInterfaz(){
     	personDataPiezas.clear();
      ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
@@ -279,22 +279,8 @@ public class FXMLDocumentController implements Initializable {
         columnNombre.setCellValueFactory(
            new PropertyValueFactory<UsuarioInterface,String>("nombrePieza")
         );
-        Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-        String pedidosstring= Admin.getPedidoID(id);
-        if(!pedidosstring.equals("") && pedidosstring!=null){
-            listaPedidos =gson.fromJson(pedidosstring, collectionType);
-        }
-        
-       
-         PiezasInterfaz interfaz= new PiezasInterfaz();
-         for (Pedido p : listaPedidos) {
-             for(int i=0;i<p.getListaPiezas().size();i++){
-                interfaz= new PiezasInterfaz(p.getListaCantidadesPiezas().get(i),p.getListaPiezas().get(i).getNombre());
-                personDataPiezas.add(interfaz);
-                
-             }
-        }
-          tablePiezas.setItems(personDataPiezas);
+
+
            tablePiezas.getColumns().addAll(columnNombre,columnCant);
      
     }
