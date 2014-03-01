@@ -35,7 +35,7 @@ namespace desguaceNET.libSOR.BD
         public int anadirPedido(Pedido p)
         {
             int id = conexion.ejecutarInsert(new MySqlCommand("insert INTO pedido (id,fecha_alta, estado, taller, tallerNombre, fecha_limite, fecha_baja, modo_automatico) values ('" + p.ID + "', '" + p.fecha_alta.ToString("yyyy/MM/dd") + "','" + (int)p.estado + "','" + p.tallerID  + "','" + p.tallerNombre +  "','" + p.fecha_limite.ToString("yyyy/MM/dd") + "', '" + p.getFecha_baja().ToString("yyyy/MM/dd") + "', '" + (p.modoAutomatico ? 1 : 0) + "');"));
-            anyadirPiezasAPedido(p.ID, p.listaPiezas, p.listaCantidadesPiezas);
+            anyadirPiezasAPedido(id, p.listaPiezas, p.listaCantidadesPiezas);
             return id;
         }
 
@@ -401,7 +401,7 @@ namespace desguaceNET.libSOR.BD
         return true;
     }
 
-    public bool anyadirPiezasAPedido(String idPedido, List<Pieza> piezas, List<int> cantidades)
+    public bool anyadirPiezasAPedido(int idPedido, List<Pieza> piezas, List<int> cantidades)
     {
         if (anyadirPiezasATablaPieza(piezas))
         {

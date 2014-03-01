@@ -29,6 +29,7 @@ CREATE TABLE `taller` (
 
 CREATE TABLE `pedido` (
   `id` char(32) NOT NULL,
+  `id_aux` int(11) NOT NULL,
   `fecha_alta` date NOT NULL,
   `estado` int(11) NOT NULL,
   `taller` char(32) NOT NULL,
@@ -42,6 +43,7 @@ CREATE TABLE `pedido` (
 
 CREATE TABLE `oferta` (
   `id` char(32) NOT NULL,
+  `id_aux` int(11) NOT NULL,
   `fecha_alta` date NOT NULL,
   `importe` double NOT NULL,
   `estado` int(11) NOT NULL,
@@ -112,13 +114,13 @@ CREATE TABLE IF NOT EXISTS `pieza` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pedido_pieza` (
-  `pedido` char(32) NOT NULL,
+  `pedido` int(11) NOT NULL,
   `pieza` varchar(45) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`pedido`,`pieza`),
   KEY `pieza_FK_idx` (`pieza`),
   KEY `pedido_FK_idx` (`pedido`),
-  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id_aux`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -201,12 +203,12 @@ CREATE TABLE `oferta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pedido_pieza` (
-  `pedido` char(32) NOT NULL,
+  `pedido` int(11) NOT NULL,
   `pieza` varchar(45) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`pedido`,`pieza`),
   KEY `pieza_FK_idx` (`pieza`),
-  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id_aux`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -54,7 +54,7 @@ namespace desguaceNET
             {
                 string desguaceID = desguace.getID();
                 string desguaceNombre = desguace.getName();
-                int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID, desguaceNombre, new DateTime(1970 - 01 - 01), fechaLimite);
+                int id = bd.anadirOferta(fechaAlta, (int)EstadoOferta.NEW, precio, idPedido, desguaceID, desguaceNombre, new DateTime(1970, 01, 01), fechaLimite);
                 if (id != -1)
                 {
                     Oferta nuevo = new Oferta(id, precio, desguaceID, desguaceNombre, idPedido, fechaLimite);
@@ -290,7 +290,6 @@ namespace desguaceNET
                 listaPedidos = JsonConvert.DeserializeObject<List<Pedido>>(pedidosstring);
                 foreach (Pedido ped in listaPedidos)
                 {
-                    // parece que esto falla o_O
                     bd.anadirPedido(ped);
 
                 }
