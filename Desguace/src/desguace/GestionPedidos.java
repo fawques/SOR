@@ -315,7 +315,8 @@ public class GestionPedidos implements Initializable {
 
     private void CompararOfertasGestorDesguace(){
         
-    ArrayList<Oferta>  ofertas= DesguaceJava.actualizarOfertas();   
+    ArrayList<Oferta>  ofertas= DesguaceJava.actualizarOfertas();  
+    ofertas.addAll(DesguaceJava.actualizarOfertasAceptadas());
     ArrayList<Oferta> ofertasgestor= new ArrayList<Oferta>();
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
