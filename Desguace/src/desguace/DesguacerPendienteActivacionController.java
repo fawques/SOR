@@ -55,7 +55,7 @@ public class DesguacerPendienteActivacionController implements Initializable {
          if ("".equals(idRecibido)) //No Activado
          {
              lbEstado.setStyle("-fx-border-color: red;");
-             lbEstado.setText("Su cuenta no está activa");
+             lbEstado.setText("Su cuenta no esta activa");
          } else //Activado
          {
              //enviar a pantalla gestion de pedido
@@ -73,7 +73,7 @@ public class DesguacerPendienteActivacionController implements Initializable {
                  loader.setBuilderFactory(new JavaFXBuilderFactory());
                  Parent page = (Parent) loader.load(location.openStream());
                  thisStage.getScene().setRoot(page);
-                 thisStage.setTitle("Gestión de pedidos");
+                 thisStage.setTitle("Desguace");
                  GestionPedidos staticDataBox = (GestionPedidos) loader.getController();
                  staticDataBox.setStage(thisStage);
                  staticDataBox.showStage();

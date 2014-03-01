@@ -247,7 +247,7 @@ public class AltaTallerController implements Initializable {
             //then we can send the registration
             System.out.println("Enviando...");
             if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(),tfCp.getText(), tfTelefono.getText())) {
-                //METER en base de datos si está todo ok.
+                //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_taller");
                 if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
                     URL location = getClass().getResource("tallerPendienteActivacion.fxml");
@@ -256,7 +256,7 @@ public class AltaTallerController implements Initializable {
                     loader.setBuilderFactory(new JavaFXBuilderFactory());
                     Parent page = (Parent) loader.load(location.openStream());
                     thisStage.getScene().setRoot(page);
-                    thisStage.setTitle("Esperando código de aceptación");
+                    thisStage.setTitle("Esperando codigo de aceptacion");
                     TallerPendienteActivacionController staticDataBox = (TallerPendienteActivacionController) loader.getController();
                     staticDataBox.setStage(thisStage);
                     staticDataBox.showStage();
