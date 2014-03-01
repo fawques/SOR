@@ -32,7 +32,8 @@ namespace desguaceNET
             main.actualizarPedidos();
             listaOfertasActivas = main.actualizarOfertas();
             listaOfertasAceptadas = main.actualizarOfertasAceptadas();            
-            listaPedidos = main.getPedidos();
+            listaPedidos = main.getPedidosActivos();
+            tablaPiezas.Rows.Clear();
 
             dataGridView1.DataSource = listaPedidos;
 
@@ -194,7 +195,7 @@ namespace desguaceNET
             if (dataGridView3.SelectedRows.Count > 0)
             {
                 idOfertaAceptada = (string)dataGridView3.SelectedRows[0].Cells[0].Value;
-                idPedidoAceptado = (string)dataGridView3.SelectedRows[0].Cells[7].Value;
+                idPedidoAceptado = (string)dataGridView3.SelectedRows[0].Cells[8].Value;
 
             }
         }
@@ -217,6 +218,7 @@ namespace desguaceNET
 
         private void Pedidos_MouseClick(object sender, MouseEventArgs e)
         {
+            tablaPiezas.Rows.Clear();
             updatePedidos();
             updateOfertasAceptadas();
             updateOfertasActivas();
