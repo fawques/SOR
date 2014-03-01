@@ -386,7 +386,6 @@ public class GestionPedidosController implements Initializable {
      *
      */
     public void aceptarOferta() {
-    	
         TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
         if(tpPed.getEstado() == EstadoOferta.ACTIVE){
 	        if (tpPed != null) {
@@ -403,7 +402,7 @@ public class GestionPedidosController implements Initializable {
      */
     public void rechazarOferta() {
         TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
-        if(tpPed.getEstado() == EstadoOferta.ACTIVE || tpPed.getEstado() == EstadoOferta.ACCEPTED){
+        if(tpPed.getEstado() == EstadoOferta.ACTIVE){
 	        if (tpPed != null) {
 	            MainTaller.rechazarOferta(tpPed.getId());
 	        }
