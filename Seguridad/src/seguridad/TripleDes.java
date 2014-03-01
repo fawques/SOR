@@ -2,6 +2,7 @@
  * 
  */
 package seguridad;
+import org.apache.commons.codec.binary.Base64;
 
 
 /*
@@ -199,7 +200,7 @@ public class TripleDes {
 	 * and write them to the output stream. This method uses CipherOutputStream
 	 * to perform the encryption and write bytes at the same time.
 	 */
-	public static void encrypt(SecretKey key, String in, OutputStream out)
+	public static String encrypt(SecretKey key, String in)
 			throws NoSuchAlgorithmException, InvalidKeyException,
 			NoSuchPaddingException, IOException {
 		// Create and initialize the encryption engine
@@ -207,18 +208,28 @@ public class TripleDes {
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 
 		// Create a special output stream to do the work for us
-		CipherOutputStream cos = new CipherOutputStream(out, cipher);
+		//CipherOutputStream cos = new CipherOutputStream(out, cipher);
 
 		// Read from the input and write to the encrypting output stream
-		byte[] buffer = new byte[2048];
+		/*byte[] buffer = new byte[2048];
 		int bytesRead;
 		while ((bytesRead = in.read(buffer)) != -1) {
 			cos.write(buffer, 0, bytesRead);
 		}
-		cos.close();
+		cos.close();*/
 
 		// For extra security, don't leave any plaintext hanging around memory.
-		java.util.Arrays.fill(buffer, (byte) 0);
+		//java.util.Arrays.fill(buffer, (byte) 0);
+		Base64 ba = new Base64();
+		byte[] encryptedString;
+		try {
+			encryptedString = ba.encode(cipher.doFinal(in.getBytes()));
+	        return new String(encryptedString);
+		} catch (IllegalBlockSizeException | BadPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
