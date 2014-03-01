@@ -26,6 +26,8 @@ namespace desguaceNET.libSOR.general
         [JsonProperty]
         public string desguaceID { get; set; }
         [JsonProperty]
+        public string desguaceNombre { get; set; }
+        [JsonProperty]
         public string pedidoID { get; set; }
         [JsonProperty]
         public DateTime fecha_baja { get; set; }
@@ -43,12 +45,13 @@ namespace desguaceNET.libSOR.general
          * @param estado
          */
         [JsonConstructor]
-        public Oferta(string ID, int ID_aux, double precio, string desguaceID, string pedidoID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoOferta estado)
+        public Oferta(string ID, int ID_aux, double precio, string desguaceID, string desguaceNombre, string pedidoID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoOferta estado)
         {
             this.ID = ID;
             this.ID_aux = ID_aux;
             this.precio = precio;
             this.desguaceID = desguaceID;
+            this.desguaceNombre = desguaceNombre;
             this.pedidoID = pedidoID;
             this.fecha_alta = fecha_alta;
             this.fecha_baja = fecha_baja;
@@ -68,12 +71,13 @@ namespace desguaceNET.libSOR.general
          * @param fecha_limite
          * @param estado
          */
-        public Oferta(string ID, double precio, string desguaceID, string pedidoID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoOferta estado)
+        public Oferta(string ID, double precio, string desguaceID, string desguaceNombre, string pedidoID, DateTime fecha_alta, DateTime fecha_baja, DateTime fecha_limite, EstadoOferta estado)
         {
             this.ID = ID;
             this.ID_aux = -1;
             this.precio = precio;
             this.desguaceID = desguaceID;
+            this.desguaceNombre = desguaceNombre;
             this.desguaceID = pedidoID;
             this.fecha_alta = fecha_alta;
             this.fecha_baja = fecha_baja;
@@ -89,12 +93,13 @@ namespace desguaceNET.libSOR.general
          * @param pedidoID
          * @param fecha_limite fecha límite para recibir ofertas de este pedido. Pasada esa fecha, el pedido se cancelará
          */
-        public Oferta(int ID_aux, double precio, string desguaceID, string pedidoID, DateTime fecha_limite)
+        public Oferta(int ID_aux, double precio, string desguaceID, string desguaceNombre, string pedidoID, DateTime fecha_limite)
         {
             this.ID = "";
             this.ID_aux = ID_aux;
             this.precio = precio;
             this.desguaceID = desguaceID;
+            this.desguaceNombre = desguaceNombre;
             this.fecha_alta = DateTime.Today;
             this.fecha_baja = new DateTime(1970,01,01);
             this.pedidoID = pedidoID;
@@ -112,6 +117,7 @@ namespace desguaceNET.libSOR.general
             this.ID_aux = o.ID_aux;
             this.precio = o.precio;
             this.desguaceID = o.desguaceID;
+            this.desguaceNombre = o.desguaceNombre;
             this.pedidoID = o.pedidoID;
             this.fecha_alta = o.fecha_alta;
             this.fecha_baja = o.fecha_baja;

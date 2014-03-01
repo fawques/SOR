@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -73,7 +75,7 @@ public class DesguaceJava extends Application {
 				} else if (desguace.getEstado() == EstadoGeneral.ACTIVE) { // activo
 					// Cargar GestionPedido
 					FXMLLoader loader = changeScene("GestionPedidos.fxml");
-					stage.setTitle("Gestion de pedidos");
+					stage.setTitle("Desguace");
 					GestionPedidos staticDataBox = (GestionPedidos) loader
 							.getController();
 					staticDataBox.setStage(stage);
@@ -81,18 +83,15 @@ public class DesguaceJava extends Application {
 
 				} else if (desguace.getEstado() == EstadoGeneral.INACTIVE) {
 					FXMLLoader loader = changeScene("DesguaceDeBaja.fxml");
-					stage.setTitle("Gestion de pedidos");
+					stage.setTitle("Desguace");
 					DesguaceDeBajaController staticDataBox = (DesguaceDeBajaController) loader
 							.getController();
 					staticDataBox.setStage(stage);
 					staticDataBox.showStage();
 
-				} else { // un botÃ³n y prou
-							// Yo lo que haria serÃ­a un volver a darme de
-							// alta, con los mismos datos
-							// un botÃ³n y prou
-					FXMLLoader loader = changeScene("AltaTaller.fxml");
-					stage.setTitle("Alta de taller");
+				} else { 
+					FXMLLoader loader = changeScene("AltaDesguace.fxml");
+					stage.setTitle("Alta de desguace");
 					AltaDesguace staticDataBox = (AltaDesguace) loader
 							.getController();
 					staticDataBox.setStage(stage);
@@ -247,16 +246,18 @@ public class DesguaceJava extends Application {
 	}
 
 	public static void crearOferta(Date fechaAlta, Date fechaLimite,
-			String idPedido, double precio) {
+			String idPedido, double precio) throws ParseException {
 		try {
 			bd = new InterfazBD("sor_desguace");
 			Desguace desguace = bd.getDesguace();
 			String desguaceNombre = desguace.getName();
 			String desguaceID = desguace.getID();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            Date fechafin = dateFormat.parse("1970/1/1");
 			int id = bd.anadirOferta(fechaAlta, 0, precio, idPedido,
-					desguaceID, desguaceNombre, null, fechaLimite);
+					desguaceID, desguaceNombre, fechafin, fechaLimite);
 			Oferta nuevo = new Oferta("", id, precio, desguaceID,
-					desguaceNombre, idPedido, fechaAlta, null, fechaLimite,
+					desguaceNombre, idPedido, fechaAlta, fechafin, fechaLimite,
 					EstadoOferta.NEW);
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
@@ -312,6 +313,7 @@ public class DesguaceJava extends Application {
 		try {
 			bd = new InterfazBD("sor_desguace");
 			of = bd.getOfertasConID_aux(EstadoOferta.ACTIVE);
+			of.addAll(bd.getOfertasConID_aux(EstadoOferta.ACCEPTED));
 			bd.close();
 			return of;
 		} catch (SQLException ex) {

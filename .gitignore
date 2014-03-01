@@ -20,6 +20,7 @@ dist/
 # jUDDI #
 libSOR/**/.log
 libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/bin/target
+libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/work
 
 
 ## Ignore Visual Studio temporary files, build results, and

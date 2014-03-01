@@ -261,7 +261,9 @@ public class TallerWS {
             for(Desguace desguace: bd.getDesguaces()){
                 enviarPedidoActivemq(desguace.getID(),new PedidoCorto(id,EstadoPedido.values()[estado]));
             }
-           return  bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
+           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
+           bd.close();
+           return ool;
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -297,6 +299,7 @@ public class TallerWS {
             }
             String listaJSON = gson.toJson(listaPedidos);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);

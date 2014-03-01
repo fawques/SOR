@@ -35,5 +35,6 @@
     </ComboBox>
     <Label fx:id="lbMensaje" layoutX="367.0" layoutY="368.0" text="" textFill="#00cc21" />
     <Button layoutX="456.0" layoutY="85.0" mnemonicParsing="false" onAction="#remove" text="Eliminar pieza" />
+    <Button layoutX="377.0" layoutY="310.0" mnemonicParsing="false" onAction="#irAGestionPedidos" text="Cancelar" />
   </children>
 </AnchorPane>

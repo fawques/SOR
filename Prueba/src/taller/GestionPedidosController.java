@@ -387,10 +387,12 @@ public class GestionPedidosController implements Initializable {
      */
     public void aceptarOferta() {
         TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
-        if (tpPed != null) {
-            MainTaller.aceptarOferta(tpPed.getId());
-            MainTaller.cambiarEstadoPedido(EstadoPedido.ACCEPTED,tpPed.getPedido());
-            actualizarPestanyaOfertas();
+        if(tpPed.getEstado() == EstadoOferta.ACTIVE){
+	        if (tpPed != null) {
+	            MainTaller.aceptarOferta(tpPed.getId());
+	            MainTaller.cambiarEstadoPedido(EstadoPedido.ACCEPTED,tpPed.getPedido());
+	            actualizarPestanyaOfertas();
+	        }
         }
         //else //no hay oferta seleccionada
     }
@@ -400,8 +402,10 @@ public class GestionPedidosController implements Initializable {
      */
     public void rechazarOferta() {
         TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
-        if (tpPed != null) {
-            MainTaller.rechazarOferta(tpPed.getId());
+        if(tpPed.getEstado() == EstadoOferta.ACTIVE){
+	        if (tpPed != null) {
+	            MainTaller.rechazarOferta(tpPed.getId());
+	        }
         }
         //else //no hay pedido seleccionada
     }

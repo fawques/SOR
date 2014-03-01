@@ -75,11 +75,11 @@ public class AltaDesguace implements Initializable {
                     } else {
                         //add errors in the interface
                         if (tfNombreDesguace.getText().length() < 22) {
-                        	errorNombreDesguace.setText("No pueden contener carácteres extraños, ni números");
+                        	errorNombreDesguace.setText("No pueden contener caracteres extranyos, ni numeros");
                         } else if (tfNombreDesguace.getText().isEmpty()) {
                         	errorNombreDesguace.setText("No puede ser vacio");
                         } else {
-                        	errorNombreDesguace.setText("No más de 21 carácteres");
+                        	errorNombreDesguace.setText("No mas de 21 caracteres");
                         }
 
                         tfNombreDesguace.setStyle("-fx-border-color: red;");
@@ -119,11 +119,11 @@ public class AltaDesguace implements Initializable {
                         tfCiudad.setStyle("-fx-border-color: red;");
                         //add errors in the interface
                         if (tfCiudad.getText().length() < 22) {
-                            errorCiudad.setText("No pueden contener carácteres extraños, ni números");
+                            errorCiudad.setText("No pueden contener caracteres extranyos, ni numeros");
                         } else if (tfCiudad.getText().isEmpty()) {
                             errorCiudad.setText("No puede ser vacio");
                         } else {
-                            errorCiudad.setText("No más de 21 carácteres");
+                            errorCiudad.setText("No mas de 21 caracteres");
                         }
                     }
                 }
@@ -140,7 +140,7 @@ public class AltaDesguace implements Initializable {
                     } else {
                         tfDireccion.setStyle("-fx-border-color: red;");
                         //add errors in the interface
-                        errorDireccion.setText("No más de 21 carácteres");
+                        errorDireccion.setText("No mas de 21 caracteres");
                     }
                 }
             }
@@ -157,11 +157,11 @@ public class AltaDesguace implements Initializable {
                         tfCp.setStyle("-fx-border-color: red;");
                         //add errors in the interface
                         if (tfCp.getText().length() >= 10) {
-                            errorCp.setText("No más de 9 carácteres");
+                            errorCp.setText("No mas de 9 caracteres");
                         } else if (tfCp.getText().isEmpty()) {
                             errorCp.setText("No puede ser vacio");
                         } else {
-                            errorCp.setText("Sólo añadir números");
+                            errorCp.setText("Solo anyadir numeros");
                         }
                     }
                 }
@@ -179,11 +179,11 @@ public class AltaDesguace implements Initializable {
                         tfTelefono.setStyle("-fx-border-color: red;");
                         //add errors in the interface
                         if (tfTelefono.getText().length() >= 10) {
-                            errorTelefono.setText("No más de 9 carácteres");
+                            errorTelefono.setText("No mas de 9 caracteres");
                         } else if (tfTelefono.getText().isEmpty()) {
                             errorTelefono.setText("No puede ser vacio");
                         } else {
-                            errorTelefono.setText("Sólo añadir números");
+                            errorTelefono.setText("Solo anyadir numeros");
                         }
                     }
                 }
@@ -246,7 +246,7 @@ public class AltaDesguace implements Initializable {
             //then we can send the registration
             System.out.println("Enviando...");
             if (DesguaceJava.alta(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
-                //METER en base de datos si está todo ok.
+                //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_desguace");
                 if (bd.altaDesguace(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
                     URL location = getClass().getResource("desguacePendienteActivacion.fxml");
@@ -255,7 +255,7 @@ public class AltaDesguace implements Initializable {
                     loader.setBuilderFactory(new JavaFXBuilderFactory());
                     Parent page = (Parent) loader.load(location.openStream());
                     thisStage.getScene().setRoot(page);
-                    thisStage.setTitle("Esperando código de aceptación");
+                    thisStage.setTitle("Esperando codigo de aceptacion");
                     DesguacerPendienteActivacionController staticDataBox = (DesguacerPendienteActivacionController) loader.getController();
                     staticDataBox.setStage(thisStage);
                     staticDataBox.showStage();
@@ -267,16 +267,6 @@ public class AltaDesguace implements Initializable {
             else{
                 System.err.println("alta me ha devuelto < 0");
             }
-            //Faltaría anyadir el código recibido por el gestor hay que pasarlo al gestor
-            /*MainTaller.sendMail("pablovm1990@gmail.com", tfEmail.getText(), "Usuario SorApp creado correctamente",
-             "<p>Gracias por confiar en nosotros como su gestor de actividades. No le defraudaremos.</p>"
-             + "<br/><br/>Los datos que ha introducido han sido los siguientes:<br/>"
-             + "<li>" + tfNombreTaller.getText() + "</li><br/>"
-             + "<li>" + tfDireccion.getText() + "</li><br/>"
-             + "<li>" + tfCiudad.getText() + "</li><br/>"
-             + "<li>" + tfCp.getText() + "</li><br/>"
-             + "<li>" + tfTelefono.getText() + "</li><br/>"
-             + "<br/>El equipo de SorPracs, liderador por el Sr. Albentosa");*/
         }
         //else nothing
     }

@@ -18,25 +18,25 @@ namespace desguaceNET.libSOR.BD
             database = "sor_desguace";
             conexion = new Conexion(database);
         }
-
-        public int anadirOferta(DateTime fechaAlta, int estado, double importe, string pedido, string desguace, DateTime fechaBaja, DateTime fechaLimite)
-        {
-            return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, fecha_baja, fecha_limite) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe.ToString("G", new CultureInfo("en-US")) + "','" + estado + "','" + pedido + "','" + desguace + "'," + (fechaBaja != null ? "'" + fechaBaja.ToString("yyyy/MM/dd") + "'" : null) + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
+        public int anadirOferta(DateTime fechaAlta,  int estado,double importe, String pedido, String desguace,String desguaceNombre, DateTime fechaBaja, DateTime fechaLimite) {
+            return conexion.ejecutarInsert(new MySqlCommand("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, desguaceNombre,fecha_baja, fecha_limite) values ('', " +  (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + importe.ToString("G", new CultureInfo("en-US")) + "','" + estado + "','" + pedido + "','" + desguace  + "','" + desguaceNombre +  "'," +  (fechaBaja != null ? "'" + fechaBaja.ToString("yyyy/MM/dd") + "'" : null)  + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ");"));
         }
 
-        public void anadirPedido(string id, DateTime fechaAlta, int estado, string taller, DateTime fechaBaja, DateTime fechaLimite, bool modoAutomatico)
+        public void anadirPedido(string id, DateTime fechaAlta, int estado, string taller,String tallerNombre,  DateTime fechaBaja, DateTime fechaLimite, bool modoAutomatico)
         {
-            conexion.ejecutarSQL(new MySqlCommand("insert INTO pedido (id, fecha_alta, estado, taller, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + estado + "','" + taller + "'," + (fechaBaja != null ? "'" + fechaBaja.ToString("yyyy/MM/dd") + "'" : null) + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ", '" + (modoAutomatico ? 1 : 0) + "');"));
+            conexion.ejecutarSQL(new MySqlCommand("insert INTO pedido (id, fecha_alta, estado, taller, tallerNombre, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + estado + "','" + taller + "','" + tallerNombre + "'," + (fechaBaja != null ? "'" + fechaBaja.ToString("yyyy/MM/dd") + "'" : null) + "," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ", '" + (modoAutomatico ? 1 : 0) + "');"));
         }
 
-        public int anadirPedido(DateTime fechaAlta, EstadoPedido estado, string taller, DateTime fechaBaja, DateTime fechaLimite, bool modoAutomatico)
+        public int anadirPedido(DateTime fechaAlta, EstadoPedido estado, string taller,string tallerNombre, DateTime fechaBaja, DateTime fechaLimite, bool modoAutomatico)
         {
-            return conexion.ejecutarInsert(new MySqlCommand("insert INTO pedido (id, fecha_alta, estado, taller, fecha_limite, modo_automatico) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + (int)estado + "','" + taller + "', " + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ", '" + (modoAutomatico ? 1 : 0) + "');"));
+            return conexion.ejecutarInsert(new MySqlCommand("insert INTO pedido (id, fecha_alta, estado, taller,tallerNombre, fecha_limite, modo_automatico) values ('', " + (fechaAlta != null ? "'" + fechaAlta.ToString("yyyy/MM/dd") + "'" : null) + ",'" + (int)estado + "','" + taller + "','" + tallerNombre +  "'," + (fechaLimite != null ? "'" + fechaLimite.ToString("yyyy/MM/dd") + "'" : null) + ", '" + (modoAutomatico ? 1 : 0) + "');"));
         }
 
         public int anadirPedido(Pedido p)
         {
-            return conexion.ejecutarInsert(new MySqlCommand("insert INTO pedido (id,fecha_alta, estado, taller, fecha_limite, fecha_baja, modo_automatico) values ('" + p.ID + "', '" + p.fecha_alta.ToString("yyyy/MM/dd") + "','" + (int)p.estado + "','" + p.tallerID + "', '" + p.fecha_limite.ToString("yyyy/MM/dd") + "', '" + p.getFecha_baja().ToString("yyyy/MM/dd") + "', '" + (p.modoAutomatico ? 1 : 0) + "');"));
+            int id = conexion.ejecutarInsert(new MySqlCommand("insert INTO pedido (id,fecha_alta, estado, taller, tallerNombre, fecha_limite, fecha_baja, modo_automatico) values ('" + p.ID + "', '" + p.fecha_alta.ToString("yyyy/MM/dd") + "','" + (int)p.estado + "','" + p.tallerID  + "','" + p.tallerNombre +  "','" + p.fecha_limite.ToString("yyyy/MM/dd") + "', '" + p.getFecha_baja().ToString("yyyy/MM/dd") + "', '" + (p.modoAutomatico ? 1 : 0) + "');"));
+            anyadirPiezasAPedido(p.ID, p.listaPiezas, p.listaCantidadesPiezas);
+            return id;
         }
 
         public int anadirDesguace(int id, string nombre, string email, string direccion, string ciudad, int codPostal, int telefono, int estado)
@@ -52,7 +52,7 @@ namespace desguaceNET.libSOR.BD
                 DataSet resultados = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM oferta;"));
                 DataTableReader reader = resultados.CreateDataReader();
                 while(reader.Read()){
-                    Oferta nuevo = new Oferta(reader.GetString(1), reader.GetInt32(0), reader.GetDouble(3), reader.GetString(6), reader.GetString(5),reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
+                    Oferta nuevo = new Oferta(reader.GetString(1), reader.GetInt32(0), reader.GetDouble(3), reader.GetString(6), (string)reader["desguaceNombre"], reader.GetString(5),reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
                     lista.Add(nuevo);
                 }
             }catch(MySqlException ex){
@@ -73,7 +73,7 @@ namespace desguaceNET.libSOR.BD
                 List<int> cantidades = new List<int>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
 
-                Pedido nuevo = new Pedido(pedidoID,(int)reader["id_aux"], (string)reader["taller"], reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID,(int)reader["id_aux"], (string)reader["taller"], (string)reader["tallerNombre"],reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.Add(nuevo);
             }
         }catch(MySqlException ex){
@@ -95,7 +95,7 @@ namespace desguaceNET.libSOR.BD
                 List<int> cantidades = new List<int>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
 
-                Pedido nuevo = new Pedido(pedidoID, reader.GetInt32(0), reader.GetString(4), reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID, reader.GetInt32(0), (string)reader["taller"], (string)reader["tallerNombre"], reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.Add(nuevo);
            }
         } catch (MySqlException ex) {
@@ -116,7 +116,7 @@ namespace desguaceNET.libSOR.BD
                     string ofertaID = reader.GetString(1);
 
 
-                    Oferta nuevo = new Oferta(ofertaID, reader.GetInt32(0), reader.GetDouble(3), reader.GetString(6), reader.GetString(5), reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
+                    Oferta nuevo = new Oferta(ofertaID, reader.GetInt32(0), reader.GetDouble(3), reader.GetString(6), (string)reader["desguaceNombre"], reader.GetString(5), reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
                     lista.Add(nuevo);
                 }
             }
@@ -141,7 +141,7 @@ namespace desguaceNET.libSOR.BD
                     string ofertaID = reader.GetString(1);
 
 
-                    Oferta nuevo = new Oferta(ofertaID, reader.GetInt32(0), reader.GetDouble(3), reader.GetString(6), reader.GetString(5), reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
+                    Oferta nuevo = new Oferta(ofertaID, reader.GetInt32(0), reader.GetDouble(3), reader.GetString(6), (string)reader["desguaceNombre"], reader.GetString(5), reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
                     lista.Add(nuevo);
                 }
             }
@@ -165,7 +165,7 @@ namespace desguaceNET.libSOR.BD
                 List<int> cantidades = new List<int>();
                 getPiezasYCantidades(id, piezas, cantidades);
 
-                pedido = new Pedido(reader.GetString(1), reader.GetString(4), reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(id));
+                pedido = new Pedido(reader.GetString(1), (string)reader["taller"], (string)reader["tallerNombre"], reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(id));
 
             }
         }catch(MySqlException ex){
@@ -215,7 +215,7 @@ namespace desguaceNET.libSOR.BD
         try{
             DataSet resultados = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM oferta WHERE desguace='" + desguaceID + "';"));
             DataTableReader reader = resultados.CreateDataReader(); while(reader.Read()){
-                Oferta nueva = new Oferta(reader.GetString(1),  reader.GetDouble(3), reader.GetString(6), reader.GetString(5),reader.GetDateTime(2), (!reader.IsDBNull(7)?reader.GetDateTime(7):new DateTime()), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
+                Oferta nueva = new Oferta(reader.GetString(1), reader.GetDouble(3), reader.GetString(6), (string)reader["desguaceNombre"], reader.GetString(5), reader.GetDateTime(2), (!reader.IsDBNull(7) ? reader.GetDateTime(7) : new DateTime()), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
                 lista.Add(nueva);
             }
         }catch(MySqlException ex){
@@ -233,7 +233,7 @@ namespace desguaceNET.libSOR.BD
             Oferta nueva;
             DataTableReader reader = resultados.CreateDataReader();
             while(reader.Read()){
-                nueva = new Oferta(reader.GetString(1), reader.GetDouble(3), reader.GetString(6), reader.GetString(5), reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
+                nueva = new Oferta(reader.GetString(1), reader.GetDouble(3), reader.GetString(6), (string)reader["desguaceNombre"], reader.GetString(5), reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
 
                 lista.Add(nueva);
             }
@@ -252,7 +252,7 @@ namespace desguaceNET.libSOR.BD
             Oferta nueva;
             DataTableReader reader = resultados.CreateDataReader();
             while(reader.Read()){
-                nueva = new Oferta(reader.GetString(1), reader.GetDouble(3), reader.GetString(6), reader.GetString(5), reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
+                nueva = new Oferta(reader.GetString(1), reader.GetDouble(3), reader.GetString(6), (string)reader["desguaceNombre"], reader.GetString(5), reader.GetDateTime(2), reader.GetDateTime(7), reader.GetDateTime(8), (EstadoOferta)reader.GetInt32(4));
 
                 lista.Add(nueva);
             }
@@ -360,7 +360,7 @@ namespace desguaceNET.libSOR.BD
             List<int> cantidades = new List<int>();
             getPiezasYCantidades(idPedido, piezas, cantidades);
             //falta filtrar por pieza
-            Pedido p = new Pedido(reader.GetString(1), reader.GetInt32(0), reader.GetString(4), reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(reader.GetString(1)));
+            Pedido p = new Pedido(reader.GetString(1), reader.GetInt32(0), (string)reader["taller"], (string)reader["tallerNombre"], reader.GetDateTime(2), reader.GetDateTime(5), reader.GetDateTime(6), (EstadoPedido)reader.GetInt32(3), (sbyte)reader["modo_automatico"] != 0, piezas, cantidades, getOfertasPedido(reader.GetString(1)));
             alPedidos.Add(p);
         }
 
@@ -391,6 +391,27 @@ namespace desguaceNET.libSOR.BD
             sWhere += "estado='" + estado + "'";
         }
         return sWhere;
+    }
+
+    private bool anyadirPiezasATablaPieza(List<Pieza> piezas) {
+        foreach (Pieza pieza in piezas)
+    	{
+		     conexion.ejecutarInsert(new MySqlCommand("Insert into pieza(nombre) values ('" + pieza.getNombre() + "')"));
+	    }
+        return true;
+    }
+
+    public bool anyadirPiezasAPedido(String idPedido, List<Pieza> piezas, List<int> cantidades)
+    {
+        if (anyadirPiezasATablaPieza(piezas))
+        {
+            for (int i = 0; i < piezas.Count; i++)
+            {
+                conexion.ejecutarInsert(new MySqlCommand("Insert into pedido_pieza(pedido,pieza,cantidad) values ('" + idPedido + "', '" + piezas[i].getNombre() + "', '" + cantidades[i] + "')"));
+            }
+            return true;
+        }
+        return false;
     }
 
     public bool cambiarEstadoOferta(EstadoOferta eOf, string id) {
