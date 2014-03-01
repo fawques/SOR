@@ -163,7 +163,7 @@ public class InterfazBD {
                 String pedidoID = resultados.getString("id");
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
-                getPiezasYCantidades(pedidoID, piezas, cantidades);
+                getPiezasYCantidades(resultados.getInt("id_aux"), piezas, cantidades);
 
                 Pedido nuevo = new Pedido(pedidoID, resultados.getInt("id_aux"),resultados.getString("taller"), resultados.getString("tallerNombre"),resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getInt("modo_automatico") != 0, piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
@@ -186,7 +186,7 @@ public class InterfazBD {
                 String pedidoID = resultados.getString("id");
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
-                getPiezasYCantidades(pedidoID, piezas, cantidades);
+                getPiezasYCantidades(resultados.getInt("id_aux"), piezas, cantidades);
                 Pedido nuevo = new Pedido(pedidoID, resultados.getInt("id_aux"), resultados.getString("taller"),resultados.getString("tallerNombre") ,resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
@@ -207,7 +207,7 @@ public class InterfazBD {
                 String pedidoID = resultados.getString("id");
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
-                getPiezasYCantidades(pedidoID, piezas, cantidades);
+                getPiezasYCantidades(resultados.getInt("id_aux"), piezas, cantidades);
                 Pedido nuevo = new Pedido(pedidoID,resultados.getInt("id_aux") ,resultados.getString("taller"),resultados.getString("tallerNombre") ,resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
                 return nuevo;
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
@@ -228,7 +228,7 @@ public class InterfazBD {
                 String pedidoID = resultados.getString("id");
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
-                getPiezasYCantidades(pedidoID, piezas, cantidades);
+                getPiezasYCantidades(resultados.getInt("id_aux"), piezas, cantidades);
 
                 Pedido nuevo = new Pedido(pedidoID, resultados.getInt("id_aux"), resultados.getString("taller"),resultados.getString("tallerNombre"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
@@ -267,7 +267,7 @@ public class InterfazBD {
                 String pedidoID = resultados.getString("id");
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
-                getPiezasYCantidades(pedidoID, piezas, cantidades);
+                getPiezasYCantidades(resultados.getInt("id_aux"), piezas, cantidades);
 
                 Pedido nuevo = new Pedido(pedidoID,resultados.getInt("id_aux") , resultados.getString("taller"), resultados.getString("tallerNombre") ,resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
@@ -288,7 +288,7 @@ public class InterfazBD {
                 String pedidoID = resultados.getString("id");
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
-                getPiezasYCantidades(pedidoID, piezas, cantidades);
+                getPiezasYCantidades(resultados.getInt("id_aux"), piezas, cantidades);
 
                 Pedido nuevo = new Pedido(pedidoID, resultados.getInt("id_aux"), resultados.getString("taller"), resultados.getString("tallerNombre"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
@@ -438,7 +438,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
                 ArrayList<Pieza> piezas =new ArrayList<>();
         
                 ArrayList<Integer> cantidades = new ArrayList<>();
-                getPiezasYCantidades(id, piezas, cantidades);
+                getPiezasYCantidades(resultados.getInt("id_aux"), piezas, cantidades);
 
                 pedido = new Pedido(resultados.getString("id"),resultados.getInt("id_aux") , resultados.getString("taller"),resultados.getString("tallerNombre"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(id));
 
@@ -463,7 +463,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
     
 
-    public void getPiezasYCantidades(String pedidoID, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades){
+    public void getPiezasYCantidades(int pedidoID, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades){
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM pedido_pieza WHERE pedido='" + pedidoID + "';");
             while(resultados.next()){
@@ -729,7 +729,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             while (!pedidos.isAfterLast()) {
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
-                getPiezasYCantidades(idPedido, piezas, cantidades);
+                getPiezasYCantidades(pedidos.getInt("id_aux"), piezas, cantidades);
                 //falta filtrar por pieza
                 Pedido p = new Pedido(pedidos.getNString("id"),
                         pedidos.getInt("id_aux"), pedidos.getNString("taller"),pedidos.getNString("tallerNombre"), pedidos.getDate("fecha_alta"), pedidos.getDate("fecha_baja"), pedidos.getDate("fecha_limite"), EstadoPedido.values()[pedidos.getInt("estado")],
