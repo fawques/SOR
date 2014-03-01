@@ -316,6 +316,7 @@ public class DesguaceJava extends Application {
 		try {
 			bd = new InterfazBD("sor_desguace");
 			of = bd.getOfertasConID_aux(EstadoOferta.ACTIVE);
+			of.addAll(bd.getOfertasConID_aux(EstadoOferta.ACCEPTED));
 			bd.close();
 			return of;
 		} catch (SQLException ex) {

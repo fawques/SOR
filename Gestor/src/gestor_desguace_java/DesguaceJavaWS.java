@@ -136,6 +136,7 @@ public class DesguaceJavaWS {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             String listaJSON = gson.toJson(listaOfertas);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -162,6 +163,7 @@ public class DesguaceJavaWS {
              
             String listaJSON = gson.toJson(listapedidos);
             System.out.println("listaJSON = " + listaJSON);
+            bd.close();
             return listaJSON;
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,7 +183,8 @@ public class DesguaceJavaWS {
             bd = new InterfazBD("sor_gestor");
             String listapedidos="";
             Pedido p=bd.getPedidoID(id);
-            listapedidos=gson.toJson(p); 
+            listapedidos=gson.toJson(p);
+            bd.close();
             return listapedidos;
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -262,7 +265,9 @@ public class DesguaceJavaWS {
         try {
             bd= new InterfazBD("sor_gestor");
             System.out.println("miau");
-           return  bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+           bd.close();
+           return ool;
       
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -279,7 +284,9 @@ public class DesguaceJavaWS {
            
         try {
             bd= new InterfazBD("sor_gestor");
-           return  bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+           bd.close();
+           return ool;
       
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
