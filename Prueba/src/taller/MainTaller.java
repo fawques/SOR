@@ -402,9 +402,12 @@ public class MainTaller extends Application {
 		if (pedidosgestor != null) {
 			for (Pedido pedidogestor : pedidosgestor) {
 				for (Pedido pedidodesguace : pedidos) {
-					if (pedidogestor.getID().equals(pedidodesguace.getID())) {
+					if (pedidogestor.getID_aux()==pedidodesguace.getID_aux()) {
 						if (pedidogestor.getEstado() != pedidodesguace.getEstado()) {
 							cambiarEstadoPedido(pedidogestor.getEstado(),pedidogestor.getID());
+						}
+						if(!pedidogestor.getID().equals(pedidodesguace.getID())){
+							bd.activarPedidoTaller(pedidodesguace.getID_aux(),pedidogestor.getID());
 						}
 					}
 				}
@@ -449,8 +452,10 @@ public class MainTaller extends Application {
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 			String idFinal = nuevoPedido(gson.toJson(nuevo));
-			bd.activarPedidoTaller(id, idFinal);
-			bd.anyadirPiezasAPedido(idFinal, piezas, cantidades);
+			if(!idFinal.equals("")){
+				bd.activarPedidoTaller(id, idFinal);				
+			}
+			bd.anyadirPiezasAPedido(id, piezas, cantidades);
 			bd.close();
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,

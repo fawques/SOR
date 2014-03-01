@@ -22,8 +22,7 @@ public class Pedido {
     private Date fecha_baja;
     private Date fecha_limite;
     private EstadoPedido estado;
-    private boolean modoAutomatico;
-    
+    private boolean modoAutomatico;    
     private ArrayList<Pieza> listaPiezas;
     private ArrayList<Integer> listaCantidadesPiezas;
     private ArrayList<Oferta> listaOfertas;
@@ -70,7 +69,7 @@ public class Pedido {
      * @param listaCantidadesPiezas
      * @param listaOfertas
      */
-    public Pedido(String ID, String tallerID,String tallerNombre, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, boolean modoAutomatico, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
+   /* public Pedido(String ID, String tallerID,String tallerNombre, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoPedido estado, boolean modoAutomatico, ArrayList<Pieza> listaPiezas, ArrayList<Integer> listaCantidadesPiezas, ArrayList<Oferta> listaOfertas) {
         this.ID = ID;
         this.tallerID = tallerID;
         this.fecha_alta = fecha_alta;
@@ -82,7 +81,7 @@ public class Pedido {
         this.listaOfertas = listaOfertas;
         this.modoAutomatico = modoAutomatico;
         this.tallerNombre=tallerNombre;
-    }
+    }*/
 
     /**
      * Constructor para pedidos nuevos. Se pone el estado a NEW y la fecha_alta a la fecha actual.

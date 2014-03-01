@@ -108,8 +108,8 @@ public class TallerWS {
             Date ahora = new Date();
             String stringID  = "Pedido_"+ bd.getNumPedidos();
             p.setID(stringID);
-             bd.anadirPedido(stringID, p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(),p.getTallerNombre() ,p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
-             bd.anyadirPiezasAPedido(p.getID(), p.getListaPiezas(), p.getListaCantidadesPiezas());
+             bd.anadirPedido(stringID,p.getID_aux(), p.getFecha_alta(), p.getEstado().ordinal(), p.getTaller(),p.getTallerNombre() ,p.getFecha_baja(), p.getFecha_limite(), p.getModoAutomatico());
+             bd.anyadirPiezasAPedido(p.getID_aux(), p.getListaPiezas(), p.getListaCantidadesPiezas());
              for(Desguace desguace: bd.getDesguaces()){
              enviarPedidoActivemq(desguace.getID(),new PedidoCorto(p.getID(),p.getEstado()));
             }

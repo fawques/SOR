@@ -35,20 +35,29 @@ public class InterfazBD {
     
     // DESGUACES 
     // setterss
-    public void anadirOferta(String id, Date fechaAlta, double importe, int estado, String pedido, String desguace,String desguaceNombre,  Date fechaBaja, Date fechaLimite) {
+    public void anadirOferta(String id, int id_aux,Date fechaAlta, double importe, int estado, String pedido, String desguace,String desguaceNombre,  Date fechaBaja, Date fechaLimite) {
          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-          conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, desguaceNombre,fecha_baja, fecha_limite) values ('" + id + "',"  +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "','" + desguaceNombre +  "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ");");
+          conexion.ejecutarInsert("insert INTO oferta (id,id_aux ,fecha_alta, importe, estado, pedido, desguace, desguaceNombre,fecha_baja, fecha_limite) values ('" + id+"','"+id_aux+ "'," +(fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "','" + desguaceNombre +  "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ");");
 
     }
+    public void anadirOferta(String id,Date fechaAlta, double importe, int estado, String pedido, String desguace,String desguaceNombre,  Date fechaBaja, Date fechaLimite) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+         conexion.ejecutarInsert("insert INTO oferta (id,fecha_alta, importe, estado, pedido, desguace, desguaceNombre,fecha_baja, fecha_limite) values ('" + id+"'," +(fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace + "','" + desguaceNombre +  "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ");");
+
+   }
     public int anadirOferta(Date fechaAlta,  int estado,double importe, String pedido, String desguace,String desguaceNombre, Date fechaBaja, Date fechaLimite) {
          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return conexion.ejecutarInsert("insert INTO oferta (id, fecha_alta, importe, estado, pedido, desguace, desguaceNombre,fecha_baja, fecha_limite) values ('', " +  (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + importe + "','" + estado + "','" + pedido + "','" + desguace  + "','" + desguaceNombre +  "'," +  (fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja)  + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ");");
     }
-    public void anadirPedido(String id, Date fechaAlta, int estado, String taller,String tallerNombre, Date fechaBaja, Date fechaLimite, boolean modoAutomatico)    {
+    public void anadirPedido(String id, int id_aux,Date fechaAlta, int estado, String taller,String tallerNombre, Date fechaBaja, Date fechaLimite, boolean modoAutomatico)    {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        conexion.ejecutarSQL("insert INTO pedido (id, fecha_alta, estado, taller,tallerNombre, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado + "','" + taller + "','" + tallerNombre +  "'," +(fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja) + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
+        conexion.ejecutarSQL("insert INTO pedido (id, id_aux,fecha_alta, estado, taller,tallerNombre, fecha_baja, fecha_limite, modo_automatico) values ('" + id +"','"+id_aux+ "'," + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado + "','" + taller + "','" + tallerNombre +  "'," +(fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja) + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
     }
-    
+
+    public void anadirPedido(String id,Date fechaAlta, int estado, String taller,String tallerNombre, Date fechaBaja, Date fechaLimite, boolean modoAutomatico)    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        conexion.ejecutarSQL("insert INTO pedido (id, id_aux,fecha_alta, estado, taller,tallerNombre, fecha_baja, fecha_limite, modo_automatico) values ('" + id + "'," + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado + "','" + taller + "','" + tallerNombre +  "'," +(fechaBaja != null ? "'" + dateFormat.format(fechaBaja) + "'" : fechaBaja) + "," + (fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
+    }
     public int anadirPedido(Date fechaAlta, EstadoPedido estado, String taller, String tallerNombre,Date fechaBaja, Date fechaLimite, boolean modoAutomatico) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return conexion.ejecutarInsert("insert INTO pedido (id, fecha_alta, estado, taller,tallerNombre ,fecha_limite, modo_automatico) values ('', " + (fechaAlta != null ? "'" + dateFormat.format(fechaAlta) + "'" : fechaAlta) + ",'" + estado.ordinal() + "','" + taller + "','" + tallerNombre +  "'," +(fechaLimite != null ? "'" + dateFormat.format(fechaLimite) + "'" : fechaLimite) + ", '" + (modoAutomatico ? 1 : 0) + "');");
@@ -67,7 +76,7 @@ public class InterfazBD {
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta;");
             while(resultados.next()){
-                Oferta nuevo = new Oferta(resultados.getString("id"), resultados.getDouble("importe"), resultados.getString("desguace"), resultados.getString("desguaceNombre"), resultados.getString("pedido"),resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")] );
+                Oferta nuevo = new Oferta(resultados.getString("id"), resultados.getInt("id_aux"),resultados.getDouble("importe"), resultados.getString("desguace"), resultados.getString("desguaceNombre"), resultados.getString("pedido"),resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")] );
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -156,7 +165,7 @@ public class InterfazBD {
                 ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
 
-                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getString("tallerNombre"),resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getInt("modo_automatico") != 0, piezas, cantidades, getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID, resultados.getInt("id_aux"),resultados.getString("taller"), resultados.getString("tallerNombre"),resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getInt("modo_automatico") != 0, piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -178,7 +187,7 @@ public class InterfazBD {
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
-                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"),resultados.getString("tallerNombre") ,resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID, resultados.getInt("id_aux"), resultados.getString("taller"),resultados.getString("tallerNombre") ,resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -199,7 +208,7 @@ public class InterfazBD {
                 ArrayList<Pieza> piezas = new ArrayList<>();
                 ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
-                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"),resultados.getString("tallerNombre") ,resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID,resultados.getInt("id_aux") ,resultados.getString("taller"),resultados.getString("tallerNombre") ,resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
                 return nuevo;
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -239,7 +248,7 @@ public class InterfazBD {
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta where estado='" + estado.ordinal() + "'");
             while (resultados.next()) {    
 
-                nueva = new Oferta(resultados.getString("id"), resultados.getDouble("importe"), resultados.getString("desguace"),resultados.getString("desguaceNombre"), resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+                nueva = new Oferta(resultados.getString("id"), resultados.getInt("id_aux") ,resultados.getDouble("importe"), resultados.getString("desguace"),resultados.getString("desguaceNombre"), resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
                 lista.add(nueva);
            }
         } catch (SQLException ex) {
@@ -260,7 +269,7 @@ public class InterfazBD {
                 ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(pedidoID, piezas, cantidades);
 
-                Pedido nuevo = new Pedido(pedidoID, resultados.getString("taller"), resultados.getString("tallerNombre") ,resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
+                Pedido nuevo = new Pedido(pedidoID,resultados.getInt("id_aux") , resultados.getString("taller"), resultados.getString("tallerNombre") ,resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(pedidoID));
                 lista.add(nuevo);
            }
         } catch (SQLException ex) {
@@ -431,7 +440,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
                 ArrayList<Integer> cantidades = new ArrayList<>();
                 getPiezasYCantidades(id, piezas, cantidades);
 
-                pedido = new Pedido(resultados.getString("id"), resultados.getString("taller"),resultados.getString("tallerNombre"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(id));
+                pedido = new Pedido(resultados.getString("id"),resultados.getInt("id_aux") , resultados.getString("taller"),resultados.getString("tallerNombre"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoPedido.values()[resultados.getInt("estado")], resultados.getBoolean("modo_automatico"), piezas, cantidades, getOfertasPedido(id));
 
             }
         }catch(SQLException ex){
@@ -489,7 +498,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta WHERE desguace='" + desguaceID + "';");
             while(resultados.next()){
-                Oferta nueva = new Oferta(resultados.getString("id"),  resultados.getDouble("importe"), resultados.getString("desguace"),resultados.getString("desguaceNombre"), resultados.getString("pedido"),resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+                Oferta nueva = new Oferta(resultados.getString("id"),resultados.getInt("id_aux") ,  resultados.getDouble("importe"), resultados.getString("desguace"),resultados.getString("desguaceNombre"), resultados.getString("pedido"),resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
                 lista.add(nueva);
             }
         }catch(SQLException ex){
@@ -506,7 +515,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta WHERE pedido='" + pedidoID + "';");
             Oferta nueva;
             while (resultados.next()) {
-                nueva = new Oferta(resultados.getString("id"), resultados.getDouble("importe"), resultados.getString("desguace"),resultados.getString("desguaceNombre"),  resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+                nueva = new Oferta(resultados.getString("id"),resultados.getInt("id_aux") , resultados.getDouble("importe"), resultados.getString("desguace"),resultados.getString("desguaceNombre"),  resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
 
                 lista.add(nueva);
             }
@@ -524,7 +533,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta WHERE pedido='" + pedidoID + "' and estado='" + estado.ordinal() + "';");
             Oferta nueva;
             while (resultados.next()) {
-                nueva = new Oferta(resultados.getString("id"), resultados.getDouble("importe"), resultados.getString("desguace"),resultados.getString("desguaceNombre"),  resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+                nueva = new Oferta(resultados.getString("id"),resultados.getInt("id_aux") , resultados.getDouble("importe"), resultados.getString("desguace"),resultados.getString("desguaceNombre"),  resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
 
                 lista.add(nueva);
             }
@@ -767,7 +776,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         return true;
     }
 
-    public boolean anyadirPiezasAPedido(String idPedido, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
+    public boolean anyadirPiezasAPedido(int idPedido, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades) {
         if (anyadirPiezasATablaPieza(piezas)) {
             for (int i = 0; i < piezas.size(); i++) {
                 conexion.ejecutarInsert("Insert into pedido_pieza(pedido,pieza,cantidad) values ('" + idPedido + "', '" + piezas.get(i).getNombre() + "', '" + cantidades.get(i) + "')");
@@ -786,9 +795,11 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     public boolean activarPedidoTaller(int id_aux, String id) {
         return conexion.ejecutarSQL("Update pedido set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
     }
+
     public boolean activarOfertaDesguace(int id_aux, String id) {
         return conexion.ejecutarSQL("Update oferta set estado='1', id='" + id + "' where id_aux='" + id_aux + "';");
     }
+    
     public boolean cancelarOfertas(String idPedido) {
         return conexion.ejecutarSQL("Update oferta set estado='" + EstadoOferta.CANCELLED.ordinal() + "' where pedido='" + idPedido + "'");
     }

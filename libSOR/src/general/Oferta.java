@@ -61,7 +61,7 @@ public class Oferta {
      * @param fecha_limite
      * @param estado
      */
-    public Oferta(String ID, double precio, String desguaceID, String desguaceNombre, String pedidoID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoOferta estado) {
+   /* public Oferta(String ID, double precio, String desguaceID, String desguaceNombre, String pedidoID, Date fecha_alta, Date fecha_baja, Date fecha_limite, EstadoOferta estado) {
         this.ID = ID;
         this.ID_aux = -1;
         this.precio = precio;
@@ -72,7 +72,7 @@ public class Oferta {
         this.fecha_limite = fecha_limite;
         this.estado = estado;
         this.desguaceNombre=desguaceNombre;
-    }
+    }*/
 
     /**
      * Constructor para ofertas nuevos. Se pone el estado a NEW y la fecha_alta a la fecha actual.
@@ -82,7 +82,7 @@ public class Oferta {
      * @param pedidoID
      * @param fecha_limite fecha límite para recibir ofertas de este pedido. Pasada esa fecha, el pedido se cancelará
      */
-    public Oferta(int ID_aux, double precio, String desguaceID, String desguaceNombre,  String pedidoID, Date fecha_limite) {
+    /*public Oferta(int ID_aux, double precio, String desguaceID, String desguaceNombre,  String pedidoID, Date fecha_limite) {
         this.ID = "";
         this.ID_aux = ID_aux;
         this.precio = precio;
@@ -93,7 +93,7 @@ public class Oferta {
         this.fecha_limite = fecha_limite;
         this.estado = EstadoOferta.NEW;
         this.desguaceNombre=desguaceNombre;
-    }
+    }*/
     
     /** Constructor de copia
      *

@@ -325,9 +325,12 @@ public class GestionPedidos implements Initializable {
         }
        for(Oferta ofertagestor:ofertasgestor){
            for(Oferta ofertadesguace:ofertas){
-               if(ofertagestor.getID().equals(ofertadesguace.getID())){
+               if(ofertagestor.getID_aux()==ofertadesguace.getID_aux()){
                     if(ofertagestor.getEstado()!=ofertadesguace.getEstado()){
                            DesguaceJava.cambiarEstadoOferta(ofertagestor.getID(),ofertagestor.getEstado());
+                    }
+                    if(!ofertagestor.getID().equals(ofertadesguace.getID())){
+                    	bd.activarOfertaDesguace(ofertagestor.getID_aux(),ofertagestor.getID());
                     }
                }
            }
@@ -629,7 +632,7 @@ public class GestionPedidos implements Initializable {
         TablaPedidos interfaz= new TablaPedidos();
          for (Pedido pedido : listaPedidos) {
             bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
-            bd.anyadirPiezasAPedido(pedido.getID(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
+            bd.anyadirPiezasAPedido(pedido.getID_aux(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
 
             /* interfaz= new TablaPedidos(pedido);
              datatablePedidos.add(interfaz);*/

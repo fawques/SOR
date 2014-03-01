@@ -262,7 +262,10 @@ public class DesguaceJava extends Application {
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 			String idFinal = nuevaOferta(gson.toJson(nuevo));
-			bd.activarOfertaDesguace(id, idFinal);
+			if(!idFinal.equals("")){
+				bd.activarOfertaDesguace(id, idFinal);
+			}
+			
 			bd.close();
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
