@@ -104,7 +104,9 @@ public class TripleDes {
 				try {
 					key2 = readKey(keyfile);
 					try {
-						encrypt(key2, "pepe", System.out);
+						String cifrado = encrypt(key2, "pepe");
+						System.out.println("ESTimado, este es el cifrado: " + cifrado);
+						decrypt(key2,cifrado);
 					} catch (NoSuchPaddingException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -220,11 +222,12 @@ public class TripleDes {
 
 		// For extra security, don't leave any plaintext hanging around memory.
 		//java.util.Arrays.fill(buffer, (byte) 0);
-		Base64 ba = new Base64();
 		byte[] encryptedString;
 		try {
-			encryptedString = ba.encode(cipher.doFinal(in.getBytes()));
+			encryptedString = cipher.doFinal(in.getBytes());
+			
 	        return new String(encryptedString);
+
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -238,7 +241,7 @@ public class TripleDes {
 	 * directly to show how it can be done without CipherInputStream and
 	 * CipherOutputStream.
 	 */
-	public static void decrypt(SecretKey key, InputStream in, OutputStream out)
+	/*public static void decrypt(SecretKey key, InputStream in, OutputStream out)
 			throws NoSuchAlgorithmException, InvalidKeyException, IOException,
 			IllegalBlockSizeException, NoSuchPaddingException,
 			BadPaddingException {
@@ -256,5 +259,22 @@ public class TripleDes {
 		// Write out the final bunch of decrypted bytes
 		out.write(cipher.doFinal());
 		out.flush();
+	}*/
+	
+
+	public static String decrypt(SecretKey key,String encryptedString) {
+	    String decryptedText=null;
+	    try {
+	    	Cipher cipher = Cipher.getInstance("DESede");
+	    	cipher.init(Cipher.DECRYPT_MODE, key);
+
+	        byte[] encryptedText = encryptedString.getBytes();
+	        byte[] plainText = cipher.doFinal(encryptedText);
+	        decryptedText= new String(plainText);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    System.out.println("ESTimado, este es el descifrado, si no coincide eres tonto!: " + decryptedText);
+	    return decryptedText;
 	}
 }

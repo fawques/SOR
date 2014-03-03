@@ -17,6 +17,8 @@ public class MainSeguridad {
 	public MainSeguridad() {
 		// TODO Auto-generated constructor stub
 		TripleDes t = new TripleDes();
+		String[] args = null ; 
+		TripleDes.main(args);
 	}
 
 }
