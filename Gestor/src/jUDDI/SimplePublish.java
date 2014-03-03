@@ -59,7 +59,7 @@ public class SimplePublish {
     private static UDDIPublicationPortType publish = null;
     private static String urlUddi;
     public SimplePublish(){
-    	urlUddi="http://localhost:8081/juddiv3/services/";
+    	urlUddi="http://192.168.1.5:8081/juddiv3/services/";
 //        try {
 //        	// create a client and read the config in the archive; 
 //            // you can use your config file name

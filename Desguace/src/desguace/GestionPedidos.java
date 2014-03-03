@@ -657,10 +657,10 @@ public class GestionPedidos implements Initializable {
                Boolean gestorlohacambiado= DesguaceJava.aceptarOfertaFin(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
                Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.FINISHED_OK);
                if(gestorlohacambiado && gestorpedido){
-                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.FINISHED_OK);
+                   /* aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.FINISHED_OK);
                     if(aceptado==false){
                         System.err.println("No se ha podido aceptar la oferta");
-                    }
+                    }*/
                   }
                   else{
                     System.err.println("No se ha podido cambiar la oferta en gestor a finalizado");

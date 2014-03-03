@@ -202,7 +202,16 @@ public class DesguaceJavaWS {
         Boolean aceptada=false;
         try {
             bd = new InterfazBD("sor_gestor");
+            Oferta of= bd.getOfertaporID(id);
             aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+            Pedido ped= bd.getPedido(of.getPedido());
+            ArrayList<Oferta> listaoferta=bd.getOfertasPedido(ped.getID());
+            for(Oferta oferta:listaoferta){
+            	if(oferta.getEstado()==EstadoOferta.ACTIVE ||oferta.getEstado()==EstadoOferta.NEW ||oferta.getEstado()==EstadoOferta.ACCEPTED){
+            		bd.cambiarEstadoOferta(EstadoOferta.REJECTED, oferta.getID());
+            	}
+            }
+            bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK,ped.getID());
             bd.close();
             return aceptada;
             
