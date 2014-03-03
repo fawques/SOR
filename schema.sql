@@ -94,7 +94,7 @@ CREATE TABLE `taller` (
 
 CREATE TABLE `pedido` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) DEFAULT '',
+  `id` char(32) UNIQUE DEFAULT '',
   `fecha_alta` date NOT NULL,
   `estado` int(11) NOT NULL,
   `taller` char(32) NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE `pedido_pieza` (
 
 CREATE TABLE `oferta` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) DEFAULT '',
+  `id` char(32) UNIQUE DEFAULT '',
   `fecha_alta` date NOT NULL,
   `importe` double NOT NULL,
   `estado` int(11) NOT NULL,
@@ -166,7 +166,7 @@ CREATE TABLE `desguace` (
 
 CREATE TABLE `pedido` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) DEFAULT '',
+  `id` char(32) UNIQUE DEFAULT '',
   `fecha_alta` date NOT NULL,
   `estado` int(11) NOT NULL,
   `taller` char(32) NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `pieza` (
 
 CREATE TABLE `oferta` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(32) DEFAULT '',
+  `id` char(32) UNIQUE DEFAULT '',
   `fecha_alta` date NOT NULL,
   `importe` double NOT NULL,
   `estado` int(11) NOT NULL,
