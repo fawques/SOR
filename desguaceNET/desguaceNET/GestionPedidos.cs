@@ -224,6 +224,12 @@ namespace desguaceNET
             updateOfertasActivas();
             updateHistoricoOfertas();
             updateHistoricoPedidos();
+            updateAcciones();
+        }
+
+        private void updateAcciones()
+        {
+            tablaAcciones.DataSource = main.getAcciones();
         }
 
         private void Pedidos_SelectedIndexChanged(object sender, EventArgs e)

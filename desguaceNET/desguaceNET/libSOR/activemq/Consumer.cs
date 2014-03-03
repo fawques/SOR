@@ -22,7 +22,7 @@ namespace desguaceNET.libSOR.activemq
         public Consumer(string queueName)
         {
             //Create ConnectionFactory
-            connectionFactory = new ConnectionFactory("failover:(" + jUDDI.jUDDIProxy.getActiveMQ().OriginalString + ")?maxReconnectAttempts=2&initialReconnectDelay=500&maxReconnectDelay=500");
+            connectionFactory = new ConnectionFactory("failover:(" + jUDDI.jUDDIProxy.getActiveMQ().OriginalString + ")?timeout=1000&maxReconnectAttempts=2&initialReconnectDelay=500&maxReconnectDelay=500");
             //Create Connection
             connection = connectionFactory.CreateConnection();
             //Create Session
@@ -34,32 +34,34 @@ namespace desguaceNET.libSOR.activemq
 
         }
 
-        public string consumeMessage(){
-    //Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
-        
-        //Start Connection
-        /** Starts (or restarts) a connection's delivery of incoming messages. */
-        connection.Start();
-        //Consume Message
-        IMessage message =  consumer.Receive(new TimeSpan(10000));
-        var textMessage = message as ITextMessage;
+        public string consumeMessage()
+        {
+            //Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy hh:mm:ss a").create();
 
-       /* if(message==null){
-            throw new javax.jms.IllegalStateException("no ha cogido ningún mensaje");
-        }*/
-        List<string> listamensaje= new List<string>();
-        
-        while(message!=null){
-            listamensaje.Add(textMessage.Text/*.Replace("\"","")*/);
-            message = consumer.Receive(new TimeSpan(10000));
-            textMessage = message as ITextMessage;
+            //Start Connection
+            /** Starts (or restarts) a connection's delivery of incoming messages. */
+            connection.Start();
+            //Consume Message
+            IMessage message = consumer.Receive(new TimeSpan(10000));
+            var textMessage = message as ITextMessage;
+
+            /* if(message==null){
+                 throw new javax.jms.IllegalStateException("no ha cogido ningún mensaje");
+             }*/
+            List<string> listamensaje = new List<string>();
+
+            while (message != null)
+            {
+                listamensaje.Add(textMessage.Text/*.Replace("\"","")*/);
+                message = consumer.Receive(new TimeSpan(10000));
+                textMessage = message as ITextMessage;
+            }
+            string listaJSON = JsonConvert.SerializeObject(listamensaje);
+            //Display Message
+
+
+            return listaJSON;
         }
-        string listaJSON = JsonConvert.SerializeObject(listamensaje);
-        //Display Message
-
-       
-        return listaJSON;
-    }
         public void closeConsumer()
         {
             //Close Consumer
