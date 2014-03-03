@@ -13,6 +13,7 @@ import general.Oferta;
 import general.Pedido;
 import general.Pieza;
 import general.Taller;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -86,7 +87,22 @@ public class InterfazBD {
         }
         return lista;    
     }
-    
+    public Oferta getOfertaporID(String id) {
+    	
+         try {
+             Oferta nueva= null;
+             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM oferta where id='" + id + "'");
+             while (resultados.next()) {    
+
+                 nueva = new Oferta(resultados.getString("id"), resultados.getInt("id_aux") ,resultados.getDouble("importe"), resultados.getString("desguace"),resultados.getString("desguaceNombre"), resultados.getString("pedido"), resultados.getDate("fecha_alta"), resultados.getDate("fecha_baja"), resultados.getDate("fecha_limite"), EstadoOferta.values()[resultados.getInt("estado")]);
+                 return nueva;
+            }
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+             return null;
+         }
+         return null;
+	}
     public ArrayList<Desguace> getDesguaces()
     {
         ArrayList<Desguace> lista= new ArrayList<>();
@@ -901,4 +917,6 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     	conexion.ejecutarSQL("DELETE FROM `acciones`;");
     	return result;
     }
+
+	
 }
