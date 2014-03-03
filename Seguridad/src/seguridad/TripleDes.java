@@ -46,7 +46,7 @@ import javax.crypto.spec.DESedeKeySpec;
  */
 public class TripleDes {
 	
-	public TripleDes(){
+	/*public TripleDes(){
 		// This is where we'll read the key from or write it to
 		File keyfile = new File("pepe.txt");
 		System.out.print("Generating key. This may take some time...");
@@ -68,7 +68,7 @@ public class TripleDes {
 		System.out.println("done.");
 		System.out.println("Secret key written to " + "pepe.txt"
 				+ ". Protect that file carefully!");
-	}
+	}*/
 	/**
 	 * The program. The first argument must be -e, -d, or -g to encrypt,
 	 * decrypt, or generate a key. The second argument is the name of a file
@@ -104,7 +104,8 @@ public class TripleDes {
 				try {
 					key2 = readKey(keyfile);
 					try {
-						String cifrado = encrypt(key2, "pepe");
+						String cifrado = encrypt(key2, "pedro martinez calvoo");
+						System.out.println("ESTimado, esta es la clave de cifrado: " + key2);
 						System.out.println("ESTimado, este es el cifrado: " + cifrado);
 						decrypt(key2,cifrado);
 					} catch (NoSuchPaddingException e) {
@@ -116,47 +117,32 @@ public class TripleDes {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		/*try {
-			// Check to see whether there is a provider that can do TripleDES
-			// encryption. If not, explicitly install the SunJCE provider.
-			try {
-				Cipher c = Cipher.getInstance("DESede");
-			} catch (Exception e) {
-				// An exception here probably means the JCE provider hasn't
-				// been permanently installed on this system by listing it
-				// in the $JAVA_HOME/jre/lib/security/java.security file.
-				// Therefore, we have to install the JCE provider explicitly.
-				System.err.println("Installing SunJCE provider.");
-				//Provider sunjce = new com.sun.crypto.provider.SunJCE();
-				//Security.addProvider(sunjce);
-			}
-
-			// This is where we'll read the key from or write it to
-			File keyfile = new File("pepe.txt");
-
-			// Now check the first arg to see what we're going to do
-			if (args[0].equals("-g")) { // Generate a key
-				System.out.print("Generating key. This may take some time...");
-				System.out.flush();
-				SecretKey key = generateKey();
-				writeKey(key, keyfile);
-				System.out.println("done.");
-				System.out.println("Secret key written to " + args[1]
-						+ ". Protect that file carefully!");
-			} else if (args[0].equals("-e")) { // Encrypt stdin to stdout
-				SecretKey key = readKey(keyfile);
-				encrypt(key, System.in, System.out);
-			} else if (args[0].equals("-d")) { // Decrypt stdin to stdout
-				SecretKey key = readKey(keyfile);
-				decrypt(key, System.in, System.out);
-			}
-		} catch (Exception e) {
-			System.err.println(e);
-			System.err.println("Usage: java " + TripleDes.class.getName()
-					+ " -d|-e|-g <keyfile>");
-		}*/
 	}
 
+	public SecretKey generarClaveGuardar(File keyfile) {
+		
+		System.out.print("Generating key. This may take some time...");
+		System.out.flush();
+		SecretKey key = null;
+		try {
+			key = generateKey();
+			try {
+				writeKey(key, keyfile);
+			} catch (NoSuchAlgorithmException | InvalidKeySpecException
+					| IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("done.");
+		System.out.println("Secret key written to " + "pepe.txt"
+				+ ". Protect that file carefully!");
+		return key;
+	}
+	
 	/** Generate a secret TripleDES encryption/decryption key */
 	public static SecretKey generateKey() throws NoSuchAlgorithmException {
 		// Get a key generator for Triple DES (a.k.a DESede)
@@ -174,6 +160,8 @@ public class TripleDes {
 				DESedeKeySpec.class);
 		byte[] rawkey = keyspec.getKey();
 
+		System.out.println("ESTimado, esta es rawkey: " + rawkey);
+		
 		// Write the raw key to the file
 		FileOutputStream out = new FileOutputStream(f);
 		out.write(rawkey);
@@ -209,19 +197,6 @@ public class TripleDes {
 		Cipher cipher = Cipher.getInstance("DESede");
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 
-		// Create a special output stream to do the work for us
-		//CipherOutputStream cos = new CipherOutputStream(out, cipher);
-
-		// Read from the input and write to the encrypting output stream
-		/*byte[] buffer = new byte[2048];
-		int bytesRead;
-		while ((bytesRead = in.read(buffer)) != -1) {
-			cos.write(buffer, 0, bytesRead);
-		}
-		cos.close();*/
-
-		// For extra security, don't leave any plaintext hanging around memory.
-		//java.util.Arrays.fill(buffer, (byte) 0);
 		byte[] encryptedString;
 		try {
 			encryptedString = cipher.doFinal(in.getBytes());
@@ -241,27 +216,6 @@ public class TripleDes {
 	 * directly to show how it can be done without CipherInputStream and
 	 * CipherOutputStream.
 	 */
-	/*public static void decrypt(SecretKey key, InputStream in, OutputStream out)
-			throws NoSuchAlgorithmException, InvalidKeyException, IOException,
-			IllegalBlockSizeException, NoSuchPaddingException,
-			BadPaddingException {
-		// Create and initialize the decryption engine
-		Cipher cipher = Cipher.getInstance("DESede");
-		cipher.init(Cipher.DECRYPT_MODE, key);
-
-		// Read bytes, decrypt, and write them out.
-		byte[] buffer = new byte[2048];
-		int bytesRead;
-		while ((bytesRead = in.read(buffer)) != -1) {
-			out.write(cipher.update(buffer, 0, bytesRead));
-		}
-
-		// Write out the final bunch of decrypted bytes
-		out.write(cipher.doFinal());
-		out.flush();
-	}*/
-	
-
 	public static String decrypt(SecretKey key,String encryptedString) {
 	    String decryptedText=null;
 	    try {
