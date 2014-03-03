@@ -358,7 +358,7 @@ public class GestionPedidosController implements Initializable {
      */
     public void cancelarPedido() {
         TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
-        if (tp != null && (tp.getEstado() == EstadoPedido.ACTIVE || tp.getEstado() == EstadoPedido.NEW)) {
+        if (tp != null && (tp.getEstado() == EstadoPedido.ACTIVE || tp.getEstado() == EstadoPedido.NEW || tp.getEstado() == EstadoPedido.ACCEPTED)) {
             if (MainTaller.cancellPedido(tp.getId())) {
                 visualizarPedidos();
             }
