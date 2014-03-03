@@ -936,7 +936,7 @@ public class MainTaller extends Application {
 	public static void pedidoModificar(String id) {
 		try {
 			bd = new InterfazBD("sor_taller");
-			pedidoModificar = bd.getPedido(id);
+			pedidoModificar = bd.getPedidoID_aux(id);
 			bd.close();
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();

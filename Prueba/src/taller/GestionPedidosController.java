@@ -502,17 +502,22 @@ public class GestionPedidosController implements Initializable {
     	
 		try {
 			tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
-			MainTaller.pedidoModificar(tp.getId());
-			URL location = getClass().getResource("modificarPedido.fxml");
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(location);
-	        loader.setBuilderFactory(new JavaFXBuilderFactory());
-	        Parent page;
-			page = (Parent) loader.load(location.openStream());
-			thisStage.getScene().setRoot(page);
-	        ModificarPedidoController tdCont = (ModificarPedidoController) loader.getController();
-	        tdCont.setStage(thisStage);
-	        tdCont.showStage();
+			if(tp!=null){
+				MainTaller.pedidoModificar(tp.getId());
+				if(MainTaller.pedidoModificar.getEstado()==EstadoPedido.ACTIVE ||MainTaller.pedidoModificar.getEstado()==EstadoPedido.NEW)
+				{
+					URL location = getClass().getResource("modificarPedido.fxml");
+			        FXMLLoader loader = new FXMLLoader();
+			        loader.setLocation(location);
+			        loader.setBuilderFactory(new JavaFXBuilderFactory());
+			        Parent page;
+					page = (Parent) loader.load(location.openStream());
+					thisStage.getScene().setRoot(page);
+			        ModificarPedidoController tdCont = (ModificarPedidoController) loader.getController();
+			        tdCont.setStage(thisStage);
+			        tdCont.showStage();
+				}
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
