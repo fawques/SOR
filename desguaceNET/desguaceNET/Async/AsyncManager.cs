@@ -77,10 +77,9 @@ namespace desguaceNET.Async
             while (acciones.Read())
             {
                 string resultAccion = acciones.GetString(0);
-                char[] delim = new char[4];
-                delim[0] = delim[3] = ':';
-                delim[1] = delim[2] = '_';
-                string[] partes = resultAccion.Split(delim);
+                string[] delim = new string[1];
+                delim[0] = ":__:";
+                string[] partes = resultAccion.Split(delim, StringSplitOptions.None);
                 string name = partes[0];
                 string paramTypes = partes[1];
                 string[] stringTypes = paramTypes.Split(((new char[1])[0] = '|'));

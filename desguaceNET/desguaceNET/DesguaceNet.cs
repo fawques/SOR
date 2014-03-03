@@ -396,7 +396,7 @@ namespace desguaceNET
         }
 
         // ============================
-        private bool alta(string name, string email, string address, string city, string postalCode, string telephone)
+        public bool alta(string name, string email, string address, string city, string postalCode, string telephone)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -432,7 +432,7 @@ namespace desguaceNET
             return false;
         }
 
-        private string checkActivacion(string mail)
+        public string checkActivacion(string mail)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -466,7 +466,7 @@ namespace desguaceNET
         }
 
 
-        private string nuevaOferta(string oferta)
+        public string nuevaOferta(string oferta)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -502,7 +502,7 @@ namespace desguaceNET
             return "";
         }
 
-        private string getOfertas()
+        public string getOfertas()
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -535,7 +535,7 @@ namespace desguaceNET
             return "";
         }
 
-        private string getPedidosporID(string str)
+        public string getPedidosporID(string str)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -568,7 +568,7 @@ namespace desguaceNET
             return "";
         }
 
-        private bool aceptarOfertaFin(string id)
+        public bool aceptarOfertaFin(string id)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -605,7 +605,7 @@ namespace desguaceNET
 
         }
 
-        private bool baja(string id)
+        public bool baja(string id)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -641,7 +641,7 @@ namespace desguaceNET
             return false;
         }
 
-        private bool cancelarOferta(string id)
+        public bool cancelarOferta(string id)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -677,7 +677,7 @@ namespace desguaceNET
             return false;
         }
 
-        private bool cambiarEstadoPedido(string id, string estado)
+        public bool cambiarEstadoPedido(string id, string estado)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -714,7 +714,7 @@ namespace desguaceNET
             return false;
         }
 
-        private bool modificar(string id, string name, string email, string address, string city, string postalCode, string telephone)
+        public bool modificar(string id, string name, string email, string address, string city, string postalCode, string telephone)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
