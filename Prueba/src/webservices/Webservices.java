@@ -6,19 +6,43 @@
 
 package webservices;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import jUDDI.JUDDIProxy;
 import gestor_taller.JMSException;
 import gestor_taller.JMSException_Exception;
 import gestor_taller.TallerWS_Service;
+
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
+import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 
 /**
  *
  * @author fawques
  */
 public class Webservices {
+	
     static public String nuevoPedido_WS(String pedido) throws JMSException_Exception {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
+        /* Security */
+    	org.apache.cxf.endpoint.Client client = ClientProxy.getClient(port);
+    	org.apache.cxf.endpoint.Endpoint cxfEndpoint = client.getEndpoint();
+    	//Map<String,Object> inProps= new HashMap<String,Object>();
+    	//WSS4JInInterceptor wssIn = new WSS4JInInterceptor(inProps);
+    	
+    	
+    	//cxfEndpoint.getInInterceptors().add(wssIn);
+        //client.getOutInterceptors().remove(wssIn);
+    	Map<String,Object> outProps = new HashMap<String,Object>();
+    	outProps.put("action", "UsernameToken");
+        outProps.put("user", "alice");
+        outProps.put("passwordType", "PasswordText");
+    	WSS4JOutInterceptor wssOut = new WSS4JOutInterceptor(outProps);
+    	cxfEndpoint.getOutInterceptors().add(wssOut);
+    	/* endSecurity */
         return port.nuevoPedido(pedido);
     }
     
