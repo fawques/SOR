@@ -362,12 +362,17 @@ namespace desguaceNET
             {
                 foreach (Oferta ofertadesguace in ofertas)
                 {
-                    if (ofertagestor.getID() == ofertadesguace.getID())
+                    if (ofertagestor.getID_aux() == ofertadesguace.getID_aux())
                     {
+                        if (ofertadesguace.getID() != ofertagestor.getID())
+                        {
+                            bd.activarOfertaDesguace(ofertagestor.getID_aux(), ofertagestor.getID());
+                        }
                         if (ofertagestor.getEstado() != ofertadesguace.getEstado())
                         {
                             cambiarEstadoOferta(ofertagestor.getID(), ofertagestor.getEstado());
                         }
+
                     }
                 }
             }
