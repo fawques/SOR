@@ -519,6 +519,7 @@ public class GestionPedidos implements Initializable {
         tableOfertas.setItems(olTablaOfertas);
         tableOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
         bd.close();
+        actualizarPedidos();
     }
     public void showStage() {
         thisStage.sizeToScene();
