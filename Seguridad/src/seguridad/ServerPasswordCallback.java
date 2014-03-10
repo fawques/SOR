@@ -4,6 +4,8 @@
 package seguridad;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
@@ -13,22 +15,26 @@ import org.apache.ws.security.WSPasswordCallback;
 
 /**
  * @author pablovm1990
- *
+ * 
  */
 public class ServerPasswordCallback implements CallbackHandler {
 
-	@Override
+	private Map<String, String> passwords = new HashMap<String, String>();
+
+	public void ClientKeystorePasswordCallback() {
+		passwords.put("myclientkey", "ckpass");
+	}
+
 	public void handle(Callback[] callbacks) throws IOException,
 			UnsupportedCallbackException {
-		// TODO Auto-generated method stub
-		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
+		for (int i = 0; i < callbacks.length; i++) {
+			WSPasswordCallback pc = (WSPasswordCallback) callbacks[i];
 
-	      System.out.println("usuario recibido : " + pc.getIdentifier());
-	      if (pc.getIdentifier().equals("joe")) {
-	         // Ponemos cual ser’a la password valida para este usuario.
-	         // El framework CXF se encargar‡ de verificar que coincide
-	         // con la enviada por el cliente.
-	         pc.setPassword("password");
-	      }
+			String pass = passwords.get(pc.getIdentifier());
+			if (pass != null) {
+				pc.setPassword(pass);
+				return;
+			}
+		}
 	}
 }

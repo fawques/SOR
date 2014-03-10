@@ -11,22 +11,26 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.xml.namespace.QName;
+import javax.xml.ws.soap.SOAPBinding;
 
 import seguridad.TripleDes;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
 import jUDDI.JUDDIProxy;
 import gestor_taller.JMSException;
 import gestor_taller.JMSException_Exception;
 import gestor_taller.TallerWS_Service;
 
+import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 
@@ -40,21 +44,23 @@ public class Webservices {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
         /* Security */
-    	org.apache.cxf.endpoint.Client client = ClientProxy.getClient(port);
-    	org.apache.cxf.endpoint.Endpoint cxfEndpoint = client.getEndpoint();
-    	//Map<String,Object> inProps= new HashMap<String,Object>();
-    	//WSS4JInInterceptor wssIn = new WSS4JInInterceptor(inProps);
+        String endpointAddress = JUDDIProxy.getWsdl().toString();
+         
+        service.addPort((QName) port, SOAPBinding.SOAP11HTTP_BINDING, endpointAddress);
+         
+
+         
+        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+         
+        // Add some logging
+        factory.getInInterceptors().add(new LoggingInInterceptor());
+        factory.getOutInterceptors().add(new LoggingOutInterceptor());
+         
+        factory.setServiceClass(gestor_taller.TallerWS.class);
+        factory.setAddress(endpointAddress);
+        gestor_taller.TallerWS port2 = (gestor_taller.TallerWS) factory.create();
+        Client client = ClientProxy.getClient(port2);
     	
-    	
-    	//cxfEndpoint.getInInterceptors().add(wssIn);
-        //client.getOutInterceptors().remove(wssIn);
-    	Map<String,Object> outProps = new HashMap<String,Object>();
-    	outProps.put("action", "UsernameToken");
-        outProps.put("user", "alice");
-        outProps.put("passwordType", "PasswordText");
-    	WSS4JOutInterceptor wssOut = new WSS4JOutInterceptor(outProps);
-    	cxfEndpoint.getOutInterceptors().add(wssOut);
-    	/* endSecurity */
         return port.nuevoPedido(pedido);
     }
     
