@@ -338,7 +338,7 @@ namespace desguaceNET
             {
                 ped = bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
                 ped = ped && bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK, idPedido);
-                cambiarEstadoPedido(idPedido, (EstadoPedido.FINISHED_OK).ToString());
+                //cambiarEstadoPedido(idPedido, (EstadoPedido.FINISHED_OK).ToString());
             }
             return ped;
         }
