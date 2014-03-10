@@ -315,7 +315,8 @@ public class DesguaceJava extends Application {
 		ArrayList<Oferta> of = new ArrayList<Oferta>();
 		try {
 			bd = new InterfazBD("sor_desguace");
-			of = bd.getOfertasConID_aux(EstadoOferta.ACTIVE);
+			of = bd.getOfertas();
+			
 			//of.addAll(bd.getOfertasConID_aux(EstadoOferta.ACCEPTED));
 			bd.close();
 			return of;
