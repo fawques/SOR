@@ -45,7 +45,7 @@ public class Webservices {
         gestor_taller.TallerWS port = service.getTallerWSPort();
         /* Security */
         String endpointAddress = JUDDIProxy.getWsdl().toString();
-         
+        QName portName = new QName(JUDDIProxy.getWsdl().toString(), port.getClass().toString());
         service.addPort((QName) port, SOAPBinding.SOAP11HTTP_BINDING, endpointAddress);
          
 
