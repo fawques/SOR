@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="/libSOR/lib/commons-codec-1.8/commons-codec-1.8.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/libSOR"/>
 	<classpathentry kind="lib" path="lib/wss4j-1.6-2.14/lib/wss4j-1.6.14.jar"/>
+	<classpathentry kind="lib" path="lib/bcprov-ext-jdk15on-150.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
