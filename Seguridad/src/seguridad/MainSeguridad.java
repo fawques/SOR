@@ -71,10 +71,12 @@ public class MainSeguridad {
 					RSAPrivateKeySpec.class);
 			// CREATE A KEYSTORE OF TYPE "Java Key Store"
 			KeyStore ks;
+			
 			try {
 				ks = KeyStore.getInstance("JKS");
+				ks.load(null, null);
 				X509Certificate certificate = generateCertificate(kp);  
-				KeyStore keyStore = KeyStore.getInstance("JKS");   
+				//KeyStore keyStore = KeyStore.getInstance("JKS");
 				Certificate[] certChain = new Certificate[1];  
 				certChain[0] = (Certificate) certificate;
 				ks.setKeyEntry("key1"+nombreUsuario, kp.getPrivate().getEncoded(), certChain);
@@ -88,14 +90,8 @@ public class MainSeguridad {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				try {
-					keyStore.load(null,null);
-				} catch (NoSuchAlgorithmException | CertificateException
-						| IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			} catch (KeyStoreException e) {
+				
+			} catch (KeyStoreException | CertificateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
