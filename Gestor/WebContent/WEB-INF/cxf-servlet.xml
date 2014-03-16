@@ -3,19 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
 	xmlns:soap="http://cxf.apache.org/bindings/soap"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
-	<bean id="myPasswordCallback"
-        class="seguridad.ServerPasswordCallback" />
 	<jaxws:endpoint xmlns:tns="http://gestor_admin/" id="adminws"
 		implementor="gestor_admin.AdminWS" wsdlLocation="wsdl/adminws.wsdl"
 		endpointName="tns:AdminWSPort" serviceName="tns:AdminWS" address="/AdminWSPort">
-		<jaxws:properties>
-            <entry key="ws-security.callback-handler">
-                <ref bean="myPasswordCallback"/>
-            </entry>
-            <entry key="ws-security.encryption.properties" value="serviceKeystore.properties"/>
-            <entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
-            <entry key="ws-security.encryption.username" value="useReqSigCert"/>
-        </jaxws:properties> 
 		<jaxws:features>
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>
@@ -24,14 +14,6 @@
 		id="desguacejavaws" implementor="gestor_desguace_java.DesguaceJavaWS"
 		wsdlLocation="wsdl/desguacejavaws.wsdl" endpointName="tns:DesguaceJavaWSPort"
 		serviceName="tns:DesguaceJavaWS" address="/DesguaceJavaWSPort">
-		<jaxws:properties>
-            <entry key="ws-security.callback-handler">
-                <ref bean="myPasswordCallback"/>
-            </entry>
-            <entry key="ws-security.encryption.properties" value="serviceKeystore.properties"/>
-            <entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
-            <entry key="ws-security.encryption.username" value="useReqSigCert"/>
-        </jaxws:properties> 
 		<jaxws:features>
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>
@@ -39,14 +21,6 @@
 	<jaxws:endpoint xmlns:tns="http://gestor_taller/" id="tallerws"
 		implementor="gestor_taller.TallerWS" wsdlLocation="wsdl/tallerws.wsdl"
 		endpointName="tns:TallerWSPort" serviceName="tns:TallerWS" address="/TallerWSPort">
-		<jaxws:properties>
-            <entry key="ws-security.callback-handler">
-                <ref bean="myPasswordCallback"/>
-            </entry>
-            <entry key="ws-security.encryption.properties" value="serviceKeystore.properties"/>
-            <entry key="ws-security.signature.properties" value="serviceKeystore.properties"/>
-            <entry key="ws-security.encryption.username" value="useReqSigCert"/>
-        </jaxws:properties> 
 		<jaxws:features>
 			<bean class="org.apache.cxf.feature.LoggingFeature" />
 		</jaxws:features>
