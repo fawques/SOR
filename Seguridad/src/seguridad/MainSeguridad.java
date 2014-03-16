@@ -39,6 +39,7 @@ public class MainSeguridad {
 
 	RSAPublicKeySpec pub;
 	RSAPrivateKeySpec priv;
+	//String clientes
 	/**
 	 * Debera llamarse desde el inicio de gestion para que inicie una
 	 * comunicaci—n segura
@@ -48,7 +49,14 @@ public class MainSeguridad {
 		generateKeys(nombreUsuario);	
 	}
 
+	//Devolvera false, si ha petado o ya existian las claves
 	public boolean generateKeys(String nombreUsuario) {
+		
+		if(pub!=null) //CUIDADO! HAY QUE HACERLO PARA VARIOS CLIENTES
+		{
+			return false;
+		}
+		
 		KeyPairGenerator kpg;
 		try {
 			kpg = KeyPairGenerator.getInstance("RSA");
@@ -74,6 +82,7 @@ public class MainSeguridad {
 					ks.load(null, null);
 					ks.store(new FileOutputStream("clavesSor"+nombreUsuario), //habria que generarlo donde lo pida
 							"Albentosa".toCharArray());
+					return true;
 				} catch (NoSuchAlgorithmException | CertificateException
 						| IOException e) {
 					// TODO Auto-generated catch block
