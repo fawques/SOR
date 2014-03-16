@@ -81,7 +81,7 @@ public class MainSeguridad {
 				certChain[0] = (Certificate) certificate;
 				ks.setKeyEntry("key1"+nombreUsuario, kp.getPrivate(), "Albentosa".toCharArray(), certChain);
 				try {
-					ks.store(new FileOutputStream(".keystore"), //habria que generarlo donde lo pida
+					ks.store(new FileOutputStream("clavesSor.jks"), //habria que generarlo donde lo pida
 							"Albentosa".toCharArray());
 					return true;
 				} catch (NoSuchAlgorithmException | CertificateException
