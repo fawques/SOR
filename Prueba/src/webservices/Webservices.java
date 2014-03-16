@@ -6,6 +6,7 @@
 
 package webservices;
 
+import seguridad.MainSeguridad;
 import jUDDI.JUDDIProxy;
 import gestor_taller.JMSException;
 import gestor_taller.JMSException_Exception;
@@ -23,6 +24,7 @@ public class Webservices {
     }
     
     public static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone) {
+    	MainSeguridad seg = new MainSeguridad("");
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
