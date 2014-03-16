@@ -19,6 +19,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
+import java.security.Security;
 import java.security.SignatureException;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
@@ -75,14 +76,12 @@ public class MainSeguridad {
 			try {
 				ks = KeyStore.getInstance("JKS");
 				ks.load(null, null);
-				X509Certificate certificate = generateCertificate(kp);  
-				//KeyStore keyStore = KeyStore.getInstance("JKS");
+				X509Certificate certificate = generateCertificate(kp);
 				Certificate[] certChain = new Certificate[1];  
 				certChain[0] = (Certificate) certificate;
-				ks.setKeyEntry("key1"+nombreUsuario, kp.getPrivate().getEncoded(), certChain);
+				ks.setKeyEntry("key1"+nombreUsuario, kp.getPrivate(), "Albentosa".toCharArray(), certChain);
 				try {
-					ks.load(null, null);
-					ks.store(new FileOutputStream("clavesSor"+nombreUsuario), //habria que generarlo donde lo pida
+					ks.store(new FileOutputStream(".keystore"), //habria que generarlo donde lo pida
 							"Albentosa".toCharArray());
 					return true;
 				} catch (NoSuchAlgorithmException | CertificateException
@@ -106,6 +105,7 @@ public class MainSeguridad {
 	}
 
 	public X509Certificate generateCertificate(KeyPair keyPair) {
+		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		X509V3CertificateGenerator cert = new X509V3CertificateGenerator();
 		cert.setSerialNumber(BigInteger.valueOf(1)); // or generate a random
 														// number
