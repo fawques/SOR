@@ -3,15 +3,15 @@ import webservices.*;
 import BD.InterfazBD;
 public aspect AuditAspect {
 
-	pointcut webservice(String s) : execution(* Webservices.*(..)) && args(s);
-	pointcut bd() : call(* InterfazBD.*(..));
+	pointcut webservice() : execution(* Webservices.*(..));
 
-    before(String s) : webservice(s) { 
-        System.out.println("Llamando a un webservice de Gestor: <" + thisEnclosingJoinPointStaticPart.toShortString() + "(" + s + ")>");
-    }
-    
-    before() : bd() { 
-        System.out.println("Llamando a la BD: <" + thisEnclosingJoinPointStaticPart.toShortString() + ">");
+    before() : webservice() {
+    	String salida = "Llamando a un webservice de Gestor: <" + thisEnclosingJoinPointStaticPart.toShortString() + "(";
+        for (Object arg : thisJoinPoint.getArgs()) {
+        	 salida+= arg + ",";            	
+        }
+        salida += ")>";
+        System.out.println(salida);
     }
 
 }

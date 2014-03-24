@@ -35,5 +35,6 @@
 	<classpathentry exported="true" kind="lib" path="/libSOR/lib/juddi-distro-3.1.5/bin/uddi-ws-3.1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="/libSOR/lib/mysql-connector-java-5.1.27-bin.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/libSOR"/>
+	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
