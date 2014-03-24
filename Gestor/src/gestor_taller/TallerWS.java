@@ -27,16 +27,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.crypto.SecretKey;
 import javax.jms.JMSException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import java.security.NoSuchAlgorithmException;
+
 import org.apache.commons.codec.digest.DigestUtils;
+
+import seguridad.TripleDes;
 
 /**
  *
@@ -46,10 +52,13 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class TallerWS {
     
     InterfazBD bd;
+    ArrayList<String> listaIdTaller;
+    ArrayList<SecretKey> listaSecretKeys;
     
     public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone) {
         try {
             bd = new InterfazBD("sor_gestor");
+        	//desencriptar elementos
             boolean res = bd.modificarTaller(id, name, email, city, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), EstadoGeneral.ACTIVE);
             bd.close();
             return res;
@@ -59,6 +68,32 @@ public class TallerWS {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    
+    public String generarClaveReto(@WebParam (name= "idTaller") String idTaller) {
+    	//Generamos la clave de reto y se la mandamos al cliente
+        TripleDes t = new TripleDes();
+		try {
+			SecretKey clave = t.generateKey();
+			//habria comprobar que no exista;
+			if(listaIdTaller.indexOf(idTaller)!=-1){
+				//borramos el anterior
+				listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
+				listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+				//y anyadimos el nuevo
+				listaIdTaller.add(idTaller);
+				listaSecretKeys.add(clave);
+			} else{ //anyadir nuevo
+				listaIdTaller.add(idTaller);
+				listaSecretKeys.add(clave);
+			}
+			return clave.toString();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	return null;
     }
     
     /**

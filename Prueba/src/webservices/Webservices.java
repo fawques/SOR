@@ -6,7 +6,17 @@
 
 package webservices;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+
 import seguridad.MainSeguridad;
+import seguridad.TripleDes;
 import jUDDI.JUDDIProxy;
 import gestor_taller.JMSException;
 import gestor_taller.JMSException_Exception;
@@ -25,6 +35,28 @@ public class Webservices {
     
     public static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone) {
     	MainSeguridad seg = new MainSeguridad("");
+        TripleDes t = new TripleDes();
+        
+        String nameCifrado = "";
+        File keyfile = new File("pepe.txt");
+        SecretKey key2 = t.generarClaveGuardar(keyfile);
+		try {
+			key2 = t.readKey(keyfile);
+			try {
+				nameCifrado = t.encrypt(key2, name);
+				System.out.println("ESTimado, esta es la clave de cifrado: " + key2);
+				System.out.println("ESTimado, este es el cifrado: " + nameCifrado);
+				//decrypt(key2,cifrado);
+			} catch (NoSuchPaddingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (InvalidKeyException | NoSuchAlgorithmException
+				| InvalidKeySpecException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(name, email, address, city, postalCode, telephone);
