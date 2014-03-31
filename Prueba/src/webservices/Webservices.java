@@ -95,7 +95,7 @@ public class Webservices {
     	 
     	gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.modificar(TripleDes.encrypt(encryptor, id), TripleDes.encrypt(encryptor, name), TripleDes.encrypt(encryptor, email), TripleDes.encrypt(encryptor, address), TripleDes.encrypt(encryptor, city), TripleDes.encrypt(encryptor, postalCode), TripleDes.encrypt(encryptor, telephone));
+        return port.modificar(id, TripleDes.encrypt(encryptor, name), TripleDes.encrypt(encryptor, email), TripleDes.encrypt(encryptor, address), TripleDes.encrypt(encryptor, city), TripleDes.encrypt(encryptor, postalCode), TripleDes.encrypt(encryptor, telephone));
     }
     
     public static Boolean cancelarPedido_WS(String idPedido) {
@@ -117,7 +117,7 @@ public class Webservices {
     	 
     	gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.getPedidos(TripleDes.encrypt(encryptor, id));
+        return port.getPedidos(id);
     }
 
 }

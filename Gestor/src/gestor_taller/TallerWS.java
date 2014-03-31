@@ -58,11 +58,10 @@ public class TallerWS {
     public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone) {
         try {
         	SecretKey key = listaSecretKeys.get(listaIdTaller.indexOf(id));
-        	TripleDes t = new TripleDes();
         	//desencriptar aqui
             bd = new InterfazBD("sor_gestor");
         	//desencriptar elementos
-            boolean res = bd.modificarTaller(t.decrypt(key, id), t.decrypt(key, name), t.decrypt(key, email), t.decrypt(key, city), t.decrypt(key, city), Integer.parseInt(t.decrypt(key, postalCode)), Integer.parseInt(t.decrypt(key, telephone)), EstadoGeneral.ACTIVE);
+            boolean res = bd.modificarTaller(id, TripleDes.decrypt(key, name), TripleDes.decrypt(key, email), TripleDes.decrypt(key, city), TripleDes.decrypt(key, city), Integer.parseInt(TripleDes.decrypt(key, postalCode)), Integer.parseInt(TripleDes.decrypt(key, telephone)), EstadoGeneral.ACTIVE);
             bd.close();
             return res;
         } catch (java.sql.SQLException ex) {
@@ -75,9 +74,8 @@ public class TallerWS {
     
     public String generarClaveReto(@WebParam (name= "idTaller") String idTaller) {
     	//Generamos la clave de reto y se la mandamos al cliente
-        TripleDes t = new TripleDes();
 		try {
-			SecretKey clave = t.generateKey();
+			SecretKey clave = TripleDes.generateKey();
 			//habria comprobar que no exista;
 			if(listaIdTaller.indexOf(idTaller)!=-1){
 				//borramos el anterior
@@ -136,13 +134,17 @@ public class TallerWS {
      * Web service operation
      */
     @WebMethod(operationName = "nuevoPedido")
-    public String nuevoPedido(@WebParam(name = "pedido") String pedido) throws JMSException {
+    public String nuevoPedido(@WebParam(name = "pedido") String pedido, @WebParam(name = "idTaller") String idTaller) throws JMSException {
          try {
             bd = new InterfazBD("sor_gestor");
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
              Type collectionType = new TypeToken<Pedido>() {
              }.getType();
-             Pedido p = gson.fromJson(pedido, collectionType);
+
+          	SecretKey key = listaSecretKeys.get(listaIdTaller.indexOf(idTaller));
+             Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido), collectionType);
+
+         	
             Date ahora = new Date();
             String stringID  = "Pedido_"+ bd.getNumPedidos();
             p.setID(stringID);
@@ -166,13 +168,14 @@ public class TallerWS {
      * Web service operation
      */
     @WebMethod(operationName = "getOfertas")
-    public String getOfertas(@WebParam(name = "listaPedidos") String listaPedidos) {
+    public String getOfertas(@WebParam(name = "listaPedidos") String listaPedidos, @WebParam(name = "idTaller") String idTaller) {
         Type collectionType = new TypeToken<ArrayList<Pedido>>() {
         }.getType();
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         ArrayList<Oferta> listaOferta = new ArrayList<>();
         ArrayList<Pedido> arrayPedido = new ArrayList<Pedido>();
-        arrayPedido = gson.fromJson(listaPedidos, collectionType);
+        SecretKey key = listaSecretKeys.get(listaIdTaller.indexOf(idTaller));
+        arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos), collectionType);
         try {
             bd = new InterfazBD("sor_gestor");
             for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
@@ -196,10 +199,11 @@ public class TallerWS {
      * Web service operation
      */
     @WebMethod(operationName = "aceptarOferta")
-    public Boolean aceptarOferta(@WebParam(name = "ID") String ID) {
+    public Boolean aceptarOferta(@WebParam(name = "ID") String ID, @WebParam(name = "idTaller") String idTaller) {
         try {
             bd = new InterfazBD("sor_gestor");
-            bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED, ID);
+            SecretKey key = listaSecretKeys.get(listaIdTaller.indexOf(idTaller));
+            bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED, TripleDes.decrypt(key, ID));
             bd.close();
             return true;
         } catch (SQLException ex) {
@@ -214,10 +218,12 @@ public class TallerWS {
      * Web service operation
      */
     @WebMethod(operationName = "rechazarOferta")
-    public Boolean rechazarOferta(@WebParam(name = "ID") String ID) {
+    public Boolean rechazarOferta(@WebParam(name = "ID") String ID, @WebParam(name = "idTaller") String idTaller) {
         try {
             bd = new InterfazBD("sor_gestor");
-            bd.cambiarEstadoOferta(EstadoOferta.REJECTED, ID);
+
+            SecretKey key = listaSecretKeys.get(listaIdTaller.indexOf(idTaller));
+            bd.cambiarEstadoOferta(EstadoOferta.REJECTED, TripleDes.decrypt(key, ID));
             bd.close();
             return true;
         } catch (SQLException ex) {
@@ -273,11 +279,13 @@ public class TallerWS {
     }
         
     @WebMethod(operationName = "cancelarPedido")
-    public Boolean cancelarPedido(@WebParam(name = "idPedido") String idPedido) {
+    public Boolean cancelarPedido(@WebParam(name = "idPedido") String idPedido, @WebParam(name = "idTaller") String idTaller) {
         try {
             bd = new InterfazBD("sor_gestor");
-            boolean oool = bd.cancelarPedido(idPedido);
-            cambiarEstadoPedido(EstadoPedido.CANCELLED.ordinal(), idPedido);
+
+            SecretKey key = listaSecretKeys.get(listaIdTaller.indexOf(idTaller));
+            boolean oool = bd.cancelarPedido(TripleDes.decrypt(key, idPedido));
+            cambiarEstadoPedido(EstadoPedido.CANCELLED.ordinal(), TripleDes.decrypt(key, idPedido));
             bd.close();
             return oool;
         } catch (SQLException ex) {
