@@ -78,8 +78,8 @@ public class TripleDes {
 	public static void main(String[] args) {
 		// This is where we'll read the key from or write it to
 				File keyfile = new File("pepe.txt");
-				System.out.print("Generating key. This may take some time...");
-				System.out.flush();
+				//System.out.print("Generating key. This may take some time...");
+				//System.out.flush();
 				SecretKey key;
 				try {
 					key = generateKey();
@@ -94,9 +94,8 @@ public class TripleDes {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("done.");
-				System.out.println("Secret key written to " + "pepe.txt"
-						+ ". Protect that file carefully!");
+				//System.out.println("done.");
+				//System.out.println("Secret key written to " + "pepe.txt"+ ". Protect that file carefully!");
 				
 				/*encriptado*/
 				SecretKey key2;
@@ -104,8 +103,8 @@ public class TripleDes {
 					key2 = readKey(keyfile);
 					try {
 						String cifrado = encrypt(key2, "pedro martinez calvoo");
-						System.out.println("ESTimado, esta es la clave de cifrado: " + key2);
-						System.out.println("ESTimado, este es el cifrado: " + cifrado);
+						//System.out.println("ESTimado, esta es la clave de cifrado: " + key2);
+						//System.out.println("ESTimado, este es el cifrado: " + cifrado);
 						decrypt(key2,cifrado);
 					} catch (NoSuchPaddingException e) {
 						// TODO Auto-generated catch block
@@ -120,8 +119,8 @@ public class TripleDes {
 
 	public SecretKey generarClaveGuardar(File keyfile) {
 		
-		System.out.print("Generating key. This may take some time...");
-		System.out.flush();
+		//System.out.print("Generating key. This may take some time...");
+		//System.out.flush();
 		SecretKey key = null;
 		try {
 			key = generateKey();
@@ -136,9 +135,8 @@ public class TripleDes {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("done.");
-		System.out.println("Secret key written to " + "pepe.txt"
-				+ ". Protect that file carefully!");
+		//System.out.println("done.");
+		//System.out.println("Secret key written to " + "pepe.txt"+ ". Protect that file carefully!");
 		return key;
 	}
 	
@@ -159,7 +157,7 @@ public class TripleDes {
 				DESedeKeySpec.class);
 		byte[] rawkey = keyspec.getKey();
 
-		System.out.println("ESTimado, esta es rawkey: " + rawkey);
+		//System.out.println("ESTimado, esta es rawkey: " + rawkey);
 		
 		// Write the raw key to the file
 		FileOutputStream out = new FileOutputStream(f);
@@ -227,7 +225,6 @@ public class TripleDes {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    System.out.println("ESTimado, este es el descifrado, si no coincide eres tonto!: " + decryptedText);
 	    return decryptedText;
 	}
 }

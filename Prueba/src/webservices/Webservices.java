@@ -28,98 +28,99 @@ import gestor_taller.TallerWS_Service;
  */
 public class Webservices {
     static public String nuevoPedido_WS(String pedido) throws JMSException_Exception {
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.nuevoPedido(pedido);
+        return port.nuevoPedido(t.encrypt(encryptor, pedido));
     }
     
     public static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone) {
-    	MainSeguridad seg = new MainSeguridad("");
-        TripleDes t = new TripleDes();
-        
-        String nameCifrado = "";
-        File keyfile = new File("pepe.txt");
-        SecretKey key2 = t.generarClaveGuardar(keyfile);
-		try {
-			key2 = t.readKey(keyfile);
-			try {
-				nameCifrado = t.encrypt(key2, name);
-				System.out.println("ESTimado, esta es la clave de cifrado: " + key2);
-				System.out.println("ESTimado, este es el cifrado: " + nameCifrado);
-				//decrypt(key2,cifrado);
-			} catch (NoSuchPaddingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (InvalidKeyException | NoSuchAlgorithmException
-				| InvalidKeySpecException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.alta(name, email, address, city, postalCode, telephone);
+        return port.alta(t.encrypt(encryptor, name), t.encrypt(encryptor, email), t.encrypt(encryptor, address), t.encrypt(encryptor, city), t.encrypt(encryptor, postalCode), t.encrypt(encryptor, telephone));
     }
     
     public static String checkActivacion_WS(String mail) {
-        TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.checkActivacion(mail);
+        return port.checkActivacion(t.encrypt(encryptor, mail));
     }
     
     public static String getOfertas_WS(String listaPedidos) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.getOfertas(listaPedidos);
+        return port.getOfertas(t.encrypt(encryptor, listaPedidos));
     }
     
     public static Boolean aceptarOferta_WS(String id) {
-        gestor_taller.TallerWS_Service service= new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());;
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	gestor_taller.TallerWS_Service service= new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());;
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.aceptarOferta(id);
+        return port.aceptarOferta(t.encrypt(encryptor, id));
     }
     
     public static Boolean rechazarOferta_WS(String id) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.rechazarOferta(id);
+        return port.rechazarOferta(t.encrypt(encryptor, id));
     }
     
     public static String hello() throws javax.xml.ws.WebServiceException{
-        gestor_taller.TallerWS_Service service = new TallerWS_Service(JUDDIProxy.getWsdl());
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	gestor_taller.TallerWS_Service service = new TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.hello();
     }
     
     public static Boolean baja_WS(String tallerID) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.baja(tallerID);
+        return port.baja(t.encrypt(encryptor, tallerID));
     }
     
     public static boolean modificar_WS(String id, String name, String email, String address, String city, String postalCode, String telephone) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.modificar(id, name, email, address, city, postalCode, telephone);
+        return port.modificar(t.encrypt(encryptor, id), t.encrypt(encryptor, name), t.encrypt(encryptor, email), t.encrypt(encryptor, address), t.encrypt(encryptor, city), t.encrypt(encryptor, postalCode), t.encrypt(encryptor, telephone));
     }
     
     public static Boolean cancelarPedido_WS(String idPedido) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.cancelarPedido(idPedido);
+        return port.cancelarPedido(t.encrypt(encryptor, idPedido));
     }
 
     public static Boolean cambiarEstadoPedido_WS(int estado, java.lang.String id) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.cambiarEstadoPedido(estado, id);
+        return port.cambiarEstadoPedido(t.encrypt(encryptor, estado), t.encrypt(encryptor, id));
     }
 
     public static String getPedidos_WS(String id) {
-        gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+    	SecretKey encryptor = generarClaveReto();
+    	TripleDes t = new TripleDes();
+    	gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.getPedidos(id);
+        return port.getPedidos(t.encrypt(encryptor, id));
     }
 
 }
