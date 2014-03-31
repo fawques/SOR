@@ -57,9 +57,12 @@ public class TallerWS {
     
     public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone) {
         try {
+        	SecretKey key = listaSecretKeys.get(listaIdTaller.indexOf(id));
+        	TripleDes t = new TripleDes();
+        	//desencriptar aqui
             bd = new InterfazBD("sor_gestor");
         	//desencriptar elementos
-            boolean res = bd.modificarTaller(id, name, email, city, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), EstadoGeneral.ACTIVE);
+            boolean res = bd.modificarTaller(t.decrypt(key, id), t.decrypt(key, name), t.decrypt(key, email), t.decrypt(key, city), t.decrypt(key, city), Integer.parseInt(t.decrypt(key, postalCode)), Integer.parseInt(t.decrypt(key, telephone)), EstadoGeneral.ACTIVE);
             bd.close();
             return res;
         } catch (java.sql.SQLException ex) {
