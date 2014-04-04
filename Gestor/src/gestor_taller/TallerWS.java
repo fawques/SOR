@@ -72,7 +72,7 @@ public class TallerWS {
         return false;
     }
     
-    public String generarClaveReto(@WebParam (name= "idTaller") String idTaller) {
+    public byte[] generarClaveReto(@WebParam (name= "idTaller") String idTaller) {
     	//Generamos la clave de reto y se la mandamos al cliente
 		try {
 			SecretKey clave = TripleDes.generateKey();
@@ -88,7 +88,7 @@ public class TallerWS {
 				listaIdTaller.add(idTaller);
 				listaSecretKeys.add(clave);
 			}
-			return clave.toString();
+			return clave.getEncoded();
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

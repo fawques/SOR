@@ -27,19 +27,28 @@ import gestor_taller.TallerWS_Service;
  * @author fawques
  */
 public class Webservices {
-    static public String nuevoPedido_WS(String pedido) throws JMSException_Exception {
-    	SecretKey encryptor = generarClaveReto();
+	
+	
+	
+    static public String nuevoPedido_WS(String pedido, String idTaller) throws JMSException_Exception {
+    	SecretKey encryptor()
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.nuevoPedido(TripleDes.encrypt(encryptor, pedido));
     }
     
     public static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone) {
-    	SecretKey encryptor = generarClaveReto();
+    	//SecretKey encryptor = generarClaveReto();
     	 
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
         return port.alta(TripleDes.encrypt(encryptor, name), TripleDes.encrypt(encryptor, email), TripleDes.encrypt(encryptor, address), TripleDes.encrypt(encryptor, city), TripleDes.encrypt(encryptor, postalCode), TripleDes.encrypt(encryptor, telephone));
+    }
+    
+    public static String generarClaveReto(String idTaller) {
+    	TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+        gestor_taller.TallerWS port = service.getTallerWSPort();
+        return port.generarClaveReto(idTaller);
     }
     
     public static String checkActivacion_WS(String mail) {
