@@ -11,28 +11,30 @@
   <children>
     <Button layoutX="290.0" layoutY="395.0" mnemonicParsing="false" onAction="#modificarDesguace" text="Modificar" />
     <Button layoutX="120.0" layoutY="395.0" mnemonicParsing="false" onAction="#irAGestionPedidos" text="Cancelar" />
-    <Label layoutX="54.0" layoutY="65.0" text="Nombre Desguace" wrapText="false" />
-    <Label layoutX="54.0" layoutY="123.0" text="E-mail" wrapText="false" />
-    <Label layoutX="54.0" layoutY="177.0" text="Dirección" wrapText="false" />
-    <Label layoutX="54.0" layoutY="239.0" text="Ciudad" />
-    <Label layoutX="54.0" layoutY="288.0" text="CP" />
-    <Label layoutX="54.0" layoutY="335.0" text="Teléfono" />
-    <TextField fx:id="tfNombreDesguace" layoutX="161.0" layoutY="65.0" prefWidth="200.0" />
-    <TextField fx:id="tfEmail" layoutX="161.0" layoutY="123.0" prefWidth="200.0" />
-    <TextField fx:id="tfDireccion" layoutX="161.0" layoutY="174.0" prefWidth="200.0" />
-    <TextField fx:id="tfCiudad" layoutX="161.0" layoutY="233.0" prefWidth="200.0" />
-    <TextField fx:id="tfCp" layoutX="161.0" layoutY="285.0" prefWidth="200.0" />
-    <TextField fx:id="tfTelefono" layoutX="161.0" layoutY="332.0" prefWidth="200.0" />
-    <Label id="errorN" fx:id="errorNombreDesguace" layoutX="369.0" layoutY="68.0" text="" textFill="RED" />
-    <Label fx:id="errorEmail" layoutX="369.0" layoutY="129.0" text="" textFill="RED">
+    <Label layoutX="54.0" layoutY="52.0" text="Nombre Desguace" wrapText="false" />
+    <Label layoutX="54.0" layoutY="110.0" text="E-mail" wrapText="false" />
+    <Label layoutX="54.0" layoutY="164.0" text="Dirección" wrapText="false" />
+    <Label layoutX="54.0" layoutY="226.0" text="Ciudad" />
+    <Label layoutX="54.0" layoutY="275.0" text="CP" />
+    <Label layoutX="54.0" layoutY="322.0" text="Teléfono" />
+    <TextField fx:id="tfNombreDesguace" layoutX="161.0" layoutY="52.0" prefWidth="200.0" />
+    <TextField fx:id="tfEmail" layoutX="161.0" layoutY="110.0" prefWidth="200.0" />
+    <TextField fx:id="tfDireccion" layoutX="161.0" layoutY="161.0" prefWidth="200.0" />
+    <TextField fx:id="tfCiudad" layoutX="161.0" layoutY="220.0" prefWidth="200.0" />
+    <TextField fx:id="tfCp" layoutX="161.0" layoutY="272.0" prefWidth="200.0" />
+    <TextField fx:id="tfTelefono" layoutX="161.0" layoutY="319.0" prefWidth="200.0" />
+    <Label id="errorN" fx:id="errorNombreDesguace" layoutX="369.0" layoutY="55.0" text="" textFill="RED" />
+    <Label fx:id="errorEmail" layoutX="369.0" layoutY="116.0" text="" textFill="RED">
       <font>
         <Font size="13.0" fx:id="x1" />
       </font>
     </Label>
-    <Label fx:id="errorDireccion" font="$x1" layoutX="369.0" layoutY="180.0" text="" textFill="RED" />
-    <Label fx:id="errorCiudad" font="$x1" layoutX="369.0" layoutY="236.0" text="" textFill="RED" />
-    <Label fx:id="errorCp" font="$x1" layoutX="369.0" layoutY="291.0" text="" textFill="RED" />
-    <Label fx:id="errorTelefono" font="$x1" layoutX="369.0" layoutY="338.0" text="" textFill="RED" />
-    <Label fx:id="labelID" layoutX="54.0" layoutY="31.0" text="" />
+    <Label fx:id="errorDireccion" font="$x1" layoutX="369.0" layoutY="167.0" text="" textFill="RED" />
+    <Label fx:id="errorCiudad" font="$x1" layoutX="369.0" layoutY="223.0" text="" textFill="RED" />
+    <Label fx:id="errorCp" font="$x1" layoutX="369.0" layoutY="278.0" text="" textFill="RED" />
+    <Label fx:id="errorTelefono" font="$x1" layoutX="369.0" layoutY="325.0" text="" textFill="RED" />
+    <Label fx:id="labelID" layoutX="54.0" layoutY="18.0" text="" />
+    <Label layoutX="54.0" layoutY="362.0" text="Contraseña" />
+    <TextField fx:id="tfContrasenya" layoutX="161.0" layoutY="359.0" prefWidth="200.0" />
   </children>
 </AnchorPane>

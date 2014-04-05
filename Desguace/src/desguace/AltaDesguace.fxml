@@ -34,5 +34,7 @@
     <Label fx:id="errorCp" font="$x1" layoutX="369.0" layoutY="291.0" text="" textFill="RED" />
     <Label fx:id="errorTelefono" font="$x1" layoutX="369.0" layoutY="338.0" text="" textFill="RED" />
     <Label fx:id="labelID" layoutX="54.0" layoutY="34.0" text="" />
+    <TextField fx:id="tfContrasenya" layoutX="161.0" layoutY="380.0" prefWidth="200.0" />
+    <Label layoutX="54.0" layoutY="380.0" text="Contraseña" />
   </children>
 </AnchorPane>

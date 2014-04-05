@@ -708,8 +708,8 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
     
     // método que llaman talleres y desguaces, sin id (lo autogenera la bd)
-    public int altaDesguace(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
-        return conexion.ejecutarInsert("insert into desguace (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
+    public int altaDesguace(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado,String contrasenya) {
+        return conexion.ejecutarInsert("insert into desguace (nombre, email, direccion, ciudad, codPostal, telefono, estado,contrasenya) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + "," + contrasenya + ");");
     }
 
     public String getMD5IdDesguace(String email) {

@@ -161,6 +161,7 @@ CREATE TABLE `desguace` (
   `codPostal` int(11) DEFAULT NULL,
   `telefono` int(11) DEFAULT NULL,
   `estado` int(11) DEFAULT NULL,
+  `contrasenya` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_aux`),
   KEY `PRIMARY_GESTOR` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
