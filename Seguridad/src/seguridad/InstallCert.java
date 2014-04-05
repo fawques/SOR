@@ -141,17 +141,16 @@ public class InstallCert {
 		    + "lib" + SEP + "security"+SEP+"jssecacerts");
 		ks.store(out, passphrase);
 		out.close();
+		System.out.println();
+		System.out.println(cert);
+		System.out.println();
+		System.out.println
+			("Added certificate to keystore 'jssecacerts' using alias '"
+			+ alias + "'");
 	}catch(FileNotFoundException ex){
 		ex.printStackTrace();
 		System.err.println("Error: Aqu’ soluci—n");
 	}
-
-	System.out.println();
-	System.out.println(cert);
-	System.out.println();
-	System.out.println
-		("Added certificate to keystore 'jssecacerts' using alias '"
-		+ alias + "'");
     }
 
     private static final char[] HEXDIGITS = "0123456789abcdef".toCharArray();

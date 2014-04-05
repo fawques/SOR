@@ -93,7 +93,7 @@ public class SimplePublish {
         String[][] servicios = new String[4][3];
         servicios[0][0] = "TallerWS";
         servicios[0][1] = "TallerWSPort";
-        servicios[0][2] = "https://" + ip + ":8080/Gestor/services/TallerWSPort?wsdl";
+        servicios[0][2] = "https://" + ip + ":8443/Gestor/services/TallerWSPort?wsdl";
         servicios[1][0] = "AdminWS";
         servicios[1][1] = "AdminWSPort";
         servicios[1][2] = "http://" + ip + ":8080/Gestor/services/AdminWSPort?wsdl";
