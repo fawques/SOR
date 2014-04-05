@@ -245,10 +245,10 @@ public class AltaTallerController implements Initializable {
         String listaJSON = g.toJson(nuevoP);
         MainTaller.nuevoPedido(listaJSON);*/
         setEditableAllInputs(false);
-        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText(),tfContrasenya.getText())) {
+        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
-            if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(),tfCp.getText(), tfTelefono.getText(),tfContrasenya.getText())) {
+            if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(),tfCp.getText(), tfTelefono.getText())) {
                 //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_taller");
                 if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2,tfContrasenya.getText()) != -1) {
@@ -290,9 +290,9 @@ public class AltaTallerController implements Initializable {
     }
 
     public void modificarTaller() throws IOException {
-        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText(),tfContrasenya.getText())) {
+        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
             System.out.println("Enviando...");
-            if (MainTaller.modificarDatos(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText(),tfContrasenya.getText()))
+            if (MainTaller.modificarDatos(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText()))
                 irAGestionPedidos();
         }
     }

@@ -252,7 +252,7 @@ public class MainTaller extends Application {
 	 * @return
 	 */
 	public static boolean validar(String nombreTaller, String email,
-			String direccion, String ciudad, String cp, String telefono,String contrasenya) {
+			String direccion, String ciudad, String cp, String telefono) {
 		return validarNombre(nombreTaller) && validarEmail(email)
 				&& validarNombre(ciudad) && validarSoloNumeros(cp)
 				&& validarSoloNumeros(telefono) && validarDireccion(direccion);
@@ -514,14 +514,14 @@ public class MainTaller extends Application {
 	}
 
 	public static boolean modificarDatos(String nombre, String email,
-			String direccion, String ciudad, String codPostal, String telefono,String contrasenya) {
+			String direccion, String ciudad, String codPostal, String telefono) {
 		try {
 			if (modificar(taller.getID(), nombre, email, direccion, ciudad,
-					codPostal, telefono,contrasenya)) {
+					codPostal, telefono)) {
 				bd = new InterfazBD("sor_taller");
 				boolean o = bd.modificarTaller(nombre, email, direccion,
 						ciudad, Integer.parseInt(codPostal),
-						Integer.parseInt(telefono),contrasenya);
+						Integer.parseInt(telefono));
 				taller = bd.getPrimerTaller();
 				bd.close();
 				return o;
@@ -638,13 +638,13 @@ public class MainTaller extends Application {
 
 	public static boolean alta(java.lang.String name, java.lang.String email,
 			java.lang.String address, java.lang.String city, String postalCode,
-			String telephone,String contrasenya) {
+			String telephone) {
 		AsyncManager manager = new AsyncManager("sor_taller");
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
 				boolean ret = alta_WS(name, email, address, city, postalCode,
-						telephone,contrasenya);
+						telephone);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -652,7 +652,7 @@ public class MainTaller extends Application {
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
-				return alta(name, email, address, city, postalCode, telephone,contrasenya);
+				return alta(name, email, address, city, postalCode, telephone);
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
@@ -872,13 +872,13 @@ public class MainTaller extends Application {
 
 	public static boolean modificar(java.lang.String id, java.lang.String name,
 			java.lang.String email, java.lang.String address,
-			java.lang.String city, String postalCode, String telephone,String contrasenya) {
+			java.lang.String city, String postalCode, String telephone) {
 		AsyncManager manager = new AsyncManager("sor_taller");
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
 				Boolean ret = modificar_WS(id, name, email, address, city,
-						postalCode, telephone,contrasenya);
+						postalCode, telephone);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -887,7 +887,7 @@ public class MainTaller extends Application {
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
 				return modificar(id, name, email, address, city, postalCode,
-						telephone,contrasenya);
+						telephone);
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");

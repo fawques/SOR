@@ -83,7 +83,7 @@ public class registro extends HttpServlet {
             throws ServletException, IOException {
         TallerWS tws = new TallerWS();
         AdminWS aws = new AdminWS();
-        if (tws.alta(request.getParameter("usuario"), request.getParameter("email"), request.getParameter("direccion"), request.getParameter("ciudad"), request.getParameter("cpostal"), request.getParameter("telefono"),"1234")) {
+        if (tws.alta(request.getParameter("usuario"), request.getParameter("email"), request.getParameter("direccion"), request.getParameter("ciudad"), request.getParameter("cpostal"), request.getParameter("telefono"))) {
             try {
                 bd = new InterfazBD("sor_gestor");
                 Taller t = bd.getTaller(request.getParameter("email"));

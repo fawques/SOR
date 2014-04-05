@@ -22,10 +22,10 @@ public class Webservices {
         return port.nuevoPedido(pedido);
     }
     
-    public static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone,java.lang.String contrasenya) {
+    public static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone) {
         gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.alta(name, email, address, city, postalCode, telephone,contrasenya);
+        return port.alta(name, email, address, city, postalCode, telephone);
     }
     
     public static String checkActivacion_WS(String mail) {

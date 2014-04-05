@@ -670,14 +670,14 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
 
     // método que llama el gestor, pasándole el id como un string (resultado del md5)
-    public boolean altaTaller(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado,String contrasenya) {
-        int res = conexion.ejecutarInsert("insert into taller (id,nombre, email, direccion, ciudad, codPostal, telefono, estado,contrasenya) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ","+ contrasenya+ ");");
+    public boolean altaTaller(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
+        int res = conexion.ejecutarInsert("insert into taller (id,nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado +  ");");
         return res >= 0;
     }
     
     // método que llaman talleres y desguaces, sin id (lo autogenera la bd)
     public int altaTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado,String contrasenya) {
-        return conexion.ejecutarInsert("insert into taller (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + "," + contrasenya + ");");
+        return conexion.ejecutarInsert("insert into taller (nombre, email, direccion, ciudad, codPostal, telefono, estado,contrasenya) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado +"," + contrasenya + ");");
     }
 
     public String getMD5IdTaller(String email) {
@@ -696,8 +696,8 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         return conexion.ejecutarSQL("UPDATE `taller` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "', `estado`='" + estado.ordinal() + "' WHERE `id`='" + ID + "';");
     }
 
-    public boolean modificarTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono,String contrasenya) {
-        return conexion.ejecutarSQL("UPDATE `taller` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono +  "', `contrasenya`='" + contrasenya + "'");
+    public boolean modificarTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono) {
+        return conexion.ejecutarSQL("UPDATE `taller` SET `nombre`='" + nombre + "', `email`='" + email + "', `direccion`='" + direccion + "', `ciudad`='" + ciudad + "', `codPostal`='" + codPostal + "', `telefono`='" + telefono + "'");
     }
     
     
