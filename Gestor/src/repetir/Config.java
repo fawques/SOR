@@ -26,7 +26,7 @@ public class Config implements ServletContextListener {
         scheduler.scheduleAtFixedRate(new DateChecker(), 120, 60, TimeUnit.SECONDS);
         AdminWS admin =new AdminWS();
         admin.Registrar();
-        scheduler.schedule(new InstallCertificado(), 1, TimeUnit.SECONDS);
+        scheduler.schedule(new InstallCertificado(), 5, TimeUnit.SECONDS);
     }
 
     @Override
