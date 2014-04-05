@@ -8,6 +8,8 @@ package webservices;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -30,9 +32,6 @@ import gestor_taller.TallerWS_Service;
  * @author fawques
  */
 public class Webservices {
-	
-	
-	
     static public String nuevoPedido_WS(String pedido, String idTaller) throws JMSException_Exception {
     	Base64 b64 = new Base64();
     	byte[] encodedKey     = b64.decode(generarClaveReto(idTaller));
@@ -51,12 +50,11 @@ public class Webservices {
     }
     
     public static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, java.lang.String postalCode, java.lang.String telephone) {
-    	//SecretKey encryptor = generarClaveReto();
 
-        //gestor_taller.TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
-        //gestor_taller.TallerWS port = service.getTallerWSPort();
-        //return port.alta(TripleDes.encrypt(encryptor, name), TripleDes.encrypt(encryptor, email), TripleDes.encrypt(encryptor, address), TripleDes.encrypt(encryptor, city), TripleDes.encrypt(encryptor, postalCode), TripleDes.encrypt(encryptor, telephone));
-    	return false;
+        	TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
+	        gestor_taller.TallerWS port = service.getTallerWSPort();
+	        return port.alta(name, email, address, city, postalCode, telephone);
+	    
     }
     
     public static String generarClaveReto(String idTaller) {
