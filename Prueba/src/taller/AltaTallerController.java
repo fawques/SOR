@@ -45,6 +45,7 @@ public class AltaTallerController implements Initializable {
     public TextField tfCiudad;
     public TextField tfCp;
     public TextField tfTelefono;
+    public TextField tfContrasenya;
     public Label id;
     public Label errorNombreTaller;
     public Label errorEmail;
@@ -226,6 +227,7 @@ public class AltaTallerController implements Initializable {
         tfCiudad.setEditable(b);
         tfCp.setEditable(b);
         tfTelefono.setEditable(b);
+        tfContrasenya.setEditable(b);
         
     }
 
@@ -243,13 +245,13 @@ public class AltaTallerController implements Initializable {
         String listaJSON = g.toJson(nuevoP);
         MainTaller.nuevoPedido(listaJSON);*/
         setEditableAllInputs(false);
-        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
+        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText(),tfContrasenya.getText())) {
             //then we can send the registration
             System.out.println("Enviando...");
-            if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(),tfCp.getText(), tfTelefono.getText())) {
+            if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(),tfCp.getText(), tfTelefono.getText(),tfContrasenya.getText())) {
                 //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_taller");
-                if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
+                if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2,tfContrasenya.getText()) != -1) {
                     URL location = getClass().getResource("tallerPendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
@@ -288,9 +290,9 @@ public class AltaTallerController implements Initializable {
     }
 
     public void modificarTaller() throws IOException {
-        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
+        if (MainTaller.validar(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText(),tfContrasenya.getText())) {
             System.out.println("Enviando...");
-            if (MainTaller.modificarDatos(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText()))
+            if (MainTaller.modificarDatos(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText(),tfContrasenya.getText()))
                 irAGestionPedidos();
         }
     }

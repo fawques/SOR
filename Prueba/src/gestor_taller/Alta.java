@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="postalCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="telephone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="contrasenya" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,7 +38,8 @@ import javax.xml.bind.annotation.XmlType;
     "address",
     "city",
     "postalCode",
-    "telephone"
+    "telephone",
+    "contrasenya"
 })
 public class Alta {
 
@@ -47,6 +49,7 @@ public class Alta {
     protected String city;
     protected String postalCode;
     protected String telephone;
+    protected String contrasenya;
 
     /**
      * Obtiene el valor de la propiedad name.
@@ -190,6 +193,30 @@ public class Alta {
      */
     public void setTelephone(String value) {
         this.telephone = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad contrasenya.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getContrasenya() {
+        return contrasenya;
+    }
+
+    /**
+     * Define el valor de la propiedad contrasenya.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setContrasenya(String value) {
+        this.contrasenya = value;
     }
 
 }

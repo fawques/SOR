@@ -217,13 +217,13 @@ public class TallerWS {
      * Web service operation
      */
     @WebMethod(operationName = "alta")
-    public boolean alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone) {
+    public boolean alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone, @WebParam(name = "contrasenya") String contrasenya) {
         try {
             bd = new InterfazBD("sor_gestor");
             Date ahora = new Date();
             Random r = new Random(ahora.getTime());
             String stringID  = DigestUtils.md5Hex(ahora.toString() + r);
-            boolean res = bd.altaTaller(stringID, name, email, address, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), EstadoGeneral.PENDIENTE.ordinal());
+            boolean res = bd.altaTaller(stringID, name, email, address, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), EstadoGeneral.PENDIENTE.ordinal(),contrasenya);
             bd.close();
             return res;
         } catch (java.sql.SQLException ex) {

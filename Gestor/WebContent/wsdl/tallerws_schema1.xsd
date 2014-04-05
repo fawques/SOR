@@ -31,6 +31,7 @@
       <xs:element minOccurs="0" name="city" type="xs:string"/>
       <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
       <xs:element minOccurs="0" name="telephone" type="xs:string"/>
+      <xs:element minOccurs="0" name="contrasenya" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="altaResponse">
