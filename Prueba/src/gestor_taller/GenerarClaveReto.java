@@ -7,16 +7,15 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para nuevoPedido complex type.
+ * <p>Clase Java para generarClaveReto complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="nuevoPedido">
+ * &lt;complexType name="generarClaveReto">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="pedido" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="idTaller" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -27,38 +26,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "nuevoPedido", propOrder = {
-    "pedido",
+@XmlType(name = "generarClaveReto", propOrder = {
     "idTaller"
 })
-public class NuevoPedido {
+public class GenerarClaveReto {
 
-    protected String pedido;
     protected String idTaller;
-
-    /**
-     * Obtiene el valor de la propiedad pedido.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPedido() {
-        return pedido;
-    }
-
-    /**
-     * Define el valor de la propiedad pedido.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPedido(String value) {
-        this.pedido = value;
-    }
 
     /**
      * Obtiene el valor de la propiedad idTaller.

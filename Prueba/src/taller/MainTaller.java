@@ -607,7 +607,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				return cambiarEstadoPedido_WS(Integer.parseInt(estado), idPedido);
+				return cambiarEstadoPedido_WS(Integer.parseInt(estado), idPedido, taller.getID());
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
@@ -697,7 +697,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = nuevoPedido_WS(pedido);
+				String ret = nuevoPedido_WS(pedido, taller.getID());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -728,7 +728,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = getOfertas_WS(listaPedidos);
+				String ret = getOfertas_WS(listaPedidos, taller.getID());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -753,7 +753,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = aceptarOferta_WS(id);
+				Boolean ret = aceptarOferta_WS(id, taller.getID());
 				if (ret) {
 
 				}
@@ -787,7 +787,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = rechazarOferta_WS(id);
+				Boolean ret = rechazarOferta_WS(id, taller.getID());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -907,7 +907,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = cancelarPedido_WS(idPedido);
+				Boolean ret = cancelarPedido_WS(idPedido, taller.getID());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {

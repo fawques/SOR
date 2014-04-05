@@ -42,6 +42,8 @@ import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import org.apache.commons.codec.binary.Base64;
+
 import seguridad.TripleDes;
 
 /**
@@ -72,7 +74,7 @@ public class TallerWS {
         return false;
     }
     
-    public byte[] generarClaveReto(@WebParam (name= "idTaller") String idTaller) {
+    public String generarClaveReto(@WebParam (name= "idTaller") String idTaller) {
     	//Generamos la clave de reto y se la mandamos al cliente
 		try {
 			SecretKey clave = TripleDes.generateKey();
@@ -88,7 +90,9 @@ public class TallerWS {
 				listaIdTaller.add(idTaller);
 				listaSecretKeys.add(clave);
 			}
-			return clave.getEncoded();
+			Base64 b64 = new Base64();
+			
+			return b64.encodeToString(clave.getEncoded());
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,6 +106,7 @@ public class TallerWS {
      * @param email
      * @return
      */
+    //REMODELACION PARA QUE HAYA UNA ESPECIE DE LOGIN
     @WebMethod(operationName = "checkActivacion")
     public String checkActivacion(@WebParam(name = "mail") String email)    {
         try {
@@ -285,7 +290,7 @@ public class TallerWS {
 
             SecretKey key = listaSecretKeys.get(listaIdTaller.indexOf(idTaller));
             boolean oool = bd.cancelarPedido(TripleDes.decrypt(key, idPedido));
-            cambiarEstadoPedido(EstadoPedido.CANCELLED.ordinal(), TripleDes.decrypt(key, idPedido));
+            cambiarEstadoPedido(EstadoPedido.CANCELLED.ordinal(), idPedido, idTaller);
             bd.close();
             return oool;
         } catch (SQLException ex) {
@@ -300,14 +305,15 @@ public class TallerWS {
      * Web service operation
      */
     @WebMethod(operationName = "cambiarEstadoPedido")
-    public Boolean cambiarEstadoPedido(@WebParam(name = "estado") int estado, @WebParam(name = "id") String id) {
+    public Boolean cambiarEstadoPedido(@WebParam(name = "estado") int estado, @WebParam(name = "id") String id, @WebParam(name = "idTaller") String idTaller) {
         try {
+        	SecretKey key = listaSecretKeys.get(listaIdTaller.indexOf(idTaller));
         	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             bd= new InterfazBD("sor_gestor");
             for(Desguace desguace: bd.getDesguaces()){
-                enviarPedidoActivemq(desguace.getID(),new PedidoCorto(id,EstadoPedido.values()[estado]));
+                enviarPedidoActivemq(desguace.getID(),new PedidoCorto(TripleDes.decrypt(key, id),EstadoPedido.values()[estado]));
             }
-           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.values()[estado], id);
+           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.values()[estado], TripleDes.decrypt(key, id));
            bd.close();
            return ool;
         } catch (SQLException ex) {

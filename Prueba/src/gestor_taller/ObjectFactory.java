@@ -27,28 +27,30 @@ public class ObjectFactory {
     private final static QName _CambiarEstadoPedidoResponse_QNAME = new QName("http://gestor_taller/", "cambiarEstadoPedidoResponse");
     private final static QName _HelloResponse_QNAME = new QName("http://gestor_taller/", "helloResponse");
     private final static QName _GetPedidos_QNAME = new QName("http://gestor_taller/", "getPedidos");
-    private final static QName _CheckActivacion_QNAME = new QName("http://gestor_taller/", "checkActivacion");
     private final static QName _GetOfertas_QNAME = new QName("http://gestor_taller/", "getOfertas");
+    private final static QName _CheckActivacion_QNAME = new QName("http://gestor_taller/", "checkActivacion");
     private final static QName _Hello_QNAME = new QName("http://gestor_taller/", "hello");
+    private final static QName _RechazarOferta_QNAME = new QName("http://gestor_taller/", "rechazarOferta");
+    private final static QName _AltaResponse_QNAME = new QName("http://gestor_taller/", "altaResponse");
+    private final static QName _GenerarClaveRetoResponse_QNAME = new QName("http://gestor_taller/", "generarClaveRetoResponse");
+    private final static QName _CancelarPedido_QNAME = new QName("http://gestor_taller/", "cancelarPedido");
+    private final static QName _Alta_QNAME = new QName("http://gestor_taller/", "alta");
+    private final static QName _GetOfertasResponse_QNAME = new QName("http://gestor_taller/", "getOfertasResponse");
+    private final static QName _Baja_QNAME = new QName("http://gestor_taller/", "baja");
+    private final static QName _CheckActivacionResponse_QNAME = new QName("http://gestor_taller/", "checkActivacionResponse");
+    private final static QName _BajaResponse_QNAME = new QName("http://gestor_taller/", "bajaResponse");
     private final static QName _RechazarOfertaResponse_QNAME = new QName("http://gestor_taller/", "rechazarOfertaResponse");
     private final static QName _CambiarEstadoPedido_QNAME = new QName("http://gestor_taller/", "cambiarEstadoPedido");
-    private final static QName _RechazarOferta_QNAME = new QName("http://gestor_taller/", "rechazarOferta");
-    private final static QName _GetPedidosResponse_QNAME = new QName("http://gestor_taller/", "getPedidosResponse");
     private final static QName _NuevoPedido_QNAME = new QName("http://gestor_taller/", "nuevoPedido");
-    private final static QName _AltaResponse_QNAME = new QName("http://gestor_taller/", "altaResponse");
+    private final static QName _GetPedidosResponse_QNAME = new QName("http://gestor_taller/", "getPedidosResponse");
     private final static QName _NuevoPedidoResponse_QNAME = new QName("http://gestor_taller/", "nuevoPedidoResponse");
     private final static QName _AceptarOferta_QNAME = new QName("http://gestor_taller/", "aceptarOferta");
+    private final static QName _GenerarClaveReto_QNAME = new QName("http://gestor_taller/", "generarClaveReto");
     private final static QName _JMSException_QNAME = new QName("http://gestor_taller/", "JMSException");
-    private final static QName _Alta_QNAME = new QName("http://gestor_taller/", "alta");
-    private final static QName _CancelarPedido_QNAME = new QName("http://gestor_taller/", "cancelarPedido");
     private final static QName _ModificarResponse_QNAME = new QName("http://gestor_taller/", "modificarResponse");
-    private final static QName _GetOfertasResponse_QNAME = new QName("http://gestor_taller/", "getOfertasResponse");
     private final static QName _AceptarOfertaResponse_QNAME = new QName("http://gestor_taller/", "aceptarOfertaResponse");
     private final static QName _Modificar_QNAME = new QName("http://gestor_taller/", "modificar");
-    private final static QName _Baja_QNAME = new QName("http://gestor_taller/", "baja");
     private final static QName _CancelarPedidoResponse_QNAME = new QName("http://gestor_taller/", "cancelarPedidoResponse");
-    private final static QName _BajaResponse_QNAME = new QName("http://gestor_taller/", "bajaResponse");
-    private final static QName _CheckActivacionResponse_QNAME = new QName("http://gestor_taller/", "checkActivacionResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: gestor_taller
@@ -66,35 +68,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Alta }
-     * 
-     */
-    public Alta createAlta() {
-        return new Alta();
-    }
-
-    /**
-     * Create an instance of {@link CancelarPedido }
-     * 
-     */
-    public CancelarPedido createCancelarPedido() {
-        return new CancelarPedido();
-    }
-
-    /**
      * Create an instance of {@link JMSException }
      * 
      */
     public JMSException createJMSException() {
         return new JMSException();
-    }
-
-    /**
-     * Create an instance of {@link GetOfertasResponse }
-     * 
-     */
-    public GetOfertasResponse createGetOfertasResponse() {
-        return new GetOfertasResponse();
     }
 
     /**
@@ -106,19 +84,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BajaResponse }
+     * Create an instance of {@link CancelarPedidoResponse }
      * 
      */
-    public BajaResponse createBajaResponse() {
-        return new BajaResponse();
-    }
-
-    /**
-     * Create an instance of {@link CheckActivacionResponse }
-     * 
-     */
-    public CheckActivacionResponse createCheckActivacionResponse() {
-        return new CheckActivacionResponse();
+    public CancelarPedidoResponse createCancelarPedidoResponse() {
+        return new CancelarPedidoResponse();
     }
 
     /**
@@ -130,43 +100,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Baja }
-     * 
-     */
-    public Baja createBaja() {
-        return new Baja();
-    }
-
-    /**
-     * Create an instance of {@link CancelarPedidoResponse }
-     * 
-     */
-    public CancelarPedidoResponse createCancelarPedidoResponse() {
-        return new CancelarPedidoResponse();
-    }
-
-    /**
      * Create an instance of {@link RechazarOfertaResponse }
      * 
      */
     public RechazarOfertaResponse createRechazarOfertaResponse() {
         return new RechazarOfertaResponse();
-    }
-
-    /**
-     * Create an instance of {@link Hello }
-     * 
-     */
-    public Hello createHello() {
-        return new Hello();
-    }
-
-    /**
-     * Create an instance of {@link NuevoPedido }
-     * 
-     */
-    public NuevoPedido createNuevoPedido() {
-        return new NuevoPedido();
     }
 
     /**
@@ -178,11 +116,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RechazarOferta }
+     * Create an instance of {@link NuevoPedido }
      * 
      */
-    public RechazarOferta createRechazarOferta() {
-        return new RechazarOferta();
+    public NuevoPedido createNuevoPedido() {
+        return new NuevoPedido();
     }
 
     /**
@@ -194,43 +132,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetPedidos }
+     * Create an instance of {@link GenerarClaveReto }
      * 
      */
-    public GetPedidos createGetPedidos() {
-        return new GetPedidos();
-    }
-
-    /**
-     * Create an instance of {@link HelloResponse }
-     * 
-     */
-    public HelloResponse createHelloResponse() {
-        return new HelloResponse();
-    }
-
-    /**
-     * Create an instance of {@link CambiarEstadoPedidoResponse }
-     * 
-     */
-    public CambiarEstadoPedidoResponse createCambiarEstadoPedidoResponse() {
-        return new CambiarEstadoPedidoResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetOfertas }
-     * 
-     */
-    public GetOfertas createGetOfertas() {
-        return new GetOfertas();
-    }
-
-    /**
-     * Create an instance of {@link CheckActivacion }
-     * 
-     */
-    public CheckActivacion createCheckActivacion() {
-        return new CheckActivacion();
+    public GenerarClaveReto createGenerarClaveReto() {
+        return new GenerarClaveReto();
     }
 
     /**
@@ -242,19 +148,131 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AltaResponse }
-     * 
-     */
-    public AltaResponse createAltaResponse() {
-        return new AltaResponse();
-    }
-
-    /**
      * Create an instance of {@link AceptarOferta }
      * 
      */
     public AceptarOferta createAceptarOferta() {
         return new AceptarOferta();
+    }
+
+    /**
+     * Create an instance of {@link CancelarPedido }
+     * 
+     */
+    public CancelarPedido createCancelarPedido() {
+        return new CancelarPedido();
+    }
+
+    /**
+     * Create an instance of {@link Alta }
+     * 
+     */
+    public Alta createAlta() {
+        return new Alta();
+    }
+
+    /**
+     * Create an instance of {@link GetOfertasResponse }
+     * 
+     */
+    public GetOfertasResponse createGetOfertasResponse() {
+        return new GetOfertasResponse();
+    }
+
+    /**
+     * Create an instance of {@link CheckActivacionResponse }
+     * 
+     */
+    public CheckActivacionResponse createCheckActivacionResponse() {
+        return new CheckActivacionResponse();
+    }
+
+    /**
+     * Create an instance of {@link BajaResponse }
+     * 
+     */
+    public BajaResponse createBajaResponse() {
+        return new BajaResponse();
+    }
+
+    /**
+     * Create an instance of {@link Baja }
+     * 
+     */
+    public Baja createBaja() {
+        return new Baja();
+    }
+
+    /**
+     * Create an instance of {@link Hello }
+     * 
+     */
+    public Hello createHello() {
+        return new Hello();
+    }
+
+    /**
+     * Create an instance of {@link RechazarOferta }
+     * 
+     */
+    public RechazarOferta createRechazarOferta() {
+        return new RechazarOferta();
+    }
+
+    /**
+     * Create an instance of {@link GetPedidos }
+     * 
+     */
+    public GetPedidos createGetPedidos() {
+        return new GetPedidos();
+    }
+
+    /**
+     * Create an instance of {@link CambiarEstadoPedidoResponse }
+     * 
+     */
+    public CambiarEstadoPedidoResponse createCambiarEstadoPedidoResponse() {
+        return new CambiarEstadoPedidoResponse();
+    }
+
+    /**
+     * Create an instance of {@link HelloResponse }
+     * 
+     */
+    public HelloResponse createHelloResponse() {
+        return new HelloResponse();
+    }
+
+    /**
+     * Create an instance of {@link CheckActivacion }
+     * 
+     */
+    public CheckActivacion createCheckActivacion() {
+        return new CheckActivacion();
+    }
+
+    /**
+     * Create an instance of {@link GetOfertas }
+     * 
+     */
+    public GetOfertas createGetOfertas() {
+        return new GetOfertas();
+    }
+
+    /**
+     * Create an instance of {@link GenerarClaveRetoResponse }
+     * 
+     */
+    public GenerarClaveRetoResponse createGenerarClaveRetoResponse() {
+        return new GenerarClaveRetoResponse();
+    }
+
+    /**
+     * Create an instance of {@link AltaResponse }
+     * 
+     */
+    public AltaResponse createAltaResponse() {
+        return new AltaResponse();
     }
 
     /**
@@ -285,15 +303,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CheckActivacion }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "checkActivacion")
-    public JAXBElement<CheckActivacion> createCheckActivacion(CheckActivacion value) {
-        return new JAXBElement<CheckActivacion>(_CheckActivacion_QNAME, CheckActivacion.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetOfertas }{@code >}}
      * 
      */
@@ -303,12 +312,102 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckActivacion }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "checkActivacion")
+    public JAXBElement<CheckActivacion> createCheckActivacion(CheckActivacion value) {
+        return new JAXBElement<CheckActivacion>(_CheckActivacion_QNAME, CheckActivacion.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Hello }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://gestor_taller/", name = "hello")
     public JAXBElement<Hello> createHello(Hello value) {
         return new JAXBElement<Hello>(_Hello_QNAME, Hello.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RechazarOferta }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "rechazarOferta")
+    public JAXBElement<RechazarOferta> createRechazarOferta(RechazarOferta value) {
+        return new JAXBElement<RechazarOferta>(_RechazarOferta_QNAME, RechazarOferta.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AltaResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "altaResponse")
+    public JAXBElement<AltaResponse> createAltaResponse(AltaResponse value) {
+        return new JAXBElement<AltaResponse>(_AltaResponse_QNAME, AltaResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GenerarClaveRetoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "generarClaveRetoResponse")
+    public JAXBElement<GenerarClaveRetoResponse> createGenerarClaveRetoResponse(GenerarClaveRetoResponse value) {
+        return new JAXBElement<GenerarClaveRetoResponse>(_GenerarClaveRetoResponse_QNAME, GenerarClaveRetoResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CancelarPedido }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "cancelarPedido")
+    public JAXBElement<CancelarPedido> createCancelarPedido(CancelarPedido value) {
+        return new JAXBElement<CancelarPedido>(_CancelarPedido_QNAME, CancelarPedido.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Alta }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "alta")
+    public JAXBElement<Alta> createAlta(Alta value) {
+        return new JAXBElement<Alta>(_Alta_QNAME, Alta.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOfertasResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "getOfertasResponse")
+    public JAXBElement<GetOfertasResponse> createGetOfertasResponse(GetOfertasResponse value) {
+        return new JAXBElement<GetOfertasResponse>(_GetOfertasResponse_QNAME, GetOfertasResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Baja }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "baja")
+    public JAXBElement<Baja> createBaja(Baja value) {
+        return new JAXBElement<Baja>(_Baja_QNAME, Baja.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckActivacionResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "checkActivacionResponse")
+    public JAXBElement<CheckActivacionResponse> createCheckActivacionResponse(CheckActivacionResponse value) {
+        return new JAXBElement<CheckActivacionResponse>(_CheckActivacionResponse_QNAME, CheckActivacionResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BajaResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "bajaResponse")
+    public JAXBElement<BajaResponse> createBajaResponse(BajaResponse value) {
+        return new JAXBElement<BajaResponse>(_BajaResponse_QNAME, BajaResponse.class, null, value);
     }
 
     /**
@@ -330,24 +429,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RechazarOferta }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "rechazarOferta")
-    public JAXBElement<RechazarOferta> createRechazarOferta(RechazarOferta value) {
-        return new JAXBElement<RechazarOferta>(_RechazarOferta_QNAME, RechazarOferta.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPedidosResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "getPedidosResponse")
-    public JAXBElement<GetPedidosResponse> createGetPedidosResponse(GetPedidosResponse value) {
-        return new JAXBElement<GetPedidosResponse>(_GetPedidosResponse_QNAME, GetPedidosResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link NuevoPedido }{@code >}}
      * 
      */
@@ -357,12 +438,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AltaResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPedidosResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "altaResponse")
-    public JAXBElement<AltaResponse> createAltaResponse(AltaResponse value) {
-        return new JAXBElement<AltaResponse>(_AltaResponse_QNAME, AltaResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "getPedidosResponse")
+    public JAXBElement<GetPedidosResponse> createGetPedidosResponse(GetPedidosResponse value) {
+        return new JAXBElement<GetPedidosResponse>(_GetPedidosResponse_QNAME, GetPedidosResponse.class, null, value);
     }
 
     /**
@@ -384,6 +465,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GenerarClaveReto }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_taller/", name = "generarClaveReto")
+    public JAXBElement<GenerarClaveReto> createGenerarClaveReto(GenerarClaveReto value) {
+        return new JAXBElement<GenerarClaveReto>(_GenerarClaveReto_QNAME, GenerarClaveReto.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link JMSException }{@code >}}
      * 
      */
@@ -393,39 +483,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Alta }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "alta")
-    public JAXBElement<Alta> createAlta(Alta value) {
-        return new JAXBElement<Alta>(_Alta_QNAME, Alta.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CancelarPedido }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "cancelarPedido")
-    public JAXBElement<CancelarPedido> createCancelarPedido(CancelarPedido value) {
-        return new JAXBElement<CancelarPedido>(_CancelarPedido_QNAME, CancelarPedido.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ModificarResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://gestor_taller/", name = "modificarResponse")
     public JAXBElement<ModificarResponse> createModificarResponse(ModificarResponse value) {
         return new JAXBElement<ModificarResponse>(_ModificarResponse_QNAME, ModificarResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetOfertasResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "getOfertasResponse")
-    public JAXBElement<GetOfertasResponse> createGetOfertasResponse(GetOfertasResponse value) {
-        return new JAXBElement<GetOfertasResponse>(_GetOfertasResponse_QNAME, GetOfertasResponse.class, null, value);
     }
 
     /**
@@ -447,39 +510,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Baja }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "baja")
-    public JAXBElement<Baja> createBaja(Baja value) {
-        return new JAXBElement<Baja>(_Baja_QNAME, Baja.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CancelarPedidoResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://gestor_taller/", name = "cancelarPedidoResponse")
     public JAXBElement<CancelarPedidoResponse> createCancelarPedidoResponse(CancelarPedidoResponse value) {
         return new JAXBElement<CancelarPedidoResponse>(_CancelarPedidoResponse_QNAME, CancelarPedidoResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BajaResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "bajaResponse")
-    public JAXBElement<BajaResponse> createBajaResponse(BajaResponse value) {
-        return new JAXBElement<BajaResponse>(_BajaResponse_QNAME, BajaResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CheckActivacionResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_taller/", name = "checkActivacionResponse")
-    public JAXBElement<CheckActivacionResponse> createCheckActivacionResponse(CheckActivacionResponse value) {
-        return new JAXBElement<CheckActivacionResponse>(_CheckActivacionResponse_QNAME, CheckActivacionResponse.class, null, value);
     }
 
 }
