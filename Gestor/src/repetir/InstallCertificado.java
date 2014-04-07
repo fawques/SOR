@@ -39,6 +39,7 @@ public class InstallCertificado implements Runnable {
 			e.printStackTrace();
 		}*/
 		MainSeguridad m = new MainSeguridad("");
+		System.out.println("acabo de hacer el jks");
 	}
 
 }
