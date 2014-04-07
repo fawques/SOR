@@ -525,4 +525,9 @@ public class GestionPedidosController implements Initializable {
         
     	
     }
+    public void nuevoUsuario(){
+    	
+    	MainTaller.anyadirRol("pepe", "12", "empleado");
+    	MainTaller.anyadirRol("pio", "11", "Entrenador_pokemon");
+    }
 }

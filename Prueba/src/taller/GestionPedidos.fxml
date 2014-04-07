@@ -58,6 +58,15 @@
             </AnchorPane>
           </content>
         </Tab>
+        <Tab text="Usuarios">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Button layoutX="77.0" layoutY="71.0" mnemonicParsing="false" onAction="#nuevoUsuario" text="Nuevo usuario" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
       </tabs>
     </TabPane>
   </children>
