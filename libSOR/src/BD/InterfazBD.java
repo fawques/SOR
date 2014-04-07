@@ -689,8 +689,8 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
 
     // método que llama el gestor, pasándole el id como un string (resultado del md5)
-    public boolean altaTaller(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado,String contrasenya) {
-        int res = conexion.ejecutarInsert("insert into taller (id,nombre, email, direccion, ciudad, codPostal, telefono, estado,contrasenya) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + "," + contrasenya +  ");");
+    public boolean altaTaller(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
+        int res = conexion.ejecutarInsert("insert into taller (id,nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado +  ");");
         return res >= 0;
     }
     
@@ -771,10 +771,10 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
 
     public boolean activarTaller(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0' where `id`='" + idRecibido + "'");
+        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0',`contrasenya`='111' where `id`='" + idRecibido + "'");
     }
     public boolean activarDesguace(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0' where `id`='" + idRecibido + "'");
+        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0',`contrasenya`='111' where `id`='" + idRecibido + "'");
     }
     public ArrayList<Pedido> buscarPedido(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) throws SQLException {
         ArrayList<Pedido> alPedidos = new ArrayList<>();
@@ -947,12 +947,34 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         ResultSet res = conexion.ejecutarSQLSelect("SELECT * from usuarios where nombre='" + usuario + "' && contrasenya='" + contrasenya+"';");
         try {
             if (res.first()) {
-                return true;
+                if(usuario.equals(res.getString("nombre")) && contrasenya.equals(res.getString("contrasenya"))){
+                	return true;
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+	}
+
+	public Desguace getDesguaceActivar(String contrasenya) {
+        ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace WHERE contrasenya='" + contrasenya + "';");
+        try {
+            if (resultados.first()) {
+                final String tallerID = resultados.getString("id");
+                if("".equals(tallerID)){
+                     return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
+                }else{
+                    ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                }
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
 	}
 
 	

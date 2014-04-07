@@ -17,10 +17,10 @@ public class Webservices {
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static String checkActivacion_WS(java.lang.String mail) {
+    public static String checkActivacion_WS(java.lang.String contrasenya) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.checkActivacion(mail);
+        return port.checkActivacion(contrasenya);
     }
 
     public static String getOfertas_WS(java.lang.String id) {

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -251,7 +252,8 @@ public class AltaDesguace implements Initializable {
                 //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_desguace");
                 if (bd.altaDesguace(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2,tfContrasenya.getText()) != -1) {
-                    URL location = getClass().getResource("desguacePendienteActivacion.fxml");
+                	DesguaceJava.anyadirRol("Administrador",tfContrasenya.getText(),"Administrador");
+                	URL location = getClass().getResource("desguacePendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
                     loader.setBuilderFactory(new JavaFXBuilderFactory());

@@ -7,12 +7,14 @@
 package desguace;
 
 import BD.InterfazBD;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -38,6 +41,7 @@ public class DesguacerPendienteActivacionController implements Initializable {
     public Button btRecargar;
     public ProgressIndicator piIndicador;
     public Label lbEstado;
+    public TextField tfValidar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -51,11 +55,11 @@ public class DesguacerPendienteActivacionController implements Initializable {
          lbEstado.setText("");
          piIndicador.setVisible(true);
          String email= bd.getDesguace().getEmail();
-         String idRecibido = DesguaceJava.checkActivacion(bd.getDesguace().getEmail());
+         String idRecibido = DesguaceJava.checkActivacion(tfValidar.getText());
          if ("".equals(idRecibido)) //No Activado
          {
              lbEstado.setStyle("-fx-border-color: red;");
-             lbEstado.setText("Su cuenta no esta activa");
+             lbEstado.setText("Su usuario o contraseña es incorrecto");
          } else //Activado
          {
              //enviar a pantalla gestion de pedido
