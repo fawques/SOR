@@ -552,5 +552,31 @@ namespace desguaceNET.libSOR.BD
             conexion.ejecutarSQL(new MySqlCommand("DELETE FROM `acciones`;"));
             return result;
         }
+        public void anyadirRol(String nombre, String contrasenya, String rol) {
+        conexion.ejecutarSQLSelect(new MySqlCommand("Insert into usuarios(nombre,contrasenya,rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol + "')"));
+
+		
+	    }
+
+	public Boolean comprobarInicio(String usuario, String contrasenya) {
+        DataSet res = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM `usuarios` where nombre='" + usuario + "';"));
+        try
+        {
+            DataTableReader reader = res.CreateDataReader();
+            if (reader.NextResult())
+            {
+
+                if (usuario.Equals((string)reader["nombre"]) && contrasenya.Equals((string)reader["contrasenya"]))
+                {
+                    return true;
+                }
+            }
+        }
+        catch (MySqlException ex)
+        {
+            Console.WriteLine(ex.StackTrace);
+        }
+        return false;
+	}
     }
 }

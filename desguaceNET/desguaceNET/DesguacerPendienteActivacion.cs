@@ -31,7 +31,7 @@ namespace desguaceNET
             InterfazBD bd = new InterfazBD("sor_desguace");
             Desguace desguace = bd.getDesguace();
             DesguaceNet main = new DesguaceNet();
-            string id = main.comprobarActivacion(desguace.getEmail());
+            string id = main.comprobarActivacion(tbValidar.Text);
             if (id != "")
             {
                 idResult = id;
