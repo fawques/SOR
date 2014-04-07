@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seguridad.InstallCert;
+import seguridad.MainSeguridad;
 
 /**
  * @author pablovm1990
@@ -24,7 +25,7 @@ public class InstallCertificado implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		String ip = "localhost";
+		/*String ip = "localhost";
         try {
              ip = Inet4Address.getLocalHost().getHostAddress();
         } catch (UnknownHostException ex) {
@@ -36,7 +37,8 @@ public class InstallCertificado implements Runnable {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		MainSeguridad m = new MainSeguridad("");
 	}
 
 }
