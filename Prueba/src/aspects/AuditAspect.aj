@@ -1,4 +1,5 @@
 package aspects;
+import audit.AuditLogger;
 import webservices.*;
 import BD.InterfazBD;
 public aspect AuditAspect {
@@ -6,12 +7,7 @@ public aspect AuditAspect {
 	pointcut webservice() : execution(* Webservices.*(..));
 
     before() : webservice() {
-    	String salida = "Llamando a un webservice de Gestor: <" + thisEnclosingJoinPointStaticPart.toShortString() + "(";
-        for (Object arg : thisJoinPoint.getArgs()) {
-        	 salida+= arg + ",";            	
-        }
-        salida += ")>";
-        System.out.println(salida);
+        AuditLogger.info("USUARIO", "ACTIVITY", "DETALLE");
     }
 
 }
