@@ -99,6 +99,15 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(30) NOT NULL,
   `contrasenya` varchar(30) DEFAULT NULL,
   `rol` varchar(45) DEFAULT NULL,
+  `nuevo_pedido` int(1) NOT NULL DEFAULT '0',
+  `borrar_pedido` int(1) NOT NULL DEFAULT '0',
+  `modificar_pedido` int(1) NOT NULL DEFAULT '0',
+  `modificar_datos` int(1) NOT NULL DEFAULT '0',
+  `baja` int(1) NOT NULL DEFAULT '0',
+  `aceptar_ofertas` int(1) NOT NULL DEFAULT '0',
+  `rechazar_ofertas` int(1) NOT NULL DEFAULT '0',
+  `nuevo_usuario` int(1) NOT NULL DEFAULT '0',
+  `nuevo_rol` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nombre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
