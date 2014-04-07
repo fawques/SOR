@@ -84,13 +84,10 @@ public class TallerWS {
     				//borramos el anterior
     				listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
     				listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
-    				//y anyadimos el nuevo
-    				listaIdTaller.add(idTaller);
-    				listaSecretKeys.add(clave);
-    			} else{ //anyadir nuevo
-    				listaIdTaller.add(idTaller);
-    				listaSecretKeys.add(clave);
     			}
+				//anyadir nuevo
+				listaIdTaller.add(idTaller);
+				listaSecretKeys.add(clave);
     			Base64 b64 = new Base64();
     			
     			return b64.encodeToString(clave.getEncoded());
