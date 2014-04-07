@@ -28,10 +28,10 @@ public class Webservices {
         return port.alta(name, email, address, city, postalCode, telephone);
     }
     
-    public static String checkActivacion_WS(String mail) {
+    public static String checkActivacion_WS(String contrasenya) {
         TallerWS_Service service = new gestor_taller.TallerWS_Service(JUDDIProxy.getWsdl());
         gestor_taller.TallerWS port = service.getTallerWSPort();
-        return port.checkActivacion(mail);
+        return port.checkActivacion(contrasenya);
     }
     
     public static String getOfertas_WS(String listaPedidos) {

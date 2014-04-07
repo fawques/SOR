@@ -647,6 +647,25 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         }
         return null;
     }
+    public Taller getTallerActivar(String contrasenya){
+        ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller WHERE contrasenya='" + contrasenya + "';");
+        try {
+            if (resultados.first()) {
+                final String tallerID = resultados.getString("id");
+                if("".equals(tallerID)){
+                    return new Taller("", resultados.getInt("id_aux"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
+                }else{
+                    ArrayList<Pedido> listaDePedidos = getPedidosTaller(resultados.getString("id"));
+                    return new Taller(tallerID, resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+                }
+                
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     public Taller getPrimerTaller() {
         ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller;");
@@ -670,8 +689,8 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
 
     // método que llama el gestor, pasándole el id como un string (resultado del md5)
-    public boolean altaTaller(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
-        int res = conexion.ejecutarInsert("insert into taller (id,nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado +  ");");
+    public boolean altaTaller(String stringID, String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado,String contrasenya) {
+        int res = conexion.ejecutarInsert("insert into taller (id,nombre, email, direccion, ciudad, codPostal, telefono, estado,contrasenya) values ('" + stringID + "','" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + "," + contrasenya +  ");");
         return res >= 0;
     }
     
@@ -917,6 +936,24 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     	conexion.ejecutarSQL("DELETE FROM `acciones`;");
     	return result;
     }
+
+	public void anyadirRol(String nombre, String contrasenya, String rol) {
+        conexion.ejecutarInsert("Insert into usuarios(nombre,contrasenya,rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol + "')");
+
+		
+	}
+
+	public Boolean comprobarInicio(String usuario, String contrasenya) {
+        ResultSet res = conexion.ejecutarSQLSelect("SELECT * from usuarios where nombre='" + usuario + "' && contrasenya='" + contrasenya+"';");
+        try {
+            if (res.first()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+	}
 
 	
 }

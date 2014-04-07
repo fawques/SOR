@@ -67,12 +67,12 @@ public class TallerWS {
      * @return
      */
     @WebMethod(operationName = "checkActivacion")
-    public String checkActivacion(@WebParam(name = "mail") String email)    {
+    public String checkActivacion(@WebParam(name = "mail") String contrasenya)    {
         try {
             bd = new InterfazBD("sor_gestor");
-            Taller taller = bd.getTaller(email);
+            Taller taller = bd.getTallerActivar(contrasenya);
             String res;
-            if (taller.getEstado() == EstadoGeneral.ACTIVE) {
+            if (taller!=null) {
                 res = taller.getID();
             }else{
                 res = "";
@@ -223,7 +223,8 @@ public class TallerWS {
             Date ahora = new Date();
             Random r = new Random(ahora.getTime());
             String stringID  = DigestUtils.md5Hex(ahora.toString() + r);
-            boolean res = bd.altaTaller(stringID, name, email, address, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), EstadoGeneral.PENDIENTE.ordinal());
+            String contrasenya="11";
+            boolean res = bd.altaTaller(stringID, name, email, address, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), EstadoGeneral.PENDIENTE.ordinal(),contrasenya);
             bd.close();
             return res;
         } catch (java.sql.SQLException ex) {

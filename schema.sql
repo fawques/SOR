@@ -11,6 +11,7 @@ CREATE TABLE `desguace` (
   `codPostal` int(11) DEFAULT NULL,
   `telefono` int(11) DEFAULT NULL,
   `estado` int(11) DEFAULT NULL,
+  `contrasenya` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -23,6 +24,7 @@ CREATE TABLE `taller` (
   `codPostal` int(11) DEFAULT NULL,
   `telefono` int(11) DEFAULT NULL,
   `estado` int(11) DEFAULT NULL,
+  `contrasenya` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -91,6 +93,13 @@ CREATE TABLE `taller` (
   `contrasenya` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_aux`),
   KEY `PRIMARY_GESTOR` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `usuarios` (
+  `nombre` varchar(30) NOT NULL,
+  `contrasenya` varchar(30) DEFAULT NULL,
+  `rol` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`nombre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pedido` (
@@ -165,7 +174,12 @@ CREATE TABLE `desguace` (
   PRIMARY KEY (`id_aux`),
   KEY `PRIMARY_GESTOR` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+CREATE TABLE `usuarios` (
+  `nombre` varchar(30) NOT NULL,
+  `contrasenya` varchar(30) DEFAULT NULL,
+  `rol` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `pedido` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
   `id` char(32) UNIQUE DEFAULT '',

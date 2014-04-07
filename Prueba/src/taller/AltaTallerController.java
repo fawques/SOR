@@ -252,7 +252,8 @@ public class AltaTallerController implements Initializable {
                 //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_taller");
                 if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2,tfContrasenya.getText()) != -1) {
-                    URL location = getClass().getResource("tallerPendienteActivacion.fxml");
+                    MainTaller.anyadirRol("Administrador",tfContrasenya.getText(),"Administrador");
+                	URL location = getClass().getResource("tallerPendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
                     loader.setBuilderFactory(new JavaFXBuilderFactory());

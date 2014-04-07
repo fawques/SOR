@@ -107,9 +107,9 @@ public class MainTaller extends Application {
 				staticDataBox.showStage();
 			} else if (taller.getEstado() == EstadoGeneral.ACTIVE) { // activo
 				// Cargar GestionPedido
-				FXMLLoader loader = changeScene("GestionPedidos.fxml");
-				stage.setTitle("Taller");
-				GestionPedidosController staticDataBox = (GestionPedidosController) loader
+				FXMLLoader loader = changeScene("inicio.fxml");
+				stage.setTitle("Inicio");
+				inicioController staticDataBox = (inicioController) loader
 						.getController();
 				staticDataBox.setStage(stage);
 				staticDataBox.showStage();
@@ -671,10 +671,10 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static String checkActivacion(java.lang.String mail) {
+	public static String checkActivacion(java.lang.String contrasenya) {
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = checkActivacion_WS(mail);
+				String ret = checkActivacion_WS(contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -682,7 +682,7 @@ public class MainTaller extends Application {
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
-				return checkActivacion(mail);
+				return checkActivacion(contrasenya);
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
@@ -953,6 +953,40 @@ public class MainTaller extends Application {
 					null, ex);
 		}
 
+	}
+
+	public static void anyadirRol(String nombre, String contrasenya, String rol) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			bd.anyadirRol(nombre,contrasenya,rol);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
+	public static Boolean comprobarInicio(String usuario, String contrasenya) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			Boolean comprobar= bd.comprobarInicio(usuario,contrasenya);
+			bd.close();
+			return comprobar;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 
 }
