@@ -9,9 +9,9 @@ namespace desguaceNET.Async
 {
     class Accion
     {
-        string name;
+        public string name{ get; set; }
         Type[] paramTypes;
-        string[] paramValues;
+        public string[] paramValues{ get; set; }
 
         public Accion(string name, Type[] paramTypes, string[] paramValues) {
             this.name = name;

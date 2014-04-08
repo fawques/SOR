@@ -1,4 +1,5 @@
-﻿using desguaceNET.libSOR.general;
+﻿using desguaceNET.Async;
+using desguaceNET.libSOR.general;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,8 +32,9 @@ namespace desguaceNET
             listaPedidos = new List<Pedido>();
             main.actualizarPedidos();
             listaOfertasActivas = main.actualizarOfertas();
-            listaOfertasAceptadas = main.actualizarOfertasAceptadas();            
-            listaPedidos = main.getPedidos();
+            listaOfertasAceptadas = main.actualizarOfertasAceptadas();
+            listaPedidos = main.getPedidosActivos();
+            tablaPiezas.Rows.Clear();
 
             dataGridView1.DataSource = listaPedidos;
 
@@ -132,8 +134,9 @@ namespace desguaceNET
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("¿Estás seguro de que quieres cancelar esta oferta?","¿Cancelar?",MessageBoxButtons.YesNo);
-            if(res == DialogResult.Yes){
+            DialogResult res = MessageBox.Show("¿Estás seguro de que quieres cancelar esta oferta?", "¿Cancelar?", MessageBoxButtons.YesNo);
+            if (res == DialogResult.Yes)
+            {
                 if (!main.cancelarOfertaDesguace(idOfertaActiva))
                 {
                     MessageBox.Show("Error al cancelar la oferta", "ERROR", MessageBoxButtons.OK);
@@ -194,7 +197,7 @@ namespace desguaceNET
             if (dataGridView3.SelectedRows.Count > 0)
             {
                 idOfertaAceptada = (string)dataGridView3.SelectedRows[0].Cells[0].Value;
-                idPedidoAceptado = (string)dataGridView3.SelectedRows[0].Cells[7].Value;
+                idPedidoAceptado = (string)dataGridView3.SelectedRows[0].Cells[8].Value;
 
             }
         }
@@ -217,16 +220,34 @@ namespace desguaceNET
 
         private void Pedidos_MouseClick(object sender, MouseEventArgs e)
         {
+            tablaPiezas.Rows.Clear();
             updatePedidos();
             updateOfertasAceptadas();
             updateOfertasActivas();
             updateHistoricoOfertas();
             updateHistoricoPedidos();
+            updateAcciones();
+        }
+
+        private void updateAcciones()
+        {
+            tablaAcciones.Rows.Clear();
+            List<Accion> acciones = main.getAcciones();
+            for (int i = 0; i < acciones.Count; i++)
+            {
+                string valoresConcat = "";
+                string[] valores = acciones[i].paramValues;
+                for (int j = 0; j < valores.Length; j++)
+                {
+                    valoresConcat += valores[j];
+                }
+                tablaAcciones.Rows.Add(acciones[i].name, valoresConcat);
+            }
         }
 
         private void Pedidos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btAceptarOferta_Click(object sender, EventArgs e)
@@ -253,8 +274,8 @@ namespace desguaceNET
             {
                 MessageBox.Show("Error al modificar", "ERROR", MessageBoxButtons.OK);
             }
-        }   
+        }
 
-        
+
     }
 }

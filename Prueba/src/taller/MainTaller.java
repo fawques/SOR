@@ -380,38 +380,41 @@ public class MainTaller extends Application {
 			bd = new InterfazBD("sor_taller");
 			taller = bd.getPrimerTaller();
 			bd.close();
+			ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+			ArrayList<Pedido> pedidosgestor = new ArrayList<Pedido>();
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+					.create();
+			Type collectionType = new TypeToken<ArrayList<Pedido>>() {
+			}.getType();
+			String pedidosString = getPedidosActivos();
+			String pedidosGestorString = getPedidos_WS(taller.getID(),taller.getPassword());
+			if (!"".equals(pedidosString) && !"".equals(pedidosGestorString)) {
+				pedidosgestor = gson.fromJson(pedidosGestorString, collectionType);
+				pedidos = gson.fromJson(pedidosString, collectionType);
+			}
+			if (pedidosgestor != null) {
+				for (Pedido pedidogestor : pedidosgestor) {
+					for (Pedido pedidodesguace : pedidos) {
+						if (pedidogestor.getID_aux()==pedidodesguace.getID_aux()) {
+							if (pedidogestor.getEstado() != pedidodesguace.getEstado()) {
+								cambiarEstadoPedido(pedidogestor.getEstado(),pedidogestor.getID());
+							}
+							if(!pedidogestor.getID().equals(pedidodesguace.getID())){
+								bd = new InterfazBD("sor_taller");
+								bd.activarPedidoTaller(pedidodesguace.getID_aux(),pedidogestor.getID());
+								bd.close();
+							}
+						}
+					}
+				}
+			}
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
-		ArrayList<Pedido> pedidosgestor = new ArrayList<Pedido>();
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-				.create();
-		Type collectionType = new TypeToken<ArrayList<Pedido>>() {
-		}.getType();
-		String pedidosString = getPedidosActivos();
-		String pedidosGestorString = getPedidos_WS(taller.getID(),taller.getPassword());
-		if (!"".equals(pedidosString) && !"".equals(pedidosGestorString)) {
-			pedidosgestor = gson.fromJson(pedidosGestorString, collectionType);
-			pedidos = gson.fromJson(pedidosString, collectionType);
-		}
-		if (pedidosgestor != null) {
-			for (Pedido pedidogestor : pedidosgestor) {
-				for (Pedido pedidodesguace : pedidos) {
-					if (pedidogestor.getID_aux()==pedidodesguace.getID_aux()) {
-						if (pedidogestor.getEstado() != pedidodesguace.getEstado()) {
-							cambiarEstadoPedido(pedidogestor.getEstado(),pedidogestor.getID());
-						}
-						if(!pedidogestor.getID().equals(pedidodesguace.getID())){
-							bd.activarPedidoTaller(pedidodesguace.getID_aux(),pedidogestor.getID());
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -937,7 +940,7 @@ public class MainTaller extends Application {
 	public static void pedidoModificar(String id) {
 		try {
 			bd = new InterfazBD("sor_taller");
-			pedidoModificar = bd.getPedido(id);
+			pedidoModificar = bd.getPedidoID_aux(id);
 			bd.close();
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
