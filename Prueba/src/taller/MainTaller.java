@@ -107,9 +107,9 @@ public class MainTaller extends Application {
 				staticDataBox.showStage();
 			} else if (taller.getEstado() == EstadoGeneral.ACTIVE) { // activo
 				// Cargar GestionPedido
-				FXMLLoader loader = changeScene("GestionPedidos.fxml");
-				stage.setTitle("Taller");
-				GestionPedidosController staticDataBox = (GestionPedidosController) loader
+				FXMLLoader loader = changeScene("inicio.fxml");
+				stage.setTitle("Inicio");
+				inicioController staticDataBox = (inicioController) loader
 						.getController();
 				staticDataBox.setStage(stage);
 				staticDataBox.showStage();
@@ -671,10 +671,10 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static String checkActivacion(java.lang.String mail) {
+	public static String checkActivacion(java.lang.String contrasenya) {
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = checkActivacion_WS(mail);
+				String ret = checkActivacion_WS(contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -682,7 +682,7 @@ public class MainTaller extends Application {
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
-				return checkActivacion(mail);
+				return checkActivacion(contrasenya);
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
@@ -953,6 +953,127 @@ public class MainTaller extends Application {
 					null, ex);
 		}
 
+	}
+
+	public static Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			Boolean estarRol= bd.anyadirRolUsuario(nombre,contrasenya,rol);
+			bd.close();
+			return estarRol;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+		
+	}
+
+	public static Boolean comprobarInicio(String usuario, String contrasenya) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			Boolean comprobar= bd.comprobarInicio(usuario,contrasenya);
+			bd.close();
+			return comprobar;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	public static void anyadirRol(String nombre, ArrayList<Integer> listaOpciones) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			bd.anyadirRol(nombre,listaOpciones);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
+	public static void cambiarUsuario(String nombreUsuario,ArrayList<Integer> listaOpciones) {	
+		try {
+			bd=new InterfazBD("sor_taller");
+			bd.cambiarUsuario(nombreUsuario,listaOpciones);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+
+	public static void cambiarRol(String nombreRol,
+			ArrayList<Integer> listaOpciones) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			bd.cambiarRol(nombreRol,listaOpciones);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public static ArrayList<String> getUsuarios() {
+		ArrayList<String> listausuarios=new ArrayList<String>();
+		try {
+			bd=new InterfazBD("sor_taller");
+			listausuarios=bd.getUsuarios();
+			bd.close();
+			return listausuarios;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static ArrayList<String> getRoles() {
+		ArrayList<String> listausuarios=new ArrayList<String>();
+		try {
+			bd=new InterfazBD("sor_taller");
+			listausuarios=bd.getRoles();
+			bd.close();
+			return listausuarios;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

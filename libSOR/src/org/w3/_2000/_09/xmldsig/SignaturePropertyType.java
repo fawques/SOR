@@ -74,8 +74,8 @@ public class SignaturePropertyType {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link Element }
      * {@link Object }
+     * {@link Element }
      * 
      * 
      */

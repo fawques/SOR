@@ -647,6 +647,25 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         }
         return null;
     }
+    public Taller getTallerActivar(String contrasenya){
+        ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller WHERE contrasenya='" + contrasenya + "';");
+        try {
+            if (resultados.first()) {
+                final String tallerID = resultados.getString("id");
+                if("".equals(tallerID)){
+                    return new Taller("", resultados.getInt("id_aux"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
+                }else{
+                    ArrayList<Pedido> listaDePedidos = getPedidosTaller(resultados.getString("id"));
+                    return new Taller(tallerID, resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+                }
+                
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     public Taller getPrimerTaller() {
         ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM taller;");
@@ -676,8 +695,8 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
     
     // método que llaman talleres y desguaces, sin id (lo autogenera la bd)
-    public int altaTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
-        return conexion.ejecutarInsert("insert into taller (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
+    public int altaTaller(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado,String contrasenya) {
+        return conexion.ejecutarInsert("insert into taller (nombre, email, direccion, ciudad, codPostal, telefono, estado,contrasenya) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado +"," + contrasenya + ");");
     }
 
     public String getMD5IdTaller(String email) {
@@ -708,8 +727,8 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
     
     // método que llaman talleres y desguaces, sin id (lo autogenera la bd)
-    public int altaDesguace(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado) {
-        return conexion.ejecutarInsert("insert into desguace (nombre, email, direccion, ciudad, codPostal, telefono, estado) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + ");");
+    public int altaDesguace(String nombre, String email, String direccion, String ciudad, int codPostal, int telefono, int estado,String contrasenya) {
+        return conexion.ejecutarInsert("insert into desguace (nombre, email, direccion, ciudad, codPostal, telefono, estado,contrasenya) values ('" + nombre + "', '" + email + "','" + direccion + "','" + ciudad + "'," + codPostal + "," + telefono + "," + estado + "," + contrasenya + ");");
     }
 
     public String getMD5IdDesguace(String email) {
@@ -752,10 +771,10 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     }
 
     public boolean activarTaller(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0' where `id`='" + idRecibido + "'");
+        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0',`contrasenya`='111' where `id`='" + idRecibido + "'");
     }
     public boolean activarDesguace(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0' where `id`='" + idRecibido + "'");
+        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0',`contrasenya`='111' where `id`='" + idRecibido + "'");
     }
     public ArrayList<Pedido> buscarPedido(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) throws SQLException {
         ArrayList<Pedido> alPedidos = new ArrayList<>();
@@ -927,6 +946,157 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return false;
+    }
+    
+	public Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+		ArrayList<Integer> listaOpciones=getRolLista(rol);
+		if(listaOpciones==null){return false;}
+        conexion.ejecutarInsert("Insert into usuarios(nombre,contrasenya,rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol,cambiar_usuario,cambiar_rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol +"', '"+ listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +  "')");
+
+		return true;
+	}
+
+	private ArrayList<Integer> getRolLista(String rol) {
+	      
+	       ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
+	       ResultSet  opciones=  conexion.ejecutarSQLSelect("SELECT * from roles where rol='" + rol + "';");
+	      try {
+			if(opciones.first()){
+
+				for(int i=2;i<=12;i++){
+					listaOpciones.add(opciones.getInt(i));
+				}
+				return listaOpciones;
+				}
+				
+			  
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	       return null;
+	}
+
+	public Boolean comprobarInicio(String usuario, String contrasenya) {
+        ResultSet res = conexion.ejecutarSQLSelect("SELECT * from usuarios where nombre='" + usuario + "' && contrasenya='" + contrasenya+"';");
+        try {
+            if (res.first()) {
+                if(usuario.equals(res.getString("nombre")) && contrasenya.equals(res.getString("contrasenya"))){
+                	return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+	}
+
+	public Desguace getDesguaceActivar(String contrasenya) {
+        ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace WHERE contrasenya='" + contrasenya + "';");
+        try {
+            if (resultados.first()) {
+                final String tallerID = resultados.getString("id");
+                if("".equals(tallerID)){
+                     return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
+                }else{
+                    ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                }
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+	}
+
+	public void anyadirRol(String nombre,ArrayList<Integer> listaOpciones) {
+        conexion.ejecutarInsert("Insert into roles(rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol,cambiar_usuario,cambiar_rol) values ('" + nombre + "', '" + listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"','"+ listaOpciones.get(9) + "', '" + listaOpciones.get(10) +"')");
+       
+
+		
+	}
+
+	public void cambiarUsuario(String nombreUsuario,ArrayList<Integer> listaOpciones) {
+      //  conexion.ejecutarInsert("Insert into roles(rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol) values ('" + nombre + "', '" + listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"')");
+         conexion.ejecutarSQL("UPDATE usuarios SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `baja`='"+listaOpciones.get(3)+"',`aceptar_ofertas`='"+listaOpciones.get(4)+"', `rechazar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where nombre='"+nombreUsuario+"';");
+		
+	}
+
+	public void cambiarRol(String nombreRol, ArrayList<Integer> listaOpciones) {
+        conexion.ejecutarSQL("UPDATE roles SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `baja`='"+listaOpciones.get(3)+"',`aceptar_ofertas`='"+listaOpciones.get(4)+"', `rechazar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where rol='"+nombreRol+"';");
+
+		
+	}
+
+	public ArrayList<String> getUsuarios() {
+		ArrayList<String> usuarios= new ArrayList<String>();
+		   ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM usuarios;");
+	        try {
+	            if (resultados.first()) {
+	            	 while (!resultados.isAfterLast()) {
+	            		 usuarios.add(resultados.getString("nombre"));
+	            		 resultados.next();
+	            	 }
+	                
+	            }
+	            return usuarios;
+	        } catch (SQLException ex) {
+	            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	        return null;
+	}
+
+	public ArrayList<String> getRoles() {
+		ArrayList<String> roles= new ArrayList<String>();
+		   ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM roles;");
+	        try {
+	            if (resultados.first()) {
+	            	 while (!resultados.isAfterLast()) {
+	            		 roles.add(resultados.getString("rol"));
+	            		 resultados.next();
+	            	 }
+	                
+	            }
+	            return roles;
+	        } catch (SQLException ex) {
+	            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	        return null;
+	}
+
+	public Boolean comprobarPermisos(String usuario, String funcion) {
+		  int funcionOpcion =0;
+	    ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM usuarios WHERE nombre='" + usuario + "';");
+        try {
+            if (resultados.first()) {
+                 funcionOpcion = resultados.getInt(funcion);
+                 if(funcionOpcion==0){
+                	 	resultados = conexion.ejecutarSQLSelect("SELECT * FROM roles WHERE nombre='" + resultados.getString("rol") + "';");
+                        try {
+                            if (resultados.first()) {
+                            	funcionOpcion = resultados.getInt(funcion);
+                            	if(funcionOpcion==1){
+                            		return true;
+                            	}
+                                
+                            }
+
+                        } catch (SQLException ex) {
+                            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                 }
+                 else{return true;}
+
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return false;
 	}
 

@@ -59,12 +59,18 @@ namespace desguaceNET
             if (desguace.getEstado() == EstadoGeneral.ACTIVE)
             { //activo
                 //Cargar GestionPedido
-                GestionPedidos pedidos = new GestionPedidos();
-                pedidos.ShowDialog();
-                if (pedidos.DialogResult == DialogResult.Abort)
-                {
-                    init();
+                Inicio inicio= new Inicio();
+                inicio.ShowDialog();
+                if (inicio.DialogResult == DialogResult.OK) {
+                    GestionPedidos pedidos = new GestionPedidos();
+                    pedidos.ShowDialog();
+                    if (pedidos.DialogResult == DialogResult.Abort)
+                    {
+                        init();
+                    }
                 }
+
+               
 
             }
         }

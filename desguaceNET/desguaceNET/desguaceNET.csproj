@@ -97,6 +97,12 @@
     <Compile Include="GestionPedidos.Designer.cs">
       <DependentUpon>GestionPedidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="libSOR\activemq\Consumer.cs" />
     <Compile Include="libSOR\activemq\Gestor_activemq.cs" />
     <Compile Include="libSOR\BD\Conexion.cs" />
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GestionPedidos.resx">
       <DependentUpon>GestionPedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModificarDesguace.resx">
       <DependentUpon>ModificarDesguace.cs</DependentUpon>

@@ -183,10 +183,10 @@ public class Webservices {
 		return port.generarClaveReto(idTaller, password);
 	}
 
-	public static String checkActivacion_WS(String mail) {
-		disableCertificateChecking();
-		TallerWS port = prepararWebService();
-		return port.checkActivacion(mail);
+    public static String checkActivacion_WS(String contrasenya) {
+    	disableCertificateChecking();
+        TallerWS port = prepararWebService();
+        return port.checkActivacion(contrasenya);
 	}
 
 	public static String getOfertas_WS(String listaPedidos, String idTaller, String password) {

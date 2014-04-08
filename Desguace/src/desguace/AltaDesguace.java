@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -47,6 +48,7 @@ public class AltaDesguace implements Initializable {
     public TextField tfCiudad;
     public TextField tfCp;
     public TextField tfTelefono;
+    public TextField tfContrasenya;
     public Label errorNombreDesguace;
     public Label errorEmail;
     public Label errorDireccion;
@@ -226,6 +228,7 @@ public class AltaDesguace implements Initializable {
         tfCiudad.setEditable(b);
         tfCp.setEditable(b);
         tfTelefono.setEditable(b);
+        tfContrasenya.setEditable(b);
     }
 
     /**
@@ -248,8 +251,9 @@ public class AltaDesguace implements Initializable {
             if (DesguaceJava.alta(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), tfCp.getText(), tfTelefono.getText())) {
                 //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_desguace");
-                if (bd.altaDesguace(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
-                    URL location = getClass().getResource("desguacePendienteActivacion.fxml");
+                if (bd.altaDesguace(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2,tfContrasenya.getText()) != -1) {
+                	DesguaceJava.anyadirRolUsuario("Administrador",tfContrasenya.getText(),"Administrador");
+                	URL location = getClass().getResource("desguacePendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
                     loader.setBuilderFactory(new JavaFXBuilderFactory());

@@ -163,12 +163,12 @@ public class TallerWS {
 	 */
 	// REMODELACION PARA QUE HAYA UNA ESPECIE DE LOGIN
 	@WebMethod(operationName = "checkActivacion")
-	public String checkActivacion(@WebParam(name = "mail") String email) {
+    public String checkActivacion(@WebParam(name = "mail") String contrasenya)    {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			Taller taller = bd.getTaller(email);
+            Taller taller = bd.getTallerActivar(contrasenya);
 			String res;
-			if (taller.getEstado() == EstadoGeneral.ACTIVE) {
+            if (taller!=null) {
 				res = taller.getID();
 			} else {
 				res = "";

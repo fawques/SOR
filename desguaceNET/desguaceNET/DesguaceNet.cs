@@ -152,9 +152,9 @@ namespace desguaceNET
         }
 
 
-        public string comprobarActivacion(string mail)
+        public string comprobarActivacion(string contrasenya)
         {
-            string id = checkActivacion(mail);
+            string id = checkActivacion(contrasenya);
             bd.activarDesguaceMainDesguace(id);
             return id;
         }
@@ -437,7 +437,7 @@ namespace desguaceNET
             return false;
         }
 
-        public string checkActivacion(string mail)
+        public string checkActivacion(string contrasenya)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -447,7 +447,7 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.checkActivacion(mail);
+                    return client.checkActivacion(contrasenya);
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -455,7 +455,7 @@ namespace desguaceNET
             {
                 if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
                 {
-                    return checkActivacion(mail);
+                    return checkActivacion(contrasenya);
                 }
             }
             catch (EndpointNotFoundException e)
@@ -756,6 +756,28 @@ namespace desguaceNET
             return false;
 
         }
+        public  Boolean comprobarInicio(String usuario, String contrasenya){
+        
+                
+                Boolean comprobar = bd.comprobarInicio(usuario, contrasenya);
+        
+                return comprobar;
+          
+        
+        }
+
+        public void anyadirRol(String nombre, String contrasenya, String rol)
+        {
+
+                
+                bd.anyadirRol(nombre, contrasenya, rol);
+               
+
+
+
+
+        }
+
 
     }
 }

@@ -9,6 +9,8 @@ import BD.InterfazBD;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import com.google.gson.Gson;
@@ -45,6 +47,7 @@ public class AltaTallerController implements Initializable {
     public TextField tfCiudad;
     public TextField tfCp;
     public TextField tfTelefono;
+    public TextField tfContrasenya;
     public Label id;
     public Label errorNombreTaller;
     public Label errorEmail;
@@ -226,6 +229,7 @@ public class AltaTallerController implements Initializable {
         tfCiudad.setEditable(b);
         tfCp.setEditable(b);
         tfTelefono.setEditable(b);
+        tfContrasenya.setEditable(b);
         
     }
 
@@ -249,8 +253,10 @@ public class AltaTallerController implements Initializable {
             if (MainTaller.alta(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(),tfCp.getText(), tfTelefono.getText())) {
                 //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_taller");
-                if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2) != -1) {
-                    URL location = getClass().getResource("tallerPendienteActivacion.fxml");
+                if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2,tfContrasenya.getText()) != -1) {
+                	MainTaller.anyadirRol("Administrador", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
+                	MainTaller.anyadirRolUsuario("Administrador",tfContrasenya.getText(),"Administrador");
+                	URL location = getClass().getResource("tallerPendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
                     loader.setBuilderFactory(new JavaFXBuilderFactory());
