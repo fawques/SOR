@@ -54,11 +54,11 @@ import seguridad.TripleDes;
 public class TallerWS {
 
 	InterfazBD bd;
-	ArrayList<String> listaIdTaller;
-	ArrayList<SecretKey> listaSecretKeys;
+	static ArrayList<String> listaIdTaller;
+	static ArrayList<SecretKey> listaSecretKeys;
 	
 
-	private SecretKey getKey(String idTaller) {
+	static private SecretKey getKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index > 0) {
 			SecretKey key = listaSecretKeys.get(index);
@@ -69,7 +69,7 @@ public class TallerWS {
 
 	}
 	
-	private void removeKey(String idTaller) {
+	static public void removeKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index > 0) {
 			listaSecretKeys.remove(index);
