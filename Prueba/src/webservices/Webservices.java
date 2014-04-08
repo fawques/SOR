@@ -122,11 +122,11 @@ public class Webservices {
 		return port;
 	}
 
-	private static SecretKey prepararClaveReto(String idTaller) {
+	private static SecretKey prepararClaveReto(String idTaller, String password) {
 		disableCertificateChecking();
 
 		Base64 b64 = new Base64();
-		String clave = generarClaveReto(idTaller);
+		String clave = generarClaveReto(idTaller,password);
 		if (clave != null) {
 			byte[] encodedKey = b64.decode(clave);
 			SecretKey encryptor = new SecretKeySpec(encodedKey, 0,
@@ -140,15 +140,15 @@ public class Webservices {
 
 	// public:
 
-	public static String nuevoPedido_WS(String pedido, String idTaller)
+	public static String nuevoPedido_WS(String pedido, String idTaller, String password)
 			throws JMSException_Exception {
-		SecretKey encryptor = prepararClaveReto(idTaller);
+		SecretKey encryptor = prepararClaveReto(idTaller,password);
 		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
 				return port.nuevoPedido(TripleDes.encrypt(encryptor, pedido),
-						idTaller);
+						idTaller,TripleDes.encrypt(encryptor, password));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
@@ -177,10 +177,10 @@ public class Webservices {
 
 	}
 
-	public static String generarClaveReto(String idTaller) {
+	public static String generarClaveReto(String idTaller, String password) {
 		disableCertificateChecking();
 		TallerWS port = prepararWebService();
-		return port.generarClaveReto(idTaller);
+		return port.generarClaveReto(idTaller, password);
 	}
 
 	public static String checkActivacion_WS(String mail) {
@@ -189,14 +189,14 @@ public class Webservices {
 		return port.checkActivacion(mail);
 	}
 
-	public static String getOfertas_WS(String listaPedidos, String idTaller) {
-		SecretKey encryptor = prepararClaveReto(idTaller);
+	public static String getOfertas_WS(String listaPedidos, String idTaller, String password) {
+		SecretKey encryptor = prepararClaveReto(idTaller,password);
 		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
 				return port.getOfertas(
-						TripleDes.encrypt(encryptor, listaPedidos), idTaller);
+						TripleDes.encrypt(encryptor, listaPedidos), idTaller,TripleDes.encrypt(encryptor, password));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
@@ -206,14 +206,14 @@ public class Webservices {
 		return null;
 	}
 
-	public static Boolean aceptarOferta_WS(String id, String idTaller) {
-		SecretKey encryptor = prepararClaveReto(idTaller);
+	public static Boolean aceptarOferta_WS(String id, String idTaller,String password) {
+		SecretKey encryptor = prepararClaveReto(idTaller,password);
 		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
 				return port.aceptarOferta(TripleDes.encrypt(encryptor, id),
-						idTaller);
+						idTaller,TripleDes.encrypt(encryptor, password));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
@@ -223,14 +223,14 @@ public class Webservices {
 		return null;
 	}
 
-	public static Boolean rechazarOferta_WS(String id, String idTaller) {
-		SecretKey encryptor = prepararClaveReto(idTaller);
+	public static Boolean rechazarOferta_WS(String id, String idTaller,String password) {
+		SecretKey encryptor = prepararClaveReto(idTaller,password);
 		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
 				return port.rechazarOferta(TripleDes.encrypt(encryptor, id),
-						idTaller);
+						idTaller,TripleDes.encrypt(encryptor, password));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
@@ -246,20 +246,20 @@ public class Webservices {
 		return port.hello();
 	}
 
-	public static Boolean baja_WS(String tallerID) {
+	public static Boolean baja_WS(String tallerID,String password) {
 		disableCertificateChecking();
 		TallerWS port = prepararWebService();
-		return port.baja(tallerID);
+		return port.baja(tallerID,password);
 	}
 
 	public static boolean modificar_WS(String id, String name, String email,
-			String address, String city, String postalCode, String telephone) {
-		SecretKey encryptor = prepararClaveReto(id);
+			String address, String city, String postalCode, String telephone,String password) {
+		SecretKey encryptor = prepararClaveReto(id,password);
 		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
-				return port.modificar(id, TripleDes.encrypt(encryptor, name),
+				return port.modificar(id, TripleDes.encrypt(encryptor, password),TripleDes.encrypt(encryptor, name),
 						TripleDes.encrypt(encryptor, email),
 						TripleDes.encrypt(encryptor, address),
 						TripleDes.encrypt(encryptor, city),
@@ -274,14 +274,14 @@ public class Webservices {
 		return false;
 	}
 
-	public static Boolean cancelarPedido_WS(String idPedido, String idTaller) {
-		SecretKey encryptor = prepararClaveReto(idTaller);
+	public static Boolean cancelarPedido_WS(String idPedido, String idTaller,String password) {
+		SecretKey encryptor = prepararClaveReto(idTaller,password);
 		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
 				return port.cancelarPedido(
-						TripleDes.encrypt(encryptor, idPedido), idTaller);
+						TripleDes.encrypt(encryptor, idPedido), idTaller,TripleDes.encrypt(encryptor, password));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
@@ -291,15 +291,15 @@ public class Webservices {
 		return null;
 	}
 
-	public static Boolean cambiarEstadoPedido_WS(int estado,
-			java.lang.String id, String idTaller) {
-		SecretKey encryptor = prepararClaveReto(idTaller);
+	public static Boolean cambiarEstadoPedido_WS(String idTaller,String password,int estado,
+			java.lang.String id) {
+		SecretKey encryptor = prepararClaveReto(idTaller,password);
 		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
-				return port.cambiarEstadoPedido(estado,
-						TripleDes.encrypt(encryptor, id), idTaller);
+				return port.cambiarEstadoPedido(idTaller,TripleDes.encrypt(encryptor, password),estado,
+						TripleDes.encrypt(encryptor, id));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
@@ -309,10 +309,10 @@ public class Webservices {
 		return null;
 	}
 
-	public static String getPedidos_WS(String id) {
+	public static String getPedidos_WS(String idTaller,String password) {
 		disableCertificateChecking();
 		TallerWS port = prepararWebService();
-		return port.getPedidos(id);
+		return port.getPedidos(idTaller,password);
 	}
 
 }

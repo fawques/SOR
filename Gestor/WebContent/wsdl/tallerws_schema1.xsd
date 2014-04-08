@@ -43,6 +43,7 @@
   <xs:complexType name="generarClaveReto">
     <xs:sequence>
       <xs:element minOccurs="0" name="idTaller" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="generarClaveRetoResponse">
@@ -54,6 +55,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="idPedido" type="xs:string"/>
       <xs:element minOccurs="0" name="idTaller" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="cancelarPedidoResponse">
@@ -63,7 +65,8 @@
   </xs:complexType>
   <xs:complexType name="getPedidos">
     <xs:sequence>
-      <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="idTaller" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="getPedidosResponse">
@@ -73,9 +76,10 @@
   </xs:complexType>
   <xs:complexType name="cambiarEstadoPedido">
     <xs:sequence>
+      <xs:element minOccurs="0" name="idTaller" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
       <xs:element name="estado" type="xs:int"/>
       <xs:element minOccurs="0" name="id" type="xs:string"/>
-      <xs:element minOccurs="0" name="idTaller" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="cambiarEstadoPedidoResponse">
@@ -86,6 +90,7 @@
   <xs:complexType name="baja">
     <xs:sequence>
       <xs:element minOccurs="0" name="tallerID" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="bajaResponse">
@@ -96,6 +101,7 @@
   <xs:complexType name="modificar">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
       <xs:element minOccurs="0" name="name" type="xs:string"/>
       <xs:element minOccurs="0" name="email" type="xs:string"/>
       <xs:element minOccurs="0" name="address" type="xs:string"/>
@@ -121,6 +127,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="listaPedidos" type="xs:string"/>
       <xs:element minOccurs="0" name="idTaller" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="getOfertasResponse">
@@ -142,6 +149,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:string"/>
       <xs:element minOccurs="0" name="idTaller" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="aceptarOfertaResponse">
@@ -153,6 +161,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:string"/>
       <xs:element minOccurs="0" name="idTaller" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="rechazarOfertaResponse">
@@ -164,6 +173,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="pedido" type="xs:string"/>
       <xs:element minOccurs="0" name="idTaller" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="nuevoPedidoResponse">

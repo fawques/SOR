@@ -32,8 +32,8 @@ public class Taller extends Usuario{
      * @param estado
      * @param listaDePedidos
      */
-    public Taller(String ID, int ID_aux ,String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, ArrayList<Pedido> listaDePedidos) {
-        super(ID, ID_aux, name, email, address, city, postalCode, telephone, estado);
+    public Taller(String ID, int ID_aux ,String password, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, ArrayList<Pedido> listaDePedidos) {
+        super(ID, ID_aux, password,name, email, address, city, postalCode, telephone, estado);
         this.listaPedidos = listaDePedidos;
     }
     
@@ -51,8 +51,8 @@ public class Taller extends Usuario{
      * @param estado
      * @param listaDePedidos
      */
-    public Taller(String ID,String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, ArrayList<Pedido> listaDePedidos) {
-        super(ID, -1, name, email, address, city, postalCode, telephone, estado);
+    public Taller(String ID,String password, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, ArrayList<Pedido> listaDePedidos) {
+        super(ID, -1, password,name, email, address, city, postalCode, telephone, estado);
         this.listaPedidos = listaDePedidos;
     }
 

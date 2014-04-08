@@ -33,8 +33,8 @@ public class Desguace extends Usuario{
      * @param estado
      * @param listaDeOfertas
      */
-    public Desguace(String ID, int ID_aux ,String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, ArrayList<Oferta> listaDeOfertas) {
-        super(ID, ID_aux, name, email, address, city, postalCode, telephone, estado);
+    public Desguace(String ID, int ID_aux ,String password, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, ArrayList<Oferta> listaDeOfertas) {
+        super(ID, ID_aux, password,name, email, address, city, postalCode, telephone, estado);
         this.listaOfertas = listaDeOfertas;
     }
     
@@ -52,8 +52,8 @@ public class Desguace extends Usuario{
      * @param estado
      * @param listaDeOfertas
      */
-    public Desguace(String ID,String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, ArrayList<Oferta> listaDeOfertas) {
-        super(ID, -1, name, email, address, city, postalCode, telephone, estado);
+    public Desguace(String ID,String password, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, ArrayList<Oferta> listaDeOfertas) {
+        super(ID, -1, password,name, email, address, city, postalCode, telephone, estado);
         this.listaOfertas = listaDeOfertas;
     }
 

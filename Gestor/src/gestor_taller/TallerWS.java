@@ -91,6 +91,7 @@ public class TallerWS {
 	}
 
 	public boolean modificar(@WebParam(name = "id") String id,
+			@WebParam(name = "password") String password,
 			@WebParam(name = "name") String name,
 			@WebParam(name = "email") String email,
 			@WebParam(name = "address") String address,
@@ -127,7 +128,7 @@ public class TallerWS {
 		return false;
 	}
 
-	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller) {
+	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		// Generamos la clave de reto y se la mandamos al cliente
 		if (bd.getTallerEnGestor(idTaller) != null) {
 			try {
@@ -191,7 +192,7 @@ public class TallerWS {
 	 */
 	@WebMethod(operationName = "nuevoPedido")
 	public String nuevoPedido(@WebParam(name = "pedido") String pedido,
-			@WebParam(name = "idTaller") String idTaller) throws JMSException {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) throws JMSException {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			Gson gson = new GsonBuilder()
@@ -240,7 +241,7 @@ public class TallerWS {
 	@WebMethod(operationName = "getOfertas")
 	public String getOfertas(
 			@WebParam(name = "listaPedidos") String listaPedidos,
-			@WebParam(name = "idTaller") String idTaller) {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		Type collectionType = new TypeToken<ArrayList<Pedido>>() {
 		}.getType();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -280,7 +281,7 @@ public class TallerWS {
 	 */
 	@WebMethod(operationName = "aceptarOferta")
 	public Boolean aceptarOferta(@WebParam(name = "ID") String ID,
-			@WebParam(name = "idTaller") String idTaller) {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
@@ -307,7 +308,7 @@ public class TallerWS {
 	 */
 	@WebMethod(operationName = "rechazarOferta")
 	public Boolean rechazarOferta(@WebParam(name = "ID") String ID,
-			@WebParam(name = "idTaller") String idTaller) {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
 
@@ -339,7 +340,7 @@ public class TallerWS {
 	}
 
 	@WebMethod(operationName = "baja")
-	public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID) {
+	public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			boolean oool = bd.bajaTaller(tallerID);
@@ -387,7 +388,7 @@ public class TallerWS {
 
 	@WebMethod(operationName = "cancelarPedido")
 	public Boolean cancelarPedido(@WebParam(name = "idPedido") String idPedido,
-			@WebParam(name = "idTaller") String idTaller) {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
 
@@ -395,8 +396,7 @@ public class TallerWS {
 			if (key != null) {
 				boolean oool = bd.cancelarPedido(TripleDes.decrypt(key,
 						idPedido));
-				cambiarEstadoPedido(EstadoPedido.CANCELLED.ordinal(), idPedido,
-						idTaller);
+				cambiarEstadoPedido(idTaller,password,EstadoPedido.CANCELLED.ordinal(), idPedido);
 				bd.close();
 				return oool;
 			} else {
@@ -416,9 +416,9 @@ public class TallerWS {
 	 * Web service operation
 	 */
 	@WebMethod(operationName = "cambiarEstadoPedido")
-	public Boolean cambiarEstadoPedido(@WebParam(name = "estado") int estado,
-			@WebParam(name = "id") String id,
-			@WebParam(name = "idTaller") String idTaller) {
+	public Boolean cambiarEstadoPedido(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password,@WebParam(name = "estado") int estado,
+			@WebParam(name = "id") String id
+			) {
 		try {
 			SecretKey key = getKey(idTaller);
 			if (key != null) {
@@ -456,7 +456,7 @@ public class TallerWS {
 	 * Web service operation
 	 */
 	@WebMethod(operationName = "getPedidos")
-	public String getPedidos(@WebParam(name = "id") String id) {
+	public String getPedidos(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 				.create();
 		// Dec 7, 2013 5:46:35 PM
@@ -464,7 +464,7 @@ public class TallerWS {
 		ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
 		try {
 			bd = new InterfazBD("sor_gestor");
-			listaPedidos = bd.getPedidosTaller(id);
+			listaPedidos = bd.getPedidosTaller(idTaller);
 			for (Pedido p : listaPedidos) {
 				if (p.getEstado() == EstadoPedido.FINISHED_OK) {
 					ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p

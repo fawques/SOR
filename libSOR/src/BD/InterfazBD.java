@@ -94,7 +94,7 @@ public class InterfazBD {
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace;");
             while(resultados.next()){
                 ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
-                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -136,14 +136,14 @@ public class InterfazBD {
         	  ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace where estado='0'");
             while(resultados.next()){
                 ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
-                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
            resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace where estado='1'");
             while(resultados.next()){
                 ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
-                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -344,7 +344,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         	  while(resultados.next()){
                   ArrayList<Pedido> listaDePedidos = new ArrayList<>();
                   listaDePedidos = null; // no se necesita para el alta
-                  Taller nuevo = new Taller(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+                  Taller nuevo = new Taller(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
                   lista.add(nuevo);
                   //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
               }
@@ -352,7 +352,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
            while(resultados.next()){
                ArrayList<Pedido> listaDePedidos = new ArrayList<>();
                listaDePedidos = null; // no se necesita para el alta
-               Taller nuevo = new Taller(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+               Taller nuevo = new Taller(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
                lista.add(nuevo);
                //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
            }
@@ -372,11 +372,11 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
                 Taller nuevo;
                 if ("".equals(resultados.getString("id"))) {
                     // estamos en taller, y está todavía pendiente
-                    nuevo = new Taller("", resultados.getInt("id_aux"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], listaDePedidos);
+                    nuevo = new Taller("", resultados.getInt("id_aux"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], listaDePedidos);
                 }else{
                     // estamos en gestor o en taller
                     listaDePedidos = getPedidosTaller(resultados.getString("id"));
-                    nuevo = new Taller(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+                    nuevo = new Taller(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
                 }
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
@@ -396,7 +396,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             while(resultados.next()){
                 ArrayList<Pedido> listaDePedidos = new ArrayList<>();
                 listaDePedidos = null; // no se necesita para el alta
-                Taller nuevo = new Taller(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+                Taller nuevo = new Taller(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -418,7 +418,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             while(resultados.next()){
                 ArrayList<Oferta> listaOfertas = new ArrayList<>();
                 listaOfertas = null; // inicialmente vacía
-                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaOfertas);
+                Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaOfertas);
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
@@ -454,7 +454,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         ResultSet resultados = conexion.ejecutarSQLSelect("Select * from taller where id='" + id + "'");
         try {
             if (resultados.first()) {
-                return new Taller(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"), resultados.getInt("codPostal"), resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
+                return new Taller(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"), resultados.getInt("codPostal"), resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
             }
         } catch (SQLException ex) {
             Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -550,10 +550,10 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             if (resultados.first()) {
                 final String tallerID = resultados.getString("id");
                 if("".equals(tallerID)){
-                     return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
+                     return  new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
                 }else{
                     ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
-                return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                return  new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 }
                 
             }
@@ -569,10 +569,10 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             if (resultados.first()) {
                 final String tallerID = resultados.getString("id");
                 if("".equals(tallerID)){
-                     return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
+                     return  new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
                 }else{
                     ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
-                return  new Desguace(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
+                return  new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 }
                 
             }
@@ -588,10 +588,10 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             if (resultados.first()) {
                 final String tallerID = resultados.getString("id");
                 if("".equals(tallerID)){
-                    return new Taller("", resultados.getInt("id_aux"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
+                    return new Taller("", resultados.getInt("id_aux"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
                 }else{
                     ArrayList<Pedido> listaDePedidos = getPedidosTaller(resultados.getString("id"));
-                    return new Taller(tallerID, resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+                    return new Taller(tallerID, resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
                 }
                 
             }
@@ -609,10 +609,10 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             if (resultados.first()) {
                 final String tallerID = resultados.getString("id");
                 if("".equals(tallerID)){
-                    return new Taller("", resultados.getInt("id_aux"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
+                    return new Taller("", resultados.getInt("id_aux"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Pedido>());
                 }else{
                     ArrayList<Pedido> listaDePedidos = getPedidosTaller(resultados.getString("id"));
-                    return new Taller(resultados.getString("id"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
+                    return new Taller(resultados.getString("id"),resultados.getString("contrasenya"),  resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")],listaDePedidos);
                 }
                 
             }

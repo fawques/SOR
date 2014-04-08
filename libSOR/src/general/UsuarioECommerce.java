@@ -26,8 +26,8 @@ public class UsuarioECommerce extends Usuario{
      * @param estado
      * @param listaDePedidos
      */
-    public UsuarioECommerce(String ID,String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado) {
-        super(ID, -1, name, email, address, city, postalCode, telephone, estado);
+    public UsuarioECommerce(String ID,String password, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado) {
+        super(ID, -1, password,name, email, address, city, postalCode, telephone, estado);
     }
     
     
