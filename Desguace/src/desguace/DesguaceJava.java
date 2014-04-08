@@ -315,8 +315,9 @@ public class DesguaceJava extends Application {
 		ArrayList<Oferta> of = new ArrayList<Oferta>();
 		try {
 			bd = new InterfazBD("sor_desguace");
-			of = bd.getOfertasConID_aux(EstadoOferta.ACTIVE);
-			of.addAll(bd.getOfertasConID_aux(EstadoOferta.ACCEPTED));
+			of = bd.getOfertas();
+			
+			//of.addAll(bd.getOfertasConID_aux(EstadoOferta.ACCEPTED));
 			bd.close();
 			return of;
 		} catch (SQLException ex) {
@@ -612,6 +613,16 @@ public class DesguaceJava extends Application {
 
 	public static Boolean aceptarOfertaFin(java.lang.String id) {
 		AsyncManager manager = new AsyncManager("sor_desguace");
+		try {
+			bd=new InterfazBD("sor_desguace");
+			bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {

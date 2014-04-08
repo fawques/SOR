@@ -315,7 +315,8 @@ public class GestionPedidos implements Initializable {
 
     private void CompararOfertasGestorDesguace(){
         
-    ArrayList<Oferta>  ofertas= DesguaceJava.actualizarOfertas();   
+    ArrayList<Oferta>  ofertas= DesguaceJava.actualizarOfertas();  
+    ofertas.addAll(DesguaceJava.actualizarOfertasAceptadas());
     ArrayList<Oferta> ofertasgestor= new ArrayList<Oferta>();
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
@@ -518,6 +519,7 @@ public class GestionPedidos implements Initializable {
         tableOfertas.setItems(olTablaOfertas);
         tableOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol, fecha_bajaCol, fecha_limiteCol);
         bd.close();
+        actualizarPedidos();
     }
     public void showStage() {
         thisStage.sizeToScene();
@@ -606,21 +608,21 @@ public class GestionPedidos implements Initializable {
                 idlista.add(p);
             }
             idlistabuena.clear();
+            collectionType = new TypeToken<Pedido>(){}.getType();
             if(listaIdsString!=null){
                 for(PedidoCorto pcorto: idlista){
                     if(!DesguaceJava.cambiarEstadoPedido(pcorto.getID(), pcorto.getEstado())){
-                        idlistabuena.add(pcorto.getID());
+                    	Pedido pedido = gson.fromJson(DesguaceJava.getPedidoporID(pcorto.getID()), collectionType);
+                    	bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
+                        bd.anyadirPiezasAPedido(bd.getPedido(pedido.getID()).getID_aux(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
+                   
                     }
+
+                    
                 }
-                Gson gsonnuevo = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                
-                String listaJSON = gsonnuevo.toJson(idlistabuena);
-                 pedidosstring= DesguaceJava.getPedidosporID(listaJSON);
             }
-            collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
-            if(pedidosstring!=null && !pedidosstring.equals("")){
-                listaPedidos = gson.fromJson(pedidosstring, collectionType);
-            }
+          
         } catch (JMSException ex) {
             Logger.getLogger(GestionPedidos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConnectException ex) {
@@ -630,14 +632,6 @@ public class GestionPedidos implements Initializable {
         
         System.out.println("pasa por aqui");
         TablaPedidos interfaz= new TablaPedidos();
-         for (Pedido pedido : listaPedidos) {
-            bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
-            bd.anyadirPiezasAPedido(pedido.getID_aux(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
-
-            /* interfaz= new TablaPedidos(pedido);
-             datatablePedidos.add(interfaz);*/
-             
-        }
         for (Pedido pedido : bd.getPedidosConID_aux(EstadoPedido.ACTIVE)) {         
             interfaz= new TablaPedidos(pedido);
              datatablePedidos.add(interfaz);
