@@ -109,7 +109,7 @@ public class InterfazBD {
         try{
             ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace;");
             while(resultados.next()){
-                ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                ArrayList<Oferta> listaOfertas = getOfertasDesguace(resultados.getString("id"));
                 Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
@@ -151,14 +151,14 @@ public class InterfazBD {
         try{
         	  ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace where estado='0'");
             while(resultados.next()){
-                ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                ArrayList<Oferta> listaOfertas = getOfertasDesguace(resultados.getString("id"));
                 Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
             }
            resultados = conexion.ejecutarSQLSelect("SELECT * FROM desguace where estado='1'");
             while(resultados.next()){
-                ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                ArrayList<Oferta> listaOfertas = getOfertasDesguace(resultados.getString("id"));
                 Desguace nuevo = new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 lista.add(nuevo);
                 //System.out.println("id: " + resultados.getString("id") + " taller: "+resultados.getInt("taller"));
@@ -598,7 +598,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
                 if("".equals(tallerID)){
                      return  new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
                 }else{
-                    ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                    ArrayList<Oferta> listaOfertas = getOfertasDesguace(resultados.getString("id"));
                 return  new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 }
                 
@@ -617,7 +617,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
                 if("".equals(tallerID)){
                      return  new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,null);
                 }else{
-                    ArrayList listaOfertas = getOfertasDesguace(resultados.getString("id"));
+                    ArrayList<Oferta> listaOfertas = getOfertasDesguace(resultados.getString("id"));
                 return  new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"),resultados.getInt("codPostal"),resultados.getInt("telefono"),EstadoGeneral.values()[resultados.getInt("estado")] ,listaOfertas);
                 }
                 
