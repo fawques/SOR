@@ -918,5 +918,17 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     	return result;
     }
 
+	public boolean login(String username, String password) {
+		try {
+            ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM `usuarios` where nombre='" + username + "' AND contrasenya='" + password + "';");
+            if(resultados.next()) {    
+                return true;
+           }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+	}
+
 	
 }
