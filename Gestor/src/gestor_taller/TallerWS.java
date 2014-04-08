@@ -60,7 +60,7 @@ public class TallerWS {
 
 	private SecretKey getKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
-		if (index > 0) {
+		if (index != -1) {
 			SecretKey key = listaSecretKeys.get(index);
 			return key;
 		} else {
@@ -71,11 +71,11 @@ public class TallerWS {
 	
 	private void removeKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
-		if (index > 0) {
+		if (index != -1) {
 			listaSecretKeys.remove(index);
 			listaIdTaller.remove(index);
 		} else {
-			System.err.println("ERROR - idTaller no está en la lista de claves de Reto");
+			System.err.println("ERROR - idTaller no esta en la lista de claves de Reto");
 		}
 	}
 	
