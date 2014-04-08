@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="idPedido" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="idTaller" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,11 +28,13 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "cancelarPedido", propOrder = {
-    "idPedido"
+    "idPedido",
+    "idTaller"
 })
 public class CancelarPedido {
 
     protected String idPedido;
+    protected String idTaller;
 
     /**
      * Obtiene el valor de la propiedad idPedido.
@@ -55,6 +58,30 @@ public class CancelarPedido {
      */
     public void setIdPedido(String value) {
         this.idPedido = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad idTaller.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdTaller() {
+        return idTaller;
+    }
+
+    /**
+     * Define el valor de la propiedad idTaller.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdTaller(String value) {
+        this.idTaller = value;
     }
 
 }

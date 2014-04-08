@@ -120,3 +120,1413 @@ INFO: Destroying singletons in org.springframework.beans.factory.support.Default
 GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@24f2f2]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@5da6725c}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
 08-feb-2014 11:25:47 org.apache.coyote.http11.Http11Protocol destroy
 INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+16-feb-2014 21:28:06 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+16-feb-2014 21:28:06 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+16-feb-2014 21:28:06 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 461 ms
+16-feb-2014 21:28:06 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+16-feb-2014 21:28:06 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+16-feb-2014 21:28:06 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+16-feb-2014 21:28:06 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+16-feb-2014 21:28:06 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+16-feb-2014 21:28:06 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Sun Feb 16 21:28:06 CET 2014]; root of context hierarchy
+16-feb-2014 21:28:06 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+16-feb-2014 21:28:07 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+16-feb-2014 21:28:07 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+16-feb-2014 21:28:07 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+16-feb-2014 21:28:07 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+16-feb-2014 21:28:07 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+16-feb-2014 21:28:07 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+16-feb-2014 21:28:07 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+16-feb-2014 21:28:07 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+16-feb-2014 21:28:07 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+16-feb-2014 21:28:07 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2781b3d4: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+16-feb-2014 21:28:07 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+16-feb-2014 21:28:09 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+16-feb-2014 21:28:09 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+16-feb-2014 21:28:09 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+16-feb-2014 21:28:09 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+16-feb-2014 21:28:10 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+16-feb-2014 21:28:10 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+16-feb-2014 21:28:10 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+16-feb-2014 21:28:10 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+16-feb-2014 21:28:10 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+16-feb-2014 21:28:10 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+16-feb-2014 21:28:11 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+16-feb-2014 21:28:11 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+16-feb-2014 21:28:11 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+16-feb-2014 21:28:11 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4678 ms
+16-feb-2014 21:28:11 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+16-feb-2014 21:28:11 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@ddb1fe0: startup date [Sun Feb 16 21:28:11 CET 2014]; parent: Root WebApplicationContext
+16-feb-2014 21:28:11 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@a26638: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@2781b3d4
+16-feb-2014 21:28:11 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+16-feb-2014 21:28:11 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+16-feb-2014 21:28:11 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+16-feb-2014 21:28:11 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+16-feb-2014 21:28:11 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+16-feb-2014 21:28:11 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+16-feb-2014 21:28:11 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+16-feb-2014 21:28:11 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+16-feb-2014 21:28:11 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+16-feb-2014 21:28:11 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/34  config=null
+16-feb-2014 21:28:11 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5674 ms
+16-feb-2014 22:05:43 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+16-feb-2014 22:05:44 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+16-feb-2014 22:05:44 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@ddb1fe0: startup date [Sun Feb 16 21:28:11 CET 2014]; parent: Root WebApplicationContext
+16-feb-2014 22:05:44 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@a26638: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@2781b3d4
+16-feb-2014 22:05:44 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Sun Feb 16 21:28:06 CET 2014]; root of context hierarchy
+16-feb-2014 22:05:44 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2781b3d4: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+16-feb-2014 22:05:44 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@456bf9ce]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@6b13c116}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+16-feb-2014 22:05:44 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+18-feb-2014 19:09:58 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+18-feb-2014 19:09:58 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+18-feb-2014 19:09:58 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 443 ms
+18-feb-2014 19:09:58 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+18-feb-2014 19:09:58 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+18-feb-2014 19:09:58 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+18-feb-2014 19:09:58 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+18-feb-2014 19:09:58 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+18-feb-2014 19:09:58 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Tue Feb 18 19:09:58 CET 2014]; root of context hierarchy
+18-feb-2014 19:09:58 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+18-feb-2014 19:09:58 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+18-feb-2014 19:09:59 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+18-feb-2014 19:09:59 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+18-feb-2014 19:09:59 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+18-feb-2014 19:09:59 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+18-feb-2014 19:09:59 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+18-feb-2014 19:09:59 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+18-feb-2014 19:09:59 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+18-feb-2014 19:09:59 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+18-feb-2014 19:09:59 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@76705d28: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+18-feb-2014 19:09:59 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+18-feb-2014 19:10:01 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+18-feb-2014 19:10:01 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+18-feb-2014 19:10:01 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+18-feb-2014 19:10:01 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+18-feb-2014 19:10:02 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+18-feb-2014 19:10:02 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+18-feb-2014 19:10:02 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+18-feb-2014 19:10:02 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+18-feb-2014 19:10:02 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+18-feb-2014 19:10:02 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+18-feb-2014 19:10:02 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+18-feb-2014 19:10:02 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+18-feb-2014 19:10:03 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+18-feb-2014 19:10:03 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4436 ms
+18-feb-2014 19:10:03 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+18-feb-2014 19:10:03 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@bdd040a: startup date [Tue Feb 18 19:10:03 CET 2014]; parent: Root WebApplicationContext
+18-feb-2014 19:10:03 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@27beb7ec: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@76705d28
+18-feb-2014 19:10:03 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+18-feb-2014 19:10:03 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+18-feb-2014 19:10:03 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+18-feb-2014 19:10:03 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+18-feb-2014 19:10:03 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+18-feb-2014 19:10:03 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+18-feb-2014 19:10:03 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+18-feb-2014 19:10:03 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+18-feb-2014 19:10:03 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+18-feb-2014 19:10:03 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/19  config=null
+18-feb-2014 19:10:03 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5314 ms
+18-feb-2014 19:10:56 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+18-feb-2014 20:43:10 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+18-feb-2014 20:43:11 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+18-feb-2014 20:43:11 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@bdd040a: startup date [Tue Feb 18 19:10:03 CET 2014]; parent: Root WebApplicationContext
+18-feb-2014 20:43:11 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@27beb7ec: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@76705d28
+18-feb-2014 20:43:11 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Tue Feb 18 19:09:58 CET 2014]; root of context hierarchy
+18-feb-2014 20:43:11 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@76705d28: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+18-feb-2014 20:43:11 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@6bdea342]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@4b187f5b}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+18-feb-2014 20:43:11 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@355155e1]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@6edd421f]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+18-feb-2014 20:43:11 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@6bdea342]) and a value of type [java.util.WeakHashMap] (value [{class org.uddi.api_v3.FindService=java.lang.ref.WeakReference@203a16, class java.util.ArrayList=java.lang.ref.WeakReference@43c57a6a, class org.uddi.api_v3.FindQualifiers=java.lang.ref.WeakReference@59e7e7e8, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@82a5e75, class org.uddi.api_v3.GetServiceDetail=java.lang.ref.WeakReference@159f5783}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+18-feb-2014 20:43:12 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+21-feb-2014 12:08:11 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+21-feb-2014 12:08:11 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+21-feb-2014 12:08:11 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 441 ms
+21-feb-2014 12:08:11 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+21-feb-2014 12:08:11 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+21-feb-2014 12:08:11 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+21-feb-2014 12:08:11 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+21-feb-2014 12:08:12 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+21-feb-2014 12:08:12 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Fri Feb 21 12:08:12 CET 2014]; root of context hierarchy
+21-feb-2014 12:08:12 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+21-feb-2014 12:08:12 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+21-feb-2014 12:08:12 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+21-feb-2014 12:08:12 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+21-feb-2014 12:08:12 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+21-feb-2014 12:08:12 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 12:08:12 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 12:08:12 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 12:08:12 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 12:08:12 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 12:08:12 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@24c6e1ec: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+21-feb-2014 12:08:13 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+21-feb-2014 12:08:14 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+21-feb-2014 12:08:14 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+21-feb-2014 12:08:14 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+21-feb-2014 12:08:14 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+21-feb-2014 12:08:15 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+21-feb-2014 12:08:15 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+21-feb-2014 12:08:15 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+21-feb-2014 12:08:15 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+21-feb-2014 12:08:16 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+21-feb-2014 12:08:16 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+21-feb-2014 12:08:16 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+21-feb-2014 12:08:16 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+21-feb-2014 12:08:16 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+21-feb-2014 12:08:16 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4422 ms
+21-feb-2014 12:08:16 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+21-feb-2014 12:08:16 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@5b2c9e5d: startup date [Fri Feb 21 12:08:16 CET 2014]; parent: Root WebApplicationContext
+21-feb-2014 12:08:16 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2d51e135: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@24c6e1ec
+21-feb-2014 12:08:16 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+21-feb-2014 12:08:16 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+21-feb-2014 12:08:16 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+21-feb-2014 12:08:16 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+21-feb-2014 12:08:16 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+21-feb-2014 12:08:16 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+21-feb-2014 12:08:16 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+21-feb-2014 12:08:16 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+21-feb-2014 12:08:16 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+21-feb-2014 12:08:16 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/14  config=null
+21-feb-2014 12:08:16 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5279 ms
+21-feb-2014 12:08:25 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+21-feb-2014 14:29:32 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+21-feb-2014 14:29:33 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+21-feb-2014 14:29:33 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@5b2c9e5d: startup date [Fri Feb 21 12:08:16 CET 2014]; parent: Root WebApplicationContext
+21-feb-2014 14:29:33 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2d51e135: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@24c6e1ec
+21-feb-2014 14:29:33 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Fri Feb 21 12:08:12 CET 2014]; root of context hierarchy
+21-feb-2014 14:29:33 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@24c6e1ec: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+21-feb-2014 14:29:33 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@16f33122]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@49ccd159}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+21-feb-2014 14:29:33 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@25c44fe9]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@7b5a5d5d]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+21-feb-2014 14:29:33 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@16f33122]) and a value of type [java.util.WeakHashMap] (value [{class org.uddi.api_v3.FindService=java.lang.ref.WeakReference@69a7c3ef, class org.uddi.api_v3.FindQualifiers=java.lang.ref.WeakReference@530b61a, class org.uddi.api_v3.GetServiceDetail=java.lang.ref.WeakReference@4103679f, class java.util.ArrayList=java.lang.ref.WeakReference@46881911, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@1125cf44}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+21-feb-2014 14:29:34 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+21-feb-2014 18:18:06 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+21-feb-2014 18:18:06 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+21-feb-2014 18:18:06 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 468 ms
+21-feb-2014 18:18:07 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+21-feb-2014 18:18:07 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+21-feb-2014 18:18:07 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+21-feb-2014 18:18:07 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+21-feb-2014 18:18:07 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+21-feb-2014 18:18:07 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Fri Feb 21 18:18:07 CET 2014]; root of context hierarchy
+21-feb-2014 18:18:07 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+21-feb-2014 18:18:07 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+21-feb-2014 18:18:07 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+21-feb-2014 18:18:07 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+21-feb-2014 18:18:08 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+21-feb-2014 18:18:08 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 18:18:08 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 18:18:08 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 18:18:08 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 18:18:08 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+21-feb-2014 18:18:08 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@56a75737: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+21-feb-2014 18:18:08 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+21-feb-2014 18:18:10 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+21-feb-2014 18:18:10 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+21-feb-2014 18:18:10 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+21-feb-2014 18:18:10 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+21-feb-2014 18:18:11 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+21-feb-2014 18:18:11 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+21-feb-2014 18:18:11 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+21-feb-2014 18:18:11 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+21-feb-2014 18:18:12 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+21-feb-2014 18:18:12 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+21-feb-2014 18:18:12 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+21-feb-2014 18:18:12 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+21-feb-2014 18:18:12 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+21-feb-2014 18:18:12 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4938 ms
+21-feb-2014 18:18:12 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+21-feb-2014 18:18:12 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@7deaf705: startup date [Fri Feb 21 18:18:12 CET 2014]; parent: Root WebApplicationContext
+21-feb-2014 18:18:12 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@14ed3007: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@56a75737
+21-feb-2014 18:18:12 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+21-feb-2014 18:18:12 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+21-feb-2014 18:18:12 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+21-feb-2014 18:18:12 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+21-feb-2014 18:18:12 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+21-feb-2014 18:18:12 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+21-feb-2014 18:18:12 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+21-feb-2014 18:18:12 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+21-feb-2014 18:18:12 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+21-feb-2014 18:18:12 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/21  config=null
+21-feb-2014 18:18:12 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5906 ms
+21-feb-2014 18:18:17 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+22-feb-2014 11:19:01 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+22-feb-2014 11:19:01 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+22-feb-2014 11:19:01 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 573 ms
+22-feb-2014 11:19:01 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+22-feb-2014 11:19:01 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+22-feb-2014 11:19:01 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+22-feb-2014 11:19:01 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+22-feb-2014 11:19:01 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+22-feb-2014 11:19:01 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Sat Feb 22 11:19:01 CET 2014]; root of context hierarchy
+22-feb-2014 11:19:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+22-feb-2014 11:19:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+22-feb-2014 11:19:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+22-feb-2014 11:19:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+22-feb-2014 11:19:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+22-feb-2014 11:19:02 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+22-feb-2014 11:19:02 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+22-feb-2014 11:19:02 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+22-feb-2014 11:19:02 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+22-feb-2014 11:19:02 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+22-feb-2014 11:19:02 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2a509df8: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+22-feb-2014 11:19:02 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+22-feb-2014 11:19:04 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+22-feb-2014 11:19:04 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+22-feb-2014 11:19:04 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+22-feb-2014 11:19:04 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+22-feb-2014 11:19:05 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+22-feb-2014 11:19:05 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+22-feb-2014 11:19:05 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+22-feb-2014 11:19:05 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+22-feb-2014 11:19:06 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+22-feb-2014 11:19:06 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+22-feb-2014 11:19:06 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+22-feb-2014 11:19:06 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+22-feb-2014 11:19:06 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+22-feb-2014 11:19:06 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4533 ms
+22-feb-2014 11:19:06 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+22-feb-2014 11:19:06 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@5ad52411: startup date [Sat Feb 22 11:19:06 CET 2014]; parent: Root WebApplicationContext
+22-feb-2014 11:19:06 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@46d766f5: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@2a509df8
+22-feb-2014 11:19:06 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+22-feb-2014 11:19:06 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+22-feb-2014 11:19:06 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+22-feb-2014 11:19:06 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+22-feb-2014 11:19:06 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+22-feb-2014 11:19:06 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+22-feb-2014 11:19:06 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+22-feb-2014 11:19:06 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+22-feb-2014 11:19:06 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+22-feb-2014 11:19:06 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/23  config=null
+22-feb-2014 11:19:06 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5510 ms
+22-feb-2014 11:47:18 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+22-feb-2014 13:13:55 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+22-feb-2014 13:13:56 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+22-feb-2014 13:13:56 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@5ad52411: startup date [Sat Feb 22 11:19:06 CET 2014]; parent: Root WebApplicationContext
+22-feb-2014 13:13:56 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@46d766f5: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@2a509df8
+22-feb-2014 13:13:56 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Sat Feb 22 11:19:01 CET 2014]; root of context hierarchy
+22-feb-2014 13:13:56 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2a509df8: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+22-feb-2014 13:13:56 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@58762acf]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@5dbdedf8}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+22-feb-2014 13:13:56 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@605264dc]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@415bd8eb]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+22-feb-2014 13:13:56 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@58762acf]) and a value of type [java.util.WeakHashMap] (value [{class org.uddi.api_v3.GetServiceDetail=java.lang.ref.WeakReference@74fe4dd2, class org.uddi.api_v3.FindQualifiers=java.lang.ref.WeakReference@63a751ff, class java.util.ArrayList=java.lang.ref.WeakReference@7df86f75, class org.uddi.api_v3.FindService=java.lang.ref.WeakReference@415daaef, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@6c81526f}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+22-feb-2014 13:13:56 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@605264dc]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@1e4b2d10]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+22-feb-2014 13:13:56 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@58762acf]) and a value of type [java.util.WeakHashMap] (value [{class org.uddi.api_v3.GetServiceDetail=java.lang.ref.WeakReference@597b84f9, class org.uddi.api_v3.FindQualifiers=java.lang.ref.WeakReference@3c572554, class java.util.ArrayList=java.lang.ref.WeakReference@7d53ccbe, class org.uddi.api_v3.FindService=java.lang.ref.WeakReference@8a70e3a, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@f970646}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+22-feb-2014 13:13:57 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 17:20:36 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+23-feb-2014 17:20:36 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 17:20:36 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 424 ms
+23-feb-2014 17:20:36 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+23-feb-2014 17:20:36 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+23-feb-2014 17:20:36 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+23-feb-2014 17:20:36 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+23-feb-2014 17:20:36 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+23-feb-2014 17:20:36 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Sun Feb 23 17:20:36 CET 2014]; root of context hierarchy
+23-feb-2014 17:20:36 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+23-feb-2014 17:20:37 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+23-feb-2014 17:20:37 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+23-feb-2014 17:20:37 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+23-feb-2014 17:20:37 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+23-feb-2014 17:20:37 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 17:20:37 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 17:20:37 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 17:20:37 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 17:20:37 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 17:20:37 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@62d337d3: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+23-feb-2014 17:20:37 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+23-feb-2014 17:20:39 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+23-feb-2014 17:20:39 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+23-feb-2014 17:20:39 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+23-feb-2014 17:20:39 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+23-feb-2014 17:20:40 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+23-feb-2014 17:20:40 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+23-feb-2014 17:20:40 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+23-feb-2014 17:20:40 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+23-feb-2014 17:20:40 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+23-feb-2014 17:20:40 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+23-feb-2014 17:20:40 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+23-feb-2014 17:20:40 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+23-feb-2014 17:20:41 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+23-feb-2014 17:20:41 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4343 ms
+23-feb-2014 17:20:41 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+23-feb-2014 17:20:41 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@142e6767: startup date [Sun Feb 23 17:20:41 CET 2014]; parent: Root WebApplicationContext
+23-feb-2014 17:20:41 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@11ace672: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@62d337d3
+23-feb-2014 17:20:41 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+23-feb-2014 17:20:41 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+23-feb-2014 17:20:41 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+23-feb-2014 17:20:41 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+23-feb-2014 17:20:41 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+23-feb-2014 17:20:41 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+23-feb-2014 17:20:41 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+23-feb-2014 17:20:41 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 17:20:41 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+23-feb-2014 17:20:41 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/21  config=null
+23-feb-2014 17:20:41 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5218 ms
+23-feb-2014 17:26:33 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 17:26:34 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+23-feb-2014 17:26:34 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@142e6767: startup date [Sun Feb 23 17:20:41 CET 2014]; parent: Root WebApplicationContext
+23-feb-2014 17:26:34 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@11ace672: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@62d337d3
+23-feb-2014 17:26:34 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Sun Feb 23 17:20:36 CET 2014]; root of context hierarchy
+23-feb-2014 17:26:34 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@62d337d3: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+23-feb-2014 17:26:34 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@65abfbc6]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@434e54d8}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+23-feb-2014 17:26:34 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 18:16:50 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+23-feb-2014 18:16:51 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 18:16:51 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 399 ms
+23-feb-2014 18:16:51 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+23-feb-2014 18:16:51 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+23-feb-2014 18:16:51 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+23-feb-2014 18:16:51 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+23-feb-2014 18:16:51 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+23-feb-2014 18:16:51 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Sun Feb 23 18:16:51 CET 2014]; root of context hierarchy
+23-feb-2014 18:16:51 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+23-feb-2014 18:16:51 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+23-feb-2014 18:16:51 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+23-feb-2014 18:16:51 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+23-feb-2014 18:16:51 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+23-feb-2014 18:16:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:16:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:16:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:16:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:16:51 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:16:52 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@16528780: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+23-feb-2014 18:16:52 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+23-feb-2014 18:16:53 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+23-feb-2014 18:16:53 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+23-feb-2014 18:16:54 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+23-feb-2014 18:16:54 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+23-feb-2014 18:16:54 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+23-feb-2014 18:16:54 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+23-feb-2014 18:16:55 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+23-feb-2014 18:16:55 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+23-feb-2014 18:16:55 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+23-feb-2014 18:16:55 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+23-feb-2014 18:16:55 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+23-feb-2014 18:16:55 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+23-feb-2014 18:16:55 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+23-feb-2014 18:16:55 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4334 ms
+23-feb-2014 18:16:55 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+23-feb-2014 18:16:55 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@7b26c885: startup date [Sun Feb 23 18:16:55 CET 2014]; parent: Root WebApplicationContext
+23-feb-2014 18:16:55 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@186458c2: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@16528780
+23-feb-2014 18:16:55 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+23-feb-2014 18:16:55 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+23-feb-2014 18:16:55 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+23-feb-2014 18:16:55 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+23-feb-2014 18:16:55 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+23-feb-2014 18:16:55 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+23-feb-2014 18:16:55 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+23-feb-2014 18:16:56 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 18:16:56 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+23-feb-2014 18:16:56 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/27  config=null
+23-feb-2014 18:16:56 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5087 ms
+23-feb-2014 18:17:22 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+23-feb-2014 18:45:46 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 18:45:47 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+23-feb-2014 18:45:47 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@7b26c885: startup date [Sun Feb 23 18:16:55 CET 2014]; parent: Root WebApplicationContext
+23-feb-2014 18:45:47 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@186458c2: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@16528780
+23-feb-2014 18:45:47 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Sun Feb 23 18:16:51 CET 2014]; root of context hierarchy
+23-feb-2014 18:45:47 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@16528780: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+23-feb-2014 18:45:47 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@1dbc21fd]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@5da19012}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+23-feb-2014 18:45:47 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@19f9bdc4]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@5b199c2e]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+23-feb-2014 18:45:47 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@1dbc21fd]) and a value of type [java.util.WeakHashMap] (value [{class org.apache.juddi.api_v3.SavePublisher=java.lang.ref.WeakReference@6e5cbebb, class org.uddi.api_v3.SaveService=java.lang.ref.WeakReference@aee1f98, class org.uddi.api_v3.BindingTemplate=java.lang.ref.WeakReference@175c39c3, class org.uddi.api_v3.Description=java.lang.ref.WeakReference@27d43d30, class org.uddi.api_v3.SaveBusiness=java.lang.ref.WeakReference@5efd2ebd, class org.uddi.api_v3.AccessPoint=java.lang.ref.WeakReference@4007ab03, class org.uddi.api_v3.BusinessEntity=java.lang.ref.WeakReference@376c72cc, class org.uddi.api_v3.BusinessService=java.lang.ref.WeakReference@30e4cb81, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@7cec9b3a, class java.util.ArrayList=java.lang.ref.WeakReference@11c33ce9, class org.uddi.api_v3.FindBusiness=java.lang.ref.WeakReference@28d3ee1b, class org.uddi.api_v3.BindingTemplates=java.lang.ref.WeakReference@71b5438d, class org.apache.juddi.api_v3.Publisher=java.lang.ref.WeakReference@3366184d, class org.uddi.api_v3.GetAuthToken=java.lang.ref.WeakReference@73c58197}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+23-feb-2014 18:45:47 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 18:49:52 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+23-feb-2014 18:49:52 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 18:49:52 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 396 ms
+23-feb-2014 18:49:52 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+23-feb-2014 18:49:52 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+23-feb-2014 18:49:52 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+23-feb-2014 18:49:52 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+23-feb-2014 18:49:53 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+23-feb-2014 18:49:53 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Sun Feb 23 18:49:53 CET 2014]; root of context hierarchy
+23-feb-2014 18:49:53 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+23-feb-2014 18:49:53 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+23-feb-2014 18:49:53 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+23-feb-2014 18:49:53 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+23-feb-2014 18:49:53 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+23-feb-2014 18:49:53 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:49:53 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:49:53 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:49:53 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:49:53 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+23-feb-2014 18:49:53 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2b68989e: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+23-feb-2014 18:49:54 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+23-feb-2014 18:49:55 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+23-feb-2014 18:49:55 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+23-feb-2014 18:49:55 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+23-feb-2014 18:49:55 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+23-feb-2014 18:49:56 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+23-feb-2014 18:49:56 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+23-feb-2014 18:49:56 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+23-feb-2014 18:49:56 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+23-feb-2014 18:49:57 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+23-feb-2014 18:49:57 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+23-feb-2014 18:49:57 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+23-feb-2014 18:49:57 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+23-feb-2014 18:49:57 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+23-feb-2014 18:49:57 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4245 ms
+23-feb-2014 18:49:57 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+23-feb-2014 18:49:57 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@3088890d: startup date [Sun Feb 23 18:49:57 CET 2014]; parent: Root WebApplicationContext
+23-feb-2014 18:49:57 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@7d76a8c8: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@2b68989e
+23-feb-2014 18:49:57 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+23-feb-2014 18:49:57 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+23-feb-2014 18:49:57 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+23-feb-2014 18:49:57 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+23-feb-2014 18:49:57 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+23-feb-2014 18:49:57 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+23-feb-2014 18:49:57 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+23-feb-2014 18:49:57 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 18:49:57 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+23-feb-2014 18:49:57 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/20  config=null
+23-feb-2014 18:49:57 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 4938 ms
+23-feb-2014 18:50:25 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+23-feb-2014 18:50:26 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+23-feb-2014 18:50:26 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@3088890d: startup date [Sun Feb 23 18:49:57 CET 2014]; parent: Root WebApplicationContext
+23-feb-2014 18:50:26 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@7d76a8c8: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@2b68989e
+23-feb-2014 18:50:26 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Sun Feb 23 18:49:53 CET 2014]; root of context hierarchy
+23-feb-2014 18:50:26 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2b68989e: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+23-feb-2014 18:50:26 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@70501e4e]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@46e5590e}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+23-feb-2014 18:50:26 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+24-feb-2014 14:17:25 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+24-feb-2014 14:17:25 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+24-feb-2014 14:17:25 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 508 ms
+24-feb-2014 14:17:25 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+24-feb-2014 14:17:25 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+24-feb-2014 14:17:25 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+24-feb-2014 14:17:25 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+24-feb-2014 14:17:25 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+24-feb-2014 14:17:25 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Mon Feb 24 14:17:25 CET 2014]; root of context hierarchy
+24-feb-2014 14:17:26 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+24-feb-2014 14:17:26 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+24-feb-2014 14:17:26 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+24-feb-2014 14:17:26 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+24-feb-2014 14:17:26 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+24-feb-2014 14:17:26 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+24-feb-2014 14:17:26 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+24-feb-2014 14:17:26 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+24-feb-2014 14:17:26 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+24-feb-2014 14:17:26 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+24-feb-2014 14:17:26 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@19d03a4e: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+24-feb-2014 14:17:26 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+24-feb-2014 14:17:28 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+24-feb-2014 14:17:28 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+24-feb-2014 14:17:28 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+24-feb-2014 14:17:28 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+24-feb-2014 14:17:29 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+24-feb-2014 14:17:29 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+24-feb-2014 14:17:29 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+24-feb-2014 14:17:29 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+24-feb-2014 14:17:29 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+24-feb-2014 14:17:29 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+24-feb-2014 14:17:30 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+24-feb-2014 14:17:30 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+24-feb-2014 14:17:30 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+24-feb-2014 14:17:30 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4389 ms
+24-feb-2014 14:17:30 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+24-feb-2014 14:17:30 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@6a75d65c: startup date [Mon Feb 24 14:17:30 CET 2014]; parent: Root WebApplicationContext
+24-feb-2014 14:17:30 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@7d6bb63e: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@19d03a4e
+24-feb-2014 14:17:30 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+24-feb-2014 14:17:30 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+24-feb-2014 14:17:30 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+24-feb-2014 14:17:30 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+24-feb-2014 14:17:30 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+24-feb-2014 14:17:30 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+24-feb-2014 14:17:30 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+24-feb-2014 14:17:30 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+24-feb-2014 14:17:30 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+24-feb-2014 14:17:30 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/20  config=null
+24-feb-2014 14:17:30 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5263 ms
+24-feb-2014 14:19:55 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+24-feb-2014 15:59:41 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+24-feb-2014 15:59:42 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+24-feb-2014 15:59:42 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@6a75d65c: startup date [Mon Feb 24 14:17:30 CET 2014]; parent: Root WebApplicationContext
+24-feb-2014 15:59:42 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@7d6bb63e: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@19d03a4e
+24-feb-2014 15:59:42 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Mon Feb 24 14:17:25 CET 2014]; root of context hierarchy
+24-feb-2014 15:59:42 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@19d03a4e: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+24-feb-2014 15:59:42 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@4f781d1d]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@7c274874}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+24-feb-2014 15:59:42 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@7705f759]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@28b2311b]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+24-feb-2014 15:59:42 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@4f781d1d]) and a value of type [java.util.WeakHashMap] (value [{class org.uddi.api_v3.BindingTemplate=java.lang.ref.WeakReference@4ab5f87c, class org.uddi.api_v3.SaveService=java.lang.ref.WeakReference@70ccbb35, class org.uddi.api_v3.GetAuthToken=java.lang.ref.WeakReference@1116ce6e, class java.util.ArrayList=java.lang.ref.WeakReference@704aa085, class org.uddi.api_v3.BusinessEntity=java.lang.ref.WeakReference@3370b55b, class org.apache.juddi.api_v3.SavePublisher=java.lang.ref.WeakReference@2c9283bf, class org.uddi.api_v3.AccessPoint=java.lang.ref.WeakReference@47078775, class org.uddi.api_v3.SaveBusiness=java.lang.ref.WeakReference@3f4e36c1, class org.uddi.api_v3.BusinessService=java.lang.ref.WeakReference@27ecd95f, class org.uddi.api_v3.BindingTemplates=java.lang.ref.WeakReference@2eb30073, class org.uddi.api_v3.Description=java.lang.ref.WeakReference@69e295f8, class org.apache.juddi.api_v3.Publisher=java.lang.ref.WeakReference@1ae40317, class org.uddi.api_v3.FindBusiness=java.lang.ref.WeakReference@6f86e8cb, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@21da0a1}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+24-feb-2014 15:59:42 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+01-mar-2014 11:39:58 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+01-mar-2014 11:39:59 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+01-mar-2014 11:39:59 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 437 ms
+01-mar-2014 11:39:59 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+01-mar-2014 11:39:59 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+01-mar-2014 11:39:59 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+01-mar-2014 11:39:59 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+01-mar-2014 11:39:59 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+01-mar-2014 11:39:59 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Sat Mar 01 11:39:59 CET 2014]; root of context hierarchy
+01-mar-2014 11:39:59 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+01-mar-2014 11:39:59 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+01-mar-2014 11:39:59 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+01-mar-2014 11:39:59 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+01-mar-2014 11:39:59 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+01-mar-2014 11:40:00 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+01-mar-2014 11:40:00 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+01-mar-2014 11:40:00 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+01-mar-2014 11:40:00 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+01-mar-2014 11:40:00 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+01-mar-2014 11:40:00 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@1b0952e8: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+01-mar-2014 11:40:00 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+01-mar-2014 11:40:01 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+01-mar-2014 11:40:01 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+01-mar-2014 11:40:02 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+01-mar-2014 11:40:02 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+01-mar-2014 11:40:02 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+01-mar-2014 11:40:02 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+01-mar-2014 11:40:03 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+01-mar-2014 11:40:03 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+01-mar-2014 11:40:03 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+01-mar-2014 11:40:03 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+01-mar-2014 11:40:03 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+01-mar-2014 11:40:03 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+01-mar-2014 11:40:04 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+01-mar-2014 11:40:04 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4502 ms
+01-mar-2014 11:40:04 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+01-mar-2014 11:40:04 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@40f274b4: startup date [Sat Mar 01 11:40:04 CET 2014]; parent: Root WebApplicationContext
+01-mar-2014 11:40:04 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@1b21c7d6: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@1b0952e8
+01-mar-2014 11:40:04 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+01-mar-2014 11:40:04 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+01-mar-2014 11:40:04 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+01-mar-2014 11:40:04 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+01-mar-2014 11:40:04 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+01-mar-2014 11:40:04 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+01-mar-2014 11:40:04 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+01-mar-2014 11:40:04 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+01-mar-2014 11:40:04 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+01-mar-2014 11:40:04 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/35  config=null
+01-mar-2014 11:40:04 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5498 ms
+01-mar-2014 11:40:05 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+02-mar-2014 11:41:20 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+02-mar-2014 11:41:21 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+02-mar-2014 11:41:21 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@40f274b4: startup date [Sat Mar 01 11:40:04 CET 2014]; parent: Root WebApplicationContext
+02-mar-2014 11:41:21 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@1b21c7d6: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@1b0952e8
+02-mar-2014 11:41:21 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Sat Mar 01 11:39:59 CET 2014]; root of context hierarchy
+02-mar-2014 11:41:21 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@1b0952e8: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+02-mar-2014 11:41:21 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@160851e0]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@5bd5c1ed}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+02-mar-2014 11:41:21 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@5a5dae04]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@3c4bb6f5]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+02-mar-2014 11:41:21 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@160851e0]) and a value of type [java.util.WeakHashMap] (value [{class org.uddi.api_v3.BusinessService=java.lang.ref.WeakReference@ed8adc0, class org.apache.juddi.api_v3.Publisher=java.lang.ref.WeakReference@33771fdd, class org.uddi.api_v3.AccessPoint=java.lang.ref.WeakReference@51cd0090, class org.uddi.api_v3.FindBusiness=java.lang.ref.WeakReference@69e017e4, class org.uddi.api_v3.SaveBusiness=java.lang.ref.WeakReference@7740b009, class org.uddi.api_v3.BindingTemplates=java.lang.ref.WeakReference@37e55c09, class org.uddi.api_v3.SaveService=java.lang.ref.WeakReference@32fd6f8a, class org.uddi.api_v3.Description=java.lang.ref.WeakReference@1ca5e72d, class org.uddi.api_v3.GetAuthToken=java.lang.ref.WeakReference@4fec4a0c, class org.uddi.api_v3.BindingTemplate=java.lang.ref.WeakReference@21f182d2, class org.uddi.api_v3.GetServiceDetail=java.lang.ref.WeakReference@76c3ba66, class java.util.ArrayList=java.lang.ref.WeakReference@2c02bb74, class org.apache.juddi.api_v3.SavePublisher=java.lang.ref.WeakReference@6760d33e, class org.uddi.api_v3.FindService=java.lang.ref.WeakReference@5ccc078, class org.uddi.api_v3.BusinessEntity=java.lang.ref.WeakReference@45700941, class org.uddi.api_v3.FindQualifiers=java.lang.ref.WeakReference@3e6fae04, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@1609a8a2}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+02-mar-2014 11:41:21 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@5a5dae04]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@541e2efb]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+02-mar-2014 11:41:21 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@160851e0]) and a value of type [java.util.WeakHashMap] (value [{class org.uddi.api_v3.BusinessService=java.lang.ref.WeakReference@99e8be2, class org.apache.juddi.api_v3.Publisher=java.lang.ref.WeakReference@7f1a75d, class org.uddi.api_v3.AccessPoint=java.lang.ref.WeakReference@a22cebe, class org.uddi.api_v3.FindBusiness=java.lang.ref.WeakReference@73332124, class org.uddi.api_v3.SaveBusiness=java.lang.ref.WeakReference@21c4fd92, class org.uddi.api_v3.BindingTemplates=java.lang.ref.WeakReference@be38d90, class org.uddi.api_v3.SaveService=java.lang.ref.WeakReference@862ef09, class org.uddi.api_v3.Description=java.lang.ref.WeakReference@173b3c2c, class org.uddi.api_v3.GetAuthToken=java.lang.ref.WeakReference@31eb789e, class org.uddi.api_v3.BindingTemplate=java.lang.ref.WeakReference@5a3be6ac, class org.uddi.api_v3.GetServiceDetail=java.lang.ref.WeakReference@12a5547c, class java.util.ArrayList=java.lang.ref.WeakReference@244da274, class org.apache.juddi.api_v3.SavePublisher=java.lang.ref.WeakReference@64e4804a, class org.uddi.api_v3.FindService=java.lang.ref.WeakReference@55a2ae05, class org.uddi.api_v3.BusinessEntity=java.lang.ref.WeakReference@2b4ef62f, class org.uddi.api_v3.FindQualifiers=java.lang.ref.WeakReference@4d049ddf, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@6a18c2f9}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+02-mar-2014 11:41:21 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+03-mar-2014 9:17:09 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+03-mar-2014 9:17:09 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+03-mar-2014 9:17:09 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 435 ms
+03-mar-2014 9:17:09 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+03-mar-2014 9:17:09 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+03-mar-2014 9:17:10 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+03-mar-2014 9:17:10 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+03-mar-2014 9:17:10 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+03-mar-2014 9:17:10 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Mon Mar 03 09:17:10 CET 2014]; root of context hierarchy
+03-mar-2014 9:17:10 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+03-mar-2014 9:17:10 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+03-mar-2014 9:17:10 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+03-mar-2014 9:17:10 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+03-mar-2014 9:17:10 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+03-mar-2014 9:17:10 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 9:17:10 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 9:17:11 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 9:17:11 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 9:17:11 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 9:17:11 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2c6691da: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+03-mar-2014 9:17:11 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+03-mar-2014 9:17:12 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+03-mar-2014 9:17:12 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+03-mar-2014 9:17:13 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+03-mar-2014 9:17:13 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+03-mar-2014 9:17:13 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+03-mar-2014 9:17:13 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+03-mar-2014 9:17:14 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+03-mar-2014 9:17:14 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+03-mar-2014 9:17:14 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+03-mar-2014 9:17:14 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+03-mar-2014 9:17:14 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+03-mar-2014 9:17:14 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+03-mar-2014 9:17:14 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+03-mar-2014 9:17:14 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 4234 ms
+03-mar-2014 9:17:14 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+03-mar-2014 9:17:14 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@545ec940: startup date [Mon Mar 03 09:17:14 CET 2014]; parent: Root WebApplicationContext
+03-mar-2014 9:17:14 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@6f404c51: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@2c6691da
+03-mar-2014 9:17:14 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+03-mar-2014 9:17:14 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+03-mar-2014 9:17:14 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+03-mar-2014 9:17:14 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+03-mar-2014 9:17:14 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+03-mar-2014 9:17:14 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+03-mar-2014 9:17:14 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+03-mar-2014 9:17:15 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+03-mar-2014 9:17:15 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+03-mar-2014 9:17:15 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/19  config=null
+03-mar-2014 9:17:15 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 5098 ms
+03-mar-2014 9:20:57 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+03-mar-2014 9:34:17 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+03-mar-2014 9:34:18 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+03-mar-2014 9:34:18 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@545ec940: startup date [Mon Mar 03 09:17:14 CET 2014]; parent: Root WebApplicationContext
+03-mar-2014 9:34:18 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@6f404c51: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@2c6691da
+03-mar-2014 9:34:18 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Mon Mar 03 09:17:10 CET 2014]; root of context hierarchy
+03-mar-2014 9:34:18 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@2c6691da: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+03-mar-2014 9:34:18 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@48acb798]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@1a53929c}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+03-mar-2014 9:34:18 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@64be4d44]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@9c2df08]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+03-mar-2014 9:34:18 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@48acb798]) and a value of type [java.util.WeakHashMap] (value [{class org.uddi.api_v3.BusinessService=java.lang.ref.WeakReference@58c08b39, class org.uddi.api_v3.AccessPoint=java.lang.ref.WeakReference@48f478b4, class org.uddi.api_v3.FindService=java.lang.ref.WeakReference@2a2096d7, class org.apache.juddi.api_v3.SavePublisher=java.lang.ref.WeakReference@418f12dc, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@181f4b24, class org.uddi.api_v3.BindingTemplates=java.lang.ref.WeakReference@2e7e34db, class org.uddi.api_v3.FindQualifiers=java.lang.ref.WeakReference@5fc02db5, class org.uddi.api_v3.SaveBusiness=java.lang.ref.WeakReference@41f8f72f, class org.apache.juddi.api_v3.Publisher=java.lang.ref.WeakReference@402c507f, class org.uddi.api_v3.GetAuthToken=java.lang.ref.WeakReference@1d58e2c3, class org.uddi.api_v3.BindingTemplate=java.lang.ref.WeakReference@368f7f42, class org.uddi.api_v3.BusinessEntity=java.lang.ref.WeakReference@6ebe20a, class org.uddi.api_v3.SaveService=java.lang.ref.WeakReference@68450212, class org.uddi.api_v3.GetServiceDetail=java.lang.ref.WeakReference@a8b2139, class org.uddi.api_v3.FindBusiness=java.lang.ref.WeakReference@34322a97, class java.util.ArrayList=java.lang.ref.WeakReference@498a3a46, class org.uddi.api_v3.Description=java.lang.ref.WeakReference@11f7ef62}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+03-mar-2014 9:34:18 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
+03-mar-2014 12:02:02 org.apache.catalina.core.AprLifecycleListener init
+INFO: La biblioteca nativa de Apache Tomcat basada en ARP que permite un rendimiento —ptimo en entornos de desarrollo no ha sido hallada en java.library.path: .:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+03-mar-2014 12:02:02 org.apache.coyote.http11.Http11Protocol init
+INFO: Inicializando Coyote HTTP/1.1 en puerto http-8081
+03-mar-2014 12:02:02 org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 457 ms
+03-mar-2014 12:02:02 org.apache.catalina.core.StandardService start
+INFO: Arrancando servicio Catalina
+03-mar-2014 12:02:02 org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.26
+03-mar-2014 12:02:02 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n host-manager.xml
+03-mar-2014 12:02:02 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n juddiv3.xml
+03-mar-2014 12:02:02 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization started
+03-mar-2014 12:02:02 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing Root WebApplicationContext: startup date [Mon Mar 03 12:02:02 CET 2014]; root of context hierarchy
+03-mar-2014 12:02:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from ServletContext resource [/WEB-INF/beans.xml]
+03-mar-2014 12:02:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+03-mar-2014 12:02:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-soap.xml]
+03-mar-2014 12:02:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-servlet.xml]
+03-mar-2014 12:02:02 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [META-INF/cxf/cxf-extension-http.xml]
+03-mar-2014 12:02:03 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 12:02:03 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 12:02:03 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 12:02:03 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 12:02:03 org.apache.juddi.api.impl.UDDIServiceCounter getServer
+INFO: Found MBean server
+03-mar-2014 12:02:03 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35f68272: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+03-mar-2014 12:02:03 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIInquiryService from class org.uddi.v3_service.UDDIInquiryPortType
+03-mar-2014 12:02:05 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /inquiry
+03-mar-2014 12:02:05 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDIPublicationService from class org.uddi.v3_service.UDDIPublicationPortType
+03-mar-2014 12:02:05 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /publish
+03-mar-2014 12:02:05 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISecurityService from class org.uddi.v3_service.UDDISecurityPortType
+03-mar-2014 12:02:06 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /security
+03-mar-2014 12:02:06 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionService from class org.uddi.v3_service.UDDISubscriptionPortType
+03-mar-2014 12:02:06 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription
+03-mar-2014 12:02:06 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDISubscriptionListenerService from class org.uddi.v3_service.UDDISubscriptionListenerPortType
+03-mar-2014 12:02:07 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /subscription-listener
+03-mar-2014 12:02:07 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:uddi-org:v3_service}UDDICustodyTransferService from class org.uddi.v3_service.UDDICustodyTransferPortType
+03-mar-2014 12:02:07 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /custody-transfer
+03-mar-2014 12:02:07 org.apache.cxf.service.factory.ReflectionServiceFactoryBean buildServiceFromClass
+INFO: Creating Service {urn:juddi-apache-org:v3_service}JUDDIApiService from class org.apache.juddi.v3_service.JUDDIApiPortType
+03-mar-2014 12:02:07 org.apache.cxf.endpoint.ServerImpl initDestination
+INFO: Setting the server's publish address to be /juddi-api
+03-mar-2014 12:02:07 org.springframework.web.context.ContextLoader initWebApplicationContext
+INFO: Root WebApplicationContext: initialization completed in 5286 ms
+03-mar-2014 12:02:07 org.apache.cxf.transport.servlet.CXFServlet updateContext
+INFO: Load the bus with application context
+03-mar-2014 12:02:07 org.springframework.context.support.AbstractApplicationContext prepareRefresh
+INFO: Refreshing org.apache.cxf.bus.spring.BusApplicationContext@726076f4: startup date [Mon Mar 03 12:02:07 CET 2014]; parent: Root WebApplicationContext
+03-mar-2014 12:02:08 org.springframework.beans.factory.support.DefaultListableBeanFactory preInstantiateSingletons
+INFO: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@9ba0281: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@35f68272
+03-mar-2014 12:02:08 org.apache.cxf.transport.servlet.AbstractCXFServlet replaceDestinationFactory
+INFO: Servlet transport factory already registered 
+03-mar-2014 12:02:08 org.apache.catalina.startup.HostConfig deployDescriptor
+INFO: Desplieque del descriptor de configuraci—n manager.xml
+03-mar-2014 12:02:08 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio docs de la aplicaci—n web
+03-mar-2014 12:02:08 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio examples de la aplicaci—n web
+03-mar-2014 12:02:08 org.apache.catalina.core.StandardContext start
+GRAVE: Error listenerStart
+03-mar-2014 12:02:08 org.apache.catalina.core.StandardContext start
+GRAVE: Fall— en arranque del Contexto [/examples] debido a errores previos
+03-mar-2014 12:02:08 org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Despliegue del directorio ROOT de la aplicaci—n web
+03-mar-2014 12:02:08 org.apache.coyote.http11.Http11Protocol start
+INFO: Arrancando Coyote HTTP/1.1 en puerto http-8081
+03-mar-2014 12:02:08 org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8089
+03-mar-2014 12:02:08 org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/34  config=null
+03-mar-2014 12:02:08 org.apache.catalina.startup.Catalina start
+INFO: Server startup in 6269 ms
+03-mar-2014 12:03:46 org.apache.juddi.config.AppConfig loadConfiguration
+INFO: Reading from properties file:  file:/Users/pablovm1990/Documents/Sor/libSOR/lib/juddi-distro-3.1.5/juddi-tomcat-3.1.5/webapps/juddiv3/WEB-INF/classes/juddiv3.properties
+03-mar-2014 13:23:13 org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausando Coyote HTTP/1.1 en puerto http-8081
+03-mar-2014 13:23:14 org.apache.catalina.core.StandardService stop
+INFO: Parando servicio Catalina
+03-mar-2014 13:23:14 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing org.apache.cxf.bus.spring.BusApplicationContext@726076f4: startup date [Mon Mar 03 12:02:07 CET 2014]; parent: Root WebApplicationContext
+03-mar-2014 13:23:14 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@9ba0281: defining beans []; parent: org.springframework.beans.factory.support.DefaultListableBeanFactory@35f68272
+03-mar-2014 13:23:14 org.springframework.context.support.AbstractApplicationContext doClose
+INFO: Closing Root WebApplicationContext: startup date [Mon Mar 03 12:02:02 CET 2014]; root of context hierarchy
+03-mar-2014 13:23:14 org.springframework.beans.factory.support.DefaultSingletonBeanRegistry destroySingletons
+INFO: Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35f68272: defining beans [cxf,org.apache.cxf.bus.spring.BusApplicationListener,org.apache.cxf.bus.spring.BusWiringBeanFactoryPostProcessor,org.apache.cxf.bus.spring.Jsr250BeanPostProcessor,org.apache.cxf.bus.spring.BusExtensionPostProcessor,org.apache.cxf.resource.ResourceManager,org.apache.cxf.configuration.Configurer,org.apache.cxf.binding.BindingFactoryManager,org.apache.cxf.transport.DestinationFactoryManager,org.apache.cxf.transport.ConduitInitiatorManager,org.apache.cxf.wsdl.WSDLManager,org.apache.cxf.phase.PhaseManager,org.apache.cxf.workqueue.WorkQueueManager,org.apache.cxf.buslifecycle.BusLifeCycleManager,org.apache.cxf.endpoint.ServerRegistry,org.apache.cxf.endpoint.ServerLifeCycleManager,org.apache.cxf.endpoint.ClientLifeCycleManager,org.apache.cxf.transports.http.QueryHandlerRegistry,org.apache.cxf.endpoint.EndpointResolverRegistry,org.apache.cxf.headers.HeaderManager,org.apache.cxf.catalog.OASISCatalogManager,org.apache.cxf.service.factory.FactoryBeanListenerManager,org.apache.cxf.endpoint.ServiceContractResolverRegistry,org.apache.cxf.binding.soap.SoapBindingFactory,org.apache.cxf.binding.soap.SoapTransportFactory,org.apache.cxf.binding.soap.customEditorConfigurer,org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder,org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder,org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider,org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory,org.apache.cxf.transport.servlet.ServletTransportFactory,inquiry,publish,security,subscription,subscription-listener,custody-transfer,juddi-api]; root of factory hierarchy
+03-mar-2014 13:23:14 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@2e0c8411]) and a value of type [java.util.WeakHashMap] (value [{class javax.xml.bind.annotation.W3CDomHandler=java.lang.ref.WeakReference@5c49d589}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+03-mar-2014 13:23:14 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.runtime.Coordinator$1@736244b4]) and a value of type [java.lang.Object[]] (value [[Ljava.lang.Object;@388cc09a]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+03-mar-2014 13:23:14 org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap
+GRAVE: A web application created a ThreadLocal with key of type [null] (value [com.sun.xml.bind.v2.ClassFactory$1@2e0c8411]) and a value of type [java.util.WeakHashMap] (value [{class org.uddi.api_v3.BindingTemplates=java.lang.ref.WeakReference@20b8db77, class org.uddi.api_v3.FindBusiness=java.lang.ref.WeakReference@48507269, class org.uddi.api_v3.Name=java.lang.ref.WeakReference@19877096, class org.uddi.api_v3.SaveBusiness=java.lang.ref.WeakReference@af094f2, class org.apache.juddi.api_v3.Publisher=java.lang.ref.WeakReference@38c2a17a, class org.uddi.api_v3.Description=java.lang.ref.WeakReference@71f76db2, class org.apache.juddi.api_v3.SavePublisher=java.lang.ref.WeakReference@2b42fb92, class java.util.ArrayList=java.lang.ref.WeakReference@3a92446e, class org.uddi.api_v3.GetAuthToken=java.lang.ref.WeakReference@58caafcc, class org.uddi.api_v3.SaveService=java.lang.ref.WeakReference@62dba79e, class org.uddi.api_v3.BindingTemplate=java.lang.ref.WeakReference@42d9a8c6, class org.uddi.api_v3.AccessPoint=java.lang.ref.WeakReference@5fd78173, class org.uddi.api_v3.BusinessService=java.lang.ref.WeakReference@3d73d62d, class org.uddi.api_v3.BusinessEntity=java.lang.ref.WeakReference@7ff243df}]) but failed to remove it when the web application was stopped. To prevent a memory leak, the ThreadLocal has been forcibly removed.
+03-mar-2014 13:23:15 org.apache.coyote.http11.Http11Protocol destroy
+INFO: Parando Coyote HTTP/1.1 en puerto http-8081
