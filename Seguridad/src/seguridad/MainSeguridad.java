@@ -38,8 +38,8 @@ import org.bouncycastle.x509.X509V3CertificateGenerator;
  */
 public class MainSeguridad {
 
-	RSAPublicKeySpec pub;
-	RSAPrivateKeySpec priv;
+	static RSAPublicKeySpec pub;
+	static RSAPrivateKeySpec priv;
 	//String clientes
 	/**
 	 * Debera llamarse desde el inicio de gestion para que inicie una
@@ -49,14 +49,13 @@ public class MainSeguridad {
 		// TODO Auto-generated constructor stub
 		generateKeys(nombreUsuario);	
 	}
+	
+	public static void main(String[] args) {
+		generateKeys("yo");	
+	}
 
 	//Devolvera false, si ha petado o ya existian las claves
-	public boolean generateKeys(String nombreUsuario) {
-		
-		if(pub!=null) //CUIDADO! HAY QUE HACERLO PARA VARIOS CLIENTES
-		{
-			return false;
-		}
+	public static boolean generateKeys(String nombreUsuario) {
 		
 		KeyPairGenerator kpg;
 		try {
@@ -104,7 +103,7 @@ public class MainSeguridad {
 		return false;
 	}
 
-	public X509Certificate generateCertificate(KeyPair keyPair) {
+	public static X509Certificate generateCertificate(KeyPair keyPair) {
 		Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 		X509V3CertificateGenerator cert = new X509V3CertificateGenerator();
 		cert.setSerialNumber(BigInteger.valueOf(1)); // or generate a random
