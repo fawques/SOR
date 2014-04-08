@@ -955,11 +955,12 @@ public class MainTaller extends Application {
 
 	}
 
-	public static void anyadirRol(String nombre, String contrasenya, String rol) {
+	public static Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
 		try {
 			bd=new InterfazBD("sor_taller");
-			bd.anyadirRol(nombre,contrasenya,rol);
+			Boolean estarRol= bd.anyadirRolUsuario(nombre,contrasenya,rol);
 			bd.close();
+			return estarRol;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -968,7 +969,7 @@ public class MainTaller extends Application {
 			e.printStackTrace();
 		}
 		
-		
+		return false;
 		
 	}
 
@@ -987,6 +988,22 @@ public class MainTaller extends Application {
 		}
 		
 		return false;
+	}
+	public static void anyadirRol(String nombre, ArrayList<Integer> listaOpciones) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			bd.anyadirRol(nombre,listaOpciones);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 }

@@ -937,10 +937,33 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
     	return result;
     }
 
-	public void anyadirRol(String nombre, String contrasenya, String rol) {
-        conexion.ejecutarInsert("Insert into usuarios(nombre,contrasenya,rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol + "')");
+	public Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+		ArrayList<Integer> listaOpciones=getRolLista(rol);
+		if(listaOpciones==null){return false;}
+        conexion.ejecutarInsert("Insert into usuarios(nombre,contrasenya,rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol +"', '"+ listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) + "')");
 
-		
+		return true;
+	}
+
+	private ArrayList<Integer> getRolLista(String rol) {
+	      
+	       ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
+	       ResultSet  opciones=  conexion.ejecutarSQLSelect("SELECT * from roles where rol='" + rol + "';");
+	      try {
+			if(opciones.first()){
+
+				for(int i=2;i<=10;i++){
+					listaOpciones.add(opciones.getInt(i));
+				}
+				return listaOpciones;
+				}
+				
+			  
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	       return null;
 	}
 
 	public Boolean comprobarInicio(String usuario, String contrasenya) {
@@ -975,6 +998,13 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+	}
+
+	public void anyadirRol(String nombre,ArrayList<Integer> listaOpciones) {
+        conexion.ejecutarInsert("Insert into roles(rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol) values ('" + nombre + "', '" + listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"')");
+       
+
+		
 	}
 
 	

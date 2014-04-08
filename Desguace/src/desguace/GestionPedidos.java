@@ -752,8 +752,8 @@ public class GestionPedidos implements Initializable {
         tdCont.showStage();
     }
  public void nuevoUsuario(){
-    	DesguaceJava.anyadirRol("pepe", "12", "empleado");
-    	DesguaceJava.anyadirRol("pio", "11", "Entrenador_pokemon");
+    	DesguaceJava.anyadirRolUsuario("pepe", "12", "empleado");
+    	DesguaceJava.anyadirRolUsuario("pio", "11", "Entrenador_pokemon");
 
     }
             

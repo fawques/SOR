@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -526,8 +527,9 @@ public class GestionPedidosController implements Initializable {
     	
     }
     public void nuevoUsuario(){
-    	
-    	MainTaller.anyadirRol("pepe", "12", "empleado");
-    	MainTaller.anyadirRol("pio", "11", "Entrenador_pokemon");
+    	MainTaller.anyadirRol("empleado", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1)));
+    	MainTaller.anyadirRolUsuario("pepe", "12", "empleado");
+    	MainTaller.anyadirRol("Entrenador_pokemon", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1)));
+    	MainTaller.anyadirRolUsuario("pio", "11", "Entrenador_pokemon");
     }
 }

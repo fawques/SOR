@@ -805,10 +805,11 @@ public class DesguaceJava extends Application {
 			return false;
 		}
 
-		public static void anyadirRol(String nombre, String contrasenya, String rol) {
+		public static void anyadirRolUsuario(String nombre, String contrasenya, String rol) {
 			try {
-				bd=new InterfazBD("sor_desguace");
-				bd.anyadirRol(nombre,contrasenya,rol);
+				
+				bd=new InterfazBD("sor_desguace");				
+				bd.anyadirRolUsuario(nombre,contrasenya,rol);
 				bd.close();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
