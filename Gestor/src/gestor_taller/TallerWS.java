@@ -56,6 +56,39 @@ public class TallerWS {
 	InterfazBD bd;
 	ArrayList<String> listaIdTaller;
 	ArrayList<SecretKey> listaSecretKeys;
+	
+
+	private SecretKey getKey(String idTaller) {
+		int index = listaIdTaller.indexOf(idTaller);
+		if (index > 0) {
+			SecretKey key = listaSecretKeys.get(index);
+			return key;
+		} else {
+			return null;
+		}
+
+	}
+	
+	private void removeKey(String idTaller) {
+		int index = listaIdTaller.indexOf(idTaller);
+		if (index > 0) {
+			listaSecretKeys.remove(index);
+			listaIdTaller.remove(index);
+		} else {
+			System.err.println("ERROR - idTaller no está en la lista de claves de Reto");
+		}
+	}
+	
+	private void enviarPedidoActivemq(String nombreCola, PedidoCorto pedido)
+			throws JMSException {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+				.create();
+		Gestor_activemq activemq = new Gestor_activemq();
+		activemq.create_Producer(nombreCola);
+		String pedidoFinal = gson.toJson(pedido);
+		activemq.producer.produceMessage(pedidoFinal);
+		activemq.producer.closeProduce();
+	}
 
 	public boolean modificar(@WebParam(name = "id") String id,
 			@WebParam(name = "name") String name,
@@ -79,6 +112,7 @@ public class TallerWS {
 						Integer.parseInt(TripleDes.decrypt(key, telephone)),
 						EstadoGeneral.ACTIVE);
 				bd.close();
+				removeKey(id);
 				return res;
 			} else {
 				System.err.println("secretKey = NULL!");
@@ -150,16 +184,7 @@ public class TallerWS {
 		return ""; // devolvemos el estado pendiente, por defecto
 	}
 
-	private void enviarPedidoActivemq(String nombreCola, PedidoCorto pedido)
-			throws JMSException {
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-				.create();
-		Gestor_activemq activemq = new Gestor_activemq();
-		activemq.create_Producer(nombreCola);
-		String pedidoFinal = gson.toJson(pedido);
-		activemq.producer.produceMessage(pedidoFinal);
-		activemq.producer.closeProduce();
-	}
+	
 
 	/**
 	 * Web service operation
@@ -207,17 +232,6 @@ public class TallerWS {
 		}
 
 		return "";
-	}
-
-	private SecretKey getKey(String idTaller) {
-		int index = listaIdTaller.indexOf(idTaller);
-		if (index > 0) {
-			SecretKey key = listaSecretKeys.get(index);
-			return key;
-		} else {
-			return null;
-		}
-
 	}
 
 	/**
