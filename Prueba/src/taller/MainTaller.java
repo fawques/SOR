@@ -1006,4 +1006,74 @@ public class MainTaller extends Application {
 		
 	}
 
+	public static void cambiarUsuario(String nombreUsuario,ArrayList<Integer> listaOpciones) {	
+		try {
+			bd=new InterfazBD("sor_taller");
+			bd.cambiarUsuario(nombreUsuario,listaOpciones);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+
+	public static void cambiarRol(String nombreRol,
+			ArrayList<Integer> listaOpciones) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			bd.cambiarRol(nombreRol,listaOpciones);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public static ArrayList<String> getUsuarios() {
+		ArrayList<String> listausuarios=new ArrayList<String>();
+		try {
+			bd=new InterfazBD("sor_taller");
+			listausuarios=bd.getUsuarios();
+			bd.close();
+			return listausuarios;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static ArrayList<String> getRoles() {
+		ArrayList<String> listausuarios=new ArrayList<String>();
+		try {
+			bd=new InterfazBD("sor_taller");
+			listausuarios=bd.getRoles();
+			bd.close();
+			return listausuarios;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

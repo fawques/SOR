@@ -19,6 +19,7 @@ import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
 
+import java.awt.CheckboxMenuItem;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -38,6 +39,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -59,6 +62,8 @@ public class GestionPedidosController implements Initializable {
     ObservableList<TablaPedidos> olTablaPedidos = FXCollections.observableArrayList();
     ObservableList<TablaPedidos> olTablaPedidosOfertas = FXCollections.observableArrayList();
     ObservableList<TablaAcciones> olTablaAcciones = FXCollections.observableArrayList();
+    ObservableList<String> listaUsuarios = FXCollections.observableArrayList();
+    ObservableList<String> listaRoles = FXCollections.observableArrayList();
     @FXML
     Button btNuevoPedido;
 
@@ -194,6 +199,21 @@ public class GestionPedidosController implements Initializable {
      */
     public TableView tbPedidosOfertas;
     public TablaPedidos tp;
+    public CheckBox cbNuevoPedido;
+    public CheckBox cbBorrarPedido;
+    public CheckBox cbModificarPedido;
+    public CheckBox cbModificarDatos;
+    public CheckBox cbDarseDeBaja;
+    public CheckBox cbAceptarOfertas;
+    public CheckBox cbRechazarOfertas;
+    public CheckBox cbNuevoUsuario;
+    public CheckBox cbCambiarUsuario;
+    public CheckBox cbCambiarRol;
+    public CheckBox cbNuevoRol;
+    public ComboBox cbRol;
+    public ComboBox cbUsuarios;
+
+    
     
     /**
      * Initializes the controller class.
@@ -526,10 +546,62 @@ public class GestionPedidosController implements Initializable {
         
     	
     }
+    public void ActualizarPermisos(){
+    	listaUsuarios.clear();
+    	listaRoles.clear();
+    	ArrayList<String> usuarios= MainTaller.getUsuarios();
+    	ArrayList<String> roles = MainTaller.getRoles();
+    	if(usuarios!=null){
+    		listaUsuarios.addAll(usuarios);
+    		cbUsuarios.setItems(listaUsuarios);
+    	}
+    	if(roles!=null){
+    		listaRoles.addAll(roles);
+        	cbRol.setItems(listaRoles);    		
+    	}
+    	
+    }
     public void nuevoUsuario(){
-    	MainTaller.anyadirRol("empleado", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1)));
+    	MainTaller.anyadirRol("empleado", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
     	MainTaller.anyadirRolUsuario("pepe", "12", "empleado");
-    	MainTaller.anyadirRol("Entrenador_pokemon", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1)));
+    	MainTaller.anyadirRol("Entrenador_pokemon", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
     	MainTaller.anyadirRolUsuario("pio", "11", "Entrenador_pokemon");
     }
+    public void cambioUsuario(){
+    	ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
+    	String nombreUsuario=cbUsuarios.getValue().toString();
+    	if(nombreUsuario!=null){
+    	   listaOpciones.add(cbNuevoPedido.isSelected()?1:0);
+    	    listaOpciones.add(cbBorrarPedido.isSelected()?1:0);
+    	    listaOpciones.add( cbModificarPedido.isSelected()?1:0);
+    	    listaOpciones.add( cbModificarDatos.isSelected()?1:0);
+    	    listaOpciones.add( cbDarseDeBaja.isSelected()?1:0);
+    	    listaOpciones.add( cbAceptarOfertas.isSelected()?1:0);
+    	    listaOpciones.add( cbRechazarOfertas.isSelected()?1:0);
+    	    listaOpciones.add(cbNuevoUsuario.isSelected()?1:0);
+    	    listaOpciones.add(cbNuevoRol.isSelected()?1:0);
+    	    listaOpciones.add(cbCambiarUsuario.isSelected()?1:0);
+    	    listaOpciones.add(cbCambiarRol.isSelected()?1:0);
+    	    MainTaller.cambiarUsuario(nombreUsuario,listaOpciones);
+    	}
+    }
+    public void cambioRol(){
+    	ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
+    	String nombreRol=cbRol.getValue().toString();
+    	if(nombreRol!=null){
+  	   listaOpciones.add(cbNuevoPedido.isSelected()?1:0);
+	    listaOpciones.add(cbBorrarPedido.isSelected()?1:0);
+	    listaOpciones.add( cbModificarPedido.isSelected()?1:0);
+	    listaOpciones.add( cbModificarDatos.isSelected()?1:0);
+	    listaOpciones.add( cbDarseDeBaja.isSelected()?1:0);
+	    listaOpciones.add( cbAceptarOfertas.isSelected()?1:0);
+	    listaOpciones.add( cbRechazarOfertas.isSelected()?1:0);
+	    listaOpciones.add(cbNuevoUsuario.isSelected()?1:0);
+	    listaOpciones.add(cbNuevoRol.isSelected()?1:0);
+	    listaOpciones.add(cbCambiarUsuario.isSelected()?1:0);
+	    listaOpciones.add(cbCambiarRol.isSelected()?1:0);
+    	MainTaller.cambiarRol(nombreRol,listaOpciones);
+    	}
+    }
+    
 }

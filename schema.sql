@@ -105,6 +105,8 @@ CREATE TABLE `roles`(
   `rechazar_ofertas` int(1) NOT NULL DEFAULT '0',
   `nuevo_usuario` int(1) NOT NULL DEFAULT '0',
   `nuevo_rol` int(1) NOT NULL DEFAULT '0',
+  `cambiar_usuario` int(1) NOT NULL DEFAULT '0',
+  `cambiar_rol` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`rol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -121,6 +123,8 @@ CREATE TABLE `usuarios` (
   `rechazar_ofertas` int(1) NOT NULL DEFAULT '0',
   `nuevo_usuario` int(1) NOT NULL DEFAULT '0',
   `nuevo_rol` int(1) NOT NULL DEFAULT '0',
+  `cambiar_usuario` int(1) NOT NULL DEFAULT '0',
+  `cambiar_rol` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nombre`),
   KEY `rol_id` (`rol`),
   CONSTRAINT `rol_usuario` FOREIGN KEY (`rol`) REFERENCES `roles`(`rol`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -169,6 +173,7 @@ CREATE TABLE `oferta` (
   `desguaceNombre` char(32) NOT NULL,
   `fecha_baja` date DEFAULT '1970-01-01',
   `fecha_limite` date NOT NULL,
+
   PRIMARY KEY (`id_aux`),
   KEY `oferta_pedido_FK_idx` (`pedido`),
   KEY `oferta_desguace_FK_idx` (`desguace`),
