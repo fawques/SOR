@@ -1055,5 +1055,38 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
 	        return null;
 	}
 
+	public Boolean comprobarPermisos(String usuario, String funcion) {
+		  int funcionOpcion =0;
+	    ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM usuarios WHERE nombre='" + usuario + "';");
+        try {
+            if (resultados.first()) {
+                 funcionOpcion = resultados.getInt(funcion);
+                 if(funcionOpcion==0){
+                	 	resultados = conexion.ejecutarSQLSelect("SELECT * FROM roles WHERE nombre='" + resultados.getString("rol") + "';");
+                        try {
+                            if (resultados.first()) {
+                            	funcionOpcion = resultados.getInt(funcion);
+                            	if(funcionOpcion==1){
+                            		return true;
+                            	}
+                                
+                            }
+
+                        } catch (SQLException ex) {
+                            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                 }
+                 else{return true;}
+
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+		return false;
+	}
+
 	
 }
