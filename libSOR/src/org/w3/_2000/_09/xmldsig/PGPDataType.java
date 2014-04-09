@@ -43,8 +43,8 @@ import org.w3c.dom.Element;
 public class PGPDataType {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "PGPKeyID", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "PGPKeyPacket", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "PGPKeyPacket", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "PGPKeyID", namespace = "http://www.w3.org/2000/09/xmldsig#", type = JAXBElement.class, required = false)
     })
     @XmlAnyElement(lax = true)
     protected List<Object> pgpKeyIDOrPGPKeyPacketOrAny;
@@ -67,9 +67,9 @@ public class PGPDataType {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link byte[]}{@code >}
+     * {@link JAXBElement }{@code <}{@link byte[]}{@code >}
      * {@link Element }
-     * {@link JAXBElement }{@code <}{@link byte[]}{@code >}
-     * {@link JAXBElement }{@code <}{@link byte[]}{@code >}
      * {@link Object }
      * 
      * 

@@ -65,6 +65,7 @@ import javax.swing.text.LabelView;
 
 
 
+
 /**
  * FXML Controller class
  *
@@ -749,6 +750,11 @@ public class GestionPedidos implements Initializable {
         AltaDesguace tdCont = (AltaDesguace) loader.getController();
         tdCont.setStage(thisStage);
         tdCont.showStage();
+    }
+ public void nuevoUsuario(){
+    	DesguaceJava.anyadirRolUsuario("pepe", "12", "empleado");
+    	DesguaceJava.anyadirRolUsuario("pio", "11", "Entrenador_pokemon");
+
     }
             
 }

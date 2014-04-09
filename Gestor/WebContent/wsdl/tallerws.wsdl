@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="TallerWS" targetNamespace="http://gestor_taller/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gestor_taller/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:types>
-    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
   <import namespace="http://gestor_taller/" schemaLocation="tallerws_schema1.xsd"/>
 </schema>
   </wsdl:types>
-  <wsdl:message name="helloResponse">
-    <wsdl:part name="parameters" element="tns:helloResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="cambiarEstadoPedidoResponse">
     <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="helloResponse">
+    <wsdl:part name="parameters" element="tns:helloResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getPedidos">
     <wsdl:part name="parameters" element="tns:getPedidos">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="checkActivacion">
-    <wsdl:part name="parameters" element="tns:checkActivacion">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="getOfertas">
     <wsdl:part name="parameters" element="tns:getOfertas">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkActivacion">
+    <wsdl:part name="parameters" element="tns:checkActivacion">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="hello">
@@ -41,12 +41,12 @@
     <wsdl:part name="parameters" element="tns:generarClaveRetoResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="alta">
-    <wsdl:part name="parameters" element="tns:alta">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="cancelarPedido">
     <wsdl:part name="parameters" element="tns:cancelarPedido">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="alta">
+    <wsdl:part name="parameters" element="tns:alta">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getOfertasResponse">
@@ -105,12 +105,12 @@
     <wsdl:part name="parameters" element="tns:aceptarOfertaResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="modificar">
-    <wsdl:part name="parameters" element="tns:modificar">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="cancelarPedidoResponse">
     <wsdl:part name="parameters" element="tns:cancelarPedidoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modificar">
+    <wsdl:part name="parameters" element="tns:modificar">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="TallerWS">

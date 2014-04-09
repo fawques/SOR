@@ -999,11 +999,12 @@ namespace desguaceNET.desguaceWS {
         desguaceNET.desguaceWS.checkActivacionResponse desguaceNET.desguaceWS.DesguaceJavaWS.checkActivacion(desguaceNET.desguaceWS.checkActivacion request) {
             return base.Channel.checkActivacion(request);
         }
-        
-        public string checkActivacion(string mail) {
+
+        public string checkActivacion(string contrasenya)
+        {
             desguaceNET.desguaceWS.checkActivacion inValue = new desguaceNET.desguaceWS.checkActivacion();
             inValue.Body = new desguaceNET.desguaceWS.checkActivacionBody();
-            inValue.Body.mail = mail;
+            inValue.Body.mail = contrasenya;
             desguaceNET.desguaceWS.checkActivacionResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).checkActivacion(inValue);
             return retVal.Body.@return;
         }

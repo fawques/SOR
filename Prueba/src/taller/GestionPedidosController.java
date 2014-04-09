@@ -19,10 +19,12 @@ import general.EstadoPedido;
 import general.Oferta;
 import general.Pedido;
 
+import java.awt.CheckboxMenuItem;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -37,6 +39,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -58,12 +62,15 @@ public class GestionPedidosController implements Initializable {
     ObservableList<TablaPedidos> olTablaPedidos = FXCollections.observableArrayList();
     ObservableList<TablaPedidos> olTablaPedidosOfertas = FXCollections.observableArrayList();
     ObservableList<TablaAcciones> olTablaAcciones = FXCollections.observableArrayList();
+    ObservableList<String> listaUsuarios = FXCollections.observableArrayList();
+    ObservableList<String> listaRoles = FXCollections.observableArrayList();
     @FXML
     Button btNuevoPedido;
 
     /**
      *
      */
+   
     public TextField tfIDPedido;
     
     /**
@@ -193,6 +200,24 @@ public class GestionPedidosController implements Initializable {
      */
     public TableView tbPedidosOfertas;
     public TablaPedidos tp;
+    public CheckBox cbNuevoPedido;
+    public CheckBox cbBorrarPedido;
+    public CheckBox cbModificarPedido;
+    public CheckBox cbModificarDatos;
+    public CheckBox cbDarseDeBaja;
+    public CheckBox cbAceptarOfertas;
+    public CheckBox cbRechazarOfertas;
+    public CheckBox cbNuevoUsuario;
+    public CheckBox cbCambiarUsuario;
+    public CheckBox cbCambiarRol;
+    public CheckBox cbNuevoRol;
+    public ComboBox cbRol;
+    public ComboBox cbUsuarios;
+    public TextField tfNombreUsuario;
+    public TextField tfContrasenya;
+    public ComboBox cbTipo;
+    public TextField tfNuevoRol;
+    
     
     /**
      * Initializes the controller class.
@@ -227,11 +252,12 @@ public class GestionPedidosController implements Initializable {
 
         ofertas = MainTaller.actualizarOfertas();
         TablaOfertas tpOf;
-        for (Oferta of : ofertas) {
-            tpOf = new TablaOfertas(of);
-            olTablaOfertas.add(tpOf);
+        if(ofertas!=null){
+	        for (Oferta of : ofertas) {
+	            tpOf = new TablaOfertas(of);
+	            olTablaOfertas.add(tpOf);
+	        }
         }
-
         tbOfertas.setEditable(true);
         tbOfertas.setItems(olTablaOfertas);
         tbOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol,desguaceNombreCol, fecha_bajaCol, fecha_limiteCol);
@@ -524,5 +550,98 @@ public class GestionPedidosController implements Initializable {
 		}
         
     	
+    }
+    public void ActualizarUsuariosPestanya(){
+    	listaRoles.clear();
+    	ArrayList<String> roles = MainTaller.getRoles();
+    	if(roles!=null){
+    		listaRoles.addAll(roles);
+        	cbTipo.setItems(listaRoles);    		
+    	}
+    }
+    public void ActualizarPermisos(){
+    	listaUsuarios.clear();
+    	listaRoles.clear();
+    	ArrayList<String> usuarios= MainTaller.getUsuarios();
+    	ArrayList<String> roles = MainTaller.getRoles();
+    	if(usuarios!=null){
+    		listaUsuarios.addAll(usuarios);
+    		cbUsuarios.setItems(listaUsuarios);
+    	}
+    	if(roles!=null){
+    		listaRoles.addAll(roles);
+        	cbRol.setItems(listaRoles);    		
+    	}
+    	
+    }
+    public void nuevoUsuario(){
+    	String usuario= tfNombreUsuario.getText();
+    	String contrasenya=tfContrasenya.getText();
+    	String rol=cbTipo.getValue().toString();
+    	if(!"".equals(usuario) && !"".equals(contrasenya)&& !"".equals(rol)){
+    		MainTaller.anyadirRolUsuario(usuario,contrasenya, rol);
+    	}
+
+    }
+    public void nuevoRol(){
+    	String rol=tfNuevoRol.getText();
+    	if(!"".equals(rol)){
+    		MainTaller.anyadirRol(rol, new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
+    	}
+    	ActualizarUsuariosPestanya();
+    }
+    public void cambioUsuario() throws IOException{
+    	ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
+    	String nombreUsuario=cbUsuarios.getValue().toString();
+    	if(nombreUsuario!=null){
+    	   listaOpciones.add(cbNuevoPedido.isSelected()?1:0);
+    	    listaOpciones.add(cbBorrarPedido.isSelected()?1:0);
+    	    listaOpciones.add( cbModificarPedido.isSelected()?1:0);
+    	    listaOpciones.add( cbModificarDatos.isSelected()?1:0);
+    	    listaOpciones.add( cbDarseDeBaja.isSelected()?1:0);
+    	    listaOpciones.add( cbAceptarOfertas.isSelected()?1:0);
+    	    listaOpciones.add( cbRechazarOfertas.isSelected()?1:0);
+    	    listaOpciones.add(cbNuevoUsuario.isSelected()?1:0);
+    	    listaOpciones.add(cbNuevoRol.isSelected()?1:0);
+    	    listaOpciones.add(cbCambiarUsuario.isSelected()?1:0);
+    	    listaOpciones.add(cbCambiarRol.isSelected()?1:0);
+    	    try {
+				MainTaller.cambiarUsuario(nombreUsuario,listaOpciones);
+			} catch (Exception e) {
+				lanzarErrorPermisos(e.getMessage());
+
+			}
+    	}
+    }
+    public void cambioRol(){
+    	ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
+    	String nombreRol=cbRol.getValue().toString();
+    	if(nombreRol!=null){
+  	   listaOpciones.add(cbNuevoPedido.isSelected()?1:0);
+	    listaOpciones.add(cbBorrarPedido.isSelected()?1:0);
+	    listaOpciones.add( cbModificarPedido.isSelected()?1:0);
+	    listaOpciones.add( cbModificarDatos.isSelected()?1:0);
+	    listaOpciones.add( cbDarseDeBaja.isSelected()?1:0);
+	    listaOpciones.add( cbAceptarOfertas.isSelected()?1:0);
+	    listaOpciones.add( cbRechazarOfertas.isSelected()?1:0);
+	    listaOpciones.add(cbNuevoUsuario.isSelected()?1:0);
+	    listaOpciones.add(cbNuevoRol.isSelected()?1:0);
+	    listaOpciones.add(cbCambiarUsuario.isSelected()?1:0);
+	    listaOpciones.add(cbCambiarRol.isSelected()?1:0);
+    	MainTaller.cambiarRol(nombreRol,listaOpciones);
+    	}
+    }
+    public void lanzarErrorPermisos(String error) throws IOException{
+		URL location = getClass().getResource("permisosError.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page;
+		page = (Parent) loader.load(location.openStream());
+		thisStage.getScene().setRoot(page);
+        PermisosError tdCont = (PermisosError) loader.getController();
+        tdCont.setStage(thisStage);
+        tdCont.setError(error);
+        tdCont.showStage();
     }
 }

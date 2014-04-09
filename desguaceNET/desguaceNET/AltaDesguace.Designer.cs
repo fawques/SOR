@@ -42,6 +42,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btCancelar = new System.Windows.Forms.Button();
             this.btAceptar = new System.Windows.Forms.Button();
+            this.tbContrasenya = new System.Windows.Forms.TextBox();
+            this.Contraseña = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbNombreDesguace
@@ -160,11 +162,29 @@
             this.btAceptar.UseVisualStyleBackColor = true;
             this.btAceptar.Click += new System.EventHandler(this.btAceptar_Click);
             // 
+            // tbContrasenya
+            // 
+            this.tbContrasenya.Location = new System.Drawing.Point(143, 293);
+            this.tbContrasenya.Name = "tbContrasenya";
+            this.tbContrasenya.Size = new System.Drawing.Size(199, 20);
+            this.tbContrasenya.TabIndex = 21;
+            // 
+            // Contraseña
+            // 
+            this.Contraseña.AutoSize = true;
+            this.Contraseña.Location = new System.Drawing.Point(39, 293);
+            this.Contraseña.Name = "Contraseña";
+            this.Contraseña.Size = new System.Drawing.Size(35, 13);
+            this.Contraseña.TabIndex = 22;
+            this.Contraseña.Text = "label6";
+            // 
             // AltaDesguace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(385, 441);
+            this.Controls.Add(this.Contraseña);
+            this.Controls.Add(this.tbContrasenya);
             this.Controls.Add(this.btAceptar);
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.tbTelefono);
@@ -202,6 +222,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btCancelar;
         private System.Windows.Forms.Button btAceptar;
+        private System.Windows.Forms.TextBox tbContrasenya;
+        private System.Windows.Forms.Label Contraseña;
     }
 }
 

@@ -41,7 +41,6 @@ import javax.jws.WebService;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.digest.DigestUtils;
-
 import org.apache.commons.codec.binary.Base64;
 
 import seguridad.TripleDes;
@@ -60,7 +59,7 @@ public class TallerWS {
 
 	static private SecretKey getKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
-		if (index > 0) {
+		if (index != -1) {
 			SecretKey key = listaSecretKeys.get(index);
 			return key;
 		} else {
@@ -71,11 +70,11 @@ public class TallerWS {
 	
 	static public void removeKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
-		if (index > 0) {
+		if (index != -1) {
 			listaSecretKeys.remove(index);
 			listaIdTaller.remove(index);
 		} else {
-			System.err.println("ERROR - idTaller no está en la lista de claves de Reto");
+			System.err.println("ERROR - idTaller no esta en la lista de claves de Reto");
 		}
 	}
 	
@@ -91,6 +90,7 @@ public class TallerWS {
 	}
 
 	public boolean modificar(@WebParam(name = "id") String id,
+			@WebParam(name = "password") String password,
 			@WebParam(name = "name") String name,
 			@WebParam(name = "email") String email,
 			@WebParam(name = "address") String address,
@@ -127,31 +127,43 @@ public class TallerWS {
 		return false;
 	}
 
-	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller) {
+	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		// Generamos la clave de reto y se la mandamos al cliente
-		if (bd.getTallerEnGestor(idTaller) != null) {
-			try {
-				SecretKey clave = TripleDes.generateKey();
+		try {
+			bd=new InterfazBD("sor_taller");
+			if (bd.getTallerEnGestor(idTaller) != null) {
+				try {
+					SecretKey clave = TripleDes.generateKey();
 
-				if (listaIdTaller.indexOf(idTaller) != -1) {
-					// borramos el anterior
-					listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
-					listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+					if (listaIdTaller.indexOf(idTaller) != -1) {
+						// borramos el anterior
+						listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
+						listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+					}
+					// anyadir nuevo
+					listaIdTaller.add(idTaller);
+					listaSecretKeys.add(clave);
+					Base64 b64 = new Base64();
+					bd.close();
+					return b64.encodeToString(clave.getEncoded());
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				// anyadir nuevo
-				listaIdTaller.add(idTaller);
-				listaSecretKeys.add(clave);
-				Base64 b64 = new Base64();
-
-				return b64.encodeToString(clave.getEncoded());
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				bd.close();
+			} else {
+				System.err
+						.println("id taller incorrecto. Clave de reto no generada");
 			}
-		} else {
-			System.err
-					.println("id taller incorrecto. Clave de reto no generada");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		
+		bd.close();
 		return null;
 	}
 
@@ -162,12 +174,12 @@ public class TallerWS {
 	 */
 	// REMODELACION PARA QUE HAYA UNA ESPECIE DE LOGIN
 	@WebMethod(operationName = "checkActivacion")
-	public String checkActivacion(@WebParam(name = "mail") String email) {
+    public String checkActivacion(@WebParam(name = "mail") String contrasenya)    {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			Taller taller = bd.getTaller(email);
+            Taller taller = bd.getTallerActivar(contrasenya);
 			String res;
-			if (taller.getEstado() == EstadoGeneral.ACTIVE) {
+            if (taller!=null) {
 				res = taller.getID();
 			} else {
 				res = "";
@@ -184,14 +196,28 @@ public class TallerWS {
 		return ""; // devolvemos el estado pendiente, por defecto
 	}
 
-	
+	private boolean comprobarPass(String idTaller, String pass){
+		try {
+			bd = new InterfazBD("sor_gestor");
+			Taller t = bd.getTallerEnGestor(idTaller);
+			bd.close();
+			if(t!=null){
+				if(t.getPassword().equals(pass))
+					return true;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	/**
 	 * Web service operation
 	 */
 	@WebMethod(operationName = "nuevoPedido")
 	public String nuevoPedido(@WebParam(name = "pedido") String pedido,
-			@WebParam(name = "idTaller") String idTaller) throws JMSException {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) throws JMSException {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			Gson gson = new GsonBuilder()
@@ -240,7 +266,7 @@ public class TallerWS {
 	@WebMethod(operationName = "getOfertas")
 	public String getOfertas(
 			@WebParam(name = "listaPedidos") String listaPedidos,
-			@WebParam(name = "idTaller") String idTaller) {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		Type collectionType = new TypeToken<ArrayList<Pedido>>() {
 		}.getType();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -280,7 +306,7 @@ public class TallerWS {
 	 */
 	@WebMethod(operationName = "aceptarOferta")
 	public Boolean aceptarOferta(@WebParam(name = "ID") String ID,
-			@WebParam(name = "idTaller") String idTaller) {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
@@ -307,7 +333,7 @@ public class TallerWS {
 	 */
 	@WebMethod(operationName = "rechazarOferta")
 	public Boolean rechazarOferta(@WebParam(name = "ID") String ID,
-			@WebParam(name = "idTaller") String idTaller) {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
 
@@ -339,7 +365,7 @@ public class TallerWS {
 	}
 
 	@WebMethod(operationName = "baja")
-	public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID) {
+	public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			boolean oool = bd.bajaTaller(tallerID);
@@ -387,7 +413,7 @@ public class TallerWS {
 
 	@WebMethod(operationName = "cancelarPedido")
 	public Boolean cancelarPedido(@WebParam(name = "idPedido") String idPedido,
-			@WebParam(name = "idTaller") String idTaller) {
+			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
 
@@ -395,8 +421,7 @@ public class TallerWS {
 			if (key != null) {
 				boolean oool = bd.cancelarPedido(TripleDes.decrypt(key,
 						idPedido));
-				cambiarEstadoPedido(EstadoPedido.CANCELLED.ordinal(), idPedido,
-						idTaller);
+				cambiarEstadoPedido(idTaller,password,EstadoPedido.CANCELLED.ordinal(), idPedido);
 				bd.close();
 				return oool;
 			} else {
@@ -416,9 +441,9 @@ public class TallerWS {
 	 * Web service operation
 	 */
 	@WebMethod(operationName = "cambiarEstadoPedido")
-	public Boolean cambiarEstadoPedido(@WebParam(name = "estado") int estado,
-			@WebParam(name = "id") String id,
-			@WebParam(name = "idTaller") String idTaller) {
+	public Boolean cambiarEstadoPedido(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password,@WebParam(name = "estado") int estado,
+			@WebParam(name = "id") String id
+			) {
 		try {
 			SecretKey key = getKey(idTaller);
 			if (key != null) {
@@ -456,7 +481,7 @@ public class TallerWS {
 	 * Web service operation
 	 */
 	@WebMethod(operationName = "getPedidos")
-	public String getPedidos(@WebParam(name = "id") String id) {
+	public String getPedidos(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 				.create();
 		// Dec 7, 2013 5:46:35 PM
@@ -464,7 +489,7 @@ public class TallerWS {
 		ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
 		try {
 			bd = new InterfazBD("sor_gestor");
-			listaPedidos = bd.getPedidosTaller(id);
+			listaPedidos = bd.getPedidosTaller(idTaller);
 			for (Pedido p : listaPedidos) {
 				if (p.getEstado() == EstadoPedido.FINISHED_OK) {
 					ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p

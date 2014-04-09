@@ -7,6 +7,7 @@ package taller;
 
 import Async.AsyncManager;
 import BD.InterfazBD;
+import permisos.permisos;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,13 +53,13 @@ import static webservices.Webservices.*;
 public class MainTaller extends Application {
 
 	static InterfazBD bd;
-
+	static permisos Permisos;
 	/**
      *
      */
 	public static Taller taller;
 	public static Pedido pedidoModificar;
-
+	public static String nombreUsuario;
 	/**
      *
      */
@@ -107,9 +108,9 @@ public class MainTaller extends Application {
 				staticDataBox.showStage();
 			} else if (taller.getEstado() == EstadoGeneral.ACTIVE) { // activo
 				// Cargar GestionPedido
-				FXMLLoader loader = changeScene("GestionPedidos.fxml");
-				stage.setTitle("Taller");
-				GestionPedidosController staticDataBox = (GestionPedidosController) loader
+				FXMLLoader loader = changeScene("inicio.fxml");
+				stage.setTitle("Inicio");
+				inicioController staticDataBox = (inicioController) loader
 						.getController();
 				staticDataBox.setStage(stage);
 				staticDataBox.showStage();
@@ -387,7 +388,7 @@ public class MainTaller extends Application {
 			Type collectionType = new TypeToken<ArrayList<Pedido>>() {
 			}.getType();
 			String pedidosString = getPedidosActivos();
-			String pedidosGestorString = getPedidos_WS(taller.getID());
+			String pedidosGestorString = getPedidos_WS(taller.getID(),taller.getPassword());
 			if (!"".equals(pedidosString) && !"".equals(pedidosGestorString)) {
 				pedidosgestor = gson.fromJson(pedidosGestorString, collectionType);
 				pedidos = gson.fromJson(pedidosString, collectionType);
@@ -416,7 +417,6 @@ public class MainTaller extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 	public static ArrayList<Pedido> buscarPedidos(String idPedido,
@@ -611,7 +611,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				return cambiarEstadoPedido_WS(Integer.parseInt(estado), idPedido, taller.getID());
+				return cambiarEstadoPedido_WS(taller.getID(),taller.getPassword(),Integer.parseInt(estado), idPedido);
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
@@ -672,10 +672,10 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static String checkActivacion(java.lang.String mail) {
+	public static String checkActivacion(java.lang.String contrasenya) {
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = checkActivacion_WS(mail);
+				String ret = checkActivacion_WS(contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -683,7 +683,7 @@ public class MainTaller extends Application {
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
-				return checkActivacion(mail);
+				return checkActivacion(contrasenya);
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
@@ -702,7 +702,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = nuevoPedido_WS(pedido, taller.getID());
+				String ret = nuevoPedido_WS(pedido, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -733,7 +733,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = getOfertas_WS(listaPedidos, taller.getID());
+				String ret = getOfertas_WS(listaPedidos, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -758,7 +758,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = aceptarOferta_WS(id, taller.getID());
+				Boolean ret = aceptarOferta_WS(id, taller.getID(), taller.getPassword());
 				if (ret) {
 
 				}
@@ -792,7 +792,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = rechazarOferta_WS(id, taller.getID());
+				Boolean ret = rechazarOferta_WS(id, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -845,7 +845,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = baja_WS(tallerID);
+				Boolean ret = baja_WS(tallerID, taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -878,7 +878,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = modificar_WS(id, name, email, address, city,
+				Boolean ret = modificar_WS(id, taller.getPassword(), name, email, address, city,
 						postalCode, telephone);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
@@ -912,7 +912,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = cancelarPedido_WS(idPedido, taller.getID());
+				Boolean ret = cancelarPedido_WS(idPedido, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -954,6 +954,129 @@ public class MainTaller extends Application {
 					null, ex);
 		}
 
+	}
+
+	public static Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			Boolean estarRol= bd.anyadirRolUsuario(nombre,contrasenya,rol);
+			bd.close();
+			return estarRol;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+		
+	}
+
+	public static Boolean comprobarInicio(String usuario, String contrasenya) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			Boolean comprobar= bd.comprobarInicio(usuario,contrasenya);
+			bd.close();
+			return comprobar;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	public static void anyadirRol(String nombre, ArrayList<Integer> listaOpciones) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			bd.anyadirRol(nombre,listaOpciones);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
+	public static void cambiarUsuario(String nombre,ArrayList<Integer> listaOpciones) throws Exception {	
+		try {
+			Permisos= new permisos();
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
+			bd=new InterfazBD("sor_taller");
+			bd.cambiarUsuario(nombre,listaOpciones);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+
+	public static void cambiarRol(String nombreRol,
+			ArrayList<Integer> listaOpciones) {
+		try {
+			bd=new InterfazBD("sor_taller");
+			bd.cambiarRol(nombreRol,listaOpciones);
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public static ArrayList<String> getUsuarios() {
+		ArrayList<String> listausuarios=new ArrayList<String>();
+		try {
+			bd=new InterfazBD("sor_taller");
+			listausuarios=bd.getUsuarios();
+			bd.close();
+			return listausuarios;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static ArrayList<String> getRoles() {
+		ArrayList<String> listausuarios=new ArrayList<String>();
+		try {
+			bd=new InterfazBD("sor_taller");
+			listausuarios=bd.getRoles();
+			bd.close();
+			return listausuarios;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

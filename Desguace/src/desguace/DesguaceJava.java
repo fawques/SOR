@@ -74,9 +74,9 @@ public class DesguaceJava extends Application {
 					staticDataBox.showStage();
 				} else if (desguace.getEstado() == EstadoGeneral.ACTIVE) { // activo
 					// Cargar GestionPedido
-					FXMLLoader loader = changeScene("GestionPedidos.fxml");
-					stage.setTitle("Desguace");
-					GestionPedidos staticDataBox = (GestionPedidos) loader
+					FXMLLoader loader = changeScene("inicio.fxml");
+					stage.setTitle("Inicio");
+					inicioController staticDataBox = (inicioController) loader
 							.getController();
 					staticDataBox.setStage(stage);
 					staticDataBox.showStage();
@@ -481,10 +481,10 @@ public class DesguaceJava extends Application {
 		return false;
 	}
 
-	public static String checkActivacion(java.lang.String mail) {
+	public static String checkActivacion(java.lang.String contrasenya) {
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = Webservices.checkActivacion_WS(mail);
+				String ret = Webservices.checkActivacion_WS(contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -492,7 +492,7 @@ public class DesguaceJava extends Application {
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
-				return checkActivacion(mail);
+				return checkActivacion(contrasenya);
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
@@ -787,4 +787,39 @@ public class DesguaceJava extends Application {
 	        manager.guardarAccion(m,params);
 	        return false;
 	    }
+
+		public static Boolean comprobarInicio(String usuario, String contrasenya) {
+			try {
+				bd=new InterfazBD("sor_desguace");
+				Boolean comprobar= bd.comprobarInicio(usuario,contrasenya);
+				bd.close();
+				return comprobar;
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return false;
+		}
+
+		public static void anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+			try {
+				
+				bd=new InterfazBD("sor_desguace");				
+				bd.anyadirRolUsuario(nombre,contrasenya,rol);
+				bd.close();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
 }

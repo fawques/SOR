@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="536.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="taller.PermisosError">
+  <children>
+    <Label fx:id="lbError" alignment="TOP_CENTER" layoutX="14.0" layoutY="130.0" prefWidth="508.0" text="El usuario no tiene acceso " textAlignment="CENTER" textFill="RED" />
+    <Button layoutX="245.0" layoutY="265.0" mnemonicParsing="false" onAction="#irAGestionPedidos" text="Aceptar" />
+  </children>
+</AnchorPane>
