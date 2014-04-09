@@ -59,7 +59,7 @@ public class MainTaller extends Application {
      */
 	public static Taller taller;
 	public static Pedido pedidoModificar;
-
+	public static String nombreUsuario;
 	/**
      *
      */
@@ -1007,12 +1007,12 @@ public class MainTaller extends Application {
 		
 	}
 
-	public static void cambiarUsuario(String nombreUsuario,ArrayList<Integer> listaOpciones) throws Exception {	
+	public static void cambiarUsuario(String nombre,ArrayList<Integer> listaOpciones) throws Exception {	
 		try {
 			Permisos= new permisos();
 			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
 			bd=new InterfazBD("sor_taller");
-			bd.cambiarUsuario(nombreUsuario,listaOpciones);
+			bd.cambiarUsuario(nombre,listaOpciones);
 			bd.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
