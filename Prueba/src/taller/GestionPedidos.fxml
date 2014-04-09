@@ -62,7 +62,22 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button layoutX="77.0" layoutY="71.0" mnemonicParsing="false" onAction="#nuevoUsuario" text="Nuevo usuario" />
+                <Button layoutX="651.0" layoutY="493.0" mnemonicParsing="false" onAction="#nuevoUsuario" text="Nuevo usuario" />
+                <Label layoutX="82.0" layoutY="74.0" text="Nombre" />
+                <TextField id="tfIdPieza" fx:id="tfNombre" layoutX="153.0" layoutY="71.0" prefWidth="126.0" />
+                <Label layoutX="318.0" layoutY="75.0" text="Contraseña" />
+                <TextField id="tfIdPieza" fx:id="tfContrasenya" layoutX="389.0" layoutY="72.0" prefWidth="98.0" />
+                <Label layoutX="529.0" layoutY="74.0" text="Rol" />
+                <ComboBox fx:id="cbTipo" layoutX="586.0" layoutY="75.0" prefHeight="21.0" prefWidth="116.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <TableView fx:id="tvUsuarios" layoutX="79.0" layoutY="140.0" prefHeight="334.0" prefWidth="620.0" />
               </children>
             </AnchorPane>
           </content>
