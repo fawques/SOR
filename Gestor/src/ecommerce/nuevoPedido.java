@@ -128,7 +128,7 @@ public class nuevoPedido extends HttpServlet {
             TallerWS tws = new TallerWS();
             Pedido p = new Pedido("", t.getID_aux(), t.getID(), t.getName(),today, new Date(1970, 1, 1), fechaLimite, EstadoPedido.ACTIVE, "Automatico".equals(request.getParameter("modo")), new ArrayList<Pieza>(), new ArrayList<Integer>(), new ArrayList<Oferta>());
             try {
-                if (!"".equals(tws.nuevoPedido(gson.toJson(p)))) {
+                if (!"".equals(tws.nuevoPedido(gson.toJson(p), ""))) {
                     System.out.println("pedido creado");
                     request.getRequestDispatcher("/gestion.jsp").forward(request, response);
                 }

@@ -56,7 +56,18 @@
         </Tab>
         <Tab id="tabPedidos" text="Opciones">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <VBox alignment="TOP_LEFT" fillWidth="true" layoutX="41.0" layoutY="45.0" pickOnBounds="true" prefHeight="200.0" prefWidth="171.0" spacing="20.0">
+                  <children>
+                    <CheckBox mnemonicParsing="false" text="Habilitar seguridad" />
+                    <CheckBox mnemonicParsing="false" text="Habilitar firma digital" />
+                    <CheckBox mnemonicParsing="false" text="Habilitar asimetrica" />
+                    <CheckBox mnemonicParsing="false" text="Habilitar simetrica" />
+                  </children>
+                </VBox>
+              </children>
+            </AnchorPane>
           </content>
         </Tab>
       </tabs>

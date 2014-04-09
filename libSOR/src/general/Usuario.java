@@ -21,6 +21,7 @@ public abstract class Usuario {
      * id auxiliar para taller o desguace. El valor de error es -1.
      */
     protected int ID_aux;
+    protected String password;
     protected String name;
     protected String email;
     protected String address;
@@ -29,9 +30,10 @@ public abstract class Usuario {
     protected int telephone;
     protected EstadoGeneral estado;
 
-    public Usuario(String ID, int ID_aux, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado) {
+    public Usuario(String ID, int ID_aux, String password, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado) {
         this.ID = ID;
         this.ID_aux = ID_aux;
+        this.password = password;
         this.name = name;
         this.email = email;
         this.address = address;
@@ -55,6 +57,14 @@ public abstract class Usuario {
 
     public void setID_aux(int ID_aux) {
         this.ID_aux = ID_aux;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

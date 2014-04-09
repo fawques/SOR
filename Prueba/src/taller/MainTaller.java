@@ -388,7 +388,7 @@ public class MainTaller extends Application {
 			Type collectionType = new TypeToken<ArrayList<Pedido>>() {
 			}.getType();
 			String pedidosString = getPedidosActivos();
-			String pedidosGestorString = getPedidos_WS(taller.getID());
+			String pedidosGestorString = getPedidos_WS(taller.getID(),taller.getPassword());
 			if (!"".equals(pedidosString) && !"".equals(pedidosGestorString)) {
 				pedidosgestor = gson.fromJson(pedidosGestorString, collectionType);
 				pedidos = gson.fromJson(pedidosString, collectionType);
@@ -417,7 +417,6 @@ public class MainTaller extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 	public static ArrayList<Pedido> buscarPedidos(String idPedido,
@@ -612,7 +611,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				return cambiarEstadoPedido_WS(Integer.parseInt(estado), idPedido);
+				return cambiarEstadoPedido_WS(taller.getID(),taller.getPassword(),Integer.parseInt(estado), idPedido);
 			} catch (javax.xml.ws.WebServiceException e) {
 			}
 		}
@@ -649,6 +648,7 @@ public class MainTaller extends Application {
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -702,7 +702,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = nuevoPedido_WS(pedido);
+				String ret = nuevoPedido_WS(pedido, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -733,7 +733,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = getOfertas_WS(listaPedidos);
+				String ret = getOfertas_WS(listaPedidos, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -758,7 +758,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = aceptarOferta_WS(id);
+				Boolean ret = aceptarOferta_WS(id, taller.getID(), taller.getPassword());
 				if (ret) {
 
 				}
@@ -792,7 +792,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = rechazarOferta_WS(id);
+				Boolean ret = rechazarOferta_WS(id, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -845,7 +845,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = baja_WS(tallerID);
+				Boolean ret = baja_WS(tallerID, taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -878,7 +878,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = modificar_WS(id, name, email, address, city,
+				Boolean ret = modificar_WS(id, taller.getPassword(), name, email, address, city,
 						postalCode, telephone);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
@@ -912,7 +912,7 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = cancelarPedido_WS(idPedido);
+				Boolean ret = cancelarPedido_WS(idPedido, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {

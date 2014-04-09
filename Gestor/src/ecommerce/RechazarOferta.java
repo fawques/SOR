@@ -31,7 +31,7 @@ public class RechazarOferta extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		TallerWS tws = new TallerWS();
-		if(tws.rechazarOferta(request.getParameter("oferta"))){
+		if(tws.rechazarOferta(request.getParameter("oferta"), "")){
 			request.getRequestDispatcher("/seguimiento.jsp").forward(request, response);
 		}
 		else
