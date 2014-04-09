@@ -53,11 +53,11 @@ import seguridad.TripleDes;
 public class TallerWS {
 
 	InterfazBD bd;
-	ArrayList<String> listaIdTaller;
-	ArrayList<SecretKey> listaSecretKeys;
+	static ArrayList<String> listaIdTaller;
+	static ArrayList<SecretKey> listaSecretKeys;
 	
 
-	private SecretKey getKey(String idTaller) {
+	static private SecretKey getKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
 			SecretKey key = listaSecretKeys.get(index);
@@ -68,7 +68,7 @@ public class TallerWS {
 
 	}
 	
-	private void removeKey(String idTaller) {
+	static public void removeKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
 			listaSecretKeys.remove(index);
@@ -127,37 +127,51 @@ public class TallerWS {
 		return false;
 	}
 
-	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
+	public String generarClaveReto(
+			@WebParam(name = "idTaller") String idTaller,
+			@WebParam(name = "password") String password) {
 		// Generamos la clave de reto y se la mandamos al cliente
-		if (bd.getTallerEnGestor(idTaller) != null) {
-			if(comprobarPass(idTaller, password)){
-				try {
-					SecretKey clave = TripleDes.generateKey();
-	
-					if (listaIdTaller.indexOf(idTaller) != -1) {
-						// borramos el anterior
-						listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
-						listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+		try {
+			bd = new InterfazBD("sor_taller");
+			if (bd.getTallerEnGestor(idTaller) != null) {
+				if (comprobarPass(idTaller, password)) {
+					try {
+						SecretKey clave = TripleDes.generateKey();
+						if (listaIdTaller.indexOf(idTaller) != -1) {
+							// borramos el anterior
+							listaSecretKeys.remove(listaIdTaller
+									.indexOf(idTaller));
+							listaIdTaller.remove(listaIdTaller
+									.indexOf(idTaller));
+						}
+						// anyadir nuevo
+						listaIdTaller.add(idTaller);
+						listaSecretKeys.add(clave);
+						Base64 b64 = new Base64();
+						bd.close();
+						return b64.encodeToString(clave.getEncoded());
+					} catch (NoSuchAlgorithmException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					// anyadir nuevo
-					listaIdTaller.add(idTaller);
-					listaSecretKeys.add(clave);
-					Base64 b64 = new Base64();
-	
-					return b64.encodeToString(clave.getEncoded());
-				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					bd.close();
+				} else {
+					System.err
+							.println("idTaller/password incorrecto. Clave de reto no generada");
 				}
-			}
-			else{
+			} else {
 				System.err
-				.println("idTaller/password incorrecto. Clave no generada");
+						.println("idTaller incorrecto. Clave de reto no generada");
 			}
-		} else {
-			System.err
-					.println("id taller incorrecto. Clave de reto no generada");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+
+		bd.close();
 		return null;
 	}
 

@@ -36,11 +36,13 @@ public class inicioController implements Initializable {
 	}
 	public void Entrar() throws IOException{
 		Boolean aceptado=MainTaller.comprobarInicio(tfUsuario.getText(),tfContrasenya.getText());
+		
 		if(aceptado==false){
 		            System.out.println(",pero no he podido updatear");
 		            lbEstado.setStyle("-fx-border-color: red;");
 		            lbEstado.setText("Su usuario o contraseña no son válidos");
 		        } else {
+		        	MainTaller.nombreUsuario=tfUsuario.getText();
 		            URL location = getClass().getResource("GestionPedidos.fxml");
 		            FXMLLoader loader = new FXMLLoader();
 		            loader.setLocation(location);

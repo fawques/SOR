@@ -3,7 +3,9 @@ import java.sql.SQLException;
 
 import BD.InterfazBD;
 public class permisos {
-
+	public permisos(){
+		
+	}
 
 	public Boolean comprobarPermisos(String basedatos,String usuario,String funcion) throws Exception{
 		try {
@@ -12,7 +14,7 @@ public class permisos {
 			bd.close();
 			if(permisos==false){
 				
-				throw ( new Exception("El usuario "+usuario+ "no tiene acceso a la función "+funcion) );
+				throw ( new Exception("El usuario "+usuario+ " no tiene acceso a la función "+funcion) );
 			}
 			return permisos;
 		} catch (ClassNotFoundException e) {

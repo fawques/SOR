@@ -70,6 +70,7 @@ public class GestionPedidosController implements Initializable {
     /**
      *
      */
+   
     public TextField tfIDPedido;
     
     /**
@@ -212,7 +213,10 @@ public class GestionPedidosController implements Initializable {
     public CheckBox cbNuevoRol;
     public ComboBox cbRol;
     public ComboBox cbUsuarios;
-
+    public TextField tfNombreUsuario;
+    public TextField tfContrasenya;
+    public ComboBox cbTipo;
+    public TextField tfNuevoRol;
     
     
     /**
@@ -248,11 +252,12 @@ public class GestionPedidosController implements Initializable {
 
         ofertas = MainTaller.actualizarOfertas();
         TablaOfertas tpOf;
-        for (Oferta of : ofertas) {
-            tpOf = new TablaOfertas(of);
-            olTablaOfertas.add(tpOf);
+        if(ofertas!=null){
+	        for (Oferta of : ofertas) {
+	            tpOf = new TablaOfertas(of);
+	            olTablaOfertas.add(tpOf);
+	        }
         }
-
         tbOfertas.setEditable(true);
         tbOfertas.setItems(olTablaOfertas);
         tbOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol,desguaceNombreCol, fecha_bajaCol, fecha_limiteCol);
@@ -546,6 +551,14 @@ public class GestionPedidosController implements Initializable {
         
     	
     }
+    public void ActualizarUsuariosPestanya(){
+    	listaRoles.clear();
+    	ArrayList<String> roles = MainTaller.getRoles();
+    	if(roles!=null){
+    		listaRoles.addAll(roles);
+        	cbTipo.setItems(listaRoles);    		
+    	}
+    }
     public void ActualizarPermisos(){
     	listaUsuarios.clear();
     	listaRoles.clear();
@@ -562,12 +575,22 @@ public class GestionPedidosController implements Initializable {
     	
     }
     public void nuevoUsuario(){
-    	MainTaller.anyadirRol("empleado", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
-    	MainTaller.anyadirRolUsuario("pepe", "12", "empleado");
-    	MainTaller.anyadirRol("Entrenador_pokemon", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
-    	MainTaller.anyadirRolUsuario("pio", "11", "Entrenador_pokemon");
+    	String usuario= tfNombreUsuario.getText();
+    	String contrasenya=tfContrasenya.getText();
+    	String rol=cbTipo.getValue().toString();
+    	if(!"".equals(usuario) && !"".equals(contrasenya)&& !"".equals(rol)){
+    		MainTaller.anyadirRolUsuario(usuario,contrasenya, rol);
+    	}
+
     }
-    public void cambioUsuario(){
+    public void nuevoRol(){
+    	String rol=tfNuevoRol.getText();
+    	if(!"".equals(rol)){
+    		MainTaller.anyadirRol(rol, new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
+    	}
+    	ActualizarUsuariosPestanya();
+    }
+    public void cambioUsuario() throws IOException{
     	ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
     	String nombreUsuario=cbUsuarios.getValue().toString();
     	if(nombreUsuario!=null){
@@ -582,7 +605,12 @@ public class GestionPedidosController implements Initializable {
     	    listaOpciones.add(cbNuevoRol.isSelected()?1:0);
     	    listaOpciones.add(cbCambiarUsuario.isSelected()?1:0);
     	    listaOpciones.add(cbCambiarRol.isSelected()?1:0);
-    	    MainTaller.cambiarUsuario(nombreUsuario,listaOpciones);
+    	    try {
+				MainTaller.cambiarUsuario(nombreUsuario,listaOpciones);
+			} catch (Exception e) {
+				lanzarErrorPermisos(e.getMessage());
+
+			}
     	}
     }
     public void cambioRol(){
@@ -603,5 +631,17 @@ public class GestionPedidosController implements Initializable {
     	MainTaller.cambiarRol(nombreRol,listaOpciones);
     	}
     }
-    
+    public void lanzarErrorPermisos(String error) throws IOException{
+		URL location = getClass().getResource("permisosError.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page;
+		page = (Parent) loader.load(location.openStream());
+		thisStage.getScene().setRoot(page);
+        PermisosError tdCont = (PermisosError) loader.getController();
+        tdCont.setStage(thisStage);
+        tdCont.setError(error);
+        tdCont.showStage();
+    }
 }

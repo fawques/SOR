@@ -58,11 +58,29 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab text="Usuarios">
+        <Tab onSelectionChanged="#ActualizarUsuariosPestanya" text="Usuarios">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button layoutX="77.0" layoutY="71.0" mnemonicParsing="false" onAction="#nuevoUsuario" text="Nuevo usuario" />
+                <Button layoutX="669.0" layoutY="34.0" mnemonicParsing="false" onAction="#nuevoUsuario" text="Nuevo usuario" />
+                <Label layoutX="21.0" layoutY="36.0" text="Nombre" />
+                <TextField id="tfIdPieza" fx:id="tfNombreUsuario" layoutX="92.0" layoutY="33.0" prefWidth="126.0" />
+                <Label layoutX="257.0" layoutY="37.0" text="Contraseña" />
+                <TextField id="tfIdPieza" fx:id="tfContrasenya" layoutX="328.0" layoutY="34.0" prefWidth="98.0" />
+                <Label layoutX="468.0" layoutY="37.0" text="Rol" />
+                <ComboBox fx:id="cbTipo" layoutX="525.0" layoutY="34.0" prefHeight="21.0" prefWidth="116.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <TableView fx:id="tvUsuarios" layoutX="80.0" layoutY="159.0" prefHeight="334.0" prefWidth="620.0" />
+                <Label layoutX="21.0" layoutY="87.0" text="Nombre rol" />
+                <TextField fx:id="tfNuevoRol" layoutX="92.0" layoutY="81.0" prefWidth="126.0" />
+                <Button layoutX="257.0" layoutY="79.0" mnemonicParsing="false" onAction="#nuevoRol" text="Nuevo rol" />
               </children>
             </AnchorPane>
           </content>
