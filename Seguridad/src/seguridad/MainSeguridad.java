@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.security.cert.Certificate;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
@@ -51,7 +53,22 @@ public class MainSeguridad {
 	}
 	
 	public static void main(String[] args) {
-		generateKeys("yo");	
+		generateKeys("yo");		
+		String ip = "localhost";
+            try {
+				ip = Inet4Address.getLocalHost().getHostAddress();
+			} catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+       String[] args1 = {ip+":8443"};
+
+		try {
+			InstallCert.main(args1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	//Devolvera false, si ha petado o ya existian las claves
