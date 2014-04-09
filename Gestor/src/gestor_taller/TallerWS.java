@@ -130,23 +130,29 @@ public class TallerWS {
 	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		// Generamos la clave de reto y se la mandamos al cliente
 		if (bd.getTallerEnGestor(idTaller) != null) {
-			try {
-				SecretKey clave = TripleDes.generateKey();
-
-				if (listaIdTaller.indexOf(idTaller) != -1) {
-					// borramos el anterior
-					listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
-					listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+			if(comprobarPass(idTaller, password)){
+				try {
+					SecretKey clave = TripleDes.generateKey();
+	
+					if (listaIdTaller.indexOf(idTaller) != -1) {
+						// borramos el anterior
+						listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
+						listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+					}
+					// anyadir nuevo
+					listaIdTaller.add(idTaller);
+					listaSecretKeys.add(clave);
+					Base64 b64 = new Base64();
+	
+					return b64.encodeToString(clave.getEncoded());
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				// anyadir nuevo
-				listaIdTaller.add(idTaller);
-				listaSecretKeys.add(clave);
-				Base64 b64 = new Base64();
-
-				return b64.encodeToString(clave.getEncoded());
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}
+			else{
+				System.err
+				.println("idTaller/password incorrecto. Clave no generada");
 			}
 		} else {
 			System.err
