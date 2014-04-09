@@ -41,7 +41,6 @@ import javax.jws.WebService;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.digest.DigestUtils;
-
 import org.apache.commons.codec.binary.Base64;
 
 import seguridad.TripleDes;
@@ -185,7 +184,21 @@ public class TallerWS {
 		return ""; // devolvemos el estado pendiente, por defecto
 	}
 
-	
+	private boolean comprobarPass(String idTaller, String pass){
+		try {
+			bd = new InterfazBD("sor_gestor");
+			Taller t = bd.getTallerEnGestor(idTaller);
+			bd.close();
+			if(t!=null){
+				if(t.getPassword().equals(pass))
+					return true;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	/**
 	 * Web service operation
