@@ -70,6 +70,7 @@ public class GestionPedidosController implements Initializable {
     /**
      *
      */
+   
     public TextField tfIDPedido;
     
     /**
@@ -212,7 +213,10 @@ public class GestionPedidosController implements Initializable {
     public CheckBox cbNuevoRol;
     public ComboBox cbRol;
     public ComboBox cbUsuarios;
-
+    public TextField tfNombreUsuario;
+    public TextField tfContrasenya;
+    public ComboBox cbTipo;
+    public TextField tfNuevoRol;
     
     
     /**
@@ -547,6 +551,14 @@ public class GestionPedidosController implements Initializable {
         
     	
     }
+    public void ActualizarUsuariosPestanya(){
+    	listaRoles.clear();
+    	ArrayList<String> roles = MainTaller.getRoles();
+    	if(roles!=null){
+    		listaRoles.addAll(roles);
+        	cbTipo.setItems(listaRoles);    		
+    	}
+    }
     public void ActualizarPermisos(){
     	listaUsuarios.clear();
     	listaRoles.clear();
@@ -563,10 +575,20 @@ public class GestionPedidosController implements Initializable {
     	
     }
     public void nuevoUsuario(){
-    	MainTaller.anyadirRol("empleado", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
-    	MainTaller.anyadirRolUsuario("pepe", "12", "empleado");
-    	MainTaller.anyadirRol("Entrenador_pokemon", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
-    	MainTaller.anyadirRolUsuario("pio", "11", "Entrenador_pokemon");
+    	String usuario= tfNombreUsuario.getText();
+    	String contrasenya=tfContrasenya.getText();
+    	String rol=cbTipo.getValue().toString();
+    	if(!"".equals(usuario) && !"".equals(contrasenya)&& !"".equals(rol)){
+    		MainTaller.anyadirRolUsuario(usuario,contrasenya, rol);
+    	}
+
+    }
+    public void nuevoRol(){
+    	String rol=tfNuevoRol.getText();
+    	if(!"".equals(rol)){
+    		MainTaller.anyadirRol(rol, new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
+    	}
+    	ActualizarUsuariosPestanya();
     }
     public void cambioUsuario() throws IOException{
     	ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
