@@ -248,11 +248,12 @@ public class GestionPedidosController implements Initializable {
 
         ofertas = MainTaller.actualizarOfertas();
         TablaOfertas tpOf;
-        for (Oferta of : ofertas) {
-            tpOf = new TablaOfertas(of);
-            olTablaOfertas.add(tpOf);
+        if(ofertas!=null){
+	        for (Oferta of : ofertas) {
+	            tpOf = new TablaOfertas(of);
+	            olTablaOfertas.add(tpOf);
+	        }
         }
-
         tbOfertas.setEditable(true);
         tbOfertas.setItems(olTablaOfertas);
         tbOfertas.getColumns().addAll(id_auxCol, idCol, fecha_altaCol, importeCol, estadoCol, pedidoCol, desguaceCol,desguaceNombreCol, fecha_bajaCol, fecha_limiteCol);
