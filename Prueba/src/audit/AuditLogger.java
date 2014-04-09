@@ -13,6 +13,7 @@ String activityDetail) {
 }    
 
 public static void info (String userid, String activity,String activityDetail) {
+	MDC.put("ip", "127.0.0.1");
 	MDC.put("userid", userid);
     MDC.put("activity", activity);
     
