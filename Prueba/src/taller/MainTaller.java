@@ -7,6 +7,7 @@ package taller;
 
 import Async.AsyncManager;
 import BD.InterfazBD;
+import permisos.permisos;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +53,7 @@ import static webservices.Webservices.*;
 public class MainTaller extends Application {
 
 	static InterfazBD bd;
-
+	static permisos Permisos;
 	/**
      *
      */
@@ -1006,8 +1007,10 @@ public class MainTaller extends Application {
 		
 	}
 
-	public static void cambiarUsuario(String nombreUsuario,ArrayList<Integer> listaOpciones) {	
+	public static void cambiarUsuario(String nombreUsuario,ArrayList<Integer> listaOpciones) throws Exception {	
 		try {
+			Permisos= new permisos();
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
 			bd=new InterfazBD("sor_taller");
 			bd.cambiarUsuario(nombreUsuario,listaOpciones);
 			bd.close();

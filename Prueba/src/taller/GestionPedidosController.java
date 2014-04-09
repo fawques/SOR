@@ -567,7 +567,7 @@ public class GestionPedidosController implements Initializable {
     	MainTaller.anyadirRol("Entrenador_pokemon", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
     	MainTaller.anyadirRolUsuario("pio", "11", "Entrenador_pokemon");
     }
-    public void cambioUsuario(){
+    public void cambioUsuario() throws IOException{
     	ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
     	String nombreUsuario=cbUsuarios.getValue().toString();
     	if(nombreUsuario!=null){
@@ -582,7 +582,12 @@ public class GestionPedidosController implements Initializable {
     	    listaOpciones.add(cbNuevoRol.isSelected()?1:0);
     	    listaOpciones.add(cbCambiarUsuario.isSelected()?1:0);
     	    listaOpciones.add(cbCambiarRol.isSelected()?1:0);
-    	    MainTaller.cambiarUsuario(nombreUsuario,listaOpciones);
+    	    try {
+				MainTaller.cambiarUsuario(nombreUsuario,listaOpciones);
+			} catch (Exception e) {
+				lanzarErrorPermisos(e.getMessage());
+
+			}
     	}
     }
     public void cambioRol(){
@@ -603,5 +608,17 @@ public class GestionPedidosController implements Initializable {
     	MainTaller.cambiarRol(nombreRol,listaOpciones);
     	}
     }
-    
+    public void lanzarErrorPermisos(String error) throws IOException{
+		URL location = getClass().getResource("permisosError.fxml");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(location);
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent page;
+		page = (Parent) loader.load(location.openStream());
+		thisStage.getScene().setRoot(page);
+        PermisosError tdCont = (PermisosError) loader.getController();
+        tdCont.setStage(thisStage);
+        tdCont.setError(error);
+        tdCont.showStage();
+    }
 }

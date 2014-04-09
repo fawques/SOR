@@ -1062,7 +1062,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
             if (resultados.first()) {
                  funcionOpcion = resultados.getInt(funcion);
                  if(funcionOpcion==0){
-                	 	resultados = conexion.ejecutarSQLSelect("SELECT * FROM roles WHERE nombre='" + resultados.getString("rol") + "';");
+                	 	resultados = conexion.ejecutarSQLSelect("SELECT * FROM roles WHERE rol='" + resultados.getString("rol") + "';");
                         try {
                             if (resultados.first()) {
                             	funcionOpcion = resultados.getInt(funcion);
