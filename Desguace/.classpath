@@ -12,5 +12,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/libSOR/lib/google-gson-2.2.4/gson-2.2.4.jar"/>
 	<classpathentry kind="lib" path="/libSOR/lib/jfxrt.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Seguridad"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
