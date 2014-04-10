@@ -58,13 +58,18 @@ public class DesguaceJavaWS {
 	private SecretKey getKey(String idDesguace, String password) {
 		int index = listaIdDesguace.indexOf(idDesguace);
 		if (index != -1) {
-			bd=new InterfazBD("sor_gestor");
-			Desguace desg = bd.getDesguaceEnGestor(idDesguace);
-			if (desg != null && desg.getPassword().equals(password)) {
-				SecretKey key = listaSecretKeys.get(index);
-				return key;
+			try {
+				bd=new InterfazBD("sor_gestor");
+				Desguace desg = bd.getDesguaceEnGestor(idDesguace);
+				if (desg != null && desg.getPassword().equals(password)) {
+					SecretKey key = listaSecretKeys.get(index);
+					return key;
+				}
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} 
+		}
 		return null;
 	}
 	
@@ -116,22 +121,6 @@ public class DesguaceJavaWS {
 		
 		bd.close();
 		return null;
-	}
-    
-    private boolean comprobarPass(String idDesguace, String pass){
-		try {
-			bd = new InterfazBD("sor_gestor");
-			Taller t = bd.getDesguaceEnGestor(idDesguace);
-			bd.close();
-			if(t!=null){
-				if(t.getPassword().equals(pass))
-					return true;
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
 	}
     
       @WebMethod(operationName = "alta")
