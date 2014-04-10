@@ -93,16 +93,27 @@ public class SimplePublish {
         String[][] servicios = new String[4][3];
         servicios[0][0] = "TallerWS";
         servicios[0][1] = "TallerWSPort";
-        servicios[0][2] = "https://" + ip + ":8443/Gestor/services/TallerWSPort?wsdl";
+        servicios[0][2] = "http://" + ip + ":8080/Gestor/services/TallerWSPort?wsdl";
         servicios[1][0] = "AdminWS";
         servicios[1][1] = "AdminWSPort";
         servicios[1][2] = "http://" + ip + ":8080/Gestor/services/AdminWSPort?wsdl";
         servicios[2][0] = "DesguaceJavaWS";
         servicios[2][1] = "DesguaceJavaWSPort";
         servicios[2][2] = "http://" + ip + ":8080/Gestor/services/DesguaceJavaWSPort?wsdl";
+        
         servicios[3][0] = "ActiveMQ";
         servicios[3][1] = "ActiveMQ";
         servicios[3][2] = "tcp://" + ip + ":61616";
+        
+        servicios[4][0] = "TallerWS_HTTPS";
+        servicios[4][1] = "TallerWSPort with secure connection";
+        servicios[4][2] = "https://" + ip + ":8443/Gestor/services/TallerWSPort?wsdl";
+        servicios[5][0] = "AdminWS_HTTPS";
+        servicios[5][1] = "AdminWSPort with secure connection";
+        servicios[5][2] = "https://" + ip + ":8443/Gestor/services/AdminWSPort?wsdl";
+        servicios[6][0] = "DesguaceJavaWS_HTTPS";
+        servicios[6][1] = "DesguaceJavaWSPort with secure connection";
+        servicios[6][2] = "https://" + ip + ":8443/Gestor/services/DesguaceJavaWSPort?wsdl";
         try {
             
             // Setting up the values to get an authentication token for the 'root' user ('root' user has admin privileges
