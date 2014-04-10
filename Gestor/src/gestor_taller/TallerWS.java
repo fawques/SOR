@@ -57,15 +57,16 @@ public class TallerWS {
 	static ArrayList<SecretKey> listaSecretKeys;
 	
 
-	static private SecretKey getKey(String idTaller) {
+	private SecretKey getKey(String idTaller, String password) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
-			SecretKey key = listaSecretKeys.get(index);
-			return key;
-		} else {
-			return null;
+			Taller t = bd.getTallerEnGestor(idTaller);
+			if (t != null && t.getPassword().equals(password)) {
+				SecretKey key = listaSecretKeys.get(index);
+				return key;
+			}
 		}
-
+		return null;
 	}
 	
 	static public void removeKey(String idTaller) {
@@ -98,7 +99,7 @@ public class TallerWS {
 			@WebParam(name = "postalCode") String postalCode,
 			@WebParam(name = "telephone") String telephone) {
 		try {
-			SecretKey key = getKey(id);
+			SecretKey key = getKey(id, password);
 			if (key != null) {
 				// desencriptar aqui
 				bd = new InterfazBD("sor_gestor");
@@ -131,7 +132,8 @@ public class TallerWS {
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {
 			bd=new InterfazBD("sor_gestor");
-			if (bd.getTallerEnGestor(idTaller) != null) {
+			Taller t = bd.getTallerEnGestor(idTaller);
+			if (t != null && t.getPassword().equals(password)) {
 				try {
 					SecretKey clave = TripleDes.generateKey();
 
@@ -225,7 +227,7 @@ public class TallerWS {
 			Type collectionType = new TypeToken<Pedido>() {
 			}.getType();
 
-			SecretKey key = getKey(idTaller);
+			SecretKey key = getKey(idTaller, password);
 			if (key != null) {
 				Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido),
 						collectionType);
@@ -273,7 +275,7 @@ public class TallerWS {
 				.create();
 		ArrayList<Oferta> listaOferta = new ArrayList<>();
 		ArrayList<Pedido> arrayPedido = new ArrayList<Pedido>();
-		SecretKey key = getKey(idTaller);
+		SecretKey key = getKey(idTaller, password);
 		if (key != null) {
 			arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
 					collectionType);
@@ -309,7 +311,7 @@ public class TallerWS {
 			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			SecretKey key = getKey(idTaller);
+			SecretKey key = getKey(idTaller, password);
 			if (key != null) {
 				bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED,
 						TripleDes.decrypt(key, ID));
@@ -337,7 +339,7 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 
-			SecretKey key = getKey(idTaller);
+			SecretKey key = getKey(idTaller, password);
 			if (key != null) {
 				bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
 						TripleDes.decrypt(key, ID));
@@ -417,7 +419,7 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 
-			SecretKey key = getKey(idTaller);
+			SecretKey key = getKey(idTaller, password);
 			if (key != null) {
 				boolean oool = bd.cancelarPedido(TripleDes.decrypt(key,
 						idPedido));
@@ -445,7 +447,7 @@ public class TallerWS {
 			@WebParam(name = "id") String id
 			) {
 		try {
-			SecretKey key = getKey(idTaller);
+			SecretKey key = getKey(idTaller, password);
 			if (key != null) {
 				Gson gson = new GsonBuilder().setDateFormat(
 						"yyyy-MM-dd'T'HH:mm:ss").create();
