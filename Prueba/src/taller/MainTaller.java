@@ -488,8 +488,10 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static boolean bajaTaller() {
+	public static boolean bajaTaller() throws Exception {
 		try {
+			Permisos= new permisos();
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
 			if (baja(taller.getID())) {
 				bd = new InterfazBD("sor_taller");
 				if (bd.bajaTaller(taller.getID())) {
@@ -536,8 +538,10 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static boolean cancellPedido(String idPedido) {
+	public static boolean cancellPedido(String idPedido) throws Exception {
 		try {
+			Permisos= new permisos();
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
 			if (cancelarPedido(idPedido)) {
 				bd = new InterfazBD("sor_taller");
 				boolean o = bd.cancelarPedido(idPedido);
@@ -754,6 +758,7 @@ public class MainTaller extends Application {
 	}
 
 	public static Boolean aceptarOferta(java.lang.String id) {
+		
 		AsyncManager manager = new AsyncManager("sor_taller");
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
@@ -938,8 +943,10 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static void pedidoModificar(String id) {
+	public static void pedidoModificar(String id) throws Exception {
 		try {
+			Permisos= new permisos();
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
 			bd = new InterfazBD("sor_taller");
 			pedidoModificar = bd.getPedidoID_aux(id);
 			bd.close();

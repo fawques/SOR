@@ -552,11 +552,41 @@ namespace desguaceNET.libSOR.BD
             conexion.ejecutarSQL(new MySqlCommand("DELETE FROM `acciones`;"));
             return result;
         }
-        public void anyadirRol(String nombre, String contrasenya, String rol) {
-        conexion.ejecutarSQLSelect(new MySqlCommand("Insert into usuarios(nombre,contrasenya,rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol + "')"));
+        public Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+            conexion.ejecutarSQLSelect(new MySqlCommand("Insert into usuarios(nombre,contrasenya,rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol + "')"));
+           List<int> listaOpciones = getRolLista(rol);
+            if (listaOpciones == null) { return false; }
+            conexion.ejecutarSQLSelect(new MySqlCommand("Insert into usuarios(nombre,contrasenya,rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol,cambiar_usuario,cambiar_rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol + "', '" + listaOpciones[0] + "', '" + listaOpciones[1] + "', '" + listaOpciones[2] + "', '" + listaOpciones[3] + "', '" + listaOpciones[4] + "', '" + listaOpciones[5]+ "', '" + listaOpciones[6] + "', '" + listaOpciones[7] + "', '" + listaOpciones[8] + "', '" + listaOpciones[9] + "', '" + listaOpciones[10] + "')"));
 
+            return true;
 		
 	    }
+        public void anyadirRol(String nombre, List<int> listaOpciones)
+        {
+            conexion.ejecutarInsert(new MySqlCommand("Insert into roles(rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol,cambiar_usuario,cambiar_rol) values ('" + nombre + "', '" + listaOpciones[0] + "', '" + listaOpciones[1] + "', '" + listaOpciones[2] + "', '" + listaOpciones[3] + "', '" + listaOpciones[4] + "', '" + listaOpciones[5] + "', '" + listaOpciones[6] + "', '" + listaOpciones[7] + "', '" + listaOpciones[8] + "', '" + listaOpciones[9] + "', '" + listaOpciones[10] + "')"));
+
+
+
+        }
+        private List<int> getRolLista(String rol)
+        {
+
+            List<int> listaOpciones = new List<int>();
+            DataSet opciones = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * from roles where rol='" + rol + "';"));
+
+            DataTableReader reader = opciones.CreateDataReader();
+            if (reader.NextResult())
+            {
+                    for (int i = 2; i <= 12; i++)
+                    {
+                        listaOpciones.Add(reader.GetInt32(i));
+                    }
+                    return listaOpciones;
+                }
+
+
+            return null;
+        }
 
 	public Boolean comprobarInicio(String usuario, String contrasenya) {
         DataSet res = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM `usuarios` where nombre='" + usuario + "';"));

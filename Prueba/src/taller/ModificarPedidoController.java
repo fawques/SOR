@@ -7,6 +7,7 @@ import general.Pieza;
 import gestor_taller.JMSException_Exception;
 
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -17,6 +18,7 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -116,7 +118,7 @@ public class ModificarPedidoController implements Initializable {
         stage.show();
     }
 
-    public void realizarPedido() throws JMSException_Exception, IOException {
+    public void realizarPedido() throws Exception {
         try {
             //validar
             //EstadoAutomatico.valueOf(cbEstado.getValue().toString()) falta añadir estado manual/automatica

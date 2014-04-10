@@ -960,12 +960,12 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
 	public Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
 		ArrayList<Integer> listaOpciones=getRolLista(rol);
 		if(listaOpciones==null){return false;}
-        conexion.ejecutarInsert("Insert into usuarios(nombre,contrasenya,rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol,cambiar_usuario,cambiar_rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol +"', '"+ listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +  "')");
+        conexion.ejecutarInsert("Insert into usuarios(nombre,contrasenya,rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol,cambiar_usuario,cambiar_rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol +"', '"+ listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"', '" + listaOpciones.get(9) + "', '" + listaOpciones.get(10) +  "')");
 
 		return true;
 	}
 
-	private ArrayList<Integer> getRolLista(String rol) {
+	public ArrayList<Integer> getRolLista(String rol) {
 	      
 	       ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
 	       ResultSet  opciones=  conexion.ejecutarSQLSelect("SELECT * from roles where rol='" + rol + "';");

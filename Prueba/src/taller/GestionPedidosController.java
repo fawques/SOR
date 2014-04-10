@@ -380,14 +380,23 @@ public class GestionPedidosController implements Initializable {
     }
 
     /**
+     * @throws IOException 
      *
      */
-    public void cancelarPedido() {
+    public void cancelarPedido() throws IOException {
         TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
         if (tp != null && (tp.getEstado() == EstadoPedido.ACTIVE || tp.getEstado() == EstadoPedido.NEW || tp.getEstado() == EstadoPedido.ACCEPTED)) {
-            if (MainTaller.cancellPedido(tp.getId())) {
-                visualizarPedidos();
-            }
+            try {
+				if (MainTaller.cancellPedido(tp.getId())) {
+				    visualizarPedidos();
+				}
+			} catch (JsonSyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				lanzarErrorPermisos(e.getMessage());
+				
+			}
         }
         //else //no hay pedido seleccionada
     }
@@ -491,11 +500,15 @@ public class GestionPedidosController implements Initializable {
      * @throws IOException
      */
     public void bajaTaller() throws IOException {
-        if (MainTaller.bajaTaller()) {
-            cambiarAPantallaTallerDeBaja();
-        } else {
-            System.err.println("Lo siento, no se ha podido dar de baja.");
-        }
+        try {
+			if (MainTaller.bajaTaller()) {
+			    cambiarAPantallaTallerDeBaja();
+			} else {
+			    System.err.println("Lo siento, no se ha podido dar de baja.");
+			}
+		} catch (Exception e) {
+			lanzarErrorPermisos(e.getMessage());
+		}
     }
 
     private void cambiarAPantallaTallerDeBaja() throws IOException {
@@ -529,7 +542,11 @@ public class GestionPedidosController implements Initializable {
 		try {
 			tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
 			if(tp!=null){
-				MainTaller.pedidoModificar(tp.getId());
+				try {
+					MainTaller.pedidoModificar(tp.getId());
+				} catch (Exception e) {
+					lanzarErrorPermisos(e.getMessage());
+				}
 				if(MainTaller.pedidoModificar.getEstado()==EstadoPedido.ACTIVE ||MainTaller.pedidoModificar.getEstado()==EstadoPedido.NEW)
 				{
 					URL location = getClass().getResource("modificarPedido.fxml");

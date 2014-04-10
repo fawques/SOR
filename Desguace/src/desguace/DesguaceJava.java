@@ -805,11 +805,12 @@ public class DesguaceJava extends Application {
 			return false;
 		}
 
-		public static void anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+
+			
+		public static void anyadirRol(String nombre, ArrayList<Integer> listaOpciones) {
 			try {
-				
-				bd=new InterfazBD("sor_desguace");				
-				bd.anyadirRolUsuario(nombre,contrasenya,rol);
+				bd=new InterfazBD("sor_taller");
+				bd.anyadirRol(nombre,listaOpciones);
 				bd.close();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -820,6 +821,24 @@ public class DesguaceJava extends Application {
 			}
 			
 			
+			
+		}
+
+		public static Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+			try {
+				bd=new InterfazBD("sor_taller");
+				Boolean estarRol= bd.anyadirRolUsuario(nombre,contrasenya,rol);
+				bd.close();
+				return estarRol;
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return false;
 			
 		}
 }
