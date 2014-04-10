@@ -90,7 +90,7 @@ public class SimplePublish {
         // servcicios[i][0] = Nombre (TallerWS)
         // servicios[i][1] = Descripcion (Lo que queramos)
         // servicios[i][2] = URL del wsdl
-        String[][] servicios = new String[4][3];
+        String[][] servicios = new String[7][3];
         servicios[0][0] = "TallerWS";
         servicios[0][1] = "TallerWSPort";
         servicios[0][2] = "http://" + ip + ":8080/Gestor/services/TallerWSPort?wsdl";
