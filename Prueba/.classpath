@@ -14,5 +14,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/Seguridad"/>
+	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
+	<classpathentry kind="lib" path="/libSOR/lib/slf4j-1.7.7/slf4j-log4j12-1.7.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
