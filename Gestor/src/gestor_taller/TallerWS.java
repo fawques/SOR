@@ -130,7 +130,7 @@ public class TallerWS {
 	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {
-			bd=new InterfazBD("sor_taller");
+			bd=new InterfazBD("sor_gestor");
 			if (bd.getTallerEnGestor(idTaller) != null) {
 				try {
 					SecretKey clave = TripleDes.generateKey();
