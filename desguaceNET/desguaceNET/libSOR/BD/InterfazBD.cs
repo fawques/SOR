@@ -589,16 +589,19 @@ namespace desguaceNET.libSOR.BD
         }
 
 	public Boolean comprobarInicio(String usuario, String contrasenya) {
-        DataSet res = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM `usuarios` where nombre='" + usuario + "';"));
         try
         {
-            DataTableReader reader = res.CreateDataReader();
-            if (reader.NextResult())
+            DataSet res = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * FROM `usuarios` where nombre='" + usuario + "';"));
+            if (res != null)
             {
-
-                if (usuario.Equals((string)reader["nombre"]) && contrasenya.Equals((string)reader["contrasenya"]))
+                DataTableReader reader = res.CreateDataReader();
+                if (reader.Read())
                 {
-                    return true;
+
+                    if (usuario.Equals((string)reader["nombre"]) && contrasenya.Equals((string)reader["contrasenya"]))
+                    {
+                        return true;
+                    }
                 }
             }
         }
