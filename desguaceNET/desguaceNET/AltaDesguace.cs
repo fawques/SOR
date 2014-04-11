@@ -68,7 +68,8 @@ namespace desguaceNET
             DesguaceNet main = new DesguaceNet();
             if (main.hacerAlta(tbNombreDesguace.Text, tbEmail.Text, tbDireccion.Text, tbCiudad.Text, tbCP.Text, tbTelefono.Text))
             {
-                main.anyadirRol("Administrador", tbContrasenya.Text, "Administrador");
+                main.anyadirRol("Administrador", new List<int>(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }));
+                main.anyadirRolUsuario("Administrador", tbContrasenya.Text, "Administrador");
                 Console.WriteLine("Alta correcta");
                 DialogResult = DialogResult.OK;
             }

@@ -76,6 +76,7 @@ namespace desguaceNET.libSOR.BD
                 Console.WriteLine(ex.StackTrace);
                 return null;
             }
+
             finally
             {
                 closeConexion();
