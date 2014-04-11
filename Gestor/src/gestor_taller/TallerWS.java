@@ -176,11 +176,9 @@ public class TallerWS {
 	 */
 	// REMODELACION PARA QUE HAYA UNA ESPECIE DE LOGIN
 	@WebMethod(operationName = "checkActivacion")
-    public String checkActivacion(@WebParam(name = "idTaller") String mail, @WebParam(name = "mail") String contrasenya)    {
-		try {
+    public String checkActivacion(@WebParam(name = "mail") String contrasenya)    {
+		try{	
 			bd = new InterfazBD("sor_gestor");
-			Taller t = bd.getTaller(mail);
-			if (t != null) {
 	            Taller taller = bd.getTallerActivar(contrasenya);
 				String res;
 	            if (taller!=null) {
@@ -189,9 +187,7 @@ public class TallerWS {
 					res = "";
 				}
 				bd.close();
-				return res;
-			}
-			bd.close();
+			return res;
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
