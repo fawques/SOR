@@ -56,20 +56,20 @@ public class TallerWS {
 	static ArrayList<String> listaIdTaller;
 	static ArrayList<SecretKey> listaSecretKeys;
 	
-
 	private SecretKey getKey(String idTaller, String password) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
 			Taller t = bd.getTallerEnGestor(idTaller);
 			if (t != null && t.getPassword().equals(password)) {
 				SecretKey key = listaSecretKeys.get(index);
+                removeKey(idTaller);
 				return key;
 			}
 		}
 		return null;
 	}
 	
-	static public void removeKey(String idTaller) {
+	static private void removeKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
 			listaSecretKeys.remove(index);

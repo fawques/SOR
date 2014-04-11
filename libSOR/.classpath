@@ -20,7 +20,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/apache-activemq-5.9.0/lib/optional/log4j-1.2.17.jar"/>
-	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/slf4j-1.7.7/slf4j-api-1.7.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
