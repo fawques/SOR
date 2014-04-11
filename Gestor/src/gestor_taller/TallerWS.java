@@ -176,11 +176,11 @@ public class TallerWS {
 	 */
 	// REMODELACION PARA QUE HAYA UNA ESPECIE DE LOGIN
 	@WebMethod(operationName = "checkActivacion")
-    public String checkActivacion(@WebParam(name = "idTaller") String idTaller, @WebParam(name = "mail") String contrasenya)    {
+    public String checkActivacion(@WebParam(name = "idTaller") String mail, @WebParam(name = "mail") String contrasenya)    {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			Taller t = bd.getTallerEnGestor(idTaller);
-			if (t != null && t.getPassword().equals(contrasenya)) {
+			Taller t = bd.getTaller(mail);
+			if (t != null) {
 	            Taller taller = bd.getTallerActivar(contrasenya);
 				String res;
 	            if (taller!=null) {
