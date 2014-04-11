@@ -25,6 +25,7 @@ import gestor_taller.JMSException_Exception;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.nio.file.AccessDeniedException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -488,30 +489,38 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static boolean bajaTaller() throws Exception {
-		try {
+	public static boolean bajaTaller() throws AccessDeniedException{
+		
 			Permisos= new permisos();
-			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
+			try {
+				Permisos.comprobarPermisos("sor_taller", nombreUsuario, "baja");
+			} catch (AccessDeniedException e1) {
+				throw e1;
+			}
+			try {
 			if (baja(taller.getID())) {
-				bd = new InterfazBD("sor_taller");
-				if (bd.bajaTaller(taller.getID())) {
-					bd.close();
-					return true;
+				
+					bd = new InterfazBD("sor_taller");
+					if (bd.bajaTaller(taller.getID())) {
+						bd.close();
+						return true;
+					} else {
+						System.err
+								.println("Error: No se ha podido cambiar el estado en taller.");
+					}
 				} else {
 					System.err
-							.println("Error: No se ha podido cambiar el estado en taller.");
+							.println("Error: No se ha podido dar de baja en gestor.");
 				}
-			} else {
-				System.err
-						.println("Error: No se ha podido dar de baja en gestor.");
-			}
-		} catch (SQLException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		}
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+
 		return false;
 	}
 
@@ -538,10 +547,14 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static boolean cancellPedido(String idPedido) throws Exception {
+	public static boolean cancellPedido(String idPedido) throws AccessDeniedException  {
 		try {
 			Permisos= new permisos();
-			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
+			try {
+				Permisos.comprobarPermisos("sor_taller", nombreUsuario, "borrar_pedido");
+			} catch (AccessDeniedException e) {
+			throw e;
+			}
 			if (cancelarPedido(idPedido)) {
 				bd = new InterfazBD("sor_taller");
 				boolean o = bd.cancelarPedido(idPedido);
@@ -757,8 +770,14 @@ public class MainTaller extends Application {
 		return "";
 	}
 
-	public static Boolean aceptarOferta(java.lang.String id) {
+	public static Boolean aceptarOferta(java.lang.String id) throws AccessDeniedException {
 		
+		try {
+			Permisos= new permisos();
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "aceptar_oferta");
+		} catch (AccessDeniedException e1) {
+			throw e1;
+		}
 		AsyncManager manager = new AsyncManager("sor_taller");
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
@@ -792,7 +811,13 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static Boolean rechazarOferta(java.lang.String id) {
+	public static Boolean rechazarOferta(java.lang.String id) throws AccessDeniedException {
+		try {
+			Permisos= new permisos();
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "rechazar_ofertas");
+		} catch (AccessDeniedException e1) {
+			throw e1;
+		}
 		AsyncManager manager = new AsyncManager("sor_taller");
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
@@ -943,27 +968,39 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static void pedidoModificar(String id) throws Exception {
-		try {
+	public static void pedidoModificar(String id) throws AccessDeniedException  {
+		
 			Permisos= new permisos();
-			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
-			bd = new InterfazBD("sor_taller");
-			pedidoModificar = bd.getPedidoID_aux(id);
-			bd.close();
-			Gson gson = new GsonBuilder()
-					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+			try {
+				Permisos.comprobarPermisos("sor_taller", nombreUsuario, "modificar_pedido");
+			} catch (AccessDeniedException e1) {
+				throw e1;
+			}
+			try {
+				bd = new InterfazBD("sor_taller");
+				pedidoModificar = bd.getPedidoID_aux(id);
+				bd.close();
+				Gson gson = new GsonBuilder()
+						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		} catch (SQLException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		}
+
 
 	}
 
-	public static Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+	public static Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) throws AccessDeniedException {
+		Permisos= new permisos();
+		try {
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "nuevo_usuario");
+		} catch (AccessDeniedException e1) {
+			throw e1;
+		}
 		try {
 			bd=new InterfazBD("sor_taller");
 			Boolean estarRol= bd.anyadirRolUsuario(nombre,contrasenya,rol);
@@ -997,7 +1034,13 @@ public class MainTaller extends Application {
 		
 		return false;
 	}
-	public static void anyadirRol(String nombre, ArrayList<Integer> listaOpciones) {
+	public static void anyadirRol(String nombre, ArrayList<Integer> listaOpciones) throws AccessDeniedException {
+		Permisos= new permisos();
+		try {
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "nuevo_rol");
+		} catch (AccessDeniedException e1) {
+			throw e1;
+		}
 		try {
 			bd=new InterfazBD("sor_taller");
 			bd.anyadirRol(nombre,listaOpciones);
@@ -1014,10 +1057,14 @@ public class MainTaller extends Application {
 		
 	}
 
-	public static void cambiarUsuario(String nombre,ArrayList<Integer> listaOpciones) throws Exception {	
+	public static void cambiarUsuario(String nombre,ArrayList<Integer> listaOpciones) throws AccessDeniedException {	
 		try {
 			Permisos= new permisos();
-			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
+			try {
+				Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_rol");
+			} catch (AccessDeniedException e) {
+				throw e;
+			}
 			bd=new InterfazBD("sor_taller");
 			bd.cambiarUsuario(nombre,listaOpciones);
 			bd.close();
@@ -1031,19 +1078,26 @@ public class MainTaller extends Application {
 	
 	}
 
-	public static void cambiarRol(String nombreRol,
-			ArrayList<Integer> listaOpciones) {
+	public static void cambiarRol(String nombreRol,	ArrayList<Integer> listaOpciones) throws AccessDeniedException {
+		
+		Permisos= new permisos();
 		try {
-			bd=new InterfazBD("sor_taller");
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
+		} catch (AccessDeniedException e) {
+			throw e;
+		}
+			try {
+				bd=new InterfazBD("sor_taller");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			bd.cambiarRol(nombreRol,listaOpciones);
 			bd.close();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		
 	}

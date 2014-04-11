@@ -256,6 +256,7 @@ public class AltaTallerController implements Initializable {
                 if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2,tfContrasenya.getText()) != -1) {
                 	MainTaller.anyadirRol("Administrador", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
                 	MainTaller.anyadirRolUsuario("Administrador",tfContrasenya.getText(),"Administrador");
+                	MainTaller.nombreUsuario="Administrador";
                 	URL location = getClass().getResource("tallerPendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
