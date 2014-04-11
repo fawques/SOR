@@ -675,7 +675,7 @@ public class MainTaller extends Application {
 	public static String checkActivacion(java.lang.String contrasenya) {
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = checkActivacion_WS(taller.getEmail(), contrasenya);
+				String ret = checkActivacion_WS(contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
