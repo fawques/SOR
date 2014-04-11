@@ -475,7 +475,7 @@ public class MainTaller extends Application {
 	public static boolean reactivarTaller() {
 		try {
 			bd = new InterfazBD("sor_taller");
-			boolean r = bd.activarTaller(taller.getID());
+			boolean r = bd.activarTaller(taller.getID(),taller.getPassword());
 			bd.close();
 			return r;
 		} catch (SQLException ex) {
@@ -1138,6 +1138,36 @@ public class MainTaller extends Application {
 
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static void ponerCodigoActivacionTaller(String codigo) {
+		try {
+			bd = new InterfazBD("sor_taller");
+			bd.ponerCodigoActivacionTaller(codigo,taller.getID());
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	public static  void getTaller(){
+		try {
+			bd = new InterfazBD("sor_taller");
+			 taller=bd.getPrimerTaller();
+			 bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

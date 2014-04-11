@@ -7,6 +7,7 @@
 package admin;
 
 
+import general.Taller;
 import jUDDI.JUDDIProxy;
 
 import java.io.IOException;
@@ -14,6 +15,9 @@ import java.net.URL;
 
 
 
+
+
+import BD.InterfazBD;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -69,6 +73,7 @@ public class Admin extends Application {
         return loader;
 
     }
+
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
@@ -153,5 +158,14 @@ public class Admin extends Application {
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getAltaDesguace();
     }
-
+    public static String getContrasenyaPorTallerID(java.lang.String id) {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getContrasenyaPorTallerID(id);
+    }
+    public static String getContrasenyaPorDesguaceID(java.lang.String id) {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.getContrasenyaPorDesguaceID(id);
+    }
 }

@@ -71,6 +71,7 @@ public class DesguacerPendienteActivacionController implements Initializable {
                  lbEstado.setText("Su cuenta no ha podido activarse");
              } else {
             	 DesguaceJava.desguace=bd.getDesguace();
+            	 DesguaceJava.ponerCodigoActivacionTaller(tfValidar.getText());
                  URL location = getClass().getResource("GestionPedidos.fxml");
                  FXMLLoader loader = new FXMLLoader();
                  loader.setLocation(location);

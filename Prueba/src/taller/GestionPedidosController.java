@@ -592,7 +592,7 @@ public class GestionPedidosController implements Initializable {
     	if(roles!=null){
     		listaRoles.addAll(roles);
         	cbTipo.setItems(listaRoles);    		
-        	System.err.println("JODERACTUALIZA");
+        	
     	}
     }
     public void ActualizarPermisos(){
@@ -632,7 +632,7 @@ public class GestionPedidosController implements Initializable {
 				lanzarErrorPermisos(e.getMessage());
 			}
     	}
-    	System.err.println("JODER");
+    	
     	ActualizarUsuariosPestanya();
     }
     public void cambioUsuario() throws IOException{

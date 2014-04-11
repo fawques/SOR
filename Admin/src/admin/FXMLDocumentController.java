@@ -24,6 +24,7 @@ import admin.Admin;
 import com.google.gson.JsonSyntaxException;
 
 
+
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -74,6 +76,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableView tablePiezas;
     @FXML private TableView tableAltaTalleres;
     @FXML private TableView tableAltaDesguaces;
+    public TextField tfContrasenyaTaller;
+    public TextField tfContrasenyaDesguace;
     @FXML
     private void handleButtonAction(ActionEvent event) {
     
@@ -493,6 +497,8 @@ public class FXMLDocumentController implements Initializable {
                             String id=altaTaller.get(selectdIndex).getID();
                             if(id!=null){
                                 Admin.darAccesoTaller(altaTaller.get(selectdIndex).getID());
+                                String contrasenya=Admin.getContrasenyaPorTallerID(altaTaller.get(selectdIndex).getID());
+                                tfContrasenyaTaller.setText(contrasenya);
                             }
                         
                         actualizarAltasTaller();
@@ -501,6 +507,8 @@ public class FXMLDocumentController implements Initializable {
                     else{
                     if(altaDesguaces.size()>=selectdIndex){
                         Admin.addAccesoDesguace(altaDesguaces.get(selectdIndex).getID());
+                        String contrasenya=Admin.getContrasenyaPorDesguaceID(altaDesguaces.get(selectdIndex).getID());
+                        tfContrasenyaDesguace.setText(contrasenya);
                         actualizarAltasDesguaces();
                     }
                     }
