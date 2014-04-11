@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="mail" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="idTaller" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,13 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "checkActivacion", propOrder = {
-    "mail"
+    "mail",
+    "idTaller"
 })
 public class CheckActivacion {
 
     protected String mail;
 
-    /**
+    protected String idTaller;
+
+	/**
      * Obtiene el valor de la propiedad mail.
      * 
      * @return
@@ -55,6 +59,30 @@ public class CheckActivacion {
      */
     public void setMail(String value) {
         this.mail = value;
+    }
+
+	/**
+     * Obtiene el valor de la propiedad idTaller.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdTaller() {
+        return idTaller;
+    }
+
+	/**
+     * Define el valor de la propiedad idTaller.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdTaller(String value) {
+        this.idTaller = value;
     }
 
 }
