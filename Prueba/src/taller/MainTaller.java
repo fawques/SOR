@@ -442,6 +442,7 @@ public class MainTaller extends Application {
 	public static void crearPedido(Date fechaAlta, EstadoPedido estado,
 			Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas,
 			ArrayList<Integer> cantidades) throws JMSException_Exception, ParseException {
+
 		try {
 			bd = new InterfazBD("sor_taller");
 			Taller taller = bd.getPrimerTaller();
@@ -553,7 +554,7 @@ public class MainTaller extends Application {
 			try {
 				Permisos.comprobarPermisos("sor_taller", nombreUsuario, "borrar_pedido");
 			} catch (AccessDeniedException e) {
-			throw e;
+				throw e;
 			}
 			if (cancelarPedido(idPedido)) {
 				bd = new InterfazBD("sor_taller");

@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import permisos.permisos;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -340,18 +341,25 @@ public class GestionPedidosController implements Initializable {
      * @throws Exception
      */
     public void onClickNuevoPedido(ActionEvent e) throws IOException, Exception {
-        URL location = getClass().getResource("NuevoPedido.fxml");
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        Parent root = FXMLLoader.load(NuevoPedidoController.class.getResource("NuevoPedido.fxml"));
-        loader.load(location.openStream());
-        stage.setScene(new Scene(root));
-        stage.setTitle("Nuevo pedido");
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(((Node) e.getSource()).getScene().getWindow());
-        NuevoPedidoController np = (NuevoPedidoController) loader.getController();
-        np.setStage(stage);
-        np.showStage();
+    	MainTaller.Permisos= new permisos();
+		try {
+			MainTaller.Permisos.comprobarPermisos("sor_taller", MainTaller.nombreUsuario, "nuevo_pedido");
+			  URL location = getClass().getResource("NuevoPedido.fxml");
+		        Stage stage = new Stage();
+		        FXMLLoader loader = new FXMLLoader();
+		        Parent root = FXMLLoader.load(NuevoPedidoController.class.getResource("NuevoPedido.fxml"));
+		        loader.load(location.openStream());
+		        stage.setScene(new Scene(root));
+		        stage.setTitle("Nuevo pedido");
+		        stage.initModality(Modality.WINDOW_MODAL);
+		        stage.initOwner(((Node) e.getSource()).getScene().getWindow());
+		        NuevoPedidoController np = (NuevoPedidoController) loader.getController();
+		        np.setStage(stage);
+		        np.showStage();
+		} catch (AccessDeniedException e1) {
+			lanzarErrorPermisos(e1.getMessage());
+		}
+      
         
       
     }
@@ -543,18 +551,31 @@ public class GestionPedidosController implements Initializable {
     }
 
     /**
+     * @throws IOException 
      *
      */
     public void modificarTaller() throws IOException {
-        URL location = getClass().getResource("modificarDatos.fxml");
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(location);
-        loader.setBuilderFactory(new JavaFXBuilderFactory());
-        Parent page = (Parent) loader.load(location.openStream());
-        thisStage.getScene().setRoot(page);
-        AltaTallerController tdCont = (AltaTallerController) loader.getController();
-        tdCont.setStage(thisStage);
-        tdCont.showStage();
+    	MainTaller.Permisos= new permisos();
+		try {
+			MainTaller.Permisos.comprobarPermisos("sor_taller", MainTaller.nombreUsuario, "modificar_datos");
+			   URL location = getClass().getResource("modificarDatos.fxml");
+		        FXMLLoader loader = new FXMLLoader();
+		        loader.setLocation(location);
+		        loader.setBuilderFactory(new JavaFXBuilderFactory());
+		        Parent page = (Parent) loader.load(location.openStream());
+		        thisStage.getScene().setRoot(page);
+		        AltaTallerController tdCont = (AltaTallerController) loader.getController();
+		        tdCont.setStage(thisStage);
+		        tdCont.showStage();
+		} catch (AccessDeniedException e1) {
+			lanzarErrorPermisos(e1.getMessage());
+		}
+      
+        
+    	
+    	
+    	
+     
     }
     public void modificarPedido() throws IOException{
     	
