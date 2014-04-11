@@ -148,25 +148,25 @@ public class DesguaceJavaWS {
     }
     
         @WebMethod(operationName = "checkActivacion")
-    public String checkActivacion(@WebParam(name = "mail") String contrasenya){
+    public String checkActivacion(@WebParam(name="idDesguace") String idDesguace, @WebParam(name = "mail") String contrasenya){
 
         try {
 
             bd = new InterfazBD("sor_gestor");
-            Desguace desguace = bd.getDesguaceActivar(contrasenya);
-            String res;
-            if (desguace!=null) {
-                res = desguace.getID();
-            }else{
-                res = "";
-            }
-            bd.close();
-            return res;
+            Desguace desg = bd.getDesguaceEnGestor(idDesguace);
+			if (desg != null && desg.getPassword().equals(contrasenya)) {
+	            Desguace desguace = bd.getDesguaceActivar(contrasenya);
+	            String res;
+	            if (desguace!=null) {
+	                res = desguace.getID();
+	            }else{
+	                res = "";
+	            }
+	            bd.close();
+	            return res;
+			}
 
-            
-            
-            
-
+			bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -213,16 +213,21 @@ public class DesguaceJavaWS {
      * Web service operation
      */
     @WebMethod(operationName = "getOfertas")
-    public String getOfertas(@WebParam(name = "string") String id) {
+    public String getOfertas(@WebParam(name = "string") String id, @WebParam(name="password") String password) {
         try {   
             bd = new InterfazBD("sor_gestor");
-             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
-            listaOfertas=bd.getOfertasDesguace(id);
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-            String listaJSON = gson.toJson(listaOfertas);
-            System.out.println("listaJSON = " + listaJSON);
-            bd.close();
-            return listaJSON;
+
+			Desguace desg = bd.getDesguaceEnGestor(id);
+			if (desg != null && desg.getPassword().equals(password)) {
+	             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
+	            listaOfertas=bd.getOfertasDesguace(id);
+	            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+	            String listaJSON = gson.toJson(listaOfertas);
+	            System.out.println("listaJSON = " + listaJSON);
+	            bd.close();
+	            return listaJSON;
+			}
+			bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -235,21 +240,25 @@ public class DesguaceJavaWS {
      * Web service operation
      */
     @WebMethod(operationName = "getPedidosporID")
-    public String getPedidosporID(@WebParam(name = "string") String string) {
+    public String getPedidosporID(@WebParam(name = "string") String string, @WebParam(name="password") String password) {
     	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         try {
             bd = new InterfazBD("sor_gestor");
-             Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
-             ArrayList<String>  listaids = gson.fromJson(string, collectionType);
-            ArrayList<Pedido> listapedidos= new ArrayList<Pedido>();
-             for(String s: listaids){
-                 listapedidos.add(bd.getPedidoID(s));
-             }
-             
-            String listaJSON = gson.toJson(listapedidos);
-            System.out.println("listaJSON = " + listaJSON);
-            bd.close();
-            return listaJSON;
+			Desguace desg = bd.getDesguaceEnGestor(string);
+			if (desg != null && desg.getPassword().equals(password)) {
+	             Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+	             ArrayList<String>  listaids = gson.fromJson(string, collectionType);
+	            ArrayList<Pedido> listapedidos= new ArrayList<Pedido>();
+	             for(String s: listaids){
+	                 listapedidos.add(bd.getPedidoID(s));
+	             }
+	             
+	            String listaJSON = gson.toJson(listapedidos);
+	            System.out.println("listaJSON = " + listaJSON);
+	            bd.close();
+	            return listaJSON;
+			}
+			bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -262,15 +271,19 @@ public class DesguaceJavaWS {
      * Web service operation
      */
     @WebMethod(operationName = "getPedidoporID")
-    public String getPedidoporID(@WebParam(name = "string") String id) {
+    public String getPedidoporID(@WebParam(name = "string") String id, @WebParam(name="password") String password) {
     	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         try {
             bd = new InterfazBD("sor_gestor");
-            String listapedidos="";
-            Pedido p=bd.getPedidoID(id);
-            listapedidos=gson.toJson(p);
-            bd.close();
-            return listapedidos;
+			Desguace desg = bd.getDesguaceEnGestor(id);
+			if (desg != null && desg.getPassword().equals(password)) {
+	            String listapedidos="";
+	            Pedido p=bd.getPedidoID(id);
+	            listapedidos=gson.toJson(p);
+	            bd.close();
+	            return listapedidos;
+			}
+			bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -345,19 +358,23 @@ public class DesguaceJavaWS {
      * Web service operation
      */
     @WebMethod(operationName = "baja")
-    public Boolean baja(@WebParam(name = "id") String id) {
+    public Boolean baja(@WebParam(name = "id") String id, @WebParam(name="password") String password) {
         try {        
             bd = new InterfazBD("sor_gestor");
-            boolean oool = bd.bajaDesguace(id);
-            bd.close();
-            return oool;
+
+			Desguace desg = bd.getDesguaceEnGestor(id);
+			if (desg != null && desg.getPassword().equals(password)) {
+	            boolean oool = bd.bajaDesguace(id);
+	            bd.close();
+	            return oool;
+			}
+			bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-      
+
         return false;
     }
 
