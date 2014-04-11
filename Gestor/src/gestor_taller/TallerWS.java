@@ -58,17 +58,17 @@ public class TallerWS {
 	
 
 	static private SecretKey getKey(String idTaller) {
+		SecretKey key = null;
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
-			SecretKey key = listaSecretKeys.get(index);
-			return key;
-		} else {
-			return null;
+			key = listaSecretKeys.get(index);
+			removeKey(idTaller);
 		}
+		return key;
 
 	}
 	
-	static public void removeKey(String idTaller) {
+	static private void removeKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
 			listaSecretKeys.remove(index);
@@ -130,7 +130,7 @@ public class TallerWS {
 	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {
-			bd=new InterfazBD("sor_taller");
+			bd=new InterfazBD("sor_gestor");
 			if (bd.getTallerEnGestor(idTaller) != null) {
 				try {
 					SecretKey clave = TripleDes.generateKey();

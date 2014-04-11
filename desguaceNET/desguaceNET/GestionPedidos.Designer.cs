@@ -59,13 +59,42 @@
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.tbAcciones = new System.Windows.Forms.TabPage();
             this.tablaAcciones = new System.Windows.Forms.DataGridView();
             this.accion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parametros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tbNombre = new System.Windows.Forms.TextBox();
+            this.tfNombre = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.Contraseña = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btNuevoUsuario = new System.Windows.Forms.Button();
+            this.tbNombreRol = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btNuevoRol = new System.Windows.Forms.Button();
+            this.dataGridView6 = new System.Windows.Forms.DataGridView();
+            this.cbRol = new System.Windows.Forms.ComboBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbNuevoPedido = new System.Windows.Forms.CheckBox();
+            this.cbBorrarPedido = new System.Windows.Forms.CheckBox();
+            this.cbModificarPedido = new System.Windows.Forms.CheckBox();
+            this.cbModificarDatos = new System.Windows.Forms.CheckBox();
+            this.cbDarseDeBaja = new System.Windows.Forms.CheckBox();
+            this.cbCambiarRol = new System.Windows.Forms.CheckBox();
+            this.cbCambiarUsuario = new System.Windows.Forms.CheckBox();
+            this.cbNuevoRol = new System.Windows.Forms.CheckBox();
+            this.cbNuevoUsuario = new System.Windows.Forms.CheckBox();
+            this.cbRechazarOfertas = new System.Windows.Forms.CheckBox();
+            this.cbAceptarOfertas = new System.Windows.Forms.CheckBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btCambiarUsuario = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.btCambiarRol = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.Pedidos.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -78,9 +107,13 @@
             this.tpHistorico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            this.tabPage2.SuspendLayout();
             this.tbAcciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaAcciones)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -113,6 +146,8 @@
             this.Pedidos.Controls.Add(this.tpHistorico);
             this.Pedidos.Controls.Add(this.tbAcciones);
             this.Pedidos.Controls.Add(this.tabPage2);
+            this.Pedidos.Controls.Add(this.tabPage3);
+            this.Pedidos.Controls.Add(this.tabPage4);
             this.Pedidos.Location = new System.Drawing.Point(0, 0);
             this.Pedidos.Name = "Pedidos";
             this.Pedidos.SelectedIndex = 0;
@@ -418,38 +453,6 @@
             this.dataGridView4.Size = new System.Drawing.Size(669, 184);
             this.dataGridView4.TabIndex = 11;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1075, 516);
-            this.tabPage2.TabIndex = 3;
-            this.tabPage2.Text = "Cuenta";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(8, 197);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(288, 139);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Modificar Datos";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(8, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(288, 146);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Dar de baja";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // tbAcciones
             // 
             this.tbAcciones.Controls.Add(this.tablaAcciones);
@@ -485,6 +488,329 @@
             this.parametros.Name = "parametros";
             this.parametros.ReadOnly = true;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1075, 516);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "Cuenta";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(8, 197);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(288, 139);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Modificar Datos";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(8, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(288, 146);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Dar de baja";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.cbRol);
+            this.tabPage3.Controls.Add(this.dataGridView6);
+            this.tabPage3.Controls.Add(this.btNuevoRol);
+            this.tabPage3.Controls.Add(this.tbNombreRol);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.btNuevoUsuario);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.tbPassword);
+            this.tabPage3.Controls.Add(this.Contraseña);
+            this.tabPage3.Controls.Add(this.tbNombre);
+            this.tabPage3.Controls.Add(this.tfNombre);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1075, 516);
+            this.tabPage3.TabIndex = 5;
+            this.tabPage3.Text = "Usuarios";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tbNombre
+            // 
+            this.tbNombre.Location = new System.Drawing.Point(98, 52);
+            this.tbNombre.Name = "tbNombre";
+            this.tbNombre.Size = new System.Drawing.Size(94, 20);
+            this.tbNombre.TabIndex = 8;
+            // 
+            // tfNombre
+            // 
+            this.tfNombre.AutoSize = true;
+            this.tfNombre.Location = new System.Drawing.Point(39, 55);
+            this.tfNombre.Name = "tfNombre";
+            this.tfNombre.Size = new System.Drawing.Size(44, 13);
+            this.tfNombre.TabIndex = 7;
+            this.tfNombre.Text = "Nombre";
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(343, 52);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(94, 20);
+            this.tbPassword.TabIndex = 10;
+            // 
+            // Contraseña
+            // 
+            this.Contraseña.AutoSize = true;
+            this.Contraseña.Location = new System.Drawing.Point(271, 55);
+            this.Contraseña.Name = "Contraseña";
+            this.Contraseña.Size = new System.Drawing.Size(61, 13);
+            this.Contraseña.TabIndex = 9;
+            this.Contraseña.Text = "Contraseña";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(487, 55);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(23, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Rol";
+            // 
+            // btNuevoUsuario
+            // 
+            this.btNuevoUsuario.Location = new System.Drawing.Point(670, 42);
+            this.btNuevoUsuario.Name = "btNuevoUsuario";
+            this.btNuevoUsuario.Size = new System.Drawing.Size(144, 38);
+            this.btNuevoUsuario.TabIndex = 12;
+            this.btNuevoUsuario.Text = "Nuevo usuario";
+            this.btNuevoUsuario.UseVisualStyleBackColor = true;
+            // 
+            // tbNombreRol
+            // 
+            this.tbNombreRol.Location = new System.Drawing.Point(98, 109);
+            this.tbNombreRol.Name = "tbNombreRol";
+            this.tbNombreRol.Size = new System.Drawing.Size(94, 20);
+            this.tbNombreRol.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(39, 112);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(58, 13);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Nombre rol";
+            // 
+            // btNuevoRol
+            // 
+            this.btNuevoRol.Location = new System.Drawing.Point(274, 99);
+            this.btNuevoRol.Name = "btNuevoRol";
+            this.btNuevoRol.Size = new System.Drawing.Size(144, 38);
+            this.btNuevoRol.TabIndex = 15;
+            this.btNuevoRol.Text = "Nuevo rol";
+            this.btNuevoRol.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView6
+            // 
+            this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView6.Location = new System.Drawing.Point(42, 169);
+            this.dataGridView6.Name = "dataGridView6";
+            this.dataGridView6.Size = new System.Drawing.Size(772, 299);
+            this.dataGridView6.TabIndex = 16;
+            // 
+            // cbRol
+            // 
+            this.cbRol.FormattingEnabled = true;
+            this.cbRol.Location = new System.Drawing.Point(528, 50);
+            this.cbRol.Name = "cbRol";
+            this.cbRol.Size = new System.Drawing.Size(121, 21);
+            this.cbRol.TabIndex = 17;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.comboBox2);
+            this.tabPage4.Controls.Add(this.btCambiarRol);
+            this.tabPage4.Controls.Add(this.comboBox1);
+            this.tabPage4.Controls.Add(this.btCambiarUsuario);
+            this.tabPage4.Controls.Add(this.groupBox1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1075, 516);
+            this.tabPage4.TabIndex = 6;
+            this.tabPage4.Text = "Permisos";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cbAceptarOfertas);
+            this.groupBox1.Controls.Add(this.cbCambiarRol);
+            this.groupBox1.Controls.Add(this.cbCambiarUsuario);
+            this.groupBox1.Controls.Add(this.cbNuevoRol);
+            this.groupBox1.Controls.Add(this.cbNuevoUsuario);
+            this.groupBox1.Controls.Add(this.cbRechazarOfertas);
+            this.groupBox1.Controls.Add(this.cbDarseDeBaja);
+            this.groupBox1.Controls.Add(this.cbModificarDatos);
+            this.groupBox1.Controls.Add(this.cbModificarPedido);
+            this.groupBox1.Controls.Add(this.cbBorrarPedido);
+            this.groupBox1.Controls.Add(this.cbNuevoPedido);
+            this.groupBox1.Location = new System.Drawing.Point(26, 43);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(921, 141);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Opciones";
+            // 
+            // cbNuevoPedido
+            // 
+            this.cbNuevoPedido.AutoSize = true;
+            this.cbNuevoPedido.Location = new System.Drawing.Point(17, 37);
+            this.cbNuevoPedido.Name = "cbNuevoPedido";
+            this.cbNuevoPedido.Size = new System.Drawing.Size(93, 17);
+            this.cbNuevoPedido.TabIndex = 9;
+            this.cbNuevoPedido.Text = "Nuevo pedido";
+            this.cbNuevoPedido.UseVisualStyleBackColor = true;
+            // 
+            // cbBorrarPedido
+            // 
+            this.cbBorrarPedido.AutoSize = true;
+            this.cbBorrarPedido.Location = new System.Drawing.Point(172, 37);
+            this.cbBorrarPedido.Name = "cbBorrarPedido";
+            this.cbBorrarPedido.Size = new System.Drawing.Size(89, 17);
+            this.cbBorrarPedido.TabIndex = 10;
+            this.cbBorrarPedido.Text = "Borrar pedido";
+            this.cbBorrarPedido.UseVisualStyleBackColor = true;
+            // 
+            // cbModificarPedido
+            // 
+            this.cbModificarPedido.AutoSize = true;
+            this.cbModificarPedido.Location = new System.Drawing.Point(327, 37);
+            this.cbModificarPedido.Name = "cbModificarPedido";
+            this.cbModificarPedido.Size = new System.Drawing.Size(104, 17);
+            this.cbModificarPedido.TabIndex = 11;
+            this.cbModificarPedido.Text = "Modificar pedido";
+            this.cbModificarPedido.UseVisualStyleBackColor = true;
+            // 
+            // cbModificarDatos
+            // 
+            this.cbModificarDatos.AutoSize = true;
+            this.cbModificarDatos.Location = new System.Drawing.Point(491, 37);
+            this.cbModificarDatos.Name = "cbModificarDatos";
+            this.cbModificarDatos.Size = new System.Drawing.Size(116, 17);
+            this.cbModificarDatos.TabIndex = 12;
+            this.cbModificarDatos.Text = "Modificar mis datos";
+            this.cbModificarDatos.UseVisualStyleBackColor = true;
+            // 
+            // cbDarseDeBaja
+            // 
+            this.cbDarseDeBaja.AutoSize = true;
+            this.cbDarseDeBaja.Location = new System.Drawing.Point(640, 37);
+            this.cbDarseDeBaja.Name = "cbDarseDeBaja";
+            this.cbDarseDeBaja.Size = new System.Drawing.Size(92, 17);
+            this.cbDarseDeBaja.TabIndex = 13;
+            this.cbDarseDeBaja.Text = "Darse de baja";
+            this.cbDarseDeBaja.UseVisualStyleBackColor = true;
+            // 
+            // cbCambiarRol
+            // 
+            this.cbCambiarRol.AutoSize = true;
+            this.cbCambiarRol.Location = new System.Drawing.Point(640, 80);
+            this.cbCambiarRol.Name = "cbCambiarRol";
+            this.cbCambiarRol.Size = new System.Drawing.Size(78, 17);
+            this.cbCambiarRol.TabIndex = 18;
+            this.cbCambiarRol.Text = "Cambiar rol";
+            this.cbCambiarRol.UseVisualStyleBackColor = true;
+            // 
+            // cbCambiarUsuario
+            // 
+            this.cbCambiarUsuario.AutoSize = true;
+            this.cbCambiarUsuario.Location = new System.Drawing.Point(491, 80);
+            this.cbCambiarUsuario.Name = "cbCambiarUsuario";
+            this.cbCambiarUsuario.Size = new System.Drawing.Size(101, 17);
+            this.cbCambiarUsuario.TabIndex = 17;
+            this.cbCambiarUsuario.Text = "Cambiar usuario";
+            this.cbCambiarUsuario.UseVisualStyleBackColor = true;
+            // 
+            // cbNuevoRol
+            // 
+            this.cbNuevoRol.AutoSize = true;
+            this.cbNuevoRol.Location = new System.Drawing.Point(327, 80);
+            this.cbNuevoRol.Name = "cbNuevoRol";
+            this.cbNuevoRol.Size = new System.Drawing.Size(72, 17);
+            this.cbNuevoRol.TabIndex = 16;
+            this.cbNuevoRol.Text = "Nuevo rol";
+            this.cbNuevoRol.UseVisualStyleBackColor = true;
+            // 
+            // cbNuevoUsuario
+            // 
+            this.cbNuevoUsuario.AutoSize = true;
+            this.cbNuevoUsuario.Location = new System.Drawing.Point(172, 80);
+            this.cbNuevoUsuario.Name = "cbNuevoUsuario";
+            this.cbNuevoUsuario.Size = new System.Drawing.Size(95, 17);
+            this.cbNuevoUsuario.TabIndex = 15;
+            this.cbNuevoUsuario.Text = "Nuevo usuario";
+            this.cbNuevoUsuario.UseVisualStyleBackColor = true;
+            // 
+            // cbRechazarOfertas
+            // 
+            this.cbRechazarOfertas.AutoSize = true;
+            this.cbRechazarOfertas.Location = new System.Drawing.Point(17, 80);
+            this.cbRechazarOfertas.Name = "cbRechazarOfertas";
+            this.cbRechazarOfertas.Size = new System.Drawing.Size(107, 17);
+            this.cbRechazarOfertas.TabIndex = 14;
+            this.cbRechazarOfertas.Text = "Rechazar ofertas";
+            this.cbRechazarOfertas.UseVisualStyleBackColor = true;
+            // 
+            // cbAceptarOfertas
+            // 
+            this.cbAceptarOfertas.AutoSize = true;
+            this.cbAceptarOfertas.Location = new System.Drawing.Point(788, 37);
+            this.cbAceptarOfertas.Name = "cbAceptarOfertas";
+            this.cbAceptarOfertas.Size = new System.Drawing.Size(98, 17);
+            this.cbAceptarOfertas.TabIndex = 19;
+            this.cbAceptarOfertas.Text = "Aceptar ofertas";
+            this.cbAceptarOfertas.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(26, 219);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(607, 21);
+            this.comboBox1.TabIndex = 19;
+            // 
+            // btCambiarUsuario
+            // 
+            this.btCambiarUsuario.Location = new System.Drawing.Point(666, 209);
+            this.btCambiarUsuario.Name = "btCambiarUsuario";
+            this.btCambiarUsuario.Size = new System.Drawing.Size(144, 38);
+            this.btCambiarUsuario.TabIndex = 18;
+            this.btCambiarUsuario.Text = "Cambiar usuario";
+            this.btCambiarUsuario.UseVisualStyleBackColor = true;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(26, 327);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(607, 21);
+            this.comboBox2.TabIndex = 21;
+            // 
+            // btCambiarRol
+            // 
+            this.btCambiarRol.Location = new System.Drawing.Point(666, 317);
+            this.btCambiarRol.Name = "btCambiarRol";
+            this.btCambiarRol.Size = new System.Drawing.Size(144, 38);
+            this.btCambiarRol.TabIndex = 20;
+            this.btCambiarRol.Text = "Cambiar rol";
+            this.btCambiarRol.UseVisualStyleBackColor = true;
+            // 
             // GestionPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -512,9 +838,15 @@
             this.tpHistorico.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            this.tabPage2.ResumeLayout(false);
             this.tbAcciones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablaAcciones)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -560,6 +892,35 @@
         private System.Windows.Forms.DataGridView tablaAcciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn accion;
         private System.Windows.Forms.DataGridViewTextBoxColumn parametros;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Label Contraseña;
+        private System.Windows.Forms.TextBox tbNombre;
+        private System.Windows.Forms.Label tfNombre;
+        private System.Windows.Forms.Button btNuevoRol;
+        private System.Windows.Forms.TextBox tbNombreRol;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btNuevoUsuario;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridView dataGridView6;
+        private System.Windows.Forms.ComboBox cbRol;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox cbAceptarOfertas;
+        private System.Windows.Forms.CheckBox cbCambiarRol;
+        private System.Windows.Forms.CheckBox cbCambiarUsuario;
+        private System.Windows.Forms.CheckBox cbNuevoRol;
+        private System.Windows.Forms.CheckBox cbNuevoUsuario;
+        private System.Windows.Forms.CheckBox cbRechazarOfertas;
+        private System.Windows.Forms.CheckBox cbDarseDeBaja;
+        private System.Windows.Forms.CheckBox cbModificarDatos;
+        private System.Windows.Forms.CheckBox cbModificarPedido;
+        private System.Windows.Forms.CheckBox cbBorrarPedido;
+        private System.Windows.Forms.CheckBox cbNuevoPedido;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button btCambiarRol;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btCambiarUsuario;
 
     }
 }
