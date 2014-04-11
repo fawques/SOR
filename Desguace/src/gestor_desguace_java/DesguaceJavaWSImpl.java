@@ -7,6 +7,7 @@
 package gestor_desguace_java;
 
 import java.util.logging.Logger;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -316,5 +317,19 @@ public class DesguaceJavaWSImpl implements DesguaceJavaWS {
             throw new RuntimeException(ex);
         }
     }
+
+	@Override
+	public String generarClaveReto(String idDesguace, String password) {
+		// TODO Auto-generated method stub
+		LOG.info("Executing operation cancelarOferta");
+        System.out.println(idDesguace);
+        try {
+            String _return = "_return19234808"; //???????
+            return _return;
+        } catch (java.lang.Exception ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        }
+	}
 
 }
