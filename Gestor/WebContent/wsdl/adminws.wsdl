@@ -9,6 +9,10 @@
     <wsdl:part name="parameters" element="tns:getAltaTalleres">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getContrasenyaPorDesguaceIDResponse">
+    <wsdl:part name="parameters" element="tns:getContrasenyaPorDesguaceIDResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getTalleresResponse">
     <wsdl:part name="parameters" element="tns:getTalleresResponse">
     </wsdl:part>
@@ -21,6 +25,10 @@
     <wsdl:part name="parameters" element="tns:getPedidosResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getContrasenyaPorDesguaceID">
+    <wsdl:part name="parameters" element="tns:getContrasenyaPorDesguaceID">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="sendMail">
     <wsdl:part name="parameters" element="tns:sendMail">
     </wsdl:part>
@@ -31,6 +39,10 @@
   </wsdl:message>
   <wsdl:message name="sendMailResponse">
     <wsdl:part name="parameters" element="tns:sendMailResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContrasenyaPorTallerID">
+    <wsdl:part name="parameters" element="tns:getContrasenyaPorTallerID">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getDesguacesAceptados">
@@ -95,6 +107,10 @@
   </wsdl:message>
   <wsdl:message name="addAccesoDesguace">
     <wsdl:part name="parameters" element="tns:addAccesoDesguace">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContrasenyaPorTallerIDResponse">
+    <wsdl:part name="parameters" element="tns:getContrasenyaPorTallerIDResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getPedidoIDResponse">
@@ -180,6 +196,12 @@
       <wsdl:output name="getOfertasporPedidoResponse" message="tns:getOfertasporPedidoResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getContrasenyaPorTallerID">
+      <wsdl:input name="getContrasenyaPorTallerID" message="tns:getContrasenyaPorTallerID">
+    </wsdl:input>
+      <wsdl:output name="getContrasenyaPorTallerIDResponse" message="tns:getContrasenyaPorTallerIDResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="hello">
       <wsdl:input name="hello" message="tns:hello">
     </wsdl:input>
@@ -214,6 +236,12 @@
       <wsdl:input name="getOfertas" message="tns:getOfertas">
     </wsdl:input>
       <wsdl:output name="getOfertasResponse" message="tns:getOfertasResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContrasenyaPorDesguaceID">
+      <wsdl:input name="getContrasenyaPorDesguaceID" message="tns:getContrasenyaPorDesguaceID">
+    </wsdl:input>
+      <wsdl:output name="getContrasenyaPorDesguaceIDResponse" message="tns:getContrasenyaPorDesguaceIDResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -300,12 +328,12 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="hello">
+    <wsdl:operation name="getContrasenyaPorTallerID">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="hello">
+      <wsdl:input name="getContrasenyaPorTallerID">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="helloResponse">
+      <wsdl:output name="getContrasenyaPorTallerIDResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -315,6 +343,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getTalleresAceptadosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="hello">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="hello">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="helloResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -342,6 +379,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getAltaTalleresResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContrasenyaPorDesguaceID">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getContrasenyaPorDesguaceID">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContrasenyaPorDesguaceIDResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

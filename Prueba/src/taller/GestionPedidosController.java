@@ -23,6 +23,7 @@ import java.awt.CheckboxMenuItem;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -380,14 +381,25 @@ public class GestionPedidosController implements Initializable {
     }
 
     /**
+     * @throws IOException 
      *
      */
-    public void cancelarPedido() {
+    public void cancelarPedido() throws IOException  {
         TablaPedidos tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
         if (tp != null && (tp.getEstado() == EstadoPedido.ACTIVE || tp.getEstado() == EstadoPedido.NEW || tp.getEstado() == EstadoPedido.ACCEPTED)) {
-            if (MainTaller.cancellPedido(tp.getId())) {
-                visualizarPedidos();
-            }
+            
+				try {
+					if (MainTaller.cancellPedido(tp.getId())) {
+					    visualizarPedidos();
+					}
+				} catch (AccessDeniedException e) {
+					lanzarErrorPermisos(e.getMessage());
+				
+				} catch (JsonSyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
         }
         //else //no hay pedido seleccionada
     }
@@ -409,28 +421,39 @@ public class GestionPedidosController implements Initializable {
     }
 
     /**
+     * @throws IOException 
      *
      */
-    public void aceptarOferta() {
+    public void aceptarOferta() throws IOException {
         TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
         if(tpPed.getEstado() == EstadoOferta.ACTIVE){
 	        if (tpPed != null) {
-	            MainTaller.aceptarOferta(tpPed.getId());
-	            MainTaller.cambiarEstadoPedido(EstadoPedido.ACCEPTED,tpPed.getPedido());
-	            actualizarPestanyaOfertas();
+	            try {
+					MainTaller.aceptarOferta(tpPed.getId());
+					MainTaller.cambiarEstadoPedido(EstadoPedido.ACCEPTED,tpPed.getPedido());
+		            actualizarPestanyaOfertas();
+				} catch (AccessDeniedException e) {
+					lanzarErrorPermisos(e.getMessage());
+				}
+	            
 	        }
         }
         //else //no hay oferta seleccionada
     }
 
     /**
+     * @throws IOException 
      *
      */
-    public void rechazarOferta() {
+    public void rechazarOferta() throws IOException {
         TablaOfertas tpPed = (TablaOfertas) tbOfertas.getSelectionModel().getSelectedItem();
         if(tpPed.getEstado() == EstadoOferta.ACTIVE){
 	        if (tpPed != null) {
-	            MainTaller.rechazarOferta(tpPed.getId());
+	            try {
+					MainTaller.rechazarOferta(tpPed.getId());
+				} catch (AccessDeniedException e) {
+					lanzarErrorPermisos(e.getMessage());
+				}
 	        }
         }
         //else //no hay pedido seleccionada
@@ -491,11 +514,20 @@ public class GestionPedidosController implements Initializable {
      * @throws IOException
      */
     public void bajaTaller() throws IOException {
-        if (MainTaller.bajaTaller()) {
-            cambiarAPantallaTallerDeBaja();
-        } else {
-            System.err.println("Lo siento, no se ha podido dar de baja.");
-        }
+       
+			try {
+				if (MainTaller.bajaTaller()) {
+				    cambiarAPantallaTallerDeBaja();
+				} else {
+				    System.err.println("Lo siento, no se ha podido dar de baja.");
+				}
+			} catch (AccessDeniedException e) {
+				lanzarErrorPermisos(e.getMessage());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
     }
 
     private void cambiarAPantallaTallerDeBaja() throws IOException {
@@ -524,12 +556,18 @@ public class GestionPedidosController implements Initializable {
         tdCont.setStage(thisStage);
         tdCont.showStage();
     }
-    public void modificarPedido(){
+    public void modificarPedido() throws IOException{
     	
-		try {
+		
 			tp = (TablaPedidos) tbPedidos.getSelectionModel().getSelectedItem();
 			if(tp!=null){
-				MainTaller.pedidoModificar(tp.getId());
+				
+					try {
+						MainTaller.pedidoModificar(tp.getId());
+					} catch (AccessDeniedException e) {
+						lanzarErrorPermisos(e.getMessage());
+					}
+				
 				if(MainTaller.pedidoModificar.getEstado()==EstadoPedido.ACTIVE ||MainTaller.pedidoModificar.getEstado()==EstadoPedido.NEW)
 				{
 					URL location = getClass().getResource("modificarPedido.fxml");
@@ -544,10 +582,7 @@ public class GestionPedidosController implements Initializable {
 			        tdCont.showStage();
 				}
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
         
     	
     }
@@ -557,6 +592,7 @@ public class GestionPedidosController implements Initializable {
     	if(roles!=null){
     		listaRoles.addAll(roles);
         	cbTipo.setItems(listaRoles);    		
+        	
     	}
     }
     public void ActualizarPermisos(){
@@ -574,20 +610,29 @@ public class GestionPedidosController implements Initializable {
     	}
     	
     }
-    public void nuevoUsuario(){
+    public void nuevoUsuario() throws IOException{
     	String usuario= tfNombreUsuario.getText();
     	String contrasenya=tfContrasenya.getText();
     	String rol=cbTipo.getValue().toString();
     	if(!"".equals(usuario) && !"".equals(contrasenya)&& !"".equals(rol)){
-    		MainTaller.anyadirRolUsuario(usuario,contrasenya, rol);
+    		try {
+				MainTaller.anyadirRolUsuario(usuario,contrasenya, rol);
+			} catch (AccessDeniedException e) {
+				lanzarErrorPermisos(e.getMessage());
+			}
     	}
 
     }
-    public void nuevoRol(){
+    public void nuevoRol() throws IOException{
     	String rol=tfNuevoRol.getText();
     	if(!"".equals(rol)){
-    		MainTaller.anyadirRol(rol, new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
+    		try {
+				MainTaller.anyadirRol(rol, new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
+			} catch (AccessDeniedException e) {
+				lanzarErrorPermisos(e.getMessage());
+			}
     	}
+    	
     	ActualizarUsuariosPestanya();
     }
     public void cambioUsuario() throws IOException{
@@ -613,7 +658,7 @@ public class GestionPedidosController implements Initializable {
 			}
     	}
     }
-    public void cambioRol(){
+    public void cambioRol() throws IOException{
     	ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
     	String nombreRol=cbRol.getValue().toString();
     	if(nombreRol!=null){
@@ -628,7 +673,11 @@ public class GestionPedidosController implements Initializable {
 	    listaOpciones.add(cbNuevoRol.isSelected()?1:0);
 	    listaOpciones.add(cbCambiarUsuario.isSelected()?1:0);
 	    listaOpciones.add(cbCambiarRol.isSelected()?1:0);
-    	MainTaller.cambiarRol(nombreRol,listaOpciones);
+    	try {
+			MainTaller.cambiarRol(nombreRol,listaOpciones);
+		} catch (AccessDeniedException e) {
+			lanzarErrorPermisos(e.getMessage());
+		}
     	}
     }
     public void lanzarErrorPermisos(String error) throws IOException{

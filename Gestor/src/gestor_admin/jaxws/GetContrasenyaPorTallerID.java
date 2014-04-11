@@ -13,21 +13,21 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 3.0.0-milestone1
  */
 
-@XmlRootElement(name = "getPedidoIDResponse", namespace = "http://gestor_admin/")
+@XmlRootElement(name = "getContrasenyaPorTallerID", namespace = "http://gestor_admin/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getPedidoIDResponse", namespace = "http://gestor_admin/")
+@XmlType(name = "getContrasenyaPorTallerID", namespace = "http://gestor_admin/")
 
-public class GetPedidoIDResponse {
+public class GetContrasenyaPorTallerID {
 
-    @XmlElement(name = "return")
-    private java.lang.String _return;
+    @XmlElement(name = "id")
+    private java.lang.String id;
 
-    public java.lang.String getReturn() {
-        return this._return;
+    public java.lang.String getId() {
+        return this.id;
     }
 
-    public void setReturn(java.lang.String new_return)  {
-        this._return = new_return;
+    public void setId(java.lang.String newId)  {
+        this.id = newId;
     }
 
 }
