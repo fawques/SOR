@@ -44,6 +44,7 @@ import gestor_taller.*;
  */
 public class Webservices {
 	private static TallerWS prepararWebService() {
+		SslConfig.disableCertificateChecking();
 		TallerWS_Service service = new TallerWS_Service(JUDDIProxy.getWsdl());
 		TallerWS port = service.getTallerWSPort();
 
@@ -52,8 +53,6 @@ public class Webservices {
 	}
 
 	private static SecretKey prepararClaveReto(String idTaller, String password) {
-		SslConfig.disableCertificateChecking();
-
 		Base64 b64 = new Base64();
 		String clave = generarClaveReto(idTaller,password);
 		if (clave != null) {
