@@ -1049,12 +1049,12 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
 
 	public void cambiarUsuario(String nombreUsuario,ArrayList<Integer> listaOpciones) {
       //  conexion.ejecutarInsert("Insert into roles(rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol) values ('" + nombre + "', '" + listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"')");
-         conexion.ejecutarSQL("UPDATE usuarios SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `baja`='"+listaOpciones.get(3)+"',`aceptar_ofertas`='"+listaOpciones.get(4)+"', `rechazar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where nombre='"+nombreUsuario+"';");
+         conexion.ejecutarSQL("UPDATE usuarios SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `modificar_datos`='"+listaOpciones.get(3)+"', `baja`='"+listaOpciones.get(4)+"',`aceptar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where nombre='"+nombreUsuario+"';");
 		
 	}
 
 	public void cambiarRol(String nombreRol, ArrayList<Integer> listaOpciones) {
-        conexion.ejecutarSQL("UPDATE roles SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `baja`='"+listaOpciones.get(3)+"',`aceptar_ofertas`='"+listaOpciones.get(4)+"', `rechazar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where rol='"+nombreRol+"';");
+        conexion.ejecutarSQL("UPDATE roles SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `modificar_datos`='"+listaOpciones.get(3)+"', `baja`='"+listaOpciones.get(4)+"',`aceptar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where rol='"+nombreRol+"';");
 
 		
 	}
@@ -1097,6 +1097,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
 
 	public Boolean comprobarPermisos(String usuario, String funcion) {
 		  int funcionOpcion =0;
+		  ResultSet resultSet ;
 	    ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM usuarios WHERE nombre='" + usuario + "';");
         try {
             if (resultados.first()) {
@@ -1119,6 +1120,21 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
                  else{return true;}
 
                 
+            }
+            else{
+            	resultSet =conexion.ejecutarSQLSelect("SELECT * FROM roles WHERE rol='Administrador';");
+                try {
+                    if (resultSet.first()) {
+                    	funcionOpcion = resultSet.getInt(funcion);
+                    	if(funcionOpcion==1){
+                    		return true;
+                    	}
+                        
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         } catch (SQLException ex) {

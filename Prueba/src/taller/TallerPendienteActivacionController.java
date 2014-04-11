@@ -74,6 +74,7 @@ public void comprobarContrasenya() throws IOException, ClassNotFoundException, S
             lbEstado.setStyle("-fx-border-color: red;");
             lbEstado.setText("Su cuenta no ha podido activarse");
         } else {
+        	MainTaller.nombreUsuario="Administrador";
             URL location = getClass().getResource("GestionPedidos.fxml");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(location);

@@ -261,3 +261,5 @@ CREATE TABLE `acciones` (
   `accion` varchar(10000) NOT NULL,
   `params` varchar(10000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `sor_taller`.`roles` (`rol`, `nuevo_pedido`, `borrar_pedido`, `modificar_pedido`, `modificar_datos`, `baja`, `aceptar_ofertas`, `rechazar_ofertas`, `nuevo_usuario`, `nuevo_rol`, `cambiar_usuario`, `cambiar_rol`) VALUES ('Administrador', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
