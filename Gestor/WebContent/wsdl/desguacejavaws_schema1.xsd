@@ -52,6 +52,7 @@
 
   <xs:complexType name="checkActivacion">
     <xs:sequence>
+      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
       <xs:element minOccurs="0" name="mail" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
@@ -65,6 +66,7 @@
   <xs:complexType name="getPedidoporID">
     <xs:sequence>
       <xs:element minOccurs="0" name="string" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -77,6 +79,7 @@
   <xs:complexType name="getPedidosporID">
     <xs:sequence>
       <xs:element minOccurs="0" name="string" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -167,6 +170,7 @@
   <xs:complexType name="getOfertas">
     <xs:sequence>
       <xs:element minOccurs="0" name="string" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -193,6 +197,7 @@
   <xs:complexType name="baja">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
