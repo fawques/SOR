@@ -509,7 +509,7 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = Webservices.nuevaOferta_WS(oferta);
+				String ret = Webservices.nuevaOferta_WS(oferta, desguace.getID(), desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -626,7 +626,7 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = Webservices.aceptarOfertaFin_WS(id);
+				Boolean ret = Webservices.aceptarOfertaFin_WS(id, desguace.getID(), desguace.getPassword());
 				if (ret) {
 
 				}
@@ -660,7 +660,7 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = Webservices.cancelarOferta_WS(id);
+				Boolean ret = Webservices.cancelarOferta_WS(id, desguace.getID(), desguace.getPassword());
 				if (ret) {
 
 				}
@@ -694,7 +694,7 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = Webservices.baja_WS(id);
+				Boolean ret = Webservices.baja_WS(id, desguace.getPassword());
 				if (ret) {
 
 				}
@@ -729,7 +729,7 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = Webservices.cambiarEstadoPedido_WS(id, estado);
+				Boolean ret = Webservices.cambiarEstadoPedido_WS(id, estado, desguace.getID(), desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -775,7 +775,7 @@ public class DesguaceJava extends Application {
 	        manager.ejecutarAcciones();
 	        for (int i = 0; i < 10; i++) {
 	            try{
-	                Boolean ret = modificar_WS(id, name, email, address, city, postalCode, telephone);
+	                Boolean ret = modificar_WS(id, name, email, address, city, postalCode, telephone, desguace.getPassword());
 	                // si no ha lanzado excepción, devolvemos correctamente
 	                return ret;
 	            }catch(javax.xml.ws.WebServiceException e){}
