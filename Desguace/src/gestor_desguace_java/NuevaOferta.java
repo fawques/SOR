@@ -17,6 +17,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="oferta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="idDesguace" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,13 +29,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "nuevaOferta", propOrder = {
-    "oferta"
+    "oferta",
+    "idDesguace",
+    "password"
 })
 public class NuevaOferta {
 
     protected String oferta;
 
-    /**
+    protected String idDesguace;
+	protected String password;
+
+	/**
      * Obtiene el valor de la propiedad oferta.
      * 
      * @return
@@ -55,6 +62,54 @@ public class NuevaOferta {
      */
     public void setOferta(String value) {
         this.oferta = value;
+    }
+
+	/**
+     * Obtiene el valor de la propiedad idDesguace.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdDesguace() {
+        return idDesguace;
+    }
+
+	/**
+     * Define el valor de la propiedad idDesguace.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdDesguace(String value) {
+        this.idDesguace = value;
+    }
+
+	/**
+     * Obtiene el valor de la propiedad password.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPassword() {
+        return password;
+    }
+
+	/**
+     * Define el valor de la propiedad password.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPassword(String value) {
+        this.password = value;
     }
 
 }

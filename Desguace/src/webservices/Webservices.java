@@ -4,10 +4,13 @@
  */
 package webservices;
 
-import gestor_desguace_java.DesguaceJavaWS;
-import gestor_taller.TallerWS;
-import gestor_taller.TallerWS_Service;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
+import gestor_desguace_java.DesguaceJavaWS;
+
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -46,6 +49,12 @@ public class Webservices {
 
 	}
 	
+	public static String generarClaveReto(String idDesguace, String password){
+		SslConfig.disableCertificateChecking();
+		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
+        return port.generarClaveReto(idDesguace, password);
+    }
+	
     public static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
@@ -68,8 +77,15 @@ public class Webservices {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
 		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
-			return port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, password);
+			try {
+				return port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, password);
+			} catch (InvalidKeyException | NoSuchAlgorithmException
+					| NoSuchPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		return null;
     }
 
     public static String getPedidosporID_WS(java.lang.String string) {
@@ -88,16 +104,30 @@ public class Webservices {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
 		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
-			return port.aceptarOfertaFin(TripleDes.encrypt(encryptor, id), idDesguace, password);
+			try {
+				return port.aceptarOfertaFin(TripleDes.encrypt(encryptor, id), idDesguace, password);
+			} catch (InvalidKeyException | NoSuchAlgorithmException
+					| NoSuchPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		return false;
     }
 
     public static Boolean cancelarOferta_WS(java.lang.String id, String idDesguace, String password) {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
 		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
-			return port.cancelarOferta(TripleDes.encrypt(encryptor, id), idDesguace, password);
+			try {
+				return port.cancelarOferta(TripleDes.encrypt(encryptor, id), idDesguace, password);
+			} catch (InvalidKeyException | NoSuchAlgorithmException
+					| NoSuchPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		return false;
     }
 
     public static Boolean baja_WS(java.lang.String id, String password) {
@@ -110,14 +140,28 @@ public class Webservices {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
 		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
-			return port.cambiarEstadoPedidoOtravez(TripleDes.encrypt(encryptor, id), TripleDes.encrypt(encryptor, estado), idDesguace, password);
+			try {
+				return port.cambiarEstadoPedidoOtravez(TripleDes.encrypt(encryptor, id), TripleDes.encrypt(encryptor, estado), idDesguace, password);
+			} catch (InvalidKeyException | NoSuchAlgorithmException
+					| NoSuchPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		return false;
     }
     public static boolean modificar_WS(String id, String name, String email, String address, String city, String postalCode, String telephone, String password) {
     	SecretKey encryptor = prepararClaveReto(id,password);
 		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
-			return port.modificar(id, TripleDes.encrypt(encryptor, name), TripleDes.encrypt(encryptor, email), TripleDes.encrypt(encryptor, address), TripleDes.encrypt(encryptor, city), TripleDes.encrypt(encryptor, postalCode), TripleDes.encrypt(encryptor, telephone), password);
+			try {
+				return port.modificar(id, TripleDes.encrypt(encryptor, name), TripleDes.encrypt(encryptor, email), TripleDes.encrypt(encryptor, address), TripleDes.encrypt(encryptor, city), TripleDes.encrypt(encryptor, postalCode), TripleDes.encrypt(encryptor, telephone), password);
+			} catch (InvalidKeyException | NoSuchAlgorithmException
+					| NoSuchPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		return false;
     }
 }

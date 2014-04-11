@@ -37,6 +37,8 @@
   <xs:element name="getPedidoporIDResponse" type="tns:getPedidoporIDResponse"/>
 
   <xs:element name="getPedidosporID" type="tns:getPedidosporID"/>
+  
+  <xs:element name="generarClaveReto" type="tns:generarClaveReto"/>
 
   <xs:element name="getPedidosporIDResponse" type="tns:getPedidosporIDResponse"/>
 
@@ -93,6 +95,7 @@
       <xs:element minOccurs="0" name="city" type="xs:string"/>
       <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
       <xs:element minOccurs="0" name="telephone" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -101,11 +104,26 @@
       <xs:element name="return" type="xs:boolean"/>
     </xs:sequence>
   </xs:complexType>
+  
+  <xs:complexType name="generarClaveReto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="generarClaveRetoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
 
   <xs:complexType name="cambiarEstadoPedido">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string"/>
       <xs:element minOccurs="0" name="estado" type="xs:string"/>
+      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -135,6 +153,8 @@
   <xs:complexType name="aceptarOfertaFin">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -159,6 +179,8 @@
   <xs:complexType name="nuevaOferta">
     <xs:sequence>
       <xs:element minOccurs="0" name="oferta" type="xs:string"/>
+      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -184,6 +206,8 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string"/>
       <xs:element minOccurs="0" name="estado" type="xs:string"/>
+      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -196,6 +220,8 @@
   <xs:complexType name="cancelarOferta">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 

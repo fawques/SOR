@@ -32,7 +32,8 @@ public class ObjectFactory {
     private final static QName _GetOfertas_QNAME = new QName("http://gestor_desguace_java/", "getOfertas");
     private final static QName _AceptarOfertaFin_QNAME = new QName("http://gestor_desguace_java/", "aceptarOfertaFin");
     private final static QName _GetPedidosporID_QNAME = new QName("http://gestor_desguace_java/", "getPedidosporID");
-    private final static QName _CancelarOferta_QNAME = new QName("http://gestor_desguace_java/", "cancelarOferta");
+    private final static QName _GenerarClaveReto_QNAME = new QName("http://gestor_desguace_java/", "generarClaveReto");
+	private final static QName _CancelarOferta_QNAME = new QName("http://gestor_desguace_java/", "cancelarOferta");
     private final static QName _AltaResponse_QNAME = new QName("http://gestor_desguace_java/", "altaResponse");
     private final static QName _CambiarEstadoPedidoOtravezResponse_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedidoOtravezResponse");
     private final static QName _AceptarOfertaFinResponse_QNAME = new QName("http://gestor_desguace_java/", "aceptarOfertaFinResponse");
@@ -249,6 +250,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GenerarClaveRetoResponse }
+     * 
+     */
+    public GenerarClaveRetoResponse createGenerarClaveRetoResponse() {
+        return new GenerarClaveRetoResponse();
+    }
+
+	/**
+     * Create an instance of {@link GenerarClaveReto }
+     * 
+     */
+    public GenerarClaveReto createGenerarClaveReto() {
+        return new GenerarClaveReto();
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link NuevaOfertaResponse }{@code >}}
      * 
      */
@@ -321,6 +338,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GenerarClaveReto }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "generarClaveReto")
+    public JAXBElement<GenerarClaveReto> createGenerarClaveReto(GenerarClaveReto value) {
+        return new JAXBElement<GenerarClaveReto>(_GenerarClaveReto_QNAME, GenerarClaveReto.class, null, value);
+    }
+
+	/**
      * Create an instance of {@link JAXBElement }{@code <}{@link CancelarOferta }{@code >}}
      * 
      */

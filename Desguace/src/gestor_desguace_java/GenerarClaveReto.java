@@ -7,16 +7,15 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para aceptarOfertaFin complex type.
+ * <p>Clase Java para generarClaveReto complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="aceptarOfertaFin">
+ * &lt;complexType name="generarClaveReto">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="idDesguace" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -28,43 +27,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "aceptarOfertaFin", propOrder = {
-    "id",
+@XmlType(name = "generarClaveReto", propOrder = {
     "idDesguace",
     "password"
 })
-public class AceptarOfertaFin {
-
-    protected String id;
+public class GenerarClaveReto {
 
     protected String idDesguace;
-	protected String password;
-
-	/**
-     * Obtiene el valor de la propiedad id.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
+    protected String password;
 
     /**
-     * Define el valor de la propiedad id.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
-
-	/**
      * Obtiene el valor de la propiedad idDesguace.
      * 
      * @return
@@ -76,7 +48,7 @@ public class AceptarOfertaFin {
         return idDesguace;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad idDesguace.
      * 
      * @param value
@@ -88,7 +60,7 @@ public class AceptarOfertaFin {
         this.idDesguace = value;
     }
 
-	/**
+    /**
      * Obtiene el valor de la propiedad password.
      * 
      * @return
@@ -100,7 +72,7 @@ public class AceptarOfertaFin {
         return password;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad password.
      * 
      * @param value

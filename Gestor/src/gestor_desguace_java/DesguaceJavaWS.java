@@ -83,6 +83,7 @@ public class DesguaceJavaWS {
 		}
 	}
 	
+	@WebMethod(operationName = "generarClaveReto")
     public String generarClaveReto(@WebParam(name = "idDesguace") String idDesguace,@WebParam(name = "password") String password) {
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {

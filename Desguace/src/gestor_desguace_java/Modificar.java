@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="postalCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="telephone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,7 +40,8 @@ import javax.xml.bind.annotation.XmlType;
     "address",
     "city",
     "postalCode",
-    "telephone"
+    "telephone",
+    "password"
 })
 public class Modificar {
 
@@ -51,7 +53,9 @@ public class Modificar {
     protected String postalCode;
     protected String telephone;
 
-    /**
+    protected String password;
+
+	/**
      * Obtiene el valor de la propiedad id.
      * 
      * @return
@@ -217,6 +221,30 @@ public class Modificar {
      */
     public void setTelephone(String value) {
         this.telephone = value;
+    }
+
+	/**
+     * Obtiene el valor de la propiedad password.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPassword() {
+        return password;
+    }
+
+	/**
+     * Define el valor de la propiedad password.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPassword(String value) {
+        this.password = value;
     }
 
 }
