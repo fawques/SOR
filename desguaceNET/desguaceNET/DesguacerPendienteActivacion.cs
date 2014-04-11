@@ -34,6 +34,7 @@ namespace desguaceNET
             string id = main.comprobarActivacion(tbValidar.Text);
             if (id != "")
             {
+                main.ponerCodigoActivacionTaller(tbValidar.Text,id);
                 idResult = id;
                 DialogResult = DialogResult.OK;
             }

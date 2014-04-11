@@ -203,12 +203,42 @@ CREATE TABLE `desguace` (
   PRIMARY KEY (`id_aux`),
   KEY `PRIMARY_GESTOR` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `roles`(
+  `rol` varchar(45) DEFAULT NULL,
+  `nuevo_pedido` int(1) NOT NULL DEFAULT '0',
+  `borrar_pedido` int(1) NOT NULL DEFAULT '0',
+  `modificar_pedido` int(1) NOT NULL DEFAULT '0',
+  `modificar_datos` int(1) NOT NULL DEFAULT '0',
+  `baja` int(1) NOT NULL DEFAULT '0',
+  `aceptar_ofertas` int(1) NOT NULL DEFAULT '0',
+  `rechazar_ofertas` int(1) NOT NULL DEFAULT '0',
+  `nuevo_usuario` int(1) NOT NULL DEFAULT '0',
+  `nuevo_rol` int(1) NOT NULL DEFAULT '0',
+  `cambiar_usuario` int(1) NOT NULL DEFAULT '0',
+  `cambiar_rol` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`rol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `usuarios` (
   `nombre` varchar(30) NOT NULL,
   `contrasenya` varchar(30) DEFAULT NULL,
-  `rol` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`nombre`)
+  `rol` varchar(45) NOT NULL,
+  `nuevo_pedido` int(1) NOT NULL DEFAULT '0',
+  `borrar_pedido` int(1) NOT NULL DEFAULT '0',
+  `modificar_pedido` int(1) NOT NULL DEFAULT '0',
+  `modificar_datos` int(1) NOT NULL DEFAULT '0',
+  `baja` int(1) NOT NULL DEFAULT '0',
+  `aceptar_ofertas` int(1) NOT NULL DEFAULT '0',
+  `rechazar_ofertas` int(1) NOT NULL DEFAULT '0',
+  `nuevo_usuario` int(1) NOT NULL DEFAULT '0',
+  `nuevo_rol` int(1) NOT NULL DEFAULT '0',
+  `cambiar_usuario` int(1) NOT NULL DEFAULT '0',
+  `cambiar_rol` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`nombre`),
+  KEY `rol_id` (`rol`),
+  CONSTRAINT `rol_usuario` FOREIGN KEY (`rol`) REFERENCES `roles`(`rol`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `pedido` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
   `id` char(32) UNIQUE DEFAULT '',
