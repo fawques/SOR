@@ -176,18 +176,22 @@ public class TallerWS {
 	 */
 	// REMODELACION PARA QUE HAYA UNA ESPECIE DE LOGIN
 	@WebMethod(operationName = "checkActivacion")
-    public String checkActivacion(@WebParam(name = "mail") String contrasenya)    {
+    public String checkActivacion(@WebParam(name = "idTaller") String idTaller, @WebParam(name = "mail") String contrasenya)    {
 		try {
 			bd = new InterfazBD("sor_gestor");
-            Taller taller = bd.getTallerActivar(contrasenya);
-			String res;
-            if (taller!=null) {
-				res = taller.getID();
-			} else {
-				res = "";
+			Taller t = bd.getTallerEnGestor(idTaller);
+			if (t != null && t.getPassword().equals(contrasenya)) {
+	            Taller taller = bd.getTallerActivar(contrasenya);
+				String res;
+	            if (taller!=null) {
+					res = taller.getID();
+				} else {
+					res = "";
+				}
+				bd.close();
+				return res;
 			}
 			bd.close();
-			return res;
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -354,9 +358,13 @@ public class TallerWS {
 	public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			boolean oool = bd.bajaTaller(tallerID);
+			Taller t = bd.getTallerEnGestor(tallerID);
+			if (t != null && t.getPassword().equals(password)) {
+				boolean oool = bd.bajaTaller(tallerID);
+				bd.close();
+				return oool;
+			}
 			bd.close();
-			return oool;
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -475,23 +483,28 @@ public class TallerWS {
 		ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
 		try {
 			bd = new InterfazBD("sor_gestor");
-			listaPedidos = bd.getPedidosTaller(idTaller);
-			for (Pedido p : listaPedidos) {
-				if (p.getEstado() == EstadoPedido.FINISHED_OK) {
-					ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
-							.getID());
-					for (Oferta of : listaOferta) {
-						if (of.getEstado() != EstadoOferta.FINISHED_OK) {
-							bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
-									of.getID());
+
+			Taller t = bd.getTallerEnGestor(idTaller);
+			if (t != null && t.getPassword().equals(password)) {
+				listaPedidos = bd.getPedidosTaller(idTaller);
+				for (Pedido p : listaPedidos) {
+					if (p.getEstado() == EstadoPedido.FINISHED_OK) {
+						ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
+								.getID());
+						for (Oferta of : listaOferta) {
+							if (of.getEstado() != EstadoOferta.FINISHED_OK) {
+								bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
+										of.getID());
+							}
 						}
 					}
 				}
+				String listaJSON = gson.toJson(listaPedidos);
+				System.out.println("listaJSON = " + listaJSON);
+				bd.close();
+				return listaJSON;
 			}
-			String listaJSON = gson.toJson(listaPedidos);
-			System.out.println("listaJSON = " + listaJSON);
 			bd.close();
-			return listaJSON;
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
