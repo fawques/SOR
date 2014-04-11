@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,13 +28,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "baja", propOrder = {
-    "id"
+    "id",
+    "password"
 })
 public class Baja {
 
     protected String id;
 
-    /**
+    protected String password;
+
+	/**
      * Obtiene el valor de la propiedad id.
      * 
      * @return
@@ -55,6 +59,30 @@ public class Baja {
      */
     public void setId(String value) {
         this.id = value;
+    }
+
+	/**
+     * Obtiene el valor de la propiedad password.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPassword() {
+        return password;
+    }
+
+	/**
+     * Define el valor de la propiedad password.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPassword(String value) {
+        this.password = value;
     }
 
 }

@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="idDesguace" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="mail" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -27,13 +28,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "checkActivacion", propOrder = {
+    "idDesguace",
     "mail"
 })
 public class CheckActivacion {
 
-    protected String mail;
+    protected String idDesguace;
+	protected String mail;
 
     /**
+     * Obtiene el valor de la propiedad idDesguace.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdDesguace() {
+        return idDesguace;
+    }
+
+	/**
+     * Define el valor de la propiedad idDesguace.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdDesguace(String value) {
+        this.idDesguace = value;
+    }
+
+	/**
      * Obtiene el valor de la propiedad mail.
      * 
      * @return
