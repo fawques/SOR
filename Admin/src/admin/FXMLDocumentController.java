@@ -24,6 +24,7 @@ import admin.Admin;
 import com.google.gson.JsonSyntaxException;
 
 
+
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -65,6 +67,10 @@ public class FXMLDocumentController implements Initializable {
     private Label label;
     @FXML
     private Button button;
+    @FXML
+    public CheckBox cbCifradoAsim;
+    @FXML
+    public CheckBox cbCifradoSim;
     @FXML
     private Button btnNew = new Button("New Record");
     @FXML private TableView tableTalleres;
@@ -755,5 +761,22 @@ public void actualizarTaller(){
     public void showStage() {
         thisStage.sizeToScene();
         thisStage.show();
+    }
+    public void toggleAsimetrico(){
+    	boolean on = cbCifradoAsim.isSelected();
+    	if(Admin.toggleAsimetrico(on)){
+    		seguridad.Config.setCifradoAsimetrico(on);
+    	}else{
+    		System.err.println("ERROR AL DESACTIVAR EL CIFRADO ASIMÉTRICO");
+    	}
+    }
+    public void toggleSimetrico(){
+    	boolean on = cbCifradoSim.isSelected();
+    	if(Admin.toggleSimetrico(on)){
+    		seguridad.Config.setCifradoSimetrico(on);
+    	}else{
+    		System.err.println("ERROR AL DESACTIVAR EL CIFRADO SIMÉTRICO");
+    	}
+    	
     }
 }

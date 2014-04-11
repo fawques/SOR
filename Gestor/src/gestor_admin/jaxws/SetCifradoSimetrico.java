@@ -13,21 +13,21 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 3.0.0-milestone1
  */
 
-@XmlRootElement(name = "getDesguacesResponse", namespace = "http://gestor_admin/")
+@XmlRootElement(name = "setCifradoSimetrico", namespace = "http://gestor_admin/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getDesguacesResponse", namespace = "http://gestor_admin/")
+@XmlType(name = "setCifradoSimetrico", namespace = "http://gestor_admin/")
 
-public class GetDesguacesResponse {
+public class SetCifradoSimetrico {
 
-    @XmlElement(name = "return")
-    private java.lang.String _return;
+    @XmlElement(name = "on")
+    private boolean on;
 
-    public java.lang.String getReturn() {
-        return this._return;
+    public boolean getOn() {
+        return this.on;
     }
 
-    public void setReturn(java.lang.String new_return)  {
-        this._return = new_return;
+    public void setOn(boolean newOn)  {
+        this.on = newOn;
     }
 
 }

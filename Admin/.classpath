@@ -16,5 +16,6 @@
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/Silvia/workspace/SOR/libSOR/lib/google-gson-2.2.4/gson-2.2.4-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Seguridad"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

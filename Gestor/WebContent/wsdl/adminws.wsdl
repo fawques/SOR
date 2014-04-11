@@ -5,6 +5,10 @@
   <import namespace="http://gestor_admin/" schemaLocation="adminws_schema1.xsd"/>
 </schema>
   </wsdl:types>
+  <wsdl:message name="setCifradoAsimetricoResponse">
+    <wsdl:part name="parameters" element="tns:setCifradoAsimetricoResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getAltaTalleres">
     <wsdl:part name="parameters" element="tns:getAltaTalleres">
     </wsdl:part>
@@ -105,8 +109,20 @@
     <wsdl:part name="parameters" element="tns:getOfertasporPedidoResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="setCifradoSimetrico">
+    <wsdl:part name="parameters" element="tns:setCifradoSimetrico">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setCifradoSimetricoResponse">
+    <wsdl:part name="parameters" element="tns:setCifradoSimetricoResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getOfertasporPedido">
     <wsdl:part name="parameters" element="tns:getOfertasporPedido">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setCifradoAsimetrico">
+    <wsdl:part name="parameters" element="tns:setCifradoAsimetrico">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getAltaTalleresResponse">
@@ -174,6 +190,12 @@
       <wsdl:output name="getDesguacesResponse" message="tns:getDesguacesResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="setCifradoSimetrico">
+      <wsdl:input name="setCifradoSimetrico" message="tns:setCifradoSimetrico">
+    </wsdl:input>
+      <wsdl:output name="setCifradoSimetricoResponse" message="tns:setCifradoSimetricoResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getOfertasporPedido">
       <wsdl:input name="getOfertasporPedido" message="tns:getOfertasporPedido">
     </wsdl:input>
@@ -208,6 +230,12 @@
       <wsdl:input name="getAltaTalleres" message="tns:getAltaTalleres">
     </wsdl:input>
       <wsdl:output name="getAltaTalleresResponse" message="tns:getAltaTalleresResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setCifradoAsimetrico">
+      <wsdl:input name="setCifradoAsimetrico" message="tns:setCifradoAsimetrico">
+    </wsdl:input>
+      <wsdl:output name="setCifradoAsimetricoResponse" message="tns:setCifradoAsimetricoResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getOfertas">
@@ -291,6 +319,15 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="setCifradoSimetrico">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="setCifradoSimetrico">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="setCifradoSimetricoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getOfertasporPedido">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="getOfertasporPedido">
@@ -342,6 +379,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getAltaTalleresResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setCifradoAsimetrico">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="setCifradoAsimetrico">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="setCifradoAsimetricoResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

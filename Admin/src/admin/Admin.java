@@ -153,5 +153,17 @@ public class Admin extends Application {
         gestor_admin.AdminWS port = service.getAdminWSPort();
         return port.getAltaDesguace();
     }
+    
+    public static boolean toggleAsimetrico(boolean on) {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.setCifradoAsimetrico(on);
+    }
+    
+    public static boolean toggleSimetrico(boolean on) {
+        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
+        gestor_admin.AdminWS port = service.getAdminWSPort();
+        return port.setCifradoSimetrico(on);
+    }
 
 }
