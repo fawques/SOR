@@ -194,20 +194,24 @@ public class TripleDes {
 	public static String encrypt(SecretKey key, String in)
 			throws NoSuchAlgorithmException, InvalidKeyException,
 			NoSuchPaddingException, IOException {
-		// Create and initialize the encryption engine
-		Cipher cipher = Cipher.getInstance("DESede");
-		cipher.init(Cipher.ENCRYPT_MODE, key);
-
-		byte[] encryptedString;
-		try {
-			Base64 b64 = new Base64();
-			encryptedString = cipher.doFinal(in.getBytes("iso-8859-1"));
-			return b64.encodeToString(encryptedString);
-		} catch (IllegalBlockSizeException | BadPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(seguridad.Config.isCifradoSimetrico()){
+			// Create and initialize the encryption engine
+			Cipher cipher = Cipher.getInstance("DESede");
+			cipher.init(Cipher.ENCRYPT_MODE, key);
+	
+			byte[] encryptedString;
+			try {
+				Base64 b64 = new Base64();
+				encryptedString = cipher.doFinal(in.getBytes("iso-8859-1"));
+				return b64.encodeToString(encryptedString);
+			} catch (IllegalBlockSizeException | BadPaddingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}else{
+			return in;
 		}
-		return null;
 	}
 
 	/**
@@ -217,18 +221,22 @@ public class TripleDes {
 	 * CipherOutputStream.
 	 */
 	public static String decrypt(SecretKey key,String encryptedString) {
-	    String decryptedText=null;
-	    try {
-	    	Cipher cipher = Cipher.getInstance("DESede");
-	    	cipher.init(Cipher.DECRYPT_MODE, key);
-	    	
-	    	Base64 b64 = new Base64();
-	        byte[] encryptedText = b64.decode(encryptedString);
-	        byte[] plainText = cipher.doFinal(encryptedText);
-	        decryptedText= new String(plainText,"iso-8859-1");
-	    } catch (Exception e) {
-	        e.printStackTrace();
+		if(seguridad.Config.isCifradoSimetrico()){
+		    String decryptedText=null;
+		    try {
+		    	Cipher cipher = Cipher.getInstance("DESede");
+		    	cipher.init(Cipher.DECRYPT_MODE, key);
+		    	
+		    	Base64 b64 = new Base64();
+		        byte[] encryptedText = b64.decode(encryptedString);
+		        byte[] plainText = cipher.doFinal(encryptedText);
+		        decryptedText= new String(plainText,"iso-8859-1");
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return decryptedText;
+	    }else{
+	    	return encryptedString;
 	    }
-	    return decryptedText;
 	}
 }
