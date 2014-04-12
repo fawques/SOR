@@ -53,8 +53,8 @@ import seguridad.TripleDes;
 public class TallerWS {
 
 	InterfazBD bd;
-	static ArrayList<String> listaIdTaller;
-	static ArrayList<SecretKey> listaSecretKeys;
+	static ArrayList<String> listaIdTaller = new ArrayList<String>();
+	static ArrayList<SecretKey> listaSecretKeys = new ArrayList<SecretKey>();
 	
 	private SecretKey getKey(String idTaller, String password) {
 		int index = listaIdTaller.indexOf(idTaller);
