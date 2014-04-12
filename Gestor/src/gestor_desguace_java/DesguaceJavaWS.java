@@ -148,12 +148,12 @@ public class DesguaceJavaWS {
     }
     
         @WebMethod(operationName = "checkActivacion")
-    public String checkActivacion(@WebParam(name="idDesguace") String idDesguace, @WebParam(name = "mail") String contrasenya){
+    public String checkActivacion(@WebParam(name="email") String email, @WebParam(name = "contrasenya") String contrasenya){
 
         try {
 
             bd = new InterfazBD("sor_gestor");
-            Desguace desg = bd.getDesguaceEnGestorID_AUX(idDesguace);
+            Desguace desg = bd.getDesguace(email);
 			if (desg != null && desg.getPassword().equals(contrasenya)) {
 	            Desguace desguace = bd.getDesguaceActivar(contrasenya);
 	            String res;

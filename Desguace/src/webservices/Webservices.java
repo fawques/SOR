@@ -34,11 +34,11 @@ public class Webservices {
 		return port;
 	}
 
-	private static SecretKey prepararClaveReto(String idTaller, String password) {
+	private static SecretKey prepararClaveReto(String idDesguace, String password) {
 		
 
 		Base64 b64 = new Base64();
-		String clave = generarClaveReto(idTaller,password);
+		String clave = generarClaveReto(idDesguace,password);
 		if (clave != null) {
 			byte[] encodedKey = b64.decode(clave);
 			SecretKey encryptor = new SecretKeySpec(encodedKey, 0,
@@ -62,10 +62,10 @@ public class Webservices {
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static String checkActivacion_WS(java.lang.String id_aux,java.lang.String contrasenya) {
+    public static String checkActivacion_WS(java.lang.String email,java.lang.String contrasenya) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.checkActivacion(id_aux,contrasenya);
+        return port.checkActivacion(email,contrasenya);
     }
 
     public static String getOfertas_WS(java.lang.String id,java.lang.String password) {
@@ -132,8 +132,8 @@ public class Webservices {
     }
 
     public static Boolean baja_WS(java.lang.String id, String password) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+    	SslConfig.disableCertificateChecking();
+    	DesguaceJavaWS port = prepararWebService();
         return port.baja(id, password);
     }
 
