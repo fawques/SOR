@@ -54,7 +54,11 @@ public class Webservices {
 
 	private static SecretKey prepararClaveReto(String idTaller, String password) {
 		Base64 b64 = new Base64();
-		String clave = generarClaveReto(idTaller,password);
+		String clave = "emptykey";
+		if(seguridad.Config.isCifradoSimetrico()){
+			clave = generarClaveReto(idTaller,password);
+		}
+			
 		if (clave != null) {
 			byte[] encodedKey = b64.decode(clave);
 			SecretKey encryptor = new SecretKeySpec(encodedKey, 0,
@@ -63,7 +67,6 @@ public class Webservices {
 		} else {
 			return null;
 		}
-
 	}
 
 	// public:
@@ -99,20 +102,17 @@ public class Webservices {
 			java.lang.String email, java.lang.String address,
 			java.lang.String city, java.lang.String postalCode,
 			java.lang.String telephone) {
-		SslConfig.disableCertificateChecking();
 		TallerWS port = prepararWebService();
 		return port.alta(name, email, address, city, postalCode, telephone);
 
 	}
 
 	public static String generarClaveReto(String idTaller, String password) {
-		SslConfig.disableCertificateChecking();
 		TallerWS port = prepararWebService();
 		return port.generarClaveReto(idTaller, password);
 	}
 
     public static String checkActivacion_WS(String contrasenya) {
-    	SslConfig.disableCertificateChecking();
         TallerWS port = prepararWebService();
         return port.checkActivacion(contrasenya);
 	}
