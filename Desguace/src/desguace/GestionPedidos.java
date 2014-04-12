@@ -48,6 +48,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -119,6 +120,8 @@ public class GestionPedidos implements Initializable {
     ObservableList<TablaAcciones> olTablaAcciones = FXCollections.observableArrayList();
 
     InterfazBD bd;
+    private CheckBox cbCifradoAsim;
+    private CheckBox cbCifradoSim;
   
     /**
      * Initializes the controller class.
@@ -756,5 +759,12 @@ public class GestionPedidos implements Initializable {
     	DesguaceJava.anyadirRolUsuario("pio", "11", "Entrenador_pokemon");
 
     }
+ 
+ public void toggleAsimetrico(){
+		seguridad.Config.setCifradoAsimetrico(cbCifradoAsim.isSelected());
+ }
+ public void toggleSimetrico(){
+		seguridad.Config.setCifradoSimetrico(cbCifradoSim.isSelected());
+ }
             
 }

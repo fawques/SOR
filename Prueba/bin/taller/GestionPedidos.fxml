@@ -132,6 +132,20 @@
             </AnchorPane>
           </content>
         </Tab>
+        <Tab onSelectionChanged="#ActualizarPermisos" text="Opciones">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <VBox alignment="TOP_LEFT" fillWidth="true" layoutX="39.0" layoutY="48.0" pickOnBounds="true" prefHeight="200.0" prefWidth="171.0" spacing="20.0">
+                  <children>
+                    <CheckBox fx:id="cbCifradoAsim" mnemonicParsing="false" onAction="#toggleAsimetrico" selected="true" style="" text="Habilitar cifrado asimetrico" />
+                    <CheckBox id="cbCifradoSim" mnemonicParsing="false" onAction="#toggleSimetrico" selected="true" text="Habilitar cifrado simetrico" />
+                  </children>
+                </VBox>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
       </tabs>
     </TabPane>
   </children>
