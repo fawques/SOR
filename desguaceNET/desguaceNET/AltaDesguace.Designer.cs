@@ -174,9 +174,10 @@
             this.Contraseña.AutoSize = true;
             this.Contraseña.Location = new System.Drawing.Point(39, 293);
             this.Contraseña.Name = "Contraseña";
-            this.Contraseña.Size = new System.Drawing.Size(35, 13);
+            this.Contraseña.Size = new System.Drawing.Size(61, 13);
             this.Contraseña.TabIndex = 22;
-            this.Contraseña.Text = "label6";
+            this.Contraseña.Text = "Contraseña";
+            this.Contraseña.Click += new System.EventHandler(this.Contraseña_Click);
             // 
             // AltaDesguace
             // 

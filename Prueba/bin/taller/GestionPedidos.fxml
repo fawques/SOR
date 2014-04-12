@@ -139,7 +139,7 @@
                 <VBox alignment="TOP_LEFT" fillWidth="true" layoutX="39.0" layoutY="48.0" pickOnBounds="true" prefHeight="200.0" prefWidth="171.0" spacing="20.0">
                   <children>
                     <CheckBox fx:id="cbCifradoAsim" mnemonicParsing="false" onAction="#toggleAsimetrico" selected="true" style="" text="Habilitar cifrado asimetrico" />
-                    <CheckBox id="cbCifradoSim" mnemonicParsing="false" onAction="#toggleSimetrico" selected="true" text="Habilitar cifrado simetrico" />
+                    <CheckBox fx:id="cbCifradoSim" mnemonicParsing="false" onAction="#toggleSimetrico" selected="true" text="Habilitar cifrado simetrico" />
                   </children>
                 </VBox>
               </children>

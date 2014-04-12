@@ -788,6 +788,9 @@ namespace desguaceNET
 
 
         }
+        public void ponerCodigoActivacionTaller(String codigo,String id) {
+            bd.ponerCodigoActivacionDesguace(codigo, id);
+        }
 
 
     }

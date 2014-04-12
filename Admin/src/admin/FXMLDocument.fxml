@@ -50,6 +50,10 @@
                 <Text font="$x1" layoutX="92.0" layoutY="289.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Alta desguaces" />
                 <TableView id="tableTalleres" fx:id="tableAltaTalleres" disable="false" editable="true" layoutX="33.0" layoutY="61.0" prefHeight="200.0" prefWidth="745.0" tableMenuButtonVisible="true" />
                 <TableView id="tableDesguaces" fx:id="tableAltaDesguaces" disable="false" editable="true" layoutX="33.0" layoutY="335.0" prefHeight="200.0" prefWidth="745.0" tableMenuButtonVisible="true" />
+                <TextField id="tfContrasenya" fx:id="tfContrasenyaTaller" layoutX="907.0" layoutY="75.0" prefWidth="200.0" />
+                <TextField fx:id="tfContrasenyaDesguace" layoutX="907.0" layoutY="335.0" prefWidth="200.0" />
+                <Text layoutX="907.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Validación taller" />
+                <Text layoutX="907.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Validación desguace" />
               </children>
             </AnchorPane>
           </content>

@@ -575,9 +575,9 @@ namespace desguaceNET.libSOR.BD
             DataSet opciones = conexion.ejecutarSQLSelect(new MySqlCommand("SELECT * from roles where rol='" + rol + "';"));
 
             DataTableReader reader = opciones.CreateDataReader();
-            if (reader.NextResult())
+            if (reader.Read())
             {
-                    for (int i = 2; i <= 12; i++)
+                    for (int i = 1; i <= 11; i++)
                     {
                         listaOpciones.Add(reader.GetInt32(i));
                     }
@@ -611,5 +611,11 @@ namespace desguaceNET.libSOR.BD
         }
         return false;
 	}
+    public void ponerCodigoActivacionDesguace(String codigo, String id)
+    {
+        conexion.ejecutarSQL(new MySqlCommand("UPDATE `desguace` SET `contrasenya`='" + codigo + "' WHERE `id`='" + id + "';"));
+
     }
+    }
+   
 }

@@ -388,7 +388,7 @@ public class DesguaceJava extends Application {
 	public static boolean reactivarDesguace() {
 		try {
 			bd = new InterfazBD("sor_desguace");
-			boolean r = bd.activarDesguace(desguace.getID());
+			boolean r = bd.activarDesguace(desguace.getID(),desguace.getPassword());
 			bd.close();
 			return r;
 		} catch (SQLException ex) {
@@ -839,6 +839,21 @@ public class DesguaceJava extends Application {
 			}
 			
 			return false;
+			
+		}
+		public static void ponerCodigoActivacionTaller(String codigo) {
+			try {
+				bd = new InterfazBD("sor_desguace");
+				bd.ponerCodigoActivacionDesguace(codigo,desguace.getID());
+				bd.close();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			
 		}
 }

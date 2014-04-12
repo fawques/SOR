@@ -20,6 +20,14 @@
 
   <xs:element name="getAltaTalleresResponse" type="tns:getAltaTalleresResponse"/>
 
+  <xs:element name="getContrasenyaPorDesguaceID" type="tns:getContrasenyaPorDesguaceID"/>
+
+  <xs:element name="getContrasenyaPorDesguaceIDResponse" type="tns:getContrasenyaPorDesguaceIDResponse"/>
+
+  <xs:element name="getContrasenyaPorTallerID" type="tns:getContrasenyaPorTallerID"/>
+
+  <xs:element name="getContrasenyaPorTallerIDResponse" type="tns:getContrasenyaPorTallerIDResponse"/>
+
   <xs:element name="getDesguaces" type="tns:getDesguaces"/>
 
   <xs:element name="getDesguacesAceptados" type="tns:getDesguacesAceptados"/>
@@ -177,6 +185,18 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="getContrasenyaPorTallerID">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getContrasenyaPorTallerIDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="hello">
     <xs:sequence/>
   </xs:complexType>
@@ -248,6 +268,18 @@
   </xs:complexType>
 
   <xs:complexType name="getOfertasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getContrasenyaPorDesguaceID">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getContrasenyaPorDesguaceIDResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:string"/>
     </xs:sequence>
