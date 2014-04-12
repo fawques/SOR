@@ -83,5 +83,10 @@ namespace desguaceNET
         {
             Close();
         }
+
+        private void Contraseña_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

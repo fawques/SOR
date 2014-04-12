@@ -2,7 +2,7 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://gestor_desguace_java/" name="DesguaceJavaWS" targetNamespace="http://gestor_desguace_java/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema">
-      <xsd:import schemaLocation="http://192.168.1.5:8080/Gestor/services/DesguaceJavaWSPort?xsd=desguacejavaws_schema1.xsd" namespace="http://gestor_desguace_java/" />
+      <xsd:import schemaLocation="http://localhost:8080/Gestor/services/DesguaceJavaWSPort?xsd=desguacejavaws_schema1.xsd" namespace="http://gestor_desguace_java/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="nuevaOfertaResponse">
@@ -240,7 +240,7 @@
   </wsdl:binding>
   <wsdl:service name="DesguaceJavaWS">
     <wsdl:port name="DesguaceJavaWSPort" binding="tns:DesguaceJavaWSSoapBinding">
-      <soap:address location="http://192.168.1.5:8080/Gestor/services/DesguaceJavaWSPort" />
+      <soap:address location="http://localhost:8080/Gestor/services/DesguaceJavaWSPort" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
