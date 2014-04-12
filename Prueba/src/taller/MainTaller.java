@@ -667,6 +667,7 @@ public class MainTaller extends Application {
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
 				e.printStackTrace();
+				System.err.println("Reintentando...");
 			}
 		}
 		try {
@@ -724,6 +725,8 @@ public class MainTaller extends Application {
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
+				e.printStackTrace();
+				System.err.println("Reintentando...");
 			}
 		}
 		try {
@@ -755,6 +758,8 @@ public class MainTaller extends Application {
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
+				e.printStackTrace();
+				System.err.println("Reintentando...");
 			}
 		}
 		try {

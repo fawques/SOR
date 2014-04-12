@@ -37,6 +37,10 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.CharSet;
+import org.bouncycastle.jcajce.provider.symmetric.ARC4.Base;
+
 /**
  * This class defines methods for encrypting and decrypting using the Triple DES
  * algorithm and for generating, reading and writing Triple DES keys. It also
@@ -196,10 +200,9 @@ public class TripleDes {
 
 		byte[] encryptedString;
 		try {
-			encryptedString = cipher.doFinal(in.getBytes());
-			
-	        return new String(encryptedString);
-
+			Base64 b64 = new Base64();
+			encryptedString = cipher.doFinal(in.getBytes("iso-8859-1"));
+			return b64.encodeToString(encryptedString);
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -218,10 +221,11 @@ public class TripleDes {
 	    try {
 	    	Cipher cipher = Cipher.getInstance("DESede");
 	    	cipher.init(Cipher.DECRYPT_MODE, key);
-
-	        byte[] encryptedText = encryptedString.getBytes();
+	    	
+	    	Base64 b64 = new Base64();
+	        byte[] encryptedText = b64.decode(encryptedString);
 	        byte[] plainText = cipher.doFinal(encryptedText);
-	        decryptedText= new String(plainText);
+	        decryptedText= new String(plainText,"iso-8859-1");
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
