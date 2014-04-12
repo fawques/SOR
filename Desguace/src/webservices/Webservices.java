@@ -57,20 +57,20 @@ public class Webservices {
     }
 	
     public static boolean alta_WS(java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+    	SslConfig.disableCertificateChecking();
+		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
     public static String checkActivacion_WS(java.lang.String email,java.lang.String contrasenya) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+    	SslConfig.disableCertificateChecking();
+		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
         return port.checkActivacion(email,contrasenya);
     }
 
     public static String getOfertas_WS(java.lang.String id,java.lang.String password) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+    	SslConfig.disableCertificateChecking();
+		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
         return port.getOfertas(id,password);
     }
     
@@ -90,14 +90,14 @@ public class Webservices {
     }
 
     public static String getPedidosporID_WS(java.lang.String string,java.lang.String password) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+    	SslConfig.disableCertificateChecking();
+		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
         return port.getPedidosporID(string,password);
     }
     
     public static String getPedidoporID_WS(java.lang.String string,java.lang.String password) {
-        gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
-        gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
+    	SslConfig.disableCertificateChecking();
+		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
         return port.getPedidoporID(string,password);
     }
     
@@ -133,7 +133,7 @@ public class Webservices {
 
     public static Boolean baja_WS(java.lang.String id, String password) {
     	SslConfig.disableCertificateChecking();
-    	DesguaceJavaWS port = prepararWebService();
+		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
         return port.baja(id, password);
     }
 
