@@ -13,20 +13,20 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 3.0.0-milestone1
  */
 
-@XmlRootElement(name = "cambiarEstadoPedidoResponse", namespace = "http://gestor_desguace_java/")
+@XmlRootElement(name = "generarClaveRetoResponse", namespace = "http://gestor_desguace_java/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "cambiarEstadoPedidoResponse", namespace = "http://gestor_desguace_java/")
+@XmlType(name = "generarClaveRetoResponse", namespace = "http://gestor_desguace_java/")
 
-public class CambiarEstadoPedidoResponse {
+public class GenerarClaveRetoResponse {
 
     @XmlElement(name = "return")
-    private java.lang.Boolean _return;
+    private java.lang.String _return;
 
-    public java.lang.Boolean getReturn() {
+    public java.lang.String getReturn() {
         return this._return;
     }
 
-    public void setReturn(java.lang.Boolean new_return)  {
+    public void setReturn(java.lang.String new_return)  {
         this._return = new_return;
     }
 

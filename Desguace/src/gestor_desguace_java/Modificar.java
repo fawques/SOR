@@ -52,10 +52,9 @@ public class Modificar {
     protected String city;
     protected String postalCode;
     protected String telephone;
-
     protected String password;
 
-	/**
+    /**
      * Obtiene el valor de la propiedad id.
      * 
      * @return
@@ -223,7 +222,7 @@ public class Modificar {
         this.telephone = value;
     }
 
-	/**
+    /**
      * Obtiene el valor de la propiedad password.
      * 
      * @return
@@ -235,7 +234,7 @@ public class Modificar {
         return password;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad password.
      * 
      * @param value

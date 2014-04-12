@@ -153,7 +153,7 @@ public class DesguaceJavaWS {
         try {
 
             bd = new InterfazBD("sor_gestor");
-            Desguace desg = bd.getDesguaceEnGestor(idDesguace);
+            Desguace desg = bd.getDesguaceEnGestorID_AUX(idDesguace);
 			if (desg != null && desg.getPassword().equals(contrasenya)) {
 	            Desguace desguace = bd.getDesguaceActivar(contrasenya);
 	            String res;

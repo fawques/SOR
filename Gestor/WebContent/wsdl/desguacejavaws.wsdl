@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="DesguaceJavaWS" targetNamespace="http://gestor_desguace_java/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gestor_desguace_java/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:types>
-<schema xmlns="http://www.w3.org/2001/XMLSchema">
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
   <import namespace="http://gestor_desguace_java/" schemaLocation="desguacejavaws_schema1.xsd"/>
 </schema>
   </wsdl:types>
@@ -9,48 +9,20 @@
     <wsdl:part name="parameters" element="tns:nuevaOfertaResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="nuevaOferta">
-    <wsdl:part name="parameters" element="tns:nuevaOferta">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="cambiarEstadoPedido">
     <wsdl:part name="parameters" element="tns:cambiarEstadoPedido">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="cambiarEstadoPedidoResponse">
-    <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="getOfertas">
-    <wsdl:part name="parameters" element="tns:getOfertas">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="checkActivacion">
-    <wsdl:part name="parameters" element="tns:checkActivacion">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="aceptarOfertaFin">
-    <wsdl:part name="parameters" element="tns:aceptarOfertaFin">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getPedidosporID">
     <wsdl:part name="parameters" element="tns:getPedidosporID">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="generarClaveReto">
+    <wsdl:part name="parameters" element="tns:generarClaveReto">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="cancelarOferta">
     <wsdl:part name="parameters" element="tns:cancelarOferta">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="altaResponse">
-    <wsdl:part name="parameters" element="tns:altaResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="cambiarEstadoPedidoOtravezResponse">
-    <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoOtravezResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="aceptarOfertaFinResponse">
-    <wsdl:part name="parameters" element="tns:aceptarOfertaFinResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getPedidosporIDResponse">
@@ -65,16 +37,56 @@
     <wsdl:part name="parameters" element="tns:modificarResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="alta">
-    <wsdl:part name="parameters" element="tns:alta">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="cambiarEstadoPedidoOtravez">
     <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoOtravez">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="cancelarOfertaResponse">
     <wsdl:part name="parameters" element="tns:cancelarOfertaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modificar">
+    <wsdl:part name="parameters" element="tns:modificar">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="nuevaOferta">
+    <wsdl:part name="parameters" element="tns:nuevaOferta">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cambiarEstadoPedidoResponse">
+    <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkActivacion">
+    <wsdl:part name="parameters" element="tns:checkActivacion">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOfertas">
+    <wsdl:part name="parameters" element="tns:getOfertas">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarClaveRetoResponse">
+    <wsdl:part name="parameters" element="tns:generarClaveRetoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="aceptarOfertaFin">
+    <wsdl:part name="parameters" element="tns:aceptarOfertaFin">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="altaResponse">
+    <wsdl:part name="parameters" element="tns:altaResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cambiarEstadoPedidoOtravezResponse">
+    <wsdl:part name="parameters" element="tns:cambiarEstadoPedidoOtravezResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="aceptarOfertaFinResponse">
+    <wsdl:part name="parameters" element="tns:aceptarOfertaFinResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="alta">
+    <wsdl:part name="parameters" element="tns:alta">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getOfertasResponse">
@@ -97,11 +109,13 @@
     <wsdl:part name="parameters" element="tns:baja">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="modificar">
-    <wsdl:part name="parameters" element="tns:modificar">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:portType name="DesguaceJavaWS">
+    <wsdl:operation name="generarClaveReto">
+      <wsdl:input name="generarClaveReto" message="tns:generarClaveReto">
+    </wsdl:input>
+      <wsdl:output name="generarClaveRetoResponse" message="tns:generarClaveRetoResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="checkActivacion">
       <wsdl:input name="checkActivacion" message="tns:checkActivacion">
     </wsdl:input>
@@ -183,6 +197,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="checkActivacionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generarClaveReto">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="generarClaveReto">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="generarClaveRetoResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -288,7 +311,7 @@
   </wsdl:binding>
   <wsdl:service name="DesguaceJavaWS">
     <wsdl:port name="DesguaceJavaWSPort" binding="tns:DesguaceJavaWSSoapBinding">
-      <soap:address location="http://localhost:9090/DesguaceJavaWSPort"/>
+      <soap:address location="http://localhost:8080/Gestor/services/DesguaceJavaWSPort"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

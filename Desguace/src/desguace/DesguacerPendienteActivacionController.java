@@ -55,7 +55,8 @@ public class DesguacerPendienteActivacionController implements Initializable {
          lbEstado.setText("");
          piIndicador.setVisible(true);
          String email= bd.getDesguace().getEmail();
-         String idRecibido = DesguaceJava.checkActivacion(tfValidar.getText());
+         String id_aux= Integer.toString(bd.getDesguace().getID_aux());
+         String idRecibido = DesguaceJava.checkActivacion(id_aux,tfValidar.getText());
          if ("".equals(idRecibido)) //No Activado
          {
              lbEstado.setStyle("-fx-border-color: red;");

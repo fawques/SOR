@@ -34,10 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 public class Baja {
 
     protected String id;
-
     protected String password;
 
-	/**
+    /**
      * Obtiene el valor de la propiedad id.
      * 
      * @return
@@ -61,7 +60,7 @@ public class Baja {
         this.id = value;
     }
 
-	/**
+    /**
      * Obtiene el valor de la propiedad password.
      * 
      * @return
@@ -73,7 +72,7 @@ public class Baja {
         return password;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad password.
      * 
      * @param value

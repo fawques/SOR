@@ -34,10 +34,9 @@ import javax.xml.bind.annotation.XmlType;
 public class GetPedidoporID {
 
     protected String string;
-
     protected String password;
 
-	/**
+    /**
      * Obtiene el valor de la propiedad string.
      * 
      * @return
@@ -61,7 +60,7 @@ public class GetPedidoporID {
         this.string = value;
     }
 
-	/**
+    /**
      * Obtiene el valor de la propiedad password.
      * 
      * @return
@@ -73,7 +72,7 @@ public class GetPedidoporID {
         return password;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad password.
      * 
      * @param value

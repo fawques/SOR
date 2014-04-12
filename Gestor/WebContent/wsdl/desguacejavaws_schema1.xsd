@@ -28,6 +28,10 @@
 
   <xs:element name="checkActivacionResponse" type="tns:checkActivacionResponse"/>
 
+  <xs:element name="generarClaveReto" type="tns:generarClaveReto"/>
+
+  <xs:element name="generarClaveRetoResponse" type="tns:generarClaveRetoResponse"/>
+
   <xs:element name="getOfertas" type="tns:getOfertas"/>
 
   <xs:element name="getOfertasResponse" type="tns:getOfertasResponse"/>
@@ -37,8 +41,6 @@
   <xs:element name="getPedidoporIDResponse" type="tns:getPedidoporIDResponse"/>
 
   <xs:element name="getPedidosporID" type="tns:getPedidosporID"/>
-  
-  <xs:element name="generarClaveReto" type="tns:generarClaveReto"/>
 
   <xs:element name="getPedidosporIDResponse" type="tns:getPedidosporIDResponse"/>
 
@@ -49,6 +51,19 @@
   <xs:element name="nuevaOferta" type="tns:nuevaOferta"/>
 
   <xs:element name="nuevaOfertaResponse" type="tns:nuevaOfertaResponse"/>
+
+  <xs:complexType name="generarClaveReto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="generarClaveRetoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
 
   <xs:complexType name="checkActivacion">
     <xs:sequence>
@@ -105,19 +120,6 @@
   <xs:complexType name="modificarResponse">
     <xs:sequence>
       <xs:element name="return" type="xs:boolean"/>
-    </xs:sequence>
-  </xs:complexType>
-  
-  <xs:complexType name="generarClaveReto">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
-      <xs:element minOccurs="0" name="password" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="generarClaveRetoResponse">
-    <xs:sequence>
-      <xs:element name="return" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 

@@ -481,10 +481,10 @@ public class DesguaceJava extends Application {
 		return false;
 	}
 
-	public static String checkActivacion(java.lang.String contrasenya) {
+	public static String checkActivacion(java.lang.String id_aux,java.lang.String contrasenya) {
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = Webservices.checkActivacion_WS(contrasenya);
+				String ret = Webservices.checkActivacion_WS(id_aux,contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -492,7 +492,7 @@ public class DesguaceJava extends Application {
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
-				return checkActivacion(contrasenya);
+				return checkActivacion(id_aux,contrasenya);
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
@@ -540,7 +540,7 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = Webservices.getOfertas_WS(desguace.getID());
+				String ret = Webservices.getOfertas_WS(desguace.getID(),desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -565,7 +565,7 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = getPedidosporID_WS(string);
+				String ret = getPedidosporID_WS(string,desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {
@@ -590,7 +590,7 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = getPedidoporID_WS(string);
+				String ret = getPedidoporID_WS(string,desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {

@@ -36,11 +36,10 @@ import javax.xml.bind.annotation.XmlType;
 public class AceptarOfertaFin {
 
     protected String id;
-
     protected String idDesguace;
-	protected String password;
+    protected String password;
 
-	/**
+    /**
      * Obtiene el valor de la propiedad id.
      * 
      * @return
@@ -64,7 +63,7 @@ public class AceptarOfertaFin {
         this.id = value;
     }
 
-	/**
+    /**
      * Obtiene el valor de la propiedad idDesguace.
      * 
      * @return
@@ -76,7 +75,7 @@ public class AceptarOfertaFin {
         return idDesguace;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad idDesguace.
      * 
      * @param value
@@ -88,7 +87,7 @@ public class AceptarOfertaFin {
         this.idDesguace = value;
     }
 
-	/**
+    /**
      * Obtiene el valor de la propiedad password.
      * 
      * @return
@@ -100,7 +99,7 @@ public class AceptarOfertaFin {
         return password;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad password.
      * 
      * @param value

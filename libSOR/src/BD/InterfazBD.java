@@ -508,7 +508,17 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         }
         return null;
     }
-    
+    public Desguace getDesguaceEnGestorID_AUX(String id_aux) {
+        ResultSet resultados = conexion.ejecutarSQLSelect("Select * from desguace where id_aux='" + id_aux + "'");
+        try {
+            if (resultados.first()) {
+                return new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"), resultados.getInt("codPostal"), resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Oferta>());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public void getPiezasYCantidades(int pedidoID, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades){
         try{

@@ -13,23 +13,23 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 3.0.0-milestone1
  */
 
-@XmlRootElement(name = "getPedidosporID", namespace = "http://gestor_desguace_java/")
+@XmlRootElement(name = "generarClaveReto", namespace = "http://gestor_desguace_java/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getPedidosporID", namespace = "http://gestor_desguace_java/", propOrder = {"string", "password"})
+@XmlType(name = "generarClaveReto", namespace = "http://gestor_desguace_java/", propOrder = {"idDesguace", "password"})
 
-public class GetPedidosporID {
+public class GenerarClaveReto {
 
-    @XmlElement(name = "string")
-    private java.lang.String string;
+    @XmlElement(name = "idDesguace")
+    private java.lang.String idDesguace;
     @XmlElement(name = "password")
     private java.lang.String password;
 
-    public java.lang.String getString() {
-        return this.string;
+    public java.lang.String getIdDesguace() {
+        return this.idDesguace;
     }
 
-    public void setString(java.lang.String newString)  {
-        this.string = newString;
+    public void setIdDesguace(java.lang.String newIdDesguace)  {
+        this.idDesguace = newIdDesguace;
     }
 
     public java.lang.String getPassword() {

@@ -27,6 +27,7 @@ import jUDDI.JUDDIProxy;
 public class Webservices {
 	
 	private static DesguaceJavaWS prepararWebService() {
+		SslConfig.disableCertificateChecking();
 		gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
 		SslConfig.disableCNChecker(port);
@@ -34,7 +35,7 @@ public class Webservices {
 	}
 
 	private static SecretKey prepararClaveReto(String idTaller, String password) {
-		SslConfig.disableCertificateChecking();
+		
 
 		Base64 b64 = new Base64();
 		String clave = generarClaveReto(idTaller,password);
@@ -61,16 +62,16 @@ public class Webservices {
         return port.alta(name, email, address, city, postalCode, telephone);
     }
 
-    public static String checkActivacion_WS(java.lang.String contrasenya) {
+    public static String checkActivacion_WS(java.lang.String id_aux,java.lang.String contrasenya) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.checkActivacion(contrasenya);
+        return port.checkActivacion(id_aux,contrasenya);
     }
 
-    public static String getOfertas_WS(java.lang.String id) {
+    public static String getOfertas_WS(java.lang.String id,java.lang.String password) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.getOfertas(id);
+        return port.getOfertas(id,password);
     }
     
     public static String nuevaOferta_WS(java.lang.String oferta, String idDesguace, String password) {
@@ -88,16 +89,16 @@ public class Webservices {
 		return null;
     }
 
-    public static String getPedidosporID_WS(java.lang.String string) {
+    public static String getPedidosporID_WS(java.lang.String string,java.lang.String password) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.getPedidosporID(string);
+        return port.getPedidosporID(string,password);
     }
     
-    public static String getPedidoporID_WS(java.lang.String string) {
+    public static String getPedidoporID_WS(java.lang.String string,java.lang.String password) {
         gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
         gestor_desguace_java.DesguaceJavaWS port = service.getDesguaceJavaWSPort();
-        return port.getPedidoporID(string);
+        return port.getPedidoporID(string,password);
     }
     
     public static Boolean aceptarOfertaFin_WS(java.lang.String id, String idDesguace, String password) {

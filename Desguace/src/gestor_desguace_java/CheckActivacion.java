@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 public class CheckActivacion {
 
     protected String idDesguace;
-	protected String mail;
+    protected String mail;
 
     /**
      * Obtiene el valor de la propiedad idDesguace.
@@ -48,7 +48,7 @@ public class CheckActivacion {
         return idDesguace;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad idDesguace.
      * 
      * @param value
@@ -60,7 +60,7 @@ public class CheckActivacion {
         this.idDesguace = value;
     }
 
-	/**
+    /**
      * Obtiene el valor de la propiedad mail.
      * 
      * @return

@@ -39,11 +39,10 @@ public class CambiarEstadoPedidoOtravez {
 
     protected String id;
     protected String estado;
-
     protected String idDesguace;
-	protected String password;
+    protected String password;
 
-	/**
+    /**
      * Obtiene el valor de la propiedad id.
      * 
      * @return
@@ -91,7 +90,7 @@ public class CambiarEstadoPedidoOtravez {
         this.estado = value;
     }
 
-	/**
+    /**
      * Obtiene el valor de la propiedad idDesguace.
      * 
      * @return
@@ -103,7 +102,7 @@ public class CambiarEstadoPedidoOtravez {
         return idDesguace;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad idDesguace.
      * 
      * @param value
@@ -115,7 +114,7 @@ public class CambiarEstadoPedidoOtravez {
         this.idDesguace = value;
     }
 
-	/**
+    /**
      * Obtiene el valor de la propiedad password.
      * 
      * @return
@@ -127,7 +126,7 @@ public class CambiarEstadoPedidoOtravez {
         return password;
     }
 
-	/**
+    /**
      * Define el valor de la propiedad password.
      * 
      * @param value
