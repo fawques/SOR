@@ -69,8 +69,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button button;
     @FXML
-    public CheckBox cbCifradoAsim;
-    @FXML
     public CheckBox cbCifradoSim;
     @FXML
     private Button btnNew = new Button("New Record");
@@ -769,14 +767,7 @@ public void actualizarTaller(){
         thisStage.sizeToScene();
         thisStage.show();
     }
-    public void toggleAsimetrico(){
-    	boolean on = cbCifradoAsim.isSelected();
-    	if(Admin.toggleAsimetrico(on)){
-    		seguridad.Config.setCifradoAsimetrico(on);
-    	}else{
-    		System.err.println("ERROR AL DESACTIVAR EL CIFRADO ASIMÉTRICO");
-    	}
-    }
+
     public void toggleSimetrico(){
     	boolean on = cbCifradoSim.isSelected();
     	if(Admin.toggleSimetrico(on)){
