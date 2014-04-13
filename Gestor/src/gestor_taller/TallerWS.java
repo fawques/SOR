@@ -99,10 +99,11 @@ public class TallerWS {
 			@WebParam(name = "postalCode") String postalCode,
 			@WebParam(name = "telephone") String telephone) {
 		try {
+			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(id, password);
 			if (key != null) {
 				// desencriptar aqui
-				bd = new InterfazBD("sor_gestor");
+				
 				// desencriptar elementos
 				boolean res = bd.modificarTaller(id,
 						TripleDes.decrypt(key, name),
@@ -259,12 +260,13 @@ public class TallerWS {
 				.create();
 		ArrayList<Oferta> listaOferta = new ArrayList<>();
 		ArrayList<Pedido> arrayPedido = new ArrayList<Pedido>();
-		SecretKey key = getKey(idTaller, password);
-		if (key != null) {
-			arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
+		try {
+			bd = new InterfazBD("sor_gestor");
+			SecretKey key = getKey(idTaller, password);
+			if (key != null) {
+				arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
 					collectionType);
-			try {
-				bd = new InterfazBD("sor_gestor");
+				
 				for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
 					Pedido p = it.next();
 					listaOferta.addAll(bd.getOfertasPedido(p.getID()));
@@ -273,16 +275,17 @@ public class TallerWS {
 				String retu = gson.toJson(listaOferta);
 				bd.close();
 				return retu;
-			} catch (SQLException ex) {
-				Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
-						null, ex);
-			} catch (ClassNotFoundException ex) {
-				Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
-						null, ex);
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
-		} else {
-			System.err.println("secretKey = NULL!");
+		} catch (SQLException ex) {
+			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
+					null, ex);
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
+					null, ex);
 		}
+		
 
 		return null;
 	}
