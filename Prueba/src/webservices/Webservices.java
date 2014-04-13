@@ -79,7 +79,7 @@ public class Webservices {
 			TallerWS port = prepararWebService();
 			try {
 				return port.nuevoPedido(TripleDes.encrypt(encryptor, pedido),
-						idTaller,password);
+						idTaller,TripleDes.encrypt(encryptor, password));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
