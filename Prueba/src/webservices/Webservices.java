@@ -175,9 +175,20 @@ public class Webservices {
 	}
 
 	public static Boolean baja_WS(String tallerID,String password) {
-		SslConfig.disableCertificateChecking();
-		TallerWS port = prepararWebService();
-		return port.baja(tallerID,password);
+		
+		SecretKey encryptor = prepararClaveReto(tallerID, password);
+		if (encryptor != null) {
+			try {
+				TallerWS port = prepararWebService();
+				return port.baja(tallerID,TripleDes.encrypt(encryptor, password));
+						
+			} catch (InvalidKeyException | NoSuchAlgorithmException
+					| NoSuchPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	public static boolean modificar_WS(String id, String name, String email,
@@ -237,10 +248,20 @@ public class Webservices {
 		return null;
 	}
 
-	public static String getPedidos_WS(String idTaller,String password) {
-		SslConfig.disableCertificateChecking();
-		TallerWS port = prepararWebService();
-		return port.getPedidos(idTaller,password);
+	public static String getPedidos_WS(String idTaller, String password) {
+		SecretKey encryptor = prepararClaveReto(idTaller, password);
+		if (encryptor != null) {
+			try {
+				TallerWS port = prepararWebService();
+				return port.getPedidos(idTaller,
+						TripleDes.encrypt(encryptor, password));
+			} catch (InvalidKeyException | NoSuchAlgorithmException
+					| NoSuchPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 }
