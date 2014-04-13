@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="string" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="idDesguace" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -29,11 +30,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "getPedidoporID", propOrder = {
     "string",
+    "idDesguace",
     "password"
 })
 public class GetPedidoporID {
 
     protected String string;
+    protected String idDesguace;
     protected String password;
 
     /**
@@ -58,6 +61,30 @@ public class GetPedidoporID {
      */
     public void setString(String value) {
         this.string = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad idDesguace.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdDesguace() {
+        return idDesguace;
+    }
+
+    /**
+     * Define el valor de la propiedad idDesguace.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdDesguace(String value) {
+        this.idDesguace = value;
     }
 
     /**

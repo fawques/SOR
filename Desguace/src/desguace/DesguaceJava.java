@@ -457,7 +457,8 @@ public class DesguaceJava extends Application {
 						postalCode, telephone);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -466,8 +467,8 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
-
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
@@ -487,7 +488,8 @@ public class DesguaceJava extends Application {
 				String ret = Webservices.checkActivacion_WS(email,contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -496,8 +498,8 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
-
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+			e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
@@ -512,7 +514,8 @@ public class DesguaceJava extends Application {
 				String ret = Webservices.nuevaOferta_WS(oferta, desguace.getID(), desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -521,8 +524,8 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
-
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
@@ -543,7 +546,8 @@ public class DesguaceJava extends Application {
 				String ret = Webservices.getOfertas_WS(desguace.getID(),desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -552,8 +556,8 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
-
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+			e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
@@ -568,7 +572,8 @@ public class DesguaceJava extends Application {
 				String ret = getPedidosporID_WS(string,desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -577,8 +582,8 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
-
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
@@ -590,10 +595,11 @@ public class DesguaceJava extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = getPedidoporID_WS(string,desguace.getPassword());
+				String ret = getPedidoporID_WS(string,desguace.getID(),desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -602,8 +608,8 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
-
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		
 		}
@@ -632,7 +638,8 @@ public class DesguaceJava extends Application {
 				}
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -641,8 +648,8 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
-
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+			e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
@@ -666,7 +673,8 @@ public class DesguaceJava extends Application {
 				}
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -675,7 +683,7 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -700,7 +708,7 @@ public class DesguaceJava extends Application {
 				}
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
 			}
 		}
 		try {
@@ -709,7 +717,7 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -732,7 +740,8 @@ public class DesguaceJava extends Application {
 				Boolean ret = Webservices.cambiarEstadoPedido_WS(id, estado, desguace.getID(), desguace.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
@@ -741,8 +750,8 @@ public class DesguaceJava extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
-
+		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
@@ -778,7 +787,9 @@ public class DesguaceJava extends Application {
 	                Boolean ret = modificar_WS(id, name, email, address, city, postalCode, telephone, desguace.getPassword());
 	                // si no ha lanzado excepción, devolvemos correctamente
 	                return ret;
-	            }catch(javax.xml.ws.WebServiceException e){}
+	            }catch(javax.xml.ws.WebServiceException e){
+	            	e.printStackTrace();
+	            }
 	        }
 	        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
 	        class Local {};

@@ -81,6 +81,7 @@
   <xs:complexType name="getPedidoporID">
     <xs:sequence>
       <xs:element minOccurs="0" name="string" type="xs:string"/>
+      <xs:element minOccurs="0" name="idDesguace" type="xs:string"/>
       <xs:element minOccurs="0" name="password" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>

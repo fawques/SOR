@@ -297,3 +297,5 @@ CREATE TABLE `acciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `sor_taller`.`roles` (`rol`, `nuevo_pedido`, `borrar_pedido`, `modificar_pedido`, `modificar_datos`, `baja`, `aceptar_ofertas`, `rechazar_ofertas`, `nuevo_usuario`, `nuevo_rol`, `cambiar_usuario`, `cambiar_rol`) VALUES ('Administrador', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `sor_desguace`.`roles` (`rol`, `nuevo_pedido`, `borrar_pedido`, `modificar_pedido`, `modificar_datos`, `baja`, `aceptar_ofertas`, `rechazar_ofertas`, `nuevo_usuario`, `nuevo_rol`, `cambiar_usuario`, `cambiar_rol`) VALUES ('Administrador', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `sor_desguace`.`usuarios` (`nombre`, `contrasenya`, `rol`, `nuevo_pedido`, `borrar_pedido`, `modificar_pedido`, `modificar_datos`, `baja`, `aceptar_ofertas`, `rechazar_ofertas`, `nuevo_usuario`, `nuevo_rol`, `cambiar_usuario`, `cambiar_rol`) VALUES ('Administrador', '1', 'Administrador', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');

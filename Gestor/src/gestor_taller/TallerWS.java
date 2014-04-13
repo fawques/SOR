@@ -131,6 +131,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -158,7 +159,7 @@ public class TallerWS {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				bd.close();
+				
 			} else {
 				System.err
 						.println("id taller incorrecto. Clave de reto no generada");
@@ -201,6 +202,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return ""; // devolvemos el estado pendiente, por defecto
 	}
 
@@ -255,7 +257,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
-
+		bd.close();
 		return "";
 	}
 
@@ -297,6 +299,7 @@ public class TallerWS {
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
+		
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
 					null, ex);
@@ -305,7 +308,7 @@ public class TallerWS {
 					null, ex);
 		}
 		
-
+		bd.close();
 		return null;
 	}
 
@@ -332,6 +335,7 @@ public class TallerWS {
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
+			bd.close();
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -339,6 +343,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -366,6 +371,7 @@ public class TallerWS {
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -373,6 +379,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -394,7 +401,7 @@ public class TallerWS {
 				bd.close();
 				return oool;
 			}
-			bd.close();
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -402,6 +409,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -432,6 +440,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -457,6 +466,7 @@ public class TallerWS {
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
+		
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -464,6 +474,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -475,13 +486,14 @@ public class TallerWS {
 			@WebParam(name = "id") String id
 			) {
 		try {
+			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
 				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				Gson gson = new GsonBuilder().setDateFormat(
 						"yyyy-MM-dd'T'HH:mm:ss").create();
-				bd = new InterfazBD("sor_gestor");
+				
 				for (Desguace desguace : bd.getDesguaces()) {
 					enviarPedidoActivemq(desguace.getID(), new PedidoCorto(
 							TripleDes.decrypt(key, id),
@@ -499,6 +511,7 @@ public class TallerWS {
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -509,7 +522,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
-
+		bd.close();
 		return false;
 	}
 
@@ -546,7 +559,7 @@ public class TallerWS {
 				bd.close();
 				return listaJSON;
 			}
-			bd.close();
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -554,7 +567,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
-
+		bd.close();
 		return null;
 	}
 

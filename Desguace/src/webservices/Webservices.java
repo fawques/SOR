@@ -95,10 +95,10 @@ public class Webservices {
         return port.getPedidosporID(string,password);
     }
     
-    public static String getPedidoporID_WS(java.lang.String string,java.lang.String password) {
+    public static String getPedidoporID_WS(java.lang.String string,java.lang.String idDesguace,java.lang.String password) {
     	SslConfig.disableCertificateChecking();
 		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
-        return port.getPedidoporID(string,password);
+        return port.getPedidoporID(string,idDesguace,password);
     }
     
     public static Boolean aceptarOfertaFin_WS(java.lang.String id, String idDesguace, String password) {
