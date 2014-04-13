@@ -82,35 +82,35 @@ public class GestionPedidos implements Initializable {
     public TableView tablePiezas;
     public TableView tableAcciones;
     @FXML
-    private Label lbID;
+    public Label lbID;
     @FXML 
-    private TextField tfPrecio;
+    public TextField tfPrecio;
     @FXML
-    private Button btBuscarPedido;
+    public Button btBuscarPedido;
     @FXML
-    private TextField tfLimiteDia;
+    public TextField tfLimiteDia;
     @FXML
-    private TextField tfLimiteMes;
+    public TextField tfLimiteMes;
     @FXML
-    private TextField tfLimiteAnyo;
+    public TextField tfLimiteAnyo;
     @FXML
-    private TableView<?> tvGrid;
+    public TableView<?> tvGrid;
     @FXML
-    private TextField tfIDOferta;
+    public TextField tfIDOferta;
     @FXML
-    private TextField tfPVPmin;
+    public TextField tfPVPmin;
     @FXML
-    private ComboBox<?> cbEstadoOfertas;
+    public ComboBox<?> cbEstadoOfertas;
     @FXML
-    private Button btBuscarOfertas;
+    public Button btBuscarOfertas;
     @FXML
-    private TextField tfPVPMax;
+    public TextField tfPVPMax;
     @FXML
-    private Button btNuevaOferta;
+    public Button btNuevaOferta;
     @FXML
-    private Button btAnularOferta;
-    private int borrarOferta=-1;
-    private int borrarOfertaAceptadas=-1;
+    public Button btAnularOferta;
+    public int borrarOferta=-1;
+    public int borrarOfertaAceptadas=-1;
     ObservableList<TablaPedidos> datatablePedidos = FXCollections.observableArrayList();
     ObservableList<TablaPedidos> datatableHistorico = FXCollections.observableArrayList();
     ObservableList<TablaOfertas> olTablaOfertas = FXCollections.observableArrayList();
@@ -120,8 +120,8 @@ public class GestionPedidos implements Initializable {
     ObservableList<TablaAcciones> olTablaAcciones = FXCollections.observableArrayList();
 
     InterfazBD bd;
-    private CheckBox cbCifradoAsim;
-    private CheckBox cbCifradoSim;
+    public CheckBox cbCifradoAsim;
+    public CheckBox cbCifradoSim;
   
     /**
      * Initializes the controller class.
@@ -137,12 +137,12 @@ public class GestionPedidos implements Initializable {
     }    
 
     @FXML
-    private void buscar(ActionEvent event) {
+    public void buscar(ActionEvent event) {
     }
         public void setStage(Stage stage) {
         thisStage = stage;
     }
-    private void actualizarOfertasHistorico(){
+    public void actualizarOfertasHistorico(){
         datatableHistoricoOfertas.clear();
         ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
         CompararOfertasGestorDesguace();
@@ -209,7 +209,7 @@ public class GestionPedidos implements Initializable {
      
     
     }
-    private void tablaOfertasHistorico(){
+    public void tablaOfertasHistorico(){
         actualizarOfertasHistorico();
         TableColumn id_auxCol = new TableColumn("Id_aux");
         id_auxCol.setCellValueFactory(new PropertyValueFactory<TablaOfertas, Integer>("id_aux"));        
@@ -241,7 +241,7 @@ public class GestionPedidos implements Initializable {
             
      
     }    
-    private void tablaOfertasActivas(){
+    public void tablaOfertasActivas(){
      try {
             bd= new InterfazBD("sor_desguace");
               ArrayList<Oferta> ofertas= new ArrayList<Oferta>();
@@ -317,7 +317,7 @@ public class GestionPedidos implements Initializable {
         }
     }
 
-    private void CompararOfertasGestorDesguace(){
+    public void CompararOfertasGestorDesguace(){
         
     ArrayList<Oferta>  ofertas= DesguaceJava.actualizarOfertas();  
     ofertas.addAll(DesguaceJava.actualizarOfertasAceptadas());
@@ -382,7 +382,7 @@ public class GestionPedidos implements Initializable {
         actualizarHistoricoPedidos();
         actualizarOfertasHistorico();
     }
-    private void actualizarHistoricoPedidos(){
+    public void actualizarHistoricoPedidos(){
         ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
         datatableHistorico.clear();
          listaPedidos=DesguaceJava.getPedidos();
@@ -393,7 +393,7 @@ public class GestionPedidos implements Initializable {
         }
 
     }
-    private void tablaHistoricoPedidos(){
+    public void tablaHistoricoPedidos(){
         
         actualizarHistoricoPedidos();
         TableColumn id_auxCol1 = new TableColumn("Id_aux");
@@ -424,7 +424,7 @@ public class GestionPedidos implements Initializable {
 
         
     }
-    private void tablaPedidos(){
+    public void tablaPedidos(){
         try {
             bd= new InterfazBD("sor_desguace");
             
@@ -673,7 +673,7 @@ public class GestionPedidos implements Initializable {
         }
     }
 
-    private void cambiarAPantallaDesguaceDeBaja() throws IOException {
+    public void cambiarAPantallaDesguaceDeBaja() throws IOException {
         URL location = getClass().getResource("DesguaceDeBaja.fxml");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
@@ -695,7 +695,7 @@ public class GestionPedidos implements Initializable {
             setGraphic(null);
         }
  
-        private String getString() {
+        public String getString() {
             return getItem() == null ? "" : getItem().toString();
         }
     }
@@ -709,7 +709,7 @@ public class GestionPedidos implements Initializable {
             setGraphic(null);
         }
  
-        private String getString() {
+        public String getString() {
             return getItem() == null ? "" : getItem().toString();
         }
     }

@@ -55,13 +55,13 @@ public class DesguaceJavaWS {
 	static ArrayList<String> listaIdDesguace;
 	static ArrayList<SecretKey> listaSecretKeys;
     
-	private SecretKey getKey(String idDesguace, String password) {
+	private SecretKey getKey(String idDesguace) {
 		int index = listaIdDesguace.indexOf(idDesguace);
 		if (index != -1) {
 			try {
 				bd=new InterfazBD("sor_gestor");
 				Desguace desg = bd.getDesguaceEnGestor(idDesguace);
-				if (desg != null && desg.getPassword().equals(password)) {
+				if (desg != null) {
 					SecretKey key = listaSecretKeys.get(index);
 					return key;
 				}
@@ -184,16 +184,22 @@ public class DesguaceJavaWS {
     public String nuevaOferta(@WebParam(name = "oferta") String oferta, @WebParam(name = "idDesguace") String idDesguace, @WebParam(name = "password") String password) {
         try {          
              Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-             SecretKey key = getKey(idDesguace, password)		;
+             SecretKey key = getKey(idDesguace);
  			if (key != null) {
-             Oferta p = gson.fromJson(TripleDes.decrypt(key, oferta),Oferta.class);
-            Date ahora = new Date();
-            String stringID  = "Oferta_" + bd.getNumOfertas();
-            p.setID(stringID);
-            bd = new InterfazBD("sor_gestor");
-             bd.anadirOferta(stringID,p.getID_aux(), p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACTIVE.ordinal(),  p.getPedido(), p.getDesguace(),p.getDesguaceNombre(), p.getFecha_baja(),p.getFecha_limite());
-             bd.close();
-             return stringID;
+ 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+		             Oferta p = gson.fromJson(TripleDes.decrypt(key, oferta),Oferta.class);
+		            Date ahora = new Date();
+		            String stringID  = "Oferta_" + bd.getNumOfertas();
+		            p.setID(stringID);
+		            bd = new InterfazBD("sor_gestor");
+		             bd.anadirOferta(stringID,p.getID_aux(), p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACTIVE.ordinal(),  p.getPedido(), p.getDesguace(),p.getDesguaceNombre(), p.getFecha_baja(),p.getFecha_limite());
+		             bd.close();
+		             return stringID;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
  			}
  			else{
 				System.err.println("secretKey = NULL!");
@@ -299,8 +305,10 @@ public class DesguaceJavaWS {
     public Boolean aceptarOfertaFin(@WebParam(name = "id") String id, @WebParam(name = "idDesguace") String idDesguace, @WebParam(name = "password") String password) {
         Boolean aceptada=false;
         try {
-        	SecretKey key = getKey(idDesguace, password)		;
+        	SecretKey key = getKey(idDesguace);
  			if (key != null) {
+ 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	            bd = new InterfazBD("sor_gestor");
 	            Oferta of= bd.getOfertaporID(TripleDes.decrypt(key, id));
 	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
@@ -314,6 +322,9 @@ public class DesguaceJavaWS {
 	            bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK,ped.getID());
 	            bd.close();
 	            return aceptada;
+				}else{
+					System.err.println("Login incorrecto");
+				}
  			}
  			else{
  				
@@ -334,13 +345,18 @@ public class DesguaceJavaWS {
     public Boolean cancelarOferta(@WebParam(name = "id") String id, @WebParam(name = "idDesguace") String idDesguace, @WebParam(name = "password") String password) {
         Boolean aceptada=false;
         try {
-        	SecretKey key = getKey(idDesguace, password);
+        	SecretKey key = getKey(idDesguace);
  			if (key != null) {
+ 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	            bd = new InterfazBD("sor_gestor");
 	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.CANCELLED, id);
 	            bd.close();
 	            
 	            return aceptada;
+				}else{
+					System.err.println("Login incorrecto");
+				}
  			}
  			else{
  				
@@ -386,13 +402,19 @@ public class DesguaceJavaWS {
          
            
         try {
-        	SecretKey key = getKey(idDesguace, password)		;
+        	SecretKey key = getKey(idDesguace);
  			if (key != null) {
+ 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	            bd= new InterfazBD("sor_gestor");
 	            System.out.println("miau");
 	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
 	           bd.close();
 	           return ool;
+				}else{
+					
+					System.err.println("Login incorrecto");
+				}
  			}
  			else{
  				
@@ -411,12 +433,17 @@ public class DesguaceJavaWS {
          
            
         try {
-        	SecretKey key = getKey(idDesguace, password)		;
+        	SecretKey key = getKey(idDesguace);
  			if (key != null) {
+ 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	            bd= new InterfazBD("sor_gestor");
 	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
 	           bd.close();
 	           return ool;
+				}else{
+					System.err.println("Login incorrecto");
+				}
  			}
  			else{
  				
@@ -433,8 +460,10 @@ public class DesguaceJavaWS {
     }
     public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone, @WebParam(name = "password") String password) {
         try {
-			SecretKey key = getKey(id, password);
+			SecretKey key = getKey(id);
 			if (key != null) {
+				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	            bd = new InterfazBD("sor_gestor");
 				// desencriptar elementos
 				boolean res = bd.modificarTaller(id,
@@ -448,6 +477,10 @@ public class DesguaceJavaWS {
 				bd.close();
 				removeKey(id);
 	            return res;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
