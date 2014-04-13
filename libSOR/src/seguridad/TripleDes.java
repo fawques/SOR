@@ -41,6 +41,9 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.CharSet;
 import org.bouncycastle.jcajce.provider.symmetric.ARC4.Base;
 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
 /**
  * This class defines methods for encrypting and decrypting using the Triple DES
  * algorithm and for generating, reading and writing Triple DES keys. It also
@@ -201,9 +204,13 @@ public class TripleDes {
 	
 			byte[] encryptedString;
 			try {
-				Base64 b64 = new Base64();
+				/*Base64 b64 = new Base64();
 				encryptedString = cipher.doFinal(in.getBytes("iso-8859-1"));
-				return b64.encodeToString(encryptedString);
+				return b64.encodeToString(encryptedString);*/
+				 BASE64Encoder encoder = new BASE64Encoder();
+			        encryptedString = cipher.doFinal(in.getBytes());
+			        String decriptedString = encoder.encodeBuffer(encryptedString);
+			        return decriptedString;
 			} catch (IllegalBlockSizeException | BadPaddingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -227,11 +234,15 @@ public class TripleDes {
 		    	Cipher cipher = Cipher.getInstance("DESede");
 		    	cipher.init(Cipher.DECRYPT_MODE, key);
 		    	
-		    	Base64 b64 = new Base64();
-		        byte[] encryptedText = b64.decode(encryptedString);
-		        byte[] plainText = cipher.doFinal(encryptedText);
-		        decryptedText= new String(plainText,"iso-8859-1");
+		 
+		        
+		        
+		        BASE64Decoder decode = new BASE64Decoder();
+		        byte[] results = cipher.doFinal(decode.decodeBuffer(encryptedString));
+		        String decriptedString = new String(results, "UTF-8");
+		        return decriptedString;
 		    } catch (Exception e) {
+		    	
 		        e.printStackTrace();
 		    }
 		    return decryptedText;
