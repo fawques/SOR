@@ -69,9 +69,12 @@ public class Webservices {
     }
 
     public static String getOfertas_WS(java.lang.String id,java.lang.String password) {
-    	SslConfig.disableCertificateChecking();
-		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
-        return port.getOfertas(id,password);
+    	SecretKey encryptor = prepararClaveReto(id,password);
+		if (encryptor != null) {
+			gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
+	        return TripleDes.decrypt(encryptor, port.getOfertas(id,password));
+		}
+		return null;
     }
     
     public static String nuevaOferta_WS(java.lang.String oferta, String idDesguace, String password) {
@@ -90,15 +93,21 @@ public class Webservices {
     }
 
     public static String getPedidosporID_WS(java.lang.String string,java.lang.String password) {
-    	SslConfig.disableCertificateChecking();
-		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
-        return port.getPedidosporID(string,password);
+    	SecretKey encryptor = prepararClaveReto(string,password);
+		if (encryptor != null) {
+			gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
+	        return port.getPedidosporID(string,password);
+		}
+		return null;
     }
     
     public static String getPedidoporID_WS(java.lang.String string,java.lang.String password) {
-    	SslConfig.disableCertificateChecking();
-		gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
-        return port.getPedidoporID(string,password);
+    	SecretKey encryptor = prepararClaveReto(string,password);
+		if (encryptor != null) {
+			gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
+	        return port.getPedidoporID(string,password);
+		}
+		return null;
     }
     
     public static Boolean aceptarOfertaFin_WS(java.lang.String id, String idDesguace, String password) {

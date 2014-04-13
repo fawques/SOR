@@ -23,7 +23,9 @@ import general.PedidoCorto;
 import general.Taller;
 import gestor_taller.TallerWS;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.jms.JMSException;
 import javax.jws.WebService;
@@ -225,20 +228,33 @@ public class DesguaceJavaWS {
 
 			Desguace desg = bd.getDesguaceEnGestor(id);
 			if (desg != null && desg.getPassword().equals(password)) {
+				SecretKey key = getKey(id);
 	             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
 	            listaOfertas=bd.getOfertasDesguace(id);
 	            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 	            String listaJSON = gson.toJson(listaOfertas);
 	            System.out.println("listaJSON = " + listaJSON);
 	            bd.close();
-	            return listaJSON;
+	            return TripleDes.encrypt(key, listaJSON);
 			}
 			bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
            return "";
         }       
 
@@ -252,6 +268,7 @@ public class DesguaceJavaWS {
             bd = new InterfazBD("sor_gestor");
 			Desguace desg = bd.getDesguaceEnGestor(string);
 			if (desg != null && desg.getPassword().equals(password)) {
+				SecretKey key = getKey(string);
 	             Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
 	             ArrayList<String>  listaids = gson.fromJson(string, collectionType);
 	            ArrayList<Pedido> listapedidos= new ArrayList<Pedido>();
@@ -262,14 +279,26 @@ public class DesguaceJavaWS {
 	            String listaJSON = gson.toJson(listapedidos);
 	            System.out.println("listaJSON = " + listaJSON);
 	            bd.close();
-	            return listaJSON;
+	            return TripleDes.encrypt(key, listaJSON);
 			}
 			bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
            
         return null;
     }
@@ -283,18 +312,31 @@ public class DesguaceJavaWS {
             bd = new InterfazBD("sor_gestor");
 			Desguace desg = bd.getDesguaceEnGestor(id);
 			if (desg != null && desg.getPassword().equals(password)) {
+				SecretKey key = getKey(id);
 	            String listapedidos="";
 	            Pedido p=bd.getPedidoID(id);
 	            listapedidos=gson.toJson(p);
 	            bd.close();
-	            return listapedidos;
+	            return TripleDes.encrypt(key, listapedidos);
 			}
 			bd.close();
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
            
         return null;
     }
