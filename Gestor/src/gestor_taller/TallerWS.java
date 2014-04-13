@@ -22,6 +22,7 @@ import general.Pedido;
 import general.PedidoCorto;
 import general.Taller;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,12 +33,14 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.jms.JMSException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -291,7 +294,7 @@ public class TallerWS {
 
 				String retu = gson.toJson(listaOferta);
 				bd.close();
-				return retu;
+				return TripleDes.encrypt(key, retu);
 				}
 				else{
 					System.err.println("Login incorrecto");
@@ -306,6 +309,18 @@ public class TallerWS {
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
 					null, ex);
+		} catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		bd.close();
@@ -538,7 +553,7 @@ public class TallerWS {
 		ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
 		try {
 			bd = new InterfazBD("sor_gestor");
-
+			SecretKey key = getKey(idTaller);
 			Taller t = bd.getTallerEnGestor(idTaller);
 			if (t != null && t.getPassword().equals(password)) {
 				listaPedidos = bd.getPedidosTaller(idTaller);
@@ -557,7 +572,7 @@ public class TallerWS {
 				String listaJSON = gson.toJson(listaPedidos);
 				System.out.println("listaJSON = " + listaJSON);
 				bd.close();
-				return listaJSON;
+				return TripleDes.encrypt(key, listaJSON);
 			}
 			
 		} catch (SQLException ex) {
@@ -566,6 +581,18 @@ public class TallerWS {
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
+		} catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		bd.close();
 		return null;

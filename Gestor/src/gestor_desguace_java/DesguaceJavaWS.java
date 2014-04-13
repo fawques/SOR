@@ -23,7 +23,9 @@ import general.PedidoCorto;
 import general.Taller;
 import gestor_taller.TallerWS;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.jms.JMSException;
 import javax.jws.WebService;
@@ -222,19 +225,21 @@ public class DesguaceJavaWS {
     @WebMethod(operationName = "getOfertas")
     public String getOfertas(@WebParam(name = "string") String id, @WebParam(name="password") String password) {
         try {   
+
         	 bd = new InterfazBD("sor_gestor");
         	   SecretKey key = getKey(id);
    			
    			if (key != null) {   			
    				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
    				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+
 	             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
 	            listaOfertas=bd.getOfertasDesguace(id);
 	            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 	            String listaJSON = gson.toJson(listaOfertas);
 	            System.out.println("listaJSON = " + listaJSON);
 	            bd.close();
-	            return listaJSON;
+	            return TripleDes.encrypt(key, listaJSON);
 			}
    			
 		
@@ -243,8 +248,22 @@ public class DesguaceJavaWS {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    	bd.close();
+
+        } catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+bd.close();
            return "";
         }       
 
@@ -255,6 +274,7 @@ public class DesguaceJavaWS {
     public String getPedidosporID(@WebParam(name = "string") String string, @WebParam(name="password") String password) {
     	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         try {
+
         	 bd = new InterfazBD("sor_gestor");
             SecretKey key = getKey(string);
 			
@@ -263,6 +283,7 @@ public class DesguaceJavaWS {
 			
 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(string);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+
 	             Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
 	             ArrayList<String>  listaids = gson.fromJson(string, collectionType);
 	            ArrayList<Pedido> listapedidos= new ArrayList<Pedido>();
@@ -273,18 +294,36 @@ public class DesguaceJavaWS {
 	            String listaJSON = gson.toJson(listapedidos);
 	            System.out.println("listaJSON = " + listaJSON);
 	            bd.close();
-	            return listaJSON;
+
+	            return TripleDes.encrypt(key, listaJSON);
 				}else{
 					System.err.println("Login incorrecto");
 				}
+
+	            
+
 			}
 			
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        bd.close();
+
+        } catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+           
+	    bd.close();
         return null;
     }
     /**
@@ -295,27 +334,45 @@ public class DesguaceJavaWS {
     	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         try {
             bd = new InterfazBD("sor_gestor");
+
             SecretKey key = getKey(idDesguace);
 			
 			if (key != null) {
 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+
 	            String listapedidos="";
 	            Pedido p=bd.getPedidoID(id);
 	            listapedidos=gson.toJson(p);
 	            bd.close();
-	            return listapedidos;
+
+return TripleDes.encrypt(key, listapedidos);
 				}
 				else{
 					System.err.println("Login incorrecto");
 				}
+
 			}
 			
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        } catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+           
         bd.close(); 
         return null;
     }

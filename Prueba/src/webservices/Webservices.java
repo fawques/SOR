@@ -123,8 +123,8 @@ public class Webservices {
 
 			TallerWS port = prepararWebService();
 			try {
-				return port.getOfertas(
-						TripleDes.encrypt(encryptor, listaPedidos), idTaller,TripleDes.encrypt(encryptor, password));
+				return TripleDes.decrypt(encryptor, port.getOfertas(
+						TripleDes.encrypt(encryptor, listaPedidos), idTaller,TripleDes.encrypt(encryptor, password)));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
@@ -253,8 +253,8 @@ public class Webservices {
 		if (encryptor != null) {
 			try {
 				TallerWS port = prepararWebService();
-				return port.getPedidos(idTaller,
-						TripleDes.encrypt(encryptor, password));
+				return TripleDes.decrypt(encryptor, port.getPedidos(idTaller,
+						TripleDes.encrypt(encryptor, password)));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
