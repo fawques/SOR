@@ -56,11 +56,11 @@ public class TallerWS {
 	static ArrayList<String> listaIdTaller = new ArrayList<String>();
 	static ArrayList<SecretKey> listaSecretKeys = new ArrayList<SecretKey>();
 	
-	private SecretKey getKey(String idTaller, String password) {
+	private SecretKey getKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
 			Taller t = bd.getTallerEnGestor(idTaller);
-			if (t != null && t.getPassword().equals(password)) {
+			if (t != null ) {
 				SecretKey key = listaSecretKeys.get(index);
                 removeKey(idTaller);
 				return key;
@@ -100,9 +100,10 @@ public class TallerWS {
 			@WebParam(name = "telephone") String telephone) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			SecretKey key = getKey(id, password);
+			SecretKey key = getKey(id);
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
-				// desencriptar aqui
+				Taller nuevotaller= bd.getTallerEnGestor(id);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				
 				// desencriptar elementos
 				boolean res = bd.modificarTaller(id,
@@ -116,6 +117,10 @@ public class TallerWS {
 				bd.close();
 				removeKey(id);
 				return res;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
@@ -212,26 +217,33 @@ public class TallerWS {
 			Type collectionType = new TypeToken<Pedido>() {
 			}.getType();
 
-			SecretKey key = getKey(idTaller, password);
+			SecretKey key = getKey(idTaller);
+			
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
-				Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido),
-						collectionType);
-
-				Date ahora = new Date();
-				String stringID = "Pedido_" + bd.getNumPedidos();
-				p.setID(stringID);
-				bd.anadirPedido(stringID, p.getID_aux(), p.getFecha_alta(), p
-						.getEstado().ordinal(), p.getTaller(), p
-						.getTallerNombre(), p.getFecha_baja(), p
-						.getFecha_limite(), p.getModoAutomatico());
-				bd.anyadirPiezasAPedido(stringID, p.getListaPiezas(),
-						p.getListaCantidadesPiezas());
-				for (Desguace desguace : bd.getDesguaces()) {
-					enviarPedidoActivemq(desguace.getID(),
-							new PedidoCorto(p.getID(), p.getEstado()));
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+					Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido),
+							collectionType);
+	
+					Date ahora = new Date();
+					String stringID = "Pedido_" + bd.getNumPedidos();
+					p.setID(stringID);
+					bd.anadirPedido(stringID, p.getID_aux(), p.getFecha_alta(), p
+							.getEstado().ordinal(), p.getTaller(), p
+							.getTallerNombre(), p.getFecha_baja(), p
+							.getFecha_limite(), p.getModoAutomatico());
+					bd.anyadirPiezasAPedido(stringID, p.getListaPiezas(),
+							p.getListaCantidadesPiezas());
+					for (Desguace desguace : bd.getDesguaces()) {
+						enviarPedidoActivemq(desguace.getID(),
+								new PedidoCorto(p.getID(), p.getEstado()));
+					}
+					bd.close();
+					return stringID;
 				}
-				bd.close();
-				return stringID;
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
@@ -262,8 +274,11 @@ public class TallerWS {
 		ArrayList<Pedido> arrayPedido = new ArrayList<Pedido>();
 		try {
 			bd = new InterfazBD("sor_gestor");
-			SecretKey key = getKey(idTaller, password);
+			SecretKey key = getKey(idTaller);
+			
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
 					collectionType);
 				
@@ -275,6 +290,10 @@ public class TallerWS {
 				String retu = gson.toJson(listaOferta);
 				bd.close();
 				return retu;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
@@ -298,12 +317,18 @@ public class TallerWS {
 			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			SecretKey key = getKey(idTaller, password);
+			SecretKey key = getKey(idTaller);
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED,
 						TripleDes.decrypt(key, ID));
 				bd.close();
 				return true;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
@@ -326,12 +351,18 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 
-			SecretKey key = getKey(idTaller, password);
+			SecretKey key = getKey(idTaller);
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
 						TripleDes.decrypt(key, ID));
 				bd.close();
 				return true;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
@@ -410,13 +441,19 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 
-			SecretKey key = getKey(idTaller, password);
+			SecretKey key = getKey(idTaller);
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				boolean oool = bd.cancelarPedido(TripleDes.decrypt(key,
 						idPedido));
 				cambiarEstadoPedido(idTaller,password,EstadoPedido.CANCELLED.ordinal(), idPedido);
 				bd.close();
 				return oool;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
@@ -438,8 +475,10 @@ public class TallerWS {
 			@WebParam(name = "id") String id
 			) {
 		try {
-			SecretKey key = getKey(idTaller, password);
+			SecretKey key = getKey(idTaller);
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				Gson gson = new GsonBuilder().setDateFormat(
 						"yyyy-MM-dd'T'HH:mm:ss").create();
 				bd = new InterfazBD("sor_gestor");
@@ -453,6 +492,10 @@ public class TallerWS {
 						TripleDes.decrypt(key, id));
 				bd.close();
 				return ool;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}

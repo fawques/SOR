@@ -79,7 +79,7 @@ public class MainTaller extends Application {
 			JUDDIProxy.loadWsdl("TallerWS");
 			hello();
 			inicioTaller();
-		} catch (javax.xml.ws.WebServiceException e) {
+		} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			FXMLLoader loader = changeScene("reintentarConexion.fxml");
 			stage.setTitle("Conexion fallida");
 			ReintentarConexionController staticDataBox = (ReintentarConexionController) loader
@@ -359,6 +359,7 @@ public class MainTaller extends Application {
 			CompararPedidosGestorDesguace();
 		}catch(javax.xml.ws.WebServiceException ex){
 			System.out.println("Error comparando con el gestor");
+			ex.printStackTrace();
 		}
 		try{
 			bd = new InterfazBD("sor_taller");
@@ -630,7 +631,7 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				return cambiarEstadoPedido_WS(taller.getID(),taller.getPassword(),Integer.parseInt(estado), idPedido);
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -639,7 +640,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -665,7 +666,7 @@ public class MainTaller extends Application {
 						telephone);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 				e.printStackTrace();
 				System.err.println("Reintentando...");
 			}
@@ -676,7 +677,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -697,7 +698,7 @@ public class MainTaller extends Application {
 				String ret = checkActivacion_WS(contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 				e.printStackTrace();
 			}
 		}
@@ -707,7 +708,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		
@@ -725,7 +726,7 @@ public class MainTaller extends Application {
 				String ret = nuevoPedido_WS(pedido, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 				e.printStackTrace();
 				System.err.println("Reintentando...");
 			}
@@ -737,7 +738,7 @@ public class MainTaller extends Application {
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 			
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
@@ -758,7 +759,7 @@ public class MainTaller extends Application {
 				String ret = getOfertas_WS(listaPedidos, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 				e.printStackTrace();
 				System.err.println("Reintentando...");
 			}
@@ -769,7 +770,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -795,7 +796,7 @@ public class MainTaller extends Application {
 				}
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -804,7 +805,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -832,7 +833,7 @@ public class MainTaller extends Application {
 				Boolean ret = rechazarOferta_WS(id, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -841,7 +842,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -861,7 +862,7 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				return Webservices.hello();
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -870,7 +871,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -885,7 +886,7 @@ public class MainTaller extends Application {
 				Boolean ret = baja_WS(tallerID, taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -894,7 +895,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -919,7 +920,7 @@ public class MainTaller extends Application {
 						postalCode, telephone);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -929,7 +930,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -952,7 +953,7 @@ public class MainTaller extends Application {
 				Boolean ret = cancelarPedido_WS(idPedido, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -961,7 +962,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
