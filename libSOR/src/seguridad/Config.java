@@ -1,8 +1,8 @@
 package seguridad;
 
 public class Config {
-	private static boolean cifradoAsimetrico = false;
-	private static boolean cifradoSimetrico = false;
+	private static boolean cifradoAsimetrico = true;
+	private static boolean cifradoSimetrico = true;
 	
 	public static boolean isCifradoAsimetrico() {
 		return cifradoAsimetrico;
