@@ -101,7 +101,7 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(id, password);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				// desencriptar aqui
 				
 				// desencriptar elementos
@@ -213,7 +213,7 @@ public class TallerWS {
 			}.getType();
 
 			SecretKey key = getKey(idTaller, password);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido),
 						collectionType);
 
@@ -263,7 +263,7 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller, password);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
 					collectionType);
 				
@@ -299,7 +299,7 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller, password);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED,
 						TripleDes.decrypt(key, ID));
 				bd.close();
@@ -327,7 +327,7 @@ public class TallerWS {
 			bd = new InterfazBD("sor_gestor");
 
 			SecretKey key = getKey(idTaller, password);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
 						TripleDes.decrypt(key, ID));
 				bd.close();
@@ -411,7 +411,7 @@ public class TallerWS {
 			bd = new InterfazBD("sor_gestor");
 
 			SecretKey key = getKey(idTaller, password);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				boolean oool = bd.cancelarPedido(TripleDes.decrypt(key,
 						idPedido));
 				cambiarEstadoPedido(idTaller,password,EstadoPedido.CANCELLED.ordinal(), idPedido);
@@ -439,7 +439,7 @@ public class TallerWS {
 			) {
 		try {
 			SecretKey key = getKey(idTaller, password);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Gson gson = new GsonBuilder().setDateFormat(
 						"yyyy-MM-dd'T'HH:mm:ss").create();
 				bd = new InterfazBD("sor_gestor");
