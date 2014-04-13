@@ -425,6 +425,19 @@ public class AdminWS {
      }
         return null;
     }
+    
+    @WebMethod(operationName = "setCifradoAsimetrico")
+    public boolean setCifradoAsimetrico(@WebParam(name = "on")boolean on) {
+        seguridad.Config.setCifradoAsimetrico(on);
+        return true;
+     }
+    
+    @WebMethod(operationName = "setCifradoSimetrico")
+    public boolean setCifradoSimetrico(@WebParam(name = "on")boolean on) {
+        seguridad.Config.setCifradoSimetrico(on);
+        return true;
+     }
+    
     /**
      * Web service operation
      */

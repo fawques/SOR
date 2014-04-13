@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS `sor_desguace`;
+DROP DATABASE IF EXISTS `sor_gestor`;
+DROP DATABASE IF EXISTS `sor_taller`;
+
 CREATE DATABASE IF NOT EXISTS `sor_gestor` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `sor_gestor`;

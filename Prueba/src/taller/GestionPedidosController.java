@@ -219,6 +219,8 @@ public class GestionPedidosController implements Initializable {
     public TextField tfContrasenya;
     public ComboBox cbTipo;
     public TextField tfNuevoRol;
+    public CheckBox cbCifradoAsim;
+    public CheckBox cbCifradoSim;
     
     
     /**
@@ -713,5 +715,12 @@ public class GestionPedidosController implements Initializable {
         tdCont.setStage(thisStage);
         tdCont.setError(error);
         tdCont.showStage();
+    }
+    
+    public void toggleAsimetrico(){
+		seguridad.Config.setCifradoAsimetrico(cbCifradoAsim.isSelected());
+    }
+    public void toggleSimetrico(){
+		seguridad.Config.setCifradoSimetrico(cbCifradoSim.isSelected());
     }
 }

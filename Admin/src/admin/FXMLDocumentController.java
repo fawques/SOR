@@ -39,6 +39,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -67,6 +68,8 @@ public class FXMLDocumentController implements Initializable {
     private Label label;
     @FXML
     private Button button;
+    @FXML
+    public CheckBox cbCifradoSim;
     @FXML
     private Button btnNew = new Button("New Record");
     @FXML private TableView tableTalleres;
@@ -763,5 +766,15 @@ public void actualizarTaller(){
     public void showStage() {
         thisStage.sizeToScene();
         thisStage.show();
+    }
+
+    public void toggleSimetrico(){
+    	boolean on = cbCifradoSim.isSelected();
+    	if(Admin.toggleSimetrico(on)){
+    		seguridad.Config.setCifradoSimetrico(on);
+    	}else{
+    		System.err.println("ERROR AL DESACTIVAR EL CIFRADO SIMÉTRICO");
+    	}
+    	
     }
 }

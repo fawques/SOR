@@ -64,10 +64,7 @@
               <children>
                 <VBox alignment="TOP_LEFT" fillWidth="true" layoutX="41.0" layoutY="45.0" pickOnBounds="true" prefHeight="200.0" prefWidth="171.0" spacing="20.0">
                   <children>
-                    <CheckBox mnemonicParsing="false" text="Habilitar seguridad" />
-                    <CheckBox mnemonicParsing="false" text="Habilitar firma digital" />
-                    <CheckBox mnemonicParsing="false" text="Habilitar asimetrica" />
-                    <CheckBox mnemonicParsing="false" text="Habilitar simetrica" />
+                    <CheckBox fx:id="cbCifradoSim" mnemonicParsing="false" onAction="#toggleSimetrico" selected="false" text="Habilitar cifrado simetrico" />
                   </children>
                 </VBox>
               </children>

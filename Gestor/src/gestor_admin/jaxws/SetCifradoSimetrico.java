@@ -13,21 +13,21 @@ import javax.xml.bind.annotation.XmlType;
  * Generated source version: 3.0.0-milestone1
  */
 
-@XmlRootElement(name = "getContrasenyaPorTallerID", namespace = "http://gestor_admin/")
+@XmlRootElement(name = "setCifradoSimetrico", namespace = "http://gestor_admin/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getContrasenyaPorTallerID", namespace = "http://gestor_admin/")
+@XmlType(name = "setCifradoSimetrico", namespace = "http://gestor_admin/")
 
-public class GetContrasenyaPorTallerID {
+public class SetCifradoSimetrico {
 
-    @XmlElement(name = "id")
-    private java.lang.String id;
+    @XmlElement(name = "on")
+    private boolean on;
 
-    public java.lang.String getId() {
-        return this.id;
+    public boolean getOn() {
+        return this.on;
     }
 
-    public void setId(java.lang.String newId)  {
-        this.id = newId;
+    public void setOn(boolean newOn)  {
+        this.on = newOn;
     }
 
 }

@@ -24,6 +24,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _SetCifradoAsimetricoResponse_QNAME = new QName("http://gestor_admin/", "setCifradoAsimetricoResponse");
     private final static QName _GetAltaTalleres_QNAME = new QName("http://gestor_admin/", "getAltaTalleres");
     private final static QName _GetContrasenyaPorDesguaceIDResponse_QNAME = new QName("http://gestor_admin/", "getContrasenyaPorDesguaceIDResponse");
     private final static QName _GetTalleresAceptadosResponse_QNAME = new QName("http://gestor_admin/", "getTalleresAceptadosResponse");
@@ -53,7 +54,10 @@ public class ObjectFactory {
     private final static QName _AddAccesoDesguace_QNAME = new QName("http://gestor_admin/", "addAccesoDesguace");
     private final static QName _GetPedidoIDResponse_QNAME = new QName("http://gestor_admin/", "getPedidoIDResponse");
     private final static QName _GetOfertasporPedidoResponse_QNAME = new QName("http://gestor_admin/", "getOfertasporPedidoResponse");
+    private final static QName _SetCifradoSimetrico_QNAME = new QName("http://gestor_admin/", "setCifradoSimetrico");
+    private final static QName _SetCifradoSimetricoResponse_QNAME = new QName("http://gestor_admin/", "setCifradoSimetricoResponse");
     private final static QName _GetOfertasporPedido_QNAME = new QName("http://gestor_admin/", "getOfertasporPedido");
+    private final static QName _SetCifradoAsimetrico_QNAME = new QName("http://gestor_admin/", "setCifradoAsimetrico");
     private final static QName _GetAltaTalleresResponse_QNAME = new QName("http://gestor_admin/", "getAltaTalleresResponse");
     private final static QName _GetDesguacesAceptadosResponse_QNAME = new QName("http://gestor_admin/", "getDesguacesAceptadosResponse");
     private final static QName _GetAltaDesguaceResponse_QNAME = new QName("http://gestor_admin/", "getAltaDesguaceResponse");
@@ -163,6 +167,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SetCifradoAsimetricoResponse }
+     * 
+     */
+    public SetCifradoAsimetricoResponse createSetCifradoAsimetricoResponse() {
+        return new SetCifradoAsimetricoResponse();
+    }
+
+    /**
      * Create an instance of {@link GetAltaTalleres }
      * 
      */
@@ -187,11 +199,35 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SetCifradoSimetrico }
+     * 
+     */
+    public SetCifradoSimetrico createSetCifradoSimetrico() {
+        return new SetCifradoSimetrico();
+    }
+
+    /**
+     * Create an instance of {@link SetCifradoSimetricoResponse }
+     * 
+     */
+    public SetCifradoSimetricoResponse createSetCifradoSimetricoResponse() {
+        return new SetCifradoSimetricoResponse();
+    }
+
+    /**
      * Create an instance of {@link GetOfertasporPedido }
      * 
      */
     public GetOfertasporPedido createGetOfertasporPedido() {
         return new GetOfertasporPedido();
+    }
+
+    /**
+     * Create an instance of {@link SetCifradoAsimetrico }
+     * 
+     */
+    public SetCifradoAsimetrico createSetCifradoAsimetrico() {
+        return new SetCifradoAsimetrico();
     }
 
     /**
@@ -336,6 +372,15 @@ public class ObjectFactory {
      */
     public Registrar createRegistrar() {
         return new Registrar();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetCifradoAsimetricoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "setCifradoAsimetricoResponse")
+    public JAXBElement<SetCifradoAsimetricoResponse> createSetCifradoAsimetricoResponse(SetCifradoAsimetricoResponse value) {
+        return new JAXBElement<SetCifradoAsimetricoResponse>(_SetCifradoAsimetricoResponse_QNAME, SetCifradoAsimetricoResponse.class, null, value);
     }
 
     /**
@@ -600,12 +645,39 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetCifradoSimetrico }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "setCifradoSimetrico")
+    public JAXBElement<SetCifradoSimetrico> createSetCifradoSimetrico(SetCifradoSimetrico value) {
+        return new JAXBElement<SetCifradoSimetrico>(_SetCifradoSimetrico_QNAME, SetCifradoSimetrico.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetCifradoSimetricoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "setCifradoSimetricoResponse")
+    public JAXBElement<SetCifradoSimetricoResponse> createSetCifradoSimetricoResponse(SetCifradoSimetricoResponse value) {
+        return new JAXBElement<SetCifradoSimetricoResponse>(_SetCifradoSimetricoResponse_QNAME, SetCifradoSimetricoResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetOfertasporPedido }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://gestor_admin/", name = "getOfertasporPedido")
     public JAXBElement<GetOfertasporPedido> createGetOfertasporPedido(GetOfertasporPedido value) {
         return new JAXBElement<GetOfertasporPedido>(_GetOfertasporPedido_QNAME, GetOfertasporPedido.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetCifradoAsimetrico }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "setCifradoAsimetrico")
+    public JAXBElement<SetCifradoAsimetrico> createSetCifradoAsimetrico(SetCifradoAsimetrico value) {
+        return new JAXBElement<SetCifradoAsimetrico>(_SetCifradoAsimetrico_QNAME, SetCifradoAsimetrico.class, null, value);
     }
 
     /**

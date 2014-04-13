@@ -68,6 +68,14 @@
 
   <xs:element name="sendMailResponse" type="tns:sendMailResponse"/>
 
+  <xs:element name="setCifradoAsimetrico" type="tns:setCifradoAsimetrico"/>
+
+  <xs:element name="setCifradoAsimetricoResponse" type="tns:setCifradoAsimetricoResponse"/>
+
+  <xs:element name="setCifradoSimetrico" type="tns:setCifradoSimetrico"/>
+
+  <xs:element name="setCifradoSimetricoResponse" type="tns:setCifradoSimetricoResponse"/>
+
   <xs:complexType name="getPedidos">
     <xs:sequence/>
   </xs:complexType>
@@ -153,6 +161,18 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="setCifradoSimetrico">
+    <xs:sequence>
+      <xs:element name="on" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setCifradoSimetricoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="getOfertasporPedido">
     <xs:sequence>
       <xs:element minOccurs="0" name="idPedido" type="xs:string"/>
@@ -228,6 +248,18 @@
   <xs:complexType name="getAltaTalleresResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setCifradoAsimetrico">
+    <xs:sequence>
+      <xs:element name="on" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setCifradoAsimetricoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
     </xs:sequence>
   </xs:complexType>
 
