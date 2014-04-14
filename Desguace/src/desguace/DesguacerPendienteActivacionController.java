@@ -72,6 +72,7 @@ public class DesguacerPendienteActivacionController implements Initializable {
              } else {
             	 DesguaceJava.desguace=bd.getDesguace();
             	 DesguaceJava.ponerCodigoActivacionTaller(tfValidar.getText());
+            	 DesguaceJava.desguace=bd.getDesguace();
                  URL location = getClass().getResource("GestionPedidos.fxml");
                  FXMLLoader loader = new FXMLLoader();
                  loader.setLocation(location);

@@ -231,8 +231,9 @@ public class DesguaceJavaWS {
    			
    			if (key != null) {   			
    				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
+   				bd.close();
    				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-
+   					bd = new InterfazBD("sor_gestor");
 	             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
 	            listaOfertas=bd.getOfertasDesguace(id);
 	            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
