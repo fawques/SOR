@@ -169,7 +169,7 @@ public class DesguaceJavaWS {
 	            return res;
 			}
 
-			bd.close();
+		
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

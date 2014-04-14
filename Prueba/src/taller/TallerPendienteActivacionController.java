@@ -59,7 +59,8 @@ public class TallerPendienteActivacionController implements Initializable {
     }
 public void comprobarContrasenya() throws IOException, ClassNotFoundException, SQLException{
     bd = new InterfazBD("sor_taller");
-    String idRecibido =MainTaller.checkActivacion(tfValidar.getText());
+    MainTaller.getTaller();
+    String idRecibido =MainTaller.checkActivacion(MainTaller.taller.getEmail(),tfValidar.getText());
     if ("".equals(idRecibido)) //No Activado
     {
         lbEstado.setStyle("-fx-border-color: red;");
