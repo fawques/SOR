@@ -100,7 +100,7 @@ public class Webservices {
 		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
 			try {
-				return port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, password);
+				return port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, TripleDes.encrypt(encryptor, password));
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
