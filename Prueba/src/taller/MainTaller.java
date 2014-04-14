@@ -1090,7 +1090,7 @@ public class MainTaller extends Application {
 		
 		Permisos= new permisos();
 		try {
-			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_rol");
 		} catch (AccessDeniedException e) {
 			throw e;
 		}
