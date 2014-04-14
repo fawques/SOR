@@ -561,7 +561,7 @@ public class TallerWS {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
 			Taller t = bd.getTallerEnGestor(idTaller);
-			if (t != null && t.getPassword().equals(password)) {
+			if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
 				listaPedidos = bd.getPedidosTaller(idTaller);
 				for (Pedido p : listaPedidos) {
 					if (p.getEstado() == EstadoPedido.FINISHED_OK) {
