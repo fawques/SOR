@@ -692,10 +692,10 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static String checkActivacion(java.lang.String contrasenya) {
+	public static String checkActivacion(java.lang.String email,java.lang.String contrasenya) {
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = checkActivacion_WS(contrasenya);
+				String ret = checkActivacion_WS(email,contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
 			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
@@ -704,7 +704,7 @@ public class MainTaller extends Application {
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
-				return checkActivacion(contrasenya);
+				return checkActivacion(email,contrasenya);
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");

@@ -112,9 +112,9 @@ public class Webservices {
 		return port.generarClaveReto(idTaller, password);
 	}
 
-    public static String checkActivacion_WS(String contrasenya) {
+    public static String checkActivacion_WS(String email, String contrasenya) {
         TallerWS port = prepararWebService();
-        return port.checkActivacion(contrasenya);
+        return port.checkActivacion(email,contrasenya);
 	}
 
 	public static String getOfertas_WS(String listaPedidos, String idTaller, String password) {
