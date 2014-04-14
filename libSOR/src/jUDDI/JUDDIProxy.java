@@ -85,11 +85,11 @@ public class JUDDIProxy {
     }
 
     public static URL getWsdl() {
-    	//if (seguridad.Config.isCifradoAsimetrico()) {
-			//return wsdl_HTTPS;
-		//}else {
+    	if (seguridad.Config.isCifradoAsimetrico()) {
+			return wsdl_HTTPS;
+		}else {
 			return wsdl;	
-		//}
+		}
     }
     
     public static String getActiveMQ() {
