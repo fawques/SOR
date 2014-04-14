@@ -169,13 +169,11 @@ public class Admin extends Application {
     }
 
     public static String getContrasenyaPorTallerID(java.lang.String id) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+    	gestor_admin.AdminWS port = prepararWebService();
         return port.getContrasenyaPorTallerID(id);
     }
     public static String getContrasenyaPorDesguaceID(java.lang.String id) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+    	gestor_admin.AdminWS port = prepararWebService();
         return port.getContrasenyaPorDesguaceID(id);
     }
 }
