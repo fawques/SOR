@@ -35,10 +35,12 @@ public class Webservices {
 	}
 
 	private static SecretKey prepararClaveReto(String idDesguace, String password) {
-		
-
 		Base64 b64 = new Base64();
-		String clave = generarClaveReto(idDesguace,password);
+		String clave = "emptykey";
+		if(seguridad.Config.isCifradoSimetrico()){
+			clave = generarClaveReto(idDesguace,password);
+		}
+			
 		if (clave != null) {
 			byte[] encodedKey = b64.decode(clave);
 			SecretKey encryptor = new SecretKeySpec(encodedKey, 0,
@@ -47,6 +49,8 @@ public class Webservices {
 		} else {
 			return null;
 		}
+
+
 
 	}
 	

@@ -55,8 +55,8 @@ public class DesguaceJavaWS {
     InterfazBD bd;
     
 
-	static ArrayList<String> listaIdDesguace;
-	static ArrayList<SecretKey> listaSecretKeys;
+	static ArrayList<String> listaIdDesguace = new ArrayList<String>();
+	static ArrayList<SecretKey> listaSecretKeys = new ArrayList<SecretKey>();;
     
 	private SecretKey getKey(String idDesguace) {
 		int index = listaIdDesguace.indexOf(idDesguace);
