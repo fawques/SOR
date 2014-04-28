@@ -85,6 +85,7 @@ CREATE TABLE `audit` (
   `IP_ORIGEN` varchar(50) DEFAULT NULL,
   `USER_ID` varchar(50) DEFAULT NULL,
   `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `TIMEZONE` varchar(50) NOT NULL,
   `ACTIVITY` varchar(50) DEFAULT NULL,
   `ACTIVITY_DETAIL` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`AUDIT_ID`)
@@ -205,6 +206,7 @@ CREATE TABLE `audit` (
   `IP_ORIGEN` varchar(50) DEFAULT NULL,
   `USER_ID` varchar(50) DEFAULT NULL,
   `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `TIMEZONE` varchar(50) NOT NULL,
   `ACTIVITY` varchar(50) DEFAULT NULL,
   `ACTIVITY_DETAIL` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`AUDIT_ID`)
@@ -321,10 +323,12 @@ CREATE TABLE `audit` (
   `IP_ORIGEN` varchar(50) DEFAULT NULL,
   `USER_ID` varchar(50) DEFAULT NULL,
   `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `TIMEZONE` varchar(50) NOT NULL,
   `ACTIVITY` varchar(50) DEFAULT NULL,
   `ACTIVITY_DETAIL` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`AUDIT_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 
 INSERT INTO `sor_taller`.`roles` (`rol`, `nuevo_pedido`, `borrar_pedido`, `modificar_pedido`, `modificar_datos`, `baja`, `aceptar_ofertas`, `rechazar_ofertas`, `nuevo_usuario`, `nuevo_rol`, `cambiar_usuario`, `cambiar_rol`) VALUES ('Administrador', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 INSERT INTO `sor_desguace`.`roles` (`rol`, `nuevo_pedido`, `borrar_pedido`, `modificar_pedido`, `modificar_datos`, `baja`, `aceptar_ofertas`, `rechazar_ofertas`, `nuevo_usuario`, `nuevo_rol`, `cambiar_usuario`, `cambiar_rol`) VALUES ('Administrador', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
