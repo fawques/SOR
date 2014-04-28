@@ -24,36 +24,44 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Registrar_QNAME = new QName("http://gestor_admin/", "Registrar");
+    private final static QName _SetCifradoAsimetricoResponse_QNAME = new QName("http://gestor_admin/", "setCifradoAsimetricoResponse");
     private final static QName _GetAltaTalleres_QNAME = new QName("http://gestor_admin/", "getAltaTalleres");
+    private final static QName _GetContrasenyaPorDesguaceIDResponse_QNAME = new QName("http://gestor_admin/", "getContrasenyaPorDesguaceIDResponse");
     private final static QName _GetTalleresAceptadosResponse_QNAME = new QName("http://gestor_admin/", "getTalleresAceptadosResponse");
-	private final static QName _GetPedidos_QNAME = new QName("http://gestor_admin/", "getPedidos");
+    private final static QName _GetTalleresResponse_QNAME = new QName("http://gestor_admin/", "getTalleresResponse");
+    private final static QName _GetPedidosResponse_QNAME = new QName("http://gestor_admin/", "getPedidosResponse");
+    private final static QName _GetContrasenyaPorDesguaceID_QNAME = new QName("http://gestor_admin/", "getContrasenyaPorDesguaceID");
+    private final static QName _SendMail_QNAME = new QName("http://gestor_admin/", "sendMail");
+    private final static QName _GetContrasenyaPorTallerID_QNAME = new QName("http://gestor_admin/", "getContrasenyaPorTallerID");
+    private final static QName _RegistrarResponse_QNAME = new QName("http://gestor_admin/", "RegistrarResponse");
+    private final static QName _SendMailResponse_QNAME = new QName("http://gestor_admin/", "sendMailResponse");
+    private final static QName _GetDesguacesAceptados_QNAME = new QName("http://gestor_admin/", "getDesguacesAceptados");
+    private final static QName _GetDesguacesResponse_QNAME = new QName("http://gestor_admin/", "getDesguacesResponse");
+    private final static QName _GetDesguaces_QNAME = new QName("http://gestor_admin/", "getDesguaces");
+    private final static QName _Registrar_QNAME = new QName("http://gestor_admin/", "Registrar");
+    private final static QName _GetPedidos_QNAME = new QName("http://gestor_admin/", "getPedidos");
     private final static QName _HelloResponse_QNAME = new QName("http://gestor_admin/", "helloResponse");
     private final static QName _AddAccesoDesguaceResponse_QNAME = new QName("http://gestor_admin/", "addAccesoDesguaceResponse");
     private final static QName _GetAltaDesguace_QNAME = new QName("http://gestor_admin/", "getAltaDesguace");
     private final static QName _GetOfertas_QNAME = new QName("http://gestor_admin/", "getOfertas");
     private final static QName _Hello_QNAME = new QName("http://gestor_admin/", "hello");
-    private final static QName _GetTalleresResponse_QNAME = new QName("http://gestor_admin/", "getTalleresResponse");
     private final static QName _DarAccesoTaller_QNAME = new QName("http://gestor_admin/", "darAccesoTaller");
     private final static QName _DarAccesoTallerResponse_QNAME = new QName("http://gestor_admin/", "darAccesoTallerResponse");
-    private final static QName _GetPedidosResponse_QNAME = new QName("http://gestor_admin/", "getPedidosResponse");
     private final static QName _GetOfertasResponse_QNAME = new QName("http://gestor_admin/", "getOfertasResponse");
     private final static QName _GetPedidoID_QNAME = new QName("http://gestor_admin/", "getPedidoID");
     private final static QName _GetTalleres_QNAME = new QName("http://gestor_admin/", "getTalleres");
+    private final static QName _GetContrasenyaPorTallerIDResponse_QNAME = new QName("http://gestor_admin/", "getContrasenyaPorTallerIDResponse");
     private final static QName _AddAccesoDesguace_QNAME = new QName("http://gestor_admin/", "addAccesoDesguace");
-    private final static QName _SendMail_QNAME = new QName("http://gestor_admin/", "sendMail");
     private final static QName _GetPedidoIDResponse_QNAME = new QName("http://gestor_admin/", "getPedidoIDResponse");
     private final static QName _GetOfertasporPedidoResponse_QNAME = new QName("http://gestor_admin/", "getOfertasporPedidoResponse");
-    private final static QName _SendMailResponse_QNAME = new QName("http://gestor_admin/", "sendMailResponse");
-    private final static QName _GetDesguacesAceptados_QNAME = new QName("http://gestor_admin/", "getDesguacesAceptados");
-	private final static QName _RegistrarResponse_QNAME = new QName("http://gestor_admin/", "RegistrarResponse");
+    private final static QName _SetCifradoSimetrico_QNAME = new QName("http://gestor_admin/", "setCifradoSimetrico");
+    private final static QName _SetCifradoSimetricoResponse_QNAME = new QName("http://gestor_admin/", "setCifradoSimetricoResponse");
     private final static QName _GetOfertasporPedido_QNAME = new QName("http://gestor_admin/", "getOfertasporPedido");
+    private final static QName _SetCifradoAsimetrico_QNAME = new QName("http://gestor_admin/", "setCifradoAsimetrico");
     private final static QName _GetAltaTalleresResponse_QNAME = new QName("http://gestor_admin/", "getAltaTalleresResponse");
     private final static QName _GetDesguacesAceptadosResponse_QNAME = new QName("http://gestor_admin/", "getDesguacesAceptadosResponse");
-	private final static QName _GetDesguacesResponse_QNAME = new QName("http://gestor_admin/", "getDesguacesResponse");
     private final static QName _GetAltaDesguaceResponse_QNAME = new QName("http://gestor_admin/", "getAltaDesguaceResponse");
     private final static QName _GetTalleresAceptados_QNAME = new QName("http://gestor_admin/", "getTalleresAceptados");
-	private final static QName _GetDesguaces_QNAME = new QName("http://gestor_admin/", "getDesguaces");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: gestor_admin
@@ -95,6 +103,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetContrasenyaPorTallerID }
+     * 
+     */
+    public GetContrasenyaPorTallerID createGetContrasenyaPorTallerID() {
+        return new GetContrasenyaPorTallerID();
+    }
+
+    /**
      * Create an instance of {@link GetDesguacesAceptados }
      * 
      */
@@ -102,7 +118,7 @@ public class ObjectFactory {
         return new GetDesguacesAceptados();
     }
 
-	/**
+    /**
      * Create an instance of {@link SendMail }
      * 
      */
@@ -126,12 +142,36 @@ public class ObjectFactory {
         return new GetTalleresAceptadosResponse();
     }
 
-	/**
+    /**
      * Create an instance of {@link GetPedidosResponse }
      * 
      */
     public GetPedidosResponse createGetPedidosResponse() {
         return new GetPedidosResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetContrasenyaPorDesguaceID }
+     * 
+     */
+    public GetContrasenyaPorDesguaceID createGetContrasenyaPorDesguaceID() {
+        return new GetContrasenyaPorDesguaceID();
+    }
+
+    /**
+     * Create an instance of {@link GetContrasenyaPorDesguaceIDResponse }
+     * 
+     */
+    public GetContrasenyaPorDesguaceIDResponse createGetContrasenyaPorDesguaceIDResponse() {
+        return new GetContrasenyaPorDesguaceIDResponse();
+    }
+
+    /**
+     * Create an instance of {@link SetCifradoAsimetricoResponse }
+     * 
+     */
+    public SetCifradoAsimetricoResponse createSetCifradoAsimetricoResponse() {
+        return new SetCifradoAsimetricoResponse();
     }
 
     /**
@@ -158,12 +198,36 @@ public class ObjectFactory {
         return new GetTalleresAceptados();
     }
 
-	/**
+    /**
+     * Create an instance of {@link SetCifradoSimetrico }
+     * 
+     */
+    public SetCifradoSimetrico createSetCifradoSimetrico() {
+        return new SetCifradoSimetrico();
+    }
+
+    /**
+     * Create an instance of {@link SetCifradoSimetricoResponse }
+     * 
+     */
+    public SetCifradoSimetricoResponse createSetCifradoSimetricoResponse() {
+        return new SetCifradoSimetricoResponse();
+    }
+
+    /**
      * Create an instance of {@link GetOfertasporPedido }
      * 
      */
     public GetOfertasporPedido createGetOfertasporPedido() {
         return new GetOfertasporPedido();
+    }
+
+    /**
+     * Create an instance of {@link SetCifradoAsimetrico }
+     * 
+     */
+    public SetCifradoAsimetrico createSetCifradoAsimetrico() {
+        return new SetCifradoAsimetrico();
     }
 
     /**
@@ -182,7 +246,7 @@ public class ObjectFactory {
         return new GetDesguacesAceptadosResponse();
     }
 
-	/**
+    /**
      * Create an instance of {@link GetPedidoIDResponse }
      * 
      */
@@ -228,6 +292,14 @@ public class ObjectFactory {
      */
     public AddAccesoDesguace createAddAccesoDesguace() {
         return new AddAccesoDesguace();
+    }
+
+    /**
+     * Create an instance of {@link GetContrasenyaPorTallerIDResponse }
+     * 
+     */
+    public GetContrasenyaPorTallerIDResponse createGetContrasenyaPorTallerIDResponse() {
+        return new GetContrasenyaPorTallerIDResponse();
     }
 
     /**
@@ -303,12 +375,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Registrar }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetCifradoAsimetricoResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://gestor_admin/", name = "Registrar")
-    public JAXBElement<Registrar> createRegistrar(Registrar value) {
-        return new JAXBElement<Registrar>(_Registrar_QNAME, Registrar.class, null, value);
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "setCifradoAsimetricoResponse")
+    public JAXBElement<SetCifradoAsimetricoResponse> createSetCifradoAsimetricoResponse(SetCifradoAsimetricoResponse value) {
+        return new JAXBElement<SetCifradoAsimetricoResponse>(_SetCifradoAsimetricoResponse_QNAME, SetCifradoAsimetricoResponse.class, null, value);
     }
 
     /**
@@ -321,6 +393,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetContrasenyaPorDesguaceIDResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getContrasenyaPorDesguaceIDResponse")
+    public JAXBElement<GetContrasenyaPorDesguaceIDResponse> createGetContrasenyaPorDesguaceIDResponse(GetContrasenyaPorDesguaceIDResponse value) {
+        return new JAXBElement<GetContrasenyaPorDesguaceIDResponse>(_GetContrasenyaPorDesguaceIDResponse_QNAME, GetContrasenyaPorDesguaceIDResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetTalleresAceptadosResponse }{@code >}}
      * 
      */
@@ -329,7 +410,106 @@ public class ObjectFactory {
         return new JAXBElement<GetTalleresAceptadosResponse>(_GetTalleresAceptadosResponse_QNAME, GetTalleresAceptadosResponse.class, null, value);
     }
 
-	/**
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTalleresResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getTalleresResponse")
+    public JAXBElement<GetTalleresResponse> createGetTalleresResponse(GetTalleresResponse value) {
+        return new JAXBElement<GetTalleresResponse>(_GetTalleresResponse_QNAME, GetTalleresResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPedidosResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getPedidosResponse")
+    public JAXBElement<GetPedidosResponse> createGetPedidosResponse(GetPedidosResponse value) {
+        return new JAXBElement<GetPedidosResponse>(_GetPedidosResponse_QNAME, GetPedidosResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetContrasenyaPorDesguaceID }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getContrasenyaPorDesguaceID")
+    public JAXBElement<GetContrasenyaPorDesguaceID> createGetContrasenyaPorDesguaceID(GetContrasenyaPorDesguaceID value) {
+        return new JAXBElement<GetContrasenyaPorDesguaceID>(_GetContrasenyaPorDesguaceID_QNAME, GetContrasenyaPorDesguaceID.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SendMail }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "sendMail")
+    public JAXBElement<SendMail> createSendMail(SendMail value) {
+        return new JAXBElement<SendMail>(_SendMail_QNAME, SendMail.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetContrasenyaPorTallerID }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getContrasenyaPorTallerID")
+    public JAXBElement<GetContrasenyaPorTallerID> createGetContrasenyaPorTallerID(GetContrasenyaPorTallerID value) {
+        return new JAXBElement<GetContrasenyaPorTallerID>(_GetContrasenyaPorTallerID_QNAME, GetContrasenyaPorTallerID.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RegistrarResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "RegistrarResponse")
+    public JAXBElement<RegistrarResponse> createRegistrarResponse(RegistrarResponse value) {
+        return new JAXBElement<RegistrarResponse>(_RegistrarResponse_QNAME, RegistrarResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SendMailResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "sendMailResponse")
+    public JAXBElement<SendMailResponse> createSendMailResponse(SendMailResponse value) {
+        return new JAXBElement<SendMailResponse>(_SendMailResponse_QNAME, SendMailResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguacesAceptados }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getDesguacesAceptados")
+    public JAXBElement<GetDesguacesAceptados> createGetDesguacesAceptados(GetDesguacesAceptados value) {
+        return new JAXBElement<GetDesguacesAceptados>(_GetDesguacesAceptados_QNAME, GetDesguacesAceptados.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguacesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getDesguacesResponse")
+    public JAXBElement<GetDesguacesResponse> createGetDesguacesResponse(GetDesguacesResponse value) {
+        return new JAXBElement<GetDesguacesResponse>(_GetDesguacesResponse_QNAME, GetDesguacesResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguaces }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getDesguaces")
+    public JAXBElement<GetDesguaces> createGetDesguaces(GetDesguaces value) {
+        return new JAXBElement<GetDesguaces>(_GetDesguaces_QNAME, GetDesguaces.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Registrar }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "Registrar")
+    public JAXBElement<Registrar> createRegistrar(Registrar value) {
+        return new JAXBElement<Registrar>(_Registrar_QNAME, Registrar.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetPedidos }{@code >}}
      * 
      */
@@ -384,15 +564,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetTalleresResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getTalleresResponse")
-    public JAXBElement<GetTalleresResponse> createGetTalleresResponse(GetTalleresResponse value) {
-        return new JAXBElement<GetTalleresResponse>(_GetTalleresResponse_QNAME, GetTalleresResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DarAccesoTaller }{@code >}}
      * 
      */
@@ -408,15 +579,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://gestor_admin/", name = "darAccesoTallerResponse")
     public JAXBElement<DarAccesoTallerResponse> createDarAccesoTallerResponse(DarAccesoTallerResponse value) {
         return new JAXBElement<DarAccesoTallerResponse>(_DarAccesoTallerResponse_QNAME, DarAccesoTallerResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPedidosResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getPedidosResponse")
-    public JAXBElement<GetPedidosResponse> createGetPedidosResponse(GetPedidosResponse value) {
-        return new JAXBElement<GetPedidosResponse>(_GetPedidosResponse_QNAME, GetPedidosResponse.class, null, value);
     }
 
     /**
@@ -447,21 +609,21 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetContrasenyaPorTallerIDResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getContrasenyaPorTallerIDResponse")
+    public JAXBElement<GetContrasenyaPorTallerIDResponse> createGetContrasenyaPorTallerIDResponse(GetContrasenyaPorTallerIDResponse value) {
+        return new JAXBElement<GetContrasenyaPorTallerIDResponse>(_GetContrasenyaPorTallerIDResponse_QNAME, GetContrasenyaPorTallerIDResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AddAccesoDesguace }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://gestor_admin/", name = "addAccesoDesguace")
     public JAXBElement<AddAccesoDesguace> createAddAccesoDesguace(AddAccesoDesguace value) {
         return new JAXBElement<AddAccesoDesguace>(_AddAccesoDesguace_QNAME, AddAccesoDesguace.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SendMail }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_admin/", name = "sendMail")
-    public JAXBElement<SendMail> createSendMail(SendMail value) {
-        return new JAXBElement<SendMail>(_SendMail_QNAME, SendMail.class, null, value);
     }
 
     /**
@@ -483,30 +645,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SendMailResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetCifradoSimetrico }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://gestor_admin/", name = "sendMailResponse")
-    public JAXBElement<SendMailResponse> createSendMailResponse(SendMailResponse value) {
-        return new JAXBElement<SendMailResponse>(_SendMailResponse_QNAME, SendMailResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "setCifradoSimetrico")
+    public JAXBElement<SetCifradoSimetrico> createSetCifradoSimetrico(SetCifradoSimetrico value) {
+        return new JAXBElement<SetCifradoSimetrico>(_SetCifradoSimetrico_QNAME, SetCifradoSimetrico.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguacesAceptados }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetCifradoSimetricoResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getDesguacesAceptados")
-    public JAXBElement<GetDesguacesAceptados> createGetDesguacesAceptados(GetDesguacesAceptados value) {
-        return new JAXBElement<GetDesguacesAceptados>(_GetDesguacesAceptados_QNAME, GetDesguacesAceptados.class, null, value);
-    }
-
-	/**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RegistrarResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_admin/", name = "RegistrarResponse")
-    public JAXBElement<RegistrarResponse> createRegistrarResponse(RegistrarResponse value) {
-        return new JAXBElement<RegistrarResponse>(_RegistrarResponse_QNAME, RegistrarResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "setCifradoSimetricoResponse")
+    public JAXBElement<SetCifradoSimetricoResponse> createSetCifradoSimetricoResponse(SetCifradoSimetricoResponse value) {
+        return new JAXBElement<SetCifradoSimetricoResponse>(_SetCifradoSimetricoResponse_QNAME, SetCifradoSimetricoResponse.class, null, value);
     }
 
     /**
@@ -516,6 +669,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://gestor_admin/", name = "getOfertasporPedido")
     public JAXBElement<GetOfertasporPedido> createGetOfertasporPedido(GetOfertasporPedido value) {
         return new JAXBElement<GetOfertasporPedido>(_GetOfertasporPedido_QNAME, GetOfertasporPedido.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetCifradoAsimetrico }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_admin/", name = "setCifradoAsimetrico")
+    public JAXBElement<SetCifradoAsimetrico> createSetCifradoAsimetrico(SetCifradoAsimetrico value) {
+        return new JAXBElement<SetCifradoAsimetrico>(_SetCifradoAsimetrico_QNAME, SetCifradoAsimetrico.class, null, value);
     }
 
     /**
@@ -536,15 +698,6 @@ public class ObjectFactory {
         return new JAXBElement<GetDesguacesAceptadosResponse>(_GetDesguacesAceptadosResponse_QNAME, GetDesguacesAceptadosResponse.class, null, value);
     }
 
-	/**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguacesResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getDesguacesResponse")
-    public JAXBElement<GetDesguacesResponse> createGetDesguacesResponse(GetDesguacesResponse value) {
-        return new JAXBElement<GetDesguacesResponse>(_GetDesguacesResponse_QNAME, GetDesguacesResponse.class, null, value);
-    }
-
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAltaDesguaceResponse }{@code >}}
      * 
@@ -561,15 +714,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://gestor_admin/", name = "getTalleresAceptados")
     public JAXBElement<GetTalleresAceptados> createGetTalleresAceptados(GetTalleresAceptados value) {
         return new JAXBElement<GetTalleresAceptados>(_GetTalleresAceptados_QNAME, GetTalleresAceptados.class, null, value);
-    }
-
-	/**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetDesguaces }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_admin/", name = "getDesguaces")
-    public JAXBElement<GetDesguaces> createGetDesguaces(GetDesguaces value) {
-        return new JAXBElement<GetDesguaces>(_GetDesguaces_QNAME, GetDesguaces.class, null, value);
     }
 
 }

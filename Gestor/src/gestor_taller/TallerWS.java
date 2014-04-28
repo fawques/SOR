@@ -22,6 +22,7 @@ import general.Pedido;
 import general.PedidoCorto;
 import general.Taller;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,12 +33,14 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.jms.JMSException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -53,22 +56,23 @@ import seguridad.TripleDes;
 public class TallerWS {
 
 	InterfazBD bd;
-	static ArrayList<String> listaIdTaller;
-	static ArrayList<SecretKey> listaSecretKeys;
+	static ArrayList<String> listaIdTaller = new ArrayList<String>();
+	static ArrayList<SecretKey> listaSecretKeys = new ArrayList<SecretKey>();
 	
-
-	static private SecretKey getKey(String idTaller) {
+	private SecretKey getKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
-			SecretKey key = listaSecretKeys.get(index);
-			return key;
-		} else {
-			return null;
+			Taller t = bd.getTallerEnGestor(idTaller);
+			if (t != null ) {
+				SecretKey key = listaSecretKeys.get(index);
+                removeKey(idTaller);
+				return key;
+			}
 		}
-
+		return null;
 	}
 	
-	static public void removeKey(String idTaller) {
+	static private void removeKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
 			listaSecretKeys.remove(index);
@@ -98,10 +102,12 @@ public class TallerWS {
 			@WebParam(name = "postalCode") String postalCode,
 			@WebParam(name = "telephone") String telephone) {
 		try {
+			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(id);
-			if (key != null) {
-				// desencriptar aqui
-				bd = new InterfazBD("sor_gestor");
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(id);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+				
 				// desencriptar elementos
 				boolean res = bd.modificarTaller(id,
 						TripleDes.decrypt(key, name),
@@ -114,6 +120,10 @@ public class TallerWS {
 				bd.close();
 				removeKey(id);
 				return res;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
@@ -124,14 +134,16 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
 	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {
-			bd=new InterfazBD("sor_taller");
-			if (bd.getTallerEnGestor(idTaller) != null) {
+			bd=new InterfazBD("sor_gestor");
+			Taller t = bd.getTallerEnGestor(idTaller);
+			if (t != null && t.getPassword().equals(password)) {
 				try {
 					SecretKey clave = TripleDes.generateKey();
 
@@ -150,7 +162,7 @@ public class TallerWS {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				bd.close();
+				
 			} else {
 				System.err
 						.println("id taller incorrecto. Clave de reto no generada");
@@ -174,18 +186,24 @@ public class TallerWS {
 	 */
 	// REMODELACION PARA QUE HAYA UNA ESPECIE DE LOGIN
 	@WebMethod(operationName = "checkActivacion")
-    public String checkActivacion(@WebParam(name = "mail") String contrasenya)    {
-		try {
+    public String checkActivacion(@WebParam(name="email") String email,@WebParam(name = "mail") String contrasenya)    {
+		try{	
 			bd = new InterfazBD("sor_gestor");
-            Taller taller = bd.getTallerActivar(contrasenya);
-			String res;
-            if (taller!=null) {
-				res = taller.getID();
-			} else {
-				res = "";
-			}
-			bd.close();
-			return res;
+			Taller taller = bd.getTaller(email);
+	            
+				String res;
+				if (taller != null && taller.getPassword().equals(contrasenya)) {
+					 taller = bd.getTallerActivar(contrasenya);
+					 if(taller!=null){
+						 res = taller.getID();
+					 }
+					 else {
+					res = "";
+					 }
+						bd.close();
+						return res;
+				}
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -193,23 +211,8 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return ""; // devolvemos el estado pendiente, por defecto
-	}
-
-	private boolean comprobarPass(String idTaller, String pass){
-		try {
-			bd = new InterfazBD("sor_gestor");
-			Taller t = bd.getTallerEnGestor(idTaller);
-			bd.close();
-			if(t!=null){
-				if(t.getPassword().equals(pass))
-					return true;
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
 	}
 
 	/**
@@ -226,25 +229,32 @@ public class TallerWS {
 			}.getType();
 
 			SecretKey key = getKey(idTaller);
-			if (key != null) {
-				Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido),
-						collectionType);
-
-				Date ahora = new Date();
-				String stringID = "Pedido_" + bd.getNumPedidos();
-				p.setID(stringID);
-				bd.anadirPedido(stringID, p.getID_aux(), p.getFecha_alta(), p
-						.getEstado().ordinal(), p.getTaller(), p
-						.getTallerNombre(), p.getFecha_baja(), p
-						.getFecha_limite(), p.getModoAutomatico());
-				bd.anyadirPiezasAPedido(stringID, p.getListaPiezas(),
-						p.getListaCantidadesPiezas());
-				for (Desguace desguace : bd.getDesguaces()) {
-					enviarPedidoActivemq(desguace.getID(),
-							new PedidoCorto(p.getID(), p.getEstado()));
+			
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+					Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido),
+							collectionType);
+	
+					Date ahora = new Date();
+					String stringID = "Pedido_" + bd.getNumPedidos();
+					p.setID(stringID);
+					bd.anadirPedido(stringID, p.getID_aux(), p.getFecha_alta(), p
+							.getEstado().ordinal(), p.getTaller(), p
+							.getTallerNombre(), p.getFecha_baja(), p
+							.getFecha_limite(), p.getModoAutomatico());
+					bd.anyadirPiezasAPedido(stringID, p.getListaPiezas(),
+							p.getListaCantidadesPiezas());
+					for (Desguace desguace : bd.getDesguaces()) {
+						enviarPedidoActivemq(desguace.getID(),
+								new PedidoCorto(p.getID(), p.getEstado()));
+					}
+					bd.close();
+					return stringID;
 				}
-				bd.close();
-				return stringID;
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
@@ -256,7 +266,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
-
+		bd.close();
 		return "";
 	}
 
@@ -273,12 +283,16 @@ public class TallerWS {
 				.create();
 		ArrayList<Oferta> listaOferta = new ArrayList<>();
 		ArrayList<Pedido> arrayPedido = new ArrayList<Pedido>();
-		SecretKey key = getKey(idTaller);
-		if (key != null) {
-			arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
+		try {
+			bd = new InterfazBD("sor_gestor");
+			SecretKey key = getKey(idTaller);
+			
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+				arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
 					collectionType);
-			try {
-				bd = new InterfazBD("sor_gestor");
+				
 				for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
 					Pedido p = it.next();
 					listaOferta.addAll(bd.getOfertasPedido(p.getID()));
@@ -286,18 +300,36 @@ public class TallerWS {
 
 				String retu = gson.toJson(listaOferta);
 				bd.close();
-				return retu;
-			} catch (SQLException ex) {
-				Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
-						null, ex);
-			} catch (ClassNotFoundException ex) {
-				Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
-						null, ex);
+				return TripleDes.encrypt(key, retu);
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
-		} else {
-			System.err.println("secretKey = NULL!");
+		
+		} catch (SQLException ex) {
+			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
+					null, ex);
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE,
+					null, ex);
+		} catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
+		
+		bd.close();
 		return null;
 	}
 
@@ -310,14 +342,21 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED,
 						TripleDes.decrypt(key, ID));
 				bd.close();
 				return true;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
+			bd.close();
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -325,6 +364,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -338,14 +378,21 @@ public class TallerWS {
 			bd = new InterfazBD("sor_gestor");
 
 			SecretKey key = getKey(idTaller);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
 						TripleDes.decrypt(key, ID));
 				bd.close();
 				return true;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -353,6 +400,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -368,9 +416,13 @@ public class TallerWS {
 	public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			boolean oool = bd.bajaTaller(tallerID);
-			bd.close();
-			return oool;
+			Taller t = bd.getTallerEnGestor(tallerID);
+			if (t != null && t.getPassword().equals(password)) {
+				boolean oool = bd.bajaTaller(tallerID);
+				bd.close();
+				return oool;
+			}
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -378,6 +430,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -408,6 +461,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -418,15 +472,22 @@ public class TallerWS {
 			bd = new InterfazBD("sor_gestor");
 
 			SecretKey key = getKey(idTaller);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				boolean oool = bd.cancelarPedido(TripleDes.decrypt(key,
 						idPedido));
 				cambiarEstadoPedido(idTaller,password,EstadoPedido.CANCELLED.ordinal(), idPedido);
 				bd.close();
 				return oool;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
+		
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -434,6 +495,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
+		bd.close();
 		return false;
 	}
 
@@ -445,11 +507,14 @@ public class TallerWS {
 			@WebParam(name = "id") String id
 			) {
 		try {
+			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
-			if (key != null) {
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				Gson gson = new GsonBuilder().setDateFormat(
 						"yyyy-MM-dd'T'HH:mm:ss").create();
-				bd = new InterfazBD("sor_gestor");
+				
 				for (Desguace desguace : bd.getDesguaces()) {
 					enviarPedidoActivemq(desguace.getID(), new PedidoCorto(
 							TripleDes.decrypt(key, id),
@@ -460,9 +525,14 @@ public class TallerWS {
 						TripleDes.decrypt(key, id));
 				bd.close();
 				return ool;
+				}
+				else{
+					System.err.println("Login incorrecto");
+				}
 			} else {
 				System.err.println("secretKey = NULL!");
 			}
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -473,7 +543,7 @@ public class TallerWS {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		}
-
+		bd.close();
 		return false;
 	}
 
@@ -489,31 +559,48 @@ public class TallerWS {
 		ArrayList<Pedido> listaPedidos = new ArrayList<Pedido>();
 		try {
 			bd = new InterfazBD("sor_gestor");
-			listaPedidos = bd.getPedidosTaller(idTaller);
-			for (Pedido p : listaPedidos) {
-				if (p.getEstado() == EstadoPedido.FINISHED_OK) {
-					ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
-							.getID());
-					for (Oferta of : listaOferta) {
-						if (of.getEstado() != EstadoOferta.FINISHED_OK) {
-							bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
-									of.getID());
+			SecretKey key = getKey(idTaller);
+			Taller t = bd.getTallerEnGestor(idTaller);
+			if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
+				listaPedidos = bd.getPedidosTaller(idTaller);
+				for (Pedido p : listaPedidos) {
+					if (p.getEstado() == EstadoPedido.FINISHED_OK) {
+						ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
+								.getID());
+						for (Oferta of : listaOferta) {
+							if (of.getEstado() != EstadoOferta.FINISHED_OK) {
+								bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
+										of.getID());
+							}
 						}
 					}
 				}
+				String listaJSON = gson.toJson(listaPedidos);
+				System.out.println("listaJSON = " + listaJSON);
+				bd.close();
+				return TripleDes.encrypt(key, listaJSON);
 			}
-			String listaJSON = gson.toJson(listaPedidos);
-			System.out.println("listaJSON = " + listaJSON);
-			bd.close();
-			return listaJSON;
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
+		} catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
+		bd.close();
 		return null;
 	}
 

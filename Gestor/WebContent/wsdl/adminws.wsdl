@@ -5,20 +5,32 @@
   <import namespace="http://gestor_admin/" schemaLocation="adminws_schema1.xsd"/>
 </schema>
   </wsdl:types>
+  <wsdl:message name="setCifradoAsimetricoResponse">
+    <wsdl:part name="parameters" element="tns:setCifradoAsimetricoResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getAltaTalleres">
     <wsdl:part name="parameters" element="tns:getAltaTalleres">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="getTalleresResponse">
-    <wsdl:part name="parameters" element="tns:getTalleresResponse">
+  <wsdl:message name="getContrasenyaPorDesguaceIDResponse">
+    <wsdl:part name="parameters" element="tns:getContrasenyaPorDesguaceIDResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getTalleresAceptadosResponse">
     <wsdl:part name="parameters" element="tns:getTalleresAceptadosResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getTalleresResponse">
+    <wsdl:part name="parameters" element="tns:getTalleresResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getPedidosResponse">
     <wsdl:part name="parameters" element="tns:getPedidosResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContrasenyaPorDesguaceID">
+    <wsdl:part name="parameters" element="tns:getContrasenyaPorDesguaceID">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="sendMail">
@@ -31,6 +43,10 @@
   </wsdl:message>
   <wsdl:message name="sendMailResponse">
     <wsdl:part name="parameters" element="tns:sendMailResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContrasenyaPorTallerID">
+    <wsdl:part name="parameters" element="tns:getContrasenyaPorTallerID">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getDesguacesAceptados">
@@ -97,6 +113,10 @@
     <wsdl:part name="parameters" element="tns:addAccesoDesguace">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getContrasenyaPorTallerIDResponse">
+    <wsdl:part name="parameters" element="tns:getContrasenyaPorTallerIDResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getPedidoIDResponse">
     <wsdl:part name="parameters" element="tns:getPedidoIDResponse">
     </wsdl:part>
@@ -105,8 +125,20 @@
     <wsdl:part name="parameters" element="tns:getOfertasporPedidoResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="setCifradoSimetrico">
+    <wsdl:part name="parameters" element="tns:setCifradoSimetrico">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setCifradoSimetricoResponse">
+    <wsdl:part name="parameters" element="tns:setCifradoSimetricoResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getOfertasporPedido">
     <wsdl:part name="parameters" element="tns:getOfertasporPedido">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setCifradoAsimetrico">
+    <wsdl:part name="parameters" element="tns:setCifradoAsimetrico">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getAltaTalleresResponse">
@@ -174,10 +206,22 @@
       <wsdl:output name="getDesguacesResponse" message="tns:getDesguacesResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="setCifradoSimetrico">
+      <wsdl:input name="setCifradoSimetrico" message="tns:setCifradoSimetrico">
+    </wsdl:input>
+      <wsdl:output name="setCifradoSimetricoResponse" message="tns:setCifradoSimetricoResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getOfertasporPedido">
       <wsdl:input name="getOfertasporPedido" message="tns:getOfertasporPedido">
     </wsdl:input>
       <wsdl:output name="getOfertasporPedidoResponse" message="tns:getOfertasporPedidoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContrasenyaPorTallerID">
+      <wsdl:input name="getContrasenyaPorTallerID" message="tns:getContrasenyaPorTallerID">
+    </wsdl:input>
+      <wsdl:output name="getContrasenyaPorTallerIDResponse" message="tns:getContrasenyaPorTallerIDResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="hello">
@@ -210,10 +254,22 @@
       <wsdl:output name="getAltaTalleresResponse" message="tns:getAltaTalleresResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="setCifradoAsimetrico">
+      <wsdl:input name="setCifradoAsimetrico" message="tns:setCifradoAsimetrico">
+    </wsdl:input>
+      <wsdl:output name="setCifradoAsimetricoResponse" message="tns:setCifradoAsimetricoResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getOfertas">
       <wsdl:input name="getOfertas" message="tns:getOfertas">
     </wsdl:input>
       <wsdl:output name="getOfertasResponse" message="tns:getOfertasResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContrasenyaPorDesguaceID">
+      <wsdl:input name="getContrasenyaPorDesguaceID" message="tns:getContrasenyaPorDesguaceID">
+    </wsdl:input>
+      <wsdl:output name="getContrasenyaPorDesguaceIDResponse" message="tns:getContrasenyaPorDesguaceIDResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -291,12 +347,30 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="setCifradoSimetrico">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="setCifradoSimetrico">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="setCifradoSimetricoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getOfertasporPedido">
       <soap:operation soapAction="" style="document"/>
       <wsdl:input name="getOfertasporPedido">
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getOfertasporPedidoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContrasenyaPorTallerID">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getContrasenyaPorTallerID">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContrasenyaPorTallerIDResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -342,6 +416,24 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getAltaTalleresResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setCifradoAsimetrico">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="setCifradoAsimetrico">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="setCifradoAsimetricoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContrasenyaPorDesguaceID">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getContrasenyaPorDesguaceID">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContrasenyaPorDesguaceIDResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

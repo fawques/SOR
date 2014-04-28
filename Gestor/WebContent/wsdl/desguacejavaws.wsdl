@@ -33,8 +33,16 @@
     <wsdl:part name="parameters" element="tns:aceptarOfertaFin">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="generarClaveRetoResponse">
+    <wsdl:part name="parameters" element="tns:generarClaveRetoResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getPedidosporID">
     <wsdl:part name="parameters" element="tns:getPedidosporID">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarClaveReto">
+    <wsdl:part name="parameters" element="tns:generarClaveReto">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="cancelarOferta">
@@ -102,6 +110,12 @@
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="DesguaceJavaWS">
+    <wsdl:operation name="generarClaveReto">
+      <wsdl:input name="generarClaveReto" message="tns:generarClaveReto">
+    </wsdl:input>
+      <wsdl:output name="generarClaveRetoResponse" message="tns:generarClaveRetoResponse">
+    </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="checkActivacion">
       <wsdl:input name="checkActivacion" message="tns:checkActivacion">
     </wsdl:input>
@@ -183,6 +197,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="checkActivacionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generarClaveReto">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="generarClaveReto">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="generarClaveRetoResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

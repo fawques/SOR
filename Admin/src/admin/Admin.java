@@ -7,6 +7,8 @@
 package admin;
 
 
+import gestor_admin.AdminWS;
+import general.Taller;
 import jUDDI.JUDDIProxy;
 
 import java.io.IOException;
@@ -14,6 +16,10 @@ import java.net.URL;
 
 
 
+
+
+import seguridad.SslConfig;
+import BD.InterfazBD;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -70,6 +76,7 @@ public class Admin extends Application {
 
     }
 
+
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
@@ -83,75 +90,90 @@ public class Admin extends Application {
     }
 
     public static String getOfertas() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getOfertas();
     }
 
-    public static String getPedidos() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
+	private static AdminWS prepararWebService() {
+		SslConfig.disableCertificateChecking();
+		gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
         gestor_admin.AdminWS port = service.getAdminWSPort();
+        
+        SslConfig.disableCNChecker(port);
+		return port;
+	}
+
+    public static String getPedidos() {
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getPedidos();
     }
 
     public static String getTalleres() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getTalleres();
     }
     public static String getTalleresAceptados() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getTalleresAceptados();
     }
     public static String getPedidoID(java.lang.String id) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getPedidoID(id);
     }
 
     public static String getOfertasporPedido(java.lang.String idPedido) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getOfertasporPedido(idPedido);
     }
 
     public static String getDesguacesAceptados() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getDesguacesAceptados();
     }
 
     public static String getDesguaces() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getDesguaces();
     }
 
 
 
     public static String getAltaTalleres() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getAltaTalleres();
     }
 
     public static void darAccesoTaller(java.lang.String id) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         port.darAccesoTaller(id);
     }
 
     public static Boolean addAccesoDesguace(java.lang.String id) {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.addAccesoDesguace(id);
     }
 
     public static String getAltaDesguace() {
-        gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+        gestor_admin.AdminWS port = prepararWebService();
         return port.getAltaDesguace();
     }
+    
+    public static boolean toggleAsimetrico(boolean on) {
+        gestor_admin.AdminWS port = prepararWebService();
+        return port.setCifradoAsimetrico(on);
+    }
+    
+    public static boolean toggleSimetrico(boolean on) {
+        gestor_admin.AdminWS port = prepararWebService();
+        return port.setCifradoSimetrico(on);
+    }
 
+    public static String getContrasenyaPorTallerID(java.lang.String id) {
+    	gestor_admin.AdminWS port = prepararWebService();
+        return port.getContrasenyaPorTallerID(id);
+    }
+    public static String getContrasenyaPorDesguaceID(java.lang.String id) {
+    	gestor_admin.AdminWS port = prepararWebService();
+        return port.getContrasenyaPorDesguaceID(id);
+    }
 }

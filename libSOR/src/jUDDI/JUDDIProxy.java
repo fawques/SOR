@@ -28,13 +28,25 @@ import org.uddi.v3_service.UDDIInquiryService;
  */
 public class JUDDIProxy {
     private static URL wsdl;
+    private static URL wsdl_HTTPS;
     private static String urlActiveMQ;
     private static URL urlUddi;
     public static void loadWsdl(String servicio) throws RemoteException {
-        load(servicio);
-        load("ActiveMQ");
+        try {
+			wsdl = new URL(load(servicio));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try {
+			wsdl_HTTPS = new URL(load(servicio+"_HTTPS"));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        urlActiveMQ = load("ActiveMQ");
     }
-    public static void load(String servicio) throws RemoteException {
+    public static String load(String servicio) throws RemoteException {
     	try {
 			urlUddi= new URL("http://localhost:8081/juddiv3/services/inquiry?wsdl");
 		} catch (MalformedURLException e) {
@@ -66,27 +78,18 @@ public class JUDDIProxy {
         BindingTemplate bt = btList.get(0);
         AccessPoint ap = bt.getAccessPoint();
         String wsdlString = ap.getValue();
-        try {
-            if (servicio.equals("ActiveMQ")) {
-                urlActiveMQ = wsdlString;
-            }else{
-                wsdl = new URL(wsdlString);
-            }
-            
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(JUDDIProxy.class.getName()).log(Level.SEVERE, null, ex);
-            if (servicio.equals("ActiveMQ")) {
-                urlActiveMQ = null;
-            }else{
-                wsdl = null;            
-            }
-        }
         System.out.println("WSDL: " + wsdlString);
+        return wsdlString;
         }
+		return "";
     }
 
     public static URL getWsdl() {
-        return wsdl;
+    	if (seguridad.Config.isCifradoAsimetrico()) {
+			return wsdl_HTTPS;
+		}else {
+			return wsdl;	
+		}
     }
     
     public static String getActiveMQ() {

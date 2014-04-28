@@ -497,6 +497,28 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         return null;
     }
     
+    public Desguace getDesguaceEnGestor(String id) {
+        ResultSet resultados = conexion.ejecutarSQLSelect("Select * from desguace where id='" + id + "'");
+        try {
+            if (resultados.first()) {
+                return new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"), resultados.getInt("codPostal"), resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Oferta>());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Desguace getDesguaceEnGestorID_AUX(String id_aux) {
+        ResultSet resultados = conexion.ejecutarSQLSelect("Select * from desguace where id_aux='" + id_aux + "'");
+        try {
+            if (resultados.first()) {
+                return new Desguace(resultados.getString("id"), resultados.getString("contrasenya"), resultados.getString("nombre"), resultados.getString("email"), resultados.getString("direccion"), resultados.getString("ciudad"), resultados.getInt("codPostal"), resultados.getInt("telefono"), EstadoGeneral.values()[resultados.getInt("estado")], new ArrayList<Oferta>());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public void getPiezasYCantidades(int pedidoID, ArrayList<Pieza> piezas, ArrayList<Integer> cantidades){
         try{
@@ -790,11 +812,11 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0', `id`='" + idRecibido + "'");
     }
 
-    public boolean activarTaller(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0',`contrasenya`='111' where `id`='" + idRecibido + "'");
+    public boolean activarTaller(String idRecibido,String pass) {
+        return conexion.ejecutarSQL("UPDATE `taller` SET  `estado`='0',`contrasenya`='"+pass+"' where `id`='" + idRecibido + "'");
     }
-    public boolean activarDesguace(String idRecibido) {
-        return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0',`contrasenya`='111' where `id`='" + idRecibido + "'");
+    public boolean activarDesguace(String idRecibido,String pass) {
+    	 return conexion.ejecutarSQL("UPDATE `desguace` SET  `estado`='0',`contrasenya`='"+pass+"' where `id`='" + idRecibido + "'");
     }
     public ArrayList<Pedido> buscarPedido(String idPedido, String idPieza, String estado, Date fechaLimite, String modoAceptacion) throws SQLException {
         ArrayList<Pedido> alPedidos = new ArrayList<>();
@@ -960,12 +982,12 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
 	public Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
 		ArrayList<Integer> listaOpciones=getRolLista(rol);
 		if(listaOpciones==null){return false;}
-        conexion.ejecutarInsert("Insert into usuarios(nombre,contrasenya,rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol,cambiar_usuario,cambiar_rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol +"', '"+ listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +  "')");
+        conexion.ejecutarInsert("Insert into usuarios(nombre,contrasenya,rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol,cambiar_usuario,cambiar_rol) values ('" + nombre + "', '" + contrasenya + "', '" + rol +"', '"+ listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"', '" + listaOpciones.get(9) + "', '" + listaOpciones.get(10) +  "')");
 
 		return true;
 	}
 
-	private ArrayList<Integer> getRolLista(String rol) {
+	public ArrayList<Integer> getRolLista(String rol) {
 	      
 	       ArrayList<Integer> listaOpciones = new ArrayList<Integer>();
 	       ResultSet  opciones=  conexion.ejecutarSQLSelect("SELECT * from roles where rol='" + rol + "';");
@@ -1049,12 +1071,12 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
 
 	public void cambiarUsuario(String nombreUsuario,ArrayList<Integer> listaOpciones) {
       //  conexion.ejecutarInsert("Insert into roles(rol,nuevo_pedido,borrar_pedido,modificar_pedido,modificar_datos,baja,aceptar_ofertas,rechazar_ofertas,nuevo_usuario,nuevo_rol) values ('" + nombre + "', '" + listaOpciones.get(0) + "', '" + listaOpciones.get(1) +  "', '" + listaOpciones.get(2) + "', '" + listaOpciones.get(3) + "', '" + listaOpciones.get(4) + "', '" + listaOpciones.get(5) + "', '" + listaOpciones.get(6) + "', '" + listaOpciones.get(7) + "', '" + listaOpciones.get(8) +"')");
-         conexion.ejecutarSQL("UPDATE usuarios SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `baja`='"+listaOpciones.get(3)+"',`aceptar_ofertas`='"+listaOpciones.get(4)+"', `rechazar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where nombre='"+nombreUsuario+"';");
+         conexion.ejecutarSQL("UPDATE usuarios SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `modificar_datos`='"+listaOpciones.get(3)+"', `baja`='"+listaOpciones.get(4)+"',`aceptar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where nombre='"+nombreUsuario+"';");
 		
 	}
 
 	public void cambiarRol(String nombreRol, ArrayList<Integer> listaOpciones) {
-        conexion.ejecutarSQL("UPDATE roles SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `baja`='"+listaOpciones.get(3)+"',`aceptar_ofertas`='"+listaOpciones.get(4)+"', `rechazar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where rol='"+nombreRol+"';");
+        conexion.ejecutarSQL("UPDATE roles SET  `nuevo_pedido`='"+listaOpciones.get(0)+"',`borrar_pedido`='"+listaOpciones.get(1)+"', `modificar_pedido`='"+listaOpciones.get(2)+"', `modificar_datos`='"+listaOpciones.get(3)+"', `baja`='"+listaOpciones.get(4)+"',`aceptar_ofertas`='"+listaOpciones.get(5)+"',`rechazar_ofertas`='"+listaOpciones.get(6)+"',`nuevo_usuario`='"+listaOpciones.get(7)+"',`nuevo_rol`='"+listaOpciones.get(8)+"',`cambiar_usuario`='"+listaOpciones.get(9)+"',`cambiar_rol`='"+listaOpciones.get(10)+"' where rol='"+nombreRol+"';");
 
 		
 	}
@@ -1097,6 +1119,7 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
 
 	public Boolean comprobarPermisos(String usuario, String funcion) {
 		  int funcionOpcion =0;
+		  ResultSet resultSet ;
 	    ResultSet resultados = conexion.ejecutarSQLSelect("SELECT * FROM usuarios WHERE nombre='" + usuario + "';");
         try {
             if (resultados.first()) {
@@ -1120,6 +1143,21 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
 
                 
             }
+            else{
+            	resultSet =conexion.ejecutarSQLSelect("SELECT * FROM roles WHERE rol='Administrador';");
+                try {
+                    if (resultSet.first()) {
+                    	funcionOpcion = resultSet.getInt(funcion);
+                    	if(funcionOpcion==1){
+                    		return true;
+                    	}
+                        
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(InterfazBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -1128,5 +1166,13 @@ public ArrayList<Oferta> getOfertasConID_aux(EstadoOferta estado) {
         return false;
 	}
 
+	public void ponerCodigoActivacionTaller(String codigo,String id) {
+		conexion.ejecutarSQL("UPDATE `taller` SET `contrasenya`='"+codigo+"' WHERE `id`='"+id+"';");
+		
+	}
+	public void ponerCodigoActivacionDesguace(String codigo,String id) {
+		conexion.ejecutarSQL("UPDATE `desguace` SET `contrasenya`='"+codigo+"' WHERE `id`='"+id+"';");
+		
+	}
 	
 }

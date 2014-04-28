@@ -20,6 +20,14 @@
 
   <xs:element name="getAltaTalleresResponse" type="tns:getAltaTalleresResponse"/>
 
+  <xs:element name="getContrasenyaPorDesguaceID" type="tns:getContrasenyaPorDesguaceID"/>
+
+  <xs:element name="getContrasenyaPorDesguaceIDResponse" type="tns:getContrasenyaPorDesguaceIDResponse"/>
+
+  <xs:element name="getContrasenyaPorTallerID" type="tns:getContrasenyaPorTallerID"/>
+
+  <xs:element name="getContrasenyaPorTallerIDResponse" type="tns:getContrasenyaPorTallerIDResponse"/>
+
   <xs:element name="getDesguaces" type="tns:getDesguaces"/>
 
   <xs:element name="getDesguacesAceptados" type="tns:getDesguacesAceptados"/>
@@ -59,6 +67,14 @@
   <xs:element name="sendMail" type="tns:sendMail"/>
 
   <xs:element name="sendMailResponse" type="tns:sendMailResponse"/>
+
+  <xs:element name="setCifradoAsimetrico" type="tns:setCifradoAsimetrico"/>
+
+  <xs:element name="setCifradoAsimetricoResponse" type="tns:setCifradoAsimetricoResponse"/>
+
+  <xs:element name="setCifradoSimetrico" type="tns:setCifradoSimetrico"/>
+
+  <xs:element name="setCifradoSimetricoResponse" type="tns:setCifradoSimetricoResponse"/>
 
   <xs:complexType name="getPedidos">
     <xs:sequence/>
@@ -145,6 +161,18 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="setCifradoSimetrico">
+    <xs:sequence>
+      <xs:element name="on" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setCifradoSimetricoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="getOfertasporPedido">
     <xs:sequence>
       <xs:element minOccurs="0" name="idPedido" type="xs:string"/>
@@ -152,6 +180,18 @@
   </xs:complexType>
 
   <xs:complexType name="getOfertasporPedidoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getContrasenyaPorTallerID">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getContrasenyaPorTallerIDResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:string"/>
     </xs:sequence>
@@ -211,11 +251,35 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="setCifradoAsimetrico">
+    <xs:sequence>
+      <xs:element name="on" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setCifradoAsimetricoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="getOfertas">
     <xs:sequence/>
   </xs:complexType>
 
   <xs:complexType name="getOfertasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getContrasenyaPorDesguaceID">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getContrasenyaPorDesguaceIDResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="xs:string"/>
     </xs:sequence>

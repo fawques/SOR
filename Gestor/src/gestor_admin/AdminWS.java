@@ -6,32 +6,42 @@
 package gestor_admin;
 
 import BD.InterfazBD;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import general.Desguace;
 import general.Oferta;
 import general.Pedido;
 import general.Taller;
 import general.Desguace;
+
 import java.util.ArrayList;
 import java.util.Date;
+
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+
 import BD.InterfazBD;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import general.EstadoOferta;
 import general.EstadoPedido;
 import jUDDI.SimplePublish;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Type;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -45,6 +55,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.Timer;
 
+import org.apache.commons.lang.RandomStringUtils;
 /**
  *
  * @author Cute
@@ -341,7 +352,8 @@ public class AdminWS {
     public Boolean darAccesoTaller(@WebParam(name = "ID") String ID) {
      try {
          bd = new InterfazBD("sor_gestor");
-         boolean res = bd.activarTaller(ID);
+         String pass=RandomStringUtils.randomAlphanumeric(4);
+         boolean res = bd.activarTaller(ID,pass);
          Taller t = bd.getTallerEnGestor(ID);
         //TODO descomentar
          /* if (res) {
@@ -375,7 +387,8 @@ public class AdminWS {
     public Boolean addAccesoDesguace(@WebParam(name = "ID") String ID) {
      try {
          bd = new InterfazBD("sor_gestor");
-        boolean ool = bd.activarDesguace(ID);
+         String pass=RandomStringUtils.randomAlphanumeric(4);
+        boolean ool = bd.activarDesguace(ID,pass);
 
         bd.close();
         return ool;
@@ -411,5 +424,51 @@ public class AdminWS {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
         return null;
+    }
+    
+    @WebMethod(operationName = "setCifradoAsimetrico")
+    public boolean setCifradoAsimetrico(@WebParam(name = "on")boolean on) {
+        seguridad.Config.setCifradoAsimetrico(on);
+        return true;
+     }
+    
+    @WebMethod(operationName = "setCifradoSimetrico")
+    public boolean setCifradoSimetrico(@WebParam(name = "on")boolean on) {
+        seguridad.Config.setCifradoSimetrico(on);
+        return true;
+     }
+    
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getContrasenyaPorTallerID")
+    public String getContrasenyaPorTallerID(@WebParam(name = "id") String id){
+    	try {
+			bd = new InterfazBD("sor_gestor");
+			Taller taller=bd.getTallerEnGestor(id);
+			return taller.getPassword();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    @WebMethod(operationName = "getContrasenyaPorDesguaceID")
+    public String getContrasenyaPorDesguaceID(@WebParam(name = "id") String id){
+    	try {
+			bd = new InterfazBD("sor_gestor");
+			Desguace desguace=bd.getDesguaceEnGestor(id);
+			return desguace.getPassword();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
     }
 }

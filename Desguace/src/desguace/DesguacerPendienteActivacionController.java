@@ -55,7 +55,7 @@ public class DesguacerPendienteActivacionController implements Initializable {
          lbEstado.setText("");
          piIndicador.setVisible(true);
          String email= bd.getDesguace().getEmail();
-         String idRecibido = DesguaceJava.checkActivacion(tfValidar.getText());
+         String idRecibido = DesguaceJava.checkActivacion(email,tfValidar.getText());
          if ("".equals(idRecibido)) //No Activado
          {
              lbEstado.setStyle("-fx-border-color: red;");
@@ -70,6 +70,8 @@ public class DesguacerPendienteActivacionController implements Initializable {
                  lbEstado.setStyle("-fx-border-color: red;");
                  lbEstado.setText("Su cuenta no ha podido activarse");
              } else {
+            	 DesguaceJava.desguace=bd.getDesguace();
+            	 DesguaceJava.ponerCodigoActivacionTaller(tfValidar.getText());
             	 DesguaceJava.desguace=bd.getDesguace();
                  URL location = getClass().getResource("GestionPedidos.fxml");
                  FXMLLoader loader = new FXMLLoader();

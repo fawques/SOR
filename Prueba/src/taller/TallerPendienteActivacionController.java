@@ -9,11 +9,11 @@ package taller;
 import BD.InterfazBD;
 
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -59,7 +59,8 @@ public class TallerPendienteActivacionController implements Initializable {
     }
 public void comprobarContrasenya() throws IOException, ClassNotFoundException, SQLException{
     bd = new InterfazBD("sor_taller");
-    String idRecibido =MainTaller.checkActivacion(tfValidar.getText());
+    MainTaller.getTaller();
+    String idRecibido =MainTaller.checkActivacion(MainTaller.taller.getEmail(),tfValidar.getText());
     if ("".equals(idRecibido)) //No Activado
     {
         lbEstado.setStyle("-fx-border-color: red;");
@@ -74,6 +75,9 @@ public void comprobarContrasenya() throws IOException, ClassNotFoundException, S
             lbEstado.setStyle("-fx-border-color: red;");
             lbEstado.setText("Su cuenta no ha podido activarse");
         } else {
+        	MainTaller.getTaller();
+        	MainTaller.nombreUsuario="Administrador";
+        	MainTaller.ponerCodigoActivacionTaller(tfValidar.getText());
             URL location = getClass().getResource("GestionPedidos.fxml");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(location);

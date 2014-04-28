@@ -86,11 +86,16 @@
             </AnchorPane>
           </content>
         </Tab>
-        <Tab text="Usuarios">
+        <Tab text="Opciones">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button layoutX="85.0" layoutY="131.0" mnemonicParsing="false" onAction="#nuevoUsuario" text="Nuevo usuario" />
+                <VBox alignment="TOP_LEFT" fillWidth="true" layoutX="41.0" layoutY="49.0" pickOnBounds="true" prefHeight="200.0" prefWidth="171.0" spacing="20.0">
+                  <children>
+                    <CheckBox fx:id="cbCifradoAsim" mnemonicParsing="false" onAction="#toggleAsimetrico" selected="true" style="" text="Habilitar cifrado asimetrico" />
+                    <CheckBox fx:id="cbCifradoSim" mnemonicParsing="false" onAction="#toggleSimetrico" selected="true" text="Habilitar cifrado simetrico" />
+                  </children>
+                </VBox>
               </children>
             </AnchorPane>
           </content>

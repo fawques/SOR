@@ -25,28 +25,30 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _NuevaOfertaResponse_QNAME = new QName("http://gestor_desguace_java/", "nuevaOfertaResponse");
-    private final static QName _NuevaOferta_QNAME = new QName("http://gestor_desguace_java/", "nuevaOferta");
     private final static QName _CambiarEstadoPedido_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedido");
-    private final static QName _CambiarEstadoPedidoResponse_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedidoResponse");
-    private final static QName _CheckActivacion_QNAME = new QName("http://gestor_desguace_java/", "checkActivacion");
-    private final static QName _GetOfertas_QNAME = new QName("http://gestor_desguace_java/", "getOfertas");
-    private final static QName _AceptarOfertaFin_QNAME = new QName("http://gestor_desguace_java/", "aceptarOfertaFin");
     private final static QName _GetPedidosporID_QNAME = new QName("http://gestor_desguace_java/", "getPedidosporID");
+    private final static QName _GenerarClaveReto_QNAME = new QName("http://gestor_desguace_java/", "generarClaveReto");
     private final static QName _CancelarOferta_QNAME = new QName("http://gestor_desguace_java/", "cancelarOferta");
-    private final static QName _AltaResponse_QNAME = new QName("http://gestor_desguace_java/", "altaResponse");
-    private final static QName _CambiarEstadoPedidoOtravezResponse_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedidoOtravezResponse");
-    private final static QName _AceptarOfertaFinResponse_QNAME = new QName("http://gestor_desguace_java/", "aceptarOfertaFinResponse");
     private final static QName _GetPedidosporIDResponse_QNAME = new QName("http://gestor_desguace_java/", "getPedidosporIDResponse");
     private final static QName _GetPedidoporID_QNAME = new QName("http://gestor_desguace_java/", "getPedidoporID");
     private final static QName _ModificarResponse_QNAME = new QName("http://gestor_desguace_java/", "modificarResponse");
-    private final static QName _Alta_QNAME = new QName("http://gestor_desguace_java/", "alta");
     private final static QName _CambiarEstadoPedidoOtravez_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedidoOtravez");
     private final static QName _CancelarOfertaResponse_QNAME = new QName("http://gestor_desguace_java/", "cancelarOfertaResponse");
-    private final static QName _GetOfertasResponse_QNAME = new QName("http://gestor_desguace_java/", "getOfertasResponse");
-    private final static QName _GetPedidoporIDResponse_QNAME = new QName("http://gestor_desguace_java/", "getPedidoporIDResponse");
-    private final static QName _CheckActivacionResponse_QNAME = new QName("http://gestor_desguace_java/", "checkActivacionResponse");
-    private final static QName _BajaResponse_QNAME = new QName("http://gestor_desguace_java/", "bajaResponse");
     private final static QName _Modificar_QNAME = new QName("http://gestor_desguace_java/", "modificar");
+    private final static QName _NuevaOferta_QNAME = new QName("http://gestor_desguace_java/", "nuevaOferta");
+    private final static QName _CambiarEstadoPedidoResponse_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedidoResponse");
+    private final static QName _GetOfertas_QNAME = new QName("http://gestor_desguace_java/", "getOfertas");
+    private final static QName _CheckActivacion_QNAME = new QName("http://gestor_desguace_java/", "checkActivacion");
+    private final static QName _GenerarClaveRetoResponse_QNAME = new QName("http://gestor_desguace_java/", "generarClaveRetoResponse");
+    private final static QName _AceptarOfertaFin_QNAME = new QName("http://gestor_desguace_java/", "aceptarOfertaFin");
+    private final static QName _AltaResponse_QNAME = new QName("http://gestor_desguace_java/", "altaResponse");
+    private final static QName _CambiarEstadoPedidoOtravezResponse_QNAME = new QName("http://gestor_desguace_java/", "cambiarEstadoPedidoOtravezResponse");
+    private final static QName _AceptarOfertaFinResponse_QNAME = new QName("http://gestor_desguace_java/", "aceptarOfertaFinResponse");
+    private final static QName _Alta_QNAME = new QName("http://gestor_desguace_java/", "alta");
+    private final static QName _GetOfertasResponse_QNAME = new QName("http://gestor_desguace_java/", "getOfertasResponse");
+    private final static QName _BajaResponse_QNAME = new QName("http://gestor_desguace_java/", "bajaResponse");
+    private final static QName _CheckActivacionResponse_QNAME = new QName("http://gestor_desguace_java/", "checkActivacionResponse");
+    private final static QName _GetPedidoporIDResponse_QNAME = new QName("http://gestor_desguace_java/", "getPedidoporIDResponse");
     private final static QName _Baja_QNAME = new QName("http://gestor_desguace_java/", "baja");
 
     /**
@@ -193,6 +195,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GenerarClaveRetoResponse }
+     * 
+     */
+    public GenerarClaveRetoResponse createGenerarClaveRetoResponse() {
+        return new GenerarClaveRetoResponse();
+    }
+
+    /**
      * Create an instance of {@link AceptarOfertaFin }
      * 
      */
@@ -206,6 +216,14 @@ public class ObjectFactory {
      */
     public GetPedidosporID createGetPedidosporID() {
         return new GetPedidosporID();
+    }
+
+    /**
+     * Create an instance of {@link GenerarClaveReto }
+     * 
+     */
+    public GenerarClaveReto createGenerarClaveReto() {
+        return new GenerarClaveReto();
     }
 
     /**
@@ -258,57 +276,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link NuevaOferta }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "nuevaOferta")
-    public JAXBElement<NuevaOferta> createNuevaOferta(NuevaOferta value) {
-        return new JAXBElement<NuevaOferta>(_NuevaOferta_QNAME, NuevaOferta.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CambiarEstadoPedido }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "cambiarEstadoPedido")
     public JAXBElement<CambiarEstadoPedido> createCambiarEstadoPedido(CambiarEstadoPedido value) {
         return new JAXBElement<CambiarEstadoPedido>(_CambiarEstadoPedido_QNAME, CambiarEstadoPedido.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CambiarEstadoPedidoResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "cambiarEstadoPedidoResponse")
-    public JAXBElement<CambiarEstadoPedidoResponse> createCambiarEstadoPedidoResponse(CambiarEstadoPedidoResponse value) {
-        return new JAXBElement<CambiarEstadoPedidoResponse>(_CambiarEstadoPedidoResponse_QNAME, CambiarEstadoPedidoResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CheckActivacion }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "checkActivacion")
-    public JAXBElement<CheckActivacion> createCheckActivacion(CheckActivacion value) {
-        return new JAXBElement<CheckActivacion>(_CheckActivacion_QNAME, CheckActivacion.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetOfertas }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "getOfertas")
-    public JAXBElement<GetOfertas> createGetOfertas(GetOfertas value) {
-        return new JAXBElement<GetOfertas>(_GetOfertas_QNAME, GetOfertas.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AceptarOfertaFin }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "aceptarOfertaFin")
-    public JAXBElement<AceptarOfertaFin> createAceptarOfertaFin(AceptarOfertaFin value) {
-        return new JAXBElement<AceptarOfertaFin>(_AceptarOfertaFin_QNAME, AceptarOfertaFin.class, null, value);
     }
 
     /**
@@ -321,39 +294,21 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GenerarClaveReto }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "generarClaveReto")
+    public JAXBElement<GenerarClaveReto> createGenerarClaveReto(GenerarClaveReto value) {
+        return new JAXBElement<GenerarClaveReto>(_GenerarClaveReto_QNAME, GenerarClaveReto.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CancelarOferta }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "cancelarOferta")
     public JAXBElement<CancelarOferta> createCancelarOferta(CancelarOferta value) {
         return new JAXBElement<CancelarOferta>(_CancelarOferta_QNAME, CancelarOferta.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AltaResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "altaResponse")
-    public JAXBElement<AltaResponse> createAltaResponse(AltaResponse value) {
-        return new JAXBElement<AltaResponse>(_AltaResponse_QNAME, AltaResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CambiarEstadoPedidoOtravezResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "cambiarEstadoPedidoOtravezResponse")
-    public JAXBElement<CambiarEstadoPedidoOtravezResponse> createCambiarEstadoPedidoOtravezResponse(CambiarEstadoPedidoOtravezResponse value) {
-        return new JAXBElement<CambiarEstadoPedidoOtravezResponse>(_CambiarEstadoPedidoOtravezResponse_QNAME, CambiarEstadoPedidoOtravezResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AceptarOfertaFinResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "aceptarOfertaFinResponse")
-    public JAXBElement<AceptarOfertaFinResponse> createAceptarOfertaFinResponse(AceptarOfertaFinResponse value) {
-        return new JAXBElement<AceptarOfertaFinResponse>(_AceptarOfertaFinResponse_QNAME, AceptarOfertaFinResponse.class, null, value);
     }
 
     /**
@@ -384,15 +339,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Alta }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "alta")
-    public JAXBElement<Alta> createAlta(Alta value) {
-        return new JAXBElement<Alta>(_Alta_QNAME, Alta.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CambiarEstadoPedidoOtravez }{@code >}}
      * 
      */
@@ -411,30 +357,111 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Modificar }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "modificar")
+    public JAXBElement<Modificar> createModificar(Modificar value) {
+        return new JAXBElement<Modificar>(_Modificar_QNAME, Modificar.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link NuevaOferta }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "nuevaOferta")
+    public JAXBElement<NuevaOferta> createNuevaOferta(NuevaOferta value) {
+        return new JAXBElement<NuevaOferta>(_NuevaOferta_QNAME, NuevaOferta.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CambiarEstadoPedidoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "cambiarEstadoPedidoResponse")
+    public JAXBElement<CambiarEstadoPedidoResponse> createCambiarEstadoPedidoResponse(CambiarEstadoPedidoResponse value) {
+        return new JAXBElement<CambiarEstadoPedidoResponse>(_CambiarEstadoPedidoResponse_QNAME, CambiarEstadoPedidoResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOfertas }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "getOfertas")
+    public JAXBElement<GetOfertas> createGetOfertas(GetOfertas value) {
+        return new JAXBElement<GetOfertas>(_GetOfertas_QNAME, GetOfertas.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckActivacion }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "checkActivacion")
+    public JAXBElement<CheckActivacion> createCheckActivacion(CheckActivacion value) {
+        return new JAXBElement<CheckActivacion>(_CheckActivacion_QNAME, CheckActivacion.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GenerarClaveRetoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "generarClaveRetoResponse")
+    public JAXBElement<GenerarClaveRetoResponse> createGenerarClaveRetoResponse(GenerarClaveRetoResponse value) {
+        return new JAXBElement<GenerarClaveRetoResponse>(_GenerarClaveRetoResponse_QNAME, GenerarClaveRetoResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AceptarOfertaFin }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "aceptarOfertaFin")
+    public JAXBElement<AceptarOfertaFin> createAceptarOfertaFin(AceptarOfertaFin value) {
+        return new JAXBElement<AceptarOfertaFin>(_AceptarOfertaFin_QNAME, AceptarOfertaFin.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AltaResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "altaResponse")
+    public JAXBElement<AltaResponse> createAltaResponse(AltaResponse value) {
+        return new JAXBElement<AltaResponse>(_AltaResponse_QNAME, AltaResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CambiarEstadoPedidoOtravezResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "cambiarEstadoPedidoOtravezResponse")
+    public JAXBElement<CambiarEstadoPedidoOtravezResponse> createCambiarEstadoPedidoOtravezResponse(CambiarEstadoPedidoOtravezResponse value) {
+        return new JAXBElement<CambiarEstadoPedidoOtravezResponse>(_CambiarEstadoPedidoOtravezResponse_QNAME, CambiarEstadoPedidoOtravezResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AceptarOfertaFinResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "aceptarOfertaFinResponse")
+    public JAXBElement<AceptarOfertaFinResponse> createAceptarOfertaFinResponse(AceptarOfertaFinResponse value) {
+        return new JAXBElement<AceptarOfertaFinResponse>(_AceptarOfertaFinResponse_QNAME, AceptarOfertaFinResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Alta }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "alta")
+    public JAXBElement<Alta> createAlta(Alta value) {
+        return new JAXBElement<Alta>(_Alta_QNAME, Alta.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetOfertasResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "getOfertasResponse")
     public JAXBElement<GetOfertasResponse> createGetOfertasResponse(GetOfertasResponse value) {
         return new JAXBElement<GetOfertasResponse>(_GetOfertasResponse_QNAME, GetOfertasResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPedidoporIDResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "getPedidoporIDResponse")
-    public JAXBElement<GetPedidoporIDResponse> createGetPedidoporIDResponse(GetPedidoporIDResponse value) {
-        return new JAXBElement<GetPedidoporIDResponse>(_GetPedidoporIDResponse_QNAME, GetPedidoporIDResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CheckActivacionResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "checkActivacionResponse")
-    public JAXBElement<CheckActivacionResponse> createCheckActivacionResponse(CheckActivacionResponse value) {
-        return new JAXBElement<CheckActivacionResponse>(_CheckActivacionResponse_QNAME, CheckActivacionResponse.class, null, value);
     }
 
     /**
@@ -447,12 +474,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Modificar }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckActivacionResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "modificar")
-    public JAXBElement<Modificar> createModificar(Modificar value) {
-        return new JAXBElement<Modificar>(_Modificar_QNAME, Modificar.class, null, value);
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "checkActivacionResponse")
+    public JAXBElement<CheckActivacionResponse> createCheckActivacionResponse(CheckActivacionResponse value) {
+        return new JAXBElement<CheckActivacionResponse>(_CheckActivacionResponse_QNAME, CheckActivacionResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPedidoporIDResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://gestor_desguace_java/", name = "getPedidoporIDResponse")
+    public JAXBElement<GetPedidoporIDResponse> createGetPedidoporIDResponse(GetPedidoporIDResponse value) {
+        return new JAXBElement<GetPedidoporIDResponse>(_GetPedidoporIDResponse_QNAME, GetPedidoporIDResponse.class, null, value);
     }
 
     /**

@@ -766,16 +766,30 @@ namespace desguaceNET
         
         }
 
-        public void anyadirRol(String nombre, String contrasenya, String rol)
+        public void anyadirRolUsuario(String nombre, String contrasenya, String rol)
         {
 
                 
-                bd.anyadirRol(nombre, contrasenya, rol);
+                bd.anyadirRolUsuario(nombre, contrasenya, rol);
                
 
 
 
 
+        }
+        public void anyadirRol(String rol,List<int> listaOpciones)
+        {
+
+
+            bd.anyadirRol(rol,listaOpciones);
+
+
+
+
+
+        }
+        public void ponerCodigoActivacionTaller(String codigo,String id) {
+            bd.ponerCodigoActivacionDesguace(codigo, id);
         }
 
 

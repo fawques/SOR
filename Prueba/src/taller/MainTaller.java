@@ -25,6 +25,7 @@ import gestor_taller.JMSException_Exception;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.nio.file.AccessDeniedException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -78,7 +79,7 @@ public class MainTaller extends Application {
 			JUDDIProxy.loadWsdl("TallerWS");
 			hello();
 			inicioTaller();
-		} catch (javax.xml.ws.WebServiceException e) {
+		} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			FXMLLoader loader = changeScene("reintentarConexion.fxml");
 			stage.setTitle("Conexion fallida");
 			ReintentarConexionController staticDataBox = (ReintentarConexionController) loader
@@ -358,6 +359,7 @@ public class MainTaller extends Application {
 			CompararPedidosGestorDesguace();
 		}catch(javax.xml.ws.WebServiceException ex){
 			System.out.println("Error comparando con el gestor");
+			ex.printStackTrace();
 		}
 		try{
 			bd = new InterfazBD("sor_taller");
@@ -441,6 +443,7 @@ public class MainTaller extends Application {
 	public static void crearPedido(Date fechaAlta, EstadoPedido estado,
 			Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas,
 			ArrayList<Integer> cantidades) throws JMSException_Exception, ParseException {
+
 		try {
 			bd = new InterfazBD("sor_taller");
 			Taller taller = bd.getPrimerTaller();
@@ -474,7 +477,7 @@ public class MainTaller extends Application {
 	public static boolean reactivarTaller() {
 		try {
 			bd = new InterfazBD("sor_taller");
-			boolean r = bd.activarTaller(taller.getID());
+			boolean r = bd.activarTaller(taller.getID(),taller.getPassword());
 			bd.close();
 			return r;
 		} catch (SQLException ex) {
@@ -488,28 +491,38 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static boolean bajaTaller() {
-		try {
+	public static boolean bajaTaller() throws AccessDeniedException{
+		
+			Permisos= new permisos();
+			try {
+				Permisos.comprobarPermisos("sor_taller", nombreUsuario, "baja");
+			} catch (AccessDeniedException e1) {
+				throw e1;
+			}
+			try {
 			if (baja(taller.getID())) {
-				bd = new InterfazBD("sor_taller");
-				if (bd.bajaTaller(taller.getID())) {
-					bd.close();
-					return true;
+				
+					bd = new InterfazBD("sor_taller");
+					if (bd.bajaTaller(taller.getID())) {
+						bd.close();
+						return true;
+					} else {
+						System.err
+								.println("Error: No se ha podido cambiar el estado en taller.");
+					}
 				} else {
 					System.err
-							.println("Error: No se ha podido cambiar el estado en taller.");
+							.println("Error: No se ha podido dar de baja en gestor.");
 				}
-			} else {
-				System.err
-						.println("Error: No se ha podido dar de baja en gestor.");
-			}
-		} catch (SQLException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		}
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+
 		return false;
 	}
 
@@ -536,8 +549,14 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static boolean cancellPedido(String idPedido) {
+	public static boolean cancellPedido(String idPedido) throws AccessDeniedException  {
 		try {
+			Permisos= new permisos();
+			try {
+				Permisos.comprobarPermisos("sor_taller", nombreUsuario, "borrar_pedido");
+			} catch (AccessDeniedException e) {
+				throw e;
+			}
 			if (cancelarPedido(idPedido)) {
 				bd = new InterfazBD("sor_taller");
 				boolean o = bd.cancelarPedido(idPedido);
@@ -612,7 +631,7 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				return cambiarEstadoPedido_WS(taller.getID(),taller.getPassword(),Integer.parseInt(estado), idPedido);
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -621,7 +640,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -647,8 +666,9 @@ public class MainTaller extends Application {
 						telephone);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 				e.printStackTrace();
+				System.err.println("Reintentando...");
 			}
 		}
 		try {
@@ -657,7 +677,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -672,22 +692,23 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static String checkActivacion(java.lang.String contrasenya) {
+	public static String checkActivacion(java.lang.String email,java.lang.String contrasenya) {
 		for (int i = 0; i < 10; i++) {
 			try {
-				String ret = checkActivacion_WS(contrasenya);
+				String ret = checkActivacion_WS(email,contrasenya);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
-				return checkActivacion(contrasenya);
+				return checkActivacion(email,contrasenya);
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		
@@ -705,7 +726,9 @@ public class MainTaller extends Application {
 				String ret = nuevoPedido_WS(pedido, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+				e.printStackTrace();
+				System.err.println("Reintentando...");
 			}
 		}
 		try {
@@ -715,7 +738,7 @@ public class MainTaller extends Application {
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 			
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
 		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
@@ -736,7 +759,9 @@ public class MainTaller extends Application {
 				String ret = getOfertas_WS(listaPedidos, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+				e.printStackTrace();
+				System.err.println("Reintentando...");
 			}
 		}
 		try {
@@ -745,7 +770,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -753,7 +778,14 @@ public class MainTaller extends Application {
 		return "";
 	}
 
-	public static Boolean aceptarOferta(java.lang.String id) {
+	public static Boolean aceptarOferta(java.lang.String id) throws AccessDeniedException {
+		
+		try {
+			Permisos= new permisos();
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "aceptar_ofertas");
+		} catch (AccessDeniedException e1) {
+			throw e1;
+		}
 		AsyncManager manager = new AsyncManager("sor_taller");
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
@@ -764,7 +796,7 @@ public class MainTaller extends Application {
 				}
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -773,7 +805,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -787,7 +819,13 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static Boolean rechazarOferta(java.lang.String id) {
+	public static Boolean rechazarOferta(java.lang.String id) throws AccessDeniedException {
+		try {
+			Permisos= new permisos();
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "rechazar_ofertas");
+		} catch (AccessDeniedException e1) {
+			throw e1;
+		}
 		AsyncManager manager = new AsyncManager("sor_taller");
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
@@ -795,7 +833,7 @@ public class MainTaller extends Application {
 				Boolean ret = rechazarOferta_WS(id, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -804,7 +842,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -824,7 +862,7 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				return Webservices.hello();
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -833,7 +871,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -848,7 +886,7 @@ public class MainTaller extends Application {
 				Boolean ret = baja_WS(tallerID, taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -857,7 +895,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -882,7 +920,7 @@ public class MainTaller extends Application {
 						postalCode, telephone);
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -892,7 +930,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -915,7 +953,7 @@ public class MainTaller extends Application {
 				Boolean ret = cancelarPedido_WS(idPedido, taller.getID(), taller.getPassword());
 				// si no ha lanzado excepción, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
+			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 			}
 		}
 		try {
@@ -924,7 +962,7 @@ public class MainTaller extends Application {
 			}
 		} catch (RemoteException e) {
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) {
+		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
 			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
@@ -938,25 +976,39 @@ public class MainTaller extends Application {
 		return false;
 	}
 
-	public static void pedidoModificar(String id) {
-		try {
-			bd = new InterfazBD("sor_taller");
-			pedidoModificar = bd.getPedidoID_aux(id);
-			bd.close();
-			Gson gson = new GsonBuilder()
-					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+	public static void pedidoModificar(String id) throws AccessDeniedException  {
+		
+			Permisos= new permisos();
+			try {
+				Permisos.comprobarPermisos("sor_taller", nombreUsuario, "modificar_pedido");
+			} catch (AccessDeniedException e1) {
+				throw e1;
+			}
+			try {
+				bd = new InterfazBD("sor_taller");
+				pedidoModificar = bd.getPedidoID_aux(id);
+				bd.close();
+				Gson gson = new GsonBuilder()
+						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		} catch (SQLException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		}
+
 
 	}
 
-	public static Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) {
+	public static Boolean anyadirRolUsuario(String nombre, String contrasenya, String rol) throws AccessDeniedException {
+		Permisos= new permisos();
+		try {
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "nuevo_usuario");
+		} catch (AccessDeniedException e1) {
+			throw e1;
+		}
 		try {
 			bd=new InterfazBD("sor_taller");
 			Boolean estarRol= bd.anyadirRolUsuario(nombre,contrasenya,rol);
@@ -990,7 +1042,13 @@ public class MainTaller extends Application {
 		
 		return false;
 	}
-	public static void anyadirRol(String nombre, ArrayList<Integer> listaOpciones) {
+	public static void anyadirRol(String nombre, ArrayList<Integer> listaOpciones) throws AccessDeniedException {
+		Permisos= new permisos();
+		try {
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "nuevo_rol");
+		} catch (AccessDeniedException e1) {
+			throw e1;
+		}
 		try {
 			bd=new InterfazBD("sor_taller");
 			bd.anyadirRol(nombre,listaOpciones);
@@ -1007,10 +1065,14 @@ public class MainTaller extends Application {
 		
 	}
 
-	public static void cambiarUsuario(String nombre,ArrayList<Integer> listaOpciones) throws Exception {	
+	public static void cambiarUsuario(String nombre,ArrayList<Integer> listaOpciones) throws AccessDeniedException {	
 		try {
 			Permisos= new permisos();
-			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
+			try {
+				Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_usuario");
+			} catch (AccessDeniedException e) {
+				throw e;
+			}
 			bd=new InterfazBD("sor_taller");
 			bd.cambiarUsuario(nombre,listaOpciones);
 			bd.close();
@@ -1024,19 +1086,26 @@ public class MainTaller extends Application {
 	
 	}
 
-	public static void cambiarRol(String nombreRol,
-			ArrayList<Integer> listaOpciones) {
+	public static void cambiarRol(String nombreRol,	ArrayList<Integer> listaOpciones) throws AccessDeniedException {
+		
+		Permisos= new permisos();
 		try {
-			bd=new InterfazBD("sor_taller");
+			Permisos.comprobarPermisos("sor_taller", nombreUsuario, "cambiar_rol");
+		} catch (AccessDeniedException e) {
+			throw e;
+		}
+			try {
+				bd=new InterfazBD("sor_taller");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			bd.cambiarRol(nombreRol,listaOpciones);
 			bd.close();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		
 	}
@@ -1077,6 +1146,36 @@ public class MainTaller extends Application {
 
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static void ponerCodigoActivacionTaller(String codigo) {
+		try {
+			bd = new InterfazBD("sor_taller");
+			bd.ponerCodigoActivacionTaller(codigo,taller.getID());
+			bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	public static  void getTaller(){
+		try {
+			bd = new InterfazBD("sor_taller");
+			 taller=bd.getPrimerTaller();
+			 bd.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

@@ -37,6 +37,13 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.CharSet;
+import org.bouncycastle.jcajce.provider.symmetric.ARC4.Base;
+
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
 /**
  * This class defines methods for encrypting and decrypting using the Triple DES
  * algorithm and for generating, reading and writing Triple DES keys. It also
@@ -190,21 +197,28 @@ public class TripleDes {
 	public static String encrypt(SecretKey key, String in)
 			throws NoSuchAlgorithmException, InvalidKeyException,
 			NoSuchPaddingException, IOException {
-		// Create and initialize the encryption engine
-		Cipher cipher = Cipher.getInstance("DESede");
-		cipher.init(Cipher.ENCRYPT_MODE, key);
-
-		byte[] encryptedString;
-		try {
-			encryptedString = cipher.doFinal(in.getBytes());
-			
-	        return new String(encryptedString);
-
-		} catch (IllegalBlockSizeException | BadPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(seguridad.Config.isCifradoSimetrico()){
+			// Create and initialize the encryption engine
+			Cipher cipher = Cipher.getInstance("DESede");
+			cipher.init(Cipher.ENCRYPT_MODE, key);
+	
+			byte[] encryptedString;
+			try {
+				/*Base64 b64 = new Base64();
+				encryptedString = cipher.doFinal(in.getBytes("iso-8859-1"));
+				return b64.encodeToString(encryptedString);*/
+				 BASE64Encoder encoder = new BASE64Encoder();
+			        encryptedString = cipher.doFinal(in.getBytes());
+			        String decriptedString = encoder.encodeBuffer(encryptedString);
+			        return decriptedString;
+			} catch (IllegalBlockSizeException | BadPaddingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}else{
+			return in;
 		}
-		return null;
 	}
 
 	/**
@@ -214,17 +228,26 @@ public class TripleDes {
 	 * CipherOutputStream.
 	 */
 	public static String decrypt(SecretKey key,String encryptedString) {
-	    String decryptedText=null;
-	    try {
-	    	Cipher cipher = Cipher.getInstance("DESede");
-	    	cipher.init(Cipher.DECRYPT_MODE, key);
-
-	        byte[] encryptedText = encryptedString.getBytes();
-	        byte[] plainText = cipher.doFinal(encryptedText);
-	        decryptedText= new String(plainText);
-	    } catch (Exception e) {
-	        e.printStackTrace();
+		if(seguridad.Config.isCifradoSimetrico()){
+		    String decryptedText=null;
+		    try {
+		    	Cipher cipher = Cipher.getInstance("DESede");
+		    	cipher.init(Cipher.DECRYPT_MODE, key);
+		    	
+		 
+		        
+		        
+		        BASE64Decoder decode = new BASE64Decoder();
+		        byte[] results = cipher.doFinal(decode.decodeBuffer(encryptedString));
+		        String decriptedString = new String(results, "UTF-8");
+		        return decriptedString;
+		    } catch (Exception e) {
+		    	
+		        e.printStackTrace();
+		    }
+		    return decryptedText;
+	    }else{
+	    	return encryptedString;
 	    }
-	    return decryptedText;
 	}
 }
