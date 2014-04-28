@@ -8,6 +8,7 @@ package taller;
 
 import Async.Accion;
 import Async.AsyncManager;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -529,13 +530,17 @@ public class GestionPedidosController implements Initializable {
 				if (MainTaller.bajaTaller()) {
 				    cambiarAPantallaTallerDeBaja();
 				} else {
-				    System.err.println("Lo siento, no se ha podido dar de baja.");
+					String error = "Error al dar de baja.";
+				    System.err.println(error);
+				    AuditLogger.error(error);
 				}
 			} catch (AccessDeniedException e) {
 				lanzarErrorPermisos(e.getMessage());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				String error = "Error al dar de baja.";
+			    AuditLogger.error(error);
 			}
 		
     }
@@ -603,6 +608,10 @@ public class GestionPedidosController implements Initializable {
 			        ModificarPedidoController tdCont = (ModificarPedidoController) loader.getController();
 			        tdCont.setStage(thisStage);
 			        tdCont.showStage();
+				}else{
+					String error = "AQUÍ DEBERÍA LOGUEAR ALGO!?";
+				    System.err.println(error);
+				    AuditLogger.error(error);
 				}
 			}
 	
@@ -704,6 +713,8 @@ public class GestionPedidosController implements Initializable {
     	}
     }
     public void lanzarErrorPermisos(String error) throws IOException{
+    	AuditLogger.error(error);
+    	
 		URL location = getClass().getResource("permisosError.fxml");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);

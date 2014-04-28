@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import audit.AuditLogger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -267,12 +269,13 @@ public class AltaTallerController implements Initializable {
                     staticDataBox.setStage(thisStage);
                     staticDataBox.showStage();
                 } else {
-                    //devolver un error
+                    AuditLogger.error("NO_USER", "Error insertando el nuevo taller en la Base de Datos");
                 }
                 bd.close();
             }
             else{
-                System.err.println("alta me ha devuelto < 0");
+                //System.err.println("alta me ha devuelto < 0");
+            	AuditLogger.error("NO_USER", "Error en el Webservice de Alta");
             }
         }
         //else nothing
