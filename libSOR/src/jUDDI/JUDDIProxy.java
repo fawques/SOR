@@ -48,7 +48,7 @@ public class JUDDIProxy {
     }
     public static String load(String servicio) throws RemoteException {
     	try {
-			urlUddi= new URL("http://192.168.1.2:8081/juddiv3/services/inquiry?wsdl");
+			urlUddi= new URL("http://localhost:8081/juddiv3/services/inquiry?wsdl");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
