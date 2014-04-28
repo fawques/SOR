@@ -561,24 +561,29 @@ public class TallerWS {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
 			Taller t = bd.getTallerEnGestor(idTaller);
-			if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
-				listaPedidos = bd.getPedidosTaller(idTaller);
-				for (Pedido p : listaPedidos) {
-					if (p.getEstado() == EstadoPedido.FINISHED_OK) {
-						ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
-								.getID());
-						for (Oferta of : listaOferta) {
-							if (of.getEstado() != EstadoOferta.FINISHED_OK) {
-								bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
-										of.getID());
+
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
+					listaPedidos = bd.getPedidosTaller(idTaller);
+					for (Pedido p : listaPedidos) {
+						if (p.getEstado() == EstadoPedido.FINISHED_OK) {
+							ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
+									.getID());
+							for (Oferta of : listaOferta) {
+								if (of.getEstado() != EstadoOferta.FINISHED_OK) {
+									bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
+											of.getID());
+								}
 							}
 						}
 					}
+					String listaJSON = gson.toJson(listaPedidos);
+					System.out.println("listaJSON = " + listaJSON);
+					bd.close();
+					return TripleDes.encrypt(key, listaJSON);
 				}
-				String listaJSON = gson.toJson(listaPedidos);
-				System.out.println("listaJSON = " + listaJSON);
-				bd.close();
-				return TripleDes.encrypt(key, listaJSON);
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
 			
 		} catch (SQLException ex) {
