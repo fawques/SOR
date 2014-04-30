@@ -8,6 +8,7 @@ package taller;
 import Async.AsyncManager;
 import BD.InterfazBD;
 import permisos.permisos;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
