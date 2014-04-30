@@ -369,16 +369,6 @@ public class GestionPedidosController implements Initializable {
 
     /**
      *
-     * @param e
-     */
-    public void buscarPedido(ActionEvent e) {
-        Date fechaLimite = new Date(Integer.parseInt(tfLimiteAnyo.getText().toString()), Integer.parseInt(tfLimiteMes.getText().toString()), Integer.parseInt(tfLimiteDia.getText().toString()));
-        System.out.println(MainTaller.buscarPedidos(tfIDPedido.getText(), tfIDPieza.getText(), cbEstado.getValue().toString(), fechaLimite, cbModo.getValue().toString()));
-
-    }
-
-    /**
-     *
      */
     public void buscarOfertas() {
 
@@ -440,7 +430,9 @@ public class GestionPedidosController implements Initializable {
         if(tpPed.getEstado() == EstadoOferta.ACTIVE){
 	        if (tpPed != null) {
 	            try {
-					MainTaller.aceptarOferta(tpPed.getId());
+					if(MainTaller.aceptarOferta(tpPed.getId())){
+						AuditLogger.CRUD_Oferta("Oferta <" + tpPed.getId() + "> aceptada");
+					}
 					MainTaller.cambiarEstadoPedido(EstadoPedido.ACCEPTED,tpPed.getPedido());
 		            actualizarPestanyaOfertas();
 				} catch (AccessDeniedException e) {
@@ -461,7 +453,9 @@ public class GestionPedidosController implements Initializable {
         if(tpPed.getEstado() == EstadoOferta.ACTIVE){
 	        if (tpPed != null) {
 	            try {
-					MainTaller.rechazarOferta(tpPed.getId());
+					if(MainTaller.rechazarOferta(tpPed.getId())){
+						AuditLogger.CRUD_Oferta("Oferta <" + tpPed.getId() + "> rechazada");
+					}
 				} catch (AccessDeniedException e) {
 					lanzarErrorPermisos(e.getMessage());
 				}
@@ -529,18 +523,12 @@ public class GestionPedidosController implements Initializable {
 			try {
 				if (MainTaller.bajaTaller()) {
 				    cambiarAPantallaTallerDeBaja();
-				} else {
-					String error = "Error al dar de baja.";
-				    System.err.println(error);
-				    AuditLogger.error(error);
 				}
 			} catch (AccessDeniedException e) {
 				lanzarErrorPermisos(e.getMessage());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				String error = "Error al dar de baja.";
-			    AuditLogger.error(error);
 			}
 		
     }

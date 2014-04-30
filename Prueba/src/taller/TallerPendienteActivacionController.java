@@ -67,20 +67,25 @@ public void comprobarContrasenya() throws IOException, ClassNotFoundException, S
     if ("".equals(idRecibido)) //No Activado
     {
         lbEstado.setStyle("-fx-border-color: red;");
-        lbEstado.setText("Su cuenta no esta activa o o ha copiado bien el código de activación");
+        lbEstado.setText("Su cuenta no esta activa o no ha copiado bien el código de activación");
+        AuditLogger.ES("ERROR: Código de activación incorrecto");
     } else //Activado
     {
+    	AuditLogger.ES("Código de activación correcto");
         //enviar a pantalla gestion de pedido
         System.out.println("He recibido " + idRecibido);
 
         if (!MainTaller.activarTallerBD(idRecibido)) {
-            System.out.println(",pero no he podido updatear");
+        	AuditLogger.error("Error al activar el taller en la Base de Datos");
+            //System.out.println(",pero no he podido updatear");
             lbEstado.setStyle("-fx-border-color: red;");
             lbEstado.setText("Su cuenta no ha podido activarse");
         } else {
+        	
         	MainTaller.getTaller();
         	MainTaller.nombreUsuario="Administrador";
         	AuditLogger.setUser(MainTaller.nombreUsuario);
+        	
         	MainTaller.ponerCodigoActivacionTaller(tfValidar.getText());
             URL location = getClass().getResource("GestionPedidos.fxml");
             FXMLLoader loader = new FXMLLoader();
