@@ -43,6 +43,7 @@ import gestor_taller.*;
  * @author fawques
  */
 public class Webservices {
+	static int errorCont = 0;
 	private static TallerWS prepararWebService() {
 		SslConfig.disableCertificateChecking();
 		TallerWS_Service service = new TallerWS_Service(JUDDIProxy.getWsdl());
@@ -78,13 +79,22 @@ public class Webservices {
 
 			TallerWS port = prepararWebService();
 			try {
-				return port.nuevoPedido(TripleDes.encrypt(encryptor, pedido),
+				String aux = port.nuevoPedido(TripleDes.encrypt(encryptor, pedido),
 						idTaller,TripleDes.encrypt(encryptor, password));
+				if(aux.equals("errorClaveSimetrica")){
+					errorCont++;
+					return aux+errorCont;
+				}
+				return aux;
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		else{
+			errorCont++;
+			return "errorClaveSimetrica"+errorCont;
 		}
 		return null;
 	}
