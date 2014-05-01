@@ -159,30 +159,36 @@ public class TallerWS {
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {
 			bd=new InterfazBD("sor_gestor");
-			Taller t = bd.getTallerEnGestor(idTaller);
-			if (t != null && t.getPassword().equals(password)) {
-				try {
-					SecretKey clave = TripleDes.generateKey();
 
-					if (listaIdTaller.indexOf(idTaller) != -1) {
-						// borramos el anterior
-						listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
-						listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+			if(seguridad.Config.isCifradoSimetrico()) {
+				Taller t = bd.getTallerEnGestor(idTaller);
+				if (t != null && t.getPassword().equals(password)) {
+					try {
+						SecretKey clave = TripleDes.generateKey();
+	
+						if (listaIdTaller.indexOf(idTaller) != -1) {
+							// borramos el anterior
+							listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
+							listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+						}
+						// anyadir nuevo
+						listaIdTaller.add(idTaller);
+						listaSecretKeys.add(clave);
+						Base64 b64 = new Base64();
+						bd.close();
+						return b64.encodeToString(clave.getEncoded());
+					} catch (NoSuchAlgorithmException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					// anyadir nuevo
-					listaIdTaller.add(idTaller);
-					listaSecretKeys.add(clave);
-					Base64 b64 = new Base64();
-					bd.close();
-					return b64.encodeToString(clave.getEncoded());
-				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
+				} else {
+					System.err
+							.println("id taller incorrecto. Clave de reto no generada");
 				}
-				
 			} else {
-				System.err
-						.println("id taller incorrecto. Clave de reto no generada");
+				System.err.println("Cifrado simetrico deshabilitado en gestor. Clave de reto no generada");
+				return null;
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -274,6 +280,9 @@ public class TallerWS {
 					}
 				} else {
 					System.err.println("secretKey = NULL!");
+
+					bd.close();
+					return "errorClaveSimetrica";
 				}
 			}else{ //cifrado no activado
 				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
