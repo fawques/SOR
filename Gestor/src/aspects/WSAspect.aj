@@ -1,10 +1,13 @@
 package aspects;
 
+import java.lang.reflect.Method;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.cxf.message.Message;
 import org.apache.cxf.phase.PhaseInterceptorChain;
 import org.apache.cxf.transport.http.AbstractHTTPDestination;
+import org.aspectj.lang.reflect.MethodSignature;
 
 import audit.AuditLogger;
 import gestor_taller.*;
@@ -20,6 +23,10 @@ public aspect WSAspect {
 		Message message = PhaseInterceptorChain.getCurrentMessage();
 		HttpServletRequest request = (HttpServletRequest)message.get(AbstractHTTPDestination.HTTP_REQUEST);
         AuditLogger.setIp(request.getRemoteAddr());
+    }
+	after() : taller() || desguace() || admin() {
+		AuditLogger.setUser("NO_USER");
+		AuditLogger.setIp("NO_IP");
     }
 	
 }

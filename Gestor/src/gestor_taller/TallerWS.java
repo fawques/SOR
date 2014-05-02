@@ -29,7 +29,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +39,6 @@ import javax.jms.JMSException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -78,8 +76,9 @@ public class TallerWS {
 		if (index != -1) {
 			listaSecretKeys.remove(index);
 			listaIdTaller.remove(index);
+			AuditLogger.info("Seguridad", "Eliminada clave de reto del taller <" + idTaller + ">");
 		} else {
-			System.err.println("ERROR - idTaller no esta en la lista de claves de Reto");
+			AuditLogger.error("idTaller <" + idTaller + "> no esta en la lista de claves de Reto");
 		}
 	}
 	
@@ -92,6 +91,7 @@ public class TallerWS {
 		String pedidoFinal = gson.toJson(pedido);
 		activemq.producer.produceMessage(pedidoFinal);
 		activemq.producer.closeProduce();
+		AuditLogger.CRUD_Pedido("Pedido <" + pedido.getID() + "> enviado a ActiveMQ, cola <" + nombreCola + ">");
 	}
 
 	public boolean modificar(@WebParam(name = "id") String id,
@@ -103,11 +103,13 @@ public class TallerWS {
 			@WebParam(name = "postalCode") String postalCode,
 			@WebParam(name = "telephone") String telephone) {
 		try {
+			AuditLogger.setUser(id);
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(id);
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(id);
 				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+					AuditLogger.ES(id,"Login correcto");
 				
 				// desencriptar elementos
 				boolean res = bd.modificarTaller(id,
@@ -119,14 +121,19 @@ public class TallerWS {
 						Integer.parseInt(TripleDes.decrypt(key, telephone)),
 						EstadoGeneral.ACTIVE);
 				bd.close();
+				if(res){
+					AuditLogger.CRUD_Taller(id,"Taller modificado");
+				}else{
+					AuditLogger.error(id,"No se ha podido modificar el Taller");
+				}
 				removeKey(id);
 				return res;
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES(id,"ERROR: Login incorrecto");
 				}
 			} else {
-				System.err.println("secretKey = NULL!");
+				AuditLogger.error(id,"secretKey = NULL!");
 			}
 		} catch (java.sql.SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
@@ -136,10 +143,12 @@ public class TallerWS {
 					ex);
 		}
 		bd.close();
+		AuditLogger.error(id,"No se ha podido modificar el Taller");
 		return false;
 	}
 
 	public String generarClaveReto(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
+		AuditLogger.setUser(idTaller);
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {
 			bd=new InterfazBD("sor_gestor");
@@ -158,6 +167,7 @@ public class TallerWS {
 					listaSecretKeys.add(clave);
 					Base64 b64 = new Base64();
 					bd.close();
+					AuditLogger.info("Seguridad", "Generada nueva clave de reto para el taller <" + idTaller + ">");
 					return b64.encodeToString(clave.getEncoded());
 				} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block
@@ -165,8 +175,7 @@ public class TallerWS {
 				}
 				
 			} else {
-				System.err
-						.println("id taller incorrecto. Clave de reto no generada");
+				AuditLogger.error("id taller <" + idTaller + "> incorrecto. Clave de reto no generada");
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -222,6 +231,7 @@ public class TallerWS {
 	@WebMethod(operationName = "nuevoPedido")
 	public String nuevoPedido(@WebParam(name = "pedido") String pedido,
 			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) throws JMSException {
+		AuditLogger.setUser(idTaller);
 		try {
 			bd = new InterfazBD("sor_gestor");
 			Gson gson = new GsonBuilder()
@@ -278,6 +288,7 @@ public class TallerWS {
 	public String getOfertas(
 			@WebParam(name = "listaPedidos") String listaPedidos,
 			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
+		AuditLogger.setUser(idTaller);
 		Type collectionType = new TypeToken<ArrayList<Pedido>>() {
 		}.getType();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -340,6 +351,7 @@ public class TallerWS {
 	@WebMethod(operationName = "aceptarOferta")
 	public Boolean aceptarOferta(@WebParam(name = "ID") String ID,
 			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
+		AuditLogger.setUser(idTaller);
 		try {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
@@ -375,6 +387,7 @@ public class TallerWS {
 	@WebMethod(operationName = "rechazarOferta")
 	public Boolean rechazarOferta(@WebParam(name = "ID") String ID,
 			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
+		AuditLogger.setUser(idTaller);
 		try {
 			bd = new InterfazBD("sor_gestor");
 
@@ -415,6 +428,7 @@ public class TallerWS {
 
 	@WebMethod(operationName = "baja")
 	public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID,@WebParam(name = "password") String password) {
+		AuditLogger.setUser(tallerID);
 		try {
 			bd = new InterfazBD("sor_gestor");
 			Taller t = bd.getTallerEnGestor(tallerID);
@@ -469,6 +483,7 @@ public class TallerWS {
 	@WebMethod(operationName = "cancelarPedido")
 	public Boolean cancelarPedido(@WebParam(name = "idPedido") String idPedido,
 			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
+		AuditLogger.setUser(idTaller);
 		try {
 			bd = new InterfazBD("sor_gestor");
 
@@ -507,6 +522,7 @@ public class TallerWS {
 	public Boolean cambiarEstadoPedido(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password,@WebParam(name = "estado") int estado,
 			@WebParam(name = "id") String id
 			) {
+		AuditLogger.setUser(idTaller);
 		try {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
@@ -553,6 +569,7 @@ public class TallerWS {
 	 */
 	@WebMethod(operationName = "getPedidos")
 	public String getPedidos(@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
+		AuditLogger.setUser(idTaller);
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
 				.create();
 		// Dec 7, 2013 5:46:35 PM
