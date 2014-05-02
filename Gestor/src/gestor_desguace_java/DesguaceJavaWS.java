@@ -8,6 +8,7 @@ package gestor_desguace_java;
 
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -76,23 +77,26 @@ public class DesguaceJavaWS {
 		return null;
 	}
 	
-	static public void removeKey(String idTaller) {
-		int index = listaIdDesguace.indexOf(idTaller);
+	static private void removeKey(String idDesguace) {
+		int index = listaIdDesguace.indexOf(idDesguace);
 		if (index != -1) {
 			listaSecretKeys.remove(index);
 			listaIdDesguace.remove(index);
+			AuditLogger.info("Seguridad", "Eliminada clave de reto del desguace <" + idDesguace + ">");
 		} else {
-			System.err.println("ERROR - idTaller no esta en la lista de claves de Reto");
+			AuditLogger.error("idDesguace <" + idDesguace + "> no esta en la lista de claves de Reto");
 		}
 	}
 	
 	@WebMethod(operationName = "generarClaveReto")
     public String generarClaveReto(@WebParam(name = "idDesguace") String idDesguace,@WebParam(name = "password") String password) {
+		AuditLogger.setUser(idDesguace);
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {
 			bd=new InterfazBD("sor_gestor");
 			Desguace desg = bd.getDesguaceEnGestor(idDesguace);
 			if (desg != null && desg.getPassword().equals(password)) {
+				AuditLogger.ES("Login correcto");
 				try {
 					SecretKey clave = TripleDes.generateKey();
 
@@ -129,6 +133,7 @@ public class DesguaceJavaWS {
     
       @WebMethod(operationName = "alta")
     public boolean alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone) {
+    	  
     
         try {       
             bd = new InterfazBD("sor_gestor");
@@ -158,6 +163,7 @@ public class DesguaceJavaWS {
             bd = new InterfazBD("sor_gestor");
             Desguace desg = bd.getDesguace(email);
 			if (desg != null && desg.getPassword().equals(contrasenya)) {
+				AuditLogger.ES("Login correcto");
 	            Desguace desguace = bd.getDesguaceActivar(contrasenya);
 	            String res;
 	            if (desguace!=null) {
@@ -185,6 +191,7 @@ public class DesguaceJavaWS {
      */
     @WebMethod(operationName = "nuevaOferta")
     public String nuevaOferta(@WebParam(name = "oferta") String oferta, @WebParam(name = "idDesguace") String idDesguace, @WebParam(name = "password") String password) {
+    	AuditLogger.setUser(idDesguace);
         try {          
              Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
              bd = new InterfazBD("sor_gestor");
@@ -192,6 +199,7 @@ public class DesguaceJavaWS {
  			if (key != null) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+					AuditLogger.ES("Login correcto");
 		             Oferta p = gson.fromJson(TripleDes.decrypt(key, oferta),Oferta.class);
 		            Date ahora = new Date();
 		            String stringID  = "Oferta_" + bd.getNumOfertas();
@@ -224,6 +232,7 @@ public class DesguaceJavaWS {
      */
     @WebMethod(operationName = "getOfertas")
     public String getOfertas(@WebParam(name = "string") String id, @WebParam(name="password") String password) {
+    	AuditLogger.setUser(id);
         try {   
 
         	 bd = new InterfazBD("sor_gestor");
@@ -233,6 +242,7 @@ public class DesguaceJavaWS {
    				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
    				bd.close();
    				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+   					AuditLogger.ES("Login correcto");
    					bd = new InterfazBD("sor_gestor");
 	             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
 	            listaOfertas=bd.getOfertasDesguace(id);
@@ -273,6 +283,7 @@ bd.close();
      */
     @WebMethod(operationName = "getPedidoporID")
     public String getPedidoporID(@WebParam(name = "string") String id,@WebParam(name = "idDesguace") String idDesguace, @WebParam(name="password") String password) {
+    	AuditLogger.setUser(idDesguace);
     	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         try {
             bd = new InterfazBD("sor_gestor");
@@ -282,6 +293,7 @@ bd.close();
 			if (key != null) {
 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+					AuditLogger.ES("Login correcto");
 
 	            String listapedidos="";
 	            Pedido p=bd.getPedidoID(id);
@@ -323,6 +335,7 @@ return TripleDes.encrypt(key, listapedidos);
      */
     @WebMethod(operationName = "aceptarOfertaFin")
     public Boolean aceptarOfertaFin(@WebParam(name = "id") String id, @WebParam(name = "idDesguace") String idDesguace, @WebParam(name = "password") String password) {
+    	AuditLogger.setUser(idDesguace);
         Boolean aceptada=false;
         try {
         	  bd = new InterfazBD("sor_gestor");
@@ -330,7 +343,7 @@ return TripleDes.encrypt(key, listapedidos);
  			if (key != null) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-	          
+					AuditLogger.ES("Login correcto");
 	            Oferta of= bd.getOfertaporID(TripleDes.decrypt(key, id));
 	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
 	            Pedido ped= bd.getPedido(of.getPedido());
@@ -365,6 +378,7 @@ return TripleDes.encrypt(key, listapedidos);
      */
     @WebMethod(operationName = "cancelarOferta")
     public Boolean cancelarOferta(@WebParam(name = "id") String id, @WebParam(name = "idDesguace") String idDesguace, @WebParam(name = "password") String password) {
+    	AuditLogger.setUser(idDesguace);
         Boolean aceptada=false;
         try {
         	 bd = new InterfazBD("sor_gestor");
@@ -372,6 +386,7 @@ return TripleDes.encrypt(key, listapedidos);
  			if (key != null) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+					AuditLogger.ES("Login correcto");
 	           
 	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.CANCELLED, id);
 	            bd.close();
@@ -399,12 +414,14 @@ return TripleDes.encrypt(key, listapedidos);
      */
     @WebMethod(operationName = "baja")
     public Boolean baja(@WebParam(name = "id") String id, @WebParam(name="password") String password) {
+    	AuditLogger.setUser(id);
         try {        
        	 bd = new InterfazBD("sor_gestor");
      	SecretKey key = getKey(id);
 			if (key != null) {
 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+					AuditLogger.ES("Login correcto");
 	            boolean oool = bd.bajaDesguace(id);
 	            bd.close();
 	            return oool;
@@ -425,6 +442,7 @@ return TripleDes.encrypt(key, listapedidos);
      */
     @WebMethod(operationName = "cambiarEstadoPedido")
     public Boolean cambiarEstadoPedido(@WebParam(name = "id") String id, @WebParam(name = "estado") String estado, @WebParam(name = "idDesguace") String idDesguace, @WebParam(name = "password") String password) {
+    	AuditLogger.setUser(idDesguace);
          
            
         try {
@@ -433,6 +451,7 @@ return TripleDes.encrypt(key, listapedidos);
  			if (key != null) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+					AuditLogger.ES("Login correcto");
 	           
 	            System.out.println("miau");
 	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
@@ -458,6 +477,7 @@ return TripleDes.encrypt(key, listapedidos);
     }
     @WebMethod(operationName = "cambiarEstadoPedidoOtravez")
     public Boolean cambiarEstadoPedidoOtravez(@WebParam(name = "id") String id, @WebParam(name = "estado") String estado, @WebParam(name = "idDesguace") String idDesguace, @WebParam(name = "password") String password) {
+    	AuditLogger.setUser(idDesguace);
          
            
         try {
@@ -466,6 +486,7 @@ return TripleDes.encrypt(key, listapedidos);
  			if (key != null) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+					AuditLogger.ES("Login correcto");
 	           
 	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
 	           bd.close();
@@ -488,12 +509,14 @@ return TripleDes.encrypt(key, listapedidos);
         return false;
     }
     public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone, @WebParam(name = "password") String password) {
+    	AuditLogger.setUser(id);
         try {
         	bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(id);
 			if (key != null) {
 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+					AuditLogger.ES("Login correcto");
 	            
 				// desencriptar elementos
 				boolean res = bd.modificarTaller(id,
