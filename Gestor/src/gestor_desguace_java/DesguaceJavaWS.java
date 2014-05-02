@@ -271,65 +271,6 @@ bd.close();
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "getPedidosporID")
-    public String getPedidosporID(@WebParam(name = "string") String string, @WebParam(name="password") String password) {
-    	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        try {
-
-        	 bd = new InterfazBD("sor_gestor");
-            SecretKey key = getKey(string);
-			
-			if (key != null) {
-				
-			
-				Desguace nuevoDesguace= bd.getDesguaceEnGestor(string);
-				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-
-	             Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
-	             ArrayList<String>  listaids = gson.fromJson(string, collectionType);
-	            ArrayList<Pedido> listapedidos= new ArrayList<Pedido>();
-	             for(String s: listaids){
-	                 listapedidos.add(bd.getPedidoID(s));
-	             }
-	             
-	            String listaJSON = gson.toJson(listapedidos);
-	            System.out.println("listaJSON = " + listaJSON);
-	            bd.close();
-
-	            return TripleDes.encrypt(key, listaJSON);
-				}else{
-					System.err.println("Login incorrecto");
-				}
-
-	            
-
-			}
-			
-        } catch (SQLException ex) {
-            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
-
-        } catch (InvalidKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-           
-	    bd.close();
-        return null;
-    }
-    /**
-     * Web service operation
-     */
     @WebMethod(operationName = "getPedidoporID")
     public String getPedidoporID(@WebParam(name = "string") String id,@WebParam(name = "idDesguace") String idDesguace, @WebParam(name="password") String password) {
     	 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();

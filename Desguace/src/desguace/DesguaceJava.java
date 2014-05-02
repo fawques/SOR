@@ -592,32 +592,6 @@ public class DesguaceJava extends Application {
 		return "";
 	}
 
-	public static String getPedidosporID(java.lang.String string) {
-		AsyncManager manager = new AsyncManager("sor_desguace");
-		manager.ejecutarAcciones();
-		for (int i = 0; i < 10; i++) {
-			try {
-				String ret = getPedidosporID_WS(string,desguace.getPassword());
-				// si no ha lanzado excepción, devolvemos correctamente
-				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {
-				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
-			}
-		}
-		try {
-			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
-				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
-				return getPedidosporID(string);
-			}
-		} catch (RemoteException e) {
-			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) { 
-			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
-		}
-		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
-		return "";
-	}
-
 	public static String getPedidoporID(java.lang.String string) {
 		AsyncManager manager = new AsyncManager("sor_desguace");
 		manager.ejecutarAcciones();
