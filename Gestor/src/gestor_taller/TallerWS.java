@@ -13,6 +13,7 @@ import audit.AuditLogger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.sun.xml.bind.v2.model.core.ID;
 
 import general.Desguace;
 import general.EstadoGeneral;
@@ -39,6 +40,7 @@ import javax.jms.JMSException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -154,13 +156,13 @@ public class TallerWS {
 			bd=new InterfazBD("sor_gestor");
 			Taller t = bd.getTallerEnGestor(idTaller);
 			if (t != null && t.getPassword().equals(password)) {
+				AuditLogger.ES("Login correcto");
 				try {
 					SecretKey clave = TripleDes.generateKey();
 
 					if (listaIdTaller.indexOf(idTaller) != -1) {
 						// borramos el anterior
-						listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
-						listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+						removeKey(idTaller);
 					}
 					// anyadir nuevo
 					listaIdTaller.add(idTaller);
@@ -175,7 +177,7 @@ public class TallerWS {
 				}
 				
 			} else {
-				AuditLogger.error("id taller <" + idTaller + "> incorrecto. Clave de reto no generada");
+				AuditLogger.error("id taller <" + idTaller + "> incorrecto.");
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -186,6 +188,7 @@ public class TallerWS {
 		}
 		
 		bd.close();
+		AuditLogger.error("Clave de reto no generada");
 		return null;
 	}
 
@@ -203,15 +206,20 @@ public class TallerWS {
 	            
 				String res;
 				if (taller != null && taller.getPassword().equals(contrasenya)) {
+					AuditLogger.ES("Login correcto");
 					 taller = bd.getTallerActivar(contrasenya);
 					 if(taller!=null){
 						 res = taller.getID();
+						 AuditLogger.CRUD_Taller("Taller <" + res + "> esta activado. Devolviendo id");
 					 }
 					 else {
-					res = "";
+						 res = "";
+						 AuditLogger.CRUD_Taller("Taller con email <" + email + "> no esta activado");
 					 }
-						bd.close();
-						return res;
+					bd.close();
+					return res;
+				}else{
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
 			
 		} catch (SQLException ex) {
@@ -222,6 +230,7 @@ public class TallerWS {
 					ex);
 		}
 		bd.close();
+		AuditLogger.error("No se ha podido comprobar la activacion del taller");
 		return ""; // devolvemos el estado pendiente, por defecto
 	}
 
@@ -244,6 +253,7 @@ public class TallerWS {
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
 				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+					AuditLogger.ES("Login correcto");
 					Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido),
 							collectionType);
 	
@@ -256,6 +266,7 @@ public class TallerWS {
 							.getFecha_limite(), p.getModoAutomatico());
 					bd.anyadirPiezasAPedido(stringID, p.getListaPiezas(),
 							p.getListaCantidadesPiezas());
+					AuditLogger.CRUD_Pedido("Creado nuevo pedido <" + stringID + ">");
 					for (Desguace desguace : bd.getDesguaces()) {
 						enviarPedidoActivemq(desguace.getID(),
 								new PedidoCorto(p.getID(), p.getEstado()));
@@ -264,10 +275,10 @@ public class TallerWS {
 					return stringID;
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
 			} else {
-				System.err.println("secretKey = NULL!");
+				AuditLogger.error("secretKey = NULL!");
 			}
 
 		} catch (SQLException ex) {
@@ -278,6 +289,7 @@ public class TallerWS {
 					ex);
 		}
 		bd.close();
+		AuditLogger.error("No se ha podido crear un nuevo pedido");
 		return "";
 	}
 
@@ -302,6 +314,7 @@ public class TallerWS {
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
 				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+					AuditLogger.ES("Login correcto");
 				arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
 					collectionType);
 				
@@ -312,13 +325,14 @@ public class TallerWS {
 
 				String retu = gson.toJson(listaOferta);
 				bd.close();
+				AuditLogger.informe("Obtenido el listado de ofertas");
 				return TripleDes.encrypt(key, retu);
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
 			} else {
-				System.err.println("secretKey = NULL!");
+				AuditLogger.error("secretKey = NULL!");
 			}
 		
 		} catch (SQLException ex) {
@@ -342,6 +356,7 @@ public class TallerWS {
 		}
 		
 		bd.close();
+		AuditLogger.error("No se ha podido obtener el listado de ofertas");
 		return null;
 	}
 
@@ -358,16 +373,18 @@ public class TallerWS {
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
 				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+					AuditLogger.ES("Login correcto");
 				bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED,
 						TripleDes.decrypt(key, ID));
 				bd.close();
+				AuditLogger.CRUD_Oferta("Oferta <" + ID + "> aceptada");
 				return true;
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
 			} else {
-				System.err.println("secretKey = NULL!");
+				AuditLogger.error("secretKey = NULL!");
 			}
 			bd.close();
 		} catch (SQLException ex) {
@@ -378,6 +395,7 @@ public class TallerWS {
 					ex);
 		}
 		bd.close();
+		AuditLogger.error("No se ha podido aceptar la oferta <" + ID + ">");
 		return false;
 	}
 
@@ -395,16 +413,19 @@ public class TallerWS {
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
 				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
-				bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
-						TripleDes.decrypt(key, ID));
+					AuditLogger.ES("Login correcto");
+					String IDDecrypt =TripleDes.decrypt(key, ID); 
+				bd.cambiarEstadoOferta(EstadoOferta.REJECTED,IDDecrypt
+						);
 				bd.close();
+				AuditLogger.CRUD_Oferta("Oferta <" + IDDecrypt + "> rechazada");
 				return true;
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
 			} else {
-				System.err.println("secretKey = NULL!");
+				AuditLogger.error("secretKey = NULL!");
 			}
 			
 		} catch (SQLException ex) {
@@ -415,6 +436,7 @@ public class TallerWS {
 					ex);
 		}
 		bd.close();
+		AuditLogger.error("No se ha podido rechazar la oferta <" + ID + ">");
 		return false;
 	}
 
@@ -423,6 +445,7 @@ public class TallerWS {
 	 */
 	@WebMethod(operationName = "hello")
 	public String hello() {
+		AuditLogger.info("Hello", "Hello");
 		return "hello";
 	}
 
@@ -433,9 +456,13 @@ public class TallerWS {
 			bd = new InterfazBD("sor_gestor");
 			Taller t = bd.getTallerEnGestor(tallerID);
 			if (t != null && t.getPassword().equals(password)) {
+				AuditLogger.ES("Login correcto");
 				boolean oool = bd.bajaTaller(tallerID);
 				bd.close();
+				AuditLogger.CRUD_Taller("Taller <" + tallerID + "> dado de baja");
 				return oool;
+			}else{
+				AuditLogger.ES("ERROR: Login incorrecto");
 			}
 			
 		} catch (SQLException ex) {
@@ -446,6 +473,7 @@ public class TallerWS {
 					ex);
 		}
 		bd.close();
+		AuditLogger.error("No se ha podido dar de baja el taller");
 		return false;
 	}
 
@@ -468,6 +496,7 @@ public class TallerWS {
 					Integer.parseInt(postalCode), Integer.parseInt(telephone),
 					EstadoGeneral.PENDIENTE.ordinal());
 			bd.close();
+			AuditLogger.CRUD_Taller("Taller dado de alta");
 			return res;
 		} catch (java.sql.SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
@@ -477,6 +506,7 @@ public class TallerWS {
 					ex);
 		}
 		bd.close();
+		AuditLogger.CRUD_Taller("No se ha podido dar de alta el taller");
 		return false;
 	}
 
@@ -491,17 +521,20 @@ public class TallerWS {
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
 				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
-				boolean oool = bd.cancelarPedido(TripleDes.decrypt(key,
-						idPedido));
+					AuditLogger.ES("Login correcto");
+				String idPedidoDecrypt = TripleDes.decrypt(key,
+						idPedido);
+				boolean oool = bd.cancelarPedido(idPedidoDecrypt);
 				cambiarEstadoPedido(idTaller,password,EstadoPedido.CANCELLED.ordinal(), idPedido);
 				bd.close();
+				AuditLogger.CRUD_Pedido("Pedido <" + idPedidoDecrypt + "> cancelado");
 				return oool;
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
 			} else {
-				System.err.println("secretKey = NULL!");
+				AuditLogger.error("secretKey = NULL!");
 			}
 		
 		} catch (SQLException ex) {
@@ -512,6 +545,7 @@ public class TallerWS {
 					ex);
 		}
 		bd.close();
+		AuditLogger.error("No se ha podido cancelar el pedido <" + idPedido + ">");
 		return false;
 	}
 
@@ -529,6 +563,7 @@ public class TallerWS {
 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
 				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+					AuditLogger.ES("Login correcto");
 				Gson gson = new GsonBuilder().setDateFormat(
 						"yyyy-MM-dd'T'HH:mm:ss").create();
 				
@@ -537,17 +572,19 @@ public class TallerWS {
 							TripleDes.decrypt(key, id),
 							EstadoPedido.values()[estado]));
 				}
+				String idDecrypt = TripleDes.decrypt(key, id);
 				Boolean ool = bd.cambiarEstadoPedido(
 						EstadoPedido.values()[estado],
-						TripleDes.decrypt(key, id));
+						idDecrypt);
+				AuditLogger.CRUD_Pedido("Pedido <" + idDecrypt + "> cambiado al estado <" + EstadoPedido.values()[estado] + ">");
 				bd.close();
 				return ool;
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
 			} else {
-				System.err.println("secretKey = NULL!");
+				AuditLogger.error("secretKey = NULL!");
 			}
 			
 		} catch (SQLException ex) {
@@ -561,6 +598,7 @@ public class TallerWS {
 					ex);
 		}
 		bd.close();
+		AuditLogger.error("No se ha podido cambiar el estado del pedido <" + id + ">");
 		return false;
 	}
 
@@ -578,8 +616,10 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 			Taller t = bd.getTallerEnGestor(idTaller);
 			if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
+				AuditLogger.ES("Login correcto");
 				listaPedidos = bd.getPedidosTaller(idTaller);
 				for (Pedido p : listaPedidos) {
 					if (p.getEstado() == EstadoPedido.FINISHED_OK) {
@@ -589,6 +629,7 @@ public class TallerWS {
 							if (of.getEstado() != EstadoOferta.FINISHED_OK) {
 								bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
 										of.getID());
+								AuditLogger.CRUD_Oferta("Oferta <" + of.getID() + "> cambiada al estado <" + EstadoOferta.REJECTED.name() + ">");
 							}
 						}
 					}
@@ -596,7 +637,13 @@ public class TallerWS {
 				String listaJSON = gson.toJson(listaPedidos);
 				System.out.println("listaJSON = " + listaJSON);
 				bd.close();
+				AuditLogger.informe("Obtenida lista de pedidos");
 				return TripleDes.encrypt(key, listaJSON);
+			}else{
+				AuditLogger.ES("ERROR: Login incorrecto");
+			}
+			}else{
+				AuditLogger.error("secretKey = NULL!");
 			}
 			
 		} catch (SQLException ex) {
@@ -619,6 +666,7 @@ public class TallerWS {
 			e.printStackTrace();
 		}
 		bd.close();
+		AuditLogger.error("No se ha podido obtener la lista de pedidos");
 		return null;
 	}
 
