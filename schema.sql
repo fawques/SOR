@@ -3,6 +3,7 @@ DROP DATABASE IF EXISTS `sor_gestor`;
 DROP DATABASE IF EXISTS `sor_taller`;
 
 SET @@global.time_zone='+00:00';
+SET time_zone='+00:00';
 
 CREATE DATABASE IF NOT EXISTS `sor_gestor` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
