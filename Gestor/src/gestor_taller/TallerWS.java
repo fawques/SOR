@@ -8,6 +8,7 @@ package gestor_taller;
 
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

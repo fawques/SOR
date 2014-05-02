@@ -12,6 +12,10 @@ public class AuditLogger {
 	 public static void setUser(String newuser){
 		 user = newuser;
 	 }
+	 
+	 public static void setIp(String newip){
+		 ip = newip;
+	 }
 
 	 public static void info (String activity,String activityDetail) {
 		info(user,activity,activityDetail);
