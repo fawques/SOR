@@ -8,11 +8,15 @@ import org.apache.cxf.transport.http.AbstractHTTPDestination;
 
 import audit.AuditLogger;
 import gestor_taller.*;
+import gestor_desguace_java.*;
+import gestor_admin.*;
 
-public aspect TallerWSAspect {
-	pointcut webservice() : execution(public * TallerWS.*(..));
+public aspect WSAspect {
+	pointcut taller() : execution(public * TallerWS.*(..));
+	pointcut desguace() : execution(public * DesguaceJavaWS.*(..));
+	pointcut admin() : execution(public * AdminWS.*(..));
 
-	before() : webservice() {
+	before() : taller() || desguace() || admin() {
 		Message message = PhaseInterceptorChain.getCurrentMessage();
 		HttpServletRequest request = (HttpServletRequest)message.get(AbstractHTTPDestination.HTTP_REQUEST);
         AuditLogger.setIp(request.getRemoteAddr());
