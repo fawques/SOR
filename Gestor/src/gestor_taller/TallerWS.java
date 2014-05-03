@@ -62,12 +62,14 @@ public class TallerWS {
 	
 	private SecretKey getKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
-		if (index != -1) {
-			Taller t = bd.getTallerEnGestor(idTaller);
-			if (t != null ) {
-				SecretKey key = listaSecretKeys.get(index);
-                removeKey(idTaller);
-				return key;
+
+		if(seguridad.Config.isCifradoSimetrico()) {
+			if (index != -1) {
+				Taller t = bd.getTallerEnGestor(idTaller);
+				if (t != null ) {
+					SecretKey key = listaSecretKeys.get(index);
+					return key;
+				}
 			}
 		}
 		return null;

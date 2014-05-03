@@ -61,13 +61,14 @@ public class DesguaceJavaWS {
     
 	private SecretKey getKey(String idDesguace) {
 		int index = listaIdDesguace.indexOf(idDesguace);
-		if (index != -1) {
-				Desguace desg = bd.getDesguaceEnGestor(idDesguace);
-				if (desg != null) {
-					SecretKey key = listaSecretKeys.get(index);
-					removeKey(idDesguace);
-					return key;
-				}
+		if(seguridad.Config.isCifradoSimetrico()) {
+			if (index != -1) {
+					Desguace desg = bd.getDesguaceEnGestor(idDesguace);
+					if (desg != null) {
+						SecretKey key = listaSecretKeys.get(index);
+						return key;
+					}
+			}
 		}
 		return null;
 	}
