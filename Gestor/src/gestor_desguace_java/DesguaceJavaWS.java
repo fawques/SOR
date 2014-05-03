@@ -392,14 +392,19 @@ return TripleDes.encrypt(key, listapedidos);
 	          
 	            Oferta of= bd.getOfertaporID(TripleDes.decrypt(key, id));
 	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
-	            Pedido ped= bd.getPedido(of.getPedido());
-	            ArrayList<Oferta> listaoferta=bd.getOfertasPedido(ped.getID());
-	            for(Oferta oferta:listaoferta){
-	            	if(oferta.getEstado()==EstadoOferta.ACTIVE ||oferta.getEstado()==EstadoOferta.NEW ||oferta.getEstado()==EstadoOferta.ACCEPTED){
-	            		bd.cambiarEstadoOferta(EstadoOferta.REJECTED, oferta.getID());
-	            	}
+	            if(aceptada){
+		            Pedido ped= bd.getPedido(of.getPedido());
+		            ArrayList<Oferta> listaoferta=bd.getOfertasPedido(ped.getID());
+		            for(Oferta oferta:listaoferta){
+		            	if(oferta.getEstado()==EstadoOferta.ACTIVE ||oferta.getEstado()==EstadoOferta.NEW ||oferta.getEstado()==EstadoOferta.ACCEPTED){
+		            		bd.cambiarEstadoOferta(EstadoOferta.REJECTED, oferta.getID());
+		            	}
+		            }
+		            bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK,ped.getID());
+				}
+	            else{
+	            	System.err.println("No se ha podido aceptar la oferta, intentar de nuevo");
 	            }
-	            bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK,ped.getID());
 	            bd.close();
 	            return aceptada;
 				}else{
