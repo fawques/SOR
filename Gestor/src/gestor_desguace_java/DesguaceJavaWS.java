@@ -61,18 +61,11 @@ public class DesguaceJavaWS {
 	private SecretKey getKey(String idDesguace) {
 		int index = listaIdDesguace.indexOf(idDesguace);
 		if (index != -1) {
-			try {
-				bd=new InterfazBD("sor_gestor");
 				Desguace desg = bd.getDesguaceEnGestor(idDesguace);
-				bd.close();
 				if (desg != null) {
 					SecretKey key = listaSecretKeys.get(index);
 					return key;
 				}
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		return null;
 	}
