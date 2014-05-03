@@ -29,9 +29,20 @@ public aspect WSAspect {
 			 AuditLogger.setIp("127.0.0.1");
 		}
     }
+	after() : taller()  {
+		TallerWS.removeKey(AuditLogger.user);
+		resetAudit();
+    }
+	after() : desguace() {
+		DesguaceJavaWS.removeKey(AuditLogger.user);
+		resetAudit();
+    }
 	after() : taller() || desguace() || admin() {
+		resetAudit();
+    }
+	private void resetAudit() {
 		AuditLogger.setUser("NO_USER");
 		AuditLogger.setIp("NO_IP");
-    }
+	}
 	
 }

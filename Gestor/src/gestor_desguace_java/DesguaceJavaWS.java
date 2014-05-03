@@ -72,7 +72,7 @@ public class DesguaceJavaWS {
 		return null;
 	}
 	
-	static private void removeKey(String idDesguace) {
+	static public void removeKey(String idDesguace) {
 		int index = listaIdDesguace.indexOf(idDesguace);
 		if (index != -1) {
 			listaSecretKeys.remove(index);

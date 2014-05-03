@@ -7,7 +7,7 @@ public class AuditLogger {
 	
 	 private static String FQCN =  "audit.AuditLogger";
 	 private static String ip = "NO_IP";
-	 private static String user = "NO_USER";
+	 public static String user = "NO_USER";
 	 
 	 public static void setUser(String newuser){
 		 user = newuser;

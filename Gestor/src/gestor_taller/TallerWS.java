@@ -73,7 +73,7 @@ public class TallerWS {
 		return null;
 	}
 	
-	static private void removeKey(String idTaller) {
+	static public void removeKey(String idTaller) {
 		int index = listaIdTaller.indexOf(idTaller);
 		if (index != -1) {
 			listaSecretKeys.remove(index);
