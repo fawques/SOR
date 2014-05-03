@@ -50,6 +50,8 @@ import org.uddi.v3_service.DispositionReportFaultMessage;
 import org.uddi.v3_service.UDDIPublicationPortType;
 import org.uddi.v3_service.UDDISecurityPortType;
 
+import audit.AuditLogger;
+
 
 public class SimplePublish {
 
@@ -214,7 +216,7 @@ public class SimplePublish {
                 ss.setAuthInfo(myPubAuthToken.getAuthInfo());
                 ServiceDetail sd = saveService(ss);
                 String myServKey = sd.getBusinessService().get(0).getServiceKey();
-                System.out.println("myService key:  " + myServKey);
+                AuditLogger.info("jUDDI", "Publicado servicio <" + serv[0] + "> direccion <" + myServKey + ">");
             }
             /*
                 ===== End foreach ==

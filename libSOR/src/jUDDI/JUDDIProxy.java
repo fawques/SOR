@@ -22,6 +22,8 @@ import org.uddi.v3_service.DispositionReportFaultMessage;
 import org.uddi.v3_service.UDDIInquiryPortType;
 import org.uddi.v3_service.UDDIInquiryService;
 
+import audit.AuditLogger;
+
 /**
  *
  * @author fawques
@@ -79,8 +81,10 @@ public class JUDDIProxy {
         AccessPoint ap = bt.getAccessPoint();
         String wsdlString = ap.getValue();
         System.out.println("WSDL: " + wsdlString);
+        AuditLogger.info("jUDDI", "Obtenido servicio <" + servicio + "> direccion <" + wsdlString + ">");
         return wsdlString;
         }
+        AuditLogger.error("jUDDI","No se ha podido obtener el servicio <" + servicio + ">");
 		return "";
     }
 
