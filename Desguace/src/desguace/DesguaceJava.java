@@ -377,6 +377,8 @@ public class DesguaceJava extends Application {
 				}else{
 					AuditLogger.error("Error al cambiar el estado del pedido <" + id + "> en gestor");
 				}
+			}else{
+				return realizado;
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
@@ -385,7 +387,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
-		AuditLogger.error("Error al cambiar el estado del pedido <" + id + ">");
+		AuditLogger.error("Error al cambiar el estado del pedido <" + id + "> al estado <" + estado.name() + ">");
 		return realizado;
 	}
 
