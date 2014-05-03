@@ -64,6 +64,7 @@ public class DesguaceJavaWS {
 				Desguace desg = bd.getDesguaceEnGestor(idDesguace);
 				if (desg != null) {
 					SecretKey key = listaSecretKeys.get(index);
+					removeKey(idDesguace);
 					return key;
 				}
 		}
