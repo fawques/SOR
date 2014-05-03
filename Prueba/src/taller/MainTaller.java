@@ -452,6 +452,9 @@ public class MainTaller extends Application {
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 			String idFinal = nuevoPedido(gson.toJson(nuevo));
+			if(idFinal.equals("errorClaveSimetrica"))
+				idFinal = "errorClaveSimetrica" + bd.getNumPedidosPorError("errorClaveSimetrica");
+		
 			if(!idFinal.equals("")){
 				bd.activarPedidoTaller(id, idFinal);				
 			}

@@ -78,7 +78,6 @@ public class Webservices {
 	public static String nuevoPedido_WS(String pedido, String idTaller, String password)
 			throws JMSException_Exception {
 		SecretKey encryptor = prepararClaveReto(idTaller,password);
-		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
@@ -101,18 +100,7 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else{
-			try {
-				bd = new InterfazBD("sor_taller");
-				errorCont = bd.getNumPedidosPorError("errorClaveSimetrica");
-				bd.close();
-				return "errorClaveSimetrica"+errorCont;
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 		return null;
 	}
 
@@ -146,7 +134,6 @@ public class Webservices {
 
 	public static String getOfertas_WS(String listaPedidos, String idTaller, String password) {
 		SecretKey encryptor = prepararClaveReto(idTaller,password);
-		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
@@ -157,13 +144,13 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		
 		return null;
 	}
 
 	public static Boolean aceptarOferta_WS(String id, String idTaller,String password) {
 		SecretKey encryptor = prepararClaveReto(idTaller,password);
-		if (encryptor != null) {
+	
 
 			TallerWS port = prepararWebService();
 			try {
@@ -174,13 +161,13 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		
 		return null;
 	}
 
 	public static Boolean rechazarOferta_WS(String id, String idTaller,String password) {
 		SecretKey encryptor = prepararClaveReto(idTaller,password);
-		if (encryptor != null) {
+		
 
 			TallerWS port = prepararWebService();
 			try {
@@ -191,7 +178,7 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		
 		return null;
 	}
 
@@ -204,7 +191,7 @@ public class Webservices {
 	public static Boolean baja_WS(String tallerID,String password) {
 		
 		SecretKey encryptor = prepararClaveReto(tallerID, password);
-		if (encryptor != null) {
+		
 			try {
 				TallerWS port = prepararWebService();
 				return port.baja(tallerID,TripleDes.encrypt(encryptor, password));
@@ -214,14 +201,14 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		
 		return null;
 	}
 
 	public static boolean modificar_WS(String id, String name, String email,
 			String address, String city, String postalCode, String telephone,String password) {
 		SecretKey encryptor = prepararClaveReto(id,password);
-		if (encryptor != null) {
+		
 
 			TallerWS port = prepararWebService();
 			try {
@@ -236,13 +223,12 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		
 		return false;
 	}
 
 	public static Boolean cancelarPedido_WS(String idPedido, String idTaller,String password) {
 		SecretKey encryptor = prepararClaveReto(idTaller,password);
-		if (encryptor != null) {
 
 			TallerWS port = prepararWebService();
 			try {
@@ -253,14 +239,13 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 		return null;
 	}
 
 	public static Boolean cambiarEstadoPedido_WS(String idTaller,String password,int estado,
 			java.lang.String id) {
 		SecretKey encryptor = prepararClaveReto(idTaller,password);
-		if (encryptor != null) {
+		
 
 			TallerWS port = prepararWebService();
 			try {
@@ -271,13 +256,13 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		
 		return null;
 	}
 
 	public static String getPedidos_WS(String idTaller, String password) {
 		SecretKey encryptor = prepararClaveReto(idTaller, password);
-		if (encryptor != null) {
+		
 			try {
 				TallerWS port = prepararWebService();
 				return TripleDes.decrypt(encryptor, port.getPedidos(idTaller,
@@ -287,7 +272,7 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		
 		return null;
 	}
 
