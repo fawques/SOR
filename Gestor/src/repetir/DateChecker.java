@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import BD.InterfazBD;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,19 +41,28 @@ public class DateChecker implements Runnable {
 				if ((new Date()).after(pedido.getFecha_limite())) {
 					if (pedido.getModoAutomatico()) {
 						if (!aceptarMejorOferta(pedido)) {
-							System.out
-									.println("ERROR: no se ha podido aceptar la mejor oferta para el pedido <"
+							AuditLogger.error("No se ha podido aceptar la mejor oferta para el pedido <"
 											+ pedido.getID() + ">");
 						}
 					} else {
-						bd.cancelarPedido(pedido.getID());
+						boolean ok = bd.cancelarPedido(pedido.getID());
+						if(ok){
+							AuditLogger.CRUD_Pedido("Pedido <" + pedido.getID() + "> cancelado");
+						}else{
+							AuditLogger.error("No se ha podido cancelar el pedido <" + pedido.getID() + ">");
+						}
 					}
 				}
 			}
 			for (Oferta oferta : listaOferta) {
 				if ((new Date()).after(oferta.getFecha_limite())) {
-					bd.cambiarEstadoOferta(EstadoOferta.CANCELLED,
+					boolean ok = bd.cambiarEstadoOferta(EstadoOferta.CANCELLED,
 							oferta.getID());
+					if(ok){
+						AuditLogger.CRUD_Oferta("Oferta <" + oferta.getID() + "> cancelada");
+					}else{
+						AuditLogger.error("No se ha podido cancelar la oferta <" + oferta.getID() + ">");
+					}
 				}
 			}
 
@@ -79,12 +89,14 @@ public class DateChecker implements Runnable {
 				}
 			}
 		}else{
-			System.out.println("Pedido sin ofertas. Cancelando");
+			AuditLogger.error("Pedido <" + pedido.getID() + "> sin ofertas. Cancelando");
 			bd.cancelarPedido(pedido.getID());
 		}
 		if (elegida != null) {
 			bd.cambiarEstadoPedido(EstadoPedido.ACCEPTED, pedido.getID());
+			AuditLogger.CRUD_Pedido("Pedido <" + pedido.getID() + "> cancelado");
 			bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED, elegida.getID());
+			AuditLogger.CRUD_Oferta("Oferta <" + elegida.getID() + "> cancelada");
 			ok = true;
 		}
 		return ok;
