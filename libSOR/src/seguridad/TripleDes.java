@@ -197,7 +197,7 @@ public class TripleDes {
 	public static String encrypt(SecretKey key, String in)
 			throws NoSuchAlgorithmException, InvalidKeyException,
 			NoSuchPaddingException, IOException {
-		if(seguridad.Config.isCifradoSimetrico()){
+		if(key != null && seguridad.Config.isCifradoSimetrico()){
 			// Create and initialize the encryption engine
 			Cipher cipher = Cipher.getInstance("DESede");
 			cipher.init(Cipher.ENCRYPT_MODE, key);
