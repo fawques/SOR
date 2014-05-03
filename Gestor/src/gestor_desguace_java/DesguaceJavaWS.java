@@ -207,6 +207,7 @@ public class DesguaceJavaWS {
  			}
  			else{
 				System.err.println("secretKey = NULL!");
+				return "errorClaveSimetrica";
  			}
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);

@@ -263,6 +263,7 @@ public class TallerWS {
 				}
 			} else {
 				System.err.println("secretKey = NULL!");
+				return "errorClaveSimetrica";
 			}
 
 		} catch (SQLException ex) {
