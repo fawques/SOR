@@ -56,7 +56,7 @@ public class DesguaceJava extends Application {
 	public void start(Stage stage2) throws IOException, SQLException {
 		try {
 			JUDDIProxy.loadWsdl("DesguaceJavaWS");
-			AuditLogger.setUser("USUARIO_DESGUACE");
+			AuditLogger.setUser("Administrador");
 			stage = stage2;
 			bd = new InterfazBD("sor_desguace");
 			// System.out.println(bd.getPedidosActivos());
