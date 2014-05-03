@@ -262,6 +262,7 @@ public class TallerWS {
 					System.err.println("Login incorrecto");
 				}
 			} else {
+				bd.close();
 				System.err.println("secretKey = NULL!");
 				return "errorClaveSimetrica";
 			}

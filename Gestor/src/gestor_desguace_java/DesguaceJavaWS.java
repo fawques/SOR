@@ -64,6 +64,7 @@ public class DesguaceJavaWS {
 			try {
 				bd=new InterfazBD("sor_gestor");
 				Desguace desg = bd.getDesguaceEnGestor(idDesguace);
+				bd.close();
 				if (desg != null) {
 					SecretKey key = listaSecretKeys.get(index);
 					return key;
@@ -206,6 +207,7 @@ public class DesguaceJavaWS {
 				}
  			}
  			else{
+ 				bd.close();
 				System.err.println("secretKey = NULL!");
 				return "errorClaveSimetrica";
  			}
@@ -232,9 +234,8 @@ public class DesguaceJavaWS {
    			
    			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {   			
    				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
-   				bd.close();
    				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-   					bd = new InterfazBD("sor_gestor");
+   				
 	             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
 	            listaOfertas=bd.getOfertasDesguace(id);
 	            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
@@ -265,7 +266,7 @@ public class DesguaceJavaWS {
 			e.printStackTrace();
 		}
 
-bd.close();
+        bd.close();
            return "";
         }       
 
