@@ -21,8 +21,13 @@ public aspect WSAspect {
 
 	before() : taller() || desguace() || admin() {
 		Message message = PhaseInterceptorChain.getCurrentMessage();
-		HttpServletRequest request = (HttpServletRequest)message.get(AbstractHTTPDestination.HTTP_REQUEST);
-        AuditLogger.setIp(request.getRemoteAddr());
+		if(message!= null){
+			HttpServletRequest request = (HttpServletRequest)message.get(AbstractHTTPDestination.HTTP_REQUEST);
+	        AuditLogger.setIp(request.getRemoteAddr());
+		}
+		else{
+			 AuditLogger.setIp("127.0.0.1");
+		}
     }
 	after() : taller() || desguace() || admin() {
 		AuditLogger.setUser("NO_USER");

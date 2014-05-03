@@ -363,7 +363,7 @@ public class DesguaceJavaWS {
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 					AuditLogger.ES("Login correcto");
 	            Oferta of= bd.getOfertaporID(TripleDes.decrypt(key, id));
-	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, of.getID());
 	            if(aceptada){
 		            Pedido ped= bd.getPedido(of.getPedido());
 		            ArrayList<Oferta> listaoferta=bd.getOfertasPedido(ped.getID());
