@@ -102,22 +102,21 @@ public class DesguaceJavaWS {
 
 					if (listaIdDesguace.indexOf(idDesguace) != -1) {
 						// borramos el anterior
-						listaSecretKeys.remove(listaIdDesguace.indexOf(idDesguace));
-						listaIdDesguace.remove(listaIdDesguace.indexOf(idDesguace));
+						removeKey(idDesguace);
 					}
 					// anyadir nuevo
 					listaIdDesguace.add(idDesguace);
 					listaSecretKeys.add(clave);
 					Base64 b64 = new Base64();
 					bd.close();
+					AuditLogger.info("Seguridad", "Generada nueva clave de reto para el desguace <" + idDesguace + ">");
 					return b64.encodeToString(clave.getEncoded());
 				} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} else {
-				System.err
-						.println("id taller incorrecto. Clave de reto no generada");
+				AuditLogger.error("id desguace <" + idDesguace + "> incorrecto.");
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -128,6 +127,7 @@ public class DesguaceJavaWS {
 		}
 		
 		bd.close();
+		AuditLogger.error("Clave de reto no generada");
 		return null;
 	}
     
@@ -143,6 +143,7 @@ public class DesguaceJavaWS {
             String stringID  = DigestUtils.md5Hex(ahora.toString() + r);
             boolean res = bd.altaDesguace(stringID, name, email, address, city, Integer.parseInt(postalCode), Integer.parseInt(telephone), 2);
             bd.close();
+            AuditLogger.CRUD_Desguace("Desguace dado de alta con ID <" + stringID + ">");
             return res;
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,6 +152,7 @@ public class DesguaceJavaWS {
         }
 
     	bd.close();
+    	AuditLogger.CRUD_Desguace("No se ha podido dar de alta el desguace");
        return false;
 
     }
@@ -168,11 +170,15 @@ public class DesguaceJavaWS {
 	            String res;
 	            if (desguace!=null) {
 	                res = desguace.getID();
+	                AuditLogger.CRUD_Desguace("Desguace <" + res + "> esta activado. Devolviendo id");
 	            }else{
 	                res = "";
+	                AuditLogger.CRUD_Desguace("Desguace con email <" + email + "> no esta activado");
 	            }
 	            bd.close();
 	            return res;
+			}else{
+				AuditLogger.ES("ERROR: Login incorrecto");
 			}
 
 		
@@ -182,6 +188,7 @@ public class DesguaceJavaWS {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
     	bd.close();
+    	AuditLogger.error("No se ha podido comprobar la activacion del desguace");
         return "";
 
     }
@@ -207,14 +214,15 @@ public class DesguaceJavaWS {
 		     
 		             bd.anadirOferta(stringID,p.getID_aux(), p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACTIVE.ordinal(),  p.getPedido(), p.getDesguace(),p.getDesguaceNombre(), p.getFecha_baja(),p.getFecha_limite());
 		             bd.close();
+		             AuditLogger.CRUD_Oferta("Creada nueva oferta <" + stringID + ">");
 		             return stringID;
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
  			}
  			else{
-				System.err.println("secretKey = NULL!");
+ 				AuditLogger.error("secretKey = NULL!");
  			}
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -223,6 +231,7 @@ public class DesguaceJavaWS {
         }
            
     	bd.close();
+    	AuditLogger.error("No se ha podido crear una nueva oferta");
         return "";
 
     }
@@ -238,7 +247,7 @@ public class DesguaceJavaWS {
         	 bd = new InterfazBD("sor_gestor");
         	   SecretKey key = getKey(id);
    			
-   			if (key != null) {   			
+   			if (key != null) {			
    				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
    				bd.close();
    				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
@@ -250,10 +259,15 @@ public class DesguaceJavaWS {
 	            String listaJSON = gson.toJson(listaOfertas);
 	            System.out.println("listaJSON = " + listaJSON);
 	            bd.close();
+	            AuditLogger.informe("Obtenida lista de ofertas");
 	            return TripleDes.encrypt(key, listaJSON);
+			}else{
+				AuditLogger.ES("ERROR: Login incorrecto");
 			}
    			
 		
+   			}else{
+   				AuditLogger.error("secretKey = NULL!");
    			}
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -275,6 +289,7 @@ public class DesguaceJavaWS {
 		}
 
 bd.close();
+AuditLogger.error("No se ha podido obtener la lista de ofertas");
            return "";
         }       
 
@@ -296,16 +311,19 @@ bd.close();
 					AuditLogger.ES("Login correcto");
 
 	            String listapedidos="";
-	            Pedido p=bd.getPedidoID(id);
+	            String idDecrypt = TripleDes.decrypt(key, id);
+	            Pedido p=bd.getPedidoID(idDecrypt);
 	            listapedidos=gson.toJson(p);
 	            bd.close();
-
-return TripleDes.encrypt(key, listapedidos);
+	            AuditLogger.informe("Obtenido pedido completo <" + idDecrypt + ">");
+	            return TripleDes.encrypt(key, listapedidos);
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
 
+			}else{
+				AuditLogger.error("secretKey = NULL!");
 			}
 			
         } catch (SQLException ex) {
@@ -327,7 +345,8 @@ return TripleDes.encrypt(key, listapedidos);
 			e.printStackTrace();
 		}
            
-        bd.close(); 
+        bd.close();
+        AuditLogger.error("No se ha podido obtener el pedido completo <" + id + ">");
         return null;
     }
     /**
@@ -346,22 +365,31 @@ return TripleDes.encrypt(key, listapedidos);
 					AuditLogger.ES("Login correcto");
 	            Oferta of= bd.getOfertaporID(TripleDes.decrypt(key, id));
 	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+	            // aquí debería haber un if(aceptada)
 	            Pedido ped= bd.getPedido(of.getPedido());
 	            ArrayList<Oferta> listaoferta=bd.getOfertasPedido(ped.getID());
 	            for(Oferta oferta:listaoferta){
 	            	if(oferta.getEstado()==EstadoOferta.ACTIVE ||oferta.getEstado()==EstadoOferta.NEW ||oferta.getEstado()==EstadoOferta.ACCEPTED){
 	            		bd.cambiarEstadoOferta(EstadoOferta.REJECTED, oferta.getID());
+	            		AuditLogger.CRUD_Oferta("Oferta <" + oferta.getID() + "> rechazada");
 	            	}
 	            }
 	            bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK,ped.getID());
 	            bd.close();
+	            if(aceptada){
+	            	AuditLogger.CRUD_Oferta("Oferta <" + of.getID() + "> finalizada correctamente");
+		            AuditLogger.CRUD_Pedido("Pedido <" + of.getPedido() + "> finalizado correctamente");	            	
+	            }else{
+	            	AuditLogger.error("No se ha podido finalizar la oferta <" + of.getID() + ">");
+	            }
+	            
 	            return aceptada;
 				}else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
  			}
  			else{
- 				
+ 				AuditLogger.error("secretKey = NULL!");
  			}
  			
         } catch (SQLException ex) {
@@ -370,6 +398,7 @@ return TripleDes.encrypt(key, listapedidos);
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         bd.close();
+        AuditLogger.error("No se ha podido finalizar la oferta <" + id + ">");
         return aceptada;
     }
 
@@ -387,17 +416,17 @@ return TripleDes.encrypt(key, listapedidos);
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 					AuditLogger.ES("Login correcto");
-	           
-	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.CANCELLED, id);
+	           String idDecrypt = TripleDes.decrypt(key, id);
+	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.CANCELLED, idDecrypt);
 	            bd.close();
-	            
+	            AuditLogger.CRUD_Oferta("Oferta <" + idDecrypt + "> cancelada");
 	            return aceptada;
 				}else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
  			}
  			else{
- 				
+ 				AuditLogger.error("secretKey = NULL!");
  			}
             
         } catch (SQLException ex) {
@@ -406,6 +435,7 @@ return TripleDes.encrypt(key, listapedidos);
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         bd.close();
+        AuditLogger.error("No se ha podido cancelar la oferta <" + id + ">");
         return aceptada;
     }
 
@@ -424,9 +454,14 @@ return TripleDes.encrypt(key, listapedidos);
 					AuditLogger.ES("Login correcto");
 	            boolean oool = bd.bajaDesguace(id);
 	            bd.close();
+	            AuditLogger.CRUD_Desguace("Desguace <" + id + "> dado de baja");
 	            return oool;
+			}else{
+				AuditLogger.ES("ERROR: Login incorrecto");
 			}
 			
+			}else{
+				AuditLogger.error("secretKey = NULL!");
 			}
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -434,6 +469,7 @@ return TripleDes.encrypt(key, listapedidos);
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         bd.close();
+        AuditLogger.error("No se ha podido dar de baja el desguace");
         return false;
     }
 
@@ -452,18 +488,19 @@ return TripleDes.encrypt(key, listapedidos);
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 					AuditLogger.ES("Login correcto");
-	           
-	            System.out.println("miau");
-	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+					String idDecrypt = TripleDes.decrypt(key, id);
+					String estadoDecrypt = TripleDes.decrypt(key, estado);
+	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), idDecrypt);
 	           bd.close();
+	           AuditLogger.CRUD_Pedido("Pedido <" + idDecrypt + "> cambiado al estado <" + estadoDecrypt + ">");
 	           return ool;
 				}else{
 					
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
  			}
  			else{
- 				
+ 				AuditLogger.error("secretKey = NULL!");
  			}
  			
         } catch (SQLException ex) {
@@ -473,6 +510,7 @@ return TripleDes.encrypt(key, listapedidos);
         }
             
         bd.close();
+        AuditLogger.error("No se ha podido cambiar el estado del pedido <" + id + ">");
         return false;
     }
     @WebMethod(operationName = "cambiarEstadoPedidoOtravez")
@@ -487,16 +525,19 @@ return TripleDes.encrypt(key, listapedidos);
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 					AuditLogger.ES("Login correcto");
+					String idDecrypt = TripleDes.decrypt(key, id);
+					String estadoDecrypt = TripleDes.decrypt(key, estado);
 	           
-	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estadoDecrypt), idDecrypt);
 	           bd.close();
+	           AuditLogger.CRUD_Pedido("Pedido <" + idDecrypt + "> cambiado al estado <" + estadoDecrypt + ">");
 	           return ool;
 				}else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
  			}
  			else{
- 				
+ 				AuditLogger.error("secretKey = NULL!");
  			}
       
         } catch (SQLException ex) {
@@ -506,6 +547,7 @@ return TripleDes.encrypt(key, listapedidos);
         }
             
         bd.close();
+        AuditLogger.error("No se ha podido cambiar el estado del pedido <" + id + ">");
         return false;
     }
     public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone, @WebParam(name = "password") String password) {
@@ -529,13 +571,18 @@ return TripleDes.encrypt(key, listapedidos);
 						EstadoGeneral.ACTIVE);
 				bd.close();
 				removeKey(id);
+				if(res){
+					AuditLogger.CRUD_Desguace("Desguace modificado");
+				}else{
+					AuditLogger.error("No se ha podido modificar el Desguace");
+				}
 	            return res;
 				}
 				else{
-					System.err.println("Login incorrecto");
+					AuditLogger.ES("ERROR: Login incorrecto");
 				}
 			} else {
-				System.err.println("secretKey = NULL!");
+				AuditLogger.error("secretKey = NULL!");
 			}
 			
         } catch (java.sql.SQLException ex) {
@@ -544,6 +591,7 @@ return TripleDes.encrypt(key, listapedidos);
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
         }
         bd.close();
+        AuditLogger.error("No se ha podido modificar el Desguace");
         return false;
     }
 }
