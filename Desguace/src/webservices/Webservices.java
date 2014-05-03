@@ -77,7 +77,6 @@ public class Webservices {
 
     public static String getOfertas_WS(java.lang.String id,java.lang.String password) {
     	SecretKey encryptor = prepararClaveReto(id,password);
-		if (encryptor != null) {
 			gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
 	        try {
 				return TripleDes.decrypt(encryptor, port.getOfertas(id,TripleDes.encrypt(encryptor,password)));
@@ -94,13 +93,11 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 		return null;
     }
     
     public static String nuevaOferta_WS(java.lang.String oferta, String idDesguace, String password) {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
-		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
 			try {
 				String aux = port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, TripleDes.encrypt(encryptor, password));
@@ -121,24 +118,11 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else{
-			try {
-				bd = new InterfazBD("sor_desguace");
-				errorCont = bd.getNumOfertasPorError("errorClaveSimetrica");
-				bd.close();
-				return "errorClaveSimetrica"+errorCont;
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		return null;
     }
 
     public static String getPedidosporID_WS(java.lang.String string,java.lang.String password) {
     	SecretKey encryptor = prepararClaveReto(string,password);
-		if (encryptor != null) {
 			gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
 	        try {
 				return TripleDes.decrypt(encryptor,port.getPedidosporID(string,TripleDes.encrypt(encryptor, password)));
@@ -155,14 +139,12 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 		return null;
     }
     
 
     public static String getPedidoporID_WS(java.lang.String string,java.lang.String idDesguace,java.lang.String password) {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
-		if (encryptor != null) {
 			gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
 	        try {
 				return TripleDes.decrypt(encryptor, port.getPedidoporID(string,idDesguace,TripleDes.encrypt(encryptor, password)));
@@ -179,14 +161,12 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 		return null;
 
     }
     
     public static Boolean aceptarOfertaFin_WS(java.lang.String id, String idDesguace, String password) {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
-		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
 			try {
 				return port.aceptarOfertaFin(TripleDes.encrypt(encryptor, id), idDesguace, TripleDes.encrypt(encryptor, password));
@@ -195,13 +175,11 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 		return false;
     }
 
     public static Boolean cancelarOferta_WS(java.lang.String id, String idDesguace, String password) {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
-		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
 			try {
 				return port.cancelarOferta(TripleDes.encrypt(encryptor, id), idDesguace, TripleDes.encrypt(encryptor, password));
@@ -210,7 +188,6 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 		return false;
     }
 
@@ -219,7 +196,6 @@ public class Webservices {
        
         
         SecretKey encryptor = prepararClaveReto(id,password);
-		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
 			
 				 try {
@@ -240,13 +216,11 @@ public class Webservices {
 				
 	
 			
-		}
 		return false;
     }
 
     public static Boolean cambiarEstadoPedido_WS(java.lang.String id, java.lang.String estado, String idDesguace, String password) {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
-		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
 			try {
 				return port.cambiarEstadoPedidoOtravez(TripleDes.encrypt(encryptor, id), TripleDes.encrypt(encryptor, estado), idDesguace, TripleDes.encrypt(encryptor, password));
@@ -255,12 +229,10 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 		return false;
     }
     public static boolean modificar_WS(String id, String name, String email, String address, String city, String postalCode, String telephone, String password) {
     	SecretKey encryptor = prepararClaveReto(id,password);
-		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
 			try {
 				return port.modificar(id, TripleDes.encrypt(encryptor, name), TripleDes.encrypt(encryptor, email), TripleDes.encrypt(encryptor, address), TripleDes.encrypt(encryptor, city), TripleDes.encrypt(encryptor, postalCode), TripleDes.encrypt(encryptor, telephone), TripleDes.encrypt(encryptor, password));
@@ -269,7 +241,6 @@ public class Webservices {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 		return false;
     }
 }
