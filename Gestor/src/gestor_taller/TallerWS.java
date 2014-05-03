@@ -517,11 +517,23 @@ public class TallerWS {
 	public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			Taller t = bd.getTallerEnGestor(tallerID);
-			if (t != null && t.getPassword().equals(password)) {
-				boolean oool = bd.bajaTaller(tallerID);
-				bd.close();
-				return oool;
+			if(seguridad.Config.isCifradoSimetrico()) {
+				SecretKey key = getKey(tallerID);
+				if (key != null) {
+					Taller t = bd.getTallerEnGestor(tallerID);
+					if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
+						boolean oool = bd.bajaTaller(tallerID);
+						bd.close();
+						return oool;
+					}
+				}
+			} else {
+				Taller t = bd.getTallerEnGestor(tallerID);
+				if (t != null && t.getPassword().equals(password)) {
+					boolean oool = bd.bajaTaller(tallerID);
+					bd.close();
+					return oool;
+				}
 			}
 			
 		} catch (SQLException ex) {
