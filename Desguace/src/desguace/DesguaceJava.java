@@ -265,6 +265,9 @@ public class DesguaceJava extends Application {
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 			String idFinal = nuevaOferta(gson.toJson(nuevo));
+			if(idFinal.equals("errorClaveSimetrica"))
+				idFinal = "errorClaveSimetrica" + bd.getNumPedidosPorError("errorClaveSimetrica");
+			
 			if(!idFinal.equals("")){
 				bd.activarOfertaDesguace(id, idFinal);
 			}
