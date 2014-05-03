@@ -189,7 +189,7 @@ public class DesguaceJavaWS {
              Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
              bd = new InterfazBD("sor_gestor");
              SecretKey key = getKey(idDesguace);
- 			if (key != null) {
+ 			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 		             Oferta p = gson.fromJson(TripleDes.decrypt(key, oferta),Oferta.class);
@@ -230,7 +230,7 @@ public class DesguaceJavaWS {
         	 bd = new InterfazBD("sor_gestor");
         	   SecretKey key = getKey(id);
    			
-   			if (key != null) {   			
+   			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {   			
    				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
    				bd.close();
    				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
@@ -280,7 +280,7 @@ bd.close();
         	 bd = new InterfazBD("sor_gestor");
             SecretKey key = getKey(string);
 			
-			if (key != null) {
+			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {
 				
 			
 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(string);
@@ -339,7 +339,7 @@ bd.close();
 
             SecretKey key = getKey(idDesguace);
 			
-			if (key != null) {
+			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {
 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 
@@ -387,7 +387,7 @@ return TripleDes.encrypt(key, listapedidos);
         try {
         	  bd = new InterfazBD("sor_gestor");
         	SecretKey key = getKey(idDesguace);
- 			if (key != null) {
+ 			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	          
@@ -429,7 +429,7 @@ return TripleDes.encrypt(key, listapedidos);
         try {
         	 bd = new InterfazBD("sor_gestor");
         	SecretKey key = getKey(idDesguace);
- 			if (key != null) {
+ 			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	           
@@ -462,7 +462,7 @@ return TripleDes.encrypt(key, listapedidos);
         try {        
        	 bd = new InterfazBD("sor_gestor");
      	SecretKey key = getKey(id);
-			if (key != null) {
+			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {
 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	            boolean oool = bd.bajaDesguace(id);
@@ -490,7 +490,7 @@ return TripleDes.encrypt(key, listapedidos);
         try {
         	 bd= new InterfazBD("sor_gestor");
         	SecretKey key = getKey(idDesguace);
- 			if (key != null) {
+ 			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	           
@@ -523,7 +523,7 @@ return TripleDes.encrypt(key, listapedidos);
         try {
         	 bd= new InterfazBD("sor_gestor");
         	SecretKey key = getKey(idDesguace);
- 			if (key != null) {
+ 			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	           
@@ -551,7 +551,7 @@ return TripleDes.encrypt(key, listapedidos);
         try {
         	bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(id);
-			if (key != null) {
+			if (key != null|| !seguridad.Config.isCifradoSimetrico()) {
 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	            
