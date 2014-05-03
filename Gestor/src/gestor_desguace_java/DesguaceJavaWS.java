@@ -314,8 +314,17 @@ public class DesguaceJavaWS {
 	            Pedido p=bd.getPedidoID(idDecrypt);
 	            listapedidos=gson.toJson(p);
 	            bd.close();
+	            String resultado="";
+	         try{
+	             resultado=TripleDes.encrypt(key, listapedidos);
+	         }
+	         catch(Exception e){
+	        	 e.printStackTrace();
+	        	 AuditLogger.error(e.getMessage());
+	         }
 	            AuditLogger.informe("Obtenido pedido completo <" + idDecrypt + ">");
-	            return TripleDes.encrypt(key, listapedidos);
+	            return resultado;
+	            
 				}
 				else{
 					AuditLogger.ES("ERROR: Login incorrecto");
@@ -330,7 +339,7 @@ public class DesguaceJavaWS {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
 
-        } catch (InvalidKeyException e) {
+        }/* catch (InvalidKeyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
@@ -342,7 +351,7 @@ public class DesguaceJavaWS {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
            
         bd.close();
         AuditLogger.error("No se ha podido obtener el pedido completo <" + id + ">");
