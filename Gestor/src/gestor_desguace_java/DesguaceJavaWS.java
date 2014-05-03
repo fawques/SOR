@@ -188,33 +188,11 @@ public class DesguaceJavaWS {
         try {          
              Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
              bd = new InterfazBD("sor_gestor");
-             if(seguridad.Config.isCifradoSimetrico()) {
-	             SecretKey key = getKey(idDesguace);
-	 			if (key != null) {
-	 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-					if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-			             Oferta p = gson.fromJson(TripleDes.decrypt(key, oferta),Oferta.class);
-			            Date ahora = new Date();
-			            String stringID  = "Oferta_" + bd.getNumOfertas();
-			            p.setID(stringID);
-			     
-			             bd.anadirOferta(stringID,p.getID_aux(), p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACTIVE.ordinal(),  p.getPedido(), p.getDesguace(),p.getDesguaceNombre(), p.getFecha_baja(),p.getFecha_limite());
-			             bd.close();
-			             removeKey(idDesguace);
-			             return stringID;
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-	 			}
-	 			else{
-					System.err.println("secretKey = NULL!");
-	 			}
-             }else{ //cifrado no activado
- 				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
+             SecretKey key = getKey(idDesguace);
+ 			if (key != null) {
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-				if(password.equals(nuevoDesguace.getPassword())){
-		             Oferta p = gson.fromJson(oferta,Oferta.class);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+		             Oferta p = gson.fromJson(TripleDes.decrypt(key, oferta),Oferta.class);
 		            Date ahora = new Date();
 		            String stringID  = "Oferta_" + bd.getNumOfertas();
 		            p.setID(stringID);
@@ -226,7 +204,10 @@ public class DesguaceJavaWS {
 				else{
 					System.err.println("Login incorrecto");
 				}
-             }
+ 			}
+ 			else{
+				System.err.println("secretKey = NULL!");
+ 			}
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -246,41 +227,24 @@ public class DesguaceJavaWS {
         try {   
 
         	 bd = new InterfazBD("sor_gestor");
-
-             if(seguridad.Config.isCifradoSimetrico()) {
-	        	 SecretKey key = getKey(id);
-	   			
-	   			if (key != null) {   			
-		   				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
-		   				bd.close();
-		   			if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-		   					bd = new InterfazBD("sor_gestor");
-			             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
-			            listaOfertas=bd.getOfertasDesguace(id);
-			            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-			            String listaJSON = gson.toJson(listaOfertas);
-			            System.out.println("listaJSON = " + listaJSON);
-			            bd.close();
-
-			             removeKey(id);
-			            return TripleDes.encrypt(key, listaJSON);
-					}
-	   			}
-             } else {
-  				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-            	 Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
-	   				bd.close();
-	   			if(password.equals(nuevoDesguace.getPassword())){
-	   					bd = new InterfazBD("sor_gestor");
-		             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
-		            listaOfertas=bd.getOfertasDesguace(id);
-		            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-		            String listaJSON = gson.toJson(listaOfertas);
-		            System.out.println("listaJSON = " + listaJSON);
-		            bd.close();
-		            return listaJSON;
-				}
-             }
+        	   SecretKey key = getKey(id);
+   			
+   			if (key != null) {   			
+   				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
+   				bd.close();
+   				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+   					bd = new InterfazBD("sor_gestor");
+	             ArrayList<Oferta> listaOfertas = new ArrayList<Oferta>();
+	            listaOfertas=bd.getOfertasDesguace(id);
+	            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+	            String listaJSON = gson.toJson(listaOfertas);
+	            System.out.println("listaJSON = " + listaJSON);
+	            bd.close();
+	            return TripleDes.encrypt(key, listaJSON);
+			}
+   			
+		
+   			}
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -313,56 +277,33 @@ bd.close();
         try {
 
         	 bd = new InterfazBD("sor_gestor");
-        	 if(seguridad.Config.isCifradoSimetrico()) {
-	            SecretKey key = getKey(string);
+            SecretKey key = getKey(string);
+			
+			if (key != null) {
 				
-				if (key != null) {
-					
-				
-					Desguace nuevoDesguace= bd.getDesguaceEnGestor(string);
-					if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-	
-		             Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
-		             ArrayList<String>  listaids = gson.fromJson(string, collectionType);
-		            ArrayList<Pedido> listapedidos= new ArrayList<Pedido>();
-		             for(String s: listaids){
-		                 listapedidos.add(bd.getPedidoID(s));
-		             }
-		             
-		            String listaJSON = gson.toJson(listapedidos);
-		            System.out.println("listaJSON = " + listaJSON);
-		            bd.close();
+			
+				Desguace nuevoDesguace= bd.getDesguaceEnGestor(string);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 
-		             removeKey(string);
-		            return TripleDes.encrypt(key, listaJSON);
-					}else{
-						System.err.println("Login incorrecto");
-					}
-	
-		            
-	
+	             Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
+	             ArrayList<String>  listaids = gson.fromJson(string, collectionType);
+	            ArrayList<Pedido> listapedidos= new ArrayList<Pedido>();
+	             for(String s: listaids){
+	                 listapedidos.add(bd.getPedidoID(s));
+	             }
+	             
+	            String listaJSON = gson.toJson(listapedidos);
+	            System.out.println("listaJSON = " + listaJSON);
+	            bd.close();
+
+	            return TripleDes.encrypt(key, listaJSON);
+				}else{
+					System.err.println("Login incorrecto");
 				}
-        	 } else {
-   				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-        		 Desguace nuevoDesguace= bd.getDesguaceEnGestor(string);
-					if(password.equals(nuevoDesguace.getPassword())){
-	
-		             Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
-		             ArrayList<String>  listaids = gson.fromJson(string, collectionType);
-		            ArrayList<Pedido> listapedidos= new ArrayList<Pedido>();
-		             for(String s: listaids){
-		                 listapedidos.add(bd.getPedidoID(s));
-		             }
-		             
-		            String listaJSON = gson.toJson(listapedidos);
-		            System.out.println("listaJSON = " + listaJSON);
-		            bd.close();
-	
-		            return listaJSON;
-					}else{
-						System.err.println("Login incorrecto");
-					}
-        	 }
+
+	            
+
+			}
 			
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -395,43 +336,24 @@ bd.close();
         try {
             bd = new InterfazBD("sor_gestor");
 
-       	 	if(seguridad.Config.isCifradoSimetrico()) {
-	            SecretKey key = getKey(idDesguace);
-				
-				if (key != null) {
-					Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-					if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-	
-		            String listapedidos="";
-		            Pedido p=bd.getPedidoID(id);
-		            listapedidos=gson.toJson(p);
-		            bd.close();
+            SecretKey key = getKey(idDesguace);
+			
+			if (key != null) {
+				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 
-		             removeKey(idDesguace);
-		            return TripleDes.encrypt(key, listapedidos);
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-	
-				}
-       	 	}else{
-   				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-	       	 	Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-				if(password.equals(nuevoDesguace.getPassword())){
-	
 	            String listapedidos="";
 	            Pedido p=bd.getPedidoID(id);
 	            listapedidos=gson.toJson(p);
 	            bd.close();
-	
-	            return listapedidos;
+
+return TripleDes.encrypt(key, listapedidos);
 				}
 				else{
 					System.err.println("Login incorrecto");
 				}
 
-       	 	}
+			}
 			
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -463,40 +385,12 @@ bd.close();
         Boolean aceptada=false;
         try {
         	  bd = new InterfazBD("sor_gestor");
-        	if(seguridad.Config.isCifradoSimetrico()) {
-	        	SecretKey key = getKey(idDesguace);
-	 			if (key != null) {
-	 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-					if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-		          
-		            Oferta of= bd.getOfertaporID(TripleDes.decrypt(key, id));
-		            aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
-		            Pedido ped= bd.getPedido(of.getPedido());
-		            ArrayList<Oferta> listaoferta=bd.getOfertasPedido(ped.getID());
-		            for(Oferta oferta:listaoferta){
-		            	if(oferta.getEstado()==EstadoOferta.ACTIVE ||oferta.getEstado()==EstadoOferta.NEW ||oferta.getEstado()==EstadoOferta.ACCEPTED){
-		            		bd.cambiarEstadoOferta(EstadoOferta.REJECTED, oferta.getID());
-		            	}
-		            }
-		            bd.cambiarEstadoPedido(EstadoPedido.FINISHED_OK,ped.getID());
-		            bd.close();
-
-		             removeKey(idDesguace);
-		            return aceptada;
-					}else{
-						System.err.println("Login incorrecto");
-					}
-	 			}
-	 			else{
-	 				
-	 			}
-        	} else {
-
-   				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-   				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-				if(password.equals(nuevoDesguace.getPassword())){
+        	SecretKey key = getKey(idDesguace);
+ 			if (key != null) {
+ 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	          
-	            Oferta of= bd.getOfertaporID(id);
+	            Oferta of= bd.getOfertaporID(TripleDes.decrypt(key, id));
 	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
 	            Pedido ped= bd.getPedido(of.getPedido());
 	            ArrayList<Oferta> listaoferta=bd.getOfertasPedido(ped.getID());
@@ -511,7 +405,10 @@ bd.close();
 				}else{
 					System.err.println("Login incorrecto");
 				}
-        	}
+ 			}
+ 			else{
+ 				
+ 			}
  			
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -530,37 +427,22 @@ bd.close();
         Boolean aceptada=false;
         try {
         	 bd = new InterfazBD("sor_gestor");
-        	 if(seguridad.Config.isCifradoSimetrico()) {
-	        	SecretKey key = getKey(idDesguace);
-	 			if (key != null) {
-	 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-					if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-		           
-		            aceptada=bd.cambiarEstadoOferta(EstadoOferta.CANCELLED, id);
-		            bd.close();
-
-		             removeKey(idDesguace);
-		            return aceptada;
-					}else{
-						System.err.println("Login incorrecto");
-					}
-	 			}
-	 			else{
-	 				
-	 			}
-        	 } else {
-        		 System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-        		 Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-					if(password.equals(nuevoDesguace.getPassword())){
-		           
-		            aceptada=bd.cambiarEstadoOferta(EstadoOferta.CANCELLED, id);
-		            bd.close();
-		            
-		            return aceptada;
-					}else{
-						System.err.println("Login incorrecto");
-					}
-        	 }
+        	SecretKey key = getKey(idDesguace);
+ 			if (key != null) {
+ 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+	           
+	            aceptada=bd.cambiarEstadoOferta(EstadoOferta.CANCELLED, id);
+	            bd.close();
+	            
+	            return aceptada;
+				}else{
+					System.err.println("Login incorrecto");
+				}
+ 			}
+ 			else{
+ 				
+ 			}
             
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -578,28 +460,16 @@ bd.close();
     public Boolean baja(@WebParam(name = "id") String id, @WebParam(name="password") String password) {
         try {        
        	 bd = new InterfazBD("sor_gestor");
-
-    	 if(seguridad.Config.isCifradoSimetrico()) {
-	     	SecretKey key = getKey(id);
-				if (key != null) {
-					Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
-					if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-			            boolean oool = bd.bajaDesguace(id);
-			            bd.close();
-			            removeKey(id);
-			            return oool;
-					}
-				
-				}
-    	 } else {
-    		 System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-    		 Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
-				if(password.equals(nuevoDesguace.getPassword())){
-		            boolean oool = bd.bajaDesguace(id);
-		            bd.close();
-		            return oool;
-				}
-    	 }
+     	SecretKey key = getKey(id);
+			if (key != null) {
+				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+	            boolean oool = bd.bajaDesguace(id);
+	            bd.close();
+	            return oool;
+			}
+			
+			}
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -618,38 +488,23 @@ bd.close();
            
         try {
         	 bd= new InterfazBD("sor_gestor");
-
-        	 if(seguridad.Config.isCifradoSimetrico()) {
-	        	SecretKey key = getKey(idDesguace);
-	 			if (key != null) {
-	 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-					if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-		            
-		           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
-		           bd.close();
-
-		            removeKey(idDesguace);
-		           return ool;
-					}else{
-						
-						System.err.println("Login incorrecto");
-					}
-	 			}
-	 			else{
-	 				
-	 			}
-        	 }else {
-        		 System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-        		 Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-					if(password.equals(nuevoDesguace.getPassword())){
-		           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
-		           bd.close();
-		           return ool;
-					}else{
-						
-						System.err.println("Login incorrecto");
-					}
-        	 }
+        	SecretKey key = getKey(idDesguace);
+ 			if (key != null) {
+ 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+	           
+	            System.out.println("miau");
+	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+	           bd.close();
+	           return ool;
+				}else{
+					
+					System.err.println("Login incorrecto");
+				}
+ 			}
+ 			else{
+ 				
+ 			}
  			
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -666,37 +521,21 @@ bd.close();
            
         try {
         	 bd= new InterfazBD("sor_gestor");
-        	 if(seguridad.Config.isCifradoSimetrico()) {
-	        	SecretKey key = getKey(idDesguace);
-	 			if (key != null) {
-	 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-					if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-		           
-		           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
-		           bd.close();
-
-		            removeKey(idDesguace);
-		           return ool;
-					}else{
-						System.err.println("Login incorrecto");
-					}
-	 			}
-	 			else{
-	 				
-	 			}
-        	 } else {
-
-        		 System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-        		 Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
-					if(password.equals(nuevoDesguace.getPassword())){
-				           
-				           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
-				           bd.close();
-				           return ool;
-					}else{
-							System.err.println("Login incorrecto");
-					}
-        	 }
+        	SecretKey key = getKey(idDesguace);
+ 			if (key != null) {
+ 				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
+	           
+	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+	           bd.close();
+	           return ool;
+				}else{
+					System.err.println("Login incorrecto");
+				}
+ 			}
+ 			else{
+ 				
+ 			}
       
         } catch (SQLException ex) {
             Logger.getLogger(DesguaceJavaWS.class.getName()).log(Level.SEVERE, null, ex);
@@ -710,40 +549,19 @@ bd.close();
     public boolean modificar(@WebParam(name = "id") String id, @WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone, @WebParam(name = "password") String password) {
         try {
         	bd = new InterfazBD("sor_gestor");
-       	 	if(seguridad.Config.isCifradoSimetrico()) {
-				SecretKey key = getKey(id);
-				if (key != null) {
-					Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
-					if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
-		            
-					// desencriptar elementos
-					boolean res = bd.modificarTaller(id,
-							TripleDes.decrypt(key, name),
-							TripleDes.decrypt(key, email),
-							TripleDes.decrypt(key, city),
-							TripleDes.decrypt(key, city),
-							Integer.parseInt(TripleDes.decrypt(key, postalCode)),
-							Integer.parseInt(TripleDes.decrypt(key, telephone)),
-							EstadoGeneral.ACTIVE);
-					bd.close();
-					removeKey(id);
-		            return res;
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-				} else {
-					System.err.println("secretKey = NULL!");
-				}
-       	 	} else {
-       	 		System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-	       	 	Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
-				if(password.equals(nuevoDesguace.getPassword())){
+			SecretKey key = getKey(id);
+			if (key != null) {
+				Desguace nuevoDesguace= bd.getDesguaceEnGestor(id);
+				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	            
 				// desencriptar elementos
-				boolean res = bd.modificarTaller(id,name,email,address, city,
-						Integer.parseInt(postalCode),
-						Integer.parseInt(telephone),
+				boolean res = bd.modificarTaller(id,
+						TripleDes.decrypt(key, name),
+						TripleDes.decrypt(key, email),
+						TripleDes.decrypt(key, city),
+						TripleDes.decrypt(key, city),
+						Integer.parseInt(TripleDes.decrypt(key, postalCode)),
+						Integer.parseInt(TripleDes.decrypt(key, telephone)),
 						EstadoGeneral.ACTIVE);
 				bd.close();
 				removeKey(id);
@@ -752,7 +570,9 @@ bd.close();
 				else{
 					System.err.println("Login incorrecto");
 				}
-       	 	}
+			} else {
+				System.err.println("secretKey = NULL!");
+			}
 			
         } catch (java.sql.SQLException ex) {
             Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null, ex);
