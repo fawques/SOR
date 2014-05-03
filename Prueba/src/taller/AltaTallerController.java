@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import audit.AuditLogger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -254,8 +256,11 @@ public class AltaTallerController implements Initializable {
                 //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_taller");
                 if (bd.altaTaller(tfNombreTaller.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2,tfContrasenya.getText()) != -1) {
+                	AuditLogger.CRUD_Taller("Creado nuevo taller. En espera de ser aceptado.");
+                	
                 	MainTaller.nombreUsuario="Administrador";
-                	MainTaller.anyadirRolUsuario("Administrador",tfContrasenya.getText(),"Administrador");                	
+                	AuditLogger.setUser(MainTaller.nombreUsuario);
+                	MainTaller.anyadirRolUsuario("Administrador",tfContrasenya.getText(),"Administrador");
                 	URL location = getClass().getResource("tallerPendienteActivacion.fxml");
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(location);
@@ -267,12 +272,13 @@ public class AltaTallerController implements Initializable {
                     staticDataBox.setStage(thisStage);
                     staticDataBox.showStage();
                 } else {
-                    //devolver un error
+                    AuditLogger.error("NO_USER", "Error insertando el nuevo taller en la Base de Datos");
                 }
                 bd.close();
             }
             else{
-                System.err.println("alta me ha devuelto < 0");
+                //System.err.println("alta me ha devuelto < 0");
+            	AuditLogger.error("NO_USER", "Error en el Webservice de Alta");
             }
         }
         //else nothing

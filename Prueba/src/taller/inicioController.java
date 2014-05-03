@@ -5,11 +5,13 @@ import BD.InterfazBD;
 
 
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import audit.AuditLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,12 +39,14 @@ public class inicioController implements Initializable {
 	public void Entrar() throws IOException{
 		Boolean aceptado=MainTaller.comprobarInicio(tfUsuario.getText(),tfContrasenya.getText());
 		
-		if(aceptado==false){
-		            System.out.println(",pero no he podido updatear");
+		if(!aceptado){
+		            //System.out.println(",pero no he podido updatear");
 		            lbEstado.setStyle("-fx-border-color: red;");
 		            lbEstado.setText("Su usuario o contraseña no son válidos");
-		        } else {
+		        } else {		        	
 		        	MainTaller.nombreUsuario=tfUsuario.getText();
+		        	AuditLogger.setUser(MainTaller.nombreUsuario);
+		        	
 		            URL location = getClass().getResource("GestionPedidos.fxml");
 		            FXMLLoader loader = new FXMLLoader();
 		            loader.setLocation(location);

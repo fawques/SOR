@@ -10,6 +10,7 @@ import Async.Accion;
 import Async.AsyncManager;
 import BD.InterfazBD;
 import activemq.Gestor_activemq;
+import audit.AuditLogger;
 import interfaz.PiezasInterfaz;
 
 import com.google.gson.Gson;
@@ -191,8 +192,11 @@ public class GestionPedidos implements Initializable {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();       
         Type collectionType = new TypeToken<Pedido>(){}.getType();
         String pedidosstring=DesguaceJava.getPedidoporID(id);
-        if(pedidosstring!=null && !pedidosstring.equals("")){
-         p = gson.fromJson(pedidosstring, collectionType);
+		if(pedidosstring!=null && !pedidosstring.equals("")){
+        	AuditLogger.informe("Obtenido el pedido completo del gestor con id <" + id + ">");
+        	p = gson.fromJson(pedidosstring, collectionType);
+        }else{
+        	AuditLogger.error("Error al obtener el pedido completo del gestor con id <" + id + ">");
         }
         
        
@@ -325,8 +329,11 @@ public class GestionPedidos implements Initializable {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
         String ofertasstring= DesguaceJava.getOfertas();
-        if(ofertasstring!=null && !ofertasstring.equals("")){
+		if(ofertasstring!=null && !ofertasstring.equals("")){
+        	AuditLogger.informe("Obtenido listado de ofertas");
             ofertasgestor = gson.fromJson(ofertasstring, collectionType);
+        }else{
+        	AuditLogger.error("No se ha podido obtener el listado de ofertas");
         }
        for(Oferta ofertagestor:ofertasgestor){
            for(Oferta ofertadesguace:ofertas){
@@ -336,6 +343,7 @@ public class GestionPedidos implements Initializable {
                     }
                     if(!ofertagestor.getID().equals(ofertadesguace.getID())){
                     	bd.activarOfertaDesguace(ofertagestor.getID_aux(),ofertagestor.getID());
+                    	AuditLogger.CRUD_Oferta("Oferta <" + ofertagestor.getID() + "> activada");
                     }
                }
            }
@@ -345,39 +353,44 @@ public class GestionPedidos implements Initializable {
        Boolean aceptado=false;
         if(borrarOfertaAceptadas!=-1){
             if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
-               Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
-                Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.ACTIVE); 
+               String idOferta = olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId();
+               boolean gestorlohacambiado= DesguaceJava.cancelarOferta(idOferta);
+               boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.ACTIVE); 
                if(gestorlohacambiado && gestorpedido){
                     aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.CANCELLED);
                     if(aceptado==false){
-                        System.err.println("No se ha podido aceptar la oferta");
+                        AuditLogger.error("No se ha podido cancelar la oferta <" + idOferta + ">");
                     }
                   }
                   else{
-                    System.err.println("No se ha podido cambiar la oferta en gestor a finalizado");
+                    AuditLogger.error("No se ha podido cancelar la oferta <" + idOferta + "> en gestor");
                   }
             }
         }
         actualizarOfertasOfertadas();
     }
-        public void anularOfertaCreada(){
-       Boolean aceptado=false;
+    public void anularOfertaCreada(){
+    	Boolean aceptado=false;
         if(borrarOferta!=-1){
             if(olTablaOfertas.size()>=borrarOferta){
-               Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(olTablaOfertas.get(borrarOferta).getId());
-                  if(gestorlohacambiado==true){
-                    aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertas.get(borrarOferta).getId(),EstadoOferta.CANCELLED);
-                    if(aceptado==false){
-                        System.err.println("No se ha podido aceptar la oferta");
-                    }
-                  }
-                  else{
-                    System.err.println("No se ha podido cambiar la oferta en gestor a finalizado");
-                  }
+               String idOferta = olTablaOfertas.get(borrarOferta).getId();
+               Boolean gestorlohacambiado= DesguaceJava.cancelarOferta(idOferta);
+               if(gestorlohacambiado==true){
+            	   aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertas.get(borrarOferta).getId(),EstadoOferta.CANCELLED);
+            	   if(aceptado==false){
+            		   AuditLogger.error("No se ha podido cancelar la oferta <" + idOferta + ">");
+            	   }else{
+            		   AuditLogger.CRUD_Oferta("Oferta <" + idOferta + "> cancelada");
+            	   }
+               }
+               else{
+            	   AuditLogger.error("No se ha podido cambiar la oferta <" + idOferta + "> en gestor");
+               }
             }
         }
         actualizarOfertas();
-    }
+	}
+        
     public void actualizarPestanyaHistorico(){
         actualizarHistoricoPedidos();
         actualizarOfertasHistorico();
@@ -617,14 +630,15 @@ public class GestionPedidos implements Initializable {
                 for(PedidoCorto pcorto: idlista){
                     if(!DesguaceJava.cambiarEstadoPedido(pcorto.getID(), pcorto.getEstado())){
                     	Pedido pedido = gson.fromJson(DesguaceJava.getPedidoporID(pcorto.getID()), collectionType);
-                    	bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
-                        bd.anyadirPiezasAPedido(bd.getPedido(pedido.getID()).getID_aux(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
-                   
+                    	if(pedido != null){
+                    		bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(),pedido.getTallerNombre(), pedido.getFecha_baja(),pedido.getFecha_limite(), true);
+                            bd.anyadirPiezasAPedido(bd.getPedido(pedido.getID()).getID_aux(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
+                            AuditLogger.CRUD_Pedido("Creado pedido <" + pcorto.getID() + ">");
+                    	}else{
+                    		AuditLogger.error("No se ha podido obtener el pedido completo <" + pcorto.getID() + "> del gestor");
+                    	}
                     }
-
-                    
                 }
-               
             }
           
         } catch (JMSException ex) {
@@ -650,16 +664,24 @@ public class GestionPedidos implements Initializable {
          Boolean aceptado=false;
         if(borrarOfertaAceptadas!=-1){
             if(olTablaOfertasAceptadas.size()>=borrarOfertaAceptadas){
-               Boolean gestorlohacambiado= DesguaceJava.aceptarOfertaFin(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId());
-               Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido(), EstadoPedido.FINISHED_OK);
+               String idOferta = olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId();
+			Boolean gestorlohacambiado= DesguaceJava.aceptarOfertaFin(idOferta);
+               String idPedido = olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getPedido();
+			Boolean gestorpedido=DesguaceJava.cambiarEstadoPedido(idPedido, EstadoPedido.FINISHED_OK);
                if(gestorlohacambiado && gestorpedido){
                     aceptado= DesguaceJava.cambiarEstadoOferta(olTablaOfertasAceptadas.get(borrarOfertaAceptadas).getId(),EstadoOferta.FINISHED_OK);
                     if(aceptado==false){
-                        System.err.println("No se ha podido aceptar la oferta");
+                        AuditLogger.error("No se ha podido aceptar la oferta <" + idOferta + ">");
                     }
                   }
                   else{
-                    System.err.println("No se ha podido cambiar la oferta en gestor a finalizado");
+                	  if(!gestorlohacambiado){
+                		  AuditLogger.error("No se ha podido aceptar la oferta <" + idOferta + "> en gestor");
+                	  }
+                	  if(!gestorpedido){
+                		  AuditLogger.error("No se ha podido aceptar el pedido <" + idPedido + ">");
+                	  }
+                    
                   }
             }
         }
@@ -668,8 +690,6 @@ public class GestionPedidos implements Initializable {
       public void bajaDesguace() throws IOException {
         if (DesguaceJava.bajaDesguace()) {
             cambiarAPantallaDesguaceDeBaja();
-        } else {
-            System.err.println("Lo siento, no se ha podido dar de baja.");
         }
     }
 

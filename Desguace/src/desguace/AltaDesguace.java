@@ -6,6 +6,7 @@
 package desguace;
 
 import BD.InterfazBD;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -254,6 +255,7 @@ public class AltaDesguace implements Initializable {
                 //METER en base de datos si esta todo ok.
                 bd = new InterfazBD("sor_desguace");
                 if (bd.altaDesguace(tfNombreDesguace.getText(), tfEmail.getText(), tfDireccion.getText(), tfCiudad.getText(), Integer.parseInt(tfCp.getText()), Integer.parseInt(tfTelefono.getText()), 2,tfContrasenya.getText()) != -1) {
+                	AuditLogger.CRUD_Desguace("Creado nuevo desguace. En espera de ser aceptado.");
                 	//DesguaceJava.anyadirRol("Administrador", new ArrayList<>(Arrays.asList(1,1,1,1,1,1,1,1,1,1,1)));
                 	//DesguaceJava.anyadirRolUsuario("Administrador",tfContrasenya.getText(),"Administrador");
                 	URL location = getClass().getResource("desguacePendienteActivacion.fxml");
@@ -267,12 +269,12 @@ public class AltaDesguace implements Initializable {
                     staticDataBox.setStage(thisStage);
                     staticDataBox.showStage();
                 } else {
-                    //devolver un error
+                	AuditLogger.error("Error insertando el nuevo desguace en la Base de Datos");
                 }
                 bd.close();
             }
             else{
-                System.err.println("alta me ha devuelto < 0");
+            	AuditLogger.error("Error en el Webservice de Alta");
             }
         }
         //else nothing

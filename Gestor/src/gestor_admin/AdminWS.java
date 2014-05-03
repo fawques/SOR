@@ -6,6 +6,7 @@
 package gestor_admin;
 
 import BD.InterfazBD;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -125,6 +126,7 @@ public class AdminWS {
      */
     @WebMethod(operationName = "hello")
     public String hello() {
+    	AuditLogger.info("Hello", "Hello");
         return "Hello";
     }
 
@@ -142,12 +144,14 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaPedidos);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenido listado de pedidos");
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         }
+        AuditLogger.error("No se ha podido obtener el listado de pedidos");
         return null;
     }
 
@@ -166,13 +170,14 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaOfertas);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenido listado de ofertas");
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        AuditLogger.error("No se ha podido obtener el listado de ofertas");
         return null;
     }
 
@@ -191,12 +196,14 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaDesguaces);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenido listado de desguaces");
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         }
+        AuditLogger.error("No se ha podido obtener el listado de desguaces");
         return null;
     }
     /**
@@ -214,12 +221,14 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaDesguaces);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenido listado de desguaces aceptados");
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         }
+        AuditLogger.error("No se ha podido obtener el listado de desguaces aceptados");
         return null;
     }
     /**
@@ -235,12 +244,14 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenido listado de talleres");
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         }
+        AuditLogger.error("No se ha podido obtener el listado de talleres");
         return null;
     }
     /**
@@ -256,12 +267,14 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenido listado de talleres aceptados");
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         }
+        AuditLogger.error("No se ha podido obtener el listado de talleres aceptados");
         return null;
     }
    
@@ -279,12 +292,14 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaOfertas);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenidas ofertas del pedido <" + idPedido + ">");
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         }
+        AuditLogger.error("No se han podido obtener ofertas del pedido <" + idPedido + ">");
         return null;
     }
 
@@ -301,13 +316,14 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaPedido);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenido pedido <" + id + ">");
             return listaJSON;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        AuditLogger.error("No se ha podidoel pedido <" + id + ">");
         return null;
 
     }
@@ -335,6 +351,7 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaTalleres);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenido el listado de altas de taller");
             return listaJSON;
         }        
         catch (ClassNotFoundException ex) {
@@ -342,6 +359,7 @@ public class AdminWS {
         } catch (SQLException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
+         AuditLogger.error("No se ha podido obtener el listado de altas de taller");
         return null;
     }
 
@@ -354,6 +372,7 @@ public class AdminWS {
          bd = new InterfazBD("sor_gestor");
          String pass=RandomStringUtils.randomAlphanumeric(4);
          boolean res = bd.activarTaller(ID,pass);
+         AuditLogger.CRUD_Taller("Taller <" + ID + "> activado");
          Taller t = bd.getTallerEnGestor(ID);
         //TODO descomentar
          /* if (res) {
@@ -376,7 +395,7 @@ public class AdminWS {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
             
-            
+     AuditLogger.error("No se ha podido activar el taller <" + ID + ">");
         return false;
     }
 
@@ -389,6 +408,7 @@ public class AdminWS {
          bd = new InterfazBD("sor_gestor");
          String pass=RandomStringUtils.randomAlphanumeric(4);
         boolean ool = bd.activarDesguace(ID,pass);
+        AuditLogger.CRUD_Desguace("Desguace <" + ID + "> activado");
 
         bd.close();
         return ool;
@@ -399,7 +419,7 @@ public class AdminWS {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
             
-            
+     AuditLogger.error("No se ha podido activar el desguace <" + ID + ">");
         return false;
     }
 
@@ -416,6 +436,7 @@ public class AdminWS {
             String listaJSON = gson.toJson(listaDesguace);
             System.out.println("listaJSON = " + listaJSON);
             bd.close();
+            AuditLogger.informe("Obtenido el listado de altas de desguace");
             return listaJSON;
         }        
         catch (ClassNotFoundException ex) {
@@ -423,6 +444,7 @@ public class AdminWS {
         } catch (SQLException ex) {
          Logger.getLogger(AdminWS.class.getName()).log(Level.SEVERE, null, ex);
      }
+         AuditLogger.error("No se ha podido obtener el listado de altas de desguace");
         return null;
     }
     

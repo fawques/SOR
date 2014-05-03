@@ -2,6 +2,9 @@ DROP DATABASE IF EXISTS `sor_desguace`;
 DROP DATABASE IF EXISTS `sor_gestor`;
 DROP DATABASE IF EXISTS `sor_taller`;
 
+SET @@global.time_zone='+00:00';
+SET time_zone='+00:00';
+
 CREATE DATABASE IF NOT EXISTS `sor_gestor` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `sor_gestor`;
@@ -79,6 +82,17 @@ CREATE TABLE `pedido_pieza` (
   CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `audit` (
+  `AUDIT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IP_ORIGEN` varchar(50) DEFAULT NULL,
+  `USER_ID` varchar(50) DEFAULT NULL,
+  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `TIMEZONE` varchar(50) NOT NULL,
+  `ACTIVITY` varchar(50) DEFAULT NULL,
+  `ACTIVITY_DETAIL` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`AUDIT_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE DATABASE IF NOT EXISTS `sor_taller` /*!40100 DEFAULT CHARACTER SET utf8 */;
 use sor_taller;
@@ -190,6 +204,17 @@ CREATE TABLE `acciones` (
   `params` varchar(10000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `audit` (
+  `AUDIT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IP_ORIGEN` varchar(50) DEFAULT NULL,
+  `USER_ID` varchar(50) DEFAULT NULL,
+  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `TIMEZONE` varchar(50) NOT NULL,
+  `ACTIVITY` varchar(50) DEFAULT NULL,
+  `ACTIVITY_DETAIL` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`AUDIT_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 CREATE DATABASE IF NOT EXISTS `sor_desguace` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `sor_desguace`;
 
@@ -295,6 +320,18 @@ CREATE TABLE `acciones` (
   `accion` varchar(10000) NOT NULL,
   `params` varchar(10000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `audit` (
+  `AUDIT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IP_ORIGEN` varchar(50) DEFAULT NULL,
+  `USER_ID` varchar(50) DEFAULT NULL,
+  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `TIMEZONE` varchar(50) NOT NULL,
+  `ACTIVITY` varchar(50) DEFAULT NULL,
+  `ACTIVITY_DETAIL` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`AUDIT_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 
 INSERT INTO `sor_taller`.`roles` (`rol`, `nuevo_pedido`, `borrar_pedido`, `modificar_pedido`, `modificar_datos`, `baja`, `aceptar_ofertas`, `rechazar_ofertas`, `nuevo_usuario`, `nuevo_rol`, `cambiar_usuario`, `cambiar_rol`) VALUES ('Administrador', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 INSERT INTO `sor_desguace`.`roles` (`rol`, `nuevo_pedido`, `borrar_pedido`, `modificar_pedido`, `modificar_datos`, `baja`, `aceptar_ofertas`, `rechazar_ofertas`, `nuevo_usuario`, `nuevo_rol`, `cambiar_usuario`, `cambiar_rol`) VALUES ('Administrador', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');

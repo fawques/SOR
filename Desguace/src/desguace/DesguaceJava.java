@@ -7,6 +7,7 @@
 package desguace;
 
 import BD.InterfazBD;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,6 +56,7 @@ public class DesguaceJava extends Application {
 	public void start(Stage stage2) throws IOException, SQLException {
 		try {
 			JUDDIProxy.loadWsdl("DesguaceJavaWS");
+			AuditLogger.setUser("Administrador");
 			stage = stage2;
 			bd = new InterfazBD("sor_desguace");
 			// System.out.println(bd.getPedidosActivos());
@@ -163,6 +165,7 @@ public class DesguaceJava extends Application {
 			bd = new InterfazBD("sor_desguace");
 			boolean r = bd.activarDesguaceMainDesguace(idRecibido);
 			bd.close();
+			AuditLogger.CRUD_Desguace("Desguace activado");
 			return r;
 
 		} catch (SQLException ex) {
@@ -172,7 +175,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
-
+		AuditLogger.error("No se ha podido activar el desguace con id <" + idRecibido + ">");
 		return false;
 	}
 
@@ -267,6 +270,8 @@ public class DesguaceJava extends Application {
 			}
 			
 			bd.close();
+			AuditLogger.CRUD_Oferta("Creada oferta <" + idFinal + ">");
+			return;
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
@@ -274,7 +279,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
-
+		AuditLogger.error("No se ha podido crear la oferta nueva");
 	}
 
 	public static ArrayList<Oferta> actualizarOfertasAceptadas() {
@@ -283,6 +288,7 @@ public class DesguaceJava extends Application {
 			bd = new InterfazBD("sor_desguace");
 			of = bd.getOfertasConID_aux(EstadoOferta.ACCEPTED);
 			bd.close();
+			AuditLogger.informe("Obtenido listado de ofertas aceptadas");
 			return of;
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
@@ -291,6 +297,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido obtener el informe de ofertas aceptadas");
 		return of;
 	}
 
@@ -300,6 +307,7 @@ public class DesguaceJava extends Application {
 			bd = new InterfazBD("sor_desguace");
 			of = bd.getOfertasConID_aux();
 			bd.close();
+			AuditLogger.informe("Obtenido listado de ofertas");
 			return of;
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
@@ -308,6 +316,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido obtener el listado de ofertas");
 		return of;
 	}
 
@@ -319,6 +328,7 @@ public class DesguaceJava extends Application {
 			
 			//of.addAll(bd.getOfertasConID_aux(EstadoOferta.ACCEPTED));
 			bd.close();
+			AuditLogger.informe("Obtenido listado de ofertas");
 			return of;
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
@@ -327,6 +337,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido obtener el listado de ofertas");
 		return of;
 	}
 
@@ -335,7 +346,10 @@ public class DesguaceJava extends Application {
 		try {
 			bd = new InterfazBD("sor_desguace");
 			realizado = bd.cambiarEstadoOferta(estado, id);
-			return realizado;
+			if(realizado){
+				AuditLogger.CRUD_Oferta("Oferta <" + id + "> cambiada al estado <" + estado.name() + ">");
+				return realizado;
+			}
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
@@ -343,6 +357,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido cambiar el estado de la oferta <" + id + ">");
 		return realizado;
 	}
 
@@ -351,12 +366,15 @@ public class DesguaceJava extends Application {
 		try {
 			bd = new InterfazBD("sor_desguace");
 			realizado = bd.cambiarEstadoPedido(estado, id);
-			if (realizado) {
-				cambiarEstadoPedido_1(id, estado.name());
-			}
 			bd.close();
-
-			return realizado;
+			if (realizado) {
+				if(cambiarEstadoPedido_1(id, estado.name())){
+					AuditLogger.CRUD_Pedido("Pedido <" + id+ "> cambiado al estado <" + estado.name() + ">");
+					return realizado;	
+				}else{
+					AuditLogger.error("Error al cambiar el estado del pedido <" + id + "> en gestor");
+				}
+			}
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
@@ -364,6 +382,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("Error al cambiar el estado del pedido <" + id + ">");
 		return realizado;
 	}
 
@@ -373,6 +392,7 @@ public class DesguaceJava extends Application {
 			bd = new InterfazBD("sor_desguace");
 			pedidoslista = bd.getPedidosConID_aux();
 			bd.close();
+			AuditLogger.informe("Obtenido listado de pedidos");
 			return pedidoslista;
 
 		} catch (SQLException ex) {
@@ -382,6 +402,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido obtener el listado de pedidos");
 		return pedidoslista;
 	}
 
@@ -390,6 +411,7 @@ public class DesguaceJava extends Application {
 			bd = new InterfazBD("sor_desguace");
 			boolean r = bd.activarDesguace(desguace.getID(),desguace.getPassword());
 			bd.close();
+			AuditLogger.CRUD_Desguace("Desguace reactivado");
 			return r;
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
@@ -398,7 +420,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
-
+		AuditLogger.error("No se ha podido reactivar el desguace");
 		return false;
 	}
 
@@ -410,14 +432,17 @@ public class DesguaceJava extends Application {
 
 				if (bd.bajaDesguace(desguace.getID())) {
 					bd.close();
+					AuditLogger.CRUD_Desguace("Baja de desguace");
 					return true;
 				} else {
-					System.err
-							.println("Error: No se ha podido cambiar el estado en taller.");
+					//System.err
+						//	.println("Error: No se ha podido cambiar el estado en taller.");
+					AuditLogger.error("No se ha podido dar de baja en desguace");
 				}
 			} else {
-				System.err
-						.println("Error: No se ha podido dar de baja en gestor.");
+				//System.err
+					//	.println("Error: No se ha podido dar de baja en gestor.");
+				AuditLogger.error("No se ha podido dar de baja en gestor");
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
@@ -426,6 +451,7 @@ public class DesguaceJava extends Application {
 			Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido dar de baja");
 		return false;
 	}
 
@@ -457,21 +483,21 @@ public class DesguaceJava extends Application {
 						postalCode, telephone);
 				// si no ha lanzado excepci贸n, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-				e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return alta(name, email, address, city, postalCode, telephone);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-e.printStackTrace();
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
+		}catch (javax.xml.ws.WebServiceException e) { 
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		// tenemos que guardar el alta en local, y dejarla pendiente de mandar
 		class Local {
 		}
@@ -488,21 +514,22 @@ e.printStackTrace();
 				String ret = Webservices.checkActivacion_WS(email,contrasenya);
 				// si no ha lanzado excepci贸n, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-				e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return checkActivacion(email,contrasenya);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
 			e.printStackTrace();
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
 
@@ -514,21 +541,21 @@ e.printStackTrace();
 				String ret = Webservices.nuevaOferta_WS(oferta, desguace.getID(), desguace.getPassword());
 				// si no ha lanzado excepci贸n, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-				e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return nuevaOferta(oferta);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-e.printStackTrace();
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
+		}catch (javax.xml.ws.WebServiceException e) { 
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -546,47 +573,22 @@ e.printStackTrace();
 				String ret = Webservices.getOfertas_WS(desguace.getID(),desguace.getPassword());
 				// si no ha lanzado excepci贸n, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-				e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return getOfertas();
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
 			e.printStackTrace();
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
-		return "";
-	}
-
-	public static String getPedidosporID(java.lang.String string) {
-		AsyncManager manager = new AsyncManager("sor_desguace");
-		manager.ejecutarAcciones();
-		for (int i = 0; i < 10; i++) {
-			try {
-				String ret = getPedidosporID_WS(string,desguace.getPassword());
-				// si no ha lanzado excepci贸n, devolvemos correctamente
-				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-				e.printStackTrace();
-			}
-		}
-		try {
-			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
-				return getPedidosporID(string);
-			}
-		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-e.printStackTrace();
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
 
@@ -598,22 +600,22 @@ e.printStackTrace();
 				String ret = getPedidoporID_WS(string,desguace.getID(),desguace.getPassword());
 				// si no ha lanzado excepci贸n, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-				e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return getPedidoporID(string);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-e.printStackTrace();
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
+		}catch (javax.xml.ws.WebServiceException e) { 
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
 
@@ -622,6 +624,7 @@ e.printStackTrace();
 		try {
 			bd=new InterfazBD("sor_desguace");
 			bd.cambiarEstadoOferta(EstadoOferta.FINISHED_OK, id);
+			AuditLogger.CRUD_Oferta("Modificado el estado de la oferta <" + id + "> al estado <" + EstadoOferta.FINISHED_OK.name() + ">");
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -638,21 +641,22 @@ e.printStackTrace();
 				}
 				// si no ha lanzado excepci贸n, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-				e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return aceptarOfertaFin(id);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
 			e.printStackTrace();
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -673,21 +677,22 @@ e.printStackTrace();
 				}
 				// si no ha lanzado excepci贸n, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-				e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return cancelarOferta(id);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -708,20 +713,22 @@ e.printStackTrace();
 				}
 				// si no ha lanzado excepci贸n, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return baja(id);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -740,21 +747,21 @@ e.printStackTrace();
 				Boolean ret = Webservices.cambiarEstadoPedido_WS(id, estado, desguace.getID(), desguace.getPassword());
 				// si no ha lanzado excepci贸n, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-				e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return cambiarEstadoPedido_1(id, estado);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
-		}catch (javax.xml.ws.WebServiceException e) { e.printStackTrace();
-e.printStackTrace();
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
+		}catch (javax.xml.ws.WebServiceException e) { 
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -770,6 +777,7 @@ e.printStackTrace();
 	                boolean o = bd.modificarDesguace(nombre, email, direccion, ciudad, Integer.parseInt(codPostal), Integer.parseInt(telefono));
 	                desguace=bd.getDesguace();
 	                bd.close();
+	                AuditLogger.CRUD_Desguace("Desguace modificado");
 	                return o;
 	            }
 	        } catch (SQLException ex) {
@@ -777,6 +785,7 @@ e.printStackTrace();
 	        } catch (ClassNotFoundException ex) {
 	            Logger.getLogger(DesguaceJava.class.getName()).log(Level.SEVERE, null, ex);
 	        }
+	        AuditLogger.error("No se ha podido modificar el desguace");
 	        return false;
 	    }
 	    public static boolean modificar(java.lang.String id, java.lang.String name, java.lang.String email, java.lang.String address, java.lang.String city, String postalCode, String telephone) {
@@ -788,10 +797,21 @@ e.printStackTrace();
 	                // si no ha lanzado excepci贸n, devolvemos correctamente
 	                return ret;
 	            }catch(javax.xml.ws.WebServiceException e){
-	            	e.printStackTrace();
+	            	AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 	            }
 	        }
-	        System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+	        try {
+				if (JUDDIProxy.loadHasChanged("DesguaceJavaWS")) {
+					AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
+					return modificar(id, name, email, address, city, postalCode, telephone);
+				}
+			} catch (RemoteException e) {
+				AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
+			}catch (javax.xml.ws.WebServiceException e) { 
+				AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
+			}
+			AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
+
 	        class Local {};
 	        java.lang.reflect.Method m = Local.class.getEnclosingMethod();
 	        String params[] = {id, name, email, address, city, postalCode, telephone};
@@ -804,6 +824,11 @@ e.printStackTrace();
 				bd=new InterfazBD("sor_desguace");
 				Boolean comprobar= bd.comprobarInicio(usuario,contrasenya);
 				bd.close();
+				if(comprobar){
+					AuditLogger.ES(usuario,"Login correcto");
+				}else{
+					AuditLogger.ES(usuario,"Su usuario o contrase馻 no son v醠idos");
+				}
 				return comprobar;
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -812,18 +837,16 @@ e.printStackTrace();
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			AuditLogger.error("No se ha podido comprobar las credenciales de login");
 			return false;
 		}
-
-
-			
 
 		public static void ponerCodigoActivacionTaller(String codigo) {
 			try {
 				bd = new InterfazBD("sor_desguace");
 				bd.ponerCodigoActivacionDesguace(codigo,desguace.getID());
 				bd.close();
+				AuditLogger.ES("Desguace activado");
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -831,7 +854,7 @@ e.printStackTrace();
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			AuditLogger.error("No se ha podido guardar el c骴igo de activaci髇");
 			
 		}
 }

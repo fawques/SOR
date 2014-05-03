@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import audit.AuditLogger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -60,19 +61,22 @@ public class DesguacerPendienteActivacionController implements Initializable {
          {
              lbEstado.setStyle("-fx-border-color: red;");
              lbEstado.setText("Su usuario o contraseña es incorrecto");
+             AuditLogger.ES("ERROR: Código de activación incorrecto");
          } else //Activado
          {
+        	 AuditLogger.ES("Código de activación correcto");
              //enviar a pantalla gestion de pedido
              System.out.println("He recibido " + idRecibido);
              
              if (!DesguaceJava.activarDesguacesBD(idRecibido)) {
-                 System.out.println(",pero no he podido updatear");
+            	 AuditLogger.error("Error al activar el taller en la Base de Datos");
                  lbEstado.setStyle("-fx-border-color: red;");
                  lbEstado.setText("Su cuenta no ha podido activarse");
              } else {
             	 DesguaceJava.desguace=bd.getDesguace();
             	 DesguaceJava.ponerCodigoActivacionTaller(tfValidar.getText());
             	 DesguaceJava.desguace=bd.getDesguace();
+            	 
                  URL location = getClass().getResource("GestionPedidos.fxml");
                  FXMLLoader loader = new FXMLLoader();
                  loader.setLocation(location);

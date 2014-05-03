@@ -8,6 +8,7 @@ package taller;
 import Async.AsyncManager;
 import BD.InterfazBD;
 import permisos.permisos;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -79,7 +80,10 @@ public class MainTaller extends Application {
 			JUDDIProxy.loadWsdl("TallerWS");
 			hello();
 			inicioTaller();
-		} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+		} catch (javax.xml.ws.WebServiceException e) {
+			e.printStackTrace();
+			AuditLogger.error("NO_USER",e.getMessage());
+			
 			FXMLLoader loader = changeScene("reintentarConexion.fxml");
 			stage.setTitle("Conexion fallida");
 			ReintentarConexionController staticDataBox = (ReintentarConexionController) loader
@@ -274,6 +278,7 @@ public class MainTaller extends Application {
 			bd = new InterfazBD("sor_taller");
 			boolean r = bd.activarTallerMainTaller(idRecibido);
 			bd.close();
+			AuditLogger.CRUD_Taller("Taller activado con id <" + idRecibido + ">");
 			return r;
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
@@ -282,7 +287,7 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
-
+		AuditLogger.error("No se ha podido activar el taller con id <" + idRecibido + ">");
 		return false;
 	}
 
@@ -320,12 +325,13 @@ public class MainTaller extends Application {
 								of.getDesguaceNombre(), of.getFecha_baja(),
 								of.getFecha_limite());
 						bd.close();
+						AuditLogger.CRUD_Oferta("Creada oferta <" + of.getID() + ">");
+					}else{
+						AuditLogger.CRUD_Oferta("Modificado el estado de la oferta <" + of.getID() + "> al estado <" + of.getEstado().name() + ">");
 					}
-
 				}
-			}				
-
-
+			}	
+			return listOf;
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
@@ -333,7 +339,8 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
-		return listOf;
+		AuditLogger.error("No se han podido actualizar las ofertas desde el gestor");
+		return null;
 	}
 
 	public static String getPedidosActivos() {
@@ -343,6 +350,7 @@ public class MainTaller extends Application {
 			bd.close();
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+			AuditLogger.informe("Obtenido listado de pedidos activos");
 			return gson.toJson(p);
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
@@ -351,6 +359,7 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se han podido obtener los pedidos activos");
 		return null;
 	}
 
@@ -367,6 +376,7 @@ public class MainTaller extends Application {
 			bd.close();
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+			AuditLogger.informe("Obtenido listado de pedidos");
 			return gson.toJson(p);
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
@@ -375,6 +385,7 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido obtener el listado de pedidos");
 		return null;
 	}
 
@@ -406,6 +417,7 @@ public class MainTaller extends Application {
 								bd = new InterfazBD("sor_taller");
 								bd.activarPedidoTaller(pedidodesguace.getID_aux(),pedidogestor.getID());
 								bd.close();
+								AuditLogger.CRUD_Pedido("Pedido <" + pedidogestor.getID() + "> activado");
 							}
 						}
 					}
@@ -421,26 +433,7 @@ public class MainTaller extends Application {
 		}
 	}
 
-	public static ArrayList<Pedido> buscarPedidos(String idPedido,
-			String idPieza, String estado, Date fechaLimite,
-			String modoAceptacion) {
-		try {
-			bd = new InterfazBD("sor_taller");
-			ArrayList<Pedido> p = bd.buscarPedido(idPedido, idPieza, estado,
-					fechaLimite, modoAceptacion);
-			bd.close();
-			return p;
-		} catch (SQLException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
-					null, ex);
-		}
-		return null;
-	}
-
-	public static void crearPedido(Date fechaAlta, EstadoPedido estado,
+	public static boolean crearPedido(Date fechaAlta, EstadoPedido estado,
 			Date fechaLimite, boolean modoAutomatico, ArrayList<Pieza> piezas,
 			ArrayList<Integer> cantidades) throws JMSException_Exception, ParseException {
 
@@ -464,6 +457,8 @@ public class MainTaller extends Application {
 			}
 			bd.anyadirPiezasAPedido(id, piezas, cantidades);
 			bd.close();
+			AuditLogger.CRUD_Pedido("Creado pedido <" + idFinal + ">");
+			return true;
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
@@ -471,7 +466,8 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
-
+		AuditLogger.error("No se ha podido crear el pedido nuevo");
+		return false;
 	}
 
 	public static boolean reactivarTaller() {
@@ -479,6 +475,7 @@ public class MainTaller extends Application {
 			bd = new InterfazBD("sor_taller");
 			boolean r = bd.activarTaller(taller.getID(),taller.getPassword());
 			bd.close();
+			AuditLogger.CRUD_Taller("Taller reactivado");
 			return r;
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
@@ -487,6 +484,7 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido reactivar el taller");
 
 		return false;
 	}
@@ -505,14 +503,17 @@ public class MainTaller extends Application {
 					bd = new InterfazBD("sor_taller");
 					if (bd.bajaTaller(taller.getID())) {
 						bd.close();
+						AuditLogger.CRUD_Taller("Taller dado de baja");
 						return true;
 					} else {
-						System.err
-								.println("Error: No se ha podido cambiar el estado en taller.");
+						//System.err
+							//	.println("Error: No se ha podido cambiar el estado en taller.");
+						AuditLogger.error("No se ha podido dar de baja el taller en la Base de Datos.");
 					}
 				} else {
-					System.err
-							.println("Error: No se ha podido dar de baja en gestor.");
+					//System.err
+						//	.println("Error: No se ha podido dar de baja en gestor.");
+					AuditLogger.error("No se ha podido dar de baja el taller en gestor.");
 				}
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -521,6 +522,7 @@ public class MainTaller extends Application {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			AuditLogger.error("No se ha podido dar de baja el taller.");
 			
 
 		return false;
@@ -537,6 +539,7 @@ public class MainTaller extends Application {
 						Integer.parseInt(telefono));
 				taller = bd.getPrimerTaller();
 				bd.close();
+				AuditLogger.CRUD_Taller("Datos de taller modificados");
 				return o;
 			}
 		} catch (SQLException ex) {
@@ -546,6 +549,7 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido modificar los datos del taller");
 		return false;
 	}
 
@@ -561,6 +565,7 @@ public class MainTaller extends Application {
 				bd = new InterfazBD("sor_taller");
 				boolean o = bd.cancelarPedido(idPedido);
 				bd.close();
+				AuditLogger.CRUD_Pedido("Se ha cancelado el pedido <" + idPedido + ">");
 				return o;
 			}
 		} catch (SQLException ex) {
@@ -570,16 +575,18 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido cancelar el pedido <" + idPedido + ">");
 		return false;
 	}
 
 	public static Boolean cambiarEstadoOferta(EstadoOferta estado,
-			String idPedido) {
+			String idOferta) {
 		try {
 			bd = new InterfazBD("sor_taller");
-			Boolean aceptado = bd.cambiarEstadoOferta(estado, idPedido);
+			Boolean aceptado = bd.cambiarEstadoOferta(estado, idOferta);
 
 			bd.close();
+			AuditLogger.CRUD_Oferta("Oferta <" + idOferta + "> cambiada al estado <" + estado.name() + ">");
 			return aceptado;
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
@@ -588,6 +595,7 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("No se ha podido cambiar el estado de la oferta <" + idOferta + ">");
 		return false;
 	}
 
@@ -599,8 +607,14 @@ public class MainTaller extends Application {
 
 			bd.close();
 			if (aceptado) {
-				return cambiarEstadoPedido_preWS(
+				boolean ok = cambiarEstadoPedido_preWS(
 						Integer.toString(estado.ordinal()), idPedido);
+				if(ok){
+					AuditLogger.CRUD_Pedido("Pedido <" + idPedido+ "> cambiado al estado <" + estado.name() + ">");
+					return ok;
+				}else{
+					AuditLogger.error("Error al cambiar el estado del pedido <" + idPedido + "> en gestor");
+				}
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
@@ -609,6 +623,7 @@ public class MainTaller extends Application {
 			Logger.getLogger(MainTaller.class.getName()).log(Level.SEVERE,
 					null, ex);
 		}
+		AuditLogger.error("Error al cambiar el estado del pedido <" + idPedido + ">");
 		return false;
 	}
 
@@ -631,20 +646,22 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				return cambiarEstadoPedido_WS(taller.getID(),taller.getPassword(),Integer.parseInt(estado), idPedido);
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return cambiarEstadoPedido_preWS(estado, idPedido);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		// tenemos que guardar el alta en local, y dejarla pendiente de mandar
 		class Local {
 		}
@@ -664,24 +681,24 @@ public class MainTaller extends Application {
 			try {
 				boolean ret = alta_WS(name, email, address, city, postalCode,
 						telephone);
-				// si no ha lanzado excepci贸n, devolvemos correctamente
+				// si no ha lanzado excepcion, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
-				e.printStackTrace();
-				System.err.println("Reintentando...");
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return alta(name, email, address, city, postalCode, telephone);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		// tenemos que guardar el alta en local, y dejarla pendiente de mandar
 		class Local {
 		}
@@ -696,24 +713,25 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				String ret = checkActivacion_WS(email,contrasenya);
-				// si no ha lanzado excepci贸n, devolvemos correctamente
+				// si no ha lanzado excepcion, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
-				e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return checkActivacion(email,contrasenya);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
 
@@ -724,24 +742,24 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				String ret = nuevoPedido_WS(pedido, taller.getID(), taller.getPassword());
-				// si no ha lanzado excepci贸n, devolvemos correctamente
+				// si no ha lanzado excepcion, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
-				e.printStackTrace();
-				System.err.println("Reintentando...");
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return nuevoPedido(pedido);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 			
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -757,24 +775,24 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				String ret = getOfertas_WS(listaPedidos, taller.getID(), taller.getPassword());
-				// si no ha lanzado excepci贸n, devolvemos correctamente
+				// si no ha lanzado excepcion, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
-				e.printStackTrace();
-				System.err.println("Reintentando...");
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return getOfertas(listaPedidos);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
 
@@ -790,26 +808,24 @@ public class MainTaller extends Application {
 		manager.ejecutarAcciones();
 		for (int i = 0; i < 10; i++) {
 			try {
-				Boolean ret = aceptarOferta_WS(id, taller.getID(), taller.getPassword());
-				if (ret) {
-
-				}
-				// si no ha lanzado excepci贸n, devolvemos correctamente
-				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+				return aceptarOferta_WS(id, taller.getID(), taller.getPassword());
+				// si no ha lanzado excepcion, devolvemos correctamente
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return aceptarOferta(id);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -831,22 +847,24 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				Boolean ret = rechazarOferta_WS(id, taller.getID(), taller.getPassword());
-				// si no ha lanzado excepci贸n, devolvemos correctamente
+				// si no ha lanzado excepcion, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return rechazarOferta(id);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -862,19 +880,22 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				return Webservices.hello();
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return Webservices.hello();
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		return "";
 	}
 
@@ -884,22 +905,24 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				Boolean ret = baja_WS(tallerID, taller.getPassword());
-				// si no ha lanzado excepci贸n, devolvemos correctamente
+				// si no ha lanzado excepcion, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return baja(tallerID);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -918,23 +941,25 @@ public class MainTaller extends Application {
 			try {
 				Boolean ret = modificar_WS(id, taller.getPassword(), name, email, address, city,
 						postalCode, telephone);
-				// si no ha lanzado excepci贸n, devolvemos correctamente
+				// si no ha lanzado excepcion, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return modificar(id, name, email, address, city, postalCode,
 						telephone);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -951,22 +976,24 @@ public class MainTaller extends Application {
 		for (int i = 0; i < 10; i++) {
 			try {
 				Boolean ret = cancelarPedido_WS(idPedido, taller.getID(), taller.getPassword());
-				// si no ha lanzado excepci贸n, devolvemos correctamente
+				// si no ha lanzado excepcion, devolvemos correctamente
 				return ret;
-			} catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
+			} catch (javax.xml.ws.WebServiceException e) {
+				AuditLogger.error("Error en la conexion con el gestor. Reintento <" + i + ">");
 			}
 		}
 		try {
 			if (JUDDIProxy.loadHasChanged("TallerWS")) {
+				AuditLogger.info("jUDDI","jUDDI ha cambiado. Reintentando con la nueva direccion");
 				return cancelarPedido(idPedido);
 			}
 		} catch (RemoteException e) {
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}catch (javax.xml.ws.WebServiceException e) {e.printStackTrace();
 
-			System.err.println("NO SE HA PODIDO CONECTAR A JUDDI");
+			AuditLogger.error("NO SE HA PODIDO CONECTAR A JUDDI");
 		}
-		System.err.println("NO SE HA PODIDO CONECTAR AL GESTOR");
+		AuditLogger.error("NO SE HA PODIDO CONECTAR AL GESTOR");
 		class Local {
 		}
 		;
@@ -987,6 +1014,7 @@ public class MainTaller extends Application {
 			try {
 				bd = new InterfazBD("sor_taller");
 				pedidoModificar = bd.getPedidoID_aux(id);
+				AuditLogger.informe("Obtenido pedido <" + id + ">");
 				bd.close();
 				Gson gson = new GsonBuilder()
 						.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
@@ -997,7 +1025,7 @@ public class MainTaller extends Application {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			AuditLogger.error("Error al obtener pedido <" + id + ">");
 
 
 	}
@@ -1012,6 +1040,7 @@ public class MainTaller extends Application {
 		try {
 			bd=new InterfazBD("sor_taller");
 			Boolean estarRol= bd.anyadirRolUsuario(nombre,contrasenya,rol);
+			AuditLogger.aprovisionamiento("Creado usuario <" + nombre + "> con rol <" + rol + ">");
 			bd.close();
 			return estarRol;
 		} catch (ClassNotFoundException e) {
@@ -1021,6 +1050,7 @@ public class MainTaller extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		AuditLogger.error("Error creando usuario <" + nombre + "> con rol <" + rol + ">" );
 		
 		return false;
 		
@@ -1031,6 +1061,11 @@ public class MainTaller extends Application {
 			bd=new InterfazBD("sor_taller");
 			Boolean comprobar= bd.comprobarInicio(usuario,contrasenya);
 			bd.close();
+			if(comprobar){
+				AuditLogger.ES(usuario,"Login correcto");
+			}else{
+				AuditLogger.ES(usuario, "ERROR: Usuario o contrase馻 incorrectos");
+			}
 			return comprobar;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -1039,7 +1074,7 @@ public class MainTaller extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		AuditLogger.error(usuario,"Error comprobando el login");
 		return false;
 	}
 	public static void anyadirRol(String nombre, ArrayList<Integer> listaOpciones) throws AccessDeniedException {
@@ -1053,6 +1088,7 @@ public class MainTaller extends Application {
 			bd=new InterfazBD("sor_taller");
 			bd.anyadirRol(nombre,listaOpciones);
 			bd.close();
+			AuditLogger.aprovisionamiento("Creado nuevo rol <" + nombre + ">");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1060,7 +1096,7 @@ public class MainTaller extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		AuditLogger.error("Error creando el rol <" + nombre + ">");
 		
 		
 	}
@@ -1076,6 +1112,7 @@ public class MainTaller extends Application {
 			bd=new InterfazBD("sor_taller");
 			bd.cambiarUsuario(nombre,listaOpciones);
 			bd.close();
+			AuditLogger.aprovisionamiento("Cambiados permisos de usuario <" + nombre + ">");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1083,6 +1120,7 @@ public class MainTaller extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		AuditLogger.error("Error al cambiar permisos de usuario <" + nombre + ">");
 	
 	}
 
@@ -1096,6 +1134,9 @@ public class MainTaller extends Application {
 		}
 			try {
 				bd=new InterfazBD("sor_taller");
+				bd.cambiarRol(nombreRol,listaOpciones);
+				bd.close();
+				AuditLogger.aprovisionamiento("Modificados permisos de rol <" + nombreRol + ">");
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1103,11 +1144,7 @@ public class MainTaller extends Application {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			bd.cambiarRol(nombreRol,listaOpciones);
-			bd.close();
-		
-		
-		
+			AuditLogger.error("No se han podido modificar los permisos del rol <" + nombreRol + ">");
 	}
 
 	public static ArrayList<String> getUsuarios() {
@@ -1116,6 +1153,7 @@ public class MainTaller extends Application {
 			bd=new InterfazBD("sor_taller");
 			listausuarios=bd.getUsuarios();
 			bd.close();
+			AuditLogger.informe("Obtenida lista de usuarios");
 			return listausuarios;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -1124,8 +1162,7 @@ public class MainTaller extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// TODO Auto-generated method stub
+		AuditLogger.error("No se ha podido obtener la lista de usuarios");
 		return null;
 	}
 
@@ -1135,6 +1172,7 @@ public class MainTaller extends Application {
 			bd=new InterfazBD("sor_taller");
 			listausuarios=bd.getRoles();
 			bd.close();
+			AuditLogger.informe("Obtenida lista de roles");
 			return listausuarios;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -1144,7 +1182,7 @@ public class MainTaller extends Application {
 			e.printStackTrace();
 		}
 
-		// TODO Auto-generated method stub
+		AuditLogger.error("No se ha podido obtener la lista de roles");
 		return null;
 	}
 
@@ -1153,6 +1191,8 @@ public class MainTaller extends Application {
 			bd = new InterfazBD("sor_taller");
 			bd.ponerCodigoActivacionTaller(codigo,taller.getID());
 			bd.close();
+			AuditLogger.CRUD_Taller("Taller activado");
+			AuditLogger.ES("Login inicial de usuario Administrador");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1160,7 +1200,7 @@ public class MainTaller extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		AuditLogger.error("No se ha podido activar el taller en la Base de Datos");
 		
 	}
 	public static  void getTaller(){
@@ -1168,6 +1208,7 @@ public class MainTaller extends Application {
 			bd = new InterfazBD("sor_taller");
 			 taller=bd.getPrimerTaller();
 			 bd.close();
+			 AuditLogger.informe("Obtenido el taller actual");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1175,7 +1216,7 @@ public class MainTaller extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		AuditLogger.error("No se ha podido obtener el taller actual");
 	}
 
 }

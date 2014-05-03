@@ -8,6 +8,7 @@ package taller;
 
 import Async.Accion;
 import Async.AsyncManager;
+import audit.AuditLogger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -368,16 +369,6 @@ public class GestionPedidosController implements Initializable {
 
     /**
      *
-     * @param e
-     */
-    public void buscarPedido(ActionEvent e) {
-        Date fechaLimite = new Date(Integer.parseInt(tfLimiteAnyo.getText().toString()), Integer.parseInt(tfLimiteMes.getText().toString()), Integer.parseInt(tfLimiteDia.getText().toString()));
-        System.out.println(MainTaller.buscarPedidos(tfIDPedido.getText(), tfIDPieza.getText(), cbEstado.getValue().toString(), fechaLimite, cbModo.getValue().toString()));
-
-    }
-
-    /**
-     *
      */
     public void buscarOfertas() {
 
@@ -439,7 +430,9 @@ public class GestionPedidosController implements Initializable {
         if(tpPed.getEstado() == EstadoOferta.ACTIVE){
 	        if (tpPed != null) {
 	            try {
-					MainTaller.aceptarOferta(tpPed.getId());
+					if(MainTaller.aceptarOferta(tpPed.getId())){
+						AuditLogger.CRUD_Oferta("Oferta <" + tpPed.getId() + "> aceptada");
+					}
 					MainTaller.cambiarEstadoPedido(EstadoPedido.ACCEPTED,tpPed.getPedido());
 		            actualizarPestanyaOfertas();
 				} catch (AccessDeniedException e) {
@@ -460,7 +453,9 @@ public class GestionPedidosController implements Initializable {
         if(tpPed.getEstado() == EstadoOferta.ACTIVE){
 	        if (tpPed != null) {
 	            try {
-					MainTaller.rechazarOferta(tpPed.getId());
+					if(MainTaller.rechazarOferta(tpPed.getId())){
+						AuditLogger.CRUD_Oferta("Oferta <" + tpPed.getId() + "> rechazada");
+					}
 				} catch (AccessDeniedException e) {
 					lanzarErrorPermisos(e.getMessage());
 				}
@@ -528,8 +523,6 @@ public class GestionPedidosController implements Initializable {
 			try {
 				if (MainTaller.bajaTaller()) {
 				    cambiarAPantallaTallerDeBaja();
-				} else {
-				    System.err.println("Lo siento, no se ha podido dar de baja.");
 				}
 			} catch (AccessDeniedException e) {
 				lanzarErrorPermisos(e.getMessage());
@@ -603,6 +596,10 @@ public class GestionPedidosController implements Initializable {
 			        ModificarPedidoController tdCont = (ModificarPedidoController) loader.getController();
 			        tdCont.setStage(thisStage);
 			        tdCont.showStage();
+				}else{
+					String error = "AQUÍ DEBERÍA LOGUEAR ALGO!?";
+				    System.err.println(error);
+				    AuditLogger.error(error);
 				}
 			}
 	
@@ -704,6 +701,8 @@ public class GestionPedidosController implements Initializable {
     	}
     }
     public void lanzarErrorPermisos(String error) throws IOException{
+    	AuditLogger.error(error);
+    	
 		URL location = getClass().getResource("permisosError.fxml");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(location);
