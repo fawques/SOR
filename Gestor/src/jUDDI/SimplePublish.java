@@ -223,6 +223,7 @@ public class SimplePublish {
             */
         } catch (Exception e) {
             e.printStackTrace();
+            AuditLogger.error("jUDDI","No se ha podido publicar en jUDDI");
         }
     }
     
