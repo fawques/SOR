@@ -145,6 +145,18 @@ public class InterfazBD {
     	return 0;
     }
     
+    public int getNumPedidosPorError(String id){
+    	ResultSet resultados = conexion.ejecutarSQLSelect("Select count(*) as num from pedido where id like '"+id+"%'");
+    	try {
+    		while(resultados.next())
+    			return resultados.getInt("num");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return 0;
+    }
+    
     public ArrayList<Desguace> getDesguacesAceptados()
     {
         ArrayList<Desguace> lista= new ArrayList<>();

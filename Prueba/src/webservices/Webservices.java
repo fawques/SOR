@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
 
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
@@ -32,6 +33,7 @@ import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
 
+import BD.InterfazBD;
 import seguridad.MainSeguridad;
 import seguridad.SslConfig;
 import seguridad.TripleDes;
@@ -43,6 +45,7 @@ import gestor_taller.*;
  * @author fawques
  */
 public class Webservices {
+	static InterfazBD bd;
 	static int errorCont = 0;
 	private static TallerWS prepararWebService() {
 		SslConfig.disableCertificateChecking();
@@ -82,8 +85,15 @@ public class Webservices {
 				String aux = port.nuevoPedido(TripleDes.encrypt(encryptor, pedido),
 						idTaller,TripleDes.encrypt(encryptor, password));
 				if(aux.equals("errorClaveSimetrica")){
-					errorCont++;
-					return aux+errorCont;
+					try {
+						bd = new InterfazBD("sor_taller");
+						errorCont = bd.getNumPedidosPorError("errorClaveSimetrica");
+						bd.close();
+						return "errorClaveSimetrica"+errorCont;
+					} catch (ClassNotFoundException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				return aux;
 			} catch (InvalidKeyException | NoSuchAlgorithmException
@@ -93,8 +103,15 @@ public class Webservices {
 			}
 		}
 		else{
-			errorCont++;
-			return "errorClaveSimetrica"+errorCont;
+			try {
+				bd = new InterfazBD("sor_taller");
+				errorCont = bd.getNumPedidosPorError("errorClaveSimetrica");
+				bd.close();
+				return "errorClaveSimetrica"+errorCont;
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
