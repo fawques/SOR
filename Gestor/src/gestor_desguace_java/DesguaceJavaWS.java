@@ -522,7 +522,7 @@ return TripleDes.encrypt(key, listapedidos);
  				Desguace nuevoDesguace= bd.getDesguaceEnGestor(idDesguace);
 				if(TripleDes.decrypt(key, password).equals(nuevoDesguace.getPassword())){
 	           
-	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), id);
+	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(TripleDes.decrypt(key, estado)), id);
 	           bd.close();
 	           return ool;
 				}else{
