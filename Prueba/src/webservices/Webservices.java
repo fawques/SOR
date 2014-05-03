@@ -58,7 +58,7 @@ public class Webservices {
 
 	private static SecretKey prepararClaveReto(String idTaller, String password) {
 		Base64 b64 = new Base64();
-		String clave = "emptykey";
+		String clave = null;
 		if(seguridad.Config.isCifradoSimetrico()){
 			clave = generarClaveReto(idTaller,password);
 		}

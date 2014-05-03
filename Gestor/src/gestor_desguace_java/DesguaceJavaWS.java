@@ -85,30 +85,35 @@ public class DesguaceJavaWS {
     public String generarClaveReto(@WebParam(name = "idDesguace") String idDesguace,@WebParam(name = "password") String password) {
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {
-			bd=new InterfazBD("sor_gestor");
-			Desguace desg = bd.getDesguaceEnGestor(idDesguace);
-			if (desg != null && desg.getPassword().equals(password)) {
-				try {
-					SecretKey clave = TripleDes.generateKey();
-
-					if (listaIdDesguace.indexOf(idDesguace) != -1) {
-						// borramos el anterior
-						listaSecretKeys.remove(listaIdDesguace.indexOf(idDesguace));
-						listaIdDesguace.remove(listaIdDesguace.indexOf(idDesguace));
+			if(seguridad.Config.isCifradoSimetrico()){
+				bd=new InterfazBD("sor_gestor");
+				Desguace desg = bd.getDesguaceEnGestor(idDesguace);
+				if (desg != null && desg.getPassword().equals(password)) {
+					try {
+						SecretKey clave = TripleDes.generateKey();
+	
+						if (listaIdDesguace.indexOf(idDesguace) != -1) {
+							// borramos el anterior
+							listaSecretKeys.remove(listaIdDesguace.indexOf(idDesguace));
+							listaIdDesguace.remove(listaIdDesguace.indexOf(idDesguace));
+						}
+						// anyadir nuevo
+						listaIdDesguace.add(idDesguace);
+						listaSecretKeys.add(clave);
+						Base64 b64 = new Base64();
+						bd.close();
+						return b64.encodeToString(clave.getEncoded());
+					} catch (NoSuchAlgorithmException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					// anyadir nuevo
-					listaIdDesguace.add(idDesguace);
-					listaSecretKeys.add(clave);
-					Base64 b64 = new Base64();
-					bd.close();
-					return b64.encodeToString(clave.getEncoded());
-				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} else {
+					System.err
+							.println("id taller incorrecto. Clave de reto no generada");
 				}
-			} else {
-				System.err
-						.println("id taller incorrecto. Clave de reto no generada");
+			}
+			else{
+				return null;
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
