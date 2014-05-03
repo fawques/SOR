@@ -103,38 +103,19 @@ public class TallerWS {
 			@WebParam(name = "telephone") String telephone) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			if(seguridad.Config.isCifradoSimetrico()){
-				SecretKey key = getKey(id);
-				if (key != null) {
-					Taller nuevotaller= bd.getTallerEnGestor(id);
-					if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
-					
-					// desencriptar elementos
-					boolean res = bd.modificarTaller(id,
-							TripleDes.decrypt(key, name),
-							TripleDes.decrypt(key, email),
-							TripleDes.decrypt(key, address),
-							TripleDes.decrypt(key, city),
-							Integer.parseInt(TripleDes.decrypt(key, postalCode)),
-							Integer.parseInt(TripleDes.decrypt(key, telephone)),
-							EstadoGeneral.ACTIVE);
-					bd.close();
-					removeKey(id);
-					return res;
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-				} else {
-					System.err.println("secretKey = NULL!");
-				}
-			} else {
-				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
+			SecretKey key = getKey(id);
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(id);
-				if(password.equals(nuevotaller.getPassword())){
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				
 				// desencriptar elementos
-				boolean res = bd.modificarTaller(id,name,email,address,city,Integer.parseInt(postalCode),Integer.parseInt(telephone),
+				boolean res = bd.modificarTaller(id,
+						TripleDes.decrypt(key, name),
+						TripleDes.decrypt(key, email),
+						TripleDes.decrypt(key, city),
+						TripleDes.decrypt(key, city),
+						Integer.parseInt(TripleDes.decrypt(key, postalCode)),
+						Integer.parseInt(TripleDes.decrypt(key, telephone)),
 						EstadoGeneral.ACTIVE);
 				bd.close();
 				removeKey(id);
@@ -143,6 +124,8 @@ public class TallerWS {
 				else{
 					System.err.println("Login incorrecto");
 				}
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
 		} catch (java.sql.SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
@@ -250,45 +233,13 @@ public class TallerWS {
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 			Type collectionType = new TypeToken<Pedido>() {
 			}.getType();
-			if(seguridad.Config.isCifradoSimetrico()) {
-				SecretKey key = getKey(idTaller);
-				
-				if (key != null) {
-					Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-					if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
-						Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido),
-								collectionType);
-		
-						Date ahora = new Date();
-						String stringID = "Pedido_" + bd.getNumPedidos();
-						p.setID(stringID);
-						bd.anadirPedido(stringID, p.getID_aux(), p.getFecha_alta(), p
-								.getEstado().ordinal(), p.getTaller(), p
-								.getTallerNombre(), p.getFecha_baja(), p
-								.getFecha_limite(), p.getModoAutomatico());
-						bd.anyadirPiezasAPedido(stringID, p.getListaPiezas(),
-								p.getListaCantidadesPiezas());
-						for (Desguace desguace : bd.getDesguaces()) {
-							enviarPedidoActivemq(desguace.getID(),
-									new PedidoCorto(p.getID(), p.getEstado()));
-						}
-						bd.close();
-						return stringID;
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-				} else {
-					System.err.println("secretKey = NULL!");
 
-					bd.close();
-					return "errorClaveSimetrica";
-				}
-			}else{ //cifrado no activado
-				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
+			SecretKey key = getKey(idTaller);
+			
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-				if(password.equals(nuevotaller.getPassword())){
-					Pedido p = gson.fromJson(pedido,
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+					Pedido p = gson.fromJson(TripleDes.decrypt(key, pedido),
 							collectionType);
 	
 					Date ahora = new Date();
@@ -310,6 +261,8 @@ public class TallerWS {
 				else{
 					System.err.println("Login incorrecto");
 				}
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
 
 		} catch (SQLException ex) {
@@ -338,35 +291,12 @@ public class TallerWS {
 		ArrayList<Pedido> arrayPedido = new ArrayList<Pedido>();
 		try {
 			bd = new InterfazBD("sor_gestor");
-			if(seguridad.Config.isCifradoSimetrico()) {
-				SecretKey key = getKey(idTaller);
-				
-				if (key != null) {
-					Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-					if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
-					arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
-						collectionType);
-					
-					for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
-						Pedido p = it.next();
-						listaOferta.addAll(bd.getOfertasPedido(p.getID()));
-					}
-	
-					String retu = gson.toJson(listaOferta);
-					bd.close();
-					return TripleDes.encrypt(key, retu);
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-				} else {
-					System.err.println("secretKey = NULL!");
-				}
-			} else { //cifrado no activado
-				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
+			SecretKey key = getKey(idTaller);
+			
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-				if(password.equals(nuevotaller.getPassword())){
-				arrayPedido = gson.fromJson(listaPedidos,
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+				arrayPedido = gson.fromJson(TripleDes.decrypt(key, listaPedidos),
 					collectionType);
 				
 				for (Iterator<Pedido> it = arrayPedido.iterator(); it.hasNext();) {
@@ -376,11 +306,13 @@ public class TallerWS {
 
 				String retu = gson.toJson(listaOferta);
 				bd.close();
-				return retu;
+				return TripleDes.encrypt(key, retu);
 				}
 				else{
 					System.err.println("Login incorrecto");
 				}
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
 		
 		} catch (SQLException ex) {
@@ -415,35 +347,22 @@ public class TallerWS {
 			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			if(seguridad.Config.isCifradoSimetrico()){
-				SecretKey key = getKey(idTaller);
-				if (key != null) {
-					Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-					if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
-					bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED,
-							TripleDes.decrypt(key, ID));
-					bd.close();
-					return true;
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-				} else {
-					System.err.println("secretKey = NULL!");
-				}
-				bd.close();
-			} else { //cifrado no activado
-				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
+			SecretKey key = getKey(idTaller);
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-				if(password.equals(nuevotaller.getPassword())){
-				bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED, ID);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+				bd.cambiarEstadoOferta(EstadoOferta.ACCEPTED,
+						TripleDes.decrypt(key, ID));
 				bd.close();
 				return true;
 				}
 				else{
 					System.err.println("Login incorrecto");
 				}
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
+			bd.close();
 		} catch (SQLException ex) {
 			Logger.getLogger(TallerWS.class.getName()).log(Level.SEVERE, null,
 					ex);
@@ -464,34 +383,20 @@ public class TallerWS {
 		try {
 			bd = new InterfazBD("sor_gestor");
 
-			if(seguridad.Config.isCifradoSimetrico()) {
-				SecretKey key = getKey(idTaller);
-				if (key != null) {
-					Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-					if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
-					bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
-							TripleDes.decrypt(key, ID));
-					bd.close();
-					return true;
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-				} else {
-					System.err.println("secretKey = NULL!");
-				}
-			}else{ //cifrado no activado
-				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
+			SecretKey key = getKey(idTaller);
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-				if(password.equals(nuevotaller.getPassword())){
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
-						ID);
+						TripleDes.decrypt(key, ID));
 				bd.close();
 				return true;
 				}
 				else{
 					System.err.println("Login incorrecto");
 				}
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
 			
 		} catch (SQLException ex) {
@@ -583,29 +488,13 @@ public class TallerWS {
 			@WebParam(name = "idTaller") String idTaller,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			if(seguridad.Config.isCifradoSimetrico()) {
-				SecretKey key = getKey(idTaller);
-				if (key != null) {
-					Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-					if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
-					boolean oool = bd.cancelarPedido(TripleDes.decrypt(key,
-							idPedido));
-					cambiarEstadoPedido(idTaller,password,EstadoPedido.CANCELLED.ordinal(), idPedido);
-					bd.close();
-					return oool;
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-				} else {
-					System.err.println("secretKey = NULL!");
-				}
-			} else { //cifrado no activado
 
-				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
+			SecretKey key = getKey(idTaller);
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-				if(password.equals(nuevotaller.getPassword())){
-				boolean oool = bd.cancelarPedido(idPedido);
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
+				boolean oool = bd.cancelarPedido(TripleDes.decrypt(key,
+						idPedido));
 				cambiarEstadoPedido(idTaller,password,EstadoPedido.CANCELLED.ordinal(), idPedido);
 				bd.close();
 				return oool;
@@ -613,6 +502,8 @@ public class TallerWS {
 				else{
 					System.err.println("Login incorrecto");
 				}
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
 		
 		} catch (SQLException ex) {
@@ -635,51 +526,29 @@ public class TallerWS {
 			) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			if(seguridad.Config.isCifradoSimetrico()) {
-				SecretKey key = getKey(idTaller);
-				if (key != null) {
-					Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-					if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
-					Gson gson = new GsonBuilder().setDateFormat(
-							"yyyy-MM-dd'T'HH:mm:ss").create();
-					
-					for (Desguace desguace : bd.getDesguaces()) {
-						enviarPedidoActivemq(desguace.getID(), new PedidoCorto(
-								TripleDes.decrypt(key, id),
-								EstadoPedido.values()[estado]));
-					}
-					Boolean ool = bd.cambiarEstadoPedido(
-							EstadoPedido.values()[estado],
-							TripleDes.decrypt(key, id));
-					bd.close();
-					return ool;
-					}
-					else{
-						System.err.println("Login incorrecto");
-					}
-				} else {
-					System.err.println("secretKey = NULL!");
-				}
-			} else { //cifrado no activado
-				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
+			SecretKey key = getKey(idTaller);
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
 				Taller nuevotaller= bd.getTallerEnGestor(idTaller);
-				if(password.equals(nuevotaller.getPassword())){
+				if(TripleDes.decrypt(key, password).equals(nuevotaller.getPassword())){
 				Gson gson = new GsonBuilder().setDateFormat(
 						"yyyy-MM-dd'T'HH:mm:ss").create();
 				
 				for (Desguace desguace : bd.getDesguaces()) {
 					enviarPedidoActivemq(desguace.getID(), new PedidoCorto(
-							id,
+							TripleDes.decrypt(key, id),
 							EstadoPedido.values()[estado]));
 				}
 				Boolean ool = bd.cambiarEstadoPedido(
-						EstadoPedido.values()[estado],id);
+						EstadoPedido.values()[estado],
+						TripleDes.decrypt(key, id));
 				bd.close();
 				return ool;
 				}
 				else{
 					System.err.println("Login incorrecto");
 				}
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
 			
 		} catch (SQLException ex) {
@@ -710,50 +579,29 @@ public class TallerWS {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
 			Taller t = bd.getTallerEnGestor(idTaller);
-			if(seguridad.Config.isCifradoSimetrico()) {
-				if (key != null) {
-					if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
-						listaPedidos = bd.getPedidosTaller(idTaller);
-						for (Pedido p : listaPedidos) {
-							if (p.getEstado() == EstadoPedido.FINISHED_OK) {
-								ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
-										.getID());
-								for (Oferta of : listaOferta) {
-									if (of.getEstado() != EstadoOferta.FINISHED_OK) {
-										bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
-												of.getID());
-									}
+
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
+					listaPedidos = bd.getPedidosTaller(idTaller);
+					for (Pedido p : listaPedidos) {
+						if (p.getEstado() == EstadoPedido.FINISHED_OK) {
+							ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
+									.getID());
+							for (Oferta of : listaOferta) {
+								if (of.getEstado() != EstadoOferta.FINISHED_OK) {
+									bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
+											of.getID());
 								}
 							}
 						}
-						String listaJSON = gson.toJson(listaPedidos);
-						System.out.println("listaJSON = " + listaJSON);
-						bd.close();
-						return TripleDes.encrypt(key, listaJSON);
 					}
-				} else {
-					System.err.println("secretKey = NULL!");
+					String listaJSON = gson.toJson(listaPedidos);
+					System.out.println("listaJSON = " + listaJSON);
+					bd.close();
+					return TripleDes.encrypt(key, listaJSON);
 				}
-			}
-			else{ //cifrado no activado
-				System.out.println("CUIDADO! CIFRADO SIMETRICO NO ACTIVADO");
-				listaPedidos = bd.getPedidosTaller(idTaller);
-				for (Pedido p : listaPedidos) {
-					if (p.getEstado() == EstadoPedido.FINISHED_OK) {
-						ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
-								.getID());
-						for (Oferta of : listaOferta) {
-							if (of.getEstado() != EstadoOferta.FINISHED_OK) {
-								bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
-										of.getID());
-							}
-						}
-					}
-				}
-				String listaJSON = gson.toJson(listaPedidos);
-				System.out.println("listaJSON = " + listaJSON);
-				bd.close();
-				return listaJSON;
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
 			
 		} catch (SQLException ex) {
