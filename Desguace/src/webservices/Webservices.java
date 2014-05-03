@@ -7,6 +7,7 @@ package webservices;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 import gestor_desguace_java.DesguaceJavaWS;
 
@@ -16,6 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+import BD.InterfazBD;
 import seguridad.SslConfig;
 import seguridad.TripleDes;
 import jUDDI.JUDDIProxy;
@@ -25,7 +27,8 @@ import jUDDI.JUDDIProxy;
  * @author pablovm1990
  */
 public class Webservices {
-	
+	static InterfazBD bd;
+	static int errorCont;
 	private static DesguaceJavaWS prepararWebService() {
 		SslConfig.disableCertificateChecking();
 		gestor_desguace_java.DesguaceJavaWS_Service service = new gestor_desguace_java.DesguaceJavaWS_Service(JUDDIProxy.getWsdl());
@@ -100,9 +103,32 @@ public class Webservices {
 		if (encryptor != null) {
 			DesguaceJavaWS port = prepararWebService();
 			try {
-				return port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, TripleDes.encrypt(encryptor, password));
+				String aux = port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, TripleDes.encrypt(encryptor, password));
+				if(aux.equals("errorClaveSimetrica")){
+					try {
+						bd = new InterfazBD("sor_desguace");
+						errorCont = bd.getNumPedidosPorError("errorClaveSimetrica");
+						bd.close();
+						return "errorClaveSimetrica"+errorCont;
+					} catch (ClassNotFoundException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				return aux;
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			try {
+				bd = new InterfazBD("sor_desguace");
+				errorCont = bd.getNumOfertasPorError("errorClaveSimetrica");
+				bd.close();
+				return "errorClaveSimetrica"+errorCont;
+			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
