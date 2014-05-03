@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
 
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
@@ -32,6 +33,7 @@ import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
 
+import BD.InterfazBD;
 import seguridad.MainSeguridad;
 import seguridad.SslConfig;
 import seguridad.TripleDes;
@@ -43,6 +45,8 @@ import gestor_taller.*;
  * @author fawques
  */
 public class Webservices {
+	static InterfazBD bd;
+	static int errorCont = 0;
 	private static TallerWS prepararWebService() {
 		SslConfig.disableCertificateChecking();
 		TallerWS_Service service = new TallerWS_Service(JUDDIProxy.getWsdl());
@@ -54,7 +58,7 @@ public class Webservices {
 
 	private static SecretKey prepararClaveReto(String idTaller, String password) {
 		Base64 b64 = new Base64();
-		String clave = "emptykey";
+		String clave = null;
 		if(seguridad.Config.isCifradoSimetrico()){
 			clave = generarClaveReto(idTaller,password);
 		}
@@ -78,10 +82,33 @@ public class Webservices {
 
 			TallerWS port = prepararWebService();
 			try {
-				return port.nuevoPedido(TripleDes.encrypt(encryptor, pedido),
+				String aux = port.nuevoPedido(TripleDes.encrypt(encryptor, pedido),
 						idTaller,TripleDes.encrypt(encryptor, password));
+				if(aux.equals("errorClaveSimetrica")){
+					try {
+						bd = new InterfazBD("sor_taller");
+						errorCont = bd.getNumPedidosPorError("errorClaveSimetrica");
+						bd.close();
+						return "errorClaveSimetrica"+errorCont;
+					} catch (ClassNotFoundException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				return aux;
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			try {
+				bd = new InterfazBD("sor_taller");
+				errorCont = bd.getNumPedidosPorError("errorClaveSimetrica");
+				bd.close();
+				return "errorClaveSimetrica"+errorCont;
+			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

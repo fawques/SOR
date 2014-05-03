@@ -142,30 +142,36 @@ public class TallerWS {
 		// Generamos la clave de reto y se la mandamos al cliente
 		try {
 			bd=new InterfazBD("sor_gestor");
-			Taller t = bd.getTallerEnGestor(idTaller);
-			if (t != null && t.getPassword().equals(password)) {
-				try {
-					SecretKey clave = TripleDes.generateKey();
 
-					if (listaIdTaller.indexOf(idTaller) != -1) {
-						// borramos el anterior
-						listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
-						listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+			if(seguridad.Config.isCifradoSimetrico()) {
+				Taller t = bd.getTallerEnGestor(idTaller);
+				if (t != null && t.getPassword().equals(password)) {
+					try {
+						SecretKey clave = TripleDes.generateKey();
+	
+						if (listaIdTaller.indexOf(idTaller) != -1) {
+							// borramos el anterior
+							listaSecretKeys.remove(listaIdTaller.indexOf(idTaller));
+							listaIdTaller.remove(listaIdTaller.indexOf(idTaller));
+						}
+						// anyadir nuevo
+						listaIdTaller.add(idTaller);
+						listaSecretKeys.add(clave);
+						Base64 b64 = new Base64();
+						bd.close();
+						return b64.encodeToString(clave.getEncoded());
+					} catch (NoSuchAlgorithmException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					// anyadir nuevo
-					listaIdTaller.add(idTaller);
-					listaSecretKeys.add(clave);
-					Base64 b64 = new Base64();
-					bd.close();
-					return b64.encodeToString(clave.getEncoded());
-				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
+				} else {
+					System.err
+							.println("id taller incorrecto. Clave de reto no generada");
 				}
-				
 			} else {
-				System.err
-						.println("id taller incorrecto. Clave de reto no generada");
+				System.err.println("Cifrado simetrico deshabilitado en gestor. Clave de reto no generada");
+				return null;
 			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -256,7 +262,9 @@ public class TallerWS {
 					System.err.println("Login incorrecto");
 				}
 			} else {
+				bd.close();
 				System.err.println("secretKey = NULL!");
+				return "errorClaveSimetrica";
 			}
 
 		} catch (SQLException ex) {
@@ -416,11 +424,23 @@ public class TallerWS {
 	public Boolean bajaTaller(@WebParam(name = "tallerID") String tallerID,@WebParam(name = "password") String password) {
 		try {
 			bd = new InterfazBD("sor_gestor");
-			Taller t = bd.getTallerEnGestor(tallerID);
-			if (t != null && t.getPassword().equals(password)) {
-				boolean oool = bd.bajaTaller(tallerID);
-				bd.close();
-				return oool;
+			if(seguridad.Config.isCifradoSimetrico()) {
+				SecretKey key = getKey(tallerID);
+				if (key != null) {
+					Taller t = bd.getTallerEnGestor(tallerID);
+					if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
+						boolean oool = bd.bajaTaller(tallerID);
+						bd.close();
+						return oool;
+					}
+				}
+			} else {
+				Taller t = bd.getTallerEnGestor(tallerID);
+				if (t != null && t.getPassword().equals(password)) {
+					boolean oool = bd.bajaTaller(tallerID);
+					bd.close();
+					return oool;
+				}
 			}
 			
 		} catch (SQLException ex) {
@@ -561,24 +581,29 @@ public class TallerWS {
 			bd = new InterfazBD("sor_gestor");
 			SecretKey key = getKey(idTaller);
 			Taller t = bd.getTallerEnGestor(idTaller);
-			if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
-				listaPedidos = bd.getPedidosTaller(idTaller);
-				for (Pedido p : listaPedidos) {
-					if (p.getEstado() == EstadoPedido.FINISHED_OK) {
-						ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
-								.getID());
-						for (Oferta of : listaOferta) {
-							if (of.getEstado() != EstadoOferta.FINISHED_OK) {
-								bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
-										of.getID());
+
+			if (key != null || !seguridad.Config.isCifradoSimetrico()) {
+				if (t != null && t.getPassword().equals(TripleDes.decrypt(key, password))) {
+					listaPedidos = bd.getPedidosTaller(idTaller);
+					for (Pedido p : listaPedidos) {
+						if (p.getEstado() == EstadoPedido.FINISHED_OK) {
+							ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
+									.getID());
+							for (Oferta of : listaOferta) {
+								if (of.getEstado() != EstadoOferta.FINISHED_OK) {
+									bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
+											of.getID());
+								}
 							}
 						}
 					}
+					String listaJSON = gson.toJson(listaPedidos);
+					System.out.println("listaJSON = " + listaJSON);
+					bd.close();
+					return TripleDes.encrypt(key, listaJSON);
 				}
-				String listaJSON = gson.toJson(listaPedidos);
-				System.out.println("listaJSON = " + listaJSON);
-				bd.close();
-				return TripleDes.encrypt(key, listaJSON);
+			} else {
+				System.err.println("secretKey = NULL!");
 			}
 			
 		} catch (SQLException ex) {

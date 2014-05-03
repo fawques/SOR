@@ -191,7 +191,7 @@ public class GestionPedidos implements Initializable {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();       
         Type collectionType = new TypeToken<Pedido>(){}.getType();
         String pedidosstring=DesguaceJava.getPedidoporID(id);
-        if(!pedidosstring.equals("") && pedidosstring!=null){
+        if(pedidosstring!=null && !pedidosstring.equals("")){
          p = gson.fromJson(pedidosstring, collectionType);
         }
         
@@ -325,7 +325,7 @@ public class GestionPedidos implements Initializable {
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
         String ofertasstring= DesguaceJava.getOfertas();
-        if(!ofertasstring.equals("") && ofertasstring!=null){
+        if(ofertasstring!=null && !ofertasstring.equals("")){
             ofertasgestor = gson.fromJson(ofertasstring, collectionType);
         }
        for(Oferta ofertagestor:ofertasgestor){
