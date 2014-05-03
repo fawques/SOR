@@ -147,7 +147,7 @@ public class Webservices {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
 			gestor_desguace_java.DesguaceJavaWS port = prepararWebService();
 	        try {
-				return TripleDes.decrypt(encryptor, port.getPedidoporID(string,idDesguace,TripleDes.encrypt(encryptor, password)));
+				return TripleDes.decrypt(encryptor, port.getPedidoporID(TripleDes.decrypt(encryptor, string),idDesguace,TripleDes.encrypt(encryptor, password)));
 			} catch (InvalidKeyException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
