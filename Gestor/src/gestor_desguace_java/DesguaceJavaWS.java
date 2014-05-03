@@ -489,7 +489,7 @@ public class DesguaceJavaWS {
 					AuditLogger.ES("Login correcto");
 					String idDecrypt = TripleDes.decrypt(key, id);
 					String estadoDecrypt = TripleDes.decrypt(key, estado);
-	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estado), idDecrypt);
+	           Boolean ool = bd.cambiarEstadoPedido(EstadoPedido.valueOf(estadoDecrypt), idDecrypt);
 	           bd.close();
 	           AuditLogger.CRUD_Pedido("Pedido <" + idDecrypt + "> cambiado al estado <" + estadoDecrypt + ">");
 	           return ool;

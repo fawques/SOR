@@ -100,19 +100,8 @@ public class Webservices {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
 			DesguaceJavaWS port = prepararWebService();
 			try {
-				String aux = port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, TripleDes.encrypt(encryptor, password));
-				if(aux.equals("errorClaveSimetrica")){
-					try {
-						bd = new InterfazBD("sor_desguace");
-						errorCont = bd.getNumPedidosPorError("errorClaveSimetrica");
-						bd.close();
-						return "errorClaveSimetrica"+errorCont;
-					} catch (ClassNotFoundException | SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				return aux;
+				return port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, TripleDes.encrypt(encryptor, password));
+				
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
