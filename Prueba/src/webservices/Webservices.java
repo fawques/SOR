@@ -81,20 +81,9 @@ public class Webservices {
 
 			TallerWS port = prepararWebService();
 			try {
-				String aux = port.nuevoPedido(TripleDes.encrypt(encryptor, pedido),
+				return port.nuevoPedido(TripleDes.encrypt(encryptor, pedido),
 						idTaller,TripleDes.encrypt(encryptor, password));
-				if(aux.equals("errorClaveSimetrica")){
-					try {
-						bd = new InterfazBD("sor_taller");
-						errorCont = bd.getNumPedidosPorError("errorClaveSimetrica");
-						bd.close();
-						return "errorClaveSimetrica"+errorCont;
-					} catch (ClassNotFoundException | SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				return aux;
+				
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {
 				// TODO Auto-generated catch block
