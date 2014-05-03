@@ -754,11 +754,7 @@ public class GestionPedidos implements Initializable {
         tdCont.setStage(thisStage);
         tdCont.showStage();
     }
- public void nuevoUsuario(){
-    	DesguaceJava.anyadirRolUsuario("pepe", "12", "empleado");
-    	DesguaceJava.anyadirRolUsuario("pio", "11", "Entrenador_pokemon");
 
-    }
  
  public void toggleAsimetrico(){
 		seguridad.Config.setCifradoAsimetrico(cbCifradoAsim.isSelected());
