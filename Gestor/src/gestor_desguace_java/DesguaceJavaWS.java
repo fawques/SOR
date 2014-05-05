@@ -579,7 +579,7 @@ public class DesguaceJavaWS {
 						Integer.parseInt(TripleDes.decrypt(key, telephone)),
 						EstadoGeneral.ACTIVE);
 				bd.close();
-				removeKey(id);
+				//removeKey(id);
 				if(res){
 					AuditLogger.CRUD_Desguace("Desguace modificado");
 				}else{

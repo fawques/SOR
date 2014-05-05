@@ -130,7 +130,7 @@ public class TallerWS {
 				}else{
 					AuditLogger.error(id,"No se ha podido modificar el Taller");
 				}
-				removeKey(id);
+				//removeKey(id);
 				return res;
 				}
 				else{
