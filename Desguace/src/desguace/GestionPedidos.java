@@ -549,7 +549,7 @@ public class GestionPedidos implements Initializable {
            
             Date today = new Date();
             String fecha = "" + tfLimiteAnyo.getText() + "/" + tfLimiteMes.getText() + "/" + tfLimiteDia.getText();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date fechaLimite = dateFormat.parse(fecha);
             
            DesguaceJava.crearOferta(today, fechaLimite,lbID.getText(),Double.parseDouble( tfPrecio.getText()));
