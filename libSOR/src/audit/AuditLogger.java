@@ -89,7 +89,7 @@ public class AuditLogger {
 	public static void CRUD_Desguace (String userid,String detalle) {
 		MDC.put("ip", ip);
 		MDC.put("userid", userid);
-	    MDC.put("activity", "CRUD_Taller");
+	    MDC.put("activity", "CRUD_Desguace");
 	    
 	    LoggerFactory.getLogger("auditInfo").info(detalle);
 	    MDC.clear();
