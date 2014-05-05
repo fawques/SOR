@@ -15,9 +15,10 @@ import gestor_desguace_java.*;
 import gestor_admin.*;
 
 public aspect WSAspect {
-	pointcut taller() : execution(public * TallerWS.*(..));
-	pointcut desguace() : execution(public * DesguaceJavaWS.*(..));
-	pointcut admin() : execution(public * AdminWS.*(..));
+	pointcut exclude() : execution(public * *.generarClaveReto(..)) || execution(public * *.alta(..)) || execution(public * *.checkActivacion(..));
+	pointcut taller() : execution(public !static * TallerWS.*(..));
+	pointcut desguace() : execution(public !static * DesguaceJavaWS.*(..));
+	pointcut admin() : execution(public !static * AdminWS.*(..));
 
 	before() : taller() || desguace() || admin() {
 		Message message = PhaseInterceptorChain.getCurrentMessage();
@@ -29,13 +30,11 @@ public aspect WSAspect {
 			 AuditLogger.setIp("127.0.0.1");
 		}
     }
-	after() : taller()  {
+	after() : taller() && !exclude()  {
 		TallerWS.removeKey(AuditLogger.user);
-		resetAudit();
     }
-	after() : desguace() {
+	after() : desguace()  && !exclude(){
 		DesguaceJavaWS.removeKey(AuditLogger.user);
-		resetAudit();
     }
 	after() : taller() || desguace() || admin() {
 		resetAudit();
