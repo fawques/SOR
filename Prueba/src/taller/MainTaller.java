@@ -442,7 +442,7 @@ public class MainTaller extends Application {
 			Taller taller = bd.getPrimerTaller();
 			String tallerID = taller.getID();
 			String tallerNombre = taller.getName();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date fechafin = dateFormat.parse("1970/1/1");
 			int id = bd.anadirPedido(fechaAlta, estado, tallerID, tallerNombre,
 					fechafin, fechaLimite, modoAutomatico);

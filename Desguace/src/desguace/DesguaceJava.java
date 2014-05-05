@@ -255,7 +255,7 @@ public class DesguaceJava extends Application {
 			Desguace desguace = bd.getDesguace();
 			String desguaceNombre = desguace.getName();
 			String desguaceID = desguace.getID();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date fechafin = dateFormat.parse("1970/1/1");
 			int id = bd.anadirOferta(fechaAlta, 0, precio, idPedido,
 					desguaceID, desguaceNombre, fechafin, fechaLimite);

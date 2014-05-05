@@ -87,7 +87,7 @@ public class NuevoPedidoController implements Initializable {
             //EstadoAutomatico.valueOf(cbEstado.getValue().toString()) falta añadir estado manual/automatica
             Date today = new Date();
             String fecha = "" + tfLimiteAnyo.getText() + "/" + tfLimiteMes.getText() + "/" + tfLimiteDia.getText();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Date fechaLimite = dateFormat.parse(fecha);
             ArrayList<Pieza> piezasPedido = new ArrayList<>();
             ArrayList<Integer> cantidadPiezas = new ArrayList<>();
