@@ -852,6 +852,7 @@ public class DesguaceJava extends Application {
 				bd.ponerCodigoActivacionDesguace(codigo,desguace.getID());
 				bd.close();
 				AuditLogger.ES("Desguace activado");
+				return;
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
