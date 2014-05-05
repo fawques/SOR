@@ -640,10 +640,12 @@ public class TallerWS {
 						ArrayList<Oferta> listaOferta = bd.getOfertasPedido(p
 								.getID());
 						for (Oferta of : listaOferta) {
-							if (of.getEstado() != EstadoOferta.FINISHED_OK) {
+							if (of.getEstado() != EstadoOferta.FINISHED_OK  && of.getEstado()!=EstadoOferta.CANCELLED) {
+							
 								bd.cambiarEstadoOferta(EstadoOferta.REJECTED,
 										of.getID());
 								AuditLogger.CRUD_Oferta("Oferta <" + of.getID() + "> cambiada al estado <" + EstadoOferta.REJECTED.name() + ">");
+								
 							}
 						}
 					}
