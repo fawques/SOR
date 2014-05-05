@@ -16,35 +16,38 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Text layoutX="168.0" layoutY="417.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 1: Actual">
+                <Text layoutX="110.0" layoutY="453.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 1: Actual">
                   <font>
                     <Font size="14.0" fx:id="x1" />
                   </font>
                 </Text>
-                <Group id="Group" layoutX="92.0" layoutY="129.0">
+                <Group id="Group" layoutX="34.0" layoutY="165.0">
                   <children>
-                    <Circle id="estadoActivo" fill="#52ff00" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
-                    <Text layoutX="91.0" layoutY="135.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Activo">
-                      <font>
-                        <Font size="11.0" fx:id="x2" />
-                      </font>
-                    </Text>
+                    <Circle id="estadoGestor1" fill="#52ff00" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
                   </children>
                 </Group>
-                <Text font="$x1" layoutX="509.0" layoutY="417.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 2" />
-                <Group id="Group" layoutX="433.0" layoutY="129.0">
+                <Text font="$x1" layoutX="451.0" layoutY="453.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 2" />
+                <Group id="Group" layoutX="375.0" layoutY="165.0">
                   <children>
-                    <Circle id="estadoInactivo" fill="#dfdfdf" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
-                    <Text font="$x2" layoutX="88.0" layoutY="135.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Inactivo" />
+                    <Circle id="estadoGestor2" fill="#dfdfdf" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
                   </children>
                 </Group>
-                <Text font="$x1" layoutX="908.0" layoutY="411.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 3" />
-                <Group id="Group" layoutX="799.0" layoutY="127.0">
+                <Text font="$x1" layoutX="850.0" layoutY="447.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 3" />
+                <Group id="Group" layoutX="741.0" layoutY="163.0">
                   <children>
-                    <Circle id="estadoError" fill="RED" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
-                    <Text font="$x2" layoutX="98.0" layoutY="127.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" />
+                    <Circle id="estadoGestor3" fill="RED" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
                   </children>
                 </Group>
+                <Text layoutX="312.0" layoutY="44.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Activo">
+                  <font>
+                    <Font size="11.0" fx:id="x2" />
+                  </font>
+                </Text>
+                <Text font="$x2" layoutX="481.0" layoutY="44.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Inactivo" />
+                <Text font="$x2" layoutX="651.0" layoutY="44.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" />
+                <Circle id="estadoGestor1" fill="#52ff00" layoutX="327.0" layoutY="101.0" radius="36.89703369140625" stroke="BLACK" strokeType="INSIDE" />
+                <Circle id="estadoGestor1" fill="#dfdfdf" layoutX="500.0" layoutY="101.0" radius="36.89703369140625" stroke="BLACK" strokeType="INSIDE" />
+                <Circle id="estadoGestor1" fill="RED" layoutX="663.0" layoutY="101.0" radius="36.89703369140625" stroke="BLACK" strokeType="INSIDE" />
               </children>
             </AnchorPane>
           </content>
