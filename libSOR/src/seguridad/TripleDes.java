@@ -228,7 +228,7 @@ public class TripleDes {
 	 * CipherOutputStream.
 	 */
 	public static String decrypt(SecretKey key,String encryptedString) {
-		if(seguridad.Config.isCifradoSimetrico()){
+		if(seguridad.Config.isCifradoSimetrico() && key!=null){
 		    String decryptedText=null;
 		    try {
 		    	Cipher cipher = Cipher.getInstance("DESede");
