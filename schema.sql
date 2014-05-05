@@ -39,12 +39,12 @@ CREATE TABLE `taller` (
 CREATE TABLE `pedido` (
   `id` char(32) NOT NULL,
   `id_aux` int(11) NOT NULL,
-  `fecha_alta` datetime NOT NULL,
+  `fecha_alta` date NOT NULL,
   `estado` int(11) NOT NULL,
   `taller` char(32) NOT NULL,
   `tallerNombre` char(32) NOT NULL,
-  `fecha_baja` datetime DEFAULT '1970-01-01',
-  `fecha_limite` datetime NOT NULL,
+  `fecha_baja` date DEFAULT '1970-01-01',
+  `fecha_limite` date NOT NULL,
   `modo_automatico` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `pedido_taller_FK_idx` (`taller`)
@@ -53,19 +53,19 @@ CREATE TABLE `pedido` (
 CREATE TABLE `oferta` (
   `id` char(32) NOT NULL,
   `id_aux` int(11) NOT NULL,
-  `fecha_alta` datetime NOT NULL,
+  `fecha_alta` date NOT NULL,
   `importe` double NOT NULL,
   `estado` int(11) NOT NULL,
   `pedido` char(32) NOT NULL,
   `desguace` char(32) NOT NULL,
   `desguaceNombre` char(32) NOT NULL,
-  `fecha_baja` datetime DEFAULT '1970-01-01',
-  `fecha_limite` datetime NOT NULL,
+  `fecha_baja` date DEFAULT '1970-01-01',
+  `fecha_limite` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `oferta_pedido_FK_idx` (`pedido`),
   KEY `oferta_desguace_FK_idx` (`desguace`),
-  CONSTRAINT `oferta_pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATEtime NO ACTION,
-  CONSTRAINT `oferta_desguace_FK` FOREIGN KEY (`desguace`) REFERENCES `desguace` (`id`) ON DELETE NO ACTION ON UPDATEtime NO ACTION
+  CONSTRAINT `oferta_pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `oferta_desguace_FK` FOREIGN KEY (`desguace`) REFERENCES `desguace` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pieza` (
@@ -79,15 +79,15 @@ CREATE TABLE `pedido_pieza` (
   `cantidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`pedido`,`pieza`),
   KEY `pieza_FK_idx` (`pieza`),
-  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATEtime NO ACTION,
-  CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATEtime NO ACTION
+  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `audit` (
   `AUDIT_ID` int(11) NOT NULL AUTO_INCREMENT,
   `IP_ORIGEN` varchar(50) DEFAULT NULL,
   `USER_ID` varchar(50) DEFAULT NULL,
-  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATEtime CURRENT_TIMESTAMP,
+  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `TIMEZONE` varchar(50) NOT NULL,
   `ACTIVITY` varchar(50) DEFAULT NULL,
   `ACTIVITY_DETAIL` varchar(1000) DEFAULT NULL,
@@ -145,23 +145,23 @@ CREATE TABLE `usuarios` (
   `cambiar_rol` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nombre`),
   KEY `rol_id` (`rol`),
-  CONSTRAINT `rol_usuario` FOREIGN KEY (`rol`) REFERENCES `roles`(`rol`) ON DELETE NO ACTION ON UPDATEtime NO ACTION
+  CONSTRAINT `rol_usuario` FOREIGN KEY (`rol`) REFERENCES `roles`(`rol`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pedido` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
   `id` char(32) UNIQUE DEFAULT '',
-  `fecha_alta` datetime NOT NULL,
+  `fecha_alta` date NOT NULL,
   `estado` int(11) NOT NULL,
   `taller` char(32) NOT NULL,
-  `fecha_baja` datetime DEFAULT '1970-01-01',
-  `fecha_limite` datetime NOT NULL,
+  `fecha_baja` date DEFAULT '1970-01-01',
+  `fecha_limite` date NOT NULL,
   `modo_automatico` tinyint(4) NOT NULL DEFAULT '0',
   `tallerNombre` char(32) NOT NULL,
   PRIMARY KEY (`id_aux`),
   KEY `PRIMARY_GESTOR` (`id`),
   KEY `pedido_taller_FK_idx` (`taller`),
-  CONSTRAINT `pedido_taller_FK` FOREIGN KEY (`taller`) REFERENCES `taller` (`id`) ON DELETE NO ACTION ON UPDATEtime NO ACTION
+  CONSTRAINT `pedido_taller_FK` FOREIGN KEY (`taller`) REFERENCES `taller` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `pieza` (
@@ -176,27 +176,27 @@ CREATE TABLE `pedido_pieza` (
   PRIMARY KEY (`pedido`,`pieza`),
   KEY `pieza_FK_idx` (`pieza`),
   KEY `pedido_FK_idx` (`pedido`),
-  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id_aux`) ON DELETE NO ACTION ON UPDATEtime NO ACTION,
-  CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATEtime NO ACTION
+  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id_aux`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `oferta` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
   `id` char(32) UNIQUE DEFAULT '',
-  `fecha_alta` datetime NOT NULL,
+  `fecha_alta` date NOT NULL,
   `importe` double NOT NULL,
   `estado` int(11) NOT NULL,
   `pedido` char(32) NOT NULL,
   `desguace` char(32) NOT NULL,
   `desguaceNombre` char(32) NOT NULL,
-  `fecha_baja` datetime DEFAULT '1970-01-01',
-  `fecha_limite` datetime NOT NULL,
+  `fecha_baja` date DEFAULT '1970-01-01',
+  `fecha_limite` date NOT NULL,
 
   PRIMARY KEY (`id_aux`),
   KEY `oferta_pedido_FK_idx` (`pedido`),
   KEY `oferta_desguace_FK_idx` (`desguace`),
   KEY `PRIMARY_GESTOR` (`id`),
-  CONSTRAINT `oferta_pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATEtime NO ACTION
+  CONSTRAINT `oferta_pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `acciones` (
@@ -208,7 +208,7 @@ CREATE TABLE `audit` (
   `AUDIT_ID` int(11) NOT NULL AUTO_INCREMENT,
   `IP_ORIGEN` varchar(50) DEFAULT NULL,
   `USER_ID` varchar(50) DEFAULT NULL,
-  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATEtime CURRENT_TIMESTAMP,
+  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `TIMEZONE` varchar(50) NOT NULL,
   `ACTIVITY` varchar(50) DEFAULT NULL,
   `ACTIVITY_DETAIL` varchar(1000) DEFAULT NULL,
@@ -265,17 +265,17 @@ CREATE TABLE `usuarios` (
   `cambiar_rol` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`nombre`),
   KEY `rol_id` (`rol`),
-  CONSTRAINT `rol_usuario` FOREIGN KEY (`rol`) REFERENCES `roles`(`rol`) ON DELETE NO ACTION ON UPDATEtime NO ACTION
+  CONSTRAINT `rol_usuario` FOREIGN KEY (`rol`) REFERENCES `roles`(`rol`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `pedido` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
   `id` char(32) UNIQUE DEFAULT '',
-  `fecha_alta` datetime NOT NULL,
+  `fecha_alta` date NOT NULL,
   `estado` int(11) NOT NULL,
   `taller` char(32) NOT NULL,
-  `fecha_baja` datetime DEFAULT '1970-01-01',
-  `fecha_limite` datetime NOT NULL,
+  `fecha_baja` date DEFAULT '1970-01-01',
+  `fecha_limite` date NOT NULL,
   `modo_automatico` tinyint(4) NOT NULL DEFAULT '0',
   `tallerNombre` char(32) NOT NULL,
   PRIMARY KEY (`id_aux`),
@@ -290,19 +290,19 @@ CREATE TABLE IF NOT EXISTS `pieza` (
 CREATE TABLE `oferta` (
   `id_aux` int(11) NOT NULL AUTO_INCREMENT,
   `id` char(32) UNIQUE DEFAULT '',
-  `fecha_alta` datetime NOT NULL,
+  `fecha_alta` date NOT NULL,
   `importe` double NOT NULL,
   `estado` int(11) NOT NULL,
   `pedido` char(32) NOT NULL,
   `desguace` char(32) NOT NULL,
-  `fecha_baja` datetime DEFAULT '1970-01-01',
-  `fecha_limite` datetime NOT NULL,
+  `fecha_baja` date DEFAULT '1970-01-01',
+  `fecha_limite` date NOT NULL,
   `desguaceNombre` char(32) NOT NULL, 
   PRIMARY KEY (`id_aux`),
   KEY `oferta_pedido_FK_idx` (`pedido`),
   KEY `oferta_desguace_FK_idx` (`desguace`),
-  CONSTRAINT `oferta_pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATEtime NO ACTION,
-  CONSTRAINT `oferta_desguace_FK` FOREIGN KEY (`desguace`) REFERENCES `desguace` (`id`) ON DELETE NO ACTION ON UPDATEtime NO ACTION,
+  CONSTRAINT `oferta_pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `oferta_desguace_FK` FOREIGN KEY (`desguace`) REFERENCES `desguace` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   KEY `PRIMARY_GESTOR` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -312,8 +312,8 @@ CREATE TABLE `pedido_pieza` (
   `cantidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`pedido`,`pieza`),
   KEY `pieza_FK_idx` (`pieza`),
-  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id_aux`) ON DELETE NO ACTION ON UPDATEtime NO ACTION,
-  CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATEtime NO ACTION
+  CONSTRAINT `pedido_FK` FOREIGN KEY (`pedido`) REFERENCES `pedido` (`id_aux`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `pieza_FK` FOREIGN KEY (`pieza`) REFERENCES `pieza` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `acciones` (
@@ -325,7 +325,7 @@ CREATE TABLE `audit` (
   `AUDIT_ID` int(11) NOT NULL AUTO_INCREMENT,
   `IP_ORIGEN` varchar(50) DEFAULT NULL,
   `USER_ID` varchar(50) DEFAULT NULL,
-  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATEtime CURRENT_TIMESTAMP,
+  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `TIMEZONE` varchar(50) NOT NULL,
   `ACTIVITY` varchar(50) DEFAULT NULL,
   `ACTIVITY_DETAIL` varchar(1000) DEFAULT NULL,
