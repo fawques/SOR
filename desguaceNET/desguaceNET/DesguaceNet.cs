@@ -4,6 +4,7 @@ using desguaceNET.libSOR.activemq;
 using desguaceNET.libSOR.BD;
 using desguaceNET.libSOR.general;
 using desguaceNET.libSOR.jUDDI;
+using desguaceNET.libSOR.Seguridad;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
@@ -20,11 +21,13 @@ namespace desguaceNET
     {
         InterfazBD bd;
         Desguace desguace;
-
+        Gestor_activemq activemq;
         public DesguaceNet()
         {
+
             bd = new InterfazBD("sor_desguace");
             desguace = bd.getDesguace();
+            activemq = new Gestor_activemq();
         }
 
         public Desguace getDesguace()
@@ -266,7 +269,7 @@ namespace desguaceNET
             // coger los pedidos de activeMQ
             try
             {
-                Gestor_activemq activemq = new Gestor_activemq();
+                
                 activemq.create_Consumer(desguace.getID());
                 listaIdsstring = activemq.consumer.consumeMessage();
                 activemq.consumer.closeConsumer();
@@ -287,16 +290,31 @@ namespace desguaceNET
 
             // cambias el estado de tu BD según ponga activeMQ
             List<string> listaIDs = new List<string>();
+            List<Pedido> listaPedidosIntroducida=new List<Pedido>();
             foreach (PedidoCorto pcorto in listaPedidosCortos)
             {
                 DesguaceNet main = new DesguaceNet();
                 if (!main.cambiarEstadoPedidoDesguace(pcorto.getID(), pcorto.getEstado()))
                 {
-                    listaIDs.Add(pcorto.getID());
+                    string pedidoentero = main.getPedidoporID(pcorto.getID());
+
+
+                    if (!pedidoentero.Equals(null))
+                    {
+                        Pedido pedido = JsonConvert.DeserializeObject<Pedido>(pedidoentero); 
+                        listaPedidosIntroducida.Add(pedido);
+                        bd.anadirPedido(pedido.getID(), pedido.getFecha_alta(), 1, pedido.getTaller(), pedido.getTaller(), pedido.getFecha_baja(), pedido.getFecha_limite(), true);
+                        bd.anyadirPiezasAPedido(bd.getPedido(pedido.getID()).getID_aux(), pedido.getListaPiezas(), pedido.getListaCantidadesPiezas());
+                    }  
+                    else
+                    {
+                        
+                        //pedidosPendientes.add(pcorto);
+                    }
                 }
             }
             // si no puedes cambiarlos, creas nuevos
-            string listaJSON = JsonConvert.SerializeObject(listaIDs);
+            /*string listaJSON = JsonConvert.SerializeObject(listaIDs);
             string pedidosstring = getPedidosporID(listaJSON);
             List<Pedido> listaPedidos = null;
             if (pedidosstring != null && pedidosstring != "")
@@ -307,8 +325,8 @@ namespace desguaceNET
                     bd.anadirPedido(ped);
 
                 }
-            }
-            return listaPedidos;
+            }*/
+            return listaPedidosIntroducida;
         }
 
         public bool cambiarEstadoPedidoDesguace(string id, EstadoPedido estado)
@@ -447,7 +465,7 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.checkActivacion(contrasenya);
+                    return client.checkActivacion(desguace.getEmail(),contrasenya);
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -481,7 +499,7 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.nuevaOferta(oferta);
+                    return client.nuevaOferta(oferta,desguace.getID(),desguace.getPassword());
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -517,7 +535,7 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.getOfertas(desguace.getID());
+                    return client.getOfertas(desguace.getID(),desguace.getPassword());
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -540,7 +558,7 @@ namespace desguaceNET
             return "";
         }
 
-        public string getPedidosporID(string str)
+        public string getPedidoporID(string str)
         {
             AsyncManager manager = new AsyncManager("sor_desguace");
             manager.ejecutarAcciones();
@@ -550,7 +568,8 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.getPedidosporID(str);
+                    string key=prepararClaveReto(desguace.getID(), desguace.getPassword());
+                    return CryptorEngine.Decrypt(client.getPedidoporID(CryptorEngine.Encrypt (str,key),desguace.getID(),CryptorEngine.Encrypt (desguace.getPassword(),key)),key);
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -558,7 +577,7 @@ namespace desguaceNET
             {
                 if (jUDDIProxy.loadHasChanged("DesguaceJavaWS"))
                 {
-                    return getPedidosporID(str);
+                    return getPedidoporID(str);
                 }
             }
             catch (EndpointNotFoundException e)
@@ -583,7 +602,7 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.aceptarOfertaFin(id);
+                    return client.aceptarOfertaFin(id,desguace.getEmail(),desguace.getPassword());
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -620,7 +639,7 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.baja(id);
+                    return client.baja(id,desguace.getPassword());
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -656,7 +675,7 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.cancelarOferta(id);
+                    return client.cancelarOferta(id,desguace.getID(),desguace.getPassword());
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -692,7 +711,7 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.cambiarEstadoPedidoOtravez(id, estado);
+                    return client.cambiarEstadoPedidoOtravez(id, estado,desguace.getID(),desguace.getPassword());
                 }
                 catch (EndpointNotFoundException e) { }
                 catch (TimeoutException e) { }
@@ -729,7 +748,7 @@ namespace desguaceNET
                 {
                     var addr = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", addr);
-                    return client.modificar(id, name, email, address, city, postalCode, telephone);
+                    return client.modificar(id, name, email, address, city, postalCode, telephone,desguace.getPassword());
                 }
                 catch (EndpointNotFoundException e) { }
                 catch (TimeoutException e) { }
@@ -792,6 +811,32 @@ namespace desguaceNET
             bd.ponerCodigoActivacionDesguace(codigo, id);
         }
 
+        private static String prepararClaveReto(String idDesguace, String password)
+        {
+            
+            String clave = null;
 
+                clave = generarClaveReto(idDesguace, password);
+
+                return clave;
+            
+
+
+
+        }
+        public static String generarClaveReto(String idDesguace, String password)
+        {
+            AsyncManager manager = new AsyncManager("sor_desguace");
+            manager.ejecutarAcciones();
+            try
+            {
+                var addr = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
+                DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", addr);
+                return client.generarClaveReto(idDesguace, password);
+            }
+            catch (EndpointNotFoundException e) { }
+            catch (TimeoutException e) { }
+            return "";
+        }
     }
 }

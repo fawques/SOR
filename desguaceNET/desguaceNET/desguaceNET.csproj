@@ -117,6 +117,8 @@
     <Compile Include="libSOR\general\Pieza.cs" />
     <Compile Include="libSOR\general\Usuario.cs" />
     <Compile Include="libSOR\jUDDI\jUDDIProxy.cs" />
+    <Compile Include="libSOR\Seguridad\CryptorEngine.cs" />
+    <Compile Include="libSOR\Seguridad\TripleDes.cs" />
     <Compile Include="ModificarDesguace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +212,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.checkActivacionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.generarClaveRetoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\desguaceWS\desguaceNET.desguaceWS.getOfertasResponse.datasource">

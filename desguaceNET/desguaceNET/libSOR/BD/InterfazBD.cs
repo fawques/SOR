@@ -318,12 +318,12 @@ namespace desguaceNET.libSOR.BD
                         string desguaceID = reader.GetString(1);
                         if (desguaceID == "")
                         {
-                            return new Desguace(desguaceID, reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8), null);
+                            return new Desguace(desguaceID, reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8),"", null);
                         }
                         else
                         {
                             List<Oferta> listaOfertas = getOfertasDesguace(reader.GetString(1));
-                            return new Desguace(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8), listaOfertas);
+                            return new Desguace(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8),reader.GetString(9), listaOfertas);
                         }
 
                     }
@@ -347,12 +347,12 @@ namespace desguaceNET.libSOR.BD
                     string tallerID = reader.GetString(1);
                     if (tallerID == "")
                     {
-                        return new Desguace(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8), null);
+                        return new Desguace(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8), "", null);
                     }
                     else
                     {
                         List<Oferta> listaOfertas = getOfertasDesguace(reader.GetString(1));
-                        return new Desguace(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8), listaOfertas);
+                        return new Desguace(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetInt32(6), reader.GetInt32(7), (EstadoGeneral)reader.GetInt32(8), reader.GetString(9), listaOfertas);
                     }
 
                 }

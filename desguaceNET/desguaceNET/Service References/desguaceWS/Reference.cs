@@ -15,7 +15,14 @@ namespace desguaceNET.desguaceWS {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://gestor_desguace_java/", ConfigurationName="desguaceWS.DesguaceJavaWS")]
     public interface DesguaceJavaWS {
         
-        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento mail del espacio de nombres  no está marcado para aceptar valores nil.
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento idDesguace del espacio de nombres  no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        desguaceNET.desguaceWS.generarClaveRetoResponse generarClaveReto(desguaceNET.desguaceWS.generarClaveReto request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.generarClaveRetoResponse> generarClaveRetoAsync(desguaceNET.desguaceWS.generarClaveReto request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento email del espacio de nombres  no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         desguaceNET.desguaceWS.checkActivacionResponse checkActivacion(desguaceNET.desguaceWS.checkActivacion request);
         
@@ -104,6 +111,78 @@ namespace desguaceNET.desguaceWS {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class generarClaveReto {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="generarClaveReto", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.generarClaveRetoBody Body;
+        
+        public generarClaveReto() {
+        }
+        
+        public generarClaveReto(desguaceNET.desguaceWS.generarClaveRetoBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class generarClaveRetoBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string idDesguace;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string password;
+        
+        public generarClaveRetoBody() {
+        }
+        
+        public generarClaveRetoBody(string idDesguace, string password) {
+            this.idDesguace = idDesguace;
+            this.password = password;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class generarClaveRetoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="generarClaveRetoResponse", Namespace="http://gestor_desguace_java/", Order=0)]
+        public desguaceNET.desguaceWS.generarClaveRetoResponseBody Body;
+        
+        public generarClaveRetoResponse() {
+        }
+        
+        public generarClaveRetoResponse(desguaceNET.desguaceWS.generarClaveRetoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class generarClaveRetoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string @return;
+        
+        public generarClaveRetoResponseBody() {
+        }
+        
+        public generarClaveRetoResponseBody(string @return) {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class checkActivacion {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="checkActivacion", Namespace="http://gestor_desguace_java/", Order=0)]
@@ -124,13 +203,17 @@ namespace desguaceNET.desguaceWS {
     public partial class checkActivacionBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string mail;
+        public string email;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string contrasenya;
         
         public checkActivacionBody() {
         }
         
-        public checkActivacionBody(string mail) {
-            this.mail = mail;
+        public checkActivacionBody(string email, string contrasenya) {
+            this.email = email;
+            this.contrasenya = contrasenya;
         }
     }
     
@@ -194,11 +277,19 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string @string;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string idDesguace;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string password;
+        
         public getPedidoporIDBody() {
         }
         
-        public getPedidoporIDBody(string @string) {
+        public getPedidoporIDBody(string @string, string idDesguace, string password) {
             this.@string = @string;
+            this.idDesguace = idDesguace;
+            this.password = password;
         }
     }
     
@@ -262,11 +353,15 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string @string;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string password;
+        
         public getPedidosporIDBody() {
         }
         
-        public getPedidosporIDBody(string @string) {
+        public getPedidosporIDBody(string @string, string password) {
             this.@string = @string;
+            this.password = password;
         }
     }
     
@@ -348,10 +443,13 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
         public string telephone;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string password;
+        
         public modificarBody() {
         }
         
-        public modificarBody(string id, string name, string email, string address, string city, string postalCode, string telephone) {
+        public modificarBody(string id, string name, string email, string address, string city, string postalCode, string telephone, string password) {
             this.id = id;
             this.name = name;
             this.email = email;
@@ -359,6 +457,7 @@ namespace desguaceNET.desguaceWS {
             this.city = city;
             this.postalCode = postalCode;
             this.telephone = telephone;
+            this.password = password;
         }
     }
     
@@ -425,12 +524,20 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public string estado;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string idDesguace;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string password;
+        
         public cambiarEstadoPedidoBody() {
         }
         
-        public cambiarEstadoPedidoBody(string id, string estado) {
+        public cambiarEstadoPedidoBody(string id, string estado, string idDesguace, string password) {
             this.id = id;
             this.estado = estado;
+            this.idDesguace = idDesguace;
+            this.password = password;
         }
     }
     
@@ -582,11 +689,19 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string id;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string idDesguace;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string password;
+        
         public aceptarOfertaFinBody() {
         }
         
-        public aceptarOfertaFinBody(string id) {
+        public aceptarOfertaFinBody(string id, string idDesguace, string password) {
             this.id = id;
+            this.idDesguace = idDesguace;
+            this.password = password;
         }
     }
     
@@ -650,11 +765,15 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string @string;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string password;
+        
         public getOfertasBody() {
         }
         
-        public getOfertasBody(string @string) {
+        public getOfertasBody(string @string, string password) {
             this.@string = @string;
+            this.password = password;
         }
     }
     
@@ -718,11 +837,19 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string oferta;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string idDesguace;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string password;
+        
         public nuevaOfertaBody() {
         }
         
-        public nuevaOfertaBody(string oferta) {
+        public nuevaOfertaBody(string oferta, string idDesguace, string password) {
             this.oferta = oferta;
+            this.idDesguace = idDesguace;
+            this.password = password;
         }
     }
     
@@ -786,11 +913,15 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string id;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string password;
+        
         public bajaBody() {
         }
         
-        public bajaBody(string id) {
+        public bajaBody(string id, string password) {
             this.id = id;
+            this.password = password;
         }
     }
     
@@ -857,12 +988,20 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public string estado;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string idDesguace;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string password;
+        
         public cambiarEstadoPedidoOtravezBody() {
         }
         
-        public cambiarEstadoPedidoOtravezBody(string id, string estado) {
+        public cambiarEstadoPedidoOtravezBody(string id, string estado, string idDesguace, string password) {
             this.id = id;
             this.estado = estado;
+            this.idDesguace = idDesguace;
+            this.password = password;
         }
     }
     
@@ -926,11 +1065,19 @@ namespace desguaceNET.desguaceWS {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string id;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string idDesguace;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string password;
+        
         public cancelarOfertaBody() {
         }
         
-        public cancelarOfertaBody(string id) {
+        public cancelarOfertaBody(string id, string idDesguace, string password) {
             this.id = id;
+            this.idDesguace = idDesguace;
+            this.password = password;
         }
     }
     
@@ -996,14 +1143,42 @@ namespace desguaceNET.desguaceWS {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        desguaceNET.desguaceWS.generarClaveRetoResponse desguaceNET.desguaceWS.DesguaceJavaWS.generarClaveReto(desguaceNET.desguaceWS.generarClaveReto request) {
+            return base.Channel.generarClaveReto(request);
+        }
+        
+        public string generarClaveReto(string idDesguace, string password) {
+            desguaceNET.desguaceWS.generarClaveReto inValue = new desguaceNET.desguaceWS.generarClaveReto();
+            inValue.Body = new desguaceNET.desguaceWS.generarClaveRetoBody();
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
+            desguaceNET.desguaceWS.generarClaveRetoResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).generarClaveReto(inValue);
+            return retVal.Body.@return;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<desguaceNET.desguaceWS.generarClaveRetoResponse> desguaceNET.desguaceWS.DesguaceJavaWS.generarClaveRetoAsync(desguaceNET.desguaceWS.generarClaveReto request) {
+            return base.Channel.generarClaveRetoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.generarClaveRetoResponse> generarClaveRetoAsync(string idDesguace, string password) {
+            desguaceNET.desguaceWS.generarClaveReto inValue = new desguaceNET.desguaceWS.generarClaveReto();
+            inValue.Body = new desguaceNET.desguaceWS.generarClaveRetoBody();
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
+            return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).generarClaveRetoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         desguaceNET.desguaceWS.checkActivacionResponse desguaceNET.desguaceWS.DesguaceJavaWS.checkActivacion(desguaceNET.desguaceWS.checkActivacion request) {
             return base.Channel.checkActivacion(request);
         }
         
-        public string checkActivacion(string mail) {
+        public string checkActivacion(string email, string contrasenya) {
             desguaceNET.desguaceWS.checkActivacion inValue = new desguaceNET.desguaceWS.checkActivacion();
             inValue.Body = new desguaceNET.desguaceWS.checkActivacionBody();
-            inValue.Body.mail = mail;
+            inValue.Body.email = email;
+            inValue.Body.contrasenya = contrasenya;
             desguaceNET.desguaceWS.checkActivacionResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).checkActivacion(inValue);
             return retVal.Body.@return;
         }
@@ -1013,10 +1188,11 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.checkActivacionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.checkActivacionResponse> checkActivacionAsync(string mail) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.checkActivacionResponse> checkActivacionAsync(string email, string contrasenya) {
             desguaceNET.desguaceWS.checkActivacion inValue = new desguaceNET.desguaceWS.checkActivacion();
             inValue.Body = new desguaceNET.desguaceWS.checkActivacionBody();
-            inValue.Body.mail = mail;
+            inValue.Body.email = email;
+            inValue.Body.contrasenya = contrasenya;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).checkActivacionAsync(inValue);
         }
         
@@ -1025,10 +1201,12 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.getPedidoporID(request);
         }
         
-        public string getPedidoporID(string @string) {
+        public string getPedidoporID(string @string, string idDesguace, string password) {
             desguaceNET.desguaceWS.getPedidoporID inValue = new desguaceNET.desguaceWS.getPedidoporID();
             inValue.Body = new desguaceNET.desguaceWS.getPedidoporIDBody();
             inValue.Body.@string = @string;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.getPedidoporIDResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getPedidoporID(inValue);
             return retVal.Body.@return;
         }
@@ -1038,10 +1216,12 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.getPedidoporIDAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getPedidoporIDResponse> getPedidoporIDAsync(string @string) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getPedidoporIDResponse> getPedidoporIDAsync(string @string, string idDesguace, string password) {
             desguaceNET.desguaceWS.getPedidoporID inValue = new desguaceNET.desguaceWS.getPedidoporID();
             inValue.Body = new desguaceNET.desguaceWS.getPedidoporIDBody();
             inValue.Body.@string = @string;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getPedidoporIDAsync(inValue);
         }
         
@@ -1050,10 +1230,11 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.getPedidosporID(request);
         }
         
-        public string getPedidosporID(string @string) {
+        public string getPedidosporID(string @string, string password) {
             desguaceNET.desguaceWS.getPedidosporID inValue = new desguaceNET.desguaceWS.getPedidosporID();
             inValue.Body = new desguaceNET.desguaceWS.getPedidosporIDBody();
             inValue.Body.@string = @string;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.getPedidosporIDResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getPedidosporID(inValue);
             return retVal.Body.@return;
         }
@@ -1063,10 +1244,11 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.getPedidosporIDAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getPedidosporIDResponse> getPedidosporIDAsync(string @string) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getPedidosporIDResponse> getPedidosporIDAsync(string @string, string password) {
             desguaceNET.desguaceWS.getPedidosporID inValue = new desguaceNET.desguaceWS.getPedidosporID();
             inValue.Body = new desguaceNET.desguaceWS.getPedidosporIDBody();
             inValue.Body.@string = @string;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getPedidosporIDAsync(inValue);
         }
         
@@ -1075,7 +1257,7 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.modificar(request);
         }
         
-        public bool modificar(string id, string name, string email, string address, string city, string postalCode, string telephone) {
+        public bool modificar(string id, string name, string email, string address, string city, string postalCode, string telephone, string password) {
             desguaceNET.desguaceWS.modificar inValue = new desguaceNET.desguaceWS.modificar();
             inValue.Body = new desguaceNET.desguaceWS.modificarBody();
             inValue.Body.id = id;
@@ -1085,6 +1267,7 @@ namespace desguaceNET.desguaceWS {
             inValue.Body.city = city;
             inValue.Body.postalCode = postalCode;
             inValue.Body.telephone = telephone;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.modificarResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).modificar(inValue);
             return retVal.Body.@return;
         }
@@ -1094,7 +1277,7 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.modificarAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.modificarResponse> modificarAsync(string id, string name, string email, string address, string city, string postalCode, string telephone) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.modificarResponse> modificarAsync(string id, string name, string email, string address, string city, string postalCode, string telephone, string password) {
             desguaceNET.desguaceWS.modificar inValue = new desguaceNET.desguaceWS.modificar();
             inValue.Body = new desguaceNET.desguaceWS.modificarBody();
             inValue.Body.id = id;
@@ -1104,6 +1287,7 @@ namespace desguaceNET.desguaceWS {
             inValue.Body.city = city;
             inValue.Body.postalCode = postalCode;
             inValue.Body.telephone = telephone;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).modificarAsync(inValue);
         }
         
@@ -1112,11 +1296,13 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.cambiarEstadoPedido(request);
         }
         
-        public bool cambiarEstadoPedido(string id, string estado) {
+        public bool cambiarEstadoPedido(string id, string estado, string idDesguace, string password) {
             desguaceNET.desguaceWS.cambiarEstadoPedido inValue = new desguaceNET.desguaceWS.cambiarEstadoPedido();
             inValue.Body = new desguaceNET.desguaceWS.cambiarEstadoPedidoBody();
             inValue.Body.id = id;
             inValue.Body.estado = estado;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.cambiarEstadoPedidoResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).cambiarEstadoPedido(inValue);
             return retVal.Body.@return;
         }
@@ -1126,11 +1312,13 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.cambiarEstadoPedidoAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.cambiarEstadoPedidoResponse> cambiarEstadoPedidoAsync(string id, string estado) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.cambiarEstadoPedidoResponse> cambiarEstadoPedidoAsync(string id, string estado, string idDesguace, string password) {
             desguaceNET.desguaceWS.cambiarEstadoPedido inValue = new desguaceNET.desguaceWS.cambiarEstadoPedido();
             inValue.Body = new desguaceNET.desguaceWS.cambiarEstadoPedidoBody();
             inValue.Body.id = id;
             inValue.Body.estado = estado;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).cambiarEstadoPedidoAsync(inValue);
         }
         
@@ -1174,10 +1362,12 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.aceptarOfertaFin(request);
         }
         
-        public bool aceptarOfertaFin(string id) {
+        public bool aceptarOfertaFin(string id, string idDesguace, string password) {
             desguaceNET.desguaceWS.aceptarOfertaFin inValue = new desguaceNET.desguaceWS.aceptarOfertaFin();
             inValue.Body = new desguaceNET.desguaceWS.aceptarOfertaFinBody();
             inValue.Body.id = id;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.aceptarOfertaFinResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).aceptarOfertaFin(inValue);
             return retVal.Body.@return;
         }
@@ -1187,10 +1377,12 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.aceptarOfertaFinAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.aceptarOfertaFinResponse> aceptarOfertaFinAsync(string id) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.aceptarOfertaFinResponse> aceptarOfertaFinAsync(string id, string idDesguace, string password) {
             desguaceNET.desguaceWS.aceptarOfertaFin inValue = new desguaceNET.desguaceWS.aceptarOfertaFin();
             inValue.Body = new desguaceNET.desguaceWS.aceptarOfertaFinBody();
             inValue.Body.id = id;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).aceptarOfertaFinAsync(inValue);
         }
         
@@ -1199,10 +1391,11 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.getOfertas(request);
         }
         
-        public string getOfertas(string @string) {
+        public string getOfertas(string @string, string password) {
             desguaceNET.desguaceWS.getOfertas inValue = new desguaceNET.desguaceWS.getOfertas();
             inValue.Body = new desguaceNET.desguaceWS.getOfertasBody();
             inValue.Body.@string = @string;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.getOfertasResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getOfertas(inValue);
             return retVal.Body.@return;
         }
@@ -1212,10 +1405,11 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.getOfertasAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getOfertasResponse> getOfertasAsync(string @string) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.getOfertasResponse> getOfertasAsync(string @string, string password) {
             desguaceNET.desguaceWS.getOfertas inValue = new desguaceNET.desguaceWS.getOfertas();
             inValue.Body = new desguaceNET.desguaceWS.getOfertasBody();
             inValue.Body.@string = @string;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).getOfertasAsync(inValue);
         }
         
@@ -1224,10 +1418,12 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.nuevaOferta(request);
         }
         
-        public string nuevaOferta(string oferta) {
+        public string nuevaOferta(string oferta, string idDesguace, string password) {
             desguaceNET.desguaceWS.nuevaOferta inValue = new desguaceNET.desguaceWS.nuevaOferta();
             inValue.Body = new desguaceNET.desguaceWS.nuevaOfertaBody();
             inValue.Body.oferta = oferta;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.nuevaOfertaResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).nuevaOferta(inValue);
             return retVal.Body.@return;
         }
@@ -1237,10 +1433,12 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.nuevaOfertaAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.nuevaOfertaResponse> nuevaOfertaAsync(string oferta) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.nuevaOfertaResponse> nuevaOfertaAsync(string oferta, string idDesguace, string password) {
             desguaceNET.desguaceWS.nuevaOferta inValue = new desguaceNET.desguaceWS.nuevaOferta();
             inValue.Body = new desguaceNET.desguaceWS.nuevaOfertaBody();
             inValue.Body.oferta = oferta;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).nuevaOfertaAsync(inValue);
         }
         
@@ -1249,10 +1447,11 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.baja(request);
         }
         
-        public bool baja(string id) {
+        public bool baja(string id, string password) {
             desguaceNET.desguaceWS.baja inValue = new desguaceNET.desguaceWS.baja();
             inValue.Body = new desguaceNET.desguaceWS.bajaBody();
             inValue.Body.id = id;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.bajaResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).baja(inValue);
             return retVal.Body.@return;
         }
@@ -1262,10 +1461,11 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.bajaAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.bajaResponse> bajaAsync(string id) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.bajaResponse> bajaAsync(string id, string password) {
             desguaceNET.desguaceWS.baja inValue = new desguaceNET.desguaceWS.baja();
             inValue.Body = new desguaceNET.desguaceWS.bajaBody();
             inValue.Body.id = id;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).bajaAsync(inValue);
         }
         
@@ -1274,11 +1474,13 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.cambiarEstadoPedidoOtravez(request);
         }
         
-        public bool cambiarEstadoPedidoOtravez(string id, string estado) {
+        public bool cambiarEstadoPedidoOtravez(string id, string estado, string idDesguace, string password) {
             desguaceNET.desguaceWS.cambiarEstadoPedidoOtravez inValue = new desguaceNET.desguaceWS.cambiarEstadoPedidoOtravez();
             inValue.Body = new desguaceNET.desguaceWS.cambiarEstadoPedidoOtravezBody();
             inValue.Body.id = id;
             inValue.Body.estado = estado;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.cambiarEstadoPedidoOtravezResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).cambiarEstadoPedidoOtravez(inValue);
             return retVal.Body.@return;
         }
@@ -1288,11 +1490,13 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.cambiarEstadoPedidoOtravezAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.cambiarEstadoPedidoOtravezResponse> cambiarEstadoPedidoOtravezAsync(string id, string estado) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.cambiarEstadoPedidoOtravezResponse> cambiarEstadoPedidoOtravezAsync(string id, string estado, string idDesguace, string password) {
             desguaceNET.desguaceWS.cambiarEstadoPedidoOtravez inValue = new desguaceNET.desguaceWS.cambiarEstadoPedidoOtravez();
             inValue.Body = new desguaceNET.desguaceWS.cambiarEstadoPedidoOtravezBody();
             inValue.Body.id = id;
             inValue.Body.estado = estado;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).cambiarEstadoPedidoOtravezAsync(inValue);
         }
         
@@ -1301,10 +1505,12 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.cancelarOferta(request);
         }
         
-        public bool cancelarOferta(string id) {
+        public bool cancelarOferta(string id, string idDesguace, string password) {
             desguaceNET.desguaceWS.cancelarOferta inValue = new desguaceNET.desguaceWS.cancelarOferta();
             inValue.Body = new desguaceNET.desguaceWS.cancelarOfertaBody();
             inValue.Body.id = id;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             desguaceNET.desguaceWS.cancelarOfertaResponse retVal = ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).cancelarOferta(inValue);
             return retVal.Body.@return;
         }
@@ -1314,10 +1520,12 @@ namespace desguaceNET.desguaceWS {
             return base.Channel.cancelarOfertaAsync(request);
         }
         
-        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.cancelarOfertaResponse> cancelarOfertaAsync(string id) {
+        public System.Threading.Tasks.Task<desguaceNET.desguaceWS.cancelarOfertaResponse> cancelarOfertaAsync(string id, string idDesguace, string password) {
             desguaceNET.desguaceWS.cancelarOferta inValue = new desguaceNET.desguaceWS.cancelarOferta();
             inValue.Body = new desguaceNET.desguaceWS.cancelarOfertaBody();
             inValue.Body.id = id;
+            inValue.Body.idDesguace = idDesguace;
+            inValue.Body.password = password;
             return ((desguaceNET.desguaceWS.DesguaceJavaWS)(this)).cancelarOfertaAsync(inValue);
         }
     }

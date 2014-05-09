@@ -58,6 +58,7 @@
             this.tbValidar.Name = "tbValidar";
             this.tbValidar.Size = new System.Drawing.Size(100, 20);
             this.tbValidar.TabIndex = 3;
+            this.tbValidar.TextChanged += new System.EventHandler(this.tbValidar_TextChanged);
             // 
             // DesguacerPendienteActivacion
             // 

@@ -23,6 +23,8 @@ namespace desguaceNET.libSOR.general
         [JsonProperty]
         protected string name { get; set; }
         [JsonProperty]
+        protected string password { get; set; }
+        [JsonProperty]
         protected string email { get; set; }
         [JsonProperty]
         protected string address { get; set; }
@@ -36,10 +38,11 @@ namespace desguaceNET.libSOR.general
         protected EstadoGeneral estado { get; set; }
 
         [JsonConstructor]
-        public Usuario(string ID, int ID_aux, string name, string email, string address, string city, int postalCode, int telephone, EstadoGeneral estado)
+        public Usuario(string ID, int ID_aux,string password, string name, string email, string address, string city, int postalCode, int telephone, EstadoGeneral estado)
         {
             this.ID = ID;
             this.ID_aux = ID_aux;
+            this.password=password;
             this.name = name;
             this.email = email;
             this.address = address;
@@ -58,7 +61,15 @@ namespace desguaceNET.libSOR.general
         {
             this.ID = ID;
         }
+        public string getPassword()
+        {
+            return password;
+        }
 
+        public void setPassword(string password)
+        {
+            this.password = password;
+        }
         public int getID_aux()
         {
             return ID_aux;

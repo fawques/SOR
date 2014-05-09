@@ -39,5 +39,10 @@ namespace desguaceNET
                 DialogResult = DialogResult.OK;
             }
         }
+
+        private void tbValidar_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

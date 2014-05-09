@@ -28,9 +28,9 @@ namespace desguaceNET.libSOR.general
          * @param estado
          * @param listaDeOfertas
          */
-        public Desguace(String ID, int ID_aux, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, List<Oferta> listaDeOfertas)
+        public Desguace(String ID, int ID_aux, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, String password, List<Oferta> listaDeOfertas)
         :
-            base(ID, ID_aux, name, email, address, city, postalCode, telephone, estado)
+            base(ID, ID_aux, password,name, email, address, city, postalCode, telephone, estado)
         {
             this.listaOfertas = listaDeOfertas;
         }
@@ -49,8 +49,8 @@ namespace desguaceNET.libSOR.general
          * @param estado
          * @param listaDeOfertas
          */
-        public Desguace(String ID, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, List<Oferta> listaDeOfertas):
-            base(ID, -1, name, email, address, city, postalCode, telephone, estado)
+        public Desguace(String ID, String name, String email, String address, String city, int postalCode, int telephone, EstadoGeneral estado, String password, List<Oferta> listaDeOfertas) :
+            base(ID, -1,password, name, email, address, city, postalCode, telephone, estado)
         {
             this.listaOfertas = listaDeOfertas;
         }
