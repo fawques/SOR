@@ -123,6 +123,8 @@ public class GestionPedidos implements Initializable {
     InterfazBD bd;
     public CheckBox cbCifradoAsim;
     public CheckBox cbCifradoSim;
+    
+    ArrayList<PedidoCorto> pedidosPendientes= new ArrayList<PedidoCorto>();
   
     /**
      * Initializes the controller class.
@@ -620,6 +622,10 @@ public class GestionPedidos implements Initializable {
             ArrayList<String> idlistabuena= gson.fromJson(listaIdsString,collectionType);
             collectionType = new TypeToken<PedidoCorto>(){}.getType();
             PedidoCorto p=new PedidoCorto();
+            for(PedidoCorto pedPendiente: pedidosPendientes){
+            	idlista.add(pedPendiente);
+            }
+            pedidosPendientes.clear();
             for(String o: idlistabuena){
                 p= gson.fromJson(o, collectionType);
                 idlista.add(p);
@@ -636,6 +642,7 @@ public class GestionPedidos implements Initializable {
                             AuditLogger.CRUD_Pedido("Creado pedido <" + pcorto.getID() + ">");
                     	}else{
                     		AuditLogger.error("No se ha podido obtener el pedido completo <" + pcorto.getID() + "> del gestor");
+                    		pedidosPendientes.add(pcorto);
                     	}
                     }
                 }
