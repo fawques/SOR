@@ -7,6 +7,7 @@
 package desguace;
 
 import BD.InterfazBD;
+import activemq.Gestor_activemq;
 import audit.AuditLogger;
 
 import com.google.gson.Gson;
@@ -33,6 +34,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.jms.JMSException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -51,10 +54,20 @@ public class DesguaceJava extends Application {
 	public Stage stage;
 	static InterfazBD bd;
 	public static Desguace desguace;
+	public static Gestor_activemq activemq;
 
 	@Override
 	public void start(Stage stage2) throws IOException, SQLException {
 		try {
+	    	
+				try {
+					activemq= new Gestor_activemq();
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			
 			JUDDIProxy.loadWsdl("DesguaceJavaWS");
 			AuditLogger.setUser("Administrador");
 			stage = stage2;

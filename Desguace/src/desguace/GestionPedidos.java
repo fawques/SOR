@@ -82,6 +82,7 @@ public class GestionPedidos implements Initializable {
     public TableView  tablaHistoricoOfertas;
     public TableView tablePiezas;
     public TableView tableAcciones;
+    
     @FXML
     public Label lbID;
     @FXML 
@@ -119,7 +120,6 @@ public class GestionPedidos implements Initializable {
     ObservableList<TablaOfertas> datatableHistoricoOfertas = FXCollections.observableArrayList();
     ObservableList<PiezasInterfaz> personDataPiezas= FXCollections.observableArrayList();
     ObservableList<TablaAcciones> olTablaAcciones = FXCollections.observableArrayList();
-
     InterfazBD bd;
     public CheckBox cbCifradoAsim;
     public CheckBox cbCifradoSim;
@@ -131,6 +131,7 @@ public class GestionPedidos implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         tablaPedidos();
         tablaOfertasActivas();
         tablaHistoricoPedidos();
@@ -605,18 +606,18 @@ public class GestionPedidos implements Initializable {
           ArrayList<Pedido> listaPedidos= new ArrayList<Pedido>();
         datatablePedidos.clear();
           Type collectionType = new TypeToken<ArrayList<String>>(){}.getType();
-            Gestor_activemq activemq;
+            ;
             String listaIdsString = null;
 
              ArrayList<String>  listaids = new ArrayList<String>();
         try {
-            activemq = new Gestor_activemq();
-            activemq.create_Consumer(DesguaceJava.desguace.getID());
+        	
+        	DesguaceJava.activemq.create_Consumer(DesguaceJava.desguace.getID());
             
-            listaIdsString= activemq.consumer.consumeMessage();
+            listaIdsString= DesguaceJava.activemq.consumer.consumeMessage();
             
            
-            activemq.consumer.closeConsumer();
+            DesguaceJava.activemq.consumer.closeConsumer();
             String pedidosstring=null;
             ArrayList<PedidoCorto> idlista= new ArrayList<PedidoCorto>();
             ArrayList<String> idlistabuena= gson.fromJson(listaIdsString,collectionType);
