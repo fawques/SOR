@@ -26,6 +26,9 @@ import com.google.gson.JsonSyntaxException;
 
 
 
+
+
+import java.awt.Color;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -48,6 +51,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -783,6 +787,36 @@ public void actualizarTaller(){
     	}
     	
     }
+    
+    
+    
+    public void cambiarEstadoGestor1(EstadoGestor res){
+    	if(res == EstadoGestor.Activo)
+	    	estadoGestor1.setFill(Paint.valueOf("#52ff00"));
+    	else if(res == EstadoGestor.Error) 
+	    	estadoGestor1.setFill(Paint.valueOf("#ffc633"));
+    	else if(res == EstadoGestor.Caido)
+    		estadoGestor1.setFill(Paint.valueOf("RED"));
+    }
+    
+    public void cambiarEstadoGestor2(EstadoGestor res){
+    	if(res == EstadoGestor.Activo)
+	    	estadoGestor2.setFill(Paint.valueOf("#52ff00"));
+    	else if(res == EstadoGestor.Error) 
+	    	estadoGestor2.setFill(Paint.valueOf("#ffc633"));
+    	else if(res == EstadoGestor.Caido)
+    		estadoGestor2.setFill(Paint.valueOf("RED"));
+    }
+    
+    public void cambiarEstadoGestor3(EstadoGestor res){
+    	if(res == EstadoGestor.Activo)
+	    	estadoGestor3.setFill(Paint.valueOf("#52ff00"));
+    	else if(res == EstadoGestor.Error) 
+	    	estadoGestor3.setFill(Paint.valueOf("#ffc633"));
+    	else if(res == EstadoGestor.Caido)
+    		estadoGestor3.setFill(Paint.valueOf("RED"));
+    }
+    
     
     
 }
