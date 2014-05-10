@@ -43,6 +43,11 @@ import javax.mail.internet.MimeMessage;*/
  */
 public class Admin extends Application {
 	   public static Stage stage;
+	   
+	   public static EstadoGestor gestor1;
+	   public static EstadoGestor gestor2;
+	   public static EstadoGestor gestor3;
+	   
     static String getOfertasporPedido() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

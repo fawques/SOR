@@ -788,32 +788,30 @@ public void actualizarTaller(){
     	
     }
     
-    
-    
-    public void cambiarEstadoGestor1(EstadoGestor res){
-    	if(res == EstadoGestor.Activo)
+    public void cambiarEstadoGestor1(){
+    	if(Admin.gestor1 == EstadoGestor.Activo)
 	    	estadoGestor1.setFill(Paint.valueOf("#52ff00"));
-    	else if(res == EstadoGestor.Error) 
+    	else if(Admin.gestor1 == EstadoGestor.Error) 
 	    	estadoGestor1.setFill(Paint.valueOf("#ffc633"));
-    	else if(res == EstadoGestor.Caido)
+    	else if(Admin.gestor1 == EstadoGestor.Caido)
     		estadoGestor1.setFill(Paint.valueOf("RED"));
     }
     
-    public void cambiarEstadoGestor2(EstadoGestor res){
-    	if(res == EstadoGestor.Activo)
+    public void cambiarEstadoGestor2(){
+    	if(Admin.gestor2 == EstadoGestor.Activo)
 	    	estadoGestor2.setFill(Paint.valueOf("#52ff00"));
-    	else if(res == EstadoGestor.Error) 
+    	else if(Admin.gestor2 == EstadoGestor.Error) 
 	    	estadoGestor2.setFill(Paint.valueOf("#ffc633"));
-    	else if(res == EstadoGestor.Caido)
+    	else if(Admin.gestor2 == EstadoGestor.Caido)
     		estadoGestor2.setFill(Paint.valueOf("RED"));
     }
     
-    public void cambiarEstadoGestor3(EstadoGestor res){
-    	if(res == EstadoGestor.Activo)
+    public void cambiarEstadoGestor3(){
+    	if(Admin.gestor3 == EstadoGestor.Activo)
 	    	estadoGestor3.setFill(Paint.valueOf("#52ff00"));
-    	else if(res == EstadoGestor.Error) 
+    	else if(Admin.gestor3 == EstadoGestor.Error) 
 	    	estadoGestor3.setFill(Paint.valueOf("#ffc633"));
-    	else if(res == EstadoGestor.Caido)
+    	else if(Admin.gestor3 == EstadoGestor.Caido)
     		estadoGestor3.setFill(Paint.valueOf("RED"));
     }
     
