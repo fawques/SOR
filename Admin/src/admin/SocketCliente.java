@@ -11,11 +11,11 @@ import java.net.Socket;
  * @author pablovm1990
  *
  */
-public class Sockets {
+public class SocketCliente {
 	static final String HOST = "localhost"; 
 	static final int PUERTO=5000;
 	
-	public Sockets() {
+	public SocketCliente() {
 		try {
 			Socket skCliente = new Socket(HOST, PUERTO);
 			InputStream aux = skCliente.getInputStream();
