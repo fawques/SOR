@@ -28,11 +28,17 @@ import com.google.gson.JsonSyntaxException;
 
 
 
+
+
+
 import java.awt.Color;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -62,6 +68,7 @@ import javafx.util.Callback;
  */
 
 public class FXMLDocumentController implements Initializable {
+	private ScheduledExecutorService scheduler;
 	public static Stage thisStage;
    private ObservableList<UsuarioInterface> personData = FXCollections.observableArrayList();
    private ObservableList<UsuarioInterface> personDataDesguaces = FXCollections.observableArrayList();
@@ -87,9 +94,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableView tableAltaDesguaces;
     public TextField tfContrasenyaTaller;
     public TextField tfContrasenyaDesguace;
-    public Circle estadoGestor1;
-    public Circle estadoGestor2;
-    public Circle estadoGestor3;
+    public static Circle estadoGestor1;
+    public static Circle estadoGestor2;
+    public static Circle estadoGestor3;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -104,6 +111,8 @@ public class FXMLDocumentController implements Initializable {
         pedidosInterfaz();
         altaTaller();
         AltaDesguaces();
+        scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(new CormprobarGestores(), 5, 4, TimeUnit.SECONDS);
     }
 
     public void actualizarPedidos(){
@@ -788,7 +797,7 @@ public void actualizarTaller(){
     	
     }
     
-    public void cambiarEstadoGestor1(){
+    public static void cambiarEstadoGestor1(){
     	if(Admin.gestor1 == EstadoGestor.Activo)
 	    	estadoGestor1.setFill(Paint.valueOf("#52ff00"));
     	else if(Admin.gestor1 == EstadoGestor.Error) 
@@ -797,7 +806,7 @@ public void actualizarTaller(){
     		estadoGestor1.setFill(Paint.valueOf("RED"));
     }
     
-    public void cambiarEstadoGestor2(){
+    public static void cambiarEstadoGestor2(){
     	if(Admin.gestor2 == EstadoGestor.Activo)
 	    	estadoGestor2.setFill(Paint.valueOf("#52ff00"));
     	else if(Admin.gestor2 == EstadoGestor.Error) 
@@ -806,7 +815,7 @@ public void actualizarTaller(){
     		estadoGestor2.setFill(Paint.valueOf("RED"));
     }
     
-    public void cambiarEstadoGestor3(){
+    public static void cambiarEstadoGestor3(){
     	if(Admin.gestor3 == EstadoGestor.Activo)
 	    	estadoGestor3.setFill(Paint.valueOf("#52ff00"));
     	else if(Admin.gestor3 == EstadoGestor.Error) 
@@ -814,6 +823,8 @@ public void actualizarTaller(){
     	else if(Admin.gestor3 == EstadoGestor.Caido)
     		estadoGestor3.setFill(Paint.valueOf("RED"));
     }
+    
+    
     
     
     
