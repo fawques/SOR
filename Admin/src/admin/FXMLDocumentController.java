@@ -112,7 +112,7 @@ public class FXMLDocumentController implements Initializable {
         altaTaller();
         AltaDesguaces();
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new CormprobarGestores(), 5, 4, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new CormprobarGestores(), 2, 3, TimeUnit.SECONDS);
     }
 
     public void actualizarPedidos(){
