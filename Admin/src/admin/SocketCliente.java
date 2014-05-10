@@ -12,16 +12,21 @@ import java.net.Socket;
  *
  */
 public class SocketCliente {
-	static final String HOST = "localhost"; 
-	static final int PUERTO=5000;
+	//static final String HOST = "localhost"; 
+	//static final int PUERTO=5000;
 	
 	public SocketCliente() {
+		
+	}
+	
+	public boolean enviaMensaje(String host, int puerto, String mensaje){
 		try {
-			Socket skCliente = new Socket(HOST, PUERTO);
+			Socket skCliente = new Socket(host, puerto);
 			InputStream aux = skCliente.getInputStream();
 			DataInputStream flujo = new DataInputStream(aux);
-			System.out.println(flujo.readUTF());
+			flujo.readUTF();
 			skCliente.close();
+			return flujo;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
