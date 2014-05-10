@@ -130,6 +130,15 @@ public class DesguaceJavaWS {
 		AuditLogger.error("Clave de reto no generada");
 		return null;
 	}
+	
+	/**
+	 * Web service operation
+	 */
+	@WebMethod(operationName = "hello")
+	public String hello() {
+		AuditLogger.info("Hello", "Hello");
+		return "hello";
+	}
     
       @WebMethod(operationName = "alta")
     public boolean alta(@WebParam(name = "name") String name, @WebParam(name = "email") String email, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "postalCode") String postalCode, @WebParam(name = "telephone") String telephone) {
