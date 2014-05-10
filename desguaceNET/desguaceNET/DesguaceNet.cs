@@ -499,7 +499,8 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.nuevaOferta(oferta,desguace.getID(),desguace.getPassword());
+                    string key = prepararClaveReto(desguace.getID(), desguace.getPassword());
+                    return CryptorEngine.Decrypt(client.nuevaOferta(CryptorEngine.Encrypt(oferta,key),desguace.getID(),CryptorEngine.Encrypt(desguace.getPassword(),key)),key);
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -535,7 +536,9 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.getOfertas(desguace.getID(),desguace.getPassword());
+                    string key = prepararClaveReto(desguace.getID(), desguace.getPassword());
+
+                    return CryptorEngine.Decrypt(client.getOfertas(desguace.getID(), CryptorEngine.Encrypt(desguace.getPassword(), key)),key);
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -602,7 +605,8 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.aceptarOfertaFin(id,desguace.getEmail(),desguace.getPassword());
+                    string key = prepararClaveReto(desguace.getID(), desguace.getPassword());
+                    return client.aceptarOfertaFin(CryptorEngine.Encrypt (id,key),desguace.getID(),CryptorEngine.Encrypt (desguace.getPassword(),key));
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -639,7 +643,8 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.baja(id,desguace.getPassword());
+                    string key = prepararClaveReto(desguace.getID(), desguace.getPassword());    
+                    return client.baja(id,CryptorEngine.Encrypt(desguace.getPassword(),key));
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -675,7 +680,8 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.cancelarOferta(id,desguace.getID(),desguace.getPassword());
+                    string key = prepararClaveReto(desguace.getID(), desguace.getPassword()); 
+                    return client.cancelarOferta(CryptorEngine.Encrypt(id,key),desguace.getID(),CryptorEngine.Encrypt(desguace.getPassword(),key));
                 }
                 catch (EndpointNotFoundException e) { }catch (TimeoutException e) { }
             }
@@ -711,7 +717,8 @@ namespace desguaceNET
                 {
                     var address = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", address);
-                    return client.cambiarEstadoPedidoOtravez(id, estado,desguace.getID(),desguace.getPassword());
+                    string key = prepararClaveReto(desguace.getID(), desguace.getPassword()); 
+                    return client.cambiarEstadoPedidoOtravez(CryptorEngine.Encrypt(id,key), CryptorEngine.Encrypt(estado,key),desguace.getID(),CryptorEngine.Encrypt(desguace.getPassword(),key));
                 }
                 catch (EndpointNotFoundException e) { }
                 catch (TimeoutException e) { }
@@ -748,7 +755,8 @@ namespace desguaceNET
                 {
                     var addr = new EndpointAddress("http://" + jUDDIProxy.getWsdl().Host + ":" + jUDDIProxy.getWsdl().Port + jUDDIProxy.getWsdl().AbsolutePath);
                     DesguaceJavaWSClient client = new DesguaceJavaWSClient("DesguaceJavaWSPort", addr);
-                    return client.modificar(id, name, email, address, city, postalCode, telephone,desguace.getPassword());
+                    string key = prepararClaveReto(desguace.getID(), desguace.getPassword()); 
+                    return client.modificar(id, CryptorEngine.Encrypt(name,key), CryptorEngine.Encrypt(email,key), CryptorEngine.Encrypt(address,key),CryptorEngine.Encrypt( city,key),CryptorEngine.Encrypt( postalCode,key),CryptorEngine.Encrypt( telephone,key),CryptorEngine.Encrypt(desguace.getPassword(),key));
                 }
                 catch (EndpointNotFoundException e) { }
                 catch (TimeoutException e) { }

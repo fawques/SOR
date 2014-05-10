@@ -100,7 +100,7 @@ public class Webservices {
     	SecretKey encryptor = prepararClaveReto(idDesguace,password);
 			DesguaceJavaWS port = prepararWebService();
 			try {
-				return port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, TripleDes.encrypt(encryptor, password));
+				return TripleDes.decrypt(encryptor, port.nuevaOferta(TripleDes.encrypt(encryptor, oferta), idDesguace, TripleDes.encrypt(encryptor, password)));
 				
 			} catch (InvalidKeyException | NoSuchAlgorithmException
 					| NoSuchPaddingException | IOException e) {

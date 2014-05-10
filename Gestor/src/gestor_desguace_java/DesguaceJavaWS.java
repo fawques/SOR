@@ -215,7 +215,13 @@ public class DesguaceJavaWS {
 		             bd.anadirOferta(stringID,p.getID_aux(), p.getFecha_alta(),p.getPrecio(), EstadoOferta.ACTIVE.ordinal(),  p.getPedido(), p.getDesguace(),p.getDesguaceNombre(), p.getFecha_baja(),p.getFecha_limite());
 		             bd.close();
 		             AuditLogger.CRUD_Oferta("Creada nueva oferta <" + stringID + ">");
-		             return stringID;
+		             try {
+						return TripleDes.encrypt(key,stringID);
+					} catch (InvalidKeyException | NoSuchAlgorithmException
+							| NoSuchPaddingException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				else{
 					AuditLogger.ES("ERROR: Login incorrecto");
