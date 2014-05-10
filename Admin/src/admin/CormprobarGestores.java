@@ -19,6 +19,10 @@ public class CormprobarGestores implements Runnable {
 		// TODO Auto-generated method stub
 		FXMLDocumentController.cambiarEstadoGestor1();
 		FXMLDocumentController.cambiarEstadoGestor2();
-		FXMLDocumentController.cambiarEstadoGestor3();	
+		FXMLDocumentController.cambiarEstadoGestor3();
+		
+		SocketServer sk = new SocketServer(5000);
+
+		SocketCliente sc = new SocketCliente("localhost", 5000, "hola que tal");
 	}
 }

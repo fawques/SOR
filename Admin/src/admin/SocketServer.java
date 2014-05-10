@@ -3,7 +3,9 @@
  */
 package admin;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,26 +15,18 @@ import java.net.Socket;
  *
  */
 public class SocketServer {
-	class Servidor {
-		static final int PUERTO=5000; 
-		public Servidor() {
-
-		}
-
-		public boolean pingAGestor(){
-			try {
-				ServerSocket skServidor = new ServerSocket(PUERTO); 
-				System.out.println("Escucho el puerto " + PUERTO );
-
-				Socket skCliente = skServidor.accept(); // Crea objeto
-				OutputStream aux = skCliente.getOutputStream(); 
-				DataOutputStream flujo= new DataOutputStream( aux );
-				flujo.writeUTF( "Hola cliente " + "1");
-				skCliente.close();
-			} catch( Exception e ) {
-				System.out.println( e.getMessage() ); 
-			}
-			return 0;
+	public SocketServer(int puerto) {
+		try {
+			ServerSocket skServidor = new ServerSocket(puerto);
+			skServidor.setSoTimeout(1000);
+			System.out.println("Escucho el puerto " + puerto );
+			Socket skCliente = skServidor.accept(); // Crea objeto
+			InputStream aux = skCliente.getInputStream(); 
+			DataInputStream flujo= new DataInputStream(aux);
+			System.out.println(flujo.read());
+			skCliente.close();
+		} catch( Exception e ) {
+			System.out.println(" 222" + e.getMessage() ); 
 		}
 	}
 }
