@@ -14,6 +14,8 @@ public class CormprobarGestores implements Runnable {
 	/* (non-Javadoc)
 	 * @see java.lang.Runnable#run()
 	 */
+	SocketServer sk = null;
+	SocketCliente sc;
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -21,8 +23,10 @@ public class CormprobarGestores implements Runnable {
 		FXMLDocumentController.cambiarEstadoGestor2();
 		FXMLDocumentController.cambiarEstadoGestor3();
 		
-		SocketServer sk = new SocketServer(5000);
-
-		SocketCliente sc = new SocketCliente("localhost", 5000, "hola que tal");
+		if(sk==null)
+			sk = new SocketServer(5000);
+		
+		sk.recibirPeticion();
+		sc = new SocketCliente("localhost", 5000, "hola que tal");
 	}
 }
