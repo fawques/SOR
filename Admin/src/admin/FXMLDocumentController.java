@@ -823,9 +823,4 @@ public void actualizarTaller(){
     	else if(Admin.gestor3 == EstadoGestor.Caido)
     		estadoGestor3.setFill(Paint.valueOf("RED"));
     }
-    
-    
-    
-    
-    
 }
