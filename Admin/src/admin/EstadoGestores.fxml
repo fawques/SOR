@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1366.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="admin.FXMLDocumentController">
+  <children>
+    <TabPane id="tabPanel" layoutX="0.0" layoutY="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1366.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab id="tabSolucitudes" onSelectionChanged="#actualizarUsuariosPestanya" text="Estado gestores">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Text layoutX="110.0" layoutY="453.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 1: Actual">
+                  <font>
+                    <Font size="14.0" fx:id="x1" />
+                  </font>
+                </Text>
+                <Group id="Group" layoutX="34.0" layoutY="165.0">
+                  <children>
+                    <Circle id="estadoGestor1" fill="#52ff00" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
+                  </children>
+                </Group>
+                <Text font="$x1" layoutX="451.0" layoutY="453.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 2" />
+                <Group id="Group" layoutX="375.0" layoutY="165.0">
+                  <children>
+                    <Circle id="estadoGestor2" fill="#dfdfdf" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
+                  </children>
+                </Group>
+                <Text font="$x1" layoutX="850.0" layoutY="447.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 3" />
+                <Group id="Group" layoutX="741.0" layoutY="163.0">
+                  <children>
+                    <Circle id="estadoGestor3" fill="RED" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
+                  </children>
+                </Group>
+                <Text layoutX="312.0" layoutY="44.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Activo">
+                  <font>
+                    <Font size="11.0" fx:id="x2" />
+                  </font>
+                </Text>
+                <Text font="$x2" layoutX="481.0" layoutY="44.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Inactivo" />
+                <Text font="$x2" layoutX="651.0" layoutY="44.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" />
+                <Circle id="estadoGestor1" fill="#52ff00" layoutX="327.0" layoutY="101.0" radius="36.89703369140625" stroke="BLACK" strokeType="INSIDE" />
+                <Circle id="estadoGestor1" fill="#dfdfdf" layoutX="500.0" layoutY="101.0" radius="36.89703369140625" stroke="BLACK" strokeType="INSIDE" />
+                <Circle id="estadoGestor1" fill="RED" layoutX="663.0" layoutY="101.0" radius="36.89703369140625" stroke="BLACK" strokeType="INSIDE" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>
