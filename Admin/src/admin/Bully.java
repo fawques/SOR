@@ -1,7 +1,10 @@
 package admin;
 
-public class Bully implements Runnable  {
+import java.net.Inet4Address;
+import java.net.InetAddress;
 
+public class Bully implements Runnable  {
+	
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
 		// else
@@ -60,7 +63,8 @@ public class Bully implements Runnable  {
 		return "respuesta";
 	}
 	
-	private void processMessage(String msg){
+	public void processMessage(String msg, InetAddress inetAddress){
+		
 		// 	comprobar el tipo de mensaje
 		// 	coordinador:
 		//		setGestor

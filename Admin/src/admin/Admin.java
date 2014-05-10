@@ -48,6 +48,8 @@ public class Admin extends Application {
 	   public static EstadoGestor gestor2 = EstadoGestor.Activo;
 	   public static EstadoGestor gestor3 = EstadoGestor.Activo;
 	   
+	   static Bully bullyAlg;
+	   
     static String getOfertasporPedido() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -61,6 +63,7 @@ public class Admin extends Application {
         FXMLDocumentController staticDataBox = (FXMLDocumentController) loader.getController();
         staticDataBox.setStage(stage);
         staticDataBox.showStage();
+        bullyAlg = new Bully();
     }
     
     public static FXMLLoader changeScene(String fxml) throws IOException {
