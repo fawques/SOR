@@ -26,7 +26,7 @@ public class SocketCliente {
 			flujo.writeUTF(mensaje);
 			skCliente.close();
 		} catch (Exception e) {
-			System.out.println(" 222111" + e.getMessage());
+			System.out.println("Cliente: " + e.getMessage());
 		}
 	}
 }

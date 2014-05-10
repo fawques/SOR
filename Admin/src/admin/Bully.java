@@ -60,7 +60,7 @@ public class Bully implements Runnable  {
 		return "respuesta";
 	}
 	
-	private void processMessage(String msg){
+	public void processMessage(String msg){
 		// 	comprobar el tipo de mensaje
 		// 	coordinador:
 		//		setGestor
