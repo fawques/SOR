@@ -35,7 +35,8 @@ public class SocketServer {
 			InputStream aux = skCliente.getInputStream(); 
 			DataInputStream flujo= new DataInputStream(aux);
 			System.out.println(flujo.readUTF());
-			Admin.bullyAlg.processMessage(flujo.readUTF(), skCliente.getInetAddress());
+			
+			Admin.bullyAlg.processMessage(Mensajes.valueOf(flujo.readUTF()), skCliente.getInetAddress());
 			skCliente.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

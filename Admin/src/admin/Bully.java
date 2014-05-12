@@ -102,13 +102,6 @@ public class Bully implements Runnable  {
 		else{
 			System.err.print("Error de mensaje");
 		}
-		// 	comprobar el tipo de mensaje
-		// 	coordinador:
-		//		setGestor
-		//	eleccion:
-		//		sendMessage(response)
-		//		if(! eleccion)
-		//			sendMessage(election)
 	}
 	
 	private boolean sendMessage(Mensajes msg, InetAddress inetAddress) {
