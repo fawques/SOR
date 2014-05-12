@@ -17,7 +17,11 @@ public class SocketCliente {
 	//static final String HOST = "localhost"; 
 	//static final int PUERTO=5000;
 	
-	public SocketCliente(String host, int puerto, String mensaje) {
+	public SocketCliente() {
+		
+	}
+	
+	public boolean sendMessage(String host, int puerto, String mensaje){
 		try {
 			Socket skCliente = new Socket(host, puerto);
 			skCliente.setSoTimeout(1000);
@@ -25,8 +29,10 @@ public class SocketCliente {
 			DataOutputStream flujo = new DataOutputStream(aux);
 			flujo.writeUTF(mensaje);
 			skCliente.close();
+			return true;
 		} catch (Exception e) {
 			System.out.println("Cliente: " + e.getMessage());
 		}
+		return false;
 	}
 }
