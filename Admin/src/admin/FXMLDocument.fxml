@@ -110,7 +110,7 @@
                         <Font size="9.0" fx:id="x2" />
                       </font>
                     </Text>
-                    <Text font="$x2" layoutX="278.0" layoutY="628.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeMiterLimit="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error (en tránsito)" />
+                    <Text font="$x2" layoutX="278.0" layoutY="628.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeMiterLimit="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="En transición" />
                     <Text font="$x2" layoutX="489.0" layoutY="627.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" />
                     <Circle id="estadoGestor1" fill="$x3" layoutX="56.0" layoutY="623.0" radius="21.39703369140625" stroke="BLACK" strokeType="INSIDE" />
                     <Circle id="estadoGestor1" fill="$x4" layoutX="201.0" layoutY="624.0" radius="20.39703369140625" stroke="BLACK" strokeType="INSIDE" />
