@@ -82,16 +82,16 @@ public class Bully implements Runnable  {
 		Boolean respuesta=false;
 		if(msg==Mensajes.eleccion){
 			for(int i=0;i<posicion;i++){
-				if(sendMessage(msg,gestores.indexOf(i))){
+				if(sendMessage(msg,gestores.get(gestores.indexOf(i)))){
 					respuesta=true;
 				}
 			}
 			if(respuesta==false){
-				sendMessage(Mensajes.respuesta,gestores.indexOf(inetAddress));
+				sendMessage(Mensajes.respuesta,gestores.get(gestores.indexOf(inetAddress)));
 				
 				for(int i=0;i<gestores.size();i++){
 					if(i!=posicion){
-						sendMessage(Mensajes.coordinacion,gestores.indexOf(i));
+						sendMessage(Mensajes.coordinacion,gestores.get(gestores.indexOf(i)));
 					}
 				}
 			}
@@ -111,6 +111,12 @@ public class Bully implements Runnable  {
 		//			sendMessage(election)
 	}
 	
+	private boolean sendMessage(Mensajes msg, InetAddress inetAddress) {
+		// TODO Auto-generated method stub
+		SocketCliente sc = new SocketCliente();
+		return sc.sendMessage(inetAddress.toString(), 5001, msg.toString());
+	}
+
 	private void iAmGestor(){
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
 	}
