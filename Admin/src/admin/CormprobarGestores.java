@@ -18,15 +18,18 @@ public class CormprobarGestores implements Runnable {
 	SocketCliente sc;
 	@Override
 	public void run() {
+		if(sk==null)
+			sk = new SocketServer(5000);
+		
+		sk.recibirPeticion();
+		
 		// TODO Auto-generated method stub
 		FXMLDocumentController.cambiarEstadoGestor1();
 		FXMLDocumentController.cambiarEstadoGestor2();
 		FXMLDocumentController.cambiarEstadoGestor3();
 		
-		if(sk==null)
-			sk = new SocketServer(5000);
 		
-		sk.recibirPeticion();
-		sc = new SocketCliente("localhost", 5000, "hola que tal");
+		/*sc = new SocketCliente();
+		sc.sendMessage("192.168.1.24", 5001, "hola que tal");*/
 	}
 }
