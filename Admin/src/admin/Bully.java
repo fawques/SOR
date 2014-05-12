@@ -2,12 +2,27 @@ package admin;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 
+import admin.Mensajes;
 public class Bully implements Runnable  {
-	
+	ArrayList<InetAddress> gestores;
+	int posicion;
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
 		// else
+		gestores= new ArrayList<InetAddress>(3);
+		try {
+			gestores.add(InetAddress.getByName("192.168.1.1"));
+			gestores.add(InetAddress.getByName("192.168.1.2"));
+			gestores.add(InetAddress.getByName("192.168.1.3"));
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		posicion=2;
 		startElection();
 		
 	}
@@ -38,11 +53,11 @@ public class Bully implements Runnable  {
 			iAmGestor();
 		}else{
 			if(msg.equals("respuesta")){
-				String msg2 = receiveMessage();
-				if(msg2.equals("haDadoTimeout")){
+				Mensajes msg2 = receiveMessage();
+				if(msg2==null){
 					startElection();
 				}else{
-					if(msg2.equals("coordinador")){
+					if(msg2==Mensajes.coordinacion){
 						setGestor(msg2);
 					}else{
 						processMessage(msg2);
@@ -54,17 +69,39 @@ public class Bully implements Runnable  {
 		} 
 	}
 	
-	private void setGestor(String msg2) {
+	private void setGestor(InetAddress gestorIP) {
 		// guarda el identificador y trata a ese proceso como nuevo coordinador
 	}
 
-	private String receiveMessage(){
+	private Mensajes receiveMessage(){
 		//	Espera un tiempo determinado hasta recibir un mensaje. Si no lo recibe, lanza excepcion / devuelve null
-		return "respuesta";
+		return null;
 	}
 	
-	public void processMessage(String msg, InetAddress inetAddress){
-		
+	public void processMessage(Mensajes msg, InetAddress inetAddress){
+		Boolean respuesta=false;
+		if(msg==Mensajes.eleccion){
+			for(int i=0;i<posicion;i++){
+				if(sendMessage(msg,gestores.indexOf(i))){
+					respuesta=true;
+				}
+			}
+			if(respuesta==false){
+				sendMessage(Mensajes.respuesta,gestores.indexOf(inetAddress));
+				
+				for(int i=0;i<gestores.size();i++){
+					if(i!=posicion){
+						sendMessage(Mensajes.coordinacion,gestores.indexOf(i));
+					}
+				}
+			}
+		}
+		else if (msg==Mensajes.coordinacion){
+			setGestor(inetAddress);
+		}
+		else{
+			System.err.print("Error de mensaje");
+		}
 		// 	comprobar el tipo de mensaje
 		// 	coordinador:
 		//		setGestor
