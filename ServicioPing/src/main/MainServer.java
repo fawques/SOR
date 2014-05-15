@@ -14,21 +14,23 @@ import wschecker.WSChecker;
 public class MainServer extends AbstractService {
 	
 	public static void main(String[] args) {
-		start();
+		MainServer main = new MainServer();
+		main.start();
 	}
 	
+	@Override
 	public int serviceMain(String[] args) throws ServiceException {
 		start();
 		return 0;
 	}
 	
 	static final int PUERTO=5001;
-	private static void start(){
+	private void start(){
 		WSChecker checker = new WSChecker();
 		ServerSocket skServidor;
 		try {
 			skServidor = new ServerSocket(PUERTO);
-			while(true){
+			while(!shutdown){
 				Socket skCliente = skServidor.accept();
 				OutputStream aux = skCliente.getOutputStream();
 				DataOutputStream flujo= new DataOutputStream(aux);
