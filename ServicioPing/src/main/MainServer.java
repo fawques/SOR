@@ -42,16 +42,20 @@ public class MainServer extends AbstractService {
 					System.out.println("Aceptando conexiones en el puerto " + PUERTO);
 					EventLog.report("WSPingSOR", EventLog.INFORMATION, "Aceptando conexiones en el puerto " + PUERTO);
 					skCliente = skServidor.accept();
+					EventLog.report("WSPingSOR", EventLog.INFORMATION, "Recibida una conexión, comprobando el ping WS");
 					OutputStream aux = skCliente.getOutputStream();
 					DataOutputStream flujo= new DataOutputStream(aux);
 					
 					if(checker.ping()){
 						flujo.writeUTF("OK");
+						EventLog.report("WSPingSOR", EventLog.INFORMATION, "WSPing OK");
 					}else{
 						flujo.writeUTF("ERROR");
+						EventLog.report("WSPingSOR", EventLog.INFORMATION, "WSPing ERROR");
 					}
 					
 					skCliente.close();
+					EventLog.report("WSPingSOR", EventLog.INFORMATION, "socketCliente cerrado");
 				}catch(SocketException ex){
 					skCliente.close();
 					skServidor.close();
