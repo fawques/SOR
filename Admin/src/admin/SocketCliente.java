@@ -35,4 +35,19 @@ public class SocketCliente {
 		}
 		return false;
 	}
+	
+	public String recieveMessage(String host, int puerto){
+		try {
+			Socket skCliente = new Socket(host, puerto);
+			skCliente.setSoTimeout(1000);
+			InputStream aux = skCliente.getInputStream();
+			DataInputStream flujo = new DataInputStream( aux );
+			String mensaje = flujo.readUTF();
+			skCliente.close();
+			return mensaje;
+		} catch (Exception e) {
+			System.out.println("Cliente: " + e.getMessage());
+		}
+		return "error";
+	}
 }

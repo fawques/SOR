@@ -10,6 +10,7 @@ public class Bully implements Runnable  {
 	ArrayList<InetAddress> gestores;
 	int posicion;
 	SocketServer skServer;
+	
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
 		// else
@@ -44,7 +45,12 @@ public class Bully implements Runnable  {
 	
 	private boolean pingGestor() {
 		// TODO hacer el ping y tal
-		return false;
+		SocketCliente sc = new SocketCliente();
+		String mensaje = sc.recieveMessage("192.168.1.24", 5001);
+		if(mensaje.equals("OK"))
+			return true;
+		else
+			return false;
 	}
 
 	private void startElection(){
@@ -72,6 +78,7 @@ public class Bully implements Runnable  {
 	
 	private void setGestor(InetAddress gestorIP) {
 		// guarda el identificador y trata a ese proceso como nuevo coordinador
+		
 	}
 
 	private Message receiveMessage(){
