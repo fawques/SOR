@@ -52,7 +52,7 @@ public class Bully implements Runnable  {
 		processMessage(msg.getMensaje(), msg.getIp());
 	}
 	
-	private boolean pingGestor() {
+	public boolean pingGestor() {
 		// TODO hacer el ping y tal
 		SocketCliente sc = new SocketCliente();
 		String mensaje = sc.recieveMessage("192.168.1.3", 5001);
@@ -62,7 +62,7 @@ public class Bully implements Runnable  {
 			return false;
 	}
 
-	private void startElection(){
+	public void startElection(){
 		// envia mensaje de eleccion a los procesos con identificador mayor que el suyo
 		Message msg=receiveMessage();
 		if(msg.getMensaje() == Mensajes.error){
