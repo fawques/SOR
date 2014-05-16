@@ -102,6 +102,16 @@ public class Bully implements Runnable  {
 				if(sendMessage(msg,gestores.get(gestores.indexOf(i)))){
 					respuesta=true;
 				}
+				else{
+					switch(i){
+						case 0: Admin.gestor1 = EstadoGestor.Caido;
+						break;	
+						case 1: Admin.gestor1 = EstadoGestor.Caido;
+						break;
+						case 2: Admin.gestor1 = EstadoGestor.Caido;
+						break;
+					}
+				}
 			}
 			if(respuesta==false){
 				sendMessage(Mensajes.respuesta,gestores.get(gestores.indexOf(inetAddress)));
@@ -115,6 +125,7 @@ public class Bully implements Runnable  {
 		}
 		else if (msg==Mensajes.coordinacion){
 			setGestor(inetAddress);
+			//cambiar gestor a otro
 		}
 		else{
 			System.err.print("Error de mensaje");
