@@ -18,7 +18,9 @@ import java.net.Socket;
  */
 public class SocketServer {
 	ServerSocket skServidor;
+	int puertoAhora;
 	public SocketServer(int puerto) {
+		puertoAhora=puerto;
 		try {
 			skServidor = new ServerSocket(puerto);
 			skServidor.setSoTimeout(1000);
@@ -31,7 +33,7 @@ public class SocketServer {
 	
 	public void recibirPeticion(){
 		try {
-			System.out.println("Recibiendo");
+			System.out.println("Recibiendo"+puertoAhora);
 			Socket skCliente = skServidor.accept(); // Crea objeto
 			InputStream aux = skCliente.getInputStream(); 
 			DataInputStream flujo= new DataInputStream(aux);
@@ -47,7 +49,7 @@ public class SocketServer {
 	
 	public Message recibirMensaje(){
 		try {
-			System.out.println("Recibiendo");
+			System.out.println("Recibiendo"+puertoAhora );
 			Socket skCliente = skServidor.accept(); // Crea objeto
 			InputStream aux = skCliente.getInputStream(); 
 			DataInputStream flujo= new DataInputStream(aux);

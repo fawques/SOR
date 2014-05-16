@@ -15,18 +15,26 @@ public class Bully implements Runnable  {
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
 		// else
-		skServer = new SocketServer(5000);
+		skServer = new SocketServer(5002);
 		gestores= new ArrayList<InetAddress>(3);
 		try {
-			gestores.add(InetAddress.getByName("192.168.1.1"));
-			gestores.add(InetAddress.getByName("192.168.1.2"));
+			gestores.add(InetAddress.getByName("172.20.41.132"));
+			//gestores.add(InetAddress.getByName("172.20.41.133"));
 			gestores.add(InetAddress.getByName("192.168.1.3"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		posicion=2;
-		startElection();
+		boolean pingOK = pingGestor();
+		if(!pingOK){
+			startElection();
+		}
+		
+		// compruebo si he recibido un mensaje...
+		//Message msg = receiveMessage();
+		//processMessage(msg.getMensaje(), msg.getIp());
+		//startElection();
 		
 	}
 	
@@ -47,7 +55,7 @@ public class Bully implements Runnable  {
 	private boolean pingGestor() {
 		// TODO hacer el ping y tal
 		SocketCliente sc = new SocketCliente();
-		String mensaje = sc.recieveMessage("192.168.1.24", 5001);
+		String mensaje = sc.recieveMessage("192.168.1.3", 5001);
 		if(mensaje.equals("OK"))
 			return true;
 		else
@@ -116,13 +124,13 @@ public class Bully implements Runnable  {
 	private boolean sendMessage(Mensajes msg, InetAddress inetAddress) {
 		// TODO Auto-generated method stub
 		SocketCliente sc = new SocketCliente();
-		return sc.sendMessage(inetAddress.toString(), 5001, msg.toString());
+		return sc.sendMessage(inetAddress.toString(), 5000, msg.toString());
 	}
 
 	private void iAmGestor(){
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
 		gestorPrincipal = gestores.get(gestores.indexOf(posicion));
-		for(int i=posicion; i<3; i++){
+		for(int i=posicion; i<gestores.size(); i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(gestores.indexOf(i)));
 		}
 	}
