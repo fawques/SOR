@@ -28,6 +28,8 @@ public class CormprobarGestores implements Runnable {
 		FXMLDocumentController.cambiarEstadoGestor2();
 		FXMLDocumentController.cambiarEstadoGestor3();
 		
+		if(Admin.bullyAlg.pingGestor())
+			Admin.bullyAlg.startElection();
 		
 		/*sc = new SocketCliente();
 		sc.sendMessage("192.168.1.24", 5001, "hola que tal");*/
