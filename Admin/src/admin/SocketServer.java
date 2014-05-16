@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -42,5 +43,21 @@ public class SocketServer {
 			// TODO Auto-generated catch block
 			System.out.println("Servidor: " + e.getMessage() ); 
 		}
+	}
+	
+	public Message recibirMensaje(){
+		try {
+			System.out.println("Recibiendo");
+			Socket skCliente = skServidor.accept(); // Crea objeto
+			InputStream aux = skCliente.getInputStream(); 
+			DataInputStream flujo= new DataInputStream(aux);
+			System.out.println(flujo.readUTF());
+			skCliente.close();
+			return new Message(skCliente.getInetAddress(),Mensajes.valueOf(flujo.readUTF()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Servidor: " + e.getMessage() ); 
+		}
+		return new Message(null, Mensajes.error);
 	}
 }

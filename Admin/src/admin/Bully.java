@@ -9,9 +9,11 @@ import admin.Mensajes;
 public class Bully implements Runnable  {
 	ArrayList<InetAddress> gestores;
 	int posicion;
+	SocketServer skServer;
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
 		// else
+		skServer = new SocketServer(5000);
 		gestores= new ArrayList<InetAddress>(3);
 		try {
 			gestores.add(InetAddress.getByName("192.168.1.1"));
@@ -21,7 +23,6 @@ public class Bully implements Runnable  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		posicion=2;
 		startElection();
 		
@@ -37,8 +38,8 @@ public class Bully implements Runnable  {
 		}
 		
 		// compruebo si he recibido un mensaje...
-		String msg = receiveMessage();
-		processMessage(msg);
+		Message msg = receiveMessage();
+		processMessage(msg.getMensaje(), msg.getIp());
 	}
 	
 	private boolean pingGestor() {
@@ -48,23 +49,23 @@ public class Bully implements Runnable  {
 
 	private void startElection(){
 		// envia mensaje de eleccion a los procesos con identificador mayor que el suyo
-		String msg = receiveMessage();
-		if(msg.equals("haDadoTimeout")){
+		Message msg=receiveMessage();
+		if(msg.getMensaje() == Mensajes.error){
 			iAmGestor();
 		}else{
 			if(msg.equals("respuesta")){
-				Mensajes msg2 = receiveMessage();
-				if(msg2==null){
+				Message msg2 = receiveMessage();
+				if(msg2.getMensaje() == Mensajes.error){
 					startElection();
 				}else{
-					if(msg2==Mensajes.coordinacion){
-						setGestor(msg2);
+					if(msg2.getMensaje()==Mensajes.coordinacion){
+						setGestor(msg2.getIp());
 					}else{
-						processMessage(msg2);
+						processMessage(msg2.getMensaje(), msg2.getIp());
 					}
 				}
 			}else{
-				processMessage(msg);
+				processMessage(msg.getMensaje(), msg.getIp());
 			}
 		} 
 	}
@@ -73,9 +74,9 @@ public class Bully implements Runnable  {
 		// guarda el identificador y trata a ese proceso como nuevo coordinador
 	}
 
-	private Mensajes receiveMessage(){
+	private Message receiveMessage(){
 		//	Espera un tiempo determinado hasta recibir un mensaje. Si no lo recibe, lanza excepcion / devuelve null
-		return null;
+		return skServer.recibirMensaje();
 	}
 	
 	public void processMessage(Mensajes msg, InetAddress inetAddress){
@@ -112,6 +113,7 @@ public class Bully implements Runnable  {
 
 	private void iAmGestor(){
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
+		
 	}
 	
 	

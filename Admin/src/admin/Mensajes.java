@@ -1,5 +1,5 @@
 package admin;
 
 public enum Mensajes {
-	eleccion,respuesta,coordinacion
+	eleccion,respuesta,coordinacion,error
 }
