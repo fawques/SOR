@@ -10,6 +10,7 @@ public class Bully implements Runnable  {
 	ArrayList<InetAddress> gestores;
 	int posicion;
 	SocketServer skServer;
+	InetAddress gestorPrincipal;
 	
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
@@ -78,7 +79,7 @@ public class Bully implements Runnable  {
 	
 	private void setGestor(InetAddress gestorIP) {
 		// guarda el identificador y trata a ese proceso como nuevo coordinador
-		
+		gestorPrincipal = gestorIP;
 	}
 
 	private Message receiveMessage(){
@@ -120,7 +121,10 @@ public class Bully implements Runnable  {
 
 	private void iAmGestor(){
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
-		
+		gestorPrincipal = gestores.get(gestores.indexOf(posicion));
+		for(int i=posicion; i<3; i++){
+			sendMessage(Mensajes.coordinacion, gestores.get(gestores.indexOf(i)));
+		}
 	}
 	
 	
