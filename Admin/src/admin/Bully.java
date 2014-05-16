@@ -128,7 +128,7 @@ public class Bully implements Runnable  {
 	}
 	
 	
-
+	/*
 	
 	// codigo copiapegado:
 	public String bully = null;
@@ -372,6 +372,6 @@ public class Bully implements Runnable  {
 			out+="-DISABLED";
 		return out;
 	}
-
+	*/
 
 }
