@@ -18,14 +18,16 @@ public class Bully implements Runnable  {
 		skServer = new SocketServer(5002);
 		gestores= new ArrayList<InetAddress>(3);
 		try {
-			gestores.add(InetAddress.getByName("172.20.41.132"));
-			//gestores.add(InetAddress.getByName("172.20.41.133"));
+			
 			gestores.add(InetAddress.getByName("192.168.1.3"));
+			//gestores.add(InetAddress.getByName("172.20.41.133"));
+			gestores.add(InetAddress.getByName("192.168.1.6"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		posicion=2;
+		posicion=0;
+		gestorPrincipal=gestores.get(0);
 		boolean pingOK = pingGestor();
 		if(!pingOK){
 			startElection();
