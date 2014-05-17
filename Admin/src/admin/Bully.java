@@ -25,7 +25,7 @@ public class Bully implements Runnable  {
 			gestores.add(InetAddress.getByName("192.168.1.108"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		posicion=0;
 		startElection();		

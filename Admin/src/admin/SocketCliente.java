@@ -31,8 +31,8 @@ public class SocketCliente {
 			skCliente.close();
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Cliente: " + e.getMessage());
+			//e.printStackTrace();
+			//System.out.println("Cliente: " + e.getMessage());
 		}
 		return false;
 	}
@@ -45,10 +45,11 @@ public class SocketCliente {
 			DataInputStream flujo = new DataInputStream( aux );
 			String mensaje = flujo.readUTF();
 			skCliente.close();
+			//System.out.println("Cliente: " + mensaje);
 			return mensaje;
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Cliente: " + e.getMessage());
+			//e.printStackTrace();
+			//System.out.println("Cliente: ERROR");
 		}
 		return "error";
 	}

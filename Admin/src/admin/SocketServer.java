@@ -27,43 +27,43 @@ public class SocketServer {
 			System.out.println("Escucho el puerto " + puerto );
 			
 		} catch(IOException e ) {
-			e.printStackTrace();
-			System.out.println("Servidor: " + e.getMessage() ); 
+			//e.printStackTrace();
+			//System.out.println("Servidor: " + e.getMessage() ); 
 		}
 	}
 	
 	public void recibirPeticion(){
 		try {
-			System.out.println("Recibiendo"+puertoAhora);
+			//System.out.println("Recibiendo"+puertoAhora);
 			Socket skCliente = skServidor.accept(); // Crea objeto
 			InputStream aux = skCliente.getInputStream(); 
 			DataInputStream flujo= new DataInputStream(aux);
 			String mensaje = flujo.readUTF();
-			System.out.println(mensaje);
+			//System.out.println(mensaje);
 			
 			Admin.bullyAlg.processMessage(Mensajes.valueOf(mensaje), skCliente.getInetAddress());
 			skCliente.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Servidor: " + e.getMessage() ); 
+			//e.printStackTrace();
+			//System.out.println("Servidor: " + e.getMessage() ); 
 		}
 	}
 	
 	public Message recibirMensaje(){
 		try {
-			System.out.println("Recibiendo"+puertoAhora );
+			//System.out.println("Recibiendo"+puertoAhora );
 			Socket skCliente = skServidor.accept(); // Crea objeto
 			InputStream aux = skCliente.getInputStream(); 
 			DataInputStream flujo= new DataInputStream(aux);
 			String mensaje = flujo.readUTF();
-			System.out.println(mensaje);
+			//System.out.println(mensaje);
 			skCliente.close();
 			return new Message(skCliente.getInetAddress(),Mensajes.valueOf(mensaje));
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			// TODO Auto-generated catch block
-			System.out.println("Servidor: " + e.getMessage() ); 
+			//System.out.println("Servidor: " + e.getMessage() ); 
 		}
 		return new Message(null, Mensajes.error);
 	}
