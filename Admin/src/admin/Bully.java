@@ -123,12 +123,12 @@ public class Bully implements Runnable  {
 	private boolean sendMessage(Mensajes msg, InetAddress inetAddress) {
 		// TODO Auto-generated method stub
 		SocketCliente sc = new SocketCliente();
-		return sc.sendMessage(inetAddress.toString(), 5000, msg.toString());
+		return sc.sendMessage(inetAddress.getHostAddress(), 5000, msg.toString());
 	}
 
 	private void iAmGestor(){
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
-		gestorPrincipal = gestores.get(gestores.indexOf(posicion));
+		gestorPrincipal = gestores.get(posicion);
 		//decirle a uddi que yo soy el gestor
 		for(int i=posicion; i<gestores.size(); i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
