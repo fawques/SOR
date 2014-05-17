@@ -39,22 +39,22 @@ public class Bully implements Runnable  {
 			startElection();
 		}
 		// TODO Auto-generated method stub
-		FXMLDocumentController.cambiarEstadoGestor1();
-		FXMLDocumentController.cambiarEstadoGestor2();
-		FXMLDocumentController.cambiarEstadoGestor3();
 	}
 	
 	public boolean pingGestor() {
 		// TODO hacer el ping y tal
-		if(gestorPrincipal.equals(gestores.get(posicion)))
-			return true;
+			
 		
 		SocketCliente sc = new SocketCliente();
 		String mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
 		if(mensaje.equals("OK"))
 			return true;
-		else
+		else {
+			if(gestorPrincipal.equals(gestores.get(posicion))){
+				FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Caido);
+			}
 			return false;
+		}
 	}
 
 	public void startElection(){
@@ -77,7 +77,7 @@ public class Bully implements Runnable  {
 		// guarda el identificador y trata a ese proceso como nuevo coordinador
 		gestorPrincipal = gestorIP;
 		System.out.println(("El gestor es: " + gestorIP));
-
+		FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Activo);
 	}
 
 	private Message receiveMessage(){
@@ -91,16 +91,6 @@ public class Bully implements Runnable  {
 			for(int i=0;i<posicion;i++){
 				if(sendMessage(msg,gestores.get(i))){
 					respuesta=true;
-				}
-				else{
-					switch(i){
-						case 0: Admin.gestor1 = EstadoGestor.Caido;
-						break;	
-						case 1: Admin.gestor2 = EstadoGestor.Caido;
-						break;
-						case 2: Admin.gestor3 = EstadoGestor.Caido;
-						break;
-					}
 				}
 			}
 			if(respuesta==false){
@@ -136,24 +126,8 @@ public class Bully implements Runnable  {
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
 		System.out.println(("Yo soy el gestor"));
-		setSemaforoGestorActivo(posicion);
+		FXMLDocumentController.soyElGestor();
 
-	}
-	
-	private void setSemaforoGestorActivo(int posicion)
-	{
-		switch(posicion){
-		case 0: Admin.gestor1 = EstadoGestor.Elegido;
-		break;	
-		case 1: Admin.gestor2 = EstadoGestor.Elegido;
-				Admin.gestor1 = EstadoGestor.Caido;
-		break;
-		case 2: Admin.gestor3 = EstadoGestor.Elegido;
-				Admin.gestor1 = EstadoGestor.Caido;
-				Admin.gestor2 = EstadoGestor.Caido;
-		break;
-		}
-		
 	}
 	
 	/*
