@@ -130,7 +130,7 @@ public class Bully implements Runnable  {
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
 		gestorPrincipal = gestores.get(posicion);
 		//decirle a uddi que yo soy el gestor
-		for(int i=posicion; i<gestores.size()-1; i++){
+		for(int i=posicion+1; i<gestores.size(); i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
 	}
