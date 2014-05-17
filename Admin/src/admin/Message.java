@@ -39,6 +39,10 @@ public class Message {
 		this.mensaje = mensaje;
 	}
 	
+	public boolean equals(String msg){
+		return this.mensaje.name().equals(msg);
+	}
+	
 	
 
 }
