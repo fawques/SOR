@@ -43,7 +43,7 @@ public class Bully implements Runnable  {
 	
 	public boolean pingGestor() {
 		// TODO hacer el ping y tal
-			
+		System.out.println("Ping a gestor");	
 		
 		SocketCliente sc = new SocketCliente();
 		String mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
@@ -59,6 +59,7 @@ public class Bully implements Runnable  {
 
 	public void startElection(){
 
+		System.out.println("Start election");
 		FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Error);
 		// envia mensaje de eleccion a los procesos con identificador mayor que el suyo
 		for(int i=0;i<posicion;i++){
@@ -88,6 +89,8 @@ public class Bully implements Runnable  {
 	}
 	
 	public void processMessage(Mensajes msg, InetAddress inetAddress){
+
+		System.out.println("Procesar mensaje:"+ msg.toString() + " "+ inetAddress.getHostAddress());
 		Boolean respuesta=false;
 		if(msg==Mensajes.eleccion){
 			FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Error);
