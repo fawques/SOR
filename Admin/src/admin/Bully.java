@@ -19,9 +19,9 @@ public class Bully implements Runnable  {
 		gestores= new ArrayList<InetAddress>(3);
 		gestorPrincipal = null;
 		try {
-			gestores.add(InetAddress.getByName("192.168.1.3"));
-			gestores.add(InetAddress.getByName("172.20.41.133"));
-			gestores.add(InetAddress.getByName("192.168.1.6"));
+			gestores.add(InetAddress.getByName("192.168.1.107"));
+			gestores.add(InetAddress.getByName("192.168.1.1066"));
+			gestores.add(InetAddress.getByName("192.168.1.108"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class Bully implements Runnable  {
 			return true;
 		
 		SocketCliente sc = new SocketCliente();
-		String mensaje = sc.recieveMessage(gestorPrincipal.toString(), 5001);
+		String mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
 		if(mensaje.equals("OK"))
 			return true;
 		else
@@ -67,16 +67,6 @@ public class Bully implements Runnable  {
 			iAmGestor();
 		}else{
 			if(msg.equals("respuesta")){
-				Message msg2 = receiveMessage();
-				if(msg2.getMensaje() == Mensajes.error){
-					startElection();
-				}else{
-					if(msg2.getMensaje()==Mensajes.coordinacion){
-						setGestor(msg2.getIp());
-					}else{
-						processMessage(msg2.getMensaje(), msg2.getIp());
-					}
-				}
 			}else{
 				processMessage(msg.getMensaje(), msg.getIp());
 			}
