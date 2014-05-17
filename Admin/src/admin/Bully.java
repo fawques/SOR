@@ -134,7 +134,7 @@ public class Bully implements Runnable  {
 		}
 		FXMLDocumentController.soyElGestor();
 		System.out.println(("Yo soy el gestor"));
-		FXMLDocumentController.soyElGestor();
+
 
 	}
 	
