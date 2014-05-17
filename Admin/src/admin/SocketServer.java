@@ -23,7 +23,7 @@ public class SocketServer {
 		puertoAhora=puerto;
 		try {
 			skServidor = new ServerSocket(puerto);
-			skServidor.setSoTimeout(1000);
+			skServidor.setSoTimeout(Admin.timeout);
 			System.out.println("Escucho el puerto " + puerto );
 			
 		} catch(IOException e ) {
