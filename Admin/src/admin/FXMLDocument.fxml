@@ -79,32 +79,17 @@
               <children>
                 <AnchorPane id="Content" layoutX="0.0" layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="1366.0">
                   <children>
-                    <Text id="lbEstadoGestor" fx:id="lbEstadoGestor1" font="$x1" layoutX="110.0" layoutY="328.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 1: Actual" />
-                    <Group id="Group" layoutX="34.0" layoutY="40.0">
+                    <Text fx:id="lbEstadoGestor" font="$x1" layoutX="417.0" layoutY="374.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 1: Actual" />
+                    <Group id="Group" layoutX="324.0" layoutY="57.0">
                       <children>
-                        <Circle fx:id="estadoGestor1" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE">
+                        <Circle id="estadoGestor1" fx:id="estadoGestor" layoutX="142.0" layoutY="142.0" radius="142.1083984375" stroke="BLACK" strokeType="INSIDE">
                           <fill>
                             <Color blue="0.000" green="1.000" red="0.322" fx:id="x3" />
                           </fill>
                         </Circle>
                       </children>
                     </Group>
-                    <Text fx:id="lbEstadoGestor2" font="$x1" layoutX="458.0" layoutY="326.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 2" />
-                    <Group id="Group" layoutX="382.0" layoutY="38.0">
-                      <children>
-                        <Circle fx:id="estadoGestor2" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE">
-                          <fill>
-                            <Color blue="0.200" green="0.776" red="1.000" fx:id="x4" />
-                          </fill>
-                        </Circle>
-                      </children>
-                    </Group>
-                    <Text fx:id="lbEstadoGestor3" font="$x1" layoutX="834.0" layoutY="324.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 3" />
-                    <Group id="Group" layoutX="725.0" layoutY="40.0">
-                      <children>
-                        <Circle fx:id="estadoGestor3" fill="RED" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
-                      </children>
-                    </Group>
+                    <Group id="Group" layoutX="725.0" layoutY="40.0" />
                     <Text layoutX="106.0" layoutY="627.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Activo">
                       <font>
                         <Font size="9.0" fx:id="x2" />
@@ -113,7 +98,11 @@
                     <Text font="$x2" layoutX="278.0" layoutY="628.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeMiterLimit="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error (en tránsito)" />
                     <Text font="$x2" layoutX="489.0" layoutY="627.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" />
                     <Circle id="estadoGestor1" fill="$x3" layoutX="56.0" layoutY="623.0" radius="21.39703369140625" stroke="BLACK" strokeType="INSIDE" />
-                    <Circle id="estadoGestor1" fill="$x4" layoutX="201.0" layoutY="624.0" radius="20.39703369140625" stroke="BLACK" strokeType="INSIDE" />
+                    <Circle id="estadoGestor1" layoutX="201.0" layoutY="624.0" radius="20.39703369140625" stroke="BLACK" strokeType="INSIDE">
+                      <fill>
+                        <Color blue="0.200" green="0.776" red="1.000" fx:id="x4" />
+                      </fill>
+                    </Circle>
                     <Circle id="estadoGestor1" fill="RED" layoutX="445.0" layoutY="623.0" radius="20.39703369140625" stroke="BLACK" strokeType="INSIDE" />
                   </children>
                 </AnchorPane>
