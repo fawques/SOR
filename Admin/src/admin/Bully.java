@@ -21,13 +21,13 @@ public class Bully implements Runnable  {
 		gestorPrincipal = null;
 		try {
 			gestores.add(InetAddress.getByName("192.168.1.107"));
-			gestores.add(InetAddress.getByName("192.168.1.1066"));
+			gestores.add(InetAddress.getByName("192.168.1.106"));
 			gestores.add(InetAddress.getByName("192.168.1.108"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		posicion=0;
+		posicion=2;
 		startElection();		
 	}
 	
@@ -60,7 +60,7 @@ public class Bully implements Runnable  {
 	public void startElection(){
 		// envia mensaje de eleccion a los procesos con identificador mayor que el suyo
 		for(int i=0;i<posicion;i++){
-				sendMessage(Mensajes.coordinacion,gestores.get(gestores.indexOf(i)));
+				sendMessage(Mensajes.coordinacion,gestores.get(i));
 		}
 		Message msg=receiveMessage();
 		if(msg.getMensaje() == Mensajes.error){
@@ -87,7 +87,7 @@ public class Bully implements Runnable  {
 		Boolean respuesta=false;
 		if(msg==Mensajes.eleccion){
 			for(int i=0;i<posicion;i++){
-				if(sendMessage(msg,gestores.get(gestores.indexOf(i)))){
+				if(sendMessage(msg,gestores.get(i))){
 					respuesta=true;
 				}
 				else{
@@ -106,7 +106,7 @@ public class Bully implements Runnable  {
 				
 				for(int i=0;i<gestores.size();i++){
 					if(i!=posicion){
-						sendMessage(Mensajes.coordinacion,gestores.get(gestores.indexOf(i)));
+						sendMessage(Mensajes.coordinacion,gestores.get(i));
 					}
 				}
 			}
@@ -123,15 +123,15 @@ public class Bully implements Runnable  {
 	private boolean sendMessage(Mensajes msg, InetAddress inetAddress) {
 		// TODO Auto-generated method stub
 		SocketCliente sc = new SocketCliente();
-		return sc.sendMessage(inetAddress.toString(), 5000, msg.toString());
+		return sc.sendMessage(inetAddress.getHostAddress(), 5000, msg.toString());
 	}
 
 	private void iAmGestor(){
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
-		gestorPrincipal = gestores.get(gestores.indexOf(posicion));
+		gestorPrincipal = gestores.get(posicion);
 		//decirle a uddi que yo soy el gestor
 		for(int i=posicion; i<gestores.size(); i++){
-			sendMessage(Mensajes.coordinacion, gestores.get(gestores.indexOf(i)));
+			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
 	}
 	
