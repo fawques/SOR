@@ -799,6 +799,7 @@ public void actualizarTaller(){
     
     public static void cambiarEstadoGestor(EstadoGestor estado){
     	if(estado == EstadoGestor.Activo){
+			lbEstadoGestor.setText("Gestor 1");
 	    	estadoGestor.setFill(Paint.valueOf("#52ff00"));
     	}else if(estado == EstadoGestor.Error){
 			lbEstadoGestor.setText("Gestor 1");
