@@ -14,7 +14,7 @@ public class Bully implements Runnable  {
 	int posicion;
 	SocketServer skServer;
 	InetAddress gestorPrincipal;
-	static int NUM_REINTENTOS = 5;
+	static int NUM_REINTENTOS = 3;
 	
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
@@ -31,7 +31,7 @@ public class Bully implements Runnable  {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
-		posicion=0;
+		posicion=2;
 		startElection();		
 	}
 	
@@ -54,6 +54,7 @@ public class Bully implements Runnable  {
 		int cont=0;
 		mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
 		while(!mensaje.equals("OK") && cont<NUM_REINTENTOS){
+			System.out.println("Reintento ping");
 			mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
 			cont++;
 		}
