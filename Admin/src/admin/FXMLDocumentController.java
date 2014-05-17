@@ -33,6 +33,7 @@ import com.google.gson.JsonSyntaxException;
 
 
 
+
 import java.awt.Color;
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -61,6 +62,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -96,7 +98,7 @@ public class FXMLDocumentController implements Initializable {
     public TextField tfContrasenyaTaller;
     public TextField tfContrasenyaDesguace;
     public static Circle estadoGestor;
-    public static Label lbEstadoGestor;
+    public static Text lbEstadoGestor;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
