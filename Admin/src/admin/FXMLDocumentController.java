@@ -96,6 +96,9 @@ public class FXMLDocumentController implements Initializable {
     public static Circle estadoGestor1;
     public static Circle estadoGestor2;
     public static Circle estadoGestor3;
+    public static Label lbEstadoGestor1;
+    public static Label lbEstadoGestor2;
+    public static Label lbEstadoGestor3;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -795,29 +798,44 @@ public void actualizarTaller(){
     }
     
     public static void cambiarEstadoGestor1(){
-    	if(Admin.gestor1 == EstadoGestor.Activo || Admin.gestor1 == EstadoGestor.Elegido)
+    	if(Admin.gestor1 == EstadoGestor.Activo || Admin.gestor1 == EstadoGestor.Elegido){
+    		if(Admin.gestor1 == EstadoGestor.Elegido)
+    			lbEstadoGestor1.setText("Gestor 1: Activo");
 	    	estadoGestor1.setFill(Paint.valueOf("#52ff00"));
-    	else if(Admin.gestor1 == EstadoGestor.Error) 
+    	}else if(Admin.gestor1 == EstadoGestor.Error){
+			lbEstadoGestor1.setText("Gestor 1");
 	    	estadoGestor1.setFill(Paint.valueOf("#ffc633"));
-    	else if(Admin.gestor1 == EstadoGestor.Caido)
+    	}else if(Admin.gestor1 == EstadoGestor.Caido){
+			lbEstadoGestor1.setText("Gestor 1");
     		estadoGestor1.setFill(Paint.valueOf("RED"));
+    	}
     }
     
     public static void cambiarEstadoGestor2(){
-    	if(Admin.gestor2 == EstadoGestor.Activo || Admin.gestor2 == EstadoGestor.Elegido)
+    	if(Admin.gestor2 == EstadoGestor.Activo || Admin.gestor2 == EstadoGestor.Elegido){
+    		if(Admin.gestor2 == EstadoGestor.Elegido)
+    			lbEstadoGestor2.setText("Gestor 2: Activo");
 	    	estadoGestor2.setFill(Paint.valueOf("#52ff00"));
-    	else if(Admin.gestor2 == EstadoGestor.Error) 
+    	}else if(Admin.gestor2 == EstadoGestor.Error){
+			lbEstadoGestor2.setText("Gestor 2");
 	    	estadoGestor2.setFill(Paint.valueOf("#ffc633"));
-    	else if(Admin.gestor2 == EstadoGestor.Caido)
+    	}else if(Admin.gestor2 == EstadoGestor.Caido){
+			lbEstadoGestor2.setText("Gestor 2");
     		estadoGestor2.setFill(Paint.valueOf("RED"));
+    	}
     }
     
     public static void cambiarEstadoGestor3(){
-    	if(Admin.gestor3 == EstadoGestor.Activo || Admin.gestor3 == EstadoGestor.Elegido)
+    	if(Admin.gestor3 == EstadoGestor.Activo || Admin.gestor3 == EstadoGestor.Elegido){
+    		if(Admin.gestor3 == EstadoGestor.Elegido)
+    			lbEstadoGestor3.setText("Gestor 3: Activo");
 	    	estadoGestor3.setFill(Paint.valueOf("#52ff00"));
-    	else if(Admin.gestor3 == EstadoGestor.Error) 
+    	}else if(Admin.gestor3 == EstadoGestor.Error) {
+    		lbEstadoGestor3.setText("Gestor 3");
 	    	estadoGestor3.setFill(Paint.valueOf("#ffc633"));
-    	else if(Admin.gestor3 == EstadoGestor.Caido)
+    	}else if(Admin.gestor3 == EstadoGestor.Caido){
+    		lbEstadoGestor3.setText("Gestor 3");
     		estadoGestor3.setFill(Paint.valueOf("RED"));
+    	}
     }
 }
