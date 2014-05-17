@@ -6,11 +6,15 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import admin.Mensajes;
+
+
+
 public class Bully implements Runnable  {
 	ArrayList<InetAddress> gestores;
 	int posicion;
 	SocketServer skServer;
 	InetAddress gestorPrincipal;
+	static int NUM_REINTENTOS = 5;
 	
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
@@ -46,7 +50,13 @@ public class Bully implements Runnable  {
 		System.out.println("Ping a gestor");	
 		
 		SocketCliente sc = new SocketCliente();
-		String mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
+		String mensaje = null;
+		int cont=0;
+		while(!mensaje.equals("OK") && cont<NUM_REINTENTOS){
+			mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
+			cont++;
+		}
+		
 		if(mensaje.equals("OK"))
 			return true;
 		else {
@@ -102,12 +112,7 @@ public class Bully implements Runnable  {
 			}
 			if(respuesta==false){
 				sendMessage(Mensajes.respuesta,gestores.get(gestores.indexOf(inetAddress)));
-				
-				for(int i=0;i<gestores.size();i++){
-					if(i!=posicion){
-						sendMessage(Mensajes.coordinacion,gestores.get(i));
-					}
-				}
+				iAmGestor();
 			}
 		}
 		else if (msg==Mensajes.coordinacion){
