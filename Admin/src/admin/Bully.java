@@ -52,6 +52,7 @@ public class Bully implements Runnable  {
 		SocketCliente sc = new SocketCliente();
 		String mensaje = null;
 		int cont=0;
+		mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
 		while(!mensaje.equals("OK") && cont<NUM_REINTENTOS){
 			mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
 			cont++;
