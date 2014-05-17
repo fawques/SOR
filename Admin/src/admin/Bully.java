@@ -102,12 +102,7 @@ public class Bully implements Runnable  {
 			}
 			if(respuesta==false){
 				sendMessage(Mensajes.respuesta,gestores.get(gestores.indexOf(inetAddress)));
-				
-				for(int i=0;i<gestores.size();i++){
-					if(i!=posicion){
-						sendMessage(Mensajes.coordinacion,gestores.get(i));
-					}
-				}
+				iAmGestor();
 			}
 		}
 		else if (msg==Mensajes.coordinacion){
