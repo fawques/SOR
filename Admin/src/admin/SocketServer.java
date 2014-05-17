@@ -56,9 +56,10 @@ public class SocketServer {
 			Socket skCliente = skServidor.accept(); // Crea objeto
 			InputStream aux = skCliente.getInputStream(); 
 			DataInputStream flujo= new DataInputStream(aux);
-			System.out.println(flujo.readUTF());
+			String mensaje = flujo.readUTF();
+			System.out.println(mensaje);
 			skCliente.close();
-			return new Message(skCliente.getInetAddress(),Mensajes.valueOf(flujo.readUTF()));
+			return new Message(skCliente.getInetAddress(),Mensajes.valueOf(mensaje));
 		} catch (IOException e) {
 			e.printStackTrace();
 			// TODO Auto-generated catch block

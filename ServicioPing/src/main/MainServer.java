@@ -51,6 +51,7 @@ public class MainServer extends AbstractService {
 						EventLog.report("WSPingSOR", EventLog.INFORMATION, "WSPing OK");
 					}else{
 						flujo.writeUTF("ERROR");
+						System.err.println("WSPing ERROR");
 						EventLog.report("WSPingSOR", EventLog.INFORMATION, "WSPing ERROR");
 					}
 					
