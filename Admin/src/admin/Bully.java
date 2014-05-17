@@ -15,7 +15,8 @@ public class Bully implements Runnable  {
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
 		// else
-		skServer = new SocketServer(5002);
+
+		skServer = new SocketServer(5000);
 		gestores= new ArrayList<InetAddress>(3);
 		gestorPrincipal = null;
 		try {
@@ -32,16 +33,15 @@ public class Bully implements Runnable  {
 	
 	@Override
 	public void run() {
-		// Hacer ping al gestor actual
-		// Si ping no responde, inicio eleccion
-		boolean pingOK = pingGestor();
-		if(!pingOK){
+		skServer.recibirPeticion();
+		
+		if(pingGestor()){
 			startElection();
 		}
-		
-		// compruebo si he recibido un mensaje...
-		Message msg = receiveMessage();
-		processMessage(msg.getMensaje(), msg.getIp());
+		// TODO Auto-generated method stub
+		FXMLDocumentController.cambiarEstadoGestor1();
+		FXMLDocumentController.cambiarEstadoGestor2();
+		FXMLDocumentController.cambiarEstadoGestor3();
 	}
 	
 	public boolean pingGestor() {

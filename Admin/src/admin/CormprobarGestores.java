@@ -18,18 +18,7 @@ public class CormprobarGestores implements Runnable {
 	SocketCliente sc;
 	@Override
 	public void run() {
-		if(sk==null)
-			sk = new SocketServer(5000);
 		
-		sk.recibirPeticion();
-		
-		if(Admin.bullyAlg.pingGestor()){
-			Admin.bullyAlg.startElection();
-		}
-		// TODO Auto-generated method stub
-		FXMLDocumentController.cambiarEstadoGestor1();
-		FXMLDocumentController.cambiarEstadoGestor2();
-		FXMLDocumentController.cambiarEstadoGestor3();
 		
 		
 		

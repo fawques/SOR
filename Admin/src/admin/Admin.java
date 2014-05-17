@@ -18,6 +18,10 @@ import java.net.URL;
 
 
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import seguridad.SslConfig;
 import BD.InterfazBD;
 import javafx.application.Application;
@@ -42,6 +46,7 @@ import javax.mail.internet.MimeMessage;*/
  * @author Cute
  */
 public class Admin extends Application {
+	   private ScheduledExecutorService scheduler;
 	   public static Stage stage;
 	   
 	   public static EstadoGestor gestor1 = EstadoGestor.Activo;
@@ -64,6 +69,8 @@ public class Admin extends Application {
         staticDataBox.setStage(stage);
         staticDataBox.showStage();
         bullyAlg = new Bully();
+        scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(bullyAlg, 2, 3, TimeUnit.SECONDS);
     }
     
     public static FXMLLoader changeScene(String fxml) throws IOException {

@@ -68,7 +68,6 @@ import javafx.util.Callback;
  */
 
 public class FXMLDocumentController implements Initializable {
-	private ScheduledExecutorService scheduler;
 	public static Stage thisStage;
    private ObservableList<UsuarioInterface> personData = FXCollections.observableArrayList();
    private ObservableList<UsuarioInterface> personDataDesguaces = FXCollections.observableArrayList();
@@ -111,8 +110,6 @@ public class FXMLDocumentController implements Initializable {
         pedidosInterfaz();
         altaTaller();
         AltaDesguaces();
-        scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new CormprobarGestores(), 2, 3, TimeUnit.SECONDS);
     }
 
     public void actualizarPedidos(){
