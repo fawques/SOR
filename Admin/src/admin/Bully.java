@@ -60,7 +60,7 @@ public class Bully implements Runnable  {
 	public void startElection(){
 		// envia mensaje de eleccion a los procesos con identificador mayor que el suyo
 		for(int i=0;i<posicion;i++){
-				sendMessage(Mensajes.coordinacion,gestores.get(i));
+				sendMessage(Mensajes.eleccion,gestores.get(i));
 		}
 		Message msg=receiveMessage();
 		if(msg.getMensaje() == Mensajes.error){
@@ -76,6 +76,8 @@ public class Bully implements Runnable  {
 	private void setGestor(InetAddress gestorIP) {
 		// guarda el identificador y trata a ese proceso como nuevo coordinador
 		gestorPrincipal = gestorIP;
+		System.out.println(("El gestor es: " + gestorIP));
+
 	}
 
 	private Message receiveMessage(){
@@ -94,9 +96,9 @@ public class Bully implements Runnable  {
 					switch(i){
 						case 0: Admin.gestor1 = EstadoGestor.Caido;
 						break;	
-						case 1: Admin.gestor1 = EstadoGestor.Caido;
+						case 1: Admin.gestor2 = EstadoGestor.Caido;
 						break;
-						case 2: Admin.gestor1 = EstadoGestor.Caido;
+						case 2: Admin.gestor3 = EstadoGestor.Caido;
 						break;
 					}
 				}
@@ -133,8 +135,26 @@ public class Bully implements Runnable  {
 		for(int i=posicion+1; i<gestores.size(); i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
+		System.out.println(("Yo soy el gestor"));
+		setSemaforoGestorActivo(posicion);
+
 	}
 	
+	private void setSemaforoGestorActivo(int posicion)
+	{
+		switch(posicion){
+		case 0: Admin.gestor1 = EstadoGestor.Elegido;
+		break;	
+		case 1: Admin.gestor2 = EstadoGestor.Elegido;
+				Admin.gestor1 = EstadoGestor.Caido;
+		break;
+		case 2: Admin.gestor3 = EstadoGestor.Elegido;
+				Admin.gestor1 = EstadoGestor.Caido;
+				Admin.gestor2 = EstadoGestor.Caido;
+		break;
+		}
+		
+	}
 	
 	/*
 	
