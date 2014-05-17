@@ -79,7 +79,7 @@
               <children>
                 <AnchorPane id="Content" layoutX="0.0" layoutY="0.0" minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="1366.0">
                   <children>
-                    <Text font="$x1" layoutX="110.0" layoutY="328.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 1: Actual" />
+                    <Text id="lbEstadoGestor" fx:id="lbEstadoGestor1" font="$x1" layoutX="110.0" layoutY="328.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 1: Actual" />
                     <Group id="Group" layoutX="34.0" layoutY="40.0">
                       <children>
                         <Circle fx:id="estadoGestor1" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE">
@@ -89,7 +89,7 @@
                         </Circle>
                       </children>
                     </Group>
-                    <Text font="$x1" layoutX="458.0" layoutY="326.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 2" />
+                    <Text fx:id="lbEstadoGestor2" font="$x1" layoutX="458.0" layoutY="326.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 2" />
                     <Group id="Group" layoutX="382.0" layoutY="38.0">
                       <children>
                         <Circle fx:id="estadoGestor2" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE">
@@ -99,7 +99,7 @@
                         </Circle>
                       </children>
                     </Group>
-                    <Text font="$x1" layoutX="834.0" layoutY="324.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 3" />
+                    <Text fx:id="lbEstadoGestor3" font="$x1" layoutX="834.0" layoutY="324.0" scaleX="2.274377745241581" scaleY="1.7460667086217747" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestor 3" />
                     <Group id="Group" layoutX="725.0" layoutY="40.0">
                       <children>
                         <Circle fx:id="estadoGestor3" fill="RED" layoutX="125.0" layoutY="125.0" radius="124.7568359375" stroke="BLACK" strokeType="INSIDE" />
