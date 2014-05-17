@@ -8,5 +8,5 @@ package admin;
  *
  */
 public enum EstadoGestor {
-	Activo, Error, Caido
+	Activo, Error, Caido, Elegido
 }
