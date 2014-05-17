@@ -31,6 +31,7 @@ public class SocketCliente {
 			skCliente.close();
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Cliente: " + e.getMessage());
 		}
 		return false;
@@ -46,6 +47,7 @@ public class SocketCliente {
 			skCliente.close();
 			return mensaje;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Cliente: " + e.getMessage());
 		}
 		return "error";

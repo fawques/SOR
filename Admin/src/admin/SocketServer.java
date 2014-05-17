@@ -27,6 +27,7 @@ public class SocketServer {
 			System.out.println("Escucho el puerto " + puerto );
 			
 		} catch(IOException e ) {
+			e.printStackTrace();
 			System.out.println("Servidor: " + e.getMessage() ); 
 		}
 	}
@@ -44,6 +45,7 @@ public class SocketServer {
 			skCliente.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			System.out.println("Servidor: " + e.getMessage() ); 
 		}
 	}
@@ -58,6 +60,7 @@ public class SocketServer {
 			skCliente.close();
 			return new Message(skCliente.getInetAddress(),Mensajes.valueOf(flujo.readUTF()));
 		} catch (IOException e) {
+			e.printStackTrace();
 			// TODO Auto-generated catch block
 			System.out.println("Servidor: " + e.getMessage() ); 
 		}
