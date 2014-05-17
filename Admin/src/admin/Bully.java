@@ -58,6 +58,8 @@ public class Bully implements Runnable  {
 	}
 
 	public void startElection(){
+
+		FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Error);
 		// envia mensaje de eleccion a los procesos con identificador mayor que el suyo
 		for(int i=0;i<posicion;i++){
 				sendMessage(Mensajes.eleccion,gestores.get(i));
@@ -88,6 +90,8 @@ public class Bully implements Runnable  {
 	public void processMessage(Mensajes msg, InetAddress inetAddress){
 		Boolean respuesta=false;
 		if(msg==Mensajes.eleccion){
+			FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Error);
+			
 			for(int i=0;i<posicion;i++){
 				if(sendMessage(msg,gestores.get(i))){
 					respuesta=true;

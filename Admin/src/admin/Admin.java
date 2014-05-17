@@ -53,6 +53,8 @@ public class Admin extends Application {
 	   public static EstadoGestor gestor2 = EstadoGestor.Activo;
 	   public static EstadoGestor gestor3 = EstadoGestor.Activo;
 	   
+	   public static int timeout = 1000;
+	   
 	   static Bully bullyAlg;
 	   
     static String getOfertasporPedido() {

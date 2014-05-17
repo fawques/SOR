@@ -24,7 +24,7 @@ public class SocketCliente {
 	public boolean sendMessage(String host, int puerto, String mensaje){
 		try {
 			Socket skCliente = new Socket(host, puerto);
-			skCliente.setSoTimeout(1000);
+			skCliente.setSoTimeout(Admin.timeout);
 			OutputStream aux = skCliente.getOutputStream();
 			DataOutputStream flujo = new DataOutputStream(aux);
 			flujo.writeUTF(mensaje);
@@ -40,7 +40,7 @@ public class SocketCliente {
 	public String recieveMessage(String host, int puerto){
 		try {
 			Socket skCliente = new Socket(host, puerto);
-			skCliente.setSoTimeout(1000);
+			skCliente.setSoTimeout(Admin.timeout);
 			InputStream aux = skCliente.getInputStream();
 			DataInputStream flujo = new DataInputStream( aux );
 			String mensaje = flujo.readUTF();
