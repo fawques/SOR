@@ -52,15 +52,16 @@ public class Admin extends Application {
 	   public static EstadoGestor gestor1 = EstadoGestor.Activo;
 	   public static EstadoGestor gestor2 = EstadoGestor.Activo;
 	   public static EstadoGestor gestor3 = EstadoGestor.Activo;
-	   
+	   public static Boolean enviadaEleccion;
 	   static Bully bullyAlg;
-	   
+	   static Receptor receptor;
     static String getOfertasporPedido() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
     public void start(Stage stage2) throws Exception {
+    	enviadaEleccion=false;
     	JUDDIProxy.loadWsdl("AdminWS");
     	 stage = stage2;
         FXMLLoader loader = changeScene("FXMLDocument.fxml");

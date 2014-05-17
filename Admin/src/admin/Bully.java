@@ -4,19 +4,21 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 
 import admin.Mensajes;
 public class Bully implements Runnable  {
 	ArrayList<InetAddress> gestores;
 	int posicion;
-	SocketServer skServer;
+	Calendar calendar1;
 	InetAddress gestorPrincipal;
 	
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
 		// else
 
-		skServer = new SocketServer(5000);
+
 		gestores= new ArrayList<InetAddress>(3);
 		gestorPrincipal = null;
 		try {
@@ -33,8 +35,11 @@ public class Bully implements Runnable  {
 	
 	@Override
 	public void run() {
-		skServer.recibirPeticion();
-		
+		Calendar calendar2= Calendar.getInstance();
+		if(calendar2.getTimeInMillis()-calendar1.getTimeInMillis()>1000 && Admin.enviadaEleccion==true){
+			Admin.enviadaEleccion=false;
+			iAmGestor();
+		}
 		if(!pingGestor()){
 			startElection();
 		}
@@ -62,7 +67,9 @@ public class Bully implements Runnable  {
 		for(int i=0;i<posicion;i++){
 				sendMessage(Mensajes.coordinacion,gestores.get(i));
 		}
-		Message msg=receiveMessage();
+		Admin.enviadaEleccion=true;
+		calendar1= Calendar.getInstance();
+	/*	Message msg=receiveMessage();
 		if(msg.getMensaje() == Mensajes.error){
 			iAmGestor();
 		}else{
@@ -71,6 +78,7 @@ public class Bully implements Runnable  {
 				processMessage(msg.getMensaje(), msg.getIp());
 			}
 		} 
+		*/
 	}
 	
 	private void setGestor(InetAddress gestorIP) {
@@ -78,11 +86,7 @@ public class Bully implements Runnable  {
 		gestorPrincipal = gestorIP;
 	}
 
-	private Message receiveMessage(){
-		//	Espera un tiempo determinado hasta recibir un mensaje. Si no lo recibe, lanza excepcion / devuelve null
-		return skServer.recibirMensaje();
-	}
-	
+
 	public void processMessage(Mensajes msg, InetAddress inetAddress){
 		Boolean respuesta=false;
 		if(msg==Mensajes.eleccion){
