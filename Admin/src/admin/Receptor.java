@@ -11,12 +11,11 @@ public class Receptor implements Runnable {
 	@Override
 	public void run() {
 		
-		skServer.recibirPeticion();
+		receiveMessage(skServer.recibirPeticion());
 		
 	}
-	private void receiveMessage(){
-		//	Espera un tiempo determinado hasta recibir un mensaje. Si no lo recibe, lanza excepcion / devuelve null
-		Message m= skServer.recibirMensaje();
+	private void receiveMessage(Message m){
+	
 		if(m.mensaje==Mensajes.respuesta){
 			if(Admin.enviadaEleccion==true){		
 				Admin.enviadaEleccion=false;

@@ -31,7 +31,7 @@ public class SocketServer {
 		}
 	}
 	
-	public void recibirPeticion(){
+	public Message recibirPeticion(){
 		try {
 			System.out.println("Recibiendo"+puertoAhora);
 			Socket skCliente = skServidor.accept(); // Crea objeto
@@ -40,12 +40,14 @@ public class SocketServer {
 			String mensaje = flujo.readUTF();
 			System.out.println(mensaje);
 			
-			Admin.bullyAlg.processMessage(Mensajes.valueOf(mensaje), skCliente.getInetAddress());
+			//Admin.bullyAlg.processMessage(Mensajes.valueOf(mensaje), skCliente.getInetAddress());
 			skCliente.close();
+			return new Message(skCliente.getInetAddress(),Mensajes.valueOf(mensaje));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Servidor: " + e.getMessage() ); 
 		}
+		return new Message(null, Mensajes.error);
 	}
 	
 	public Message recibirMensaje(){

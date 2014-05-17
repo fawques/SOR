@@ -117,6 +117,7 @@ public class Bully implements Runnable  {
 		}
 		else if (msg==Mensajes.coordinacion){
 			setGestor(inetAddress);
+			Admin.enviadaEleccion=false;
 			//cambiar gestor a otro
 		}
 		else{
