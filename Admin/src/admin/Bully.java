@@ -17,17 +17,18 @@ public class Bully implements Runnable  {
 		// else
 		skServer = new SocketServer(5002);
 		gestores= new ArrayList<InetAddress>(3);
+		gestorPrincipal = null;
 		try {
 			
 			gestores.add(InetAddress.getByName("192.168.1.3"));
-			//gestores.add(InetAddress.getByName("172.20.41.133"));
+			gestores.add(InetAddress.getByName("172.20.41.133"));
 			gestores.add(InetAddress.getByName("192.168.1.6"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		posicion=0;
-		gestorPrincipal=gestores.get(0);
+		//gestorPrincipal=gestores.get(0);
 		boolean pingOK = pingGestor();
 		if(!pingOK){
 			startElection();
@@ -56,8 +57,11 @@ public class Bully implements Runnable  {
 	
 	public boolean pingGestor() {
 		// TODO hacer el ping y tal
+		if(gestorPrincipal!=null && gestorPrincipal.equals(gestores.get(posicion)))
+			return true;
+		
 		SocketCliente sc = new SocketCliente();
-		String mensaje = sc.recieveMessage("192.168.1.3", 5001);
+		String mensaje = sc.recieveMessage(gestorPrincipal.toString(), 5001);
 		if(mensaje.equals("OK"))
 			return true;
 		else
