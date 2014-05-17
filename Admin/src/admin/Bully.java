@@ -19,7 +19,6 @@ public class Bully implements Runnable  {
 		gestores= new ArrayList<InetAddress>(3);
 		gestorPrincipal = null;
 		try {
-			
 			gestores.add(InetAddress.getByName("192.168.1.3"));
 			gestores.add(InetAddress.getByName("172.20.41.133"));
 			gestores.add(InetAddress.getByName("192.168.1.6"));
@@ -28,17 +27,7 @@ public class Bully implements Runnable  {
 			e.printStackTrace();
 		}
 		posicion=0;
-		//gestorPrincipal=gestores.get(0);
-		boolean pingOK = pingGestor();
-		if(!pingOK){
-			startElection();
-		}
-		
-		// compruebo si he recibido un mensaje...
-		//Message msg = receiveMessage();
-		//processMessage(msg.getMensaje(), msg.getIp());
-		//startElection();
-		
+		startElection();		
 	}
 	
 	@Override
