@@ -27,7 +27,7 @@ public class Bully implements Runnable  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		posicion=2;
+		posicion=0;
 		startElection();		
 	}
 	
@@ -129,6 +129,7 @@ public class Bully implements Runnable  {
 		for(int i=posicion+1; i<gestores.size(); i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
+		FXMLDocumentController.soyElGestor();
 		System.out.println(("Yo soy el gestor"));
 		FXMLDocumentController.soyElGestor();
 
