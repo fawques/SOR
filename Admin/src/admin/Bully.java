@@ -105,7 +105,7 @@ public class Bully implements Runnable  {
 		Boolean respuesta=false;
 		if(msg==Mensajes.eleccion){
 			FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Error);
-			
+			// startElection()
 			for(int i=0;i<posicion;i++){
 				if(sendMessage(msg,gestores.get(i))){
 					respuesta=true;
