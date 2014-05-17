@@ -57,7 +57,7 @@ public class Bully implements Runnable  {
 	
 	public boolean pingGestor() {
 		// TODO hacer el ping y tal
-		if(gestorPrincipal!=null && gestorPrincipal.equals(gestores.get(posicion)))
+		if(gestorPrincipal.equals(gestores.get(posicion)))
 			return true;
 		
 		SocketCliente sc = new SocketCliente();
@@ -70,6 +70,9 @@ public class Bully implements Runnable  {
 
 	public void startElection(){
 		// envia mensaje de eleccion a los procesos con identificador mayor que el suyo
+		for(int i=0;i<posicion;i++){
+				sendMessage(Mensajes.coordinacion,gestores.get(gestores.indexOf(i)));
+		}
 		Message msg=receiveMessage();
 		if(msg.getMensaje() == Mensajes.error){
 			iAmGestor();
