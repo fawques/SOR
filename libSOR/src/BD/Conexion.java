@@ -33,7 +33,7 @@ public class Conexion {
         this.database = database;
         try {
           Class.forName("com.mysql.jdbc.Driver");
-          conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + database,"root","12345");
+          conexion = DriverManager.getConnection("jdbc:mysql://192.168.1.100:3306/" + database,"root","12345");
           System.out.println("Conexion establecida");
        } catch (SQLException ex) {
           ex.printStackTrace();
