@@ -35,7 +35,7 @@ public class Bully implements Runnable  {
 	public void run() {
 		skServer.recibirPeticion();
 		
-		if(pingGestor()){
+		if(!pingGestor()){
 			startElection();
 		}
 		// TODO Auto-generated method stub
@@ -130,7 +130,7 @@ public class Bully implements Runnable  {
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
 		gestorPrincipal = gestores.get(posicion);
 		//decirle a uddi que yo soy el gestor
-		for(int i=posicion; i<gestores.size(); i++){
+		for(int i=posicion; i<gestores.size()-1; i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
 	}
