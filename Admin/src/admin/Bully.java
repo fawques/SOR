@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import admin.Mensajes;
 public class Bully implements Runnable  {
 	ArrayList<InetAddress> gestores;
+	ArrayList<InetAddress> gestoresOriginal;
 	int posicion;
 	SocketServer skServer;
 	InetAddress gestorPrincipal;
@@ -18,17 +19,22 @@ public class Bully implements Runnable  {
 		// else
 		estarCaido=false;
 		skServer = new SocketServer(5000);
+		gestoresOriginal= new ArrayList<InetAddress>(3);
 		gestores= new ArrayList<InetAddress>(3);
-		gestorPrincipal = null;
 		try {
-			gestores.add(InetAddress.getByName("172.20.41.134"));
-			gestores.add(InetAddress.getByName("172.20.41.135"));
-			gestores.add(InetAddress.getByName("172.20.41.140"));
+			gestorPrincipal = InetAddress.getByName("192.168.1.10");
+			gestores.add(InetAddress.getByName("192.168.1.20"));
+			gestores.add(InetAddress.getByName("192.168.1.21"));
+			gestores.add(InetAddress.getByName("192.168.1.22"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
-		posicion=0;
+		
+		gestoresOriginal.addAll(gestores);
+		
+		posicion=1;
+		//cambiarIP a la de mi posicion
 		startElection();		
 	}
 	
@@ -104,7 +110,16 @@ public class Bully implements Runnable  {
 	
 	private void setGestor(InetAddress gestorIP) {
 		// guarda el identificador y trata a ese proceso como nuevo coordinador
-		gestorPrincipal = gestorIP;
+//		gestorPrincipal = gestorIP;
+		// cambiar la ip al original
+		InetAddress original = gestoresOriginal.get(posicion);
+		
+		try{
+			gestores.set(gestores.indexOf(gestorPrincipal), gestoresOriginal.get(gestores.indexOf(gestorPrincipal)));
+		}catch(IndexOutOfBoundsException e){
+			// no hago nada
+		}
+		gestores.set(gestores.indexOf(gestorIP), gestorPrincipal);
 		System.out.println(("El gestor es: " + gestorIP));
 		FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Activo);
 	}
@@ -148,15 +163,21 @@ public class Bully implements Runnable  {
 
 	private void iAmGestor(){
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
-		gestorPrincipal = gestores.get(posicion);
+//		gestorPrincipal = gestores.get(posicion);
 		System.out.println(("Yo soy el gestor"));
 		//decirle a uddi que yo soy el gestor
+
+		try{
+			gestores.set(gestores.indexOf(gestorPrincipal), gestoresOriginal.get(gestores.indexOf(gestorPrincipal)));
+		}catch(IndexOutOfBoundsException e){
+			// no hago nada
+		}
+		gestores.set(posicion, gestorPrincipal);
+		// cambiar la ip a gestorPrincipal
 		for(int i=posicion+1; i<gestores.size(); i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
 		FXMLDocumentController.soyElGestor();
-		
-		Admin.registrar();
 
 	}
 	
