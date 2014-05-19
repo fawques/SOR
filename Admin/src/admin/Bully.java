@@ -117,6 +117,12 @@ posicion=2;
 		
 		InetAddress original = gestoresOriginal.get(posicion);
 		cambiarIP(original);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try{
 			gestores.set(gestores.indexOf(gestorPrincipal), gestoresOriginal.get(gestores.indexOf(gestorPrincipal)));
 		}catch(IndexOutOfBoundsException e){
@@ -176,10 +182,17 @@ posicion=2;
 			// no hago nada
 		}
 		gestores.set(posicion, gestorPrincipal);
-		cambiarIP(gestorPrincipal);
+		
 		for(int i=posicion+1; i<gestores.size(); i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cambiarIP(gestorPrincipal);
 		FXMLDocumentController.soyElGestor();
 
 	}
