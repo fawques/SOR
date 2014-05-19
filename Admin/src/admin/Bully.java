@@ -21,9 +21,9 @@ public class Bully implements Runnable  {
 		gestores= new ArrayList<InetAddress>(3);
 		gestorPrincipal = null;
 		try {
-			gestores.add(InetAddress.getByName("192.168.1.107"));
-			gestores.add(InetAddress.getByName("192.168.1.106"));
-			gestores.add(InetAddress.getByName("192.168.1.108"));
+			gestores.add(InetAddress.getByName("172.20.41.134"));
+			gestores.add(InetAddress.getByName("172.20.41.135"));
+			gestores.add(InetAddress.getByName("172.20.41.140"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
@@ -37,7 +37,13 @@ public class Bully implements Runnable  {
 		skServer.recibirPeticion();
 		
 		if(!pingGestor()){
-			startElection();
+			if(gestores.indexOf(gestorPrincipal)==posicion){
+				FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Caido);
+			}
+			else{
+				startElection();
+			}
+			
 		}
 		// TODO Auto-generated method stub
 	}
@@ -132,12 +138,13 @@ public class Bully implements Runnable  {
 	private void iAmGestor(){
 		//el proceso se erige como coordinador y envia mensaje de coordinador a todos los procesos con identificadores mas bajos
 		gestorPrincipal = gestores.get(posicion);
+		System.out.println(("Yo soy el gestor"));
 		//decirle a uddi que yo soy el gestor
 		for(int i=posicion+1; i<gestores.size(); i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
 		FXMLDocumentController.soyElGestor();
-		System.out.println(("Yo soy el gestor"));
+		
 		Admin.registrar();
 
 	}

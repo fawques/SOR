@@ -21,7 +21,7 @@ public class Config implements ServletContextListener {
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(new DateChecker(), 120, 60, TimeUnit.SECONDS);
         AdminWS admin =new AdminWS();
-        admin.Registrar();
+       // admin.Registrar();
     }
 
     @Override
