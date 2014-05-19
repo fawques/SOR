@@ -151,8 +151,12 @@ posicion=2;
 				}
 			}
 			if(respuesta==false){
-				sendMessage(Mensajes.respuesta,gestores.get(gestores.indexOf(inetAddress)));
+				int index = gestores.indexOf(inetAddress);
+				if(index != -1){
+					sendMessage(Mensajes.respuesta,gestores.get(index));
+				}
 				iAmGestor();
+				
 			}
 		}
 		else if (msg==Mensajes.coordinacion){
@@ -183,6 +187,7 @@ posicion=2;
 		}
 		gestores.set(posicion, gestorPrincipal);
 		
+		sendMessage(Mensajes.coordinacion, gestorPrincipal);
 		for(int i=posicion+1; i<gestores.size(); i++){
 			sendMessage(Mensajes.coordinacion, gestores.get(i));
 		}
