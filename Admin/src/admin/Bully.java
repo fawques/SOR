@@ -34,7 +34,7 @@ public class Bully implements Runnable  {
 		
 		gestoresOriginal.addAll(gestores);
 		
-		posicion=1;
+posicion=2;
 		cambiarIP(gestores.get(posicion));
 		startElection();		
 	}
@@ -68,15 +68,17 @@ public class Bully implements Runnable  {
 	
 	public boolean pingGestor() {
 		// TODO hacer el ping y tal
-		System.out.println("Ping a gestor");	
+		System.out.println("Ping a gestor <" + gestorPrincipal.getHostAddress() + ">");	
 		
 		SocketCliente sc = new SocketCliente();
 		String mensaje = null;
 		int cont=0;
 		mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
+		System.out.println("<" + mensaje + ">");
 		while(!mensaje.equals("OK") && cont<NUM_REINTENTOS){
 			System.out.println("Reintento ping");
 			mensaje = sc.recieveMessage(gestorPrincipal.getHostAddress(), 5001);
+			System.out.println("<" + mensaje + ">");
 			cont++;
 		}
 		
@@ -193,6 +195,12 @@ public class Bully implements Runnable  {
 	        System.out.println(pp.getInputStream().toString());
 	        System.out.println(pp.getErrorStream().toString());
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

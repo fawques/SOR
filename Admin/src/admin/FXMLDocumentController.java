@@ -188,7 +188,7 @@ public class FXMLDocumentController implements Initializable {
        
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring= Admin.getPedidos();
-        if(!pedidosstring.equals("") && pedidosstring!=null){
+        if(pedidosstring!=null && !pedidosstring.equals("")){
             listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -212,7 +212,7 @@ public class FXMLDocumentController implements Initializable {
      personDataOferta.clear();
      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
       String ofertasstring= Admin.getOfertas();
-      if(!ofertasstring.equals("") && ofertasstring!=null){
+      if(ofertasstring!=null && !ofertasstring.equals("")){
       listaOferta = gson.fromJson(ofertasstring, collectionType);
       }
         
@@ -257,7 +257,7 @@ public class FXMLDocumentController implements Initializable {
       
       Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
       String ofertasstring= Admin.getOfertas();
-      if(!ofertasstring.equals("") && ofertasstring!=null){
+      if(ofertasstring!=null && !ofertasstring.equals("")){
       listaOferta = gson.fromJson(ofertasstring, collectionType);
       }
         
@@ -279,7 +279,7 @@ public class FXMLDocumentController implements Initializable {
      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
      Type collectionType = new TypeToken<ArrayList<Oferta>>(){}.getType();
      String ofertasstring=Admin.getOfertasporPedido(id);
-     if(!ofertasstring.equals("") && ofertasstring!=null){
+     if(ofertasstring!=null && !ofertasstring.equals("")){
         listaOferta = gson.fromJson(ofertasstring, collectionType);
      }
         System.out.println("pasa por aqui");
@@ -316,7 +316,7 @@ public class FXMLDocumentController implements Initializable {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();       
         Type collectionType = new TypeToken<ArrayList<Pedido>>(){}.getType();
         String pedidosstring=Admin.getPedidoID(id);
-        if(!pedidosstring.equals("") && pedidosstring!=null){
+        if(pedidosstring!=null && !pedidosstring.equals("")){
          listaPedidos = gson.fromJson(pedidosstring, collectionType);
         }
         
@@ -353,7 +353,7 @@ public class FXMLDocumentController implements Initializable {
     ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
         String desguacestring=Admin.getDesguacesAceptados();
-        if(!desguacestring.equals("") && desguacestring!=null){
+        if(desguacestring!=null && !desguacestring.equals("")){
             listaDesguaces = gson.fromJson(desguacestring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -371,7 +371,7 @@ public class FXMLDocumentController implements Initializable {
     ArrayList<Desguace> listaDesguaces= new ArrayList<Desguace>();
        Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
         String desguacestring=Admin.getAltaDesguace();
-        if(!desguacestring.equals("") && desguacestring!=null){
+        if(desguacestring!=null && !desguacestring.equals("")){
             listaDesguaces = gson.fromJson(desguacestring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -419,7 +419,7 @@ public class FXMLDocumentController implements Initializable {
            );
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
         String desguacestring=Admin.getDesguacesAceptados();
-        if(!desguacestring.equals("") && desguacestring!=null){
+        if(desguacestring!=null && !desguacestring.equals("")){
             listaDesguaces = gson.fromJson(desguacestring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -489,7 +489,7 @@ public class FXMLDocumentController implements Initializable {
         });
         Type collectionType = new TypeToken<ArrayList<Desguace>>(){}.getType();
         String desguacestring=Admin.getAltaDesguace();
-        if(!desguacestring.equals("") && desguacestring!=null){
+        if(desguacestring!=null && !desguacestring.equals("")){
             listaDesguaces = gson.fromJson(desguacestring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -566,7 +566,7 @@ public class FXMLDocumentController implements Initializable {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
         String tallerstring=Admin.getAltaTalleres();
-        if( !tallerstring.equals("") && tallerstring!=null ){
+        if(tallerstring!=null  && !tallerstring.equals("")){
             listaTalleres = gson.fromJson(tallerstring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -586,7 +586,7 @@ public void actualizarTaller(){
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
         String tallerstring=Admin.getTalleresAceptados();
-        if( !tallerstring.equals("") && tallerstring!=null ){
+        if(tallerstring!=null  && !tallerstring.equals("")){
             listaTalleres = gson.fromJson(tallerstring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -660,7 +660,7 @@ public void actualizarTaller(){
         
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
         String tallerstring=Admin.getAltaTalleres();
-        if( !tallerstring.equals("") && tallerstring!=null ){
+        if(tallerstring!=null && !tallerstring.equals("")){
             listaTalleres = gson.fromJson(tallerstring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -715,7 +715,7 @@ public void actualizarTaller(){
         
         Type collectionType = new TypeToken<ArrayList<Taller>>(){}.getType();
         String tallerstring=Admin.getTalleresAceptados();
-        if( !tallerstring.equals("") && tallerstring!=null ){
+        if(tallerstring!=null && !tallerstring.equals("") ){
             listaTalleres = gson.fromJson(tallerstring, collectionType);
         }
         System.out.println("pasa por aqui");
@@ -799,13 +799,13 @@ public void actualizarTaller(){
     
     public static void cambiarEstadoGestor(EstadoGestor estado){
     	if(estado == EstadoGestor.Activo){
-			lbEstadoGestor.setText("Gestor 1");
+			lbEstadoGestor.setText("Gestor ");
 	    	estadoGestor.setFill(Paint.valueOf("#52ff00"));
     	}else if(estado == EstadoGestor.Error){
-			lbEstadoGestor.setText("Gestor 1");
+			lbEstadoGestor.setText("Gestor ");
 	    	estadoGestor.setFill(Paint.valueOf("#ffc633"));
     	}else if(estado == EstadoGestor.Caido){
-			lbEstadoGestor.setText("Gestor 1");
+			lbEstadoGestor.setText("Gestor ");
     		estadoGestor.setFill(Paint.valueOf("RED"));
     	}
     }
