@@ -61,9 +61,19 @@ public class SocketServer {
 			skCliente.close();
 			return new Message(skCliente.getInetAddress(),Mensajes.valueOf(mensaje));
 		} catch (IOException e) {
+			try{
+			Socket skCliente = skServidor.accept(); // Crea objeto
+			InputStream aux = skCliente.getInputStream(); 
+			DataInputStream flujo= new DataInputStream(aux);
+			String mensaje = flujo.readUTF();
+			//System.out.println(mensaje);
+			skCliente.close();
+			return new Message(skCliente.getInetAddress(),Mensajes.valueOf(mensaje));
+			} catch (IOException ex) {
 			//e.printStackTrace();
 			// TODO Auto-generated catch block
-			//System.out.println("Servidor: " + e.getMessage() ); 
+			//System.out.println("Servidor: " + e.getMessage() );
+			}
 		}
 		return new Message(null, Mensajes.error);
 	}
