@@ -193,4 +193,9 @@ public class Admin extends Application {
     	gestor_admin.AdminWS port = prepararWebService();
         return port.getContrasenyaPorDesguaceID(id);
     }
+    
+    public static String registrar(){
+    	gestor_admin.AdminWS port = prepararWebService();
+    	return port.registrar();
+    }
 }
