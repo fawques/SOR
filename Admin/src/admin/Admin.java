@@ -12,6 +12,7 @@ import general.Taller;
 import jUDDI.JUDDIProxy;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 
@@ -113,11 +114,19 @@ public class Admin extends Application {
 
 	private static AdminWS prepararWebService() {
 		SslConfig.disableCertificateChecking();
-		gestor_admin.AdminWS_Service service = new gestor_admin.AdminWS_Service(JUDDIProxy.getWsdl());
-        gestor_admin.AdminWS port = service.getAdminWSPort();
+		gestor_admin.AdminWS_Service service;
+		try {
+			service = new gestor_admin.AdminWS_Service(new URL("http://localhost:8080/Gestor/services/AdminWSPort?wsdl"));
+			gestor_admin.AdminWS port = service.getAdminWSPort();
+			SslConfig.disableCNChecker(port);
+			return port;
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
-        SslConfig.disableCNChecker(port);
-		return port;
+        return null;
+        
 	}
 
     public static String getPedidos() {
