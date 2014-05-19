@@ -23,10 +23,10 @@ public class Bully implements Runnable  {
 		gestoresOriginal= new ArrayList<InetAddress>(3);
 		gestores= new ArrayList<InetAddress>(3);
 		try {
-			gestorPrincipal = InetAddress.getByName("192.168.1.10");
-			gestores.add(InetAddress.getByName("192.168.1.20"));
-			gestores.add(InetAddress.getByName("192.168.1.21"));
-			gestores.add(InetAddress.getByName("192.168.1.22"));
+			gestorPrincipal = InetAddress.getByName("192.168.1.150");
+			gestores.add(InetAddress.getByName("192.168.1.104"));
+			gestores.add(InetAddress.getByName("192.168.1.103"));
+			gestores.add(InetAddress.getByName("192.168.1.100"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
