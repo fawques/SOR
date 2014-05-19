@@ -185,7 +185,7 @@ public class Bully implements Runnable  {
 	private void cambiarIP(InetAddress ip){
         String str1=ip.getHostAddress();
         String str2="255.255.255.0";
-        String[] command1 = { "netsh", "interface", "ip", "set address name=\"Ethernet\" source=static addr=\""+str1+"\" mask=\""+str2+"\""};
+        String[] command1 = { "netsh", "interface", "ip", "set","address","name=","Ethernet","source=static","addr=",str1,"mask=",str2};
         Process pp;
 		try {
 			pp = java.lang.Runtime.getRuntime().exec(command1);
