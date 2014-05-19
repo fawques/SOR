@@ -12,11 +12,11 @@ public class Bully implements Runnable  {
 	SocketServer skServer;
 	InetAddress gestorPrincipal;
 	static int NUM_REINTENTOS = 3;
-	
+	Boolean estarCaido;
 	public Bully(){
 		// Si es el proceso de identificador mas alto -> manda mensaje de coordinador a todos
 		// else
-
+		estarCaido=false;
 		skServer = new SocketServer(5000);
 		gestores= new ArrayList<InetAddress>(3);
 		gestorPrincipal = null;
@@ -28,7 +28,7 @@ public class Bully implements Runnable  {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
-		posicion=2;
+		posicion=0;
 		startElection();		
 	}
 	
@@ -36,14 +36,25 @@ public class Bully implements Runnable  {
 	public void run() {
 		skServer.recibirPeticion();
 		
+		
 		if(!pingGestor()){
 			if(gestores.indexOf(gestorPrincipal)==posicion){
 				FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Caido);
+				estarCaido=true;
 			}
 			else{
 				startElection();
 			}
 			
+		}
+		else{
+
+		    if(estarCaido && gestores.indexOf(gestorPrincipal)==posicion){
+				FXMLDocumentController.cambiarEstadoGestor(EstadoGestor.Activo);
+				startElection();
+				estarCaido=false;
+			}
+
 		}
 		// TODO Auto-generated method stub
 	}
