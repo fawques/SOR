@@ -6,9 +6,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import admin.Mensajes;
-
-
-
 public class Bully implements Runnable  {
 	ArrayList<InetAddress> gestores;
 	int posicion;
@@ -141,7 +138,7 @@ public class Bully implements Runnable  {
 		}
 		FXMLDocumentController.soyElGestor();
 		System.out.println(("Yo soy el gestor"));
-
+		Admin.registrar();
 
 	}
 	
